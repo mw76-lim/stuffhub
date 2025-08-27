@@ -1,77 +1,19 @@
-
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-<meta name="format-detection" content="telephone=no" />
-
-<link href="http://rondakorea.gloriasnd.kr/images/rondakorea.ico" rel="shortcut icon" type="image/x-icon">
-<meta http-equiv="imagetoolbar" content="no">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<title></title>
-<link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/default.css?ver=2303229">
-<link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/js/font-awesome/css/font-awesome.min.css?ver=2303229">
-<link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/font.css?ver=2303229">
-<link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/all.min.css?ver=2303229">
-<link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/rondakorea_common.css?ver=2303229">
-<link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/rondakorea_css.css?ver=2303229">
-<link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/rondakorea_animate.css?ver=2303229">
-<link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/rondakorea_css_en.css?ver=2303229">
-<link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/skin/latest/notice/style.css?ver=2303229">
-<!--[if lte IE 8]>
-<script src="http://rondakorea.gloriasnd.kr/js/html5.js"></script>
-<![endif]-->
-<script>
-// 자바스크립트에서 사용하는 전역변수 선언
-var g5_url       = "http://rondakorea.gloriasnd.kr";
-var g5_bbs_url   = "http://rondakorea.gloriasnd.kr/bbs";
-var g5_is_member = "";
-var g5_is_admin  = "";
-var g5_is_mobile = "";
-var g5_bo_table  = "";
-var g5_sca       = "";
-var g5_editor    = "";
-var g5_cookie_domain = "";
-var g5_shop_url = "http://rondakorea.gloriasnd.kr/shop";
-</script>
-
-<script src="http://rondakorea.gloriasnd.kr/js/jquery-1.12.4.min.js?ver=2304171"></script>
-<script src="http://rondakorea.gloriasnd.kr/js/jquery-migrate-1.4.1.min.js?ver=2304171"></script>
-<script src="http://rondakorea.gloriasnd.kr/js/jquery.menu.js?ver=2304171"></script>
-<script src="http://rondakorea.gloriasnd.kr/js/common.js?ver=2304171"></script>
-<script src="http://rondakorea.gloriasnd.kr/js/wrest.js?ver=2304171"></script>
-<script src="http://rondakorea.gloriasnd.kr/js/placeholders.min.js?ver=2304171"></script>
-<script src="http://rondakorea.gloriasnd.kr/js/rondakorea_common.js?ver=2304171"></script>
-<script src="http://rondakorea.gloriasnd.kr/js/swiper.min.js?ver=2304171"></script>
-<script src="http://rondakorea.gloriasnd.kr/js/wow.min.js?ver=2304171"></script>
- <script>new WOW().init();</script>
-<script src="http://rondakorea.gloriasnd.kr/js/jquery.bxslider.js?ver=2304171"></script>
-
-
+  <meta charset="utf-8" />
+  <title>딤레이어 공지 팝업 (800×600 이미지)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-
-    /* ===== DimLayer Localize ===== */
-    /* :root 변수 대체 → .dimlayer 자체에 지역 변수 선언 */
-    .dimlayer{
-    /* 전역(:root) 대신 지역 변수로 재정의 */
-    --popup-w: min(92vw, 720px);
-    --radius: 16px;
-    --shadow: 0 20px 50px rgba(0,0,0,.35);
-    --brand: #0a68ff;
-
-    /* html, body의 폰트 상속에 의존하지 않도록 스코프 내 폰트 고정 */
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
-
-    /* 전역 마진/높이 설정과 무관하게 동작 */
-    line-height: 1.4;
+    :root{
+      --popup-w: 800px; /* 기본 너비(이미지 폭과 동일) */
+      --radius: 16px;
+      --shadow: 0 20px 50px rgba(0,0,0,.35);
+      --brand: #0a68ff;
     }
+    html,body{ height:100%; margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif; }
+    body.has-modal{ overflow:hidden; }
 
-    /* 스코프 내 모든 요소도 위 폰트를 따르게(안전망) */
-    .dimlayer, .dimlayer *{
-    font-family: inherit;
-    }
-    
     /* Dim overlay */
     .dimlayer{
       position:fixed; inset:0; z-index:1000;
@@ -143,504 +85,44 @@ var g5_shop_url = "http://rondakorea.gloriasnd.kr/shop";
 </head>
 <body>
 
+  <!-- 페이지 콘텐츠 -->
+  <main style="min-height:120vh; display:grid; place-items:center; text-align:center; padding:24px;">
+    <h1 style="margin:0 0 8px;">메인 페이지</h1>
+    <p style="margin:0 0 18px;">아래 버튼으로 팝업을 테스트하세요.</p>
+    <button class="btn btn--primary" id="openBtn" type="button">공지 팝업 열기</button>
+  </main>
 
-<!-- 상단 시작 { -->
-<div id="wrap">
-
-<header id="rondakorea_header">
-    <div class="inner2">
-        <p id="rondakorea_logo"><a href="http://rondakorea.gloriasnd.kr/en" title="메인으로 이동"><span class="text_hidden"></span></a></p>
-
-        <nav id="rondakorea_gnb">
-            <ul>
-                <li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda" title="Company">Company</a>
-                    <ul>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda" title="CEO Greetings">CEO Greetings</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda#section2" title="Company Overview">Company Overview</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda#section3" title="Philosophy">Philosophy</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda#section4" title="Our Journey">Our Journey</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda#section5" title="Location">Location</a></li>
-</ul>                </li>
-                <li><a href="http://rondakorea.gloriasnd.kr/en/doc/business.php/overview" title="Business">Business</a>
-                    <ul>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/business.php/overview" title="Business Overview">Business Overview</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/business.php/core" title="Core Strategy">Core Strategy</a></li>
-</ul>                </li>
-                <li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=consumable_parts_en" title="Products">Products</a>
-                    <ul>
-	<li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=consumable_parts_en" title="Consumable Parts">Consumable Parts</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=facility_solution_en" title="Facility Solution">Facility Solution</a></li>
-</ul>                </li>
-                <li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_news_en" title="Community">Community</a>
-                    <ul>
-	<li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_news_en" title="News">News</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_reference_en" title="Reference Room ">Reference Room </a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_faq_en" title="FAQ">FAQ</a></li>
-</ul>                </li>
-                <li><a href="http://rondakorea.gloriasnd.kr/en/doc/contact.php/inquiry" title="Contact Us">Contact Us</a>
-                    <ul>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/contact.php/inquiry" title="Online Inquiry">Online Inquiry</a></li>
-</ul>                </li>
-            </ul>
-        </nav>
-
-        <div>
-
-			<ul class="h_member">
-								<li><a href="http://rondakorea.gloriasnd.kr/bbs/login.php">Login</a></li>
-				<li><a href="http://rondakorea.gloriasnd.kr/bbs/register_form.php">Join</a></li>
-							</ul>
-
-            <div class="h_lang">
-                <button type="button">Eng</button>
-                <ul>
-                    <li class="on"><a href="http://rondakorea.gloriasnd.kr/en?lang=en">Eng</a></li>
-                    <li><a href="http://rondakorea.gloriasnd.kr/cn?lang=cn">Chn</a></li>
-                </ul>
-            </div>
-
-            <button type="button" id="menuToggle" title="사이트맵"><span></span><span></span><span></span><span></span></button>
-        </div>
-    </div>
-
-    <div id="all_gnb">
-        <ul class="inner">
-            <li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda" title="Company">Company</a>
-                <ul>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda" title="CEO Greetings">CEO Greetings</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda#section2" title="Company Overview">Company Overview</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda#section3" title="Philosophy">Philosophy</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda#section4" title="Our Journey">Our Journey</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda#section5" title="Location">Location</a></li>
-</ul>            </li>
-            <li><a href="http://rondakorea.gloriasnd.kr/en/doc/business.php/overview" title="Business">Business</a>
-                <ul>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/business.php/overview" title="Business Overview">Business Overview</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/business.php/core" title="Core Strategy">Core Strategy</a></li>
-</ul>            </li>
-            <li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=consumable_parts_en" title="Products">Products</a>
-                <ul>
-	<li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=consumable_parts_en" title="Consumable Parts">Consumable Parts</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=facility_solution_en" title="Facility Solution">Facility Solution</a></li>
-</ul>            </li>
-            <li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_news_en" title="Community">Community</a>
-                <ul>
-	<li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_news_en" title="News">News</a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_reference_en" title="Reference Room ">Reference Room </a></li>
-	<li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_faq_en" title="FAQ">FAQ</a></li>
-</ul>            </li>
-            <li><a href="http://rondakorea.gloriasnd.kr/en/doc/contact.php/inquiry" title="Contact Us">Contact Us</a>
-                <ul>
-	<li><a href="http://rondakorea.gloriasnd.kr/en/doc/contact.php/inquiry" title="Online Inquiry">Online Inquiry</a></li>
-</ul>            </li>
-        </ul>
-    </div>
-</header>
-<!-- } 상단 끝 -->
-
-
-<!-- 콘텐츠 시작 { -->
-
-
-<div id="mVisu">
-    <div class="txt_box inner2">
-        <div class="tit">
-            <p class="fc_01"><span class="wow fadeInUp">Global Experts</span></p>
-            <p><span class="wow fadeInUp">Meet Technology</span></p>
-        </div>
-    </div>
-    <div class="img_box">
-		<div class="mVisu_slide">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide"><div class="video"><iframe src="https://www.youtube.com/embed/luXyEALaVGc?autoplay=1&loop=1&playlist=luXyEALaVGc&mute=1" frameborder="0" allowfullscreen></iframe></div></div>
-				<!--<div class="swiper-slide"><div class="img" style="background-image:url(/images/mVisu_img1.jpg)"></div></div>
-				<div class="swiper-slide"><div class="img" style="background-image:url(/images/mVisu_img2.jpg)"></div></div>
-				<div class="swiper-slide"><div class="img" style="background-image:url(/images/mVisu_img3.jpg)"></div></div>-->
-			</div>
-			<div class="swiper-pagination"></div>
-		</div>
-        <div class="scroll_box">
-            <i class="icon"></i>
-            <p>SCROLL DOWN</p>
-        </div>
-    </div>
-</div>
-
-<div id="mCompany" class="inner2">
-    <div class="txt_box">
-        <p class="tit"><span>We're Leading the Future</span></p>
-        <p class="txt">Ronda Korea is a global company specialized in semiconductor manufacturing. <br>Our experts, from leading companies such as Samsung and TSMC, deliver customized solutions based on diverse field experience.</p>
-    </div>
-    <div class="img_box"></div>
-</div>
-
-<div id="mProducts" class="inner">
-    <div class="main_title">
-        <h2 class="wow fadeInLeft">Products</h2>
-        <p class="t1 wow fadeInRight">Ronda Korea is composed of experts specialized in high-volume semiconductor production. We offer broad technical capabilities from device to module processes, with deep understanding of the hardware and process technologies required for high-performance manufacturing.</p>
-    </div>
-    <ul>
-        <li class="wow fadeInUp"><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=consumable_parts_en">
-            <div class="img_box" style="background-image:url(http://rondakorea.gloriasnd.kr/images/mProducts_img1.png)"></div>
-            <div class="txt_box">
-                <span>Products</span>
-                <h3>Comsumable Part</h3>
-                <ol>
-                    <li>Si</li>
-                    <li>SiC</li>
-                    <li>Quartz</li>
-                </ol>
-            </div>
-        </a></li>
-        <li class="wow fadeInUp"><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=facility_solution_en">
-            <div class="img_box" style="background-image:url(http://rondakorea.gloriasnd.kr/images/mProducts_img2.png)"></div>
-            <div class="txt_box">
-                <span>Products</span>
-                <h3>Facility Solution</h3>
-                <ol>
-                    <li>Valve</li>
-                    <li>Scrubber</li>
-                    <li>Pump</li>
-                </ol>
-            </div>
-        </a></li>
-    </ul>
-</div>
-
-<div id="mGlobal">
-    <div class="inner2">
-        <div class="main_title tc">
-            <h2 class="wow fadeInUp">Global Network</h2>
-            <p class="t2 wow fadeInUp">With capabilities to manage the entire semiconductor <br class="mo_br">supply chain, we provide reliable solutions to global clients.</p>
-        </div>
-        <div class="map_box wow fadeIn">
-            <img src="http://rondakorea.gloriasnd.kr/images/mGlobal_map.png">
-            <ul>
-                <li class="on"><button type="button" data-location="korea"><span class="text_hidden">korea</span></button></li>
-                <li><button type="button" data-location="xian"><span class="text_hidden">xian</span></button></li>
-                <li><button type="button" data-location="wuxi"><span class="text_hidden">wuxi</span></button></li>
-            </ul>
-        </div>
-        <div class="mGlobal_slide_wrap">
-            <div class="mGlobal_slide">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide on wow fadeInRight" data-location="korea">
-                        <div class="img_box" style="background-image:url(/images/mGlobal_img1.png)"></div>
-                        <p class="t1">Dongtan, Korea</p>
-                        <p class="t2">Ronda Korea</p>
-                    </div>
-                    <div class="swiper-slide on wow fadeInRight" data-location="korea" data-wow-delay="0.2s">
-                        <div class="img_box" style="background-image:url(/images/mGlobal_img2.png)"></div>
-                        <p class="t1">Hwasung, Korea</p>
-                        <p class="t2">ARON Mechanics</p>
-                    </div>
-                    <div class="swiper-slide on wow fadeInRight" data-location="korea" data-wow-delay="0.4s">
-                        <div class="img_box" style="background-image:url(/images/mGlobal_img3.png)"></div>
-                        <p class="t1">Ansung, Korea</p>
-                        <p class="t2">TRON Photonics</p>
-                    </div>
-                    <div class="swiper-slide wow fadeInRight" data-location="xian" data-wow-delay="0.6s">
-                        <div class="img_box" style="background-image:url(/images/mGlobal_img4.png)"></div>
-                        <p class="t1">Xian, China</p>
-                        <p class="t2">Ronda Material</p>
-                    </div>
-                    <div class="swiper-slide wow fadeInRight" data-location="xian" data-wow-delay="0.8s">
-                        <div class="img_box" style="background-image:url(/images/mGlobal_img5.png)"></div>
-                        <p class="t1">Xian, China</p>
-                        <p class="t2">DGE Electronics</p>
-                    </div>
-                    <div class="swiper-slide wow fadeInRight" data-location="wuxi" data-wow-delay="1s">
-                        <div class="img_box" style="background-image:url(/images/mGlobal_img6.png)"></div>
-                        <p class="t1">Wuxi, China</p>
-                        <p class="t2">SoAo Global</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="mCore" class="inner">
-    <div>
-        <div class="txt_box">
-            <span>Global Core Hub</span>
-            <p>We aim to grow as a central hub connecting the global semiconductor manufacturing industry.</p>
-        </div>
-        <div class="box">
-            <div>
-                <div class="img_box" style="background-image:url(/images/mCore_img1.png)"></div>
-                <dl>
-                    <dt>Expertise</dt>
-                    <dd>A team of semiconductor experts from key technical fields</dd>
-                </dl>
-            </div>
-            <div>
-                <div class="img_box" style="background-image:url(/images/mCore_img2.png)"></div>
-                <dl>
-                    <dt>Knowhow</dt>
-                    <dd>Extensive practical experience from global leading companies</dd>
-                </dl>
-            </div>
-            <div>
-                <div class="img_box" style="background-image:url(/images/mCore_img3.png)"></div>
-                <dl>
-                    <dt>Connectivity</dt>
-                    <dd>Strong global supply chain network for international business</dd>
-                </dl>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="mCustomers" class="inner2">
-    <div class="main_title wow fadeInLeft">
-        <h2 class="fc_w">Customers <br>Oriented</h2>
-        <p class="t1 fc_w">Ronda Korea delivers customer-centered service with <br class="mo_br">superior products, competitive pricing, and excellent support.</p>
-    </div>
-    <ul class="wow fadeInRight">
-        <li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_faq_en">
-            <i class="fa-light fa-comments-question"></i>
-            <p>FAQ</p>
-        </a></li>
-        <li><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_reference_en">
-            <i class="fa-light fa-files"></i>
-            <p>Reference Room</p>
-        </a></li>
-        <li><a href="http://rondakorea.gloriasnd.kr/en/doc/company.php/ronda#section5">
-            <i class="fa-light fa-location-dot"></i>
-            <p>Location</p>
-        </a></li>
-    </ul>
-</div>
-
-<div id="mNews" class="inner">
-    <div class="main_title tc">
-        <h2 class="wow fadeInUp">Latest Updates</h2>
-        <p class="t2 wow fadeInUp">Stay updated with the latest news from Ronda Korea.</p>
-    </div>
-    <div class="mNews_slide wow fadeInUp">
-        <div class="swiper-wrapper">
-            
-<div class="swiper-slide"><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_news_en&amp;wr_id=12">
-	<div class="cont">
-		<p class="subject">2025 OPS Workshop in Lijiang Successfully Conclude…</p>
-		<p class="content">“Together to the Top”In June 2025, Ronda Korea (RK) successfully hosted the 2025 OPS Workshop in Lijiang, Yunnan Province, China, together with RMX, RKC, and SOAO.Under the slogan “One OPS, One Motion…</p>
-	</div>
-	<div class="info">
-		<p>2025.07.21</p>
-		<span>More</span>
-	</div>
-</a></div>
-<div class="swiper-slide"><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_news_en&amp;wr_id=11">
-	<div class="cont">
-		<p class="subject">Ronda Korea Participates in U.S. Tariff Response R…</p>
-		<p class="content">On April 24, 2025, the Korea SMEs and Startups Agency (KOSME) held a “U.S. Tariff Response Roundtable for Exporters” at the business site of Miju Precision Co., Ltd. in Hwaseong, Gyeonggi Province, to…</p>
-	</div>
-	<div class="info">
-		<p>2025.07.21</p>
-		<span>More</span>
-	</div>
-</a></div>
-<div class="swiper-slide"><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_news_en&amp;wr_id=10">
-	<div class="cont">
-		<p class="subject">Ronda Korea Named Rookie Exporter at the 2024 Gyeo…</p>
-		<p class="content">On December 10, 2024, Gyeonggi Province held an award ceremony in celebration of Export Business Day, recognizing local SMEs with outstanding export performance.At this event, Ronda Korea was selected…</p>
-	</div>
-	<div class="info">
-		<p>2025.07.21</p>
-		<span>More</span>
-	</div>
-</a></div>
-<div class="swiper-slide"><a href="http://rondakorea.gloriasnd.kr/bbs/board.php?bo_table=ronda_news_en&amp;wr_id=9">
-	<div class="cont">
-		<p class="subject">[Media Coverage] Gyeonggi-do Export Business Day –…</p>
-		<p class="content">On December 10, 2024, Ronda Korea was introduced as a recipient of the “Rookie Exporter Award” in coverage by Dailian, the Gyeonggi Provincial Government’s official press release, and the Gyeonggi Ins…</p>
-	</div>
-	<div class="info">
-		<p>2025.07.21</p>
-		<span>More</span>
-	</div>
-</a></div>
-        </div>
-        <div class="swiper-pagination"></div>
-    </div>
-</div>
-
-<div id="mContact">
-    <div class="inner">
-        <div class="main_title wow fadeInLeft">
-            <h2 class="fc_w">Contact Us</h2>
-            <p class="t2 fc_w">Need assistance?</p>
-        </div>
-        <a href="http://rondakorea.gloriasnd.kr/en/doc/contact.php/inquiry" class="wow fadeInLeft" data-wow-delay="0.3s"><i class="fa-thin fa-arrow-right-long"></i></a>
-    </div>
-</div>
-
-<script>
-	var swiper2 = new Swiper(".mVisu_slide", {
-		effect: 'fade',
-		loop: true,
-		pagination: {
-			el: ".swiper-pagination",
-			clickable: true,
-		},
-        /*autoplay: {
-            delay: 7000,
-            disableOnInteraction: false,
-        },*/
-		on: {
-			slideChange : function(){
-				/*var activeIndex = this.activeIndex;
-				if (activeIndex == 2){
-					$(".mVisu_slide .video").addClass("on");
-				}*/
-			},
-		},
-	});
-
-    var swiper = new Swiper(".mGlobal_slide", {
-        slidesPerView: 'auto',
-        spaceBetween: 15,
-        breakpoints: {
-            1024: {
-                spaceBetween: 10,
-            }, 
-        },
-        on: {
-            slideChange: function () {
-                var activeIndex = this.activeIndex;
-                var activeLocation = $(".mGlobal_slide .swiper-slide:eq("+ activeIndex +")").data("location");
-
-                $("#mGlobal .map_box li").removeClass("on")
-                $("#mGlobal .map_box li button[data-location='"+ activeLocation +"']").parent("li").addClass("on")
-		
-				$(".mGlobal_slide .swiper-slide").removeClass("on");
-				$(".mGlobal_slide .swiper-slide[data-location='"+ activeLocation +"']").addClass("on");
-            }
-        }
-    });
-
-    $("#mGlobal .map_box button").on("click", function () {
-        const targetLocation = $(this).data("location");
-
-        const targetIndex = $(".mGlobal_slide .swiper-slide").filter(function () {
-            return $(this).data("location") === targetLocation;
-        }).first().index();
-
-        swiper.slideTo(targetIndex);
-		
-		$(".mGlobal_slide .swiper-slide").removeClass("on");
-		$(".mGlobal_slide .swiper-slide[data-location='"+ targetLocation +"']").addClass("on");
-
-        $("#mGlobal .map_box li").removeClass("on")
-        $(this).parent("li").addClass("on")
-    });
-
-    var swiper2 = new Swiper(".mNews_slide", {
-        slidesPerView: 3,
-        spaceBetween: 50,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-        breakpoints: {
-            1024: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-            }, 
-            767: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-            }, 
-        }
-    });
-
-</script>
-
-<script src="http://rondakorea.gloriasnd.kr/js/gsap.min.js"></script>
-<script src="http://rondakorea.gloriasnd.kr/js/ScrollTrigger.min.js"></script>
-<script>
-    gsap.registerPlugin(ScrollTrigger);
-    ScrollTrigger.create({
-        trigger: "#mVisu",
-        start: "60% top",
-        toggleActions: "play none none none", 
-        once: true, 
-        onEnter: function () {
-            document.querySelector("#mCompany").classList.add("active");
-        }
-    });
-</script>
-
-
-
-<!-- } 콘텐츠 끝 -->
-
-
-<!-- 하단 시작 { -->
-<footer id="rondakorea_footer">
-    <div class="inner">
-        <p class="f_logo"><img src="http://rondakorea.gloriasnd.kr/images/logo_w.png" alt="Ronda Korea"></p>
-        <ul class="f_info">
-            <li>CEO : BS Moon</li>
-            <li>Business Registration Number : 882-86-01292</li>
-            <li>Personal Data Manager : sales@rondakorea.com</li><br>
-            <li>Address : #1501–1505, Geumgang Penterium IX Tower A, 27, Dongtanchemdansaneop 1-ro, Hwaseong-si, Gyeonggi-do, Republic of Korea</li>
-            <li>Tel : +82-31-613-2360</li>
-        </ul>
-        <p class="copy">© RONDA KOREA. All Rights Reserved.</p>
-        <div class="f_member">
-			            <a href="http://rondakorea.gloriasnd.kr/bbs/login.php">ADMIN</a>
-			        </div>
-    </div>
-</footer>
-
-<div id="Quick">
-    <a href="#" class="case2"><i class="fa-regular fa-pen-line"></i><span>Brochure Download</span></a>
-    <a href="http://rondakorea.gloriasnd.kr/en/doc/contact.php/inquiry"><i class="fa-regular fa-message-lines"></i><span>Contact Us</span></a>
-    <button type="button" class="go_top" title="상단으로 이동"><i class="fa-regular fa-arrow-up-long"></i></button>
-</div>
-
-</div>
-
-
-<!-- } 하단 끝 -->
-
-
-<button class="btn btn--primary" id="openBtn" type="button">공지 팝업 열기</button>
   <!-- 딤레이어 팝업 -->
   <div class="dimlayer" id="dim" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="noticeTitle">
-    <div class="notice" role="document" style="padding: 0px;">
+    <div class="notice" role="document">
       <!-- 닫기 버튼 -->
       <div class="notice__bar">
         <button class="iconbtn" id="closeX" aria-label="닫기">
-          <!-- X icon -->
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>
       </div>
 
-      <!-- 공지 이미지 (여기 이미지만 교체하세요) -->
-      <!-- 링크로 연결하고 싶으면 a 요소 href 수정 -->
+      <!-- 공지 이미지 (요청하신 800×600 / 지정 URL) -->
       <a class="notice__link" href="#" target="_blank" rel="noopener" aria-labelledby="noticeTitle">
-        <img class="notice__img" src="https://placehold.co/800x600/000000/FFFFFF/png?text=Image+,+on/off" alt="공지 배너 이미지" />
+        <img
+          class="notice__img"
+          src="https://placehold.co/800x600/000000/FFFFFF/png?text=Image+,+on/off"
+          width="800" height="600"
+          alt="공지 배너 이미지 (800×600)" />
       </a>
       <h2 id="noticeTitle" style="position:absolute; left:-9999px; top:auto;">공지 팝업</h2>
 
-      <!-- 풋터(오늘 하루 보지 않기 + 닫기) -->
+      <!-- 풋터: 오늘 하루 보지 않기 + 닫기/자세히 -->
       <div class="notice__foot">
         <label class="chk">
           <input type="checkbox" id="hideToday" />
           오늘 하루 보지 않기
         </label>
         <div class="btn--row">
-          <button class="btn btn--ghost" id="closeBtn" type="button" style="display: inline-flex; align-items: center;font-size: 13.3px;">닫기</button>
-          <button class="btn btn--primary" id="goBtn" type="button" style="display: inline-flex; align-items: center;font-size: 13.3px;">자세히 보기</button>
+          <button class="btn btn--ghost" id="closeBtn" type="button">닫기</button>
+          <button class="btn btn--primary" id="goBtn" type="button">자세히 보기</button>
         </div>
       </div>
     </div>
@@ -648,7 +130,7 @@ var g5_shop_url = "http://rondakorea.gloriasnd.kr/shop";
 
   <script>
     (function(){
-      const STORAGE_KEY = 'rk_notice_hide_until'; // 로컬스토리지 키
+      const STORAGE_KEY = 'rk_notice_hide_until';
       const dim = document.getElementById('dim');
       const openBtn = document.getElementById('openBtn');
       const closeBtn = document.getElementById('closeBtn');
@@ -657,26 +139,21 @@ var g5_shop_url = "http://rondakorea.gloriasnd.kr/shop";
       const hideToday = document.getElementById('hideToday');
       let lastFocus = null;
 
-      // EOD(오늘 23:59:59) 타임스탬프 구하기
       function endOfToday(){
         const now = new Date();
         return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999).getTime();
       }
-
       function shouldOpen(){
         const until = Number(localStorage.getItem(STORAGE_KEY) || 0);
         return Date.now() > until;
       }
-
       function lockScroll(lock){
         document.body.classList.toggle('has-modal', !!lock);
       }
-
       function openNotice(){
         lastFocus = document.activeElement;
         dim.setAttribute('aria-hidden','false');
         lockScroll(true);
-        // 포커스 이동
         closeX.focus();
         // 간단 포커스 트랩
         const focusables = dim.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])');
@@ -684,17 +161,12 @@ var g5_shop_url = "http://rondakorea.gloriasnd.kr/shop";
         dim.addEventListener('keydown', function(e){
           if(e.key === 'Escape'){ e.preventDefault(); closeNotice(); }
           if(e.key === 'Tab'){
-            if(e.shiftKey && document.activeElement === first){
-              e.preventDefault(); last.focus();
-            }else if(!e.shiftKey && document.activeElement === last){
-              e.preventDefault(); first.focus();
-            }
+            if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+            else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
           }
-        }, { once:false });
+        });
       }
-
       function closeNotice(){
-        // 오늘 하루 보지 않기 체크 시 저장
         if(hideToday.checked){
           localStorage.setItem(STORAGE_KEY, String(endOfToday()));
         }
@@ -703,17 +175,14 @@ var g5_shop_url = "http://rondakorea.gloriasnd.kr/shop";
         if(lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
       }
 
-      // 외부 클릭으로 닫기 (컨텐츠 바깥)
-      dim.addEventListener('click', (e)=>{
-        if(e.target === dim) closeNotice();
-      });
+      // 바깥 클릭 닫기
+      dim.addEventListener('click', (e)=>{ if(e.target === dim) closeNotice(); });
 
-      // 버튼 바인딩
       openBtn.addEventListener('click', openNotice);
       closeBtn.addEventListener('click', closeNotice);
       closeX.addEventListener('click', closeNotice);
 
-      // 자세히 보기 → 이미지 링크 클릭과 동일 동작 (원하면 URL 변경)
+      // 자세히 보기 (이미지 링크와 동일 동작)
       goBtn.addEventListener('click', ()=>{
         const link = document.querySelector('.notice__link');
         if(link && link.getAttribute('href') && link.getAttribute('href') !== '#'){
@@ -728,7 +197,5 @@ var g5_shop_url = "http://rondakorea.gloriasnd.kr/shop";
       });
     })();
   </script>
-
-
 </body>
 </html>
