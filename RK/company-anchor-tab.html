@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>우측 세로 앵커탭 + 긴 레이어 데모</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --brand:#0a68ff;
+      --text:#1b1f23;
+      --muted:#667085;
+      --edge: 20px;
+      --maxw: 1100px;
+      scroll-behavior: smooth;
+    }
+    *{ box-sizing:border-box }
+    html,body{ height:100%; margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; color:var(--text); }
+
+    /* 헤더(선택) */
+    header{
+      position: sticky; top:0; z-index: 5;
+      background: #ffffffcc; backdrop-filter: blur(6px);
+      border-bottom:1px solid #eef1f6;
+    }
+    header .wrap{ max-width:var(--maxw); margin:0 auto; padding:14px 20px; }
+    h1{ margin:0; font-size:20px; }
+
+    /* 본문 섹션 */
+    .section{
+      max-width:var(--maxw); margin:0 auto; padding:36px 20px 64px;
+      border-bottom:1px dashed #e6ebf2;
+    }
+    .section h2{ margin:0 0 12px; font-size:26px }
+    .section p{ line-height:1.85; color:#2b2f36; margin: 0 0 16px; }
+    .hint{ color:var(--muted); font-size:14px; margin-top:6px; }
+
+    /* 우측 세로 앵커탭 */
+    .side-nav{
+      position:fixed; z-index:20;
+      right: var(--edge); top: 50%;
+      transform: translateY(-50%);
+      display:flex; flex-direction:column; gap:10px;
+      background:#fff; padding:12px; border:1px solid #e4e9f6; border-radius:14px;
+      box-shadow:0 12px 30px rgba(0,0,0,.15);
+    }
+    .side-title{ font-weight:800; font-size:12px; color:#475467; letter-spacing:.04em; margin-bottom:6px; text-transform:uppercase; }
+    .anchor{
+      white-space:nowrap;
+      appearance:none; border:1px solid #dbe2f0; background:#f5f7fb;
+      padding:10px 12px; border-radius:999px; color:#111; font-weight:700; cursor:pointer;
+    }
+    .anchor:hover{ background:#ecf2ff; border-color:#cbd9ff; }
+    .anchor[aria-current="true"]{
+      background:var(--brand); color:#fff; border-color:var(--brand);
+      box-shadow:0 0 0 3px rgba(10,104,255,.22);
+    }
+
+    /* 반응형: 작은 화면에서는 우측 네비를 하단 플로팅 버튼으로 간략화(옵션) */
+    @media (max-width: 1024px){
+      .side-nav{
+        left: 50%; right:auto; top: auto; bottom: var(--edge);
+        transform: translateX(-50%);
+        flex-direction: row; gap: 8px; overflow:auto; max-width: 92vw;
+      }
+      .side-title{ display:none; }
+      .anchor{ font-size:14px; padding:8px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <h1>우측 세로 앵커탭 + 긴 레이어 데모</h1>
+    </div>
+  </header>
+
+  <!-- 본문: 각 섹션에 더미 텍스트 대량 추가 -->
+  <section id="ceo-message" class="section">
+    <h2>CEO 인사말 (ceo-message)</h2>
+    <p>이 페이지는 상단 고정 탭 대신 우측 끝에 세로로 나열된 앵커탭 메뉴를 사용합니다. 섹션이 길어 스크롤을 많이 해야 하며, 현재 보이는 섹션에 맞춰 우측 버튼이 하이라이트됩니다.</p>
+    <p class="hint">아래 더미 텍스트는 의도적으로 많이 넣어 섹션 높이를 크게 만들었습니다.</p>
+    <p>더미 텍스트… 사용자 흐름을 검증하기 위해 긴 문단이 배치됩니다. 컨텐츠의 양이 많을 때 우측 네비로 빠른 점프가 가능해야 하며, 스크롤 진행에 따라 현재 위치가 동기 표시되는지 확인합니다.</p>
+    <p>더미 텍스트… 제품 가치, 고객 사례, 핵심 지표 등의 내용이 실제 서비스에서는 배치됩니다. 반응형 환경에서 우측 네비는 하단 바 형태로 축약됩니다.</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+  </section>
+
+  <section id="overview" class="section">
+    <h2>회사 개요 (overview)</h2>
+    <p>우측 세로 앵커는 고정(fixed)되어 항상 가시성을 유지합니다. 각 버튼은 해당 섹션의 id(#overview 등)로 이동합니다. 스크롤 시 IntersectionObserver가 현재 섹션을 감지해 aria-current를 업데이트합니다.</p>
+    <p>긴 설명 섹션에서도 사용자가 맥락을 잃지 않도록 시각적 하이라이트가 적용됩니다.</p>
+    <p>더미 텍스트 반복… 더미 텍스트 반복… 더미 텍스트 반복… 더미 텍스트 반복…</p>
+    <p>더미 텍스트 반복… 더미 텍스트 반복… 더미 텍스트 반복… 더미 텍스트 반복…</p>
+    <p>더미 텍스트 반복… 더미 텍스트 반복… 더미 텍스트 반복… 더미 텍스트 반복…</p>
+    <p>더미 텍스트 반복… 더미 텍스트 반복… 더미 텍스트 반복… 더미 텍스트 반복…</p>
+    <p>더미 텍스트 반복… 더미 텍스트 반복… 더미 텍스트 반복… 더미 텍스트 반복…</p>
+  </section>
+
+  <section id="philosophy" class="section">
+    <h2>경영철학 (philosophy)</h2>
+    <p>사양 정보는 표·그래프·장표가 길게 이어질 수 있으므로, 앵커 네비게이션으로 특정 지점으로 빠르게 이동할 수 있어야 합니다.</p>
+    <p>더미 텍스트… 수많은 파라미터, 시험 결과, 벤치마크 수치 등이 이 영역에 포함됩니다.</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+  </section>
+
+  <section id="history" class="section">
+    <h2>걸어온 길 (history)</h2>
+    <p>가격 안내 섹션은 옵션·플랜·약관 등 텍스트가 길어지는 경우가 많습니다. 우측 네비는 사용자가 빠르게 비교 지점으로 이동하게 도와줍니다.</p>
+    <p>더미 텍스트… 가격표, 할인 정책, 약정 조건, SLA, 환불 규정 등.</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+  </section>
+
+  <section id="location" class="section">
+    <h2>찾아오시는 길</h2>
+    <p>자주 묻는 질문이 많으면 스크롤 거리가 길어집니다. 우측 네비는 사용자가 원하는 질문 카테고리로 즉시 이동하는 데 유용합니다.</p>
+    <p>더미 텍스트… 질문과 답변이 반복됩니다. 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 질문과 답변이 반복됩니다. 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 질문과 답변이 반복됩니다. 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 질문과 답변이 반복됩니다. 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>문의 (Contact)</h2>
+    <p>마지막 문의 섹션. 주소, 연락처, 지도, 폼 등이 길게 이어질 수 있습니다. 우측 네비의 “맨 위로” 버튼으로 헤더로 즉시 복귀가 가능합니다.</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+    <p>더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트… 더미 텍스트…</p>
+  </section>
+
+  <!-- 우측 세로 앵커탭 -->
+  <aside class="side-nav" aria-label="세로 앵커탭 네비게이션">
+    <div class="side-title">Sections</div>
+    <button class="anchor" data-target="#ceo-message">CEO 인사말</button>
+    <button class="anchor" data-target="#overview">회사 개요</button>
+    <button class="anchor" data-target="#philosophy">경영철학</button>
+    <button class="anchor" data-target="#history">걸어온길</button>
+    <button class="anchor" data-target="#location">찾아오시는 길</button>
+    <button class="anchor" data-target="#contact">문의</button>
+    <button class="anchor" id="toTop" title="맨 위로">↑ Top</button>
+  </aside>
+
+  <script>
+    (function(){
+      const sections = [...document.querySelectorAll('.section')];
+      const anchors  = [...document.querySelectorAll('.anchor[data-target]')];
+      const toTopBtn = document.getElementById('toTop');
+
+      // 클릭 시 부드러운 스크롤 (헤더 높이 보정)
+      function scrollToHash(hash){
+        const target = document.querySelector(hash);
+        if(!target) return;
+        const headerH = document.querySelector('header')?.offsetHeight || 0;
+        const y = target.getBoundingClientRect().top + window.scrollY - (headerH + 8);
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+      anchors.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const hash = btn.dataset.target;
+          scrollToHash(hash);
+          history.replaceState(null, '', hash);
+        });
+      });
+      toTopBtn.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+      // 현재 섹션 하이라이트 (IntersectionObserver)
+      function setActive(id){
+        anchors.forEach(b=>{
+          const on = b.dataset.target === ('#'+id);
+          b.setAttribute('aria-current', on ? 'true' : 'false');
+        });
+      }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ setActive(e.target.id); }
+        });
+      },{
+        root: null,
+        rootMargin: '-40% 0px -50% 0px', // 중앙 근처에 들어오면 활성
+        threshold: 0
+      });
+      sections.forEach(s=>io.observe(s));
+
+      // 초기 해시 위치 보정
+      window.addEventListener('load', ()=>{
+        if(location.hash){
+          setTimeout(()=>scrollToHash(location.hash), 30);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
