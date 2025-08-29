@@ -440,7 +440,7 @@
             가치를 나누는 파트너산업의 <br />
             흐름을 바꾸는 힘
           </p>
-          <div class="sub_menu_wrap case2">
+          <div id="myTagTabMenu" style="" class="sub_menu_wrap case2">
             <button type="button"></button>
             <ul>
               <li>
@@ -1200,7 +1200,7 @@
     </div>
 
     <!-- 우측 세로 앵커탭 -->
-    <aside class="side-nav" aria-label="세로 앵커탭 네비게이션">
+    <aside id="myTagAnchorTabMenu" class="side-nav" aria-label="세로 앵커탭 네비게이션">
       <div class="side-title">Sections</div>
       <button class="anchor" data-target="#section1">CEO 인사말</button>
       <button class="anchor" data-target="#section2">회사 개요</button>
@@ -1397,6 +1397,32 @@
           },
         },
       });
+
+      (function () {
+        const target = document.querySelector("#myTagTabMenu"); // 감시할 태그
+        const headerH = document.querySelector("rondakorea_header")?.offsetHeight || 0;
+        const anchorTabMenu = document.getElementById("myTagAnchorTabMenu"); // 앵커탭메뉴
+
+        const io = new IntersectionObserver(
+            ([entry]) => {
+            const rect = entry.boundingClientRect;
+            const outAbove = !entry.isIntersecting && rect.top < 0 - headerH;
+            if (outAbove) {
+                anchorTabMenu.style.display = "";
+            } else {
+                anchorTabMenu.style.display = "none";
+            }
+            },
+            {
+            root: null, // 뷰포트 기준 (스크롤 컨테이너가 따로 있으면 그 요소를 지정)
+            threshold: 0,
+            // 헤더가 고정되어 있으면 그만큼 음수로 올려 사라짐 판정 시점을 보정
+            rootMargin: `-${headerH}px 0px 0px 0px`,
+            }
+        );
+
+        io.observe(target);
+    })();
     </script>
   </body>
 </html>
