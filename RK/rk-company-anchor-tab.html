@@ -1,25 +1,50 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <meta name="format-detection" content="telephone=no" />
-    
-    <link href="http://rondakorea.gloriasnd.kr/images/rondakorea.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <link
+      href="http://rondakorea.gloriasnd.kr/images/rondakorea.ico"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
     <meta http-equiv="imagetoolbar" content="no" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title></title>
-    <link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/default.css?ver=2303229" />
-    <link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/js/font-awesome/css/font-awesome.min.css?ver=2303229" />
-    <link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/font.css?ver=2303229" />
-    <link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/all.min.css?ver=2303229" />
-    <link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/rondakorea_common.css?ver=2303229" />
-    <link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/rondakorea_css.css?ver=2303229" />
-    <link rel="stylesheet" href="http://rondakorea.gloriasnd.kr/css/rondakorea_animate.css?ver=2303229" />
+    <link
+      rel="stylesheet"
+      href="http://rondakorea.gloriasnd.kr/css/default.css?ver=2303229"
+    />
+    <link
+      rel="stylesheet"
+      href="http://rondakorea.gloriasnd.kr/js/font-awesome/css/font-awesome.min.css?ver=2303229"
+    />
+    <link
+      rel="stylesheet"
+      href="http://rondakorea.gloriasnd.kr/css/font.css?ver=2303229"
+    />
+    <link
+      rel="stylesheet"
+      href="http://rondakorea.gloriasnd.kr/css/all.min.css?ver=2303229"
+    />
+    <link
+      rel="stylesheet"
+      href="http://rondakorea.gloriasnd.kr/css/rondakorea_common.css?ver=2303229"
+    />
+    <link
+      rel="stylesheet"
+      href="http://rondakorea.gloriasnd.kr/css/rondakorea_css.css?ver=2303229"
+    />
+    <link
+      rel="stylesheet"
+      href="http://rondakorea.gloriasnd.kr/css/rondakorea_animate.css?ver=2303229"
+    />
     <!--[if lte IE 8]>
-    <script src="http://rondakorea.gloriasnd.kr/js/html5.js"></script>
+      <script src="http://rondakorea.gloriasnd.kr/js/html5.js"></script>
     <![endif]-->
-    
+
     <script src="http://rondakorea.gloriasnd.kr/js/jquery-1.12.4.min.js?ver=2304171"></script>
     <script src="http://rondakorea.gloriasnd.kr/js/jquery-migrate-1.4.1.min.js?ver=2304171"></script>
     <script src="http://rondakorea.gloriasnd.kr/js/jquery.menu.js?ver=2304171"></script>
@@ -29,902 +54,1349 @@
     <script src="http://rondakorea.gloriasnd.kr/js/rondakorea_common.js?ver=2304171"></script>
     <script src="http://rondakorea.gloriasnd.kr/js/swiper.min.js?ver=2304171"></script>
     <script src="http://rondakorea.gloriasnd.kr/js/wow.min.js?ver=2304171"></script>
-    
 
-<style>
-    :root{
-      --brand:#0a68ff;
-      --text:#1b1f23;
-      --muted:#667085;
-      --edge: 20px;
-      --maxw: 1100px;
-      scroll-behavior: smooth;
-    }
-    *{ box-sizing:border-box }
-    html,body{ height:100%; margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; color:var(--text); }
-
-    /* 헤더(선택) */
-    header{
-      position: sticky; top:0; z-index: 5;
-      background: #ffffffcc; backdrop-filter: blur(6px);
-      border-bottom:1px solid #eef1f6;
-    }
-    header .wrap{ max-width:var(--maxw); margin:0 auto; padding:14px 20px; }
-    h1{ margin:0; font-size:20px; }
-
-    /* 본문 섹션 */
-    .section{
-      max-width:var(--maxw); margin:0 auto; padding:36px 20px 64px;
-      border-bottom:1px dashed #e6ebf2;
-    }
-    .section h2{ margin:0 0 12px; font-size:26px }
-    .section p{ line-height:1.85; color:#2b2f36; margin: 0 0 16px; }
-    .hint{ color:var(--muted); font-size:14px; margin-top:6px; }
-
-    /* 우측 세로 앵커탭 */
-    .side-nav{
-      position:fixed; z-index:20;
-      right: var(--edge); top: 50%;
-      transform: translateY(-50%);
-      display:flex; flex-direction:column; gap:10px;
-      background:#fff; padding:12px; border:1px solid #e4e9f6; border-radius:14px;
-      box-shadow:0 12px 30px rgba(0,0,0,.15);
-    }
-    .side-title{ font-weight:800; font-size:12px; color:#475467; letter-spacing:.04em; margin-bottom:6px; text-transform:uppercase; }
-    .anchor{
-      white-space:nowrap;
-      appearance:none; border:1px solid #dbe2f0; background:#f5f7fb;
-      padding:10px 12px; border-radius:999px; color:#111; font-weight:700; cursor:pointer;
-    }
-    .anchor:hover{ background:#ecf2ff; border-color:#cbd9ff; }
-    .anchor[aria-current="true"]{
-      background:var(--brand); color:#fff; border-color:var(--brand);
-      box-shadow:0 0 0 3px rgba(10,104,255,.22);
-    }
-
-    /* 반응형: 작은 화면에서는 우측 네비를 하단 플로팅 버튼으로 간략화(옵션) */
-    @media (max-width: 1400px){
-      .side-nav{
-        left: 50%; right:auto; top: auto; bottom: var(--edge);
-        transform: translateX(-50%);
-        flex-direction: row; gap: 8px; overflow:auto; max-width: 92vw;
+    <style>
+      :root {
+        --brand: #0a68ff;
+        --text: #1b1f23;
+        --muted: #667085;
+        --edge: 20px;
+        --maxw: 1100px;
+        scroll-behavior: smooth;
       }
-      .side-title{ display:none; }
-      .anchor{ font-size:14px; padding:8px 12px; }
-    }
-</style>
-</head>
-<body>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+          "Noto Sans KR", sans-serif;
+        color: var(--text);
+      }
+
+      /* 헤더(선택) */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: #ffffffcc;
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid #eef1f6;
+      }
+      header .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 14px 20px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      /* 본문 섹션 */
+      .section {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 36px 20px 64px;
+        border-bottom: 1px dashed #e6ebf2;
+      }
+      .section h2 {
+        margin: 0 0 12px;
+        font-size: 26px;
+      }
+      .section p {
+        line-height: 1.85;
+        color: #2b2f36;
+        margin: 0 0 16px;
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: 6px;
+      }
+
+      /* 우측 세로 앵커탭 */
+      .side-nav {
+        position: fixed;
+        z-index: 20;
+        right: var(--edge);
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: #fff;
+        padding: 12px;
+        border: 1px solid #e4e9f6;
+        border-radius: 14px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+      .side-title {
+        font-weight: 800;
+        font-size: 12px;
+        color: #475467;
+        letter-spacing: 0.04em;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+      }
+      .anchor {
+        white-space: nowrap;
+        appearance: none;
+        border: 1px solid #dbe2f0;
+        background: #f5f7fb;
+        padding: 10px 12px;
+        border-radius: 999px;
+        color: #111;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .anchor:hover {
+        background: #ecf2ff;
+        border-color: #cbd9ff;
+      }
+      .anchor[aria-current="true"] {
+        background: var(--brand);
+        color: #fff;
+        border-color: var(--brand);
+        box-shadow: 0 0 0 3px rgba(10, 104, 255, 0.22);
+      }
+
+      /* 반응형: 작은 화면에서는 우측 네비를 하단 플로팅 버튼으로 간략화(옵션) */
+      @media (max-width: 1400px) {
+        .side-nav {
+          left: 50%;
+          right: auto;
+          top: auto;
+          bottom: var(--edge);
+          transform: translateX(-50%);
+          flex-direction: row;
+          gap: 8px;
+          overflow: auto;
+          max-width: 92vw;
+        }
+        .side-title {
+          display: none;
+        }
+        .anchor {
+          font-size: 14px;
+          padding: 8px 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <div id="wrap">
-        <header id="rondakorea_header">
-            <div class="inner2">
-                <p id="rondakorea_logo">
-                    <a href="/" title="메인으로 이동"><span class="text_hidden"></span></a>
-                </p>
-                
-                <nav id="rondakorea_gnb">
-                    <ul>
-                        <li>
-                            <a href="/doc/company.php/ronda" title="Company">Company</a>
-                            <ul>
-                                <li><a href="/doc/company.php/ronda" title="CEO인사말">CEO인사말</a></li>
-                                <li><a href="/doc/company.php/ronda#section2" title="회사개요">회사개요</a></li>
-                                <li><a href="/doc/company.php/ronda#section3" title="경영철학">경영철학</a></li>
-                                <li><a href="/doc/company.php/ronda#section4" title="걸어온길">걸어온길</a></li>
-                                <li><a href="/doc/company.php/ronda#section5" title="찾아오시는길">찾아오시는길</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/doc/business.php/overview" title="Business">Business</a>
-                            <ul>
-                                <li><a href="/doc/business.php/overview" title="사업개요">사업개요</a></li>
-                                <li><a href="/doc/business.php/core" title="핵심전략">핵심전략</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/bbs/board.php?bo_table=consumable_parts" title="Products">Products</a>
-                            <ul>
-                                <li><a href="/bbs/board.php?bo_table=consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
-                                <li><a href="/bbs/board.php?bo_table=facility_solution" title="Facility Solution">Facility Solution</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/bbs/board.php?bo_table=ronda_news" title="Community">Community</a>
-                            <ul>
-                                <li><a href="/bbs/board.php?bo_table=ronda_news" title="뉴스">뉴스</a></li>
-                                <li><a href="/bbs/board.php?bo_table=ronda_reference" title="자료실 ">자료실 </a></li>
-                                <li><a href="/bbs/board.php?bo_table=ronda_faq" title="FAQ">FAQ</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/doc/contact.php/inquiry" title="Contact Us">Contact Us</a>
-                            <ul>
-                                <li><a href="/doc/contact.php/inquiry" title="온라인문의">온라인문의</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-                
-                <div>
-                    <div class="h_lang">
-                        <button type="button">Kor</button>
-                        <ul>
-                            <li class="on"><a href="/">Kor</a></li>
-                            <li><a href="#">Eng</a></li>
-                            <li><a href="#">Chn</a></li>
-                        </ul>
-                    </div>
-                    
-                    <button type="button" id="menuToggle" title="사이트맵"><span></span><span></span><span></span><span></span></button>
-                </div>
-            </div>
-            
-            <div id="all_gnb">
-                <ul class="inner">
-                    <li>
-                        <a href="/doc/company.php/ronda" title="Company">Company</a>
-                        <ul>
-                            <li><a href="/doc/company.php/ronda" title="CEO인사말">CEO인사말</a></li>
-                            <li><a href="/doc/company.php/ronda#section2" title="회사개요">회사개요</a></li>
-                            <li><a href="/doc/company.php/ronda#section3" title="경영철학">경영철학</a></li>
-                            <li><a href="/doc/company.php/ronda#section4" title="걸어온길">걸어온길</a></li>
-                            <li><a href="/doc/company.php/ronda#section5" title="찾아오시는길">찾아오시는길</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/doc/business.php/overview" title="Business">Business</a>
-                        <ul>
-                            <li><a href="/doc/business.php/overview" title="사업개요">사업개요</a></li>
-                            <li><a href="/doc/business.php/core" title="핵심전략">핵심전략</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/bbs/board.php?bo_table=consumable_parts" title="Products">Products</a>
-                        <ul>
-                            <li><a href="/bbs/board.php?bo_table=consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
-                            <li><a href="/bbs/board.php?bo_table=facility_solution" title="Facility Solution">Facility Solution</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/bbs/board.php?bo_table=ronda_news" title="Community">Community</a>
-                        <ul>
-                            <li><a href="/bbs/board.php?bo_table=ronda_news" title="뉴스">뉴스</a></li>
-                            <li><a href="/bbs/board.php?bo_table=ronda_reference" title="자료실 ">자료실 </a></li>
-                            <li><a href="/bbs/board.php?bo_table=ronda_faq" title="FAQ">FAQ</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/doc/contact.php/inquiry" title="Contact Us">Contact Us</a>
-                        <ul>
-                            <li><a href="/doc/contact.php/inquiry" title="온라인문의">온라인문의</a></li>
-                        </ul>
-                    </li>
+      <header id="rondakorea_header">
+        <div class="inner2">
+          <p id="rondakorea_logo">
+            <a href="/" title="메인으로 이동"
+              ><span class="text_hidden"></span
+            ></a>
+          </p>
+
+          <nav id="rondakorea_gnb">
+            <ul>
+              <li>
+                <a href="/doc/company.php/ronda" title="Company">Company</a>
+                <ul>
+                  <li>
+                    <a href="/doc/company.php/ronda" title="CEO인사말"
+                      >CEO인사말</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/doc/company.php/ronda#section2" title="회사개요"
+                      >회사개요</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/doc/company.php/ronda#section3" title="경영철학"
+                      >경영철학</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/doc/company.php/ronda#section4" title="걸어온길"
+                      >걸어온길</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/doc/company.php/ronda#section5"
+                      title="찾아오시는길"
+                      >찾아오시는길</a
+                    >
+                  </li>
                 </ul>
-            </div>
-        </header>
-        
-        <div id="sVisu" class="sVisu1">
-            <div class="s-inner">
-                <h2 class="wow fadeInUp" data-wow-delay="0.2s">Company</h2>
-                <p class="wow fadeInUp" data-wow-delay="0.4s">
-                    가치를 나누는 파트너산업의 <br />
-                    흐름을 바꾸는 힘
-                </p>
-                <div class="sub_menu_wrap case2">
-                    <button type="button"></button>
-                    <ul>
-                        <li><a href="/doc/company.php/ronda" title="CEO인사말">CEO인사말</a></li>
-                        <li><a href="/doc/company.php/ronda#section2" title="회사개요">회사개요</a></li>
-                        <li><a href="/doc/company.php/ronda#section3" title="경영철학">경영철학</a></li>
-                        <li><a href="/doc/company.php/ronda#section4" title="걸어온길">걸어온길</a></li>
-                        <li><a href="/doc/company.php/ronda#section5" title="찾아오시는길">찾아오시는길</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="img_box"></div>
-        </div>
-        
-        <div id="sub_content" class="pt0">
-            
-            <div id="section1" class="sCompany_case1 s-inner pt100 pb200 section">
-                <div class="img_box"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img7.png" alt="Ronda" /></div>
-                <div class="txt_box">
-                    <p class="s_txt1">
-                        론다코리아는 반도체 산업의 첨단 공정에서 요구되는 고정밀, 고내구성 부품을 자체 개발 및 생산하는 전문 기업입니다. 형상 상부 전극, 외곽 상부 전극, C-Ring, Edge Ring, 실리콘, Q-Pad 등 다양한 공정 부품 솔루션을 통해
-                        고객사의 생산성과 공정 신뢰성을 높이고 있으며 실제 고객 공정에 최적화된 부품 개발을 목표로 정밀도, 소재 안정성, 내구성 확보에 집중하고 있습니다.
-                    </p>
-                    <p class="s_txt1">
-                        기술력과 품질에 대한 집요한 집중, 그리고 빠르고 유연한 고객 대응이 오늘의 론다코리아를 만든 핵심 기반입니다. 당사는 국내 생산 인프라를 중심으로 중국 시안과 청두에 제조 및 영업 거점을 운영하며 실제 사용 환경에서
-                        반복 검증된 기술력을 바탕으로 글로벌 시장을 확대하고 있습니다.
-                    </p>
-                    <p class="s_txt1">
-                        반도체 미세 공정 시대, 하나의 부품이 전체 공정의 효율을 결정짓는 지금 론다코리아는 고객이 필요로 하는 제품을 가장 안정적이고 신속하게 제공하는 실질적 제조 파트너로 자리잡고 있습니다. 앞으로도 우리는 기술과 품질을
-                        중심에 두고 고객의 니즈에 실질적으로 기여하는 방식으로 시장을 확대해 나가겠습니다.
-                    </p>
-                    <p class="name">론다코리아 대표 <strong>문병술</strong></p>
-                </div>
-            </div>
-            
-            <div class="sCompany_slide1_wrap">
-                <div class="sCompany_slide1 s-inner">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="img" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img1_1.png);"></div>
-                            <p>론다코리아는 구성원의 85% 이상이 AMAT 및 삼성전자 등 글로벌 주요 FAB 및 장비업체(OEM) 출신의 전문가들로 구성되어 있습니다.</p>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="img" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img1_2.png);"></div>
-                            <p>론다코리아는 메모리 및 로직 양산(HVM) 분야에서 Etch, CVD, PVD 공정에 특화된 공급망(SCM) 솔루션을 제공합니다.</p>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="img" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img1_3.png);"></div>
-                            <p>론다코리아는 40개 이상의 제품군과 500개 이상의 제품을 취급하며 활발한 비즈니스 활동을 전개하고 있습니다.</p>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
-            
-            <div id="section2" class="sCompany_case2 s-inner pt100 section">
-                <div class="tit_box">
-                    <p class="sub_title">
-                        론다코리아는 <br />
-                        글로벌 반도체 전문그룹입니다
-                    </p>
-                    <a href="#" class="rondakorea_btn1">회사소개서 다운로드</a>
-                </div>
-                <table class="sub_table_box1 mt50">
-                    <tbody>
-                        <tr>
-                            <th scope="row">회사명</th>
-                            <td>론다코리아 주식회사 (Ronda Korea Co., Ltd.)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">대표이사</th>
-                            <td>문병술 (BS Moon)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">설립연도</th>
-                            <td>2019년</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">사업장 위치</th>
-                            <td>
-                                대한민국 : 경기도 동탄<br />
-                                중국 : 시안(Xian), 우시(Wuxi)
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">실적현황</th>
-                            <td>
-                                <ul>
-                                    <li>2023년 기준 연매출 3억 위안(RMB) 달성, 22% 이상의 영업이익률 기록</li>
-                                    <li>연평균 성장률(CAGR) 100% 이상</li>
-                                    <li>주요 고객사: 중국 및 한국 내 주요 반도체 FAB 및 장비업체(OEM)</li>
-                                    <li>주요 공급처: 한국의 첨단 소모품, 부품 및 컴포넌트 공급사</li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">사업범위</th>
-                            <td>
-                                <strong>첨단 반도체 제조 솔루션 제공업체</strong>
-                                <ul>
-                                    <li>고객 맞춤형 공정 부품 및 소모품 공급</li>
-                                    <li>장비 성능 최적화 및 공정 효율 향상을 위한 전문 기술 지원 제공</li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">글로벌 사업확장</th>
-                            <td>
-                                <ul>
-                                    <li>국내 및 해외 전역에 걸친 반도체 부품 및 소재 공급 사업 전개</li>
-                                    <li>한국을 거점으로 미국, 유럽, 동남아시아 등으로 공급망 확대</li>
-                                    <li>시장 변화에 유연하게 대응하는 글로벌 운영 체계 구축</li>
-                                    <li>고객 맞춤형 기술 솔루션을 통한 신뢰 기반 파트너십 유지</li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="overflow pt150">
-                <div class="s-inner">
-                    <p class="s_tit1">특허·인증 및 수상</p>
-                    <div class="sCompany_slide2 mt30">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_1.jpg" alt="품질경영 ISO9001" /></div>
-                                <p>품질경영 ISO9001</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_2.jpg" alt="환경경영 ISO14001" /></div>
-                                <p>환경경영 ISO14001</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_3.jpg" alt="글로벌 강소기업 1000+" /></div>
-                                <p>글로벌 강소기업 1000+</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_4.jpg" alt="Inno-Biz 확인서" /></div>
-                                <p>Inno-Biz 확인서</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_5.jpg" alt="벤처기업 확인서" /></div>
-                                <p>벤처기업 확인서</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_6.jpg" alt="기업부설 연구소 인정서" /></div>
-                                <p>기업부설 연구소 인정서</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_7.jpg" alt="안전보건 CQM 인증" /></div>
-                                <p>안전보건 CQM 인증</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_8.jpg" alt="품질 CQM 인증" /></div>
-                                <p>품질 CQM 인증</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_9.jpg" alt="환경 CQM 인증" /></div>
-                                <p>환경 CQM 인증</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_10.jpg" alt="특허증" /></div>
-                                <p>특허증</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_11.jpg" alt="수출프론티어기업 인증서" /></div>
-                                <p>수출프론티어기업 인증서</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_12.jpg" alt="삼천만불 수출의 탑" /></div>
-                                <p>삼천만불 수출의 탑</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_13.jpg" alt="벤처기업인상" /></div>
-                                <p>벤처기업인상</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_14.jpg" alt="수출프론티어 신인왕상" /></div>
-                                <p>수출프론티어 신인왕상</p>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img"><img src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_15.jpg" alt="중소기업표창 도지사상" /></div>
-                                <p>중소기업표창 도지사상</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="sCompany_case3 pt150 pb200">
-                <div class="s-inner">
-                    <div class="tit_box">
-                        <p class="s_tit1">글로벌 네트워크</p>
-                        <p class="s_txt1 mt30">
-                            론다코리아의 글로벌 네트워크는 반도체 기술, 영업, 마케팅 및 공급망 분야에서 <br class="mo_br" />
-                            미국과 중국 시장을 아우르는 풍부한 인프라를 보유하고 있습니다.
-                        </p>
-                        <ul class="tab_box">
-                            <li class="on"><button type="button" data-location="all">All View</button></li>
-                            <li><button type="button" data-location="korea">Korea</button></li>
-                            <li><button type="button" data-location="china">China</button></li>
-                        </ul>
-                    </div>
-                    <div class="map_box mt70">
-                        <img src="http://rondakorea.gloriasnd.kr/images/mGlobal_map.png" />
-                        <ul>
-                            <li class="on">
-                                <button type="button" data-location="korea"><span class="text_hidden">korea</span></button>
-                            </li>
-                            <li>
-                                <button type="button" data-location="china"><span class="text_hidden">xian</span></button>
-                            </li>
-                            <li>
-                                <button type="button" data-location="china"><span class="text_hidden">wuxi</span></button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="sCompany_slide3">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" data-location="korea">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_1.png);"></div>
-                                <div class="txt_box">
-                                    <p class="en">Ronda Korea</p>
-                                    <p class="name">론다코리아</p>
-                                    <ul>
-                                        <li>분야 : 글로벌 비즈니스 기술/무역</li>
-                                        <li>위치 : 경기도 동탄</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" data-location="korea">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_2.png);"></div>
-                                <div class="txt_box">
-                                    <p class="en">ARON Mechanics</p>
-                                    <p class="name">아론 메카닉스</p>
-                                    <ul>
-                                        <li>분야 : 드릴 및 CNC 기계 제조</li>
-                                        <li>위치 : 경기도 화성</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" data-location="korea">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_3.png);"></div>
-                                <div class="txt_box">
-                                    <p class="en">TRON Photonics</p>
-                                    <p class="name">트론 포토닉스</p>
-                                    <ul>
-                                        <li>분야 : 포토 화학 연구 및 개발</li>
-                                        <li>위치 : 경기도 안성</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" data-location="china">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_4.png);"></div>
-                                <div class="txt_box">
-                                    <p class="en">Ronda Materials</p>
-                                    <p class="name">론다 머티리얼즈</p>
-                                    <ul>
-                                        <li>분야 : Si/SiC 부품 제조</li>
-                                        <li>위치 : 중국 시안</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" data-location="china">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_5.png);"></div>
-                                <div class="txt_box">
-                                    <p class="en">DGE Electronics</p>
-                                    <p class="name">DGE 일렉트로닉스</p>
-                                    <ul>
-                                        <li>분야 : 가스켓, 소켓, 젤 부품 제조</li>
-                                        <li>위치 : 중국 시안</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" data-location="china">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_6.png);"></div>
-                                <div class="txt_box">
-                                    <p class="en">SoAo Global</p>
-                                    <p class="name">소아오 글로벌</p>
-                                    <ul>
-                                        <li>분야 : 밸브, 펌프, 스크러버 제조</li>
-                                        <li>위치 : 중국 우시</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="section3" class="sCompany_case4 section">
-                <div class="s-inner">
-                    <p class="sub_title fc_w tc">
-                        론다코리아는 반도체 분야의 <br />
-                        글로벌 리더로 도약하겠습니다
-                    </p>
-                    <div class="box mt50">
-                        <div>
-                            <p>Vision</p>
-                            <ul>
-                                <li>글로벌 반도체 산업을 선도하는 기술력 확보</li>
-                                <li>한중미를 잇는 전략적 공급망 구축</li>
-                                <li>지속 가능한 기술 혁신과 고객 신뢰 확보</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p>Mission</p>
-                            <ul>
-                                <li>정밀한 소모품 및 설비 솔루션 공급</li>
-                                <li>전략적 파트너십을 통한 글로벌 서비스</li>
-                                <li>최적화된 공급 및 품질관리 시스템 운영</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="s-inner pt150">
-                <p class="s_tit1">기업문화와 약속</p>
-                <div class="sCompany_case5 mt30">
-                    <div>
-                        <i class="icon icon1"></i>
-                        <p>책임있는 공급망 관리</p>
-                    </div>
-                    <div>
-                        <i class="icon icon2"></i>
-                        <p>품질우선 정책 운영</p>
-                    </div>
-                    <div>
-                        <i class="icon icon3"></i>
-                        <p>지속가능한 제조와 환경고려</p>
-                    </div>
-                    <div>
-                        <i class="icon icon4"></i>
-                        <p>고객중심 서비스 체계</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="overflow pt150">
-                <div class="s-inner">
-                    <p class="s_tit1">핵심가치</p>
-                    <div class="sCompany_slide4 mt30">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img6_1.jpg);"></div>
-                                <dl>
-                                    <dt>정밀성 (Precision)</dt>
-                                    <dd>미세한 오차도 허용하지 않는 제품품질 및 설계역량</dd>
-                                </dl>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img6_2.jpg);"></div>
-                                <dl>
-                                    <dt>신뢰 (Trust)</dt>
-                                    <dd>고객과 파트너와의 신뢰를 최우선으로 하는 협력기반</dd>
-                                </dl>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img6_3.jpg);"></div>
-                                <dl>
-                                    <dt>혁신 (Innovation)</dt>
-                                    <dd>공정 최적화를 위한 기술개발과 R&D 투자 지속</dd>
-                                </dl>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img6_4.jpg);"></div>
-                                <dl>
-                                    <dt>유연성 (Flexibility)</dt>
-                                    <dd>고객요구 및 시장변화에 빠르게 대응하는 조직문화</dd>
-                                </dl>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="img_box" style="background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img6_5.jpg);"></div>
-                                <dl>
-                                    <dt>글로벌 역량 (Global Presence)</dt>
-                                    <dd>중국 중심의 생산 네트워크와 한중미 협업 체계</dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="section4" class="sCompany_case6 s-inner pt200 section">
-                <p class="sub_title">걸어온길</p>
-                <div class="box">
-                    <div>
-                        <p class="year">2024</p>
-                        <dl>
-                            <dt>06</dt>
-                            <dd>
-                                SOAO 공장 설립<br />
-                                밸브(Valve), 펌프(Pump), 스크러버(Scrubber) 생산<br />
-                                설비 솔루션 라인업 완성 및 수직 계열화 추진
-                            </dd>
-                            <dt>06</dt>
-                            <dd>
-                                DGE 공장 설립<br />
-                                가스켓(Gasket), 소켓(Socket), 젤(GEL) 생산<br />
-                                소모성 부품 생산 역량 확대
-                            </dd>
-                            <dt>02</dt>
-                            <dd>
-                                ARON 설비 도입<br />
-                                Drill/CNC 가공 시작<br />
-                                고정밀 가공 역량 강화
-                            </dd>
-                            <dt>01</dt>
-                            <dd>
-                                RMX 공장 설립<br />
-                                Si/SiC 부품 생산<br />
-                                고내열·고강도 소재 부품의 독자 생산 체계 구축
-                            </dd>
-                        </dl>
-                    </div>
-                    <div>
-                        <p class="year">2023</p>
-                        <dl>
-                            <dt>10</dt>
-                            <dd>
-                                TRON 공장 가동<br />
-                                포토케미컬(Photo Chemical) 생산 개시<br />
-                                반도체 공정용 화학소재 자체 생산 시작
-                            </dd>
-                            <dt>03</dt>
-                            <dd>
-                                중국 시안 고신구 정부와 투자 계약 체결<br />
-                                현지 생산 및 기술 거점 확대
-                            </dd>
-                        </dl>
-                    </div>
-                    <div>
-                        <p class="year">2022</p>
-                        <dl>
-                            <dt>03</dt>
-                            <dd>
-                                RK Chengdu 설립 (중국 청두 무역/영업 법인)<br />
-                                중국 내 영업 및 공급망 관리 기반 마련
-                            </dd>
-                        </dl>
-                    </div>
-                    <div>
-                        <p class="year">2019</p>
-                        <dl>
-                            <dt>04</dt>
-                            <dd>
-                                RONDA KOREA 설립<br />
-                                반도체 장비 및 부품 전문 기업으로 출범<br />
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="section5" class="sCompany_case7 s-inner pt200 section">
-                <p class="sub_title">찾아오시는길</p>
-                <div class="map_box mt50">
-                    <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3177.5421615280165!2d127.08736217631065!3d37.211102644428784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b459c37969ceb%3A0x1d9e618f6b31b359!2z64-Z7YOEIOq4iOqwle2OnO2FjOumrOybgElY7YOA7JuMIEHrj5k!5e0!3m2!1sko!2skr!4v1752670057747!5m2!1sko!2skr"
-                    style="border: 0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    ></iframe>
-                </div>
-                <div class="info_box mt50">
-                    <p class="add">
-                        경기도 화성시 동탄첨단산업1로 27<br />
-                        금강펜테리움IX타워 A동 1501~1505호
-                    </p>
-                    <ul>
-                        <li>
-                            <dl>
-                                <dt>대표번호</dt>
-                                <dd><a href="tel:031-613-2360">031-613-2360</a></dd>
-                            </dl>
-                        </li>
-                        <li>
-                            <dl>
-                                <dt>팩스번호</dt>
-                                <dd>031-613-2320</dd>
-                            </dl>
-                        </li>
-                        <li>
-                            <dl>
-                                <dt>이메일</dt>
-                                <dd><a href="mailto:sales@rondakorea.com">sales@rondakorea.com</a></dd>
-                            </dl>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            
-        </div>
-        
-        <footer id="rondakorea_footer">
-            <div class="inner">
-                <p class="f_logo"><img src="http://rondakorea.gloriasnd.kr/images/logo_w.png" alt="Ronda Korea" /></p>
-                <ul class="f_info">
-                    <li>대표 : 문병술</li>
-                    <li>사업자등록번호 : 882-86-01292</li>
-                    <li>개인정보관리자 : sales@rondakorea.com</li>
-                    <br />
-                    <li>주소 : 경기도 화성시 동탄첨단산업1로 27 금강펜테리움IX타워 A동 1501~1505호</li>
-                    <li>대표번호 : 031-613-2360</li>
+              </li>
+              <li>
+                <a href="/doc/business.php/overview" title="Business"
+                  >Business</a
+                >
+                <ul>
+                  <li>
+                    <a href="/doc/business.php/overview" title="사업개요"
+                      >사업개요</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/doc/business.php/core" title="핵심전략"
+                      >핵심전략</a
+                    >
+                  </li>
                 </ul>
-                <p class="copy">© RONDA KOREA. All Rights Reserved.</p>
-                <div class="f_member">
-                    <a href="http://rondakorea.gloriasnd.kr/bbs/login.php">ADMIN</a>
-                </div>
+              </li>
+              <li>
+                <a
+                  href="/bbs/board.php?bo_table=consumable_parts"
+                  title="Products"
+                  >Products</a
+                >
+                <ul>
+                  <li>
+                    <a
+                      href="/bbs/board.php?bo_table=consumable_parts"
+                      title="Consumable Parts"
+                      >Consumable Parts</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/bbs/board.php?bo_table=facility_solution"
+                      title="Facility Solution"
+                      >Facility Solution</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/bbs/board.php?bo_table=ronda_news" title="Community"
+                  >Community</a
+                >
+                <ul>
+                  <li>
+                    <a href="/bbs/board.php?bo_table=ronda_news" title="뉴스"
+                      >뉴스</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/bbs/board.php?bo_table=ronda_reference"
+                      title="자료실 "
+                      >자료실
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/bbs/board.php?bo_table=ronda_faq" title="FAQ"
+                      >FAQ</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/doc/contact.php/inquiry" title="Contact Us"
+                  >Contact Us</a
+                >
+                <ul>
+                  <li>
+                    <a href="/doc/contact.php/inquiry" title="온라인문의"
+                      >온라인문의</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+
+          <div>
+            <div class="h_lang">
+              <button type="button">Kor</button>
+              <ul>
+                <li class="on"><a href="/">Kor</a></li>
+                <li><a href="#">Eng</a></li>
+                <li><a href="#">Chn</a></li>
+              </ul>
             </div>
-        </footer>
-        
-        <div id="Quick">
-            <a href="#" class="case2"><i class="fa-regular fa-pen-line"></i><span>회사소개서 다운</span></a>
-            <a href="/doc/contact.php/inquiry"><i class="fa-regular fa-message-lines"></i><span>문의하기</span></a>
-            <button type="button" class="go_top" title="상단으로 이동"><i class="fa-regular fa-arrow-up-long"></i></button>
+
+            <button type="button" id="menuToggle" title="사이트맵">
+              <span></span><span></span><span></span><span></span>
+            </button>
+          </div>
         </div>
+
+        <div id="all_gnb">
+          <ul class="inner">
+            <li>
+              <a href="/doc/company.php/ronda" title="Company">Company</a>
+              <ul>
+                <li>
+                  <a href="/doc/company.php/ronda" title="CEO인사말"
+                    >CEO인사말</a
+                  >
+                </li>
+                <li>
+                  <a href="/doc/company.php/ronda#section2" title="회사개요"
+                    >회사개요</a
+                  >
+                </li>
+                <li>
+                  <a href="/doc/company.php/ronda#section3" title="경영철학"
+                    >경영철학</a
+                  >
+                </li>
+                <li>
+                  <a href="/doc/company.php/ronda#section4" title="걸어온길"
+                    >걸어온길</a
+                  >
+                </li>
+                <li>
+                  <a href="/doc/company.php/ronda#section5" title="찾아오시는길"
+                    >찾아오시는길</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="/doc/business.php/overview" title="Business">Business</a>
+              <ul>
+                <li>
+                  <a href="/doc/business.php/overview" title="사업개요"
+                    >사업개요</a
+                  >
+                </li>
+                <li>
+                  <a href="/doc/business.php/core" title="핵심전략">핵심전략</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="/bbs/board.php?bo_table=consumable_parts"
+                title="Products"
+                >Products</a
+              >
+              <ul>
+                <li>
+                  <a
+                    href="/bbs/board.php?bo_table=consumable_parts"
+                    title="Consumable Parts"
+                    >Consumable Parts</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/bbs/board.php?bo_table=facility_solution"
+                    title="Facility Solution"
+                    >Facility Solution</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="/bbs/board.php?bo_table=ronda_news" title="Community"
+                >Community</a
+              >
+              <ul>
+                <li>
+                  <a href="/bbs/board.php?bo_table=ronda_news" title="뉴스"
+                    >뉴스</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/bbs/board.php?bo_table=ronda_reference"
+                    title="자료실 "
+                    >자료실
+                  </a>
+                </li>
+                <li>
+                  <a href="/bbs/board.php?bo_table=ronda_faq" title="FAQ"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="/doc/contact.php/inquiry" title="Contact Us"
+                >Contact Us</a
+              >
+              <ul>
+                <li>
+                  <a href="/doc/contact.php/inquiry" title="온라인문의"
+                    >온라인문의</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </header>
+
+      <div id="sVisu" class="sVisu1">
+        <div class="s-inner">
+          <h2 class="wow fadeInUp" data-wow-delay="0.2s">Company</h2>
+          <p class="wow fadeInUp" data-wow-delay="0.4s">
+            가치를 나누는 파트너산업의 <br />
+            흐름을 바꾸는 힘
+          </p>
+          <div class="sub_menu_wrap case2">
+            <button type="button"></button>
+            <ul>
+              <li>
+                <a href="/doc/company.php/ronda" title="CEO인사말">CEO인사말</a>
+              </li>
+              <li>
+                <a href="/doc/company.php/ronda#section2" title="회사개요"
+                  >회사개요</a
+                >
+              </li>
+              <li>
+                <a href="/doc/company.php/ronda#section3" title="경영철학"
+                  >경영철학</a
+                >
+              </li>
+              <li>
+                <a href="/doc/company.php/ronda#section4" title="걸어온길"
+                  >걸어온길</a
+                >
+              </li>
+              <li>
+                <a href="/doc/company.php/ronda#section5" title="찾아오시는길"
+                  >찾아오시는길</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="img_box"></div>
+      </div>
+
+      <div id="sub_content" class="pt0">
+        <div id="section1" class="sCompany_case1 s-inner pt100 pb200 section">
+          <div class="img_box">
+            <img
+              src="http://rondakorea.gloriasnd.kr/images/sCompany_img7.png"
+              alt="Ronda"
+            />
+          </div>
+          <div class="txt_box">
+            <p class="s_txt1">
+              론다코리아는 반도체 산업의 첨단 공정에서 요구되는 고정밀, 고내구성
+              부품을 자체 개발 및 생산하는 전문 기업입니다. 형상 상부 전극, 외곽
+              상부 전극, C-Ring, Edge Ring, 실리콘, Q-Pad 등 다양한 공정 부품
+              솔루션을 통해 고객사의 생산성과 공정 신뢰성을 높이고 있으며 실제
+              고객 공정에 최적화된 부품 개발을 목표로 정밀도, 소재 안정성,
+              내구성 확보에 집중하고 있습니다.
+            </p>
+            <p class="s_txt1">
+              기술력과 품질에 대한 집요한 집중, 그리고 빠르고 유연한 고객 대응이
+              오늘의 론다코리아를 만든 핵심 기반입니다. 당사는 국내 생산
+              인프라를 중심으로 중국 시안과 청두에 제조 및 영업 거점을 운영하며
+              실제 사용 환경에서 반복 검증된 기술력을 바탕으로 글로벌 시장을
+              확대하고 있습니다.
+            </p>
+            <p class="s_txt1">
+              반도체 미세 공정 시대, 하나의 부품이 전체 공정의 효율을 결정짓는
+              지금 론다코리아는 고객이 필요로 하는 제품을 가장 안정적이고
+              신속하게 제공하는 실질적 제조 파트너로 자리잡고 있습니다. 앞으로도
+              우리는 기술과 품질을 중심에 두고 고객의 니즈에 실질적으로 기여하는
+              방식으로 시장을 확대해 나가겠습니다.
+            </p>
+            <p class="name">론다코리아 대표 <strong>문병술</strong></p>
+          </div>
+        </div>
+
+        <div class="sCompany_slide1_wrap">
+          <div class="sCompany_slide1 s-inner">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div
+                  class="img"
+                  style="
+                    background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img1_1.png);
+                  "
+                ></div>
+                <p>
+                  론다코리아는 구성원의 85% 이상이 AMAT 및 삼성전자 등 글로벌
+                  주요 FAB 및 장비업체(OEM) 출신의 전문가들로 구성되어 있습니다.
+                </p>
+              </div>
+              <div class="swiper-slide">
+                <div
+                  class="img"
+                  style="
+                    background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img1_2.png);
+                  "
+                ></div>
+                <p>
+                  론다코리아는 메모리 및 로직 양산(HVM) 분야에서 Etch, CVD, PVD
+                  공정에 특화된 공급망(SCM) 솔루션을 제공합니다.
+                </p>
+              </div>
+              <div class="swiper-slide">
+                <div
+                  class="img"
+                  style="
+                    background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img1_3.png);
+                  "
+                ></div>
+                <p>
+                  론다코리아는 40개 이상의 제품군과 500개 이상의 제품을 취급하며
+                  활발한 비즈니스 활동을 전개하고 있습니다.
+                </p>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+
+        <div id="section2" class="sCompany_case2 s-inner pt100 section">
+          <div class="tit_box">
+            <p class="sub_title">
+              론다코리아는 <br />
+              글로벌 반도체 전문그룹입니다
+            </p>
+            <a href="#" class="rondakorea_btn1">회사소개서 다운로드</a>
+          </div>
+          <table class="sub_table_box1 mt50">
+            <tbody>
+              <tr>
+                <th scope="row">회사명</th>
+                <td>론다코리아 주식회사 (Ronda Korea Co., Ltd.)</td>
+              </tr>
+              <tr>
+                <th scope="row">대표이사</th>
+                <td>문병술 (BS Moon)</td>
+              </tr>
+              <tr>
+                <th scope="row">설립연도</th>
+                <td>2019년</td>
+              </tr>
+              <tr>
+                <th scope="row">사업장 위치</th>
+                <td>
+                  대한민국 : 경기도 동탄<br />
+                  중국 : 시안(Xian), 우시(Wuxi)
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">실적현황</th>
+                <td>
+                  <ul>
+                    <li>
+                      2023년 기준 연매출 3억 위안(RMB) 달성, 22% 이상의
+                      영업이익률 기록
+                    </li>
+                    <li>연평균 성장률(CAGR) 100% 이상</li>
+                    <li>
+                      주요 고객사: 중국 및 한국 내 주요 반도체 FAB 및
+                      장비업체(OEM)
+                    </li>
+                    <li>
+                      주요 공급처: 한국의 첨단 소모품, 부품 및 컴포넌트 공급사
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">사업범위</th>
+                <td>
+                  <strong>첨단 반도체 제조 솔루션 제공업체</strong>
+                  <ul>
+                    <li>고객 맞춤형 공정 부품 및 소모품 공급</li>
+                    <li>
+                      장비 성능 최적화 및 공정 효율 향상을 위한 전문 기술 지원
+                      제공
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">글로벌 사업확장</th>
+                <td>
+                  <ul>
+                    <li>
+                      국내 및 해외 전역에 걸친 반도체 부품 및 소재 공급 사업
+                      전개
+                    </li>
+                    <li>
+                      한국을 거점으로 미국, 유럽, 동남아시아 등으로 공급망 확대
+                    </li>
+                    <li>시장 변화에 유연하게 대응하는 글로벌 운영 체계 구축</li>
+                    <li>
+                      고객 맞춤형 기술 솔루션을 통한 신뢰 기반 파트너십 유지
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="overflow pt150">
+          <div class="s-inner">
+            <p class="s_tit1">특허·인증 및 수상</p>
+            <div class="sCompany_slide2 mt30">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_1.jpg"
+                      alt="품질경영 ISO9001"
+                    />
+                  </div>
+                  <p>품질경영 ISO9001</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_2.jpg"
+                      alt="환경경영 ISO14001"
+                    />
+                  </div>
+                  <p>환경경영 ISO14001</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_3.jpg"
+                      alt="글로벌 강소기업 1000+"
+                    />
+                  </div>
+                  <p>글로벌 강소기업 1000+</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_4.jpg"
+                      alt="Inno-Biz 확인서"
+                    />
+                  </div>
+                  <p>Inno-Biz 확인서</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_5.jpg"
+                      alt="벤처기업 확인서"
+                    />
+                  </div>
+                  <p>벤처기업 확인서</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_6.jpg"
+                      alt="기업부설 연구소 인정서"
+                    />
+                  </div>
+                  <p>기업부설 연구소 인정서</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_7.jpg"
+                      alt="안전보건 CQM 인증"
+                    />
+                  </div>
+                  <p>안전보건 CQM 인증</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_8.jpg"
+                      alt="품질 CQM 인증"
+                    />
+                  </div>
+                  <p>품질 CQM 인증</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_9.jpg"
+                      alt="환경 CQM 인증"
+                    />
+                  </div>
+                  <p>환경 CQM 인증</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_10.jpg"
+                      alt="특허증"
+                    />
+                  </div>
+                  <p>특허증</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_11.jpg"
+                      alt="수출프론티어기업 인증서"
+                    />
+                  </div>
+                  <p>수출프론티어기업 인증서</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_12.jpg"
+                      alt="삼천만불 수출의 탑"
+                    />
+                  </div>
+                  <p>삼천만불 수출의 탑</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_13.jpg"
+                      alt="벤처기업인상"
+                    />
+                  </div>
+                  <p>벤처기업인상</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_14.jpg"
+                      alt="수출프론티어 신인왕상"
+                    />
+                  </div>
+                  <p>수출프론티어 신인왕상</p>
+                </div>
+                <div class="swiper-slide">
+                  <div class="img">
+                    <img
+                      src="http://rondakorea.gloriasnd.kr/images/sCompany_img2_15.jpg"
+                      alt="중소기업표창 도지사상"
+                    />
+                  </div>
+                  <p>중소기업표창 도지사상</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sCompany_case3 pt150 pb200">
+          <div class="s-inner">
+            <div class="tit_box">
+              <p class="s_tit1">글로벌 네트워크</p>
+              <p class="s_txt1 mt30">
+                론다코리아의 글로벌 네트워크는 반도체 기술, 영업, 마케팅 및
+                공급망 분야에서 <br class="mo_br" />
+                미국과 중국 시장을 아우르는 풍부한 인프라를 보유하고 있습니다.
+              </p>
+              <ul class="tab_box">
+                <li class="on">
+                  <button type="button" data-location="all">All View</button>
+                </li>
+                <li>
+                  <button type="button" data-location="korea">Korea</button>
+                </li>
+                <li>
+                  <button type="button" data-location="china">China</button>
+                </li>
+              </ul>
+            </div>
+            <div class="map_box mt70">
+              <img
+                src="http://rondakorea.gloriasnd.kr/images/mGlobal_map.png"
+              />
+              <ul>
+                <li class="on">
+                  <button type="button" data-location="korea">
+                    <span class="text_hidden">korea</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-location="china">
+                    <span class="text_hidden">xian</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-location="china">
+                    <span class="text_hidden">wuxi</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div class="sCompany_slide3">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" data-location="korea">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_1.png);
+                    "
+                  ></div>
+                  <div class="txt_box">
+                    <p class="en">Ronda Korea</p>
+                    <p class="name">론다코리아</p>
+                    <ul>
+                      <li>분야 : 글로벌 비즈니스 기술/무역</li>
+                      <li>위치 : 경기도 동탄</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="swiper-slide" data-location="korea">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_2.png);
+                    "
+                  ></div>
+                  <div class="txt_box">
+                    <p class="en">ARON Mechanics</p>
+                    <p class="name">아론 메카닉스</p>
+                    <ul>
+                      <li>분야 : 드릴 및 CNC 기계 제조</li>
+                      <li>위치 : 경기도 화성</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="swiper-slide" data-location="korea">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_3.png);
+                    "
+                  ></div>
+                  <div class="txt_box">
+                    <p class="en">TRON Photonics</p>
+                    <p class="name">트론 포토닉스</p>
+                    <ul>
+                      <li>분야 : 포토 화학 연구 및 개발</li>
+                      <li>위치 : 경기도 안성</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="swiper-slide" data-location="china">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_4.png);
+                    "
+                  ></div>
+                  <div class="txt_box">
+                    <p class="en">Ronda Materials</p>
+                    <p class="name">론다 머티리얼즈</p>
+                    <ul>
+                      <li>분야 : Si/SiC 부품 제조</li>
+                      <li>위치 : 중국 시안</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="swiper-slide" data-location="china">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_5.png);
+                    "
+                  ></div>
+                  <div class="txt_box">
+                    <p class="en">DGE Electronics</p>
+                    <p class="name">DGE 일렉트로닉스</p>
+                    <ul>
+                      <li>분야 : 가스켓, 소켓, 젤 부품 제조</li>
+                      <li>위치 : 중국 시안</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="swiper-slide" data-location="china">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img3_6.png);
+                    "
+                  ></div>
+                  <div class="txt_box">
+                    <p class="en">SoAo Global</p>
+                    <p class="name">소아오 글로벌</p>
+                    <ul>
+                      <li>분야 : 밸브, 펌프, 스크러버 제조</li>
+                      <li>위치 : 중국 우시</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="section3" class="sCompany_case4 section">
+          <div class="s-inner">
+            <p class="sub_title fc_w tc">
+              론다코리아는 반도체 분야의 <br />
+              글로벌 리더로 도약하겠습니다
+            </p>
+            <div class="box mt50">
+              <div>
+                <p>Vision</p>
+                <ul>
+                  <li>글로벌 반도체 산업을 선도하는 기술력 확보</li>
+                  <li>한중미를 잇는 전략적 공급망 구축</li>
+                  <li>지속 가능한 기술 혁신과 고객 신뢰 확보</li>
+                </ul>
+              </div>
+              <div>
+                <p>Mission</p>
+                <ul>
+                  <li>정밀한 소모품 및 설비 솔루션 공급</li>
+                  <li>전략적 파트너십을 통한 글로벌 서비스</li>
+                  <li>최적화된 공급 및 품질관리 시스템 운영</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-inner pt150">
+          <p class="s_tit1">기업문화와 약속</p>
+          <div class="sCompany_case5 mt30">
+            <div>
+              <i class="icon icon1"></i>
+              <p>책임있는 공급망 관리</p>
+            </div>
+            <div>
+              <i class="icon icon2"></i>
+              <p>품질우선 정책 운영</p>
+            </div>
+            <div>
+              <i class="icon icon3"></i>
+              <p>지속가능한 제조와 환경고려</p>
+            </div>
+            <div>
+              <i class="icon icon4"></i>
+              <p>고객중심 서비스 체계</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="overflow pt150">
+          <div class="s-inner">
+            <p class="s_tit1">핵심가치</p>
+            <div class="sCompany_slide4 mt30">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img6_1.jpg);
+                    "
+                  ></div>
+                  <dl>
+                    <dt>정밀성 (Precision)</dt>
+                    <dd>미세한 오차도 허용하지 않는 제품품질 및 설계역량</dd>
+                  </dl>
+                </div>
+                <div class="swiper-slide">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img6_2.jpg);
+                    "
+                  ></div>
+                  <dl>
+                    <dt>신뢰 (Trust)</dt>
+                    <dd>고객과 파트너와의 신뢰를 최우선으로 하는 협력기반</dd>
+                  </dl>
+                </div>
+                <div class="swiper-slide">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img6_3.jpg);
+                    "
+                  ></div>
+                  <dl>
+                    <dt>혁신 (Innovation)</dt>
+                    <dd>공정 최적화를 위한 기술개발과 R&D 투자 지속</dd>
+                  </dl>
+                </div>
+                <div class="swiper-slide">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img6_4.jpg);
+                    "
+                  ></div>
+                  <dl>
+                    <dt>유연성 (Flexibility)</dt>
+                    <dd>고객요구 및 시장변화에 빠르게 대응하는 조직문화</dd>
+                  </dl>
+                </div>
+                <div class="swiper-slide">
+                  <div
+                    class="img_box"
+                    style="
+                      background-image: url(http://rondakorea.gloriasnd.kr/images/sCompany_img6_5.jpg);
+                    "
+                  ></div>
+                  <dl>
+                    <dt>글로벌 역량 (Global Presence)</dt>
+                    <dd>중국 중심의 생산 네트워크와 한중미 협업 체계</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="section4" class="sCompany_case6 s-inner pt200 section">
+          <p class="sub_title">걸어온길</p>
+          <div class="box">
+            <div>
+              <p class="year">2024</p>
+              <dl>
+                <dt>06</dt>
+                <dd>
+                  SOAO 공장 설립<br />
+                  밸브(Valve), 펌프(Pump), 스크러버(Scrubber) 생산<br />
+                  설비 솔루션 라인업 완성 및 수직 계열화 추진
+                </dd>
+                <dt>06</dt>
+                <dd>
+                  DGE 공장 설립<br />
+                  가스켓(Gasket), 소켓(Socket), 젤(GEL) 생산<br />
+                  소모성 부품 생산 역량 확대
+                </dd>
+                <dt>02</dt>
+                <dd>
+                  ARON 설비 도입<br />
+                  Drill/CNC 가공 시작<br />
+                  고정밀 가공 역량 강화
+                </dd>
+                <dt>01</dt>
+                <dd>
+                  RMX 공장 설립<br />
+                  Si/SiC 부품 생산<br />
+                  고내열·고강도 소재 부품의 독자 생산 체계 구축
+                </dd>
+              </dl>
+            </div>
+            <div>
+              <p class="year">2023</p>
+              <dl>
+                <dt>10</dt>
+                <dd>
+                  TRON 공장 가동<br />
+                  포토케미컬(Photo Chemical) 생산 개시<br />
+                  반도체 공정용 화학소재 자체 생산 시작
+                </dd>
+                <dt>03</dt>
+                <dd>
+                  중국 시안 고신구 정부와 투자 계약 체결<br />
+                  현지 생산 및 기술 거점 확대
+                </dd>
+              </dl>
+            </div>
+            <div>
+              <p class="year">2022</p>
+              <dl>
+                <dt>03</dt>
+                <dd>
+                  RK Chengdu 설립 (중국 청두 무역/영업 법인)<br />
+                  중국 내 영업 및 공급망 관리 기반 마련
+                </dd>
+              </dl>
+            </div>
+            <div>
+              <p class="year">2019</p>
+              <dl>
+                <dt>04</dt>
+                <dd>
+                  RONDA KOREA 설립<br />
+                  반도체 장비 및 부품 전문 기업으로 출범<br />
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <div id="section5" class="sCompany_case7 s-inner pt200 section">
+          <p class="sub_title">찾아오시는길</p>
+          <div class="map_box mt50">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3177.5421615280165!2d127.08736217631065!3d37.211102644428784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b459c37969ceb%3A0x1d9e618f6b31b359!2z64-Z7YOEIOq4iOqwle2OnO2FjOumrOybgElY7YOA7JuMIEHrj5k!5e0!3m2!1sko!2skr!4v1752670057747!5m2!1sko!2skr"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <div class="info_box mt50">
+            <p class="add">
+              경기도 화성시 동탄첨단산업1로 27<br />
+              금강펜테리움IX타워 A동 1501~1505호
+            </p>
+            <ul>
+              <li>
+                <dl>
+                  <dt>대표번호</dt>
+                  <dd><a href="tel:031-613-2360">031-613-2360</a></dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt>팩스번호</dt>
+                  <dd>031-613-2320</dd>
+                </dl>
+              </li>
+              <li>
+                <dl>
+                  <dt>이메일</dt>
+                  <dd>
+                    <a href="mailto:sales@rondakorea.com"
+                      >sales@rondakorea.com</a
+                    >
+                  </dd>
+                </dl>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <footer id="rondakorea_footer">
+        <div class="inner">
+          <p class="f_logo">
+            <img
+              src="http://rondakorea.gloriasnd.kr/images/logo_w.png"
+              alt="Ronda Korea"
+            />
+          </p>
+          <ul class="f_info">
+            <li>대표 : 문병술</li>
+            <li>사업자등록번호 : 882-86-01292</li>
+            <li>개인정보관리자 : sales@rondakorea.com</li>
+            <br />
+            <li>
+              주소 : 경기도 화성시 동탄첨단산업1로 27 금강펜테리움IX타워 A동
+              1501~1505호
+            </li>
+            <li>대표번호 : 031-613-2360</li>
+          </ul>
+          <p class="copy">© RONDA KOREA. All Rights Reserved.</p>
+          <div class="f_member">
+            <a href="http://rondakorea.gloriasnd.kr/bbs/login.php">ADMIN</a>
+          </div>
+        </div>
+      </footer>
+
+      <div id="Quick">
+        <a href="#" class="case2"
+          ><i class="fa-regular fa-pen-line"></i><span>회사소개서 다운</span></a
+        >
+        <a href="/doc/contact.php/inquiry"
+          ><i class="fa-regular fa-message-lines"></i><span>문의하기</span></a
+        >
+        <button type="button" class="go_top" title="상단으로 이동">
+          <i class="fa-regular fa-arrow-up-long"></i>
+        </button>
+      </div>
     </div>
 
+    <!-- 우측 세로 앵커탭 -->
+    <aside class="side-nav" aria-label="세로 앵커탭 네비게이션">
+      <div class="side-title">Sections</div>
+      <button class="anchor" data-target="#section1">CEO 인사말</button>
+      <button class="anchor" data-target="#section2">회사 개요</button>
+      <button class="anchor" data-target="#section3">경영철학</button>
+      <button class="anchor" data-target="#section4">걸어온길</button>
+      <button class="anchor" data-target="#section5">찾아오시는 길</button>
+      <!-- <button class="anchor" data-target="#section1">문의</button> -->
+      <button class="anchor" id="toTop" title="맨 위로">↑ Top</button>
+    </aside>
 
-  <!-- 우측 세로 앵커탭 -->
-  <aside class="side-nav" aria-label="세로 앵커탭 네비게이션">
-    <div class="side-title">Sections</div>
-    <button class="anchor" data-target="#section1">CEO 인사말</button>
-    <button class="anchor" data-target="#section2">회사 개요</button>
-    <button class="anchor" data-target="#section3">경영철학</button>
-    <button class="anchor" data-target="#section4">걸어온길</button>
-    <button class="anchor" data-target="#section5">찾아오시는 길</button>
-    <!-- <button class="anchor" data-target="#section1">문의</button> -->
-    <button class="anchor" id="toTop" title="맨 위로">↑ Top</button>
-  </aside>
+    <script>
+      (function () {
+        const sections = [...document.querySelectorAll(".section")];
+        const anchors = [...document.querySelectorAll(".anchor[data-target]")];
+        const toTopBtn = document.getElementById("toTop");
 
-  <script>
-    (function(){
-      const sections = [...document.querySelectorAll('.section')];
-      const anchors  = [...document.querySelectorAll('.anchor[data-target]')];
-      const toTopBtn = document.getElementById('toTop');
-
-      // 클릭 시 부드러운 스크롤 (헤더 높이 보정)
-      function scrollToHash(hash){
-        const target = document.querySelector(hash);
-        if(!target) return;
-        const headerH = document.querySelector('header')?.offsetHeight || 0;
-        const y = target.getBoundingClientRect().top + window.scrollY - (headerH + 8);
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-      anchors.forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          const hash = btn.dataset.target;
-          scrollToHash(hash);
-          history.replaceState(null, '', hash);
-        });
-      });
-      toTopBtn.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
-
-      // 현재 섹션 하이라이트 (IntersectionObserver)
-      function setActive(id){
-        anchors.forEach(b=>{
-          const on = b.dataset.target === ('#'+id);
-          b.setAttribute('aria-current', on ? 'true' : 'false');
-        });
-      }
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){ setActive(e.target.id); }
-        });
-      },{
-        root: null,
-        rootMargin: '-40% 0px -50% 0px', // 중앙 근처에 들어오면 활성
-        threshold: 0
-      });
-      sections.forEach(s=>io.observe(s));
-
-      // 초기 해시 위치 보정
-      window.addEventListener('load', ()=>{
-        if(location.hash){
-          setTimeout(()=>scrollToHash(location.hash), 30);
+        // 클릭 시 부드러운 스크롤 (헤더 높이 보정)
+        function scrollToHash(hash) {
+          const target = document.querySelector(hash);
+          if (!target) return;
+          const headerH = document.querySelector("header")?.offsetHeight || 0;
+          const y =
+            target.getBoundingClientRect().top + window.scrollY - (headerH + 8);
+          window.scrollTo({ top: y, behavior: "smooth" });
         }
+        anchors.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const hash = btn.dataset.target;
+            scrollToHash(hash);
+            history.replaceState(null, "", hash);
+          });
+        });
+        toTopBtn.addEventListener("click", () =>
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        );
+
+        // 현재 섹션 하이라이트 (IntersectionObserver)
+        function setActive(id) {
+          anchors.forEach((b) => {
+            const on = b.dataset.target === "#" + id;
+            b.setAttribute("aria-current", on ? "true" : "false");
+          });
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                setActive(e.target.id);
+              }
+            });
+          },
+          {
+            root: null,
+            rootMargin: "-40% 0px -50% 0px", // 중앙 근처에 들어오면 활성
+            threshold: 0,
+          }
+        );
+        sections.forEach((s) => io.observe(s));
+
+        // 초기 해시 위치 보정
+        window.addEventListener("load", () => {
+          if (location.hash) {
+            setTimeout(() => scrollToHash(location.hash), 30);
+          }
+        });
+      })();
+    </script>
+
+    <script>
+      // 자바스크립트에서 사용하는 전역변수 선언
+      var g5_url = "http://rondakorea.gloriasnd.kr";
+      var g5_bbs_url = "http://rondakorea.gloriasnd.kr/bbs";
+      var g5_is_member = "";
+      var g5_is_admin = "";
+      var g5_is_mobile = "";
+      var g5_bo_table = "";
+      var g5_sca = "";
+      var g5_editor = "";
+      var g5_cookie_domain = "";
+      var g5_shop_url = "http://rondakorea.gloriasnd.kr/shop";
+    </script>
+    <script>
+      new WOW().init();
+    </script>
+    <script>
+      subFun(1);
+    </script>
+    <script>
+      var swiper = new Swiper(".sCompany_slide1", {
+        loop: true,
+        loopAdditionalSlides: 1,
+        spaceBetween: 20,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
       });
-    })();
-  </script>
-  
-    <script>
-        // 자바스크립트에서 사용하는 전역변수 선언
-        var g5_url = "http://rondakorea.gloriasnd.kr";
-        var g5_bbs_url = "http://rondakorea.gloriasnd.kr/bbs";
-        var g5_is_member = "";
-        var g5_is_admin = "";
-        var g5_is_mobile = "";
-        var g5_bo_table = "";
-        var g5_sca = "";
-        var g5_editor = "";
-        var g5_cookie_domain = "";
-        var g5_shop_url = "http://rondakorea.gloriasnd.kr/shop";
-    </script>
-    <script>
-        new WOW().init();
-    </script>
-    <script>
-        subFun(1);
-    </script>
-    <script>
-        var swiper = new Swiper(".sCompany_slide1", {
-            loop: true,
-            loopAdditionalSlides: 1,
-            spaceBetween: 20,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-        });
-        
-        var swiper = new Swiper(".sCompany_slide2", {
-            loop: true,
-            loopAdditionalSlides: 1,
-            slidesPerView: 5,
-            spaceBetween: 15,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            breakpoints: {
-                1024: {
-                    slidesPerView: 4,
-                    spaceBetween: 10,
-                },
-                767: {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                },
-            },
-        });
-        
-        var mapSwiper = new Swiper(".sCompany_slide3", {
-            slidesPerView: "auto",
-            spaceBetween: 15,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            breakpoints: {
-                1024: {
-                    spaceBetween: 10,
-                },
-            },
-            on: {
-                slideChange: function () {
-                    var activeIndex = this.activeIndex;
-                },
-            },
-        });
-        
-        $(".sCompany_case3 .tab_box li button").on("click", function () {
-            let selected = $(this).data("location");
-            
-            $(".sCompany_case3 .tab_box li").removeClass("on");
-            $(this).parent("li").addClass("on");
-            
-            $(".sCompany_case3 .map_box ul li").removeClass("on");
-            if (selected === "all") {
-                $(".sCompany_case3 .map_box ul li").addClass("on");
-            } else {
-                $(".sCompany_case3 .map_box ul li").each(function () {
-                    if ($(this).find("button").data("location") === selected) {
-                        $(this).addClass("on");
-                    }
-                });
-            }
-            
-            let $allSlides = $(".sCompany_slide3 .swiper-slide");
-            $allSlides.hide();
-            
-            if (selected === "all") {
-                $allSlides.show();
-            } else {
-                $allSlides.each(function () {
-                    if ($(this).data("location") === selected) {
-                        $(this).show();
-                    }
-                });
-            }
-            
-            mapSwiper.update();
-            mapSwiper.slideTo(0);
-        });
-        
-        var swiper = new Swiper(".sCompany_slide4", {
-            /*loop: true,
-            loopAdditionalSlides: 1,*/
+
+      var swiper = new Swiper(".sCompany_slide2", {
+        loop: true,
+        loopAdditionalSlides: 1,
+        slidesPerView: 5,
+        spaceBetween: 15,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          767: {
             slidesPerView: 2,
-            spaceBetween: 20,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            breakpoints: {
-                1024: {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                },
-                767: {
-                    slidesPerView: 1,
-                    spaceBetween: 10,
-                },
-            },
-        });
+            spaceBetween: 10,
+          },
+        },
+      });
+
+      var mapSwiper = new Swiper(".sCompany_slide3", {
+        slidesPerView: "auto",
+        spaceBetween: 15,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          1024: {
+            spaceBetween: 10,
+          },
+        },
+        on: {
+          slideChange: function () {
+            var activeIndex = this.activeIndex;
+          },
+        },
+      });
+
+      $(".sCompany_case3 .tab_box li button").on("click", function () {
+        let selected = $(this).data("location");
+
+        $(".sCompany_case3 .tab_box li").removeClass("on");
+        $(this).parent("li").addClass("on");
+
+        $(".sCompany_case3 .map_box ul li").removeClass("on");
+        if (selected === "all") {
+          $(".sCompany_case3 .map_box ul li").addClass("on");
+        } else {
+          $(".sCompany_case3 .map_box ul li").each(function () {
+            if ($(this).find("button").data("location") === selected) {
+              $(this).addClass("on");
+            }
+          });
+        }
+
+        let $allSlides = $(".sCompany_slide3 .swiper-slide");
+        $allSlides.hide();
+
+        if (selected === "all") {
+          $allSlides.show();
+        } else {
+          $allSlides.each(function () {
+            if ($(this).data("location") === selected) {
+              $(this).show();
+            }
+          });
+        }
+
+        mapSwiper.update();
+        mapSwiper.slideTo(0);
+      });
+
+      var swiper = new Swiper(".sCompany_slide4", {
+        /*loop: true,
+            loopAdditionalSlides: 1,*/
+        slidesPerView: 2,
+        spaceBetween: 20,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          767: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+        },
+      });
     </script>
-</body>
+  </body>
 </html>
