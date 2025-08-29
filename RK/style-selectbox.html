@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>스타일 셀렉트 박스</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Noto Sans KR", sans-serif;
+    }
+
+    body {
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .custom-select {
+      position: relative;
+      width: 260px;
+      font-size: 15px;
+    }
+
+    .select-btn {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 12px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: all 0.2s;
+    }
+
+    .select-btn:hover {
+      border-color: #007bff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+
+    .select-btn span {
+      font-weight: 500;
+      color: #333;
+    }
+
+    /* 세모 아이콘 */
+    .arrow {
+      width: 0;
+      height: 0;
+      margin-left: 10px;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #333;
+      transition: transform 0.3s;
+    }
+
+    .select-btn.active .arrow {
+      transform: rotate(180deg);
+    }
+
+    .options {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .options.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .option {
+      padding: 12px 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .option:hover {
+      background: #f2f8ff;
+    }
+
+    .option.active {
+      background: #e6f0ff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="custom-select" style="max-width: 530px; width: 80%;">
+    <div class="select-btn">
+      <span>CEO인사말</span>
+      <div class="arrow"></div>
+    </div>
+    <div class="options">
+      <div class="option active">CEO인사말</div>
+      <div class="option">회사개요</div>
+      <div class="option">경영철학</div>
+      <div class="option">걸어온길</div>
+      <div class="option">찾아오시는길</div>
+    </div>
+  </div>
+
+  <script>
+    const selectBtn = document.querySelector(".select-btn");
+    const options = document.querySelector(".options");
+    const optionItems = document.querySelectorAll(".option");
+    const btnText = selectBtn.querySelector("span");
+
+    selectBtn.addEventListener("click", () => {
+      selectBtn.classList.toggle("active");
+      options.classList.toggle("active");
+    });
+
+    optionItems.forEach(option => {
+      option.addEventListener("click", () => {
+        btnText.innerText = option.innerText;
+
+        optionItems.forEach(opt => opt.classList.remove("active"));
+        option.classList.add("active");
+
+        selectBtn.classList.remove("active");
+        options.classList.remove("active");
+      });
+    });
+  </script>
+</body>
+</html>
