@@ -336,19 +336,19 @@
 
       (function () {
         const target = document.querySelector("#myTagTabMenu"); // 감시할 태그
-        const headerH = document.querySelector("rondakorea_header")?.offsetHeight || 0;
+        // const headerH = document.querySelector("#rondakorea_header")?.offsetHeight || 0;
+        const headerH = 0;
         const anchorTabMenu = document.getElementById("myTagAnchorTabMenu"); // 앵커탭메뉴
 
         const io = new IntersectionObserver(
           ([entry]) => {
             const rect = entry.boundingClientRect;
             const outAbove = !entry.isIntersecting && rect.top < 0 - headerH;
+
             if (outAbove) {
-              console.log("위로 사라졌다!");
               anchorTabMenu.style.display = "";
             } else {
               anchorTabMenu.style.display = "none";
-              console.log("화면 안이거나, 아래쪽에 있다");
             }
           },
           {
