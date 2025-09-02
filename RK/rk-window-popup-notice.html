@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>공지사항 - Ronda Korea</title>
+  <meta name="description" content="RK 공지 상세 (WYSIWYG 렌더)" />
+  <style>
+    :root{
+      --brand:#002766;        /* 요청하신 포인트 네이비 */
+      --brand-2:#4b6cb7;      /* 보조 톤(밝은 블루네이비 계열) */
+      --bg:#f8fafc;
+      --paper:#ffffff;
+      --line:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;padding:0;background:var(--bg);color:var(--text);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",sans-serif
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+
+    /* 헤더 (기존 구조 + 네이비 기운만 살짝) */
+    header.site-header{
+      position:sticky;top:0;z-index:10;
+      background:
+        radial-gradient(1200px 200px at 50% -50%, rgba(0,39,102,.16), transparent 60%),
+        linear-gradient(90deg, #ffffff 0%, #fbfdff 100%);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:saturate(1.1) blur(2px);
+    }
+    .hbar{height:80px;display:flex;align-items:center;justify-content:space-between}
+    .brand img{
+      height:48px; /* 원본 143px → 비율 축소 */
+      display:block;
+    }
+    .header-deco{
+      display:flex;gap:8px;align-items:center;opacity:.8
+    }
+    .pill{
+      height:10px;border-radius:999px;
+      background:linear-gradient(90deg, #eef2f7, #f4f7fb);
+      border:1px solid var(--line)
+    }
+    .pill.p1{width:56px}
+    .pill.p2{width:36px}
+    .pill.p3{width:24px}
+
+    /* 본문 카드 */
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:0 10px 30px rgba(15,23,42,.05);
+      margin:20px 0 28px;
+      padding:26px;
+    }
+
+    /* 에디터 출력 영역 */
+    .editor-content{line-height:1.85;font-size:1rem}
+    .editor-content h1{font-size:1.8rem;margin:.2rem 0 1rem;color:var(--brand)}
+    .editor-content h2{font-size:1.4rem;margin:1.4rem 0 .6rem}
+    .editor-content h3{font-size:1.2rem;margin:1.2rem 0 .5rem}
+    .editor-content p{margin:.7rem 0}
+    .editor-content ul, .editor-content ol{margin:.6rem 0 .8rem 1.2rem}
+    .editor-content li{margin:.3rem 0}
+    .editor-content blockquote{
+      margin:1rem 0; padding:.8rem 1rem; border-left:4px solid var(--brand);
+      background:#f3f7ff; color:#1e3a8a; border-radius:10px;
+    }
+    .editor-content code{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      background:#f8fafc; border:1px solid var(--line); padding:.1rem .35rem; border-radius:6px;
+    }
+    .editor-content pre{
+      overflow:auto; padding:1rem; background:#0b1220; color:#e5e7eb; border-radius:12px;
+      border:1px solid #0f172a; line-height:1.6; font-size:.95rem;
+    }
+    .editor-content table{
+      width:100%; border-collapse:collapse; margin:1rem 0; font-size:.95rem;
+    }
+    .editor-content th, .editor-content td{
+      border:1px solid var(--line); padding:.6rem .7rem; text-align:left;
+    }
+    .editor-content thead th{background:#f5f7fb}
+
+    /* ===== 풋터 (구조/사이즈 동일, 색상/로고만 살짝 활용) ===== */
+    footer.site-footer{
+      position:relative;
+      border-top:1px solid var(--line);
+      background:
+        radial-gradient(900px 120px at 50% 0%, rgba(0,39,102,.10), transparent 60%),
+        #ffffff;
+      margin-top:24px;
+      overflow:hidden; /* 로고 워터마크가 영역 밖으로 새지 않도록 */
+    }
+    /* 로고 워터마크: 배경 레이어로만 추가 (구조/높이 변화 없음) */
+    footer.site-footer::after{
+      content:"";
+      position:absolute;
+      left:50%; bottom:12px;
+      transform:translateX(-50%);
+      width:160px; height:32px; /* 크기 조정 가능 */
+      background-image:url("http://rondakorea.gloriasnd.kr/images/logo.png");
+      background-repeat:no-repeat;
+      background-size:contain;
+      background-position:center bottom;
+      opacity:.08;
+      pointer-events:none;
+      filter:grayscale(20%);
+    }
+
+    .fbar{display:flex; align-items:center; justify-content:space-between; padding:18px 0}
+    /* 좌측 네모 심볼: 네이비 톤만 살짝 강화 */
+    .fmark{
+      width:26px;height:26px;border-radius:7px;
+      background:
+        linear-gradient(135deg, rgba(0,39,102,.85), rgba(75,108,183,.75)),
+        linear-gradient(#fff,#fff);
+      box-shadow:0 1px 0 rgba(0,0,0,.06) inset, 0 0 0 1px rgba(255,255,255,.35) inset;
+      border:1px solid rgba(0,39,102,.15);
+    }
+    .fshapes{display:flex;gap:6px;align-items:center;opacity:.7}
+    .dot{width:6px;height:6px;border-radius:999px;background:#dbeafe;border:1px solid #bfdbfe}
+    .bar{height:6px;width:38px;border-radius:999px;background:#eaf1ff;border:1px solid #d9e3f5}
+
+    @media (max-width:560px){
+      .card{padding:20px;border-radius:14px}
+      .hbar{height:70px}
+      .brand img{height:40px}
+    }
+  </style>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header class="site-header">
+    <div class="wrap hbar">
+      <div class="brand">
+        <img src="http://rondakorea.gloriasnd.kr/images/logo.png" alt="Ronda Korea 로고">
+      </div>
+      <div class="header-deco" aria-hidden="true">
+        <div class="pill p1"></div>
+        <div class="pill p2"></div>
+        <div class="pill p3"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 본문 -->
+  <main class="wrap" id="main">
+    <article class="card">
+      <div class="editor-content">
+        <span style="color: crimson;background-color: #A4AAB6;">--본 박스-- 내용들은 WYSIWYG 같은 에디터로 관리되는 HTML이 들어가는 영역입니다</span>
+        <!-- WYSIWYG 에디터가 생성한 HTML이 들어가는 영역 -->
+        <h1>[더미] 시스템 점검 안내</h1>
+        <p>안정적인 서비스 제공을 위해 아래 일정으로 정기 점검을 진행합니다. 이 영역은 에디터가 렌더링하는 영역이며, 본 문구는 샘플입니다.</p>
+        <h2>점검 정보</h2>
+        <ul>
+          <li><strong>일시</strong> : 2025-09-10(수) 01:00 ~ 04:00 (KST)</li>
+          <li><strong>영향</strong> : 일부 메뉴 접속 지연</li>
+          <li><strong>문의</strong> : 문의하기 메뉴 또는 운영 메일</li>
+        </ul>
+        <blockquote>점검 시간은 상황에 따라 변동될 수 있으며, 신속히 공지하겠습니다.</blockquote>
+        <h3>변경 사항 요약</h3>
+        <table>
+          <thead><tr><th>항목</th><th>설명</th></tr></thead>
+          <tbody>
+            <tr><td>보안 패치</td><td>시스템 핵심 모듈 업데이트</td></tr>
+            <tr><td>DB 최적화</td><td>인덱스 및 쿼리 튜닝</td></tr>
+          </tbody>
+        </table>
+        <p>필요 시 <code>cs@rk.co.kr</code>로 연락 주시면 도와드리겠습니다.</p>
+      </div>
+    </article>
+  </main>
+
+  <!-- 풋터 (구조/사이즈 동일) -->
+  <footer class="site-footer">
+    <div class="wrap fbar">
+      <div class="fmark" aria-hidden="true"></div>
+      <div class="fshapes" aria-hidden="true">
+        <span class="dot"></span><span class="bar"></span><span class="dot"></span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
