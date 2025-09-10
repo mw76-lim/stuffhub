@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Haystack Brewery — Starter Layout</title>
+  <meta name="description" content="Haystack Brewery: 포틀랜드 감성의 로컬 크래프트 브루어리. 시그니처 라인업, 탭룸, 투어/이벤트 정보." />
+
+  <!-- SEO & Social -->
+  <meta property="og:title" content="Haystack Brewery" />
+  <meta property="og:description" content="포틀랜드 감성의 로컬 크래프트 브루어리" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://picsum.photos/1200/630?random=31" />
+  <meta name="theme-color" content="#0A1F1E" />
+
+  <style>
+    :root{
+      --brand:#0AAE8F;        /* 메인 포인트 (초록빛 틸) */
+      --brand-2:#FFC857;      /* 보조 포인트 (골드) */
+      --ink:#0A1F1E;          /* 본문 글자 */
+      --muted:#667085;        /* 보조 글자 */
+      --bg:#FBFBFD;           /* 배경 */
+      --card:#FFFFFF;         /* 카드 배경 */
+      --border:#E6E8EE;       /* 경계선 */
+      --radius:16px;
+      --shadow:0 12px 30px rgba(0,0,0,.08);
+      --maxw:1160px;
+      --pad: clamp(16px, 3vw, 28px);
+      scroll-behavior:smooth;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --ink:#EEF2F5;
+        --muted:#A6B0C2;
+        --bg:#0E141A;
+        --card:#121A22;
+        --border:#273244;
+        --shadow:0 16px 40px rgba(0,0,0,.35);
+      }
+    }
+    *{ box-sizing:border-box }
+    html,body{ margin:0; padding:0; color:var(--ink); background:var(--bg);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; line-height:1.6; }
+
+    /* 헤더 */
+    header{
+      position:sticky; top:0; z-index:20;
+      background:color-mix(in oklab, var(--card) 92%, transparent);
+      backdrop-filter:saturate(1.4) blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      max-width:var(--maxw); margin:0 auto; padding:12px var(--pad);
+      display:flex; align-items:center; gap:16px; justify-content:space-between;
+    }
+    .brand{
+      font-weight:800; letter-spacing:.02em; font-size:18px; display:flex; align-items:center; gap:10px;
+    }
+    .brand .logo{ inline-size:28px; block-size:28px; border-radius:6px; background:linear-gradient(135deg, var(--brand), #0A7F73); display:inline-block; position:relative; }
+    .brand .logo::after{ content:""; position:absolute; inset:6px; border-radius:4px; background:radial-gradient( circle at 30% 30%, var(--brand-2), transparent 60% ); mix-blend:screen; opacity:.8; }
+
+    .menu{ display:flex; gap:14px; align-items:center; }
+    .menu a{ text-decoration:none; color:var(--ink); font-weight:700; padding:8px 12px; border-radius:999px; }
+    .menu a:hover{ background:color-mix(in oklab, var(--brand) 12%, transparent); color:#0b3a35; }
+    .cta{ padding:10px 14px; border-radius:999px; border:1px solid var(--brand); color:#063c35; background:color-mix(in oklab, var(--brand) 18%, white);
+      font-weight:800; text-decoration:none; }
+    .toggle{ display:none; background:none; border:none; inline-size:40px; block-size:40px; border-radius:10px; }
+    .toggle span{ display:block; inline-size:20px; block-size:2px; background:var(--ink); margin:5px auto; border-radius:2px; }
+
+    @media (max-width:980px){
+      .toggle{ display:block; }
+      .menu{ position:fixed; inset:64px var(--pad) auto var(--pad); background:var(--card); border:1px solid var(--border);
+        padding:14px; border-radius:14px; box-shadow:var(--shadow); display:none; flex-direction:column; align-items:stretch; }
+      .menu.show{ display:flex; }
+      .menu a{ padding:12px 14px; border:1px solid transparent; }
+      .menu a:hover{ border-color:var(--border); background:transparent; }
+    }
+
+    /* 히어로 */
+    .hero{
+      position:relative; overflow:hidden;
+      background:linear-gradient(160deg, #041311, #0A1F1E 50%, #103530 100%);
+      color:#EAF5F1;
+    }
+    .hero .wrap{ max-width:var(--maxw); margin:0 auto; padding:80px var(--pad) 64px; display:grid; grid-template-columns: 1.3fr 1fr; gap:24px; align-items:center; }
+    .hero h1{ margin:0 0 8px; font-size: clamp(28px, 5vw, 52px); line-height:1.15; letter-spacing:.01em; }
+    .hero p{ margin:0 0 18px; color:#CFE7E1; font-size: clamp(15px, 2.2vw, 18px); }
+    .hero .actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; }
+    .btn{
+      appearance:none; border:none; cursor:pointer; font-weight:800; letter-spacing:.01em;
+      padding:12px 16px; border-radius:12px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn.primary{ background:var(--brand); color:#06211F; }
+    .btn.ghost{ background:transparent; border:1px solid #2E504C; color:#CFE7E1; }
+    .hero .media{
+      aspect-ratio: 4 / 3; border-radius:20px; border:1px solid #18433E;
+      background: url('https://picsum.photos/800/600?blur=1&random=40') center/cover no-repeat;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+    @media (max-width:980px){
+      .hero .wrap{ grid-template-columns: 1fr; padding-top:56px; }
+    }
+
+    /* 섹션 공통 */
+    .section{ max-width:var(--maxw); margin:0 auto; padding:64px var(--pad); }
+    .section h2{ margin:0 0 10px; font-size: clamp(22px, 3.6vw, 36px); letter-spacing:.01em; }
+    .lead{ color:var(--muted); margin:0 0 26px; }
+
+    /* 카드 그리드 */
+    .grid{ display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); }
+    .card{ grid-column: span 4; background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column; }
+    .card .img{ aspect-ratio: 4 / 3; background:#ddd center/cover no-repeat; }
+    .card .body{ padding:16px; display:flex; flex-direction:column; gap:8px; }
+    .badge{ display:inline-flex; align-items:center; gap:6px; font-weight:800; font-size:12px; letter-spacing:.04em; text-transform:uppercase;
+      background:color-mix(in oklab, var(--brand) 18%, transparent); padding:6px 10px; border-radius:999px; color:#0b3a35; }
+    .meta{ color:var(--muted); font-size:14px; }
+
+    @media (max-width:1100px){
+      .card{ grid-column: span 6; }
+    }
+    @media (max-width:680px){
+      .card{ grid-column: span 12; }
+    }
+
+    /* 탭룸 소개 */
+    .feature{
+      display:grid; grid-template-columns: 1.1fr 1fr; gap:24px; align-items:center;
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px;
+    }
+    .feature .media{ aspect-ratio: 16/10; background:url('https://picsum.photos/1000/620?random=22') center/cover no-repeat; border-radius:12px; }
+    .feature .bullets{ margin:0; padding-left:18px; }
+    .feature .bullets li{ margin:6px 0; }
+    @media (max-width:900px){ .feature{ grid-template-columns:1fr; } }
+
+    /* 이벤트 리스트 */
+    .list{ display:grid; gap:12px; }
+    .item{ background:var(--card); border:1px solid var(--border); padding:16px; border-radius:12px; display:flex; gap:12px; align-items:center; justify-content:space-between; }
+    .item .when{ font-weight:800; color:#0b3a35; background:color-mix(in oklab, var(--brand) 15%, transparent); padding:6px 10px; border-radius:10px; }
+    .item .title{ font-weight:800; }
+    .item a{ text-decoration:none; font-weight:700; color:var(--brand); }
+
+    /* 방문/문의 */
+    .visit{
+      display:grid; grid-template-columns: 1.1fr 1fr; gap:18px;
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px;
+    }
+    .map{ aspect-ratio: 16 / 10; border:0; width:100%; border-radius:12px; }
+    form{ display:grid; gap:10px; }
+    input, textarea, select{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:var(--bg); color:var(--ink);
+      font: inherit;
+    }
+    textarea{ min-height:120px; resize:vertical; }
+    .hint{ font-size:12px; color:var(--muted); }
+    .submit{ justify-self:start; }
+
+    @media (max-width:980px){ .visit{ grid-template-columns: 1fr; } }
+
+    /* 푸터 */
+    footer{
+      border-top:1px solid var(--border);
+      background: linear-gradient(180deg, color-mix(in oklab, var(--card) 82%, transparent), transparent);
+    }
+    .foot{ max-width:var(--maxw); margin:0 auto; padding:32px var(--pad); display:grid; gap:18px; grid-template-columns: 1.2fr 1fr 1fr; }
+    .foot small{ color:var(--muted); }
+    .fcol h4{ margin:0 0 8px; }
+    .fcol ul{ margin:0; padding-left:16px; }
+    @media (max-width:900px){ .foot{ grid-template-columns:1fr; } }
+
+    /* 유틸 */
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .pill{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; font-weight:800; border:1px solid var(--border); background:var(--card); }
+    .sep{ height:1px; background:var(--border); margin:28px 0; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="sr-only">본문으로 바로가기</a>
+
+  <header>
+    <nav class="nav" aria-label="주요 메뉴">
+      <div class="brand">
+        <i class="logo" aria-hidden="true"></i> Haystack Brewery
+      </div>
+      <button class="toggle" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      <div id="menu" class="menu">
+        <a href="#beers">Beers</a>
+        <a href="#taproom">Taproom</a>
+        <a href="#events">Events</a>
+        <a href="#visit">Visit</a>
+        <a class="cta" href="#visit">Book a Tour</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="wrap">
+        <div>
+          <div class="pill" aria-hidden="true">Portland-inspired • Craft • Local</div>
+          <h1>포틀랜드 감성의<br/>로컬 크래프트 브루어리</h1>
+          <p>헤이스탁 브루어리는 지역과 함께 숨 쉬는 양조장입니다. 연중 15종의 라인업과 계절 한정 맥주, 캔 포장, 투어&체험을 제공합니다.</p>
+          <div class="actions">
+            <a class="btn primary" href="#beers">시그니처 맥주 보기</a>
+            <a class="btn ghost" href="#visit">탭룸 방문 예약</a>
+          </div>
+        </div>
+        <div class="media" role="img" aria-label="양조 설비와 탭룸 풍경 이미지"></div>
+      </div>
+    </section>
+
+    <!-- Beers -->
+    <section class="section" id="beers" aria-labelledby="beers-title">
+      <h2 id="beers-title">Signature Beers</h2>
+      <p class="lead">연중 제공되는 시그니처 라인업과 계절 한정 맥주를 만나보세요.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="img" style="background-image:url('https://picsum.photos/seed/hs1/640/480');"></div>
+          <div class="body">
+            <span class="badge">Flagship</span>
+            <h3 style="margin:4px 0 0">Haystack Pale Ale</h3>
+            <p class="meta">쌉싸름한 시트러스 향, 균형 잡힌 몰트 바디.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="img" style="background-image:url('https://picsum.photos/seed/hs2/640/480');"></div>
+          <div class="body">
+            <span class="badge">Flagship</span>
+            <h3 style="margin:4px 0 0">Rock IPA</h3>
+            <p class="meta">탱한 홉 아로마, 트로피컬 노트, 드라이 피니시.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="img" style="background-image:url('https://picsum.photos/seed/hs3/640/480');"></div>
+          <div class="body">
+            <span class="badge" style="background:color-mix(in oklab, var(--brand-2) 28%, transparent); color:#5d4205;">Seasonal</span>
+            <h3 style="margin:4px 0 0">Raspberry Wheat</h3>
+            <p class="meta">상큼한 라즈베리 향과 깔끔한 밀맥주 바디.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Taproom -->
+    <section class="section" id="taproom" aria-labelledby="taproom-title">
+      <h2 id="taproom-title">Taproom & Tour</h2>
+      <p class="lead">양조 설비가 보이는 공간에서 신선한 맥주를 즐기세요. 투어와 양조 체험을 운영합니다.</p>
+      <div class="feature">
+        <div>
+          <h3 style="margin-top:0">탭룸 하이라이트</h3>
+          <ul class="bullets">
+            <li>연중 15개 탭 라인업 + 시즌 한정 2~3종</li>
+            <li>캔 포장 & TO-GO 판매</li>
+            <li>양조장 투어(주말) · 양조 체험(사전 예약)</li>
+            <li>커뮤니티 이벤트(바비큐, 홈브루 워크숍 등)</li>
+          </ul>
+          <div class="actions" style="margin-top:10px">
+            <a class="btn primary" href="#visit">방문 예약</a>
+            <a class="btn ghost" href="#events">이벤트 보기</a>
+          </div>
+        </div>
+        <div class="media" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Events -->
+    <section class="section" id="events" aria-labelledby="events-title">
+      <h2 id="events-title">Upcoming Events</h2>
+      <p class="lead">매월 지역 커뮤니티와 함께하는 이벤트가 열립니다.</p>
+      <div class="list" role="list">
+        <div class="item" role="listitem">
+          <div class="when">9.28 Sat</div>
+          <div class="title">BBQ Night with Rock IPA</div>
+          <a href="#visit" aria-label="이벤트 예약">예약</a>
+        </div>
+        <div class="item" role="listitem">
+          <div class="when">10.12 Sat</div>
+          <div class="title">Homebrew Workshop · Beginner</div>
+          <a href="#visit">신청</a>
+        </div>
+        <div class="item" role="listitem">
+          <div class="when">10.26 Sat</div>
+          <div class="title">Seasonal Release · Raspberry Wheat</div>
+          <a href="#visit">참여</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visit -->
+    <section class="section" id="visit" aria-labelledby="visit-title">
+      <h2 id="visit-title">Visit & Contact</h2>
+      <p class="lead">판교의 조용한 주택가에서 양조장을 만나보세요. 단체 예약/대관 문의 환영합니다.</p>
+      <div class="visit">
+        <div>
+          <iframe class="map" title="Haystack Brewery 위치"
+            src="https://maps.google.com/maps?q=Seongnam-si%20Pangyo&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
+            <span class="pill">영업시간 · Tue–Sun 14:00–23:00</span>
+            <span class="pill">주소 · 성남시 분당구 판교공원로3길 25</span>
+            <span class="pill">주차 · 인근 공영주차장 이용</span>
+          </div>
+        </div>
+        <form aria-label="문의 양식" onsubmit="event.preventDefault(); alert('데모 양식입니다. 서버 연결 후 처리하세요.');">
+          <label>
+            <span class="sr-only">이름</span>
+            <input type="text" name="name" placeholder="이름" required />
+          </label>
+          <label>
+            <span class="sr-only">이메일</span>
+            <input type="email" name="email" placeholder="이메일" required />
+          </label>
+          <label>
+            <span class="sr-only">문의 유형</span>
+            <select name="type" aria-label="문의 유형">
+              <option>방문 예약</option>
+              <option>양조 투어</option>
+              <option>대관 문의</option>
+              <option>기타</option>
+            </select>
+          </label>
+          <label>
+            <span class="sr-only">내용</span>
+            <textarea name="message" placeholder="문의 내용을 작성해 주세요" required></textarea>
+          </label>
+          <button class="btn primary submit" type="submit">문의 보내기</button>
+          <p class="hint">※ 데모 폼입니다. 실제 전송 기능은 서버 연동 후 활성화하세요.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <div class="fcol">
+        <div class="brand"><i class="logo" aria-hidden="true"></i> Haystack Brewery</div>
+        <small>© <span id="y"></span> Haystack Brewery. All rights reserved.</small>
+      </div>
+      <div class="fcol">
+        <h4>탭룸</h4>
+        <ul>
+          <li>메뉴 & 시그니처</li>
+          <li>시즌 한정</li>
+          <li>투어 · 체험</li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h4>정책</h4>
+        <ul>
+          <li>이용약관</li>
+          <li>개인정보처리방침</li>
+          <li>알레르기 안내</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 모바일 메뉴 토글
+    const toggle = document.querySelector('.toggle');
+    const menu = document.getElementById('menu');
+    toggle?.addEventListener('click', ()=>{
+      const open = menu.classList.toggle('show');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+
+    // 푸터 연도
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // 앵커 스크롤 시 모바일 메뉴 닫기
+    document.querySelectorAll('#menu a').forEach(a => {
+      a.addEventListener('click', ()=> menu.classList.remove('show'));
+    });
+  </script>
+</body>
+</html>
