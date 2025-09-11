@@ -1,332 +1,627 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LCH 굿즈 제작 기획안</title>
-  <meta name="description" content="라오충칭훠궈(LCH) 굿즈 제작 기획안 – 배경, 콘셉트, 아이템, 활용 방안, 일정, 기대효과, 마스코트(병마용판다) 가이드" />
-  <style>
-    :root{
-      --bg:#f8fafc;           /* 밝은 배경 */
-      --paper:#ffffff;        /* 카드 배경 */
-      --text:#1a1a1a;         /* 본문 텍스트 */
-      --muted:#5f6368;        /* 보조 텍스트 */
-      --brand:#b3001b;        /* LCH 레드 */
-      --brand-2:#cfae5c;      /* 골드 포인트 */
-      --line:#e2e4e8;         /* 구분선 */
-      --green:#2e7d32;        /* 체크 포인트 */
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,Apple SD Gothic Neo,Noto Sans KR,Helvetica,Arial,sans-serif;
-      color:var(--text); background:var(--bg);
-      line-height:1.6; letter-spacing:.2px;
-    }
-    /* 고정 플로팅 헤더 (전체 스크롤 구간 고정) */
-    header{
-      position:fixed; top:0; left:0; right:0; z-index:1000;
-      backdrop-filter:saturate(130%) blur(10px);
-      background:rgba(255,255,255,0.9);
-      border-bottom:1px solid rgba(0,0,0,.08);
-    }
-    .spacer{height:72px} /* 헤더 높이 확보 */
-    .head-inner{max-width:1100px; margin:0 auto; padding:16px 20px; display:flex; gap:16px; align-items:center;}
-    .logo{display:inline-flex; gap:10px; align-items:center}
-    .logo-badge{width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,var(--brand), #740010);
-      display:grid; place-items:center; color:white; font-weight:700}
-    .logo-title{font-size:18px; font-weight:700}
-    .tag{font-size:12px; color:var(--brand); border:1px solid rgba(179,0,27,.3); padding:2px 8px; border-radius:999px}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LCH 굿즈 제작 기획안</title>
+    <meta
+      name="description"
+      content="라오충칭훠궈(LCH) 굿즈 제작 기획안 – 배경, 콘셉트, 아이템, 활용 방안, 일정, 기대효과, 마스코트(병마용판다) 가이드"
+    />
+    <style>
+      :root {
+        --bg: #f8fafc; /* 밝은 배경 */
+        --paper: #ffffff; /* 카드 배경 */
+        --text: #1a1a1a; /* 본문 텍스트 */
+        --muted: #5f6368; /* 보조 텍스트 */
+        --brand: #b3001b; /* LCH 레드 */
+        --brand-2: #cfae5c; /* 골드 포인트 */
+        --line: #e2e4e8; /* 구분선 */
+        --green: #2e7d32; /* 체크 포인트 */
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Pretendard, Apple SD Gothic Neo, Noto Sans KR, Helvetica, Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.6;
+        letter-spacing: 0.2px;
+      }
+      /* 고정 플로팅 헤더 (전체 스크롤 구간 고정) */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        backdrop-filter: saturate(130%) blur(10px);
+        background: rgba(255, 255, 255, 0.9);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .spacer {
+        height: 72px;
+      } /* 헤더 높이 확보 */
+      .head-inner {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 16px 20px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+      .logo {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .logo-badge {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--brand), #740010);
+        display: grid;
+        place-items: center;
+        color: white;
+        font-weight: 700;
+      }
+      .logo-title {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .tag {
+        font-size: 12px;
+        color: var(--brand);
+        border: 1px solid rgba(179, 0, 27, 0.3);
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
 
-    .container{max-width:1100px; margin-inline:auto; padding:40px 20px 96px}
-    .hero{padding:10px 0 18px}
-    .eyebrow{color:var(--brand); font-weight:600; letter-spacing:.3px}
-    h1{font-size:34px; line-height:1.25; margin:8px 0 10px}
-    .lead{color:#444; font-size:16px}
+      .container {
+        max-width: 1300px;
+        margin-inline: auto;
+        padding: 40px 20px 96px;
+      }
+      .hero {
+        padding: 10px 0 18px;
+      }
+      .eyebrow {
+        color: var(--brand);
+        font-weight: 600;
+        letter-spacing: 0.3px;
+      }
+      h1 {
+        font-size: 34px;
+        line-height: 1.25;
+        margin: 8px 0 10px;
+      }
+      .lead {
+        color: #444;
+        font-size: 16px;
+      }
 
-    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:16px; margin-top:26px}
-    .card{grid-column:span 12; background:var(--paper);
-      border:1px solid var(--line); border-radius:16px; padding:22px; box-shadow:0 2px 6px rgba(0,0,0,.05)}
-    @media(min-width:900px){ .card{grid-column:span 6} }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 16px;
+        margin-top: 26px;
+      }
+      .card {
+        grid-column: span 12;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+      @media (min-width: 900px) {
+        .card {
+          grid-column: span 6;
+        }
+      }
 
-    h2{font-size:22px; margin:0 0 14px}
-    h3{font-size:16px; margin:20px 0 8px; color:#333}
-    p{margin:8px 0}
+      h2 {
+        font-size: 22px;
+        margin: 0 0 14px;
+      }
+      h3 {
+        font-size: 16px;
+        margin: 20px 0 8px;
+        color: #333;
+      }
+      p {
+        margin: 8px 0;
+      }
 
-    .kicker{display:inline-flex; gap:8px; align-items:center; font-size:13px; color:var(--muted)}
-    .kicker .dot{width:6px; height:6px; border-radius:999px; background:var(--brand)}
+      .kicker {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .kicker .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--brand);
+      }
 
-    ul{padding-left:20px; margin:8px 0}
-    li{margin:6px 0}
-    .note{color:var(--muted); font-size:14px}
+      ul {
+        padding-left: 20px;
+        margin: 8px 0;
+      }
+      li {
+        margin: 6px 0;
+      }
+      .note {
+        color: var(--muted);
+        font-size: 14px;
+      }
 
-    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--line);
-      border-radius:999px; background:rgba(0,0,0,.04); font-size:13px; color:#333; margin-right:8px}
-    .swatches{display:flex; gap:12px; flex-wrap:wrap; margin-top:8px}
-    .swatch{display:grid; grid-template-rows:50px auto; width:110px; border-radius:12px; overflow:hidden; border:1px solid var(--line)}
-    .swatch .tone{display:block}
-    .swatch small{display:block; padding:8px; color:#444; text-align:center; font-size:12px; background:#f4f4f4}
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.04);
+        font-size: 13px;
+        color: #333;
+        margin-right: 8px;
+      }
+      .swatches {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .swatch {
+        display: grid;
+        grid-template-rows: 50px auto;
+        width: 110px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+      }
+      .swatch .tone {
+        display: block;
+      }
+      .swatch small {
+        display: block;
+        padding: 8px;
+        color: #444;
+        text-align: center;
+        font-size: 12px;
+        background: #f4f4f4;
+      }
 
-    .list-table{width:100%; border-collapse:separate; border-spacing:0; margin-top:8px}
-    .list-table th,.list-table td{padding:12px 14px; text-align:left; border-bottom:1px solid var(--line)}
-    .list-table th{color:#222; font-weight:600; background:#f9f9f9}
+      .list-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-top: 8px;
+      }
+      .list-table th,
+      .list-table td {
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+      }
+      .list-table th {
+        color: #222;
+        font-weight: 600;
+        background: #f9f9f9;
+      }
 
-    .timeline{display:grid; gap:14px}
-    .step{border-left:3px solid var(--brand); padding:10px 12px 10px 16px; background:linear-gradient(90deg, rgba(179,0,27,.07), transparent 50%);
-      border-radius:10px}
+      .timeline {
+        display: grid;
+        gap: 14px;
+      }
+      .step {
+        border-left: 3px solid var(--brand);
+        padding: 10px 12px 10px 16px;
+        background: linear-gradient(90deg, rgba(179, 0, 27, 0.07), transparent 50%);
+        border-radius: 10px;
+      }
 
-    .callout{border:1px solid rgba(46,125,50,.45); background:rgba(46,125,50,.05);
-      padding:16px; border-radius:14px; color:#2e7d32}
+      .callout {
+        border: 1px solid rgba(46, 125, 50, 0.45);
+        background: rgba(46, 125, 50, 0.05);
+        padding: 16px;
+        border-radius: 14px;
+        color: #2e7d32;
+      }
 
-    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
-    .btn{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; cursor:pointer; text-decoration:none; color:white;
-      border:1px solid var(--line); background:linear-gradient(135deg, var(--brand), #d94c4c);}
-    .btn.secondary{background:#f1f1f1; color:#333}
-    .btn .icon{font-weight:700}
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        cursor: pointer;
+        text-decoration: none;
+        color: white;
+        border: 1px solid var(--line);
+        background: linear-gradient(135deg, var(--brand), #d94c4c);
+      }
+      .btn.secondary {
+        background: #f1f1f1;
+        color: #333;
+      }
+      .btn .icon {
+        font-weight: 700;
+      }
 
-    footer{margin-top:48px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
-    .small{font-size:12px; color:var(--muted)}
+      footer {
+        margin-top: 48px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+      }
 
-    @media print{
-      header{position:static; backdrop-filter:none}
-      .spacer{display:none}
-      .actions{display:none}
-      body{background:white; color:#111}
-      .card,.callout,.step{background:white; border-color:#ccc; box-shadow:none}
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="head-inner">
-      <div class="logo" aria-label="LCH logo">
-        <div class="logo-badge">LCH</div>
-        <div>
-          <div class="logo-title">라오충칭훠궈 (LCH)</div>
-          <div class="note">Goods Production Plan</div>
+      @media print {
+        header {
+          position: static;
+          backdrop-filter: none;
+        }
+        .spacer {
+          display: none;
+        }
+        .actions {
+          display: none;
+        }
+        body {
+          background: white;
+          color: #111;
+        }
+        .card,
+        .callout,
+        .step {
+          background: white;
+          border-color: #ccc;
+          box-shadow: none;
+        }
+      }
+
+      /* 오른쪽 고정 탭앵커 메뉴 스타일 */
+      .actions {
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 2000;
+      }
+      .btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid #ddd;
+        background: #fff;
+        color: #333;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        transition: all 0.2s ease;
+      }
+      .btn:hover {
+        background: #b3001b;
+        color: #fff;
+        border-color: #b3001b;
+      }
+      .btn.secondary {
+        background: #fafafa;
+        color: #333;
+      }
+      .btn.secondary:hover {
+        background: #cfae5c;
+        color: #fff;
+        border-color: #cfae5c;
+      }
+      .btn .icon {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <header>
+      <div class="head-inner">
+        <div class="logo" aria-label="LCH logo">
+          <div class="logo-badge">LCH</div>
+          <div>
+            <div class="logo-title">라오충칭훠궈 (LCH)</div>
+            <div class="note">Goods Production Plan</div>
+          </div>
         </div>
+        <span class="tag" title="브랜드 포지셔닝">Premium • Authentic • Playful</span>
       </div>
-      <span class="tag" title="브랜드 포지셔닝">Premium • Authentic • Playful</span>
-    </div>
-  </header>
-  <div class="spacer" aria-hidden="true"></div>
+    </header>
+    <div class="spacer" aria-hidden="true"></div> -->
 
-  <main class="container">
-    <section class="hero">
-      <div class="eyebrow">브랜드 굿즈 전략 기획서</div>
-      <h1>LCH 굿즈 제작 기획안</h1>
-      <p class="lead">정통 충칭 훠궈의 고급감과 센스를 살린 굿즈 라인업 제안 – 배경, 콘셉트, 제작 아이템, 활용 방안, 일정, 기대효과, 마스코트 가이드.</p>
-      <div class="actions" role="group" aria-label="빠른 작업">
-        <a class="btn" href="#section-3" title="아이템 제안 바로가기"><span class="icon">🛍️</span>아이템 제안</a>
-        <a class="btn secondary" href="#section-4" title="활용 방안 바로가기"><span class="icon">📣</span>활용 방안</a>
-        <a class="btn secondary" href="#section-7" title="마스코트 가이드 바로가기"><span class="icon">🐼</span>마스코트 가이드</a>
-        <a class="btn secondary" href="#section-5" title="일정 바로가기"><span class="icon">🗓️</span>일정</a>
-      </div>
-    </section>
-
-    <!-- 1. 기획 배경 -->
-    <section id="section-1" class="grid" aria-labelledby="sec1-title">
-      <article class="card" style="grid-column:span 12">
-        <div class="kicker"><span class="dot"></span><span id="sec1-title">1. 기획 배경</span></div>
-        <ul>
-          <li><strong>브랜드 아이덴티티 강화</strong>: LCH 영문 약칭 활용으로 세련되고 글로벌한 이미지 구축</li>
-          <li><strong>고객 경험 확장</strong>: 매장 경험을 집에서도 이어가는 ‘브랜드 라이프스타일 굿즈’ 제공</li>
-          <li><strong>마케팅/홍보 시너지</strong>: 굿즈 기반 SNS 확산(#LCH, #라오충칭훠궈), 재방문 유도</li>
-        </ul>
-      </article>
-    </section>
-
-    <!-- 2. 콘셉트 -->
-    <section id="section-2" class="grid" aria-labelledby="sec2-title">
-      <article class="card">
-        <div class="kicker"><span class="dot"></span><span id="sec2-title">2. 굿즈 콘셉트</span></div>
-        <h3>키워드</h3>
-        <p><span class="pill">Authentic</span> <span class="pill">Premium</span> <span class="pill">Playful</span></p>
-        <h3>디자인 방향</h3>
-        <p>LCH 심볼을 중심으로 전통 중국적 디테일(홍등, 문양) + 현대적 미니멀리즘 결합</p>
-        <h3>컬러 팔레트</h3>
-        <div class="swatches" aria-label="브랜드 컬러 팔레트">
-          <div class="swatch"><span class="tone" style="background:#b3001b"></span><small>#B3001B LCH Red</small></div>
-          <div class="swatch"><span class="tone" style="background:#111111"></span><small>#111111 Black</small></div>
-          <div class="swatch"><span class="tone" style="background:#cfae5c"></span><small>#CFAE5C Gold</small></div>
+    <main class="container">
+      <section class="hero">
+        <div class="eyebrow">브랜드 굿즈 전략 기획서</div>
+        <h1>LCH 굿즈 제작 기획안</h1>
+        <p class="lead">
+          정통 충칭 훠궈의 고급감과 센스를 살린 굿즈 라인업 제안 – 배경, 콘셉트, 제작 아이템, 활용 방안, 일정, 기대효과, 마스코트 가이드.
+        </p>
+        <div class="actions" role="group" aria-label="빠른 작업">
+          <a class="btn" href="#section-1" title="아이템 제안 바로가기"><span class="icon">🛍️</span>기획 배경</a>
+          <a class="btn" href="#section-2" title="아이템 제안 바로가기"><span class="icon">🛍️</span>굿즈 콘셉트</a>
+          <a class="btn" href="#section-3" title="아이템 제안 바로가기"><span class="icon">🛍️</span>아이템 제안</a>
+          <a class="btn secondary" href="#section-4" title="활용 방안 바로가기"><span class="icon">📣</span>활용 방안</a>
+          <a class="btn secondary" href="#section-7" title="마스코트 가이드 바로가기"><span class="icon">🐼</span>마스코트 가이드</a>
+          <a class="btn secondary" href="#section-5" title="일정 바로가기"><span class="icon">🗓️</span>일정</a>
         </div>
-      </article>
+      </section>
 
-      <article class="card">
-        <div class="kicker"><span class="dot"></span><span>브랜딩 가이드 (요약)</span></div>
-        <table class="list-table" aria-label="브랜딩 요약">
-          <thead>
-            <tr><th>요소</th><th>가이드</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>로고 사용</td><td>메인: “LCH” 심볼, 보조: “LCH Hotpot” 확장형 병기</td></tr>
-            <tr><td>타이포</td><td>한글: Pretendard/Noto Sans KR, 영문: Inter/Roboto 계열</td></tr>
-            <tr><td>그래픽</td><td>홍등/문양을 10–20% 투명도로 배경 레이어에 은은하게</td></tr>
-            <tr><td>톤앤매너</td><td>고급·차분 70% + 재치 있는 카피 30%</td></tr>
-          </tbody>
-        </table>
-      </article>
-    </section>
+      <!-- 1. 기획 배경 -->
+      <section id="section-1" class="grid" aria-labelledby="sec1-title">
+        <article class="card" style="grid-column: span 12">
+          <div class="kicker"><span class="dot"></span><span id="sec1-title">1. 기획 배경</span></div>
+          <ul>
+            <li><strong>브랜드 아이덴티티 강화</strong>: LCH 영문 약칭 활용으로 세련되고 글로벌한 이미지 구축</li>
+            <li><strong>고객 경험 확장</strong>: 매장 경험을 집에서도 이어가는 ‘브랜드 라이프스타일 굿즈’ 제공</li>
+            <li><strong>마케팅/홍보 시너지</strong>: 굿즈 기반 SNS 확산(#LCH, #라오충칭훠궈), 재방문 유도</li>
+          </ul>
+        </article>
+      </section>
 
-    <!-- 3. 제작 아이템 제안 -->
-    <section id="section-3" class="grid" aria-labelledby="sec3-title">
-      <article class="card" style="grid-column:span 12">
-        <div class="kicker"><span class="dot"></span><span id="sec3-title">3. 제작 아이템 제안</span></div>
-      </article>
+      <!-- 2. 콘셉트 -->
+      <section id="section-2" class="grid" aria-labelledby="sec2-title">
+        <article class="card">
+          <div class="kicker"><span class="dot"></span><span id="sec2-title">2. 굿즈 콘셉트</span></div>
+          <h3>키워드</h3>
+          <p><span class="pill">Authentic</span> <span class="pill">Premium</span> <span class="pill">Playful</span></p>
+          <h3>디자인 방향</h3>
+          <p>LCH 심볼을 중심으로 전통 중국적 디테일(홍등, 문양) + 현대적 미니멀리즘 결합</p>
+          <h3>컬러 팔레트</h3>
+          <div class="swatches" aria-label="브랜드 컬러 팔레트">
+            <div class="swatch"><span class="tone" style="background: #b3001b"></span><small>#B3001B LCH Red</small></div>
+            <div class="swatch"><span class="tone" style="background: #ffffff"></span><small>#ffffff white</small></div>
+            <div class="swatch"><span class="tone" style="background: #111111"></span><small>#111111 Black</small></div>
+            <div class="swatch"><span class="tone" style="background: #cfae5c"></span><small>#CFAE5C Gold</small></div>
+          </div>
+        </article>
 
-      <article class="card">
-        <h2>① 실용성 중심</h2>
-        <ul>
-          <li><strong>에코백</strong>: 블랙 또는 아이보리 캔버스 + LCH 로고(실크스크린/자수)</li>
-          <li><strong>텀블러/머그컵</strong>: “LCH Hotpot” + 내부 홍등 패턴</li>
-          <li><strong>앞치마</strong>: 스태프 동일 디자인, VIP 한정 증정/판매</li>
-        </ul>
-      </article>
+        <article class="card">
+          <div class="kicker"><span class="dot"></span><span>브랜딩 가이드 (요약)</span></div>
+          <table class="list-table" aria-label="브랜딩 요약">
+            <thead>
+              <tr>
+                <th>요소</th>
+                <th>가이드</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>로고 사용</td>
+                <td>메인: “LCH” 심볼, 보조: “LCH Hotpot” 확장형 병기</td>
+              </tr>
+              <tr>
+                <td>타이포</td>
+                <td>한글: Pretendard/Noto Sans KR, 영문: Inter/Roboto 계열</td>
+              </tr>
+              <tr>
+                <td>그래픽</td>
+                <td>홍등/문양을 10–20% 투명도로 배경 레이어에 은은하게</td>
+              </tr>
+              <tr>
+                <td>톤앤매너</td>
+                <td>고급·차분 70% + 재치 있는 카피 30%</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </section>
 
-      <article class="card">
-        <h2>② 라이프스타일</h2>
-        <ul>
-          <li><strong>키링</strong>: 미니 훠궈 냄비 모양 + 로고 각인</li>
-          <li><strong>코스터</strong>: 전통 문양 + 심볼</li>
-          <li><strong>고급 파우치</strong>: 레드&골드 자수, 쿠폰 패키징 연계</li>
-        </ul>
-      </article>
+      <!-- 3. 제작 아이템 제안 -->
+      <section id="section-3" class="grid" aria-labelledby="sec3-title">
+        <article class="card" style="grid-column: span 12">
+          <div class="kicker"><span class="dot"></span><span id="sec3-title">3. 제작 아이템 제안</span></div>
+        </article>
 
-      <article class="card">
-        <h2>③ 한정판</h2>
-        <ul>
-          <li><strong>홍등 무드등</strong>: 미니 사이즈, LCH 음각</li>
-          <li><strong>소스 세트(소용량)</strong>: 마라·참깨 소스 패키지</li>
-          <li><strong>포춘쿠키</strong>: “Next hotpot at LCH?” 등 위트 문구</li>
-        </ul>
-      </article>
+        <article class="card">
+          <h2>① 실용성 중심</h2>
+          <ul>
+            <li><strong>에코백</strong>: 블랙 또는 아이보리 캔버스 + LCH 로고(실크스크린/자수)</li>
+            <li><strong>텀블러/머그컵</strong>: “LCH Hotpot” + 내부 홍등 패턴</li>
+            <li><strong>앞치마</strong>: 스태프 동일 디자인, VIP 한정 증정/판매</li>
+          </ul>
+        </article>
 
-      <article class="card" style="grid-column:span 12">
-        <h3>제작/원가 메모</h3>
-        <ul>
-          <li>로고 방식: 실크스크린(경제적), 자수(고급감), 레이저 각인(키링/금속류)</li>
-          <li>포장: 공통 레드 박스 + 골드 포일 스탬핑(브랜드 통일감)</li>
-          <li class="note">※ 원하시면 단가/MOQ/총예산 포함한 세부 예산표를 별도 시트로 구성해 드립니다.</li>
-        </ul>
-      </article>
-    </section>
+        <article class="card">
+          <h2>② 라이프스타일</h2>
+          <ul>
+            <li><strong>키링</strong>: 미니 훠궈 냄비 모양 + 로고 각인</li>
+            <li><strong>코스터</strong>: 전통 문양 + 심볼</li>
+            <li><strong>고급 파우치</strong>: 레드&골드 자수, 쿠폰 패키징 연계</li>
+          </ul>
+        </article>
 
-    <!-- 4. 활용 방안 -->
-    <section id="section-4" class="grid" aria-labelledby="sec4-title">
-      <article class="card" style="grid-column:span 12">
-        <div class="kicker"><span class="dot"></span><span id="sec4-title">4. 활용 방안</span></div>
-      </article>
+        <article class="card">
+          <h2>③ 한정판</h2>
+          <ul>
+            <li><strong>홍등 무드등</strong>: 미니 사이즈, LCH 음각</li>
+            <li><strong>소스 세트(소용량)</strong>: 마라·참깨 소스 패키지</li>
+            <li><strong>포춘쿠키</strong>: “Next hotpot at LCH?” 등 위트 문구</li>
+          </ul>
+        </article>
 
-      <article class="card">
-        <h2>① 프로모션용 증정</h2>
-        <ul>
-          <li>신규 방문 고객: 머그컵 증정 이벤트</li>
-          <li>멤버십 가입: 앞치마/텀블러 제공</li>
-        </ul>
-      </article>
+        <article class="card" style="grid-column: span 12">
+          <h3>제작/원가 메모</h3>
+          <ul>
+            <li>로고 방식: 실크스크린(경제적), 자수(고급감), 레이저 각인(키링/금속류)</li>
+            <li>포장: 공통 레드 박스 + 골드 포일 스탬핑(브랜드 통일감)</li>
+            <li class="note">※ 원하시면 단가/MOQ/총예산 포함한 세부 예산표를 별도 시트로 구성해 드립니다.</li>
+          </ul>
+        </article>
+      </section>
 
-      <article class="card">
-        <h2>② 판매 상품화</h2>
-        <ul>
-          <li>매장 내 ‘LCH 굿즈 존’ 설치</li>
-          <li>온라인 판매 채널: 네이버 스마트스토어, 카카오톡 스토어</li>
-        </ul>
-      </article>
+      <!-- 4. 활용 방안 -->
+      <section id="section-4" class="grid" aria-labelledby="sec4-title">
+        <article class="card" style="grid-column: span 12">
+          <div class="kicker"><span class="dot"></span><span id="sec4-title">4. 활용 방안</span></div>
+        </article>
 
-      <article class="card">
-        <h2>③ SNS 캠페인</h2>
-        <ul>
-          <li>#MyLCHGoods 챌린지: 인증샷 업로드 → 식사 쿠폰 제공</li>
-          <li>언박싱/Reels 제작: 스토리텔링 카피 + 단색 배경</li>
-        </ul>
-      </article>
-    </section>
+        <article class="card">
+          <h2>① 프로모션용 증정</h2>
+          <ul>
+            <li>신규 방문 고객: 머그컵 증정 이벤트</li>
+            <li>멤버십 가입: 앞치마/텀블러 제공</li>
+          </ul>
+        </article>
 
-    <!-- 5. 예상 일정 -->
-    <section id="section-5" class="grid" aria-labelledby="sec5-title">
-      <article class="card" style="grid-column:span 12">
-        <div class="kicker"><span class="dot"></span><span id="sec5-title">5. 예상 일정</span></div>
-        <div class="timeline" aria-label="프로젝트 타임라인">
-          <div class="step"><strong>T+0 ~ T+3주</strong> · 1차 디자인 개발</div>
-          <div class="step"><strong>T+4 ~ T+7주</strong> · 샘플 제작 및 검수</div>
-          <div class="step"><strong>T+8주</strong> · 파일럿 런칭(증정 이벤트 중심)</div>
-          <div class="step"><strong>T+12주</strong> · 정식 출시(판매 + 온라인 연계)</div>
-        </div>
-      </article>
-    </section>
+        <article class="card">
+          <h2>② 판매 상품화</h2>
+          <ul>
+            <li>매장 내 ‘LCH 굿즈 존’ 설치</li>
+            <li>온라인 판매 채널: 네이버 스마트스토어, 카카오톡 스토어</li>
+          </ul>
+        </article>
 
-    <!-- 6. 기대 효과 -->
-    <section id="section-6" class="grid" aria-labelledby="sec6-title">
-      <article class="card" style="grid-column:span 12">
-        <div class="kicker"><span class="dot"></span><span id="sec6-title">6. 기대 효과</span></div>
-        <ul>
-          <li>브랜드 시각적 통일성 강화</li>
-          <li>재방문율 및 체류 시간 증가</li>
-          <li>SNS 확산 및 신규 고객 유입</li>
-          <li>동탄 지역 프리미엄 훠궈 브랜드 입지 강화</li>
-        </ul>
-        <div class="callout" role="note"><strong>Next Step 제안:</strong> 우선순위 3개 아이템(머그컵·에코백·키링)으로 <em>빠른 샘플</em> 제작 → 사진/영상으로 피드백 수집 → 생산 확정.</div>
-      </article>
-    </section>
+        <article class="card">
+          <h2>③ SNS 캠페인</h2>
+          <ul>
+            <li>#MyLCHGoods 챌린지: 인증샷 업로드 → 식사 쿠폰 제공</li>
+            <li>언박싱/Reels 제작: 스토리텔링 카피 + 단색 배경</li>
+          </ul>
+        </article>
+      </section>
 
-    <!-- 7. 마스코트: 병마용판다 가이드 -->
-    <section id="section-7" class="grid" aria-labelledby="sec7-title">
-      <article class="card" style="grid-column:span 12">
-        <div class="kicker"><span class="dot"></span><span id="sec7-title">7. 마스코트 가이드 — 병마용판다</span></div>
-        <p>병마용(兵馬俑)의 장엄함과 판다의 친근함을 결합한 LCH 전용 캐릭터. 중국 전통성과 대중적 호감을 동시에 담아 <strong>브랜드 스토리텔링과 SNS 확산</strong>에 최적화.</p>
-      </article>
+      <!-- 5. 예상 일정 -->
+      <section id="section-5" class="grid" aria-labelledby="sec5-title">
+        <article class="card" style="grid-column: span 12">
+          <div class="kicker"><span class="dot"></span><span id="sec5-title">5. 예상 일정</span></div>
+          <div class="timeline" aria-label="프로젝트 타임라인">
+            <div class="step"><strong>T+0 ~ T+3주</strong> · 1차 디자인 개발</div>
+            <div class="step"><strong>T+4 ~ T+7주</strong> · 샘플 제작 및 검수</div>
+            <div class="step"><strong>T+8주</strong> · 파일럿 런칭(증정 이벤트 중심)</div>
+            <div class="step"><strong>T+12주</strong> · 정식 출시(판매 + 온라인 연계)</div>
+          </div>
+        </article>
+      </section>
 
-      <article class="card">
-        <h2>활용 영역</h2>
-        <ul>
-          <li><strong>키링·피규어·스티커</strong> — 캐릭터 단독 활용</li>
-          <li><strong>머그·에코백</strong> — LCH 로고 + 병마용판다 콤보 디자인</li>
-          <li><strong>VIP 굿즈</strong> — 미니 피규어 + 넘버링 인증 카드</li>
-        </ul>
-      </article>
+      <!-- 6. 기대 효과 -->
+      <section id="section-6" class="grid" aria-labelledby="sec6-title">
+        <article class="card" style="grid-column: span 12">
+          <div class="kicker"><span class="dot"></span><span id="sec6-title">6. 기대 효과</span></div>
+          <ul>
+            <li>브랜드 시각적 통일성 강화</li>
+            <li>재방문율 및 체류 시간 증가</li>
+            <li>SNS 확산 및 신규 고객 유입</li>
+            <li>동탄 지역 프리미엄 훠궈 브랜드 입지 강화</li>
+          </ul>
+          <div class="callout" role="note">
+            <strong>Next Step 제안:</strong> 우선순위 3개 아이템(머그컵·에코백·키링)으로 <em>빠른 샘플</em> 제작 → 사진/영상으로 피드백 수집 → 생산
+            확정.
+          </div>
+        </article>
+      </section>
 
-      <article class="card">
-        <h2>디자인 가이드</h2>
-        <table class="list-table" aria-label="캐릭터 디자인 가이드">
-          <thead>
-            <tr><th>항목</th><th>가이드</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>기본 포즈</td><td>정면/45도/측면 3종, 손에 훠궈 국자 또는 홍등 소품</td></tr>
-            <tr><td>색상</td><td>모노(블랙/화이트) + 레드 포인트(#B3001B), 골드 악세서리(#CFAE5C)</td></tr>
-            <tr><td>윤곽선</td><td>1.5–2px 굵기, 인쇄 시 최소 0.3mm 유지</td></tr>
-            <tr><td>금지 규칙</td><td>로고를 가리는 배치, 과도한 왜곡/기울임, 저해상도 확대 금지</td></tr>
-            <tr><td>파일 포맷</td><td>벡터 AI/SVG(마스터), PNG(투명배경), PDF(제작 의뢰)</td></tr>
-          </tbody>
-        </table>
-      </article>
+      <!-- 7. 마스코트: 병마용판다 가이드 -->
+      <section id="section-7" class="grid" aria-labelledby="sec7-title">
+        <article class="card" style="grid-column: span 12">
+          <div class="kicker"><span class="dot"></span><span id="sec7-title">7. 마스코트 가이드 — 병마용판다</span></div>
+          <p>
+            병마용(兵馬俑)의 장엄함과 판다의 친근함을 결합한 LCH 전용 캐릭터. 중국 전통성과 대중적 호감을 동시에 담아
+            <strong>브랜드 스토리텔링과 SNS 확산</strong>에 최적화.
+          </p>
+        </article>
 
-      <article class="card">
-        <h2>굿즈 라인업(캐릭터 에디션)</h2>
-        <ul>
-          <li><strong>머그컵</strong> — 병마용판다 패턴 링(내부 림 금박 옵션)</li>
-          <li><strong>에코백</strong> — 캐릭터 와펜 자수 + 하단 LCH 태그</li>
-          <li><strong>키링</strong> — 소프트 PVC 또는 다이캐스트 금속(레이저 각인)</li>
-          <li><strong>스티커팩</strong> — 포즈 6종 + 홍등/국자 소품</li>
-          <li><strong>피규어</strong> — 7~10cm 데스크톱, 넘버링 한정판</li>
-        </ul>
-        <p class="note">※ 원하시면 캐릭터 <em>표정 8종 세트</em>(기쁨/설렘/매콤/승부/집중/깜짝/휴식/건배) 도안도 바로 구성 가능합니다.</p>
-      </article>
+        <article class="card">
+          <h2>활용 영역</h2>
+          <ul>
+            <li><strong>키링·피규어·스티커</strong> — 캐릭터 단독 활용</li>
+            <li><strong>머그·에코백</strong> — LCH 로고 + 병마용판다 콤보 디자인</li>
+            <li><strong>VIP 굿즈</strong> — 미니 피규어 + 넘버링 인증 카드</li>
+          </ul>
+        </article>
 
-      <article class="card" style="grid-column:span 12">
-        <h3>샘플 목업 가이드(내부용)</h3>
-        <ul>
-          <li>흰 배경 3D 머그 목업에 캐릭터 정면 + 로고 조합</li>
-          <li>아이보리 캔버스 에코백 목업에 와펜/자수 위치 2안</li>
-          <li>다이컷 스티커 목업(타공선 표시) — 최소여백 2mm</li>
-        </ul>
-      </article>
-    </section>
+        <article class="card">
+          <h2>디자인 가이드</h2>
+          <table class="list-table" aria-label="캐릭터 디자인 가이드">
+            <thead>
+              <tr>
+                <th>항목</th>
+                <th>가이드</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>기본 포즈</td>
+                <td>정면/45도/측면 3종, 손에 훠궈 국자 또는 홍등 소품</td>
+              </tr>
+              <tr>
+                <td>색상</td>
+                <td>모노(블랙/화이트) + 레드 포인트(#B3001B), 골드 악세서리(#CFAE5C)</td>
+              </tr>
+              <tr>
+                <td>윤곽선</td>
+                <td>1.5–2px 굵기, 인쇄 시 최소 0.3mm 유지</td>
+              </tr>
+              <tr>
+                <td>금지 규칙</td>
+                <td>로고를 가리는 배치, 과도한 왜곡/기울임, 저해상도 확대 금지</td>
+              </tr>
+              <tr>
+                <td>파일 포맷</td>
+                <td>벡터 AI/SVG(마스터), PNG(투명배경), PDF(제작 의뢰)</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
 
-    <footer>
-      <p>© LCH (Lao Chongqing Hotpot). All rights reserved.</p>
-      <p class="small">본 문서는 내부 기획용으로 제작되었습니다. 외부 배포 시 문구/가격/일정은 변경될 수 있습니다.</p>
-    </footer>
-  </main>
-</body>
+        <article class="card">
+          <h2>굿즈 라인업(캐릭터 에디션)</h2>
+          <ul>
+            <li><strong>머그컵</strong> — 병마용판다 패턴 링(내부 림 금박 옵션)</li>
+            <li><strong>에코백</strong> — 캐릭터 와펜 자수 + 하단 LCH 태그</li>
+            <li><strong>키링</strong> — 소프트 PVC 또는 다이캐스트 금속(레이저 각인)</li>
+            <li><strong>스티커팩</strong> — 포즈 6종 + 홍등/국자 소품</li>
+            <li><strong>피규어</strong> — 7~10cm 데스크톱, 넘버링 한정판</li>
+          </ul>
+          <p class="note">※ 원하시면 캐릭터 <em>표정 8종 세트</em>(기쁨/설렘/매콤/승부/집중/깜짝/휴식/건배) 도안도 바로 구성 가능합니다.</p>
+        </article>
+
+        <article class="card" style="grid-column: span 12">
+          <h3>샘플 목업 가이드(내부용)</h3>
+          <ul>
+            <li>흰 배경 3D 머그 목업에 캐릭터 정면 + 로고 조합</li>
+            <li>아이보리 캔버스 에코백 목업에 와펜/자수 위치 2안</li>
+            <li>다이컷 스티커 목업(타공선 표시) — 최소여백 2mm</li>
+          </ul>
+        </article>
+      </section>
+
+      <footer>
+        <p>© LCH (Lao Chongqing Hotpot). All rights reserved.</p>
+        <p class="small">본 문서는 내부 기획용으로 제작되었습니다. 외부 배포 시 문구/가격/일정은 변경될 수 있습니다.</p>
+      </footer>
+    </main>
+  </body>
 </html>
