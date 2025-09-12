@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>RK 서브페이지 타이틀 다국어 예시</title>
+    <style>
+      body {
+        font-family: "Noto Sans KR", "Segoe UI", "Noto Sans SC", system-ui, sans-serif;
+        margin: 40px;
+        background: #f9fafb;
+      }
+      .lang-columns {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        justify-content: space-between;
+        min-width: 1800px;
+      }
+      .page-title {
+        text-align: left;
+        margin: 40px 0;
+        flex: 1;
+      }
+      .page-title .subtitle {
+        font-size: 20px;
+        color: #6b7280; /* muted gray */
+        margin: 0;
+      }
+      .page-title .maintitle {
+        font-size: 46px;
+        font-weight: 700;
+        color: #191919;
+        margin: 4px 0 0 0;
+        line-height: 1.35;
+      }
+      .subtitle-cap {
+        font-size: 22px;
+        color: #132b88;
+        letter-spacing: -0.04em;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin: 0 12px 0 0;
+        display: inline-block;
+      }
+      @media (max-width: 960px) {
+        .lang-columns {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lang-columns">
+      <!-- 국문 -->
+      <div class="lang-block">
+        <!-- 1번 -->
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Company</span>가치를 나누는 파트너십</p>
+          <h1 class="maintitle">산업의 흐름을 바꾸는 힘</h1>
+        </div>
+        <!-- 2번 -->
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Business</span>기술의 진보를 넘어</p>
+          <h1 class="maintitle">비즈니스의 미래를 설계합니다</h1>
+        </div>
+        <!-- 3번 -->
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Products</span>정밀한 기술력으로</p>
+          <h1 class="maintitle">글로벌 반도체 시장을 선도합니다</h1>
+        </div>
+        <!-- 4번 -->
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Technology</span>론다코리아의 제품과 기술력</p>
+          <h1 class="maintitle">고정밀 반도체 부품과 첨단 설비 솔루션</h1>
+        </div>
+        <!-- 5번 -->
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Contact us</span>고객과 파트너가 함께</p>
+          <h1 class="maintitle">지속 가능한 가치를 만들어갑니다</h1>
+        </div>
+        <!-- 6번 -->
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Support</span>관계로부터 힘을 얻어</p>
+          <h1 class="maintitle">함께 성장하고 나아갑니다</h1>
+        </div>
+      </div>
+
+      <!-- 영문 -->
+      <div class="lang-block">
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Company</span>Partnerships that share value</p>
+          <h1 class="maintitle">The power to reshape industry</h1>
+        </div>
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Business</span>Beyond technological progress</p>
+          <h1 class="maintitle">Designing the future of business</h1>
+        </div>
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Products</span>With precision technology</p>
+          <h1 class="maintitle">Leading the global semiconductor market</h1>
+        </div>
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Technology</span>Ronda Korea · Products and Expertise</p>
+          <h1 class="maintitle">Explore precision semiconductor solutions</h1>
+        </div>
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Contact us</span>Together with our customers and partners</p>
+          <h1 class="maintitle">Creating sustainable value</h1>
+        </div>
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Support</span>Strength through relationships</p>
+          <h1 class="maintitle">Growing and moving forward together</h1>
+        </div>
+      </div>
+    </div>
+    <div class="lang-columns">
+      <!-- 중문 -->
+      <div class="lang-block">
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Company</span>分享价值的合作伙伴关系</p>
+          <h1 class="maintitle">改变产业格局的力量</h1>
+        </div>
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Business</span>超越技术的进步</p>
+          <h1 class="maintitle">设计商业的未来</h1>
+        </div>
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Products</span>以精密技术</p>
+          <h1 class="maintitle">引领全球半导体市场</h1>
+        </div>
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Technology</span>RK的产品与技术实力</p>
+          <h1 class="maintitle">探索高精度半导体部件与先进解决方案</h1>
+        </div>
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Contact us</span>与客户和合作伙伴携手</p>
+          <h1 class="maintitle">共创可持续价值</h1>
+        </div>
+        <div class="page-title">
+          <p class="subtitle"><span class="subtitle-cap">Support</span>从关系中汲取力量</p>
+          <h1 class="maintitle">共同成长，共同前行</h1>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
