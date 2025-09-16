@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>VFB | 베리티소식 블로그형 카드 게시판</title>
+<meta name="description" content="VFB 베리티소식 — 운영 소식, 새 메뉴 출시, 내부 소식, SNS 콘텐츠, 음식 철학·원재료 이야기, 브랜드 방향성 에세이, 브랜드 사진·짧은 영상">
+<meta name="theme-color" content="#111111"/>
+
+<style>
+  :root{
+    --bg:#f8f7f4; --paper:#fff; --text:#161616; --muted:#6b7280; --line:#e7e5e4;
+    --brand:#111; --accent:#ff6a00; --accent-2:#fca311;
+    --radius:16px; --shadow:0 10px 30px rgba(17,17,17,.08); --maxw:1200px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.65;
+  }
+  a{color:inherit;text-decoration:none}
+  img,video{display:block;max-width:100%;border-radius:12px}
+  .container{width:100%;max-width:var(--maxw);margin:0 auto;padding:22px}
+
+  /* Header */
+  header.site{
+    position:sticky;top:0;z-index:20;
+    backdrop-filter:saturate(180%) blur(10px);
+    background:linear-gradient(180deg,rgba(248,247,244,.92),rgba(248,247,244,.6) 60%,rgba(248,247,244,0));
+    border-bottom:1px solid rgba(0,0,0,.06);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;gap:10px;align-items:center;font-weight:800}
+  .brand-mark{
+    width:28px;height:28px;border-radius:50%;
+    background:
+      conic-gradient(from 0deg,var(--accent) 0 12.5%,transparent 12.5% 25%,var(--accent-2) 25% 37.5%,transparent 37.5% 50%,var(--accent) 50% 62.5%,transparent 62.5% 75%,var(--accent-2) 75% 87.5%,transparent 87.5% 100%),
+      radial-gradient(closest-side,#fff 35%,transparent 36%);
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+  }
+  nav a{padding:8px 10px;border-radius:10px}
+  nav a.active{background:rgba(0,0,0,.06)}
+
+  /* Hero */
+  .hero{padding:18px 0 8px}
+  .hero h1{font-size:clamp(24px,5vw,40px);margin:.2em 0 .2em;letter-spacing:-.3px}
+  .hero p{color:var(--muted);margin:.2em 0 0}
+
+  /* Controls */
+  .controls{
+    display:grid;gap:12px;grid-template-columns:1fr;align-items:center;margin:18px 0 8px;
+  }
+  @media(min-width:900px){.controls{grid-template-columns:1fr auto}}
+  .searchbar{
+    display:flex;gap:8px;align-items:center;background:var(--paper);border:1px solid var(--line);
+    border-radius:999px;padding:10px 14px;box-shadow:var(--shadow)
+  }
+  .searchbar input{
+    appearance:none;border:0;outline:0;background:transparent;flex:1;min-width:120px;font-size:15px
+  }
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{
+    border:1px solid var(--line);background:var(--paper);padding:8px 12px;border-radius:999px;cursor:pointer;
+    font-size:14px;box-shadow:0 2px 10px rgba(0,0,0,.04)
+  }
+  .chip.active{background:var(--accent);color:#fff;border-color:transparent}
+
+  /* Grid */
+  .grid{display:grid;gap:16px;margin:16px 0 60px}
+  @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+  /* Card */
+  .card{
+    display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1px solid var(--line);
+    border-radius:var(--radius);padding:12px;box-shadow:var(--shadow);min-height:100%;
+  }
+  .thumb{aspect-ratio:16/9;background:#eee url('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop') center/cover;border-radius:12px}
+  .badge{display:inline-flex;gap:8px;align-items:center;font-size:12px;color:#374151}
+  .badge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .title{font-weight:800;font-size:18px;line-height:1.35;letter-spacing:-.2px}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+  .excerpt{color:#333}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+  .tag{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#fafafa}
+  .actions{display:flex;gap:8px;margin-top:auto}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:12px;
+    border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:600;font-size:14px;flex:1
+  }
+  .btn.accent{background:var(--accent);color:#fff;border-color:transparent}
+
+  /* Video card */
+  .video-wrap{position:relative}
+  .video-wrap::after{
+    content:"";position:absolute;inset:0;background:
+      radial-gradient(600px 240px at 80% 10%, rgba(255,106,0,.12), transparent 60%),
+      radial-gradient(400px 220px at 10% 90%, rgba(17,17,17,.06), transparent 60%);
+    border-radius:12px;pointer-events:none
+  }
+
+  /* Footer */
+  footer.site{border-top:1px solid var(--line);background:var(--bg)}
+  .foot{padding:24px 22px;color:#525252;font-size:14px}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="container nav">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <a href="#" aria-label="VFB Home">Verity F&amp;B</a>
+    </div>
+    <nav aria-label="메뉴">
+      <a href="#">Home</a>
+      <a href="#" aria-current="page"><strong>베리티소식</strong></a>
+      <a href="#">메뉴</a>
+      <a href="#">문의</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>베리티소식</h1>
+    <p>운영 소식부터 음식 철학, 브랜드 에세이와 사진/짧은 영상까지 — VFB의 이야기를 한곳에.</p>
+  </section>
+
+  <!-- Controls -->
+  <section class="controls" aria-label="검색과 필터">
+    <div class="searchbar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.3-4.3" stroke="#777" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="#777" stroke-width="1.8"/></svg>
+      <input id="search" type="search" placeholder="검색: 메뉴, 철학, 영상, 내부 소식…" aria-label="게시글 검색" />
+    </div>
+    <div class="filters" role="group" aria-label="카테고리 필터">
+      <button class="chip active" data-filter="all" type="button">전체</button>
+      <button class="chip" data-filter="운영 소식" type="button">운영 소식</button>
+      <button class="chip" data-filter="새 메뉴 출시" type="button">새 메뉴 출시</button>
+      <button class="chip" data-filter="내부 소식" type="button">내부 소식</button>
+      <button class="chip" data-filter="SNS 콘텐츠" type="button">SNS 콘텐츠</button>
+      <button class="chip" data-filter="음식 철학·원재료" type="button">음식 철학·원재료</button>
+      <button class="chip" data-filter="브랜드 방향성 에세이" type="button">브랜드 방향성 에세이</button>
+      <button class="chip" data-filter="브랜드 사진·짧은 영상" type="button">브랜드 사진·짧은 영상</button>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <section class="grid" id="grid" aria-live="polite">
+
+    <!-- 운영 소식 -->
+    <article class="card" data-cat="운영 소식" data-title="영업 시간 변경 안내 동절기">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1200&auto=format&fit=crop')" role="img" aria-label="매장 외관 이미지"></div>
+      <div class="badge">운영 소식</div>
+      <div class="title">동절기 영업 시간 안내</div>
+      <div class="meta"><span>2025-01-10</span> · <span>공지</span></div>
+      <p class="excerpt">평일 11:00–22:00 / 주말 11:00–23:00로 운영 시간이 조정됩니다.</p>
+      <div class="tags">
+        <span class="tag">#운영</span><span class="tag">#공지</span>
+      </div>
+      <div class="actions">
+        <a class="btn accent" href="#">자세히</a>
+        <a class="btn" href="#">공유</a>
+      </div>
+    </article>
+
+    <!-- 새 메뉴 출시 -->
+    <article class="card" data-cat="새 메뉴 출시" data-title="수제 새우완자 출시 LCH 시그니처">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1604908812118-3e4f6b31dadd?q=80&w=1600&auto=format&fit=crop')" role="img" aria-label="새우완자 신메뉴"></div>
+      <div class="badge">새 메뉴 출시</div>
+      <div class="title">LCH 시그니처 — 수제 새우완자</div>
+      <div class="meta"><span>2025-02-05</span> · <span>메뉴</span></div>
+      <p class="excerpt">탱글한 식감과 담백한 풍미를 살린 프리미엄 새우완자.</p>
+      <div class="tags">
+        <span class="tag">#신메뉴</span><span class="tag">#새우완자</span>
+      </div>
+      <div class="actions">
+        <a class="btn accent" href="#">자세히</a>
+        <a class="btn" href="#">공유</a>
+      </div>
+    </article>
+
+    <!-- 내부 소식 -->
+    <article class="card" data-cat="내부 소식" data-title="셰프 인터뷰 정통 충칭의 기술">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop')" role="img" aria-label="셰프 인터뷰"></div>
+      <div class="badge">내부 소식</div>
+      <div class="title">셰프 인터뷰 — 정통 충칭의 기술</div>
+      <div class="meta"><span>2025-03-12</span> · <span>인터뷰</span></div>
+      <p class="excerpt">LCH 셰프가 말하는 마라의 균형과 국물 깊이.</p>
+      <div class="tags">
+        <span class="tag">#인터뷰</span><span class="tag">#팀</span>
+      </div>
+      <div class="actions">
+        <a class="btn accent" href="#">자세히</a>
+        <a class="btn" href="#">공유</a>
+      </div>
+    </article>
+
+    <!-- SNS 콘텐츠 -->
+    <article class="card" data-cat="SNS 콘텐츠" data-title="훠궈는 국물 vs 건더기 당신은">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1543352634-8730a9b1c5f5?q=80&w=1600&auto=format&fit=crop')" role="img" aria-label="SNS 콘텐츠"></div>
+      <div class="badge">SNS 콘텐츠</div>
+      <div class="title">훠궈는 국물 vs 건더기, 당신은?</div>
+      <div class="meta"><span>2025-03-25</span> · <span>릴스</span></div>
+      <p class="excerpt">댓글로 참여해 주세요! #국물파 #건더기파</p>
+      <div class="tags">
+        <span class="tag">#SNS</span><span class="tag">#릴스</span>
+      </div>
+      <div class="actions">
+        <a class="btn accent" href="#">자세히</a>
+        <a class="btn" href="#">공유</a>
+      </div>
+    </article>
+
+    <!-- 음식 철학·원재료 이야기 -->
+    <article class="card" data-cat="음식 철학·원재료" data-title="Local Farm Your Table 공급망 다이어그램">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1600&auto=format&fit=crop')" role="img" aria-label="로컬 농가"></div>
+      <div class="badge">음식 철학·원재료</div>
+      <div class="title">Local Farm → Your Table</div>
+      <div class="meta"><span>2025-02-22</span> · <span>에세이</span></div>
+      <p class="excerpt">지속가능한 공급망, 로컬 농가와의 약속에 대하여.</p>
+      <div class="tags">
+        <span class="tag">#원재료</span><span class="tag">#지속가능성</span>
+      </div>
+      <div class="actions">
+        <a class="btn accent" href="#">자세히</a>
+        <a class="btn" href="#">공유</a>
+      </div>
+    </article>
+
+    <!-- 브랜드 방향성 에세이 -->
+    <article class="card" data-cat="브랜드 방향성 에세이" data-title="Food Beyond 브랜드 비전">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?q=80&w=1600&auto=format&fit=crop')" role="img" aria-label="브랜드 비전"></div>
+      <div class="badge">브랜드 방향성 에세이</div>
+      <div class="title">Food &amp; Beyond — VFB의 비전</div>
+      <div class="meta"><span>2025-01-28</span> · <span>비전</span></div>
+      <p class="excerpt">식탁에서 시작해 경험으로 확장되는 이야기.</p>
+      <div class="tags">
+        <span class="tag">#비전</span><span class="tag">#에세이</span>
+      </div>
+      <div class="actions">
+        <a class="btn accent" href="#">자세히</a>
+        <a class="btn" href="#">공유</a>
+      </div>
+    </article>
+
+    <!-- 브랜드 사진·짧은 영상 (비디오 카드) -->
+    <article class="card" data-cat="브랜드 사진·짧은 영상" data-title="LCH Signature Short Film 12s">
+      <div class="video-wrap">
+        <video controls preload="metadata" poster="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1600&auto=format&fit=crop" style="aspect-ratio:16/9;">
+          <source src="" type="video/mp4">
+          브라우저가 비디오 태그를 지원하지 않습니다.
+        </video>
+      </div>
+      <div class="badge">브랜드 사진·짧은 영상</div>
+      <div class="title">LCH 시그니처 숏필름 (12s)</div>
+      <div class="meta"><span>2025-03-30</span> · <span>영상</span></div>
+      <p class="excerpt">국물과 건더기의 조화, 12초에 담다.</p>
+      <div class="tags">
+        <span class="tag">#브랜드영상</span><span class="tag">#숏폼</span>
+      </div>
+      <div class="actions">
+        <a class="btn accent" href="#">자세히</a>
+        <a class="btn" href="#">공유</a>
+      </div>
+    </article>
+
+  </section>
+</main>
+
+<footer class="site">
+  <div class="container foot">© 2025 Verity F&amp;B · Food &amp; Beyond</div>
+</footer>
+
+<script>
+  // 간단 검색 + 카테고리 필터
+  (function(){
+    const grid = document.getElementById('grid');
+    const cards = [...grid.querySelectorAll('.card')];
+    const chips = [...document.querySelectorAll('.chip')];
+    const search = document.getElementById('search');
+
+    let currentCat = 'all';
+    let q = '';
+
+    function apply(){
+      const query = q.trim().toLowerCase();
+      cards.forEach(c=>{
+        const cat = c.getAttribute('data-cat');
+        const title = (c.getAttribute('data-title')||'').toLowerCase();
+        const text = (c.innerText||'').toLowerCase();
+
+        const matchCat = (currentCat==='all' || cat===currentCat);
+        const matchQuery = (!query || title.includes(query) || text.includes(query));
+        c.style.display = (matchCat && matchQuery) ? '' : 'none';
+      });
+    }
+
+    chips.forEach(ch=>{
+      ch.addEventListener('click', ()=>{
+        chips.forEach(x=>x.classList.remove('active'));
+        ch.classList.add('active');
+        currentCat = ch.getAttribute('data-filter');
+        apply();
+      });
+    });
+
+    search.addEventListener('input', (e)=>{ q = e.target.value; apply(); });
+
+    // 초기 적용
+    apply();
+  })();
+</script>
+</body>
+</html>
