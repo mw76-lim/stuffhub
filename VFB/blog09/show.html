@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>VFB | 음식 철학·원재료 이야기 — Local Farm → Your Table</title>
+    <meta name="description" content="VFB 음식 철학·원재료 이야기: 로컬 농가와의 협업, 지속가능한 공급망, 정통 충칭 훠궈를 위한 재료 선택의 철학." />
+    <meta name="theme-color" content="#111111" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+
+    <style>
+      :root {
+        --bg: #f8f7f4;
+        --paper: #fff;
+        --text: #161616;
+        --muted: #6b7280;
+        --line: #e7e5e4;
+        --accent: #ff6a00;
+        --radius: 16px;
+        --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
+        --maxw: 1100px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        line-height: 1.7;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 14px;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .container {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 22px;
+      }
+
+      header.site {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(248, 247, 244, 0.9);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 70px;
+      }
+      .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-weight: 800;
+      }
+      .brand-mark {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, var(--accent) 0 25%, transparent 25% 50%, var(--accent) 50% 75%, transparent 75% 100%);
+      }
+      nav a {
+        padding: 8px 10px;
+        border-radius: 8px;
+      }
+      nav a.active {
+        background: rgba(0, 0, 0, 0.06);
+      }
+
+      /* Hero */
+      .hero h1 {
+        font-size: clamp(22px, 5vw, 30px);
+        margin: 0.6em 0 0.3em;
+      }
+      .crumbs {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .crumbs a {
+        color: var(--muted);
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+
+      article.post {
+        background: var(--paper);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 20px;
+      }
+      .cover01 {
+        aspect-ratio: 16/9;
+        background: center/cover;
+        border-radius: 14px;
+        margin-bottom: 16px;
+      }
+
+      .cover02 {
+        margin-bottom: 16px;
+      }
+      .cover02 video {
+        width: 100%;
+        aspect-ratio: 16/9;
+        background: #000;
+        border-radius: 14px;
+      }
+      .cover03 {
+        position: relative;
+        aspect-ratio: 16/9;
+        margin-bottom: 14px;
+        background: center/cover no-repeat;
+        border-radius: 14px;
+      }
+      .cover03::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 14px;
+        background: radial-gradient(900px 500px at 85% 10%, rgba(255, 106, 0, 0.12), transparent 60%),
+          radial-gradient(700px 400px at 10% 90%, rgba(17, 17, 17, 0.06), transparent 60%);
+        pointer-events: none;
+      }
+
+      .prose h2 {
+        margin: 1.3em 0 0.5em;
+        font-size: 20px;
+      }
+      .prose p {
+        margin: 0.9em 0;
+      }
+      .note {
+        border-left: 4px solid var(--accent);
+        background: #fff7ef;
+        padding: 12px 14px;
+        border-radius: 12px;
+        margin: 14px 0;
+      }
+
+      /* Q&A */
+      .qa {
+        display: grid;
+        gap: 14px;
+        margin: 16px 0;
+      }
+      .q {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 14px;
+      }
+      .q b {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      /* Timeline */
+      .timeline {
+        border-left: 3px solid var(--line);
+        margin: 16px 0 8px 4px;
+        padding-left: 14px;
+      }
+      .tl-item {
+        margin: 10px 0;
+      }
+      .tl-date {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .tl-title {
+        font-weight: 800;
+        margin: 0.2em 0;
+      }
+
+      /* People */
+      .people {
+        display: grid;
+        gap: 14px;
+        margin: 14px 0;
+      }
+      @media (min-width: 800px) {
+        .people {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .p {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 14px;
+        display: grid;
+        gap: 8px;
+      }
+      .avatar {
+        aspect-ratio: 1/1;
+        background: #eee center/cover;
+        border-radius: 10px;
+      }
+
+      /* poll */
+      .poll {
+        display: flex;
+        gap: 14px;
+        margin: 18px 0;
+        flex-wrap: wrap;
+      }
+      .vote {
+        flex: 1;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        text-align: center;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .vote:hover {
+        background: #fff3ec;
+      }
+
+      .diagram {
+        margin: 20px 0;
+        text-align: center;
+      }
+      .diagram img {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      /* Gallery */
+      .gallery {
+        display: grid;
+        gap: 10px;
+        margin: 18px 0;
+      }
+      @media (min-width: 720px) {
+        .gallery {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .gallery .ph {
+        aspect-ratio: 16/10;
+        background: #eee;
+        border-radius: 12px;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .tag {
+        font-size: 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 10px;
+        background: #fafafa;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .btn.accent {
+        background: var(--accent);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      /* Image blocks */
+      .image-single {
+        margin: 22px 0;
+      }
+      .image-single img {
+        width: 100%;
+        display: block;
+        border-radius: 12px;
+      }
+      .image-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin: 22px 0;
+      }
+      .image-pair.right-long {
+        grid-template-columns: 1fr 1.5fr;
+      }
+      .image-pair.right-too-long {
+        grid-template-columns: 1fr 2fr;
+      }
+      .image-pair.left-long {
+        grid-template-columns: 1.5fr 1fr;
+      }
+      .image-pair.left-too-long {
+        grid-template-columns: 2fr 1fr;
+      }
+      .image-pair img {
+        width: 100%;
+        display: block;
+        border-radius: 12px;
+      }
+
+      /* kpi */
+      .kpi {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 16px 0;
+      }
+      .kpi .box {
+        background: #c2ae77;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+      }
+      .kpi .num {
+        font-size: 22px;
+        font-weight: 800;
+        margin-bottom: 4px;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 10px;
+        margin: 16px 0;
+      }
+      .step {
+        background: #fdefc9;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .step h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+
+      .grid-6 {
+        grid-column: span 6;
+      }
+      .grid-8 {
+        grid-column: span 8;
+      }
+      .grid-4 {
+        grid-column: span 4;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="container nav">
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <a href="/">Verity F&amp;B</a>
+        </div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/menu">메뉴</a>
+          <a href="/vfb/news" class="active">베리티소식</a>
+          <a href="/contact">문의</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- 게시글 #9 -->
+      <section class="hero">
+        <h1>[게시글 #9] 중국 현지에서 시작되는 정통의 맛</h1>
+        <div class="meta">카테고리: 푸드 스토리 · 게시일: 2025-02-22</div>
+      </section>
+      <article class="post">
+        <div
+          class="cover01"
+          style="background-image: url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1600&auto=format&fit=crop')"
+        ></div>
+
+        <div class="prose">
+          <p>
+            정통 충칭 훠궈의 깊은 맛은 결국 <strong>좋은 재료</strong>에서 시작합니다. VFB가 말하는 ‘Local Farm’은 행정적 의미의 지역 농가만을 뜻하지
+            않습니다. 우리의 로컬은, 정통의 뿌리가 있는 <strong>충칭과 중국 현지</strong> 그 자체입니다.
+          </p>
+
+          <h2>핵심은 정통 — 중국 현지 조달 원칙</h2>
+          <p>
+            마라 향신료, 두반장, 화자오 등 <strong>맛의 뿌리를 이루는 핵심 재료</strong>는 충칭·쓰촨 등 현지에서 엄선해 들여옵니다. 수입 과정이
+            까다롭고 비용이 더 들더라도, 정체성을 지키기 위한 최소한의 원칙입니다.
+          </p>
+
+          <h2>국내 신선 공급망과의 조화</h2>
+          <p>
+            채소·육류 등 신선 식재는 국내에서 안정적인 공급망을 통해 보완합니다. 이렇게 <strong>중국 현지 조달(핵심) + 국내 신선 공급(보완)</strong>의
+            조합으로, 한 그릇 안에서 정통성과 신선함의 균형을 맞춥니다.
+          </p>
+
+          <div class="note">
+            “Food & Beyond — 음식을 넘어, 경험으로” VFB는 정직한 원산지 표기와 투명한 조달 과정을 통해, 맛 이상의 가치를 전합니다.
+          </div>
+
+          <h2>공급 흐름(예시)</h2>
+          <div class="diagram">
+            <img src="https://dummyimage.com/480x240/eee/333.png&text=China+Origin+→+LCH" alt="중국 현지 조달 + 국내 신선 공급망 다이어그램" />
+          </div>
+
+          <h2>대표 재료 한 줄 소개</h2>
+          <p>
+            <em>마라 향신료</em> — 얼얼한 화자오 향으로 훠궈의 골격을 세웁니다. <br />
+            <em>두반장</em> — 깊고 풍부한 감칠맛의 중심. <br />
+            <em>수제 새우완자</em> — 탱글한 식감은 신선도와 반죽 비율의 결과입니다.
+          </p>
+
+          <div class="image-pair">
+            <img src="두반장4.jpg" alt="국내 신선 채소" />
+            <img src="화자오2.jpg" alt="해산물·새우 손질" />
+          </div>
+
+          <h2>정직하게, 투명하게</h2>
+          <p>
+            우리는 “로컬”을 <strong>맛의 근원</strong>으로 정의합니다. 한국 매장에서 만나는 한 그릇의 훠궈가, 중국 현지의 진짜 맛과 국내의 신선함을
+            동시에 담아낼 수 있도록 원산지와 공정을 투명하게 공개하겠습니다.
+          </p>
+        </div>
+
+        <div class="tags">
+          <span class="tag">#음식철학</span>
+          <span class="tag">#원재료</span>
+          <span class="tag">#라오충칭훠궈</span>
+        </div>
+        
+        <div class="actions">
+          <a class="btn accent" href="../blogpage.html">목록으로</a>
+          <a class="btn" href="#">공유하기</a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site">
+      <div class="container foot">© 2025 Verity F&amp;B · Food &amp; Beyond</div>
+    </footer>
+
+  </body>
+</html>
