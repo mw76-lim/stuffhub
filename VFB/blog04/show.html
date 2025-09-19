@@ -538,17 +538,18 @@
             } catch (err) {
               // 사용자 취소/미지원/무반응 타임아웃 등 모두 fallback
             }
+          } else {
+            // Fallback: 링크 복사
+            try {
+              await navigator.clipboard.writeText(location.href);
+              alert('공유 기능이 제한되어 링크를 복사했습니다. 원하는 앱에 붙여넣어 공유해주세요.');
+            } catch {
+              // 클립보드 API 미지원 시 마지막 수단
+              const ok = prompt('공유 기능이 제한됩니다. 아래 링크를 복사해주세요:', location.href);
+              // 사용자가 취소해도 추가 처리 불필요
+            }
           }
 
-          // Fallback: 링크 복사
-          try {
-            await navigator.clipboard.writeText(location.href);
-            alert('공유 기능이 제한되어 링크를 복사했습니다. 원하는 앱에 붙여넣어 공유해주세요.');
-          } catch {
-            // 클립보드 API 미지원 시 마지막 수단
-            const ok = prompt('공유 기능이 제한됩니다. 아래 링크를 복사해주세요:', location.href);
-            // 사용자가 취소해도 추가 처리 불필요
-          }
         });
         
         
