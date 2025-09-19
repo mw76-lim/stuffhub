@@ -503,8 +503,8 @@
 
         <div class="actions">
           <a class="btn accent" href="../subpage.html">목록으로</a>
-          <a id="shareBtn" class="btn" href="#">공유하기</a>
-          <a id="copyLink" class="btn" href="#">복사하기</a>
+          <div id="shareBtn" class="btn">공유하기</div>
+          <div id="copyLink" class="btn">링크복사</div>
         </div>
       </article>
     </main>
@@ -527,7 +527,7 @@
             } else {
               await navigator.clipboard.writeText(url);
               shareBtn.textContent = "링크 복사됨";
-              setTimeout(() => (shareBtn.textContent = "공유하기"), 1400);
+              // setTimeout(() => (shareBtn.textContent = "공유하기"), 1400);
             }
           } catch (e) {}
         });
@@ -536,7 +536,7 @@
           try {
             await navigator.clipboard.writeText(url);
             copyBtn.textContent = "복사됨!";
-            setTimeout(() => (copyBtn.textContent = "링크 복사"), 1400);
+            // setTimeout(() => (copyBtn.textContent = "복사됨!"), 1400);
           } catch (e) {}
         });
       })();
