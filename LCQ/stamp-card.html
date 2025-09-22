@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LCQ 스탬프 카드 — 12간지(전화번호 연동)</title>
+  <meta name="description" content="라오충칭훠궈(LCQ) 매장용 스탬프 카드 — 고객 전화번호로 매핑, 12간지(십이지신) 12칸 적립 구조, 로컬 저장/공유/인쇄 지원." />
+  <style>
+    :root{
+      --bg:#f8fafc; --paper:#ffffff; --text:#1a1a1a; --muted:#6b7280;
+      --line:#e5e7eb; --brand:#b3001b; --gold:#cfae5c; --ok:#16a34a; --warn:#d97706;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,Noto Sans KR,Helvetica,Arial,sans-serif;line-height:1.5}
+
+    header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.9);backdrop-filter:saturate(130%) blur(8px);border-bottom:1px solid var(--line)}
+    .head{max-width:980px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:12px}
+    .badge{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--brand),#7c0011);display:grid;place-items:center;color:#fff;font-weight:800}
+    .title{font-weight:800}
+    .sub{font-size:12px;color:var(--muted)}
+
+    main{max-width:980px;margin:0 auto;padding:20px 16px 80px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.04);padding:16px}
+
+    .flex{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+    .progress{height:10px;background:#f1f5f9;border-radius:999px;overflow:hidden}
+    .bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),#e85858);transition:width .3s ease}
+    .hint{color:var(--muted);font-size:12px}
+
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+    @media(max-width:560px){.grid{grid-template-columns:repeat(3,1fr);gap:8px}}
+
+    .stamp{
+      position:relative; aspect-ratio:1/1; border:2px dashed #cbd5e1; border-radius:12px; background:#fff; display:grid; place-items:center; cursor:pointer; overflow:hidden;
+      transition:transform .08s ease; touch-action:manipulation; padding:6px; text-align:center
+    }
+    .stamp:active{transform:scale(.98)}
+    .stamp[data-checked="true"]{border:2px solid var(--brand)}
+    .emoji{font-size:26px; line-height:1}
+    .label{font-size:11px;color:#475569;margin-top:6px}
+    .idx{position:absolute;top:6px;left:8px;font-size:11px;color:#94a3b8}
+
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    button, .btn{appearance:none;border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600}
+    .primary{background:linear-gradient(135deg,var(--brand),#e85858);color:#fff;border-color:transparent}
+    .ghost{background:#f8fafc}
+
+    .reward{margin-top:18px;border:1px dashed var(--gold);border-radius:12px;padding:14px;background:linear-gradient(180deg,rgba(207,174,92,.08),transparent)}
+    .reward h3{margin:0 0 6px}
+    .hide{display:none}
+
+    .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;transition:all .25s ease;background:#111827;color:#fff;padding:10px 14px;border-radius:999px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.3);z-index:9999}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    .form{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+    .form input{padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:14px;min-width:240px}
+    .form .ok{color:var(--ok);font-size:12px}
+    .form .warn{color:var(--warn);font-size:12px}
+
+    /* 인쇄용 */
+    @media print{
+      header{position:static}
+      .actions, .toast, .form{display:none!important}
+      body{background:#fff}
+      .stamp{border-color:#00000055}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="head">
+      <div class="badge">LCQ</div>
+      <div>
+        <div class="title">스탬프 카드 — 12간지</div>
+        <div class="sub">전화번호로 적립 상태 매핑 · 12칸 완료 시 리워드</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card" aria-labelledby="titleProgress">
+      <div class="row" style="justify-content:space-between">
+        <div>
+          <strong id="titleProgress">적립 현황</strong>
+          <div class="hint" id="progressHint">0/12 적립</div>
+        </div>
+        <div class="hint" id="dateHint"></div>
+      </div>
+
+      <!-- 전화번호 매핑 영역 -->
+      <div class="form" role="group" aria-label="전화번호 매핑">
+        <label for="phone" class="hint">전화번호</label>
+        <input id="phone" type="tel" placeholder="010-1234-5678" inputmode="numeric" autocomplete="tel" />
+        <button id="bindBtn" class="btn">연동/불러오기</button>
+        <span id="bindState" class="hint"></span>
+      </div>
+
+      <div class="progress" aria-hidden="true" style="margin-top:12px"><div class="bar" id="bar"></div></div>
+
+      <div class="grid" id="grid" role="group" aria-label="12간지 스탬프">
+        <!-- 12칸 자동 생성 -->
+      </div>
+
+      <div class="actions" role="group" aria-label="조작">
+        <button class="ghost" id="undoBtn" title="마지막 스탬프 되돌리기">↩ 되돌리기</button>
+        <button class="ghost" id="resetBtn" title="초기화">🧹 초기화</button>
+        <button class="primary" id="shareBtn" title="진행상황 공유">공유하기</button>
+      </div>
+
+      <div class="reward hide" id="rewardBox" aria-live="polite">
+        <h3>🎉 축하합니다! 12개 적립 완료</h3>
+        <p>리워드: <strong>LCQ 시그니처 음료 1잔 무료</strong> 또는 <strong>병마용판다 스티커팩</strong> 중 택1</p>
+        <p class="hint">직원 확인 후 증정합니다. (쿠폰 ID: <span id="couponId"></span>)</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // ====== 설정 ======
+    const ZODIAC = [
+      {key:'rat',    emoji:'🐀', name:'자(쥐)'},
+      {key:'ox',     emoji:'🐂', name:'축(소)'},
+      {key:'tiger',  emoji:'🐅', name:'인(호)'},
+      {key:'rabbit', emoji:'🐇', name:'묘(토끼)'},
+      {key:'dragon', emoji:'🐉', name:'진(용)'},
+      {key:'snake',  emoji:'🐍', name:'사(뱀)'},
+      {key:'horse',  emoji:'🐎', name:'오(말)'},
+      {key:'goat',   emoji:'🐑', name:'미(양)'},
+      {key:'monkey', emoji:'🐒', name:'신(원숭이)'},
+      {key:'rooster',emoji:'🐓', name:'유(닭)'},
+      {key:'dog',    emoji:'🐕', name:'술(개)'},
+      {key:'pig',    emoji:'🐖', name:'해(돼지)'}
+    ];
+    const N = ZODIAC.length; // 12
+    const KEY_PREFIX = 'lcqStampCard12:'; // 전화번호 네임스페이스
+
+    // ====== 상태 ======
+    let phone = '';
+    let KEY = KEY_PREFIX + 'guest';
+    let state = load(KEY) || { stamps: Array(N).fill(false), updatedAt: Date.now(), coupon: null, history: [] };
+
+    // ====== 엘리먼트 ======
+    const grid = document.getElementById('grid');
+    const bar = document.getElementById('bar');
+    const hint = document.getElementById('progressHint');
+    const dateHint = document.getElementById('dateHint');
+    const toast = document.getElementById('toast');
+    const rewardBox = document.getElementById('rewardBox');
+    const couponId = document.getElementById('couponId');
+    const phoneInput = document.getElementById('phone');
+    const bindBtn = document.getElementById('bindBtn');
+    const bindState = document.getElementById('bindState');
+
+    // ====== UI 빌드: 12간지 칸 ======
+    function buildGrid(){
+      grid.innerHTML='';
+      ZODIAC.forEach((z, i)=>{
+        const btn = document.createElement('button');
+        btn.className = 'stamp';
+        btn.setAttribute('aria-pressed','false');
+        btn.setAttribute('title', `${z.name} 스탬프`);
+        btn.dataset.index = i;
+        btn.innerHTML = `
+          <span class="idx">${i+1}</span>
+          <div class="emoji" aria-hidden="true">${z.emoji}</div>
+          <div class="label">${z.name}</div>
+        `;
+        btn.addEventListener('click', ()=> toggle(i));
+        grid.appendChild(btn);
+      });
+    }
+
+    // ====== 전화번호 포맷 & 바인딩 ======
+    function normalizePhone(v){
+      if(!v) return '';
+      const digits = v.replace(/\D/g,'');
+      if(digits.length < 9) return digits; // 불완전
+      // 한국 휴대전화 간단 포맷 3-4-4 시도
+      if(digits.startsWith('02')){
+        return digits.replace(/(02)(\d{3,4})(\d{4})/, '$1-$2-$3');
+      }
+      return digits.replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3');
+    }
+
+    function bindPhone(){
+      const formatted = normalizePhone(phoneInput.value.trim());
+      phoneInput.value = formatted;
+      if(!/\d{2,4}-\d{3,4}-\d{4}/.test(formatted)){
+        bindState.textContent = '전화번호 형식을 확인하세요';
+        bindState.className = 'warn';
+        notify('전화번호 형식 오류');
+        return;
+      }
+      phone = formatted;
+      KEY = KEY_PREFIX + phone;
+      state = load(KEY) || { stamps: Array(N).fill(false), updatedAt: Date.now(), coupon: null, history: [] };
+      save();
+      render();
+      bindState.textContent = `연동됨: ${phone}`;
+      bindState.className = 'ok';
+      notify('전화번호 연동 및 데이터 불러오기 완료');
+    }
+
+    bindBtn.addEventListener('click', bindPhone);
+    phoneInput.addEventListener('change', ()=>{ phoneInput.value = normalizePhone(phoneInput.value) })
+
+    // ====== 로컬 스토리지 ======
+    function save(){ localStorage.setItem(KEY, JSON.stringify(state)); }
+    function load(key){ try{ return JSON.parse(localStorage.getItem(key)); }catch(e){ return null } }
+
+    // ====== 상호작용 ======
+    function toggle(i){
+      if(state.stamps[i]) return notify('이미 찍힌 칸입니다');
+      state.stamps[i] = true;
+      state.history.push(i);
+      state.updatedAt = Date.now();
+      save();
+      render();
+      const done = count();
+      notify(`${ZODIAC[i].name} 도장 적립 — ${done}/${N}`);
+      if(done===N) unlock();
+    }
+
+    function count(){ return state.stamps.filter(Boolean).length }
+
+    function render(){
+      // cells
+      [...grid.children].forEach((el, i)=>{
+        const checked = !!state.stamps[i];
+        el.dataset.checked = checked;
+        el.setAttribute('aria-pressed', checked? 'true':'false');
+      });
+      // progress
+      const done = count();
+      bar.style.width = (done/N*100)+'%';
+      hint.textContent = `${done}/${N} 적립`;
+      dateHint.textContent = `업데이트: ${new Date(state.updatedAt).toLocaleString()}`;
+      // reward
+      if(done===N){
+        rewardBox.classList.remove('hide');
+        if(!state.coupon){ state.coupon = genCoupon(); save(); }
+        couponId.textContent = state.coupon;
+      }else{
+        rewardBox.classList.add('hide');
+      }
+    }
+
+    function genCoupon(){
+      // 간단한 로컬 쿠폰 ID (실운영은 서버 발급 권장)
+      const rnd = Math.random().toString(36).slice(2,8).toUpperCase();
+      const day = new Date().toISOString().slice(2,10).replace(/-/g,'');
+      return `LCQ12-${day}-${rnd}`;
+    }
+
+    function notify(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(window.__t); window.__t = setTimeout(()=> t.classList.remove('show'), 1600);
+    }
+
+    document.getElementById('undoBtn').addEventListener('click',()=>{
+      const last = state.history.pop();
+      if(last==null){ return notify('되돌릴 항목이 없습니다'); }
+      state.stamps[last] = false; state.updatedAt = Date.now(); save(); render(); notify('마지막 스탬프 취소');
+    });
+
+    document.getElementById('resetBtn').addEventListener('click',()=>{
+      if(!confirm('모든 스탬프를 초기화할까요? 현재 전화번호 네임스페이스에서만 초기화됩니다.')) return;
+      state.stamps = Array(N).fill(false); state.history = []; state.coupon = null; state.updatedAt = Date.now(); save(); render(); notify('초기화 완료');
+    });
+
+    document.getElementById('shareBtn').addEventListener('click', async ()=>{
+      const done = count();
+      const text = `LCQ 12간지 스탬프 ${done}/${N} 적립` + (done===N? ` — 쿠폰: ${state.coupon}`:'' ) + (phone? ` — ${phone}`:'' );
+      try{
+        if(navigator.share){ await navigator.share({title:'LCQ Stamp 12', text}); }
+        else { await navigator.clipboard.writeText(text); notify('진행상황을 클립보드에 복사했습니다'); return; }
+        notify('공유 완료');
+      }catch(e){ notify('공유가 취소되었어요'); }
+    });
+
+    function unlock(){
+      notify('12개 적립 완료! 리워드를 받아가세요');
+      rewardBox.animate([
+        { transform:'scale(.98)', filter:'brightness(.98)' },
+        { transform:'scale(1.02)', filter:'brightness(1.05)' },
+        { transform:'scale(1)', filter:'brightness(1)' }
+      ], { duration:500, easing:'cubic-bezier(.2,.8,.2,1)' });
+    }
+
+    // 초기 빌드 및 렌더
+    buildGrid();
+    render();
+  </script>
+</body>
+</html>

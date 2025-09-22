@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toast 메시지 구현 데모 (단일 파일)</title>
+  <style>
+    :root{
+      --toast-bg: rgba(30, 41, 59, 0.9);       /* slategrey/900 with opacity */
+      --toast-fg: #f8fafc;                     /* slate-50 */
+      --toast-border: rgba(148, 163, 184, .35);
+      --toast-shadow: 0 10px 25px rgba(0,0,0,.25), 0 2px 8px rgba(0,0,0,.15);
+
+      --info: #0ea5e9;       /* sky-500 */
+      --success: #22c55e;    /* green-500 */
+      --warning: #f59e0b;    /* amber-500 */
+      --error: #ef4444;      /* red-500 */
+    }
+
+    /* 컨테이너: 포지션별 4개를 동적으로 생성 */
+    .toast-container{
+      position: fixed;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      padding: .75rem;
+      pointer-events: none; /* 토스트 바깥 클릭은 통과 */
+    }
+
+    .top-left{ top: .75rem; left: .75rem; align-items: flex-start; }
+    .top-right{ top: .75rem; right: .75rem; align-items: flex-end; }
+    .bottom-left{ bottom: .75rem; left: .75rem; align-items: flex-start; }
+    .bottom-right{ bottom: .75rem; right: .75rem; align-items: flex-end; }
+
+    /* 토스트 박스 */
+    .toast{
+      pointer-events: auto; /* 토스트 내부 클릭 활성화 */
+      max-width: min(90vw, 420px);
+      display: grid;
+      grid-template-columns: auto 1fr auto; /* 아이콘 | 내용 | 닫기/액션 */
+      gap: .75rem;
+      align-items: center;
+      padding: .75rem .9rem;
+      border-radius: .75rem;
+      color: var(--toast-fg);
+      background: var(--toast-bg);
+      border: 1px solid var(--toast-border);
+      backdrop-filter: blur(6px) saturate(120%);
+      box-shadow: var(--toast-shadow);
+      overflow: hidden;
+      position: relative;
+      opacity: 0;
+      transform: translateY(-6px) scale(.98);
+      animation: toast-in 220ms cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    @keyframes toast-in{
+      to{ opacity:1; transform: translateY(0) scale(1);} 
+    }
+    @keyframes toast-out{
+      to{ opacity:0; transform: translateY(-6px) scale(.98);} 
+    }
+
+    /* 모션 최소화 사용자 설정 존중 */
+    @media (prefers-reduced-motion: reduce){
+      .toast{ animation: none; opacity: 1; transform: none; }
+    }
+
+    .toast__icon{
+      width: 1.25rem; height: 1.25rem; display: grid; place-items: center;
+      border-radius: .5rem; background: rgba(255,255,255,.08);
+      border: 1px solid var(--toast-border);
+      font-size: .95rem; line-height: 1; 
+    }
+
+    .toast__content{ display:flex; flex-direction: column; gap: .2rem; min-width: 0; }
+    .toast__title{ font-weight: 700; font-size: .95rem; letter-spacing: .01em; }
+    .toast__desc{ font-size: .86rem; color: #e2e8f0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+
+    .toast__actions{ display:flex; align-items:center; gap:.25rem; margin-left: .25rem; }
+    .toast__btn{
+      appearance: none; border: 1px solid var(--toast-border); background: rgba(255,255,255,.06);
+      color: var(--toast-fg); border-radius: .55rem; padding: .4rem .6rem; font-size: .8rem; cursor: pointer;
+    }
+    .toast__btn:hover{ background: rgba(255,255,255,.12); }
+
+    .toast__close{ appearance:none; border:none; background:transparent; color:#cbd5e1; cursor:pointer; padding:.25rem; border-radius:.5rem; }
+    .toast__close:hover{ background: rgba(255,255,255,.08); color:#fff; }
+
+    /* 타입 배지(좌측 컬러 바) */
+    .toast::before{
+      content:""; position:absolute; inset:0 0 0 auto; width:4px; border-radius:.5rem 0 0 .5rem; opacity:.95;
+    }
+    .toast--info::before{ background: var(--info); right:auto; left:0; }
+    .toast--success::before{ background: var(--success); right:auto; left:0; }
+    .toast--warning::before{ background: var(--warning); right:auto; left:0; }
+    .toast--error::before{ background: var(--error); right:auto; left:0; }
+
+    /* 진행바(자동 닫힘 표시) */
+    .toast__progress{ position:absolute; left:0; right:0; bottom:0; height:3px; background: rgba(255,255,255,.12); overflow:hidden; }
+    .toast__progress > span{ display:block; height:100%; width:100%; transform-origin:left center; animation: progress linear forwards; }
+    @keyframes progress{ from{ transform: scaleX(1);} to{ transform: scaleX(0);} }
+
+    /* 데모 영역 */
+    .demo{ max-width: 900px; margin: 80px auto; padding: 2rem; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+    .demo h1{ font-size: clamp(1.2rem, 2vw, 1.8rem); margin-bottom: .75rem; }
+    .demo .row{ display:flex; flex-wrap: wrap; gap:.5rem; align-items:center; margin:.5rem 0 1rem; }
+    .demo select, .demo input, .demo button{ font: inherit; }
+    .demo button{ padding:.6rem .9rem; border-radius:.6rem; border:1px solid #cbd5e1; background:#f8fafc; cursor:pointer; }
+    .demo button:hover{ background:#eef2f7; }
+    .demo code{ background:#0b1220; color:#c7d2fe; padding:.25rem .4rem; border-radius:.4rem; }
+  </style>
+</head>
+<body>
+  <!-- 데모 UI (필요 없으면 이 섹션만 삭제) -->
+  <div class="demo">
+    <h1>Toast 메시지 구현 (HTML + CSS + JS 단일 파일)</h1>
+    <p>아래 버튼을 눌러 다양한 타입의 토스트를 띄워보세요. 실제 사용 시엔 <code>showToast({...})</code> 함수만 호출하면 됩니다.</p>
+
+    <div class="row">
+      <label>포지션:</label>
+      <select id="pos">
+        <option value="top-right">top-right</option>
+        <option value="top-left">top-left</option>
+        <option value="bottom-right">bottom-right</option>
+        <option value="bottom-left">bottom-left</option>
+      </select>
+      <label style="margin-left:.75rem;">지속(ms):</label>
+      <input id="dur" type="number" value="3500" min="1000" step="500" style="width:110px;" />
+      <label style="margin-left:.75rem;">최대 동시 표시:</label>
+      <input id="max" type="number" value="4" min="1" max="8" style="width:70px;" />
+    </div>
+
+    <div class="row">
+      <button onclick="demoToast('info')">정보(Info)</button>
+      <button onclick="demoToast('success')">성공(Success)</button>
+      <button onclick="demoToast('warning')">경고(Warning)</button>
+      <button onclick="demoToast('error')">오류(Error)</button>
+      <button onclick="demoActionToast()">액션 버튼</button>
+      <button onclick="demoQueue()">여러 개 쏘기</button>
+    </div>
+  </div>
+
+  <script>
+    // ===== 접근성: 라이브 리전 =====
+    const ariaLive = document.createElement('div');
+    ariaLive.setAttribute('aria-live','polite');
+    ariaLive.setAttribute('aria-atomic','true');
+    ariaLive.style.position = 'fixed';
+    ariaLive.style.left = '-9999px';
+    document.body.appendChild(ariaLive);
+
+    // ===== 컨테이너 유틸 =====
+    const POSITIONS = ['top-left','top-right','bottom-left','bottom-right'];
+    const containers = new Map();
+
+    function ensureContainer(position = 'top-right'){
+      if(!POSITIONS.includes(position)) position = 'top-right';
+      if(containers.has(position)) return containers.get(position);
+      const el = document.createElement('div');
+      el.className = `toast-container ${position.replace(/\s+/g,'-')}`;
+      el.id = `toast-container-${position}`;
+      document.body.appendChild(el);
+      containers.set(position, el);
+      return el;
+    }
+
+    // ===== 토스트 생성 메인 함수 =====
+    /**
+     * showToast(options)
+     * @param {Object} options
+     * @param {('info'|'success'|'warning'|'error')} [options.type='info']
+     * @param {String} options.title - 굵은 제목(선택)
+     * @param {String} options.message - 본문(필수)
+     * @param {Number} [options.duration=3500] - 자동 닫힘(ms). 0 또는 음수면 자동 닫힘 없음
+     * @param {('top-left'|'top-right'|'bottom-left'|'bottom-right')} [options.position='top-right']
+     * @param {Boolean} [options.dismissible=true] - 닫기 버튼 표시 여부
+     * @param {{label:string, onClick:Function}|null} [options.action] - 액션 버튼(선택)
+     * @param {Number} [options.maxVisible=4] - 포지션별 최대 동시 표시 개수
+     */
+    function showToast(options={}){
+      const {
+        type='info',
+        title='',
+        message='',
+        duration=3500,
+        position='top-right',
+        dismissible=true,
+        action=null,
+        maxVisible=4
+      } = options;
+
+      if(!message) return;
+
+      // 라이브 리전에 텍스트 반영(스크린리더 공지)
+      ariaLive.textContent = `${title? title+': ' : ''}${message}`;
+
+      const container = ensureContainer(position);
+      const toast = document.createElement('div');
+      toast.className = `toast toast--${type}`;
+      toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
+      toast.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+
+      // 아이콘 선택(기본 이모지, 원하면 SVG로 교체)
+      const iconMap = { info:'ℹ️', success:'✅', warning:'⚠️', error:'⛔' };
+      const icon = document.createElement('div');
+      icon.className = 'toast__icon';
+      icon.textContent = iconMap[type] || '🔔';
+
+      const content = document.createElement('div');
+      content.className = 'toast__content';
+
+      if(title){
+        const h = document.createElement('div');
+        h.className = 'toast__title';
+        h.textContent = title;
+        content.appendChild(h);
+      }
+      const p = document.createElement('div');
+      p.className = 'toast__desc';
+      p.textContent = message;
+      content.appendChild(p);
+
+      const actions = document.createElement('div');
+      actions.className = 'toast__actions';
+
+      if(action && action.label){
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'toast__btn';
+        btn.textContent = action.label;
+        btn.addEventListener('click', () => {
+          try{ action.onClick && action.onClick(); }catch(e){}
+          closeToast(toast);
+        });
+        actions.appendChild(btn);
+      }
+
+      if(dismissible){
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'toast__close';
+        close.setAttribute('aria-label', '닫기');
+        close.innerHTML = '&times;';
+        close.addEventListener('click', () => closeToast(toast));
+        actions.appendChild(close);
+      }
+
+      toast.append(icon, content, actions);
+
+      // 진행바 (자동 닫힘 설정 시)
+      let hideTimer = null;
+      if(duration > 0){
+        const bar = document.createElement('div');
+        bar.className = 'toast__progress';
+        const span = document.createElement('span');
+        span.style.animationDuration = duration + 'ms';
+        span.style.background = ({info:'var(--info)', success:'var(--success)', warning:'var(--warning)', error:'var(--error)'}[type]) || 'var(--info)';
+        bar.appendChild(span);
+        toast.appendChild(bar);
+
+        hideTimer = setTimeout(() => closeToast(toast), duration + 20);
+      }
+
+      // 포지션별 최대 동시 표시 제한/스택 관리
+      const current = Array.from(container.children);
+      const overflow = current.length - (maxVisible - 1);
+      if(overflow > 0){
+        // 오래된 토스트부터 제거
+        for(let i=0;i<overflow;i++){
+          closeToast(current[i]);
+        }
+      }
+
+      // 마우스 오버 시 일시 정지
+      toast.addEventListener('mouseenter', () => { if(hideTimer) clearTimeout(hideTimer); });
+      toast.addEventListener('mouseleave', () => { if(duration>0) hideTimer = setTimeout(() => closeToast(toast), 900); });
+
+      container.appendChild(toast);
+
+      // 스와이프(모바일)로 닫기: 오른쪽으로 살짝
+      let startX = null;
+      toast.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive:true});
+      toast.addEventListener('touchmove', e => {
+        if(startX===null) return; 
+        const dx = e.touches[0].clientX - startX;
+        if(Math.abs(dx)>8){ toast.style.transform = `translateX(${dx}px)`; toast.style.opacity = String(Math.max(0, 1 - Math.abs(dx)/120)); }
+      }, {passive:true});
+      toast.addEventListener('touchend', e => {
+        if(startX===null) return; 
+        const dx = e.changedTouches[0].clientX - startX; startX=null;
+        if(Math.abs(dx) > 80){ closeToast(toast); }
+        else{ toast.style.transform=''; toast.style.opacity=''; }
+      });
+
+      return toast;
+    }
+
+    function closeToast(toast){
+      if(!toast || toast.dataset.closing) return;
+      toast.dataset.closing = '1';
+      toast.style.animation = 'toast-out 180ms ease forwards';
+      setTimeout(() => toast?.remove(), 180);
+    }
+
+    // ===== 데모 헬퍼 =====
+    function getDemoOpts(){
+      const position = document.getElementById('pos').value;
+      const duration = Number(document.getElementById('dur').value || 3500);
+      const maxVisible = Number(document.getElementById('max').value || 4);
+      return { position, duration, maxVisible };
+    }
+
+    function demoToast(type){
+      const {position, duration, maxVisible} = getDemoOpts();
+      const map = {
+        info:   {title:'안내', message:'일반 정보 토스트입니다. 설정이 성공적으로 저장되었습니다.'},
+        success:{title:'성공', message:'작업이 완료되었습니다. 계속 진행하세요.'},
+        warning:{title:'경고', message:'저장하지 않은 변경 사항이 있습니다.'},
+        error:  {title:'오류', message:'네트워크 오류가 발생했습니다. 잠시 후 다시 시도하세요.'}
+      }
+      showToast({ type, ...map[type], position, duration, maxVisible });
+    }
+
+    function demoActionToast(){
+      const {position, duration, maxVisible} = getDemoOpts();
+      showToast({
+        type: 'info',
+        title: '복원 가능',
+        message: '파일을 삭제했습니다.',
+        position, duration, maxVisible,
+        action: {
+          label: '되돌리기',
+          onClick(){ showToast({ type:'success', title:'복원 완료', message:'파일을 복구했습니다.', position }); }
+        }
+      });
+    }
+
+    function demoQueue(){
+      const {position, duration, maxVisible} = getDemoOpts();
+      const types = ['info','success','warning','error'];
+      let i = 0;
+      const iv = setInterval(() =>{
+        if(i>=8){ clearInterval(iv); return; }
+        const t = types[i % types.length];
+        showToast({ type:t, title:t.toUpperCase(), message:`큐 테스트 #${i+1}`, position, duration, maxVisible });
+        i++;
+      }, 500);
+    }
+  </script>
+</body>
+</html>
