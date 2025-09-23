@@ -188,6 +188,78 @@
         font-weight: 800;
         margin: 0.2em 0;
       }
+      /* === 2-Column Timeline (Weekday / Weekend) === */
+      .timeline-2col {
+        display: grid;
+        gap: 14px;
+        margin: 16px 0 8px 0;
+      }
+      @media (min-width: 840px) {
+        .timeline-2col {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .tl-col {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .tl-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 6px 0 10px;
+        border-bottom: 1px solid var(--line);
+      }
+      .tl-head h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+      .tl-badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #fafafa;
+        border: 1px solid var(--line);
+        white-space: nowrap;
+      }
+      .tl-list {
+        position: relative;
+        border-left: 3px solid var(--line);
+        margin: 12px 0 0 4px;
+        padding-left: 14px;
+      }
+      .tl-item {
+        margin: 12px 0;
+        padding-left: 0;
+      }
+      .tl-date {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .tl-title {
+        font-weight: 800;
+        margin: 0.2em 0;
+      }
+      .tl-desc {
+        margin: 0.2em 0 0.4em;
+      }
+
+      /* 가독성을 위한 미세 강조 */
+      .tl-col.weekend .tl-head {
+        background: linear-gradient(180deg, rgba(255, 106, 0, 0.08), rgba(255, 106, 0, 0));
+        border-radius: 10px;
+        padding: 10px;
+        margin: -6px -10px 10px -10px;
+      }
+      .tl-col.weekday .tl-head {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0));
+        border-radius: 10px;
+        padding: 10px;
+        margin: -6px -10px 10px -10px;
+      }
 
       /* People */
       .people {
@@ -426,27 +498,81 @@
           </div>
 
           <h2>우리의 하루 타임라인</h2>
-          <div class="timeline" aria-label="업무 일정">
-            <div class="tl-item">
-              <div class="tl-date">AM 6:00</div>
-              <div class="tl-title">식재료 입고 & 선도 확인</div>
-              <div>로컬 농가 채소, 육류, 해산물—온도·신선도 체크 후 바로 손질.</div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-date">AM 8:30</div>
-              <div class="tl-title">육수/라오유(辣油) 컨디션 점검</div>
-              <div>장시간 우린 베이스와 마라향 오일의 황금 비율을 유지.</div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-date">PM 12:00</div>
-              <div class="tl-title">런치 서비스</div>
-              <div>테이블 회전/온도/재료 타이밍 컨트롤—서비스 퀄리티 표준화.</div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-date">PM 5:30</div>
-              <div class="tl-title">디너 프렙</div>
-              <div>피크 타임 대비 셋업—신선 재료 보충, 반조리 상태 최적화.</div>
-            </div>
+          <div class="timeline-2col" aria-label="업무 일정 (평일/주말)">
+            <!-- 평일 -->
+            <section class="tl-col weekday">
+              <div class="tl-head">
+                <h3>평일 타임라인</h3>
+                <span class="tl-badge">Weekday · Open 17:00</span>
+              </div>
+              <div class="tl-list">
+                <div class="tl-item">
+                  <div class="tl-date">AM 6:00</div>
+                  <div class="tl-title">식재료 입고 & 선도 확인</div>
+                  <div class="tl-desc">농가 채소, 육류, 해산물—온도·신선도 체크 후 바로 손질.</div>
+                </div>
+                <div class="tl-item">
+                  <div class="tl-date">AM 8:30</div>
+                  <div class="tl-title">육수/라오유(辣油) 컨디션 점검</div>
+                  <div class="tl-desc">장시간 우린 베이스와 마라향 오일의 황금 비율 유지.</div>
+                </div>
+                <div class="tl-item">
+                  <div class="tl-date">PM 3:00</div>
+                  <div class="tl-title">디너 프렙</div>
+                  <div class="tl-desc">저녁 서비스 대비 신선 재료 보충, 테이블·기기 셋업.</div>
+                </div>
+                <div class="tl-item">
+                  <div class="tl-date">PM 5:00</div>
+                  <div class="tl-title">디너 오픈</div>
+                  <div class="tl-desc">테이블 회전/온도/재료 타이밍 컨트롤—서비스 퀄리티 표준화.</div>
+                </div>
+                <div class="tl-item">
+                  <div class="tl-date">PM 9:00</div>
+                  <div class="tl-title">서비스 피크</div>
+                  <div class="tl-desc">주방·홀 긴밀 협업으로 품질 유지 & 고객 경험 최적화.</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 주말 -->
+            <section class="tl-col weekend">
+              <div class="tl-head">
+                <h3>주말 타임라인</h3>
+                <span class="tl-badge">Weekend · Open 12:00</span>
+              </div>
+              <div class="tl-list">
+                <div class="tl-item">
+                  <div class="tl-date">AM 6:00</div>
+                  <div class="tl-title">식재료 입고 & 선도 확인</div>
+                  <div class="tl-desc">평일과 동일 기준으로 검수·손질, 주말 수요 대비 물량 체크.</div>
+                </div>
+                <div class="tl-item">
+                  <div class="tl-date">AM 8:30</div>
+                  <div class="tl-title">육수/라오유(辣油) 컨디션 점검</div>
+                  <div class="tl-desc">점심 오픈을 위해 템포 업—황금 비율 & 화력 안정화.</div>
+                </div>
+                <div class="tl-item">
+                  <div class="tl-date">AM 11:00</div>
+                  <div class="tl-title">런치 프렙</div>
+                  <div class="tl-desc">테이블 세팅, 반조리 상태 점검, 신선 재료 보충.</div>
+                </div>
+                <div class="tl-item">
+                  <div class="tl-date">PM 12:00</div>
+                  <div class="tl-title">런치 오픈</div>
+                  <div class="tl-desc">활기찬 점심 서비스—테이블 회전/온도/타이밍 표준화.</div>
+                </div>
+                <div class="tl-item">
+                  <div class="tl-date">PM 5:00</div>
+                  <div class="tl-title">디너 프렙</div>
+                  <div class="tl-desc">점심 직후 재정비—재료 보충, 소스·라오유 컨디션 재점검.</div>
+                </div>
+                <div class="tl-item">
+                  <div class="tl-date">PM 6:00</div>
+                  <div class="tl-title">디너 피크 돌입</div>
+                  <div class="tl-desc">가족·지인 모임으로 테이블 풀가동—주방/홀 풀스피드 운영.</div>
+                </div>
+              </div>
+            </section>
           </div>
 
           <h2>팀을 소개합니다</h2>
