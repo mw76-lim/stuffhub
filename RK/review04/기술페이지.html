@@ -155,10 +155,10 @@
       }
 
       /* Powder Control specific: 3-column single-row, tall cards */
-      #powdercontrol .highlights {
+      #criticalcomponent .highlights, #powdercontrol .highlights {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
-      #powdercontrol .card {
+      #criticalcomponent .card, #powdercontrol .card {
         min-height: 200px; /* 원하는 높이로 조정 가능 (예: 300~400px) */
         display: flex;
         flex-direction: column;
@@ -167,12 +167,12 @@
 
       /* 반응형: 화면이 좁아지면 2컬럼 → 1컬럼 */
       @media (max-width: 980px) {
-        #powdercontrol .highlights {
+        #criticalcomponent .highlights, #powdercontrol .highlights {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
       @media (max-width: 680px) {
-        #powdercontrol .highlights {
+        #criticalcomponent .highlights, #powdercontrol .highlights {
           grid-template-columns: 1fr;
         }
       }
@@ -480,19 +480,19 @@
       }
 
       /* Powder Control: 3-column tall tiles */
-      #powdercontrol .tech-grid3 {
+      #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 12px;
         padding: 12px 18px 18px;
       }
       @media (max-width: 1080px) {
-        #powdercontrol .tech-grid3 {
+        #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
       @media (max-width: 720px) {
-        #powdercontrol .tech-grid3 {
+        #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
           grid-template-columns: 1fr;
         }
       }
@@ -767,10 +767,8 @@
                   <!-- <div class="lead-eyebrow">Section 02</div> -->
                   <h2 id="h-criticalcomponent">Critical Component</h2>
                   <p class="lead-desc" style="font-style: italic">
-                    <strong>ESC :</strong> 반도체 ESC(Electrostatic Chuck)는 반도체 제조 공정에서 웨이퍼를 정전기 힘으로 고정하는 핵심 부품으로, 진공
-                    및 플라즈마 환경에서 웨이퍼의 위치와 온도를 정밀하게 제어하는 역할을 합니다. <br /><strong>Ceramic Heater :</strong> 반도체 증착
-                    (CVD/ALD) 공정에서 사용공정에서 웨이퍼를 일정한 온도로 가열하고 유지하는 핵심 부품으로 고온 안정성, 균일한 열 분포, 정밀한 온도
-                    제어 등의 장점과 Chucking 및 Purge 기능을 접목할 수 있습니다
+                    ESC, Ceramic Heater, Vaporizer는 공정 안정성과 박막 품질을 좌우하는 핵심 기술 요소로, 공정 신뢰성과 
+                    생산 수율 향상에 직접적으로 기여합니다
                   </p>
                 </div>
 
@@ -783,30 +781,75 @@
                   <span class="chip"><b>Zones</b> 3–7 zones</span>
                   <span class="chip"><b>Ramp</b> &gt; 15 °C/s</span>
                 </div>
-
+                
                 <!-- 아카데믹 노트 리스트 -->
-                <div class="note-list" aria-label="Highlights">
-                  <div class="note-item">
-                    <span class="k">Precision Temperature Control</span>
-                    <span class="v">우수한 온도 제어 능력</span>
-                    <span class="d">고정밀 열선 인쇄 및 저항 제어를 통한 Zone to Zone 낮은 Temp Range 구현.</span>
-                  </div>
-                  <div class="note-item">
-                    <span class="k">Uniform Wafer Heating</span>
-                    <span class="v">Multi Heating Zone 온도 제어</span>
-                    <span class="d">4 ~ Multi Heater Zone 구현으로 웨이퍼 전체에 균일한 온도 제어 가능.</span>
-                  </div>
-                  <div class="note-item">
-                    <span class="k">Precision Depth Control</span>
-                    <span class="v">정밀한 유전체층 균일도</span>
-                    <span class="d">RF Mesh Layer 초정밀 제어 및 일정한 Depth Control -> 균일한 박막 두께 증착.</span>
-                  </div>
-                  <div class="note-item">
-                    <span class="k">Process Adaptability</span>
-                    <span class="v">Chucking 및 Purge 기능 적용 유연성</span>
-                    <span class="d">웨이퍼 Warpage 개선, Edge 수율 향상 목적 기능 추가 가능.</span>
+                <!-- 3컬럼 세로형 타일 리스트 -->
+                <div class="tech-grid3" aria-label="Technology Items">
+                  <!-- 기술 소재 #1 -->
+                  <article class="tech-tile">
+                    <!-- <span class="k">기술 소재 #1</span> -->
+                    <h3 class="v">Vaporizer</h3>
+                    <p class="d">
+                      액상 Precursor를 일정 온도와 압력 조건에서 균일하게 기화시켜 프로세스 챔버로 공급하는 장치로, CVD 및 ALD 공정의 박막 품질과 
+                      공정 안정성 확보에 핵심적인 역할을 수행합니다. 고정밀 온도제어 및 유량 제어 기술을 통해 파티클 저감과 고효율 기화 특성을 구현합니다.
+                    </p>
+                    <div class="spacer"></div>
+                  </article>
+
+                  <!-- 기술 소재 #2 -->
+                  <article class="tech-tile">
+                    <!-- <span class="k">기술 소재 #2</span> -->
+                    <h3 class="v">ESC</h3>
+                    <p class="d">
+                      반도체 ESC(Electrostatic Chuck)는 반도체 제조 공정에서 웨이퍼를 정전기 힘으로 고정하는 핵심 부품으로, 진공 및 플라즈마 
+                      환경에서 웨이퍼의 위치와 온도를 정밀하게 제어하는 역할을 합니다.
+                    </p>
+                    <div class="spacer"></div>
+                  </article>
+
+                  <!-- 기술 소재 #3 -->
+                  <article class="tech-tile">
+                    <!-- <span class="k">기술 소재 #3</span> -->
+                    <h3 class="v">Ceramic Heater</h3>
+                    <p class="d">
+                      반도체 증착 (CVD/ALD) 공정에서 사용공정에서 웨이퍼를 일정한 온도로 가열하고 유지하는 핵심 부품으로 고온 안정성, 균일한 열 분포, 
+                      정밀한 온도 제어 등의 장점과 Chucking 및 Purge 기능을 접목할 수 있습니다.
+                    </p>
+                    <div class="spacer"></div>
+                  </article>
+                </div>
+                
+                <!-- 이미지 설명 5 (요약 리스트) 그대로 유지 -->
+                <div class="feature-summary">
+                  <p>
+                    <strong>다음의 네 가지 관점에서 본 통합 효과는 공정 신뢰성 및 장비 가용성을 크게 향상시킵니다.</strong>
+                  </p>
+
+                  <!-- 아카데믹 노트 리스트 -->
+                  <div class="note-list" aria-label="Highlights">
+                    <div class="note-item">
+                      <span class="k">Precision Temperature Control</span>
+                      <span class="v">우수한 온도 제어 능력</span>
+                      <span class="d">고정밀 열선 인쇄 및 저항 제어를 통한 Zone to Zone 낮은 Temp Range 구현.</span>
+                    </div>
+                    <div class="note-item">
+                      <span class="k">Uniform Wafer Heating</span>
+                      <span class="v">Multi Heating Zone 온도 제어</span>
+                      <span class="d">4 ~ Multi Heater Zone 구현으로 웨이퍼 전체에 균일한 온도 제어 가능.</span>
+                    </div>
+                    <div class="note-item">
+                      <span class="k">Precision Depth Control</span>
+                      <span class="v">정밀한 유전체층 균일도</span>
+                      <span class="d">RF Mesh Layer 초정밀 제어 및 일정한 Depth Control -> 균일한 박막 두께 증착.</span>
+                    </div>
+                    <div class="note-item">
+                      <span class="k">Process Adaptability</span>
+                      <span class="v">Chucking 및 Purge 기능 적용 유연성</span>
+                      <span class="d">웨이퍼 Warpage 개선, Edge 수율 향상 목적 기능 추가 가능.</span>
+                    </div>
                   </div>
                 </div>
+
               </div>
             </section>
 
