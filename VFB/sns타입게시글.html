@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>VFB | SNS Story Demo Section</title>
+    <style>
+      :root {
+        --bg: #0b0b0e;
+        --ink: #fff;
+        --muted: #c7c9d1;
+        --accent: #ff6a00;
+        --line: rgba(255, 255, 255, 0.12);
+        --radius: 16px;
+        --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        --maxw: 1080px;
+        --slide-h: 70vh; /* 데스크탑 높이 */
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        line-height: 1.6;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .section-title {
+        margin: 8px 0 16px;
+        font-weight: 800;
+        font-size: clamp(18px, 3vw, 24px);
+        color: #eaeaf0;
+      }
+      .subtitle {
+        color: var(--muted);
+        margin-top: -4px;
+      }
+
+      /* Stage */
+      .stage {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius);
+        background: #000;
+        box-shadow: var(--shadow);
+        isolation: isolate;
+        height: var(--slide-h);
+        max-height: 820px;
+        min-height: 420px;
+        /* 모바일 9:16 비율 유지 */
+        aspect-ratio: 9/16;
+        margin: 16px 0;
+      }
+
+      /* Slides */
+      .slides {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        background: #000 center/cover no-repeat;
+      }
+      .slide.active {
+        opacity: 1;
+      }
+      .slide::after {
+        /* 비네트/시네마틱 그라데이션 */
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, 0.2) 65%, rgba(0, 0, 0, 0.65));
+        pointer-events: none;
+      }
+
+      /* Caption */
+      .caption {
+        position: absolute;
+        left: 6%;
+        right: 6%;
+        bottom: 8%;
+        color: var(--ink);
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+        font-weight: 800;
+        line-height: 1.25;
+        font-size: clamp(10px, 3.2vw, 18px);
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .caption.show {
+        opacity: 1;
+        transform: none;
+        padding-bottom: 20px;
+      }
+      .subcap {
+        display: block;
+        margin-top: 8px;
+        font-size: clamp(13px, 1.7vw, 16px);
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      /* Controls */
+      .controls {
+        position: absolute;
+        inset: auto 0 0 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--line);
+        color: #fff;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: rgba(255, 255, 255, 0.14);
+      }
+      .btn:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .spacer {
+        flex: 1;
+      }
+
+      /* Progress */
+      .progress {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 54px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .bar {
+        height: 100%;
+        width: 0%;
+        background: var(--accent);
+        transition: width 0.12s linear;
+      }
+
+      /* Info row */
+      .info {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+        font-size: 13px;
+        color: var(--muted);
+        padding: 2px 12px 10px;
+      }
+
+      /* Top meta */
+      .meta-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .pill {
+        border: 1px solid var(--line);
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .brand-mark {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        vertical-align: -3px;
+        margin-right: 6px;
+        background: conic-gradient(from 0deg, var(--accent) 0 25%, transparent 25% 50%, var(--accent) 50% 75%, transparent 75% 100%);
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 780px) {
+        .wrap {
+          padding: 14px;
+        }
+        .stage {
+          min-height: 420px;
+          height: auto;
+        }
+        .controls {
+          padding: 10px;
+        }
+      }
+
+      /* Noscript fallback */
+      .fallback {
+        display: none;
+      }
+      noscript .fallback {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="section-title">#SNS 콘텐츠 | 진짜 충칭 마라란 이런 것</div>
+      <div class="subtitle">인스타 컷 스토리를 웹에서 시네마틱하게 재연합니다.</div>
+
+      <div class="meta-row" style="margin-top: 8px">
+        <span class="pill"><span class="brand-mark"></span>Verity F&amp;B</span>
+        <span class="pill">출처: <a href="https://instagram.com/TODO_handle" target="_blank" rel="noopener">@TODO_handle</a></span>
+        <span class="pill">총 5컷 · 15초</span>
+      </div>
+
+      <!-- Stage -->
+      <section class="stage" aria-label="SNS Story Demo" role="region">
+        <div class="slides" id="slides" aria-live="polite">
+          <!-- JS가 주입. 아래는 noscript용 -->
+          <noscript>
+            <div class="fallback">
+              <img src="story-01.jpg" alt="컷1" />
+              <img src="story-02.jpg" alt="컷2" />
+            </div>
+          </noscript>
+        </div>
+
+        <!-- Caption -->
+        <div id="caption" class="caption" aria-live="assertive"></div>
+
+        <!-- Progress -->
+        <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+
+        <!-- Controls -->
+        <div class="controls" aria-label="재생 컨트롤">
+          <button class="btn" id="prevBtn" title="이전(←)" aria-label="이전">◀</button>
+          <button class="btn" id="playBtn" title="재생/일시정지(스페이스)" aria-label="재생/일시정지">⏸</button>
+          <button class="btn" id="nextBtn" title="다음(→)" aria-label="다음">▶</button>
+          <div class="spacer"></div>
+          <div class="pill" id="counter" aria-live="polite">1 / 5</div>
+        </div>
+
+        <div class="info">
+          <span>호버 시 일시정지 · 스와이프/키보드 지원</span>
+          <span>자막/이미지 동기화 데모</span>
+        </div>
+      </section>
+
+      <p style="color: var(--muted); font-size: 14px">
+        © 2025 Verity F&amp;B · 이 데모는 인스타그램 릴스/스토리의 감성을 웹에서 재연하기 위한 하이라이트 섹션 예시입니다.
+      </p>
+    </div>
+
+    <script>
+      // === 데이터 정의(컷 시퀀스) ===========================================
+      const slidesData = [
+        { src: "https://placehold.co/320x580/d9a326/FFFFFF/png?text=cut+01", alt: "컷1", caption: "처음엔, 맵다." },
+        { src: "https://placehold.co/320x580/d9a326/FFFFFF/png?text=cut+02", alt: "컷2", caption: "곧이어, 혀끝이 얼얼하다." },
+        { src: "https://placehold.co/320x580/d9a326/FFFFFF/png?text=cut+03", alt: "컷3", caption: "심장이 두근, 땀이 번진다." },
+        { src: "https://placehold.co/320x580/d9a326/FFFFFF/png?text=cut+04", alt: "컷4", caption: "그 순간 알게 된다—" },
+        { src: "https://placehold.co/320x580/d9a326/FFFFFF/png?text=cut+05", alt: "컷5", caption: "이게 진짜 충칭 마라다." },
+      ];
+
+      // === 설정값 ===========================================================
+      const DURATION_PER_SLIDE = 3000; // 3s per slide
+      const AUTO_PLAY = true;
+
+      // === 엘리먼트 참조 ====================================================
+      const slidesEl = document.getElementById("slides");
+      const captionEl = document.getElementById("caption");
+      const barEl = document.getElementById("bar");
+      const playBtn = document.getElementById("playBtn");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const counterEl = document.getElementById("counter");
+      const stageEl = document.querySelector(".stage");
+
+      // === 슬라이드 DOM 생성 ===============================================
+      const slideNodes = slidesData.map((s, i) => {
+        const d = document.createElement("div");
+        d.className = "slide" + (i === 0 ? " active" : "");
+        d.style.backgroundImage = `url('${s.src}')`;
+        d.setAttribute("role", "img");
+        d.setAttribute("aria-label", s.alt);
+        slidesEl.appendChild(d);
+        return d;
+      });
+
+      // === 상태 =============================================================
+      let idx = 0;
+      let playing = AUTO_PLAY;
+      let timer = null;
+      let startedAt = performance.now();
+
+      // 초기 렌더
+      function render() {
+        slideNodes.forEach((n, i) => n.classList.toggle("active", i === idx));
+        captionEl.textContent = slidesData[idx].caption;
+        captionEl.classList.remove("show");
+        // 자막 살짝 지연 후 등장
+        setTimeout(() => captionEl.classList.add("show"), 60);
+        counterEl.textContent = `${idx + 1} / ${slidesData.length}`;
+        // 진행바 초기화
+        barEl.style.width = "0%";
+        startedAt = performance.now();
+      }
+
+      // 진행바 애니메이션
+      function tick() {
+        if (!playing) return;
+        const elapsed = performance.now() - startedAt;
+        const pct = Math.min(100, (elapsed / DURATION_PER_SLIDE) * 100);
+        barEl.style.width = pct + "%";
+        if (elapsed >= DURATION_PER_SLIDE) {
+          next();
+        }
+        requestAnimationFrame(tick);
+      }
+
+      function next() {
+        idx = (idx + 1) % slidesData.length;
+        render();
+        startedAt = performance.now();
+      }
+      function prev() {
+        idx = (idx - 1 + slidesData.length) % slidesData.length;
+        render();
+        startedAt = performance.now();
+      }
+
+      function play() {
+        playing = true;
+        playBtn.textContent = "⏸";
+        startedAt = performance.now();
+        tick();
+      }
+      function pause() {
+        playing = false;
+        playBtn.textContent = "▶";
+      }
+
+      // 초기화
+      render();
+      if (AUTO_PLAY) play();
+      else pause();
+
+      // === 이벤트 바인딩 ====================================================
+      playBtn.addEventListener("click", () => (playing ? pause() : play()));
+      prevBtn.addEventListener("click", () => {
+        prev();
+        if (!playing) barEl.style.width = "0%";
+      });
+      nextBtn.addEventListener("click", () => {
+        next();
+        if (!playing) barEl.style.width = "0%";
+      });
+
+      // 키보드
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          e.preventDefault();
+          playing ? pause() : play();
+        }
+        if (e.key === "ArrowRight") next();
+        if (e.key === "ArrowLeft") prev();
+      });
+
+      // 호버 시 일시정지
+      stageEl.addEventListener("mouseenter", () => playing && pause());
+      stageEl.addEventListener("mouseleave", () => !playing && play());
+
+      // 페이지 숨김 시 일시정지
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) pause();
+        else play();
+      });
+
+      // 터치 스와이프
+      let touchX = null;
+      stageEl.addEventListener(
+        "touchstart",
+        (e) => {
+          touchX = e.touches[0].clientX;
+        },
+        { passive: true }
+      );
+      stageEl.addEventListener(
+        "touchend",
+        (e) => {
+          if (touchX === null) return;
+          const dx = e.changedTouches[0].clientX - touchX;
+          if (Math.abs(dx) > 40) {
+            dx < 0 ? next() : prev();
+          }
+          touchX = null;
+        },
+        { passive: true }
+      );
+
+      // 접근성: 캡션 변경 시점에 aria-live로 읽히도록 약간의 지연
+      const observer = new MutationObserver(() => {
+        /* screen reader will pick up changes */
+      });
+      observer.observe(captionEl, { childList: true });
+
+      // 커스텀 API (원하면 재사용 가능)
+      window.VFBStoryDemo = {
+        next,
+        prev,
+        play,
+        pause,
+        goTo: (n) => {
+          idx = ((n % slidesData.length) + slidesData.length) % slidesData.length;
+          render();
+        },
+        setSlides: (arr) => {
+          /* 확장용: 동적으로 데이터 갈아끼우기 */
+        },
+      };
+    </script>
+  </body>
+</html>

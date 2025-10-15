@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>VFB | 음식 철학·원재료 이야기 — Local Farm → Your Table</title>
+    <meta name="description" content="VFB 음식 철학·원재료 이야기: 로컬 농가와의 협업, 지속가능한 공급망, 정통 충칭 훠궈를 위한 재료 선택의 철학." />
+    <meta name="theme-color" content="#111111" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+
+    <style>
+      :root {
+        --bg: #f8f7f4;
+        --paper: #fff;
+        --text: #161616;
+        --muted: #6b7280;
+        --line: #e7e5e4;
+        --accent: #ff6a00;
+        --radius: 16px;
+        --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
+        --maxw: 1100px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        line-height: 1.7;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 14px;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .container {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 22px;
+      }
+
+      header.site {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(248, 247, 244, 0.9);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 70px;
+      }
+      .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-weight: 800;
+      }
+      .brand-mark {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, var(--accent) 0 25%, transparent 25% 50%, var(--accent) 50% 75%, transparent 75% 100%);
+      }
+      nav a {
+        padding: 8px 10px;
+        border-radius: 8px;
+      }
+      nav a.active {
+        background: rgba(0, 0, 0, 0.06);
+      }
+
+      /* Hero */
+      .hero h1 {
+        font-size: clamp(22px, 5vw, 30px);
+        margin: 0.6em 0 0.3em;
+      }
+      .crumbs {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .crumbs a {
+        color: var(--muted);
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+
+      article.post {
+        background: var(--paper);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 20px;
+      }
+      .cover01 {
+        aspect-ratio: 16/9;
+        background: center/cover;
+        border-radius: 14px;
+        margin-bottom: 16px;
+      }
+
+      .cover02 {
+        margin-bottom: 16px;
+      }
+      .cover02 video {
+        width: 100%;
+        aspect-ratio: 16/9;
+        background: #000;
+        border-radius: 14px;
+      }
+      .cover03 {
+        position: relative;
+        aspect-ratio: 16/9;
+        margin-bottom: 14px;
+        background: center/cover no-repeat;
+        border-radius: 14px;
+      }
+      .cover03::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 14px;
+        background: radial-gradient(900px 500px at 85% 10%, rgba(255, 106, 0, 0.12), transparent 60%),
+          radial-gradient(700px 400px at 10% 90%, rgba(17, 17, 17, 0.06), transparent 60%);
+        pointer-events: none;
+      }
+
+      .prose h2 {
+        margin: 1.3em 0 0.5em;
+        font-size: 20px;
+      }
+      .prose p {
+        margin: 0.9em 0;
+      }
+      .note {
+        border-left: 4px solid var(--accent);
+        background: #fff7ef;
+        padding: 12px 14px;
+        border-radius: 12px;
+        margin: 14px 0;
+      }
+
+      /* Q&A */
+      .qa {
+        display: grid;
+        gap: 14px;
+        margin: 16px 0;
+      }
+      .q {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 14px;
+      }
+      .q b {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      /* Timeline */
+      .timeline {
+        border-left: 3px solid var(--line);
+        margin: 16px 0 8px 4px;
+        padding-left: 14px;
+      }
+      .tl-item {
+        margin: 10px 0;
+      }
+      .tl-date {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .tl-title {
+        font-weight: 800;
+        margin: 0.2em 0;
+      }
+      /* === 2-Column Timeline (Weekday / Weekend) === */
+      .timeline-2col {
+        display: grid;
+        gap: 14px;
+        margin: 16px 0 8px 0;
+      }
+      @media (min-width: 840px) {
+        .timeline-2col {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .tl-col {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .tl-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 6px 0 10px;
+        border-bottom: 1px solid var(--line);
+      }
+      .tl-head h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+      .tl-badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #fafafa;
+        border: 1px solid var(--line);
+        white-space: nowrap;
+      }
+      .tl-list {
+        position: relative;
+        border-left: 3px solid var(--line);
+        margin: 12px 0 0 4px;
+        padding-left: 14px;
+      }
+      .tl-item {
+        margin: 12px 0;
+        padding-left: 0;
+      }
+      .tl-date {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .tl-title {
+        font-weight: 800;
+        margin: 0.2em 0;
+      }
+      .tl-desc {
+        margin: 0.2em 0 0.4em;
+      }
+
+      /* 가독성을 위한 미세 강조 */
+      .tl-col.weekend .tl-head {
+        background: linear-gradient(180deg, rgba(255, 106, 0, 0.08), rgba(255, 106, 0, 0));
+        border-radius: 10px;
+        padding: 10px;
+        margin: -6px -10px 10px -10px;
+      }
+      .tl-col.weekday .tl-head {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0));
+        border-radius: 10px;
+        padding: 10px;
+        margin: -6px -10px 10px -10px;
+      }
+
+      /* People */
+      .people {
+        display: grid;
+        gap: 14px;
+        margin: 14px 0;
+      }
+      @media (min-width: 800px) {
+        .people {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .p {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 14px;
+        display: grid;
+        gap: 8px;
+      }
+      .avatar {
+        aspect-ratio: 1/1;
+        background: #eee center/cover;
+        border-radius: 10px;
+      }
+
+      /* poll */
+      .poll {
+        display: flex;
+        gap: 14px;
+        margin: 18px 0;
+        flex-wrap: wrap;
+      }
+      .vote {
+        flex: 1;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        text-align: center;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .vote:hover {
+        background: #fff3ec;
+      }
+
+      .diagram {
+        margin: 20px 0;
+        text-align: center;
+      }
+      .diagram img {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      /* Gallery */
+      .gallery {
+        display: grid;
+        gap: 10px;
+        margin: 18px 0;
+      }
+      @media (min-width: 720px) {
+        .gallery {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .gallery .ph {
+        aspect-ratio: 16/10;
+        background: #eee;
+        border-radius: 12px;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .tag {
+        font-size: 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 10px;
+        background: #fafafa;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .btn.accent {
+        background: var(--accent);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      /* Image blocks */
+      .image-single {
+        margin: 22px 0;
+      }
+      .image-single img {
+        width: 100%;
+        display: block;
+        border-radius: 12px;
+      }
+      .image-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin: 22px 0;
+      }
+      .image-pair.right-long {
+        grid-template-columns: 1fr 1.5fr;
+      }
+      .image-pair.right-too-long {
+        grid-template-columns: 1fr 2fr;
+      }
+      .image-pair.left-long {
+        grid-template-columns: 1.5fr 1fr;
+      }
+      .image-pair.left-too-long {
+        grid-template-columns: 2fr 1fr;
+      }
+      .image-pair img {
+        width: 100%;
+        display: block;
+        border-radius: 12px;
+      }
+
+      /* kpi */
+      .kpi {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 16px 0;
+      }
+      .kpi .box {
+        background: #c2ae77;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+      }
+      .kpi .num {
+        font-size: 22px;
+        font-weight: 800;
+        margin-bottom: 4px;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 10px;
+        margin: 16px 0;
+      }
+      .step {
+        background: #fdefc9;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .step h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+
+      .grid-6 {
+        grid-column: span 6;
+      }
+      .grid-8 {
+        grid-column: span 8;
+      }
+      .grid-4 {
+        grid-column: span 4;
+      }
+
+      /* Stage */
+      .stage {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius);
+        background: #000;
+        box-shadow: var(--shadow);
+        isolation: isolate;
+        height: var(--slide-h);
+        /* 820px */
+        max-height: 510px;
+        /* 420px */
+        min-height: 210px;
+        /* 모바일 9:16 비율 유지 */
+        aspect-ratio: 9/16;
+        margin: 16px 0;
+      }
+
+      /* Slides */
+      .slides {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        background: #000 center/cover no-repeat;
+      }
+      .slide.active {
+        opacity: 1;
+      }
+      .slide::after {
+        /* 비네트/시네마틱 그라데이션 */
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, 0.2) 65%, rgba(0, 0, 0, 0.65));
+        pointer-events: none;
+      }
+
+      /* Caption */
+      .caption {
+        position: absolute;
+        left: 6%;
+        right: 6%;
+        bottom: 8%;
+        color: var(--ink);
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+        font-weight: 800;
+        line-height: 1.25;
+        font-size: clamp(10px, 3.2vw, 18px);
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        color: white;
+      }
+      .caption.show {
+        opacity: 1;
+        transform: none;
+        padding-bottom: 30px;
+      }
+      .subcap {
+        display: block;
+        margin-top: 8px;
+        font-size: clamp(13px, 1.7vw, 16px);
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      /* Controls */
+      .controls {
+        position: absolute;
+        inset: auto 0 0 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--line);
+        color: #fff;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: rgba(255, 255, 255, 0.14);
+      }
+      .btn:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .spacer {
+        flex: 1;
+      }
+
+      /* Progress */
+      .progress {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 54px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .bar {
+        height: 100%;
+        width: 0%;
+        background: var(--accent);
+        transition: width 0.12s linear;
+      }
+
+      /* Info row */
+      .info {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+        font-size: 13px;
+        color: var(--muted);
+        padding: 2px 12px 10px;
+      }
+
+      /* Top meta */
+      .meta-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .pill {
+        border: 1px solid var(--line);
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        color: white;
+      }
+      .brand-mark {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        vertical-align: -3px;
+        margin-right: 6px;
+        background: conic-gradient(from 0deg, var(--accent) 0 25%, transparent 25% 50%, var(--accent) 50% 75%, transparent 75% 100%);
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 780px) {
+        .wrap {
+          padding: 14px;
+        }
+        .stage {
+          min-height: 420px;
+          height: auto;
+        }
+        .controls {
+          padding: 10px;
+        }
+      }
+
+      /* Noscript fallback */
+      .fallback {
+        display: none;
+      }
+      noscript .fallback {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="container nav">
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <a href="/">Verity F&amp;B</a>
+        </div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/menu">메뉴</a>
+          <a href="/vfb/news" class="active">베리티소식</a>
+          <a href="/contact">문의</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- 게시글 #11 -->
+      <section class="hero">
+        <div class="crumbs"><a href="/vfb/news">베리티소식</a> › <span>SNS 콘텐츠</span></div>
+        <h1>#SNS 콘텐츠 | 진짜 충칭 마라란 이런 것</h1>
+        <div class="meta"><span>카테고리: SNS 콘텐츠</span>· <span>게시일: 2025-03-12</span></div>
+      </section>
+      <article class="post">
+        <div style="display: flex; align-items: flex-start">
+            <!-- Stage -->
+            <section class="stage" style="flex: 0 0 auto" aria-label="SNS Story Demo" role="region">
+            <div class="slides" id="slides" aria-live="polite">
+                <!-- JS가 주입. 아래는 noscript용 -->
+                <noscript>
+                <div class="fallback">
+                    <img src="story-01.jpg" alt="컷1" />
+                    <img src="story-02.jpg" alt="컷2" />
+                </div>
+                </noscript>
+            </div>
+
+            <!-- Caption -->
+            <div id="caption" class="caption" aria-live="assertive"></div>
+
+            <!-- Progress -->
+            <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+
+            <!-- Controls -->
+            <div class="controls" aria-label="재생 컨트롤">
+                <button class="btn" id="prevBtn" title="이전(←)" aria-label="이전">◀</button>
+                <button class="btn" id="playBtn" title="재생/일시정지(스페이스)" aria-label="재생/일시정지">⏸</button>
+                <button class="btn" id="nextBtn" title="다음(→)" aria-label="다음">▶</button>
+                <div class="spacer"></div>
+                <div class="pill" id="counter" aria-live="polite">1 / 5</div>
+            </div>
+
+            <div class="info">
+                <span>호버 시 일시정지 · 스와이프/키보드 지원</span>
+                <span>자막/이미지 동기화 데모</span>
+            </div>
+            </section>
+            <section style="flex: 1 1 auto; margin: 10px 20px">
+            <div class="prose">
+                <p>
+                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
+                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+                </p>
+
+                <h2>핵심은 정통 — 중국 현지 조달 원칙</h2>
+                <p>
+                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
+                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+                </p>
+
+                <h2>국내 신선 공급망과의 조화</h2>
+                <p>
+                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
+                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+                </p>
+
+                <div class="note">
+                “Food & Beyond — 음식을 넘어, 경험으로” VFB는 정직한 원산지 표기와 투명한 조달 과정을 통해, 맛 이상의 가치를 전합니다.
+                </div>
+            </div>
+            </section>
+        </div>
+        
+
+        <div>
+            <div class="prose">
+                <p>
+                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
+                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+                </p>
+
+                <h2>핵심은 정통 — 중국 현지 조달 원칙</h2>
+                <p>
+                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
+                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+                </p>
+
+                <h2>국내 신선 공급망과의 조화</h2>
+                <p>
+                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
+                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+                </p>
+
+                <div class="note">
+                “Food & Beyond — 음식을 넘어, 경험으로” VFB는 정직한 원산지 표기와 투명한 조달 과정을 통해, 맛 이상의 가치를 전합니다.
+                </div>
+            </div>
+        </div>
+      </article>
+    </main>
+
+    <script>
+      // === 데이터 정의(컷 시퀀스) ===========================================
+      const slidesData = [
+        { src: "https://placehold.co/286x510/d9a326/FFFFFF/png?text=cut+01", alt: "컷1", caption: "처음엔, 맵다." },
+        { src: "https://placehold.co/286x510/d9a326/FFFFFF/png?text=cut+02", alt: "컷2", caption: "곧이어, 혀끝이 얼얼하다." },
+        { src: "https://placehold.co/286x510/d9a326/FFFFFF/png?text=cut+03", alt: "컷3", caption: "심장이 두근, 땀이 번진다." },
+        { src: "https://placehold.co/286x510/d9a326/FFFFFF/png?text=cut+04", alt: "컷4", caption: "그 순간 알게 된다—" },
+        { src: "https://placehold.co/286x510/d9a326/FFFFFF/png?text=cut+05", alt: "컷5", caption: "이게 진짜 충칭 마라다." },
+      ];
+
+      // === 설정값 ===========================================================
+      const DURATION_PER_SLIDE = 3000; // 3s per slide
+      const AUTO_PLAY = true;
+
+      // === 엘리먼트 참조 ====================================================
+      const slidesEl = document.getElementById("slides");
+      const captionEl = document.getElementById("caption");
+      const barEl = document.getElementById("bar");
+      const playBtn = document.getElementById("playBtn");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const counterEl = document.getElementById("counter");
+      const stageEl = document.querySelector(".stage");
+
+      // === 슬라이드 DOM 생성 ===============================================
+      const slideNodes = slidesData.map((s, i) => {
+        const d = document.createElement("div");
+        d.className = "slide" + (i === 0 ? " active" : "");
+        d.style.backgroundImage = `url('${s.src}')`;
+        d.setAttribute("role", "img");
+        d.setAttribute("aria-label", s.alt);
+        slidesEl.appendChild(d);
+        return d;
+      });
+
+      // === 상태 =============================================================
+      let idx = 0;
+      let playing = AUTO_PLAY;
+      let timer = null;
+      let startedAt = performance.now();
+
+      // 초기 렌더
+      function render() {
+        slideNodes.forEach((n, i) => n.classList.toggle("active", i === idx));
+        captionEl.textContent = slidesData[idx].caption;
+        captionEl.classList.remove("show");
+        // 자막 살짝 지연 후 등장
+        setTimeout(() => captionEl.classList.add("show"), 60);
+        counterEl.textContent = `${idx + 1} / ${slidesData.length}`;
+        // 진행바 초기화
+        barEl.style.width = "0%";
+        startedAt = performance.now();
+      }
+
+      // 진행바 애니메이션
+      function tick() {
+        if (!playing) return;
+        const elapsed = performance.now() - startedAt;
+        const pct = Math.min(100, (elapsed / DURATION_PER_SLIDE) * 100);
+        barEl.style.width = pct + "%";
+        if (elapsed >= DURATION_PER_SLIDE) {
+          next();
+        }
+        requestAnimationFrame(tick);
+      }
+
+      function next() {
+        idx = (idx + 1) % slidesData.length;
+        render();
+        startedAt = performance.now();
+      }
+      function prev() {
+        idx = (idx - 1 + slidesData.length) % slidesData.length;
+        render();
+        startedAt = performance.now();
+      }
+
+      function play() {
+        playing = true;
+        playBtn.textContent = "⏸";
+        startedAt = performance.now();
+        tick();
+      }
+      function pause() {
+        playing = false;
+        playBtn.textContent = "▶";
+      }
+
+      // 초기화
+      render();
+      if (AUTO_PLAY) play();
+      else pause();
+
+      // === 이벤트 바인딩 ====================================================
+      playBtn.addEventListener("click", () => (playing ? pause() : play()));
+      prevBtn.addEventListener("click", () => {
+        prev();
+        if (!playing) barEl.style.width = "0%";
+      });
+      nextBtn.addEventListener("click", () => {
+        next();
+        if (!playing) barEl.style.width = "0%";
+      });
+
+      // 키보드
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          e.preventDefault();
+          playing ? pause() : play();
+        }
+        if (e.key === "ArrowRight") next();
+        if (e.key === "ArrowLeft") prev();
+      });
+
+      // 호버 시 일시정지
+      stageEl.addEventListener("mouseenter", () => playing && pause());
+      stageEl.addEventListener("mouseleave", () => !playing && play());
+
+      // 페이지 숨김 시 일시정지
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) pause();
+        else play();
+      });
+
+      // 터치 스와이프
+      let touchX = null;
+      stageEl.addEventListener(
+        "touchstart",
+        (e) => {
+          touchX = e.touches[0].clientX;
+        },
+        { passive: true }
+      );
+      stageEl.addEventListener(
+        "touchend",
+        (e) => {
+          if (touchX === null) return;
+          const dx = e.changedTouches[0].clientX - touchX;
+          if (Math.abs(dx) > 40) {
+            dx < 0 ? next() : prev();
+          }
+          touchX = null;
+        },
+        { passive: true }
+      );
+
+      // 접근성: 캡션 변경 시점에 aria-live로 읽히도록 약간의 지연
+      const observer = new MutationObserver(() => {
+        /* screen reader will pick up changes */
+      });
+      observer.observe(captionEl, { childList: true });
+
+      // 커스텀 API (원하면 재사용 가능)
+      window.VFBStoryDemo = {
+        next,
+        prev,
+        play,
+        pause,
+        goTo: (n) => {
+          idx = ((n % slidesData.length) + slidesData.length) % slidesData.length;
+          render();
+        },
+        setSlides: (arr) => {
+          /* 확장용: 동적으로 데이터 갈아끼우기 */
+        },
+      };
+    </script>
+
+    <footer class="site">
+      <div class="container foot">© 2025 Verity F&amp;B · Food &amp; Beyond</div>
+    </footer>
+  </body>
+</html>
