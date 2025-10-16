@@ -156,10 +156,10 @@
       }
 
       /* Powder Control specific: 3-column single-row, tall cards */
-      #criticalcomponent .highlights, #powdercontrol .highlights {
+      #consumablepartsolution .highlights, #criticalcomponent .highlights, #powdercontrol .highlights {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
-      #criticalcomponent .card, #powdercontrol .card {
+      #consumablepartsolution .card, #powdercontrol .card {
         min-height: 200px; /* 원하는 높이로 조정 가능 (예: 300~400px) */
         display: flex;
         flex-direction: column;
@@ -168,12 +168,12 @@
 
       /* 반응형: 화면이 좁아지면 2컬럼 → 1컬럼 */
       @media (max-width: 980px) {
-        #criticalcomponent .highlights, #powdercontrol .highlights {
+        #consumablepartsolution .highlights, #criticalcomponent .highlights, #powdercontrol .highlights {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
       @media (max-width: 680px) {
-        #criticalcomponent .highlights, #powdercontrol .highlights {
+        #consumablepartsolution .highlights, #criticalcomponent .highlights, #powdercontrol .highlights {
           grid-template-columns: 1fr;
         }
       }
@@ -481,19 +481,19 @@
       }
 
       /* Powder Control: 3-column tall tiles */
-      #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
+      #consumablepartsolution .tech-grid3, #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 12px;
         padding: 12px 18px 18px;
       }
       @media (max-width: 1080px) {
-        #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
+        #consumablepartsolution .tech-grid3, #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
       @media (max-width: 720px) {
-        #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
+        #consumablepartsolution .tech-grid3, #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
           grid-template-columns: 1fr;
         }
       }
@@ -734,29 +734,72 @@
                   <span class="chip"><b>Leakage</b> &lt; 1 µA @ rated</span>
                 </div>
 
+                
                 <!-- 아카데믹 노트 리스트 -->
-                <div class="note-list" aria-label="Highlights">
-                  <div class="note-item">
-                    <span class="k">Process Optimization</span>
-                    <span class="v">Solution Provider</span>
-                    <span class="d">Providing part engineering solutions optimized for semiconductor processes</span>
-                  </div>
-                  <div class="note-item">
-                    <span class="k">Precision Machining</span>
-                    <span class="v">Superior machining technology</span>
-                    <span class="d">Delivering complex geometries with high dimensional accuracy</span>
-                  </div>
-                  <div class="note-item">
-                    <span class="k">Semiconductor-Grade Cleaning</span>
-                    <span class="v">Quality Control</span>
-                    <span class="d">Semiconductor-grade cleaning and excellent quality management</span>
-                  </div>
-                  <div class="note-item">
-                    <span class="k">Total Manufacturing Solution</span>
-                    <span class="v">Benefit</span>
-                    <span class="d">Providing total solutions for cost reduction and yield improvement</span>
+                <!-- 3컬럼 세로형 타일 리스트 -->
+                <div class="tech-grid3" aria-label="Technology Items">
+                  <!-- 기술 소재 #1 -->
+                  <article class="tech-tile">
+                    <!-- <span class="k">기술 소재 #1</span> -->
+                    <h3 class="v">Advanced Material Technology for Process Reliability</h3>
+                    <p class="d">
+                      High-purity materials such as Si, SiC, Quartz, and Polymer ensure durability and chemical stability across various chamber environments.
+                    </p>
+                    <div class="spacer"></div>
+                  </article>
+
+                  <!-- 기술 소재 #2 -->
+                  <article class="tech-tile">
+                    <!-- <span class="k">기술 소재 #2</span> -->
+                    <h3 class="v">Stable Performance under Extreme Conditions</h3>
+                    <p class="d">
+                      Ceramic and polymer-based components maintain insulation, corrosion resistance, and structural stability even under high-temperature and plasma conditions.
+                    </p>
+                    <div class="spacer"></div>
+                  </article>
+
+                  <!-- 기술 소재 #3 -->
+                  <article class="tech-tile">
+                    <!-- <span class="k">기술 소재 #3</span> -->
+                    <h3 class="v">Precision Sealing Technology for Process Stability</h3>
+                    <p class="d">
+                      Engineering Plastic and Gasket ensure precise fitting and excellent sealing, effectively preventing gas leakage and particle generation.
+                    </p>
+                    <div class="spacer"></div>
+                  </article>
+                </div>
+                
+                <!-- 이미지 설명 5 (요약 리스트) 그대로 유지 -->
+                <div class="feature-summary">
+                  <p>
+                    <strong>HIGHLIGHTS</strong>
+                  </p>
+
+                  <!-- 아카데믹 노트 리스트 -->
+                  <div class="note-list" aria-label="Highlights">
+                    <div class="note-item">
+                      <span class="k">Process Optimization</span>
+                      <span class="v">Solution Provider</span>
+                      <span class="d">Providing part engineering solutions optimized for semiconductor processes</span>
+                    </div>
+                    <div class="note-item">
+                      <span class="k">Precision Machining</span>
+                      <span class="v">Superior machining technology</span>
+                      <span class="d">Delivering complex geometries with high dimensional accuracy</span>
+                    </div>
+                    <div class="note-item">
+                      <span class="k">Semiconductor-Grade Cleaning</span>
+                      <span class="v">Quality Control</span>
+                      <span class="d">Semiconductor-grade cleaning and excellent quality management</span>
+                    </div>
+                    <div class="note-item">
+                      <span class="k">Total Manufacturing Solution</span>
+                      <span class="v">Benefit</span>
+                      <span class="d">Providing total solutions for cost reduction and yield improvement</span>
+                    </div>
                   </div>
                 </div>
+                
               </div>
             </section>
 

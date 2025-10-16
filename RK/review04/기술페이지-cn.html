@@ -156,10 +156,10 @@
       }
 
       /* Powder Control specific: 3-column single-row, tall cards */
-      #criticalcomponent .highlights, #powdercontrol .highlights {
+      #consumablepartsolution .highlights, #criticalcomponent .highlights, #powdercontrol .highlights {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
-      #criticalcomponent .card, #powdercontrol .card {
+      #consumablepartsolution .card, #powdercontrol .card {
         min-height: 200px; /* 원하는 높이로 조정 가능 (예: 300~400px) */
         display: flex;
         flex-direction: column;
@@ -168,12 +168,12 @@
 
       /* 반응형: 화면이 좁아지면 2컬럼 → 1컬럼 */
       @media (max-width: 980px) {
-        #criticalcomponent .highlights, #powdercontrol .highlights {
+        #consumablepartsolution .highlights, #criticalcomponent .highlights, #powdercontrol .highlights {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
       @media (max-width: 680px) {
-        #criticalcomponent .highlights, #powdercontrol .highlights {
+        #consumablepartsolution .highlights, #criticalcomponent .highlights, #powdercontrol .highlights {
           grid-template-columns: 1fr;
         }
       }
@@ -481,19 +481,19 @@
       }
 
       /* Powder Control: 3-column tall tiles */
-      #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
+      #consumablepartsolution .tech-grid3, #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 12px;
         padding: 12px 18px 18px;
       }
       @media (max-width: 1080px) {
-        #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
+        #consumablepartsolution .tech-grid3, #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
       @media (max-width: 720px) {
-        #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
+        #consumablepartsolution .tech-grid3, #criticalcomponent .tech-grid3, #powdercontrol .tech-grid3 {
           grid-template-columns: 1fr;
         }
       }
@@ -734,27 +734,69 @@
                   <span class="chip"><b>Leakage</b> &lt; 1 µA @ rated</span>
                 </div>
 
+                
                 <!-- 아카데믹 노트 리스트 -->
-                <div class="note-list" aria-label="Highlights">
-                  <div class="note-item">
-                    <span class="k">Process Optimization</span>
-                    <span class="v">Solution Provider</span>
-                    <span class="d">提供适用于半导体工艺的 Part Engineering Solution</span>
-                  </div>
-                  <div class="note-item">
-                    <span class="k">Precision Machining</span>
-                    <span class="v">卓越的加工技术</span>
-                    <span class="d">满足复杂形状与精确图纸尺寸的优异加工能力</span>
-                  </div>
-                  <div class="note-item">
-                    <span class="k">Semiconductor-Grade Cleaning</span>
-                    <span class="v">Quality Control</span>
-                    <span class="d">半导体级清洗及卓越的品质管理</span>
-                  </div>
-                  <div class="note-item">
-                    <span class="k">Total Manufacturing Solution</span>
-                    <span class="v">Benefit</span>
-                    <span class="d">提供面向客户成本降低与良率提升的整体解决方案</span>
+                <!-- 3컬럼 세로형 타일 리스트 -->
+                <div class="tech-grid3" aria-label="Technology Items">
+                  <!-- 기술 소재 #1 -->
+                  <article class="tech-tile">
+                    <!-- <span class="k">기술 소재 #1</span> -->
+                    <h3 class="v">工艺可靠性的先进材料技术</h3>
+                    <p class="d">
+                      采用Si、SiC、Quartz、Polymer等高纯度材料，在多种腔室环境下实现优异的耐久性和化学稳定性。
+                    </p>
+                    <div class="spacer"></div>
+                  </article>
+
+                  <!-- 기술 소재 #2 -->
+                  <article class="tech-tile">
+                    <!-- <span class="k">기술 소재 #2</span> -->
+                    <h3 class="v">在极端条件下仍保持稳定性能</h3>
+                    <p class="d">
+                      基于陶瓷和聚合物(Ceramic & Polymer)的部件在高温和Plasma环境中仍能保持绝缘性、耐腐蚀性和结构稳定性。
+                    </p>
+                    <div class="spacer"></div>
+                  </article>
+
+                  <!-- 기술 소재 #3 -->
+                  <article class="tech-tile">
+                    <!-- <span class="k">기술 소재 #3</span> -->
+                    <h3 class="v">工艺稳定性的精密密封技术</h3>
+                    <p class="d">
+                      Engineering Plastic与Gasket提供精密配合与优异密封性能，有效防止气体泄漏及颗粒产生。
+                    </p>
+                    <div class="spacer"></div>
+                  </article>
+                </div>
+                
+                <!-- 이미지 설명 5 (요약 리스트) 그대로 유지 -->
+                <div class="feature-summary">
+                  <p>
+                    <strong>HIGHLIGHTS</strong>
+                  </p>
+
+                  <!-- 아카데믹 노트 리스트 -->
+                  <div class="note-list" aria-label="Highlights">
+                    <div class="note-item">
+                      <span class="k">Process Optimization</span>
+                      <span class="v">Solution Provider</span>
+                      <span class="d">提供适用于半导体工艺的 Part Engineering Solution</span>
+                    </div>
+                    <div class="note-item">
+                      <span class="k">Precision Machining</span>
+                      <span class="v">卓越的加工技术</span>
+                      <span class="d">满足复杂形状与精确图纸尺寸的优异加工能力</span>
+                    </div>
+                    <div class="note-item">
+                      <span class="k">Semiconductor-Grade Cleaning</span>
+                      <span class="v">Quality Control</span>
+                      <span class="d">半导体级清洗及卓越的品质管理</span>
+                    </div>
+                    <div class="note-item">
+                      <span class="k">Total Manufacturing Solution</span>
+                      <span class="v">Benefit</span>
+                      <span class="d">提供面向客户成本降低与良率提升的整体解决方案</span>
+                    </div>
                   </div>
                 </div>
               </div>
