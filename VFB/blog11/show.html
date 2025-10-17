@@ -528,7 +528,7 @@
         padding: 10px 12px;
         background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
       }
-      .btn {
+      .btn-control {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -540,10 +540,10 @@
         color: #fff;
         cursor: pointer;
       }
-      .btn:hover {
+      .btn-control:hover {
         background: rgba(255, 255, 255, 0.14);
       }
-      .btn:focus-visible {
+      .btn-control:focus-visible {
         outline: 2px solid var(--accent);
         outline-offset: 2px;
       }
@@ -652,16 +652,16 @@
       </section>
       <article class="post">
         <div style="display: flex; align-items: flex-start">
-            <!-- Stage -->
-            <section class="stage" style="flex: 0 0 auto" aria-label="SNS Story Demo" role="region">
+          <!-- Stage -->
+          <section class="stage" style="flex: 0 0 auto" aria-label="SNS Story Demo" role="region">
             <div class="slides" id="slides" aria-live="polite">
-                <!-- JS가 주입. 아래는 noscript용 -->
-                <noscript>
+              <!-- JS가 주입. 아래는 noscript용 -->
+              <noscript>
                 <div class="fallback">
-                    <img src="story-01.jpg" alt="컷1" />
-                    <img src="story-02.jpg" alt="컷2" />
+                  <img src="story-01.jpg" alt="컷1" />
+                  <img src="story-02.jpg" alt="컷2" />
                 </div>
-                </noscript>
+              </noscript>
             </div>
 
             <!-- Caption -->
@@ -672,68 +672,75 @@
 
             <!-- Controls -->
             <div class="controls" aria-label="재생 컨트롤">
-                <button class="btn" id="prevBtn" title="이전(←)" aria-label="이전">◀</button>
-                <button class="btn" id="playBtn" title="재생/일시정지(스페이스)" aria-label="재생/일시정지">⏸</button>
-                <button class="btn" id="nextBtn" title="다음(→)" aria-label="다음">▶</button>
-                <div class="spacer"></div>
-                <div class="pill" id="counter" aria-live="polite">1 / 5</div>
+              <button class="btn-control" id="prevBtn" title="이전(←)" aria-label="이전">◀</button>
+              <button class="btn-control" id="playBtn" title="재생/일시정지(스페이스)" aria-label="재생/일시정지">⏸</button>
+              <button class="btn-control" id="nextBtn" title="다음(→)" aria-label="다음">▶</button>
+              <div class="spacer"></div>
+              <div class="pill" id="counter" aria-live="polite">1 / 5</div>
             </div>
 
             <div class="info">
-                <span>호버 시 일시정지 · 스와이프/키보드 지원</span>
-                <span>자막/이미지 동기화 데모</span>
+              <span>호버 시 일시정지 · 스와이프/키보드 지원</span>
+              <span>자막/이미지 동기화 데모</span>
             </div>
-            </section>
-            <section style="flex: 1 1 auto; margin: 10px 20px">
+          </section>
+          <section style="flex: 1 1 auto; margin: 10px 20px">
             <div class="prose">
-                <p>
-                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
-                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
-                </p>
+              <p>
+                Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident.
+                Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+              </p>
 
-                <h2>핵심은 정통 — 중국 현지 조달 원칙</h2>
-                <p>
-                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
-                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
-                </p>
+              <h2>핵심은 정통 — 중국 현지 조달 원칙</h2>
+              <p>
+                Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident.
+                Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+              </p>
 
-                <h2>국내 신선 공급망과의 조화</h2>
-                <p>
-                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
-                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
-                </p>
+              <h2>국내 신선 공급망과의 조화</h2>
+              <p>
+                Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident.
+                Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+              </p>
 
-                <div class="note">
+              <div class="note">
                 “Food & Beyond — 음식을 넘어, 경험으로” VFB는 정직한 원산지 표기와 투명한 조달 과정을 통해, 맛 이상의 가치를 전합니다.
-                </div>
+              </div>
             </div>
-            </section>
+          </section>
         </div>
-        
 
-        <div>
-            <div class="prose">
-                <p>
-                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
-                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
-                </p>
+        <div class="prose">
+          <p>
+            Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. Optio
+            necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+          </p>
 
-                <h2>핵심은 정통 — 중국 현지 조달 원칙</h2>
-                <p>
-                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
-                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
-                </p>
+          <h2>핵심은 정통 — 중국 현지 조달 원칙</h2>
+          <p>
+            Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. Optio
+            necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+          </p>
 
-                <h2>국내 신선 공급망과의 조화</h2>
-                <p>
-                    Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. 
-                    Optio necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
-                </p>
+          <h2>국내 신선 공급망과의 조화</h2>
+          <p>
+            Lorem ipsum dolor sit, amet <strong>consectetur</strong> adipisicing elit. Iusto quam ex laboriosam debitis odit fugit provident. Optio
+            necessitatibus est veniam. Eius harum non voluptas, quis <strong>deserunt</strong> eum sequi odit quo!
+          </p>
 
-                <div class="note">
-                “Food & Beyond — 음식을 넘어, 경험으로” VFB는 정직한 원산지 표기와 투명한 조달 과정을 통해, 맛 이상의 가치를 전합니다.
-                </div>
-            </div>
+          <div class="note">
+            “Food & Beyond — 음식을 넘어, 경험으로” VFB는 정직한 원산지 표기와 투명한 조달 과정을 통해, 맛 이상의 가치를 전합니다.
+          </div>
+
+          <div class="tags" role="list">
+            <span class="tag" role="listitem">#라오충칭훠궈</span>
+            <span class="tag" role="listitem">#SNS</span>
+            <span class="tag" role="listitem">#인스타</span>
+          </div>
+          <div class="actions">
+            <a class="btn accent" href="../blogpage.html">목록으로</a>
+            <a class="btn" href="#">공유하기</a>
+          </div>
         </div>
       </article>
     </main>
