@@ -1,0 +1,216 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ronda Korea 관리자 가이드 (Admin Guide)</title>
+  <style>
+    /* Base */
+    :root{
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --accent:#2563eb;
+      --bg:#ffffff;
+      --paper:#ffffff;
+      --radius:14px;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--ink);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", Roboto, Arial, sans-serif;
+      line-height:1.65;
+      font-size:16px;
+    }
+
+    /* Page container with reduced margins (similar to v2 docx) */
+    .wrap{
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 16px;
+      background-color: #EEEEEE;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    header h1{
+      margin: 0 0 6px;
+      font-size: clamp(1.4rem, 2.6vw, 2rem);
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+    header p.intro{
+      margin: 6px 0 20px;
+      color: var(--muted);
+    }
+
+    /* Section blocks */
+    section.block{
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin: 14px 0;
+    }
+    section.block h2{
+      margin: 0 0 8px;
+      font-size: clamp(1.05rem, 2.1vw, 1.3rem);
+      font-weight: 800;
+    }
+    section.block h3{
+      margin: 14px 0 6px;
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    p, li{ color: var(--ink); }
+    .muted{ color: var(--muted); }
+
+    /* Indented sub-sections (A/B) inside section 1 */
+    .indent{
+      padding-left: 24px; /* visual indent */
+      border-left: 3px solid var(--line);
+      margin: 8px 0;
+    }
+
+    /* Lists */
+    ul{ margin: 6px 0 10px 18px; padding:0; }
+    ul li{ margin: 2px 0; }
+    .list-tight li{ margin: 0; }
+
+    /* Code-like buttons row */
+    .btnrow{
+      display: inline-block;
+      border: 1px dashed var(--line);
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #fafafa;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: .95rem;
+    }
+    .btnrow b{ color:#1f2937; }
+
+    /* Table (if needed later) */
+    table{
+      width:100%; border-collapse: collapse; margin:8px 0 4px;
+      border:1px solid var(--line);
+    }
+    th, td{
+      border:1px solid var(--line);
+      padding:8px 10px; text-align:left;
+    }
+    th{ background:#f8fafc; }
+
+    /* Print styles: shrink margins */
+    @page{
+      size: A4;
+      margin: 10mm 12mm 12mm 12mm; /* top right bottom left */
+    }
+    @media print{
+      .wrap{ max-width: none; margin: 0; padding: 0 4mm; }
+      section.block{ page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Ronda Korea 관리자 가이드 (Admin Guide)</h1>
+      <p class="intro">본 문서는 Ronda Korea 웹사이트의 콘텐츠 및 팝업, 제품, 뉴스 관리 등 전반적인 관리 시스템 사용 방법을 안내합니다.</p>
+    </header>
+
+    <section class="block" id="sec-1">
+      <h2>1. 관리 페이지 구조 개요</h2>
+      <p class="muted">관리 페이지는 총 8개의 페이지로 구성되어 있으며, 독립적으로 운영되는 관리 페이지(5개)와 서비스 페이지에 병합되어 운영되는 관리 페이지(3개)로 구분됩니다.</p>
+
+      <div class="indent">
+        <h3>A. 독립적인 관리 페이지 (5개)</h3>
+        <ul>
+          <li><b>Contact Us</b> — 온라인 문의 내용 확인 및 답변 관리</li>
+          <li><b>개인정보처리방침</b> — 개인정보 처리방침 내용 등록 및 수정</li>
+          <li><b>회사소개서</b> — 회사소개서 PDF 파일 업로드 및 관리</li>
+          <li><b>팝업등록</b> — 신규 팝업 등록 및 기간 설정</li>
+          <li><b>팝업공지</b> — 팝업 리스트 확인 및 활성/비활성 설정</li>
+        </ul>
+      </div>
+
+      <div class="indent">
+        <h3>B. 서비스 페이지에 병합된 관리 페이지 (3개)</h3>
+        <ul>
+          <li><b>Products 페이지</b> — 제품별 콘텐츠, 이미지, 사양 데이터 관리</li>
+          <li><b>뉴스룸 페이지</b> — 뉴스 게시글, 보도자료 등록 및 관리</li>
+          <li><b>FAQ 페이지</b> — 자주 묻는 질문 등록 및 정렬</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block" id="sec-2">
+      <h2>2. 관리자 접근 방법</h2>
+      <ul class="list-tight">
+        <li>① 서비스 페이지 하단에 있는 <b>[ADMIN]</b> 버튼 클릭</li>
+        <li>② 로그인 창에서 관리자 계정 입력</li>
+        <li>③ 로그인 성공 시 하단 버튼이 다음과 같이 변경됨:</li>
+      </ul>
+      <p class="btnrow">[<b>LOGOUT</b>] [<b>Contact Us</b>] [<b>개인정보처리방침</b>] [<b>회사소개서</b>] [<b>팝업등록</b>] [<b>팝업공지</b>]</p>
+      <ul class="list-tight">
+        <li>④ 각 버튼 클릭 시 해당 독립 관리 페이지로 이동하여 콘텐츠 수정 가능</li>
+      </ul>
+    </section>
+
+    <section class="block" id="sec-3">
+      <h2>3. 페이지별 콘텐츠 관리 방식</h2>
+      <h3>A. 독립 관리 페이지 (5개)</h3>
+      <ul>
+        <li>등록 / 수정 / 삭제</li>
+        <li>게시 상태 (활성 / 비활성) 설정</li>
+        <li>파일 업로드 기능 (이미지, PDF 등)</li>
+        <li>노출기간 설정 (시작일 / 종료일)</li>
+      </ul>
+
+      <h3>B. 서비스 통합 관리 페이지 (3개)</h3>
+      <ul>
+        <li><b>Products 페이지</b> — 제품명, 사양, 기술 이미지 관리</li>
+        <li><b>뉴스룸 페이지</b> — 뉴스/보도자료 등록 및 순서 조정</li>
+        <li><b>FAQ 페이지</b> — 질문/답변 등록 및 카테고리 분류</li>
+      </ul>
+    </section>
+
+    <section class="block" id="sec-4">
+      <h2>4. 운영 권장 사항</h2>
+      <ul>
+        <li>로그인 후 브라우저 새 창에서 다른 페이지를 열지 마세요. (세션 충돌 방지)</li>
+        <li>수정 후 반드시 <b>저장</b>하고, 새로고침으로 결과를 확인하세요.</li>
+        <li>팝업 노출기간 설정 시 <b>시간 단위(YYYY-MM-DD hh:mm)</b>까지 확인하세요.</li>
+        <li>회사소개서 업로드 시 기존 파일이 자동 대체됩니다. (파일명 자동 관리)</li>
+        <li>비정상 접근 또는 오류 발생 시 IT 관리자에게 문의하세요.</li>
+      </ul>
+    </section>
+
+    <section class="block" id="sec-5">
+      <h2>5. 기술 참고</h2>
+      <ul>
+        <li>Frontend: HTML5, CSS3, JavaScript (JQuery)</li>
+        <li>Backend: PHP 7.x (Cafe24 환경)</li>
+        <li>Auth: 세션 기반 로그인 시스템</li>
+        <li>Upload Path: <code>/uploads/admin/</code>, <code>/uploads/popup/</code></li>
+        <li>Security: SSL 암호화, IP 접근 제한 가능</li>
+      </ul>
+    </section>
+
+    <section class="block" id="sec-6">
+      <h2>요약</h2>
+      <ul>
+        <li>총 8개의 관리 페이지로 구성 (5개 독립, 3개 통합)</li>
+        <li>접근 경로: 하단 <b>ADMIN</b> 버튼 → 로그인 → 관리 메뉴 표시</li>
+        <li>주요 기능: 팝업, 뉴스, FAQ, 제품, 문의, 회사소개서 등 콘텐츠 관리</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
