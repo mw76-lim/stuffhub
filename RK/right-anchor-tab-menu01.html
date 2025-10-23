@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ronda Korea — Right Anchored Tab Menu</title>
+  <style>
+    :root {
+      /* Ronda Korea palette (example) */
+      --rk-navy: #0b1f3a;
+      --rk-navy-600: #0f2a4f;
+      --rk-cyan: #26dbff;
+      --rk-cyan-600: #19b8d8;
+      --rk-ink: #101318;
+      --rk-bg: #0a0f18;
+      --rk-card: #0f1726;
+      --rk-text: #e8eef8;
+      --rk-muted: #9fb1c6;
+      --rk-line: rgba(255,255,255,0.08);
+      --shadow-1: 0 8px 24px rgba(0,0,0,0.35);
+      --shadow-2: 0 12px 28px rgba(12, 180, 210, 0.18);
+    }
+
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--rk-text);
+      background: radial-gradient(1200px 700px at 80% 10%, rgba(38,219,255,0.10), transparent 60%),
+                  linear-gradient(180deg, var(--rk-bg), #060a12 60%);
+      scroll-behavior: smooth;
+    }
+
+    /* Layout */
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 56px 24px; }
+    section { min-height: 100vh; display: grid; place-items: center; position: relative; }
+    .card {
+      width: min(920px, 92vw);
+      background: linear-gradient(180deg, var(--rk-card), #0b1322);
+      border: 1px solid var(--rk-line);
+      border-radius: 20px;
+      padding: clamp(28px, 4vw, 48px);
+      box-shadow: var(--shadow-1);
+    }
+    h1 { font-size: clamp(28px, 5vw, 44px); margin: 0 0 8px; letter-spacing: -0.02em; }
+    p.lead { color: var(--rk-muted); margin: 0 0 20px; font-size: clamp(15px, 2.4vw, 18px); }
+
+    /* Accent underline with trimmed edges */
+    .u-underline { position: relative; display: inline-block; }
+    .u-underline::after {
+      content: ""; position: absolute; left: 10px; right: 10px; bottom: -6px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--rk-cyan), transparent);
+      filter: drop-shadow(0 0 6px rgba(38,219,255,0.5));
+    }
+
+    /* Right anchored tab nav */
+    .anchor-nav {
+      position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 14px; z-index: 50;
+    }
+    .anchor-nav .dot {
+      --size: 14px;
+      width: var(--size); height: var(--size);
+      border-radius: 999px; position: relative; display: grid; place-items: center;
+      background: linear-gradient(145deg, #0f1f35, #0a1524);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+      cursor: pointer; transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .anchor-nav .dot::before { /* inner glow */
+      content: ""; width: 6px; height: 6px; border-radius: 999px; background: #9ab3c9; opacity: .6; transition: background .25s ease, opacity .25s ease;
+    }
+    .anchor-nav .dot:hover {
+      transform: scale(1.25);
+      box-shadow: 0 0 0 6px rgba(38,219,255,0.12), var(--shadow-2);
+    }
+
+    /* Active state */
+    .anchor-nav .dot.active { border-color: rgba(38,219,255,0.7); }
+    .anchor-nav .dot.active::before { background: var(--rk-cyan); opacity: 1; box-shadow: 0 0 12px rgba(38,219,255,0.8); }
+
+    /* Tooltip labels that slide out on hover + active */
+    .anchor-nav .dot span {
+      position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+      background: linear-gradient(180deg, #0d1b2d, #0a1524);
+      color: var(--rk-text); border: 1px solid var(--rk-line);
+      padding: 6px 10px; border-radius: 10px; white-space: nowrap; font-size: 12px;
+      opacity: 0; pointer-events: none; translate: 8px 0; transition: opacity .25s ease, translate .25s ease;
+      box-shadow: var(--shadow-1);
+    }
+    .anchor-nav .dot:hover span, .anchor-nav .dot.active span { opacity: 1; translate: 0 0; }
+
+    /* Hide on small screens */
+    @media (max-width: 900px) { .anchor-nav { display: none; } }
+
+    /* CTA button */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 18px; border-radius: 12px;
+      color: #061018; background: linear-gradient(135deg, var(--rk-cyan), #7ae9ff);
+      border: none; font-weight: 700; cursor: pointer; box-shadow: var(--shadow-2);
+      transition: transform .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+
+    /* Subtle divider with trimmed edges */
+    .divider { height: 1px; position: relative; margin: 24px 0; background: transparent; }
+    .divider::after { content: ""; position: absolute; left: 10px; right: 10px; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent); }
+
+    /* Demo content styling */
+    ul.keypoints { list-style: none; padding: 0; margin: 0; }
+    ul.keypoints li { position: relative; padding: 10px 0; }
+    ul.keypoints li::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent); }
+    ul.keypoints li:last-child::after { content: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Right Anchored Tabs -->
+  <nav class="anchor-nav" aria-label="Ronda Korea sections">
+    <a class="dot" href="#hero" aria-label="Top"><span>Top</span></a>
+    <a class="dot" href="#products" aria-label="Products"><span>Products</span></a>
+    <a class="dot" href="#technology" aria-label="Technology"><span>Technology</span></a>
+    <a class="dot" href="#news" aria-label="Newsroom"><span>Newsroom</span></a>
+    <a class="dot" href="#contact" aria-label="Contact"><span>Comsumable Part Solutions</span></a>
+  </nav>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section id="hero" aria-labelledby="hero-title">
+      <div class="card">
+        <h1 id="hero-title"><span class="u-underline">Ronda Korea</span> — High‑precision Semiconductor Parts & Solutions</h1>
+        <p class="lead">Si / Quartz / Gasket / SiC Consumables 중심의 고정밀 반도체 부품, 공정 신뢰성 향상과 TCO 절감을 위한 엔지니어링 솔루션을 제공합니다.</p>
+        <button class="btn" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">제품 라인업 보기 →</button>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products" aria-labelledby="products-title">
+      <div class="card">
+        <h1 id="products-title" class="u-underline">Products</h1>
+        <p class="lead">Si / Quartz / Gasket / SiC / Ceramic Heater 등 핵심 소모품 라인업.</p>
+        <div class="divider"></div>
+        <ul class="keypoints">
+          <li>Plasma용 Si/Quartz 파츠 — 에칭/증착 공정 최적화</li>
+          <li>ESC & Ceramic Heater — 균일한 온도 제어 및 빠른 램프업</li>
+          <li>Powder Trap & Vaporizer — 파우더 축적 최소화, 유지보수 비용 절감</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TECHNOLOGY -->
+    <section id="technology" aria-labelledby="tech-title">
+      <div class="card">
+        <h1 id="tech-title" class="u-underline">Technology</h1>
+        <p class="lead">표면 조도/미세결함 관리, 파티클 억제 공정, 열충격 내성 및 코팅 튜닝 등 공정 신뢰성을 뒷받침하는 핵심 기술.</p>
+        <div class="divider"></div>
+        <ul class="keypoints">
+          <li>SiC 소재의 열적 안정성과 장시간 공정 내구성</li>
+          <li>Quartz 파츠의 고순도·고투명도 관리 체계</li>
+          <li>ESC 전극/Dielectric 설계로 온도 균일도 향상</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- NEWSROOM -->
+    <section id="news" aria-labelledby="news-title">
+      <div class="card">
+        <h1 id="news-title" class="u-underline">Newsroom</h1>
+        <p class="lead">수상, 간담회, 외부보도 중심으로 기술/사업 소식을 전합니다.</p>
+        <div class="divider"></div>
+        <ul class="keypoints">
+          <li>신제품 발표 & 기술 백서 공개</li>
+          <li>고객 기술 세미나 및 파트너십 소식</li>
+          <li>공정 사례 인터뷰 및 어워즈</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="card">
+        <h1 id="contact-title" class="u-underline">Comsumable Part Solutions</h1>
+        <p class="lead">상담/견적/기술문의 — 빠르게 회신드리겠습니다.</p>
+        <div class="divider"></div>
+        <ul class="keypoints">
+          <li>Sales: sales@ronda.co.kr</li>
+          <li>Tech: tech@ronda.co.kr</li>
+          <li>Tel: 02-000-0000</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Observe sections to toggle active state on right tabs
+    const sections = document.querySelectorAll('section');
+    const dots = document.querySelectorAll('.anchor-nav .dot');
+
+    const byId = id => document.querySelector(id);
+    const map = new Map();
+    dots.forEach(d => map.set(d.getAttribute('href').replace('#',''), d));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          dots.forEach(d => d.classList.remove('active'));
+          const active = map.get(id);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    sections.forEach(sec => io.observe(sec));
+
+    // Optional: smooth scroll offset fix for browsers without native smooth behavior
+    document.querySelectorAll('.anchor-nav a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = a.getAttribute('href');
+        document.querySelector(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>

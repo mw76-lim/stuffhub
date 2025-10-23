@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ronda Korea — Right Anchored Tab (Numbered Rail + Mobile Bottom Bar)</title>
+  <style>
+    :root {
+      /* Light Navy theme based on #232a52 / #132b88 */
+      --rk-navy: #232a52;
+      --rk-navy-strong: #132b88;
+      --rk-line: rgba(19,43,136,0.14);
+      --rk-text: #1c233a;
+      --rk-muted: #5f6d8f;
+      --rk-cyan: #46d9ff;
+      --rk-cyan-soft: #a2ebff;
+      --bg-1: #fafdff;
+      --bg-2: #f0f4fa;
+      --shadow-1: 0 6px 18px rgba(35,42,82,.12);
+      --shadow-2: 0 10px 30px rgba(19,43,136,.18);
+    }
+
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Pretendard','Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color: var(--rk-text);
+      background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      scroll-behavior: smooth;
+    }
+
+    /* Sections */
+    section { min-height: 100vh; display:grid; place-items:center; padding: 56px 24px; box-sizing: border-box; }
+    .card { background:#fff; border:1px solid var(--rk-line); border-radius:20px; box-shadow:var(--shadow-1); width:min(900px,90vw); padding:clamp(28px,4vw,48px); }
+    h1{ font-size:clamp(28px,5vw,42px); margin:0 0 12px; color:var(--rk-navy-strong); letter-spacing:-.02em }
+    p.lead{ color:var(--rk-muted); margin:0 0 20px; font-size:clamp(15px,2.4vw,18px) }
+    .u-underline{ position:relative; display:inline-block }
+    .u-underline::after{ content:""; position:absolute; left:10px; right:10px; bottom:-6px; height:2px; background:linear-gradient(90deg,transparent,var(--rk-cyan),transparent) }
+
+    /* ===== Desktop: B. Numbered Rail (Right side) ===== */
+    .anchor-rail{ position:fixed; right:30px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; gap:22px; padding-left:6px; z-index:60 }
+    .anchor-rail::before{ content:""; position:absolute; left:8px; top:4px; bottom:4px; width:2px; background:linear-gradient(#c7d2f3,#e3e9fb); border-radius:2px }
+    .anchor-rail a{ position:relative; display:grid; grid-template-columns:28px auto; align-items:center; gap:10px; text-decoration:none; color:var(--rk-navy) }
+    .anchor-rail .num{ width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:#fff; border:1px solid var(--rk-line); box-shadow:var(--shadow-1); font-weight:700; color:var(--rk-navy-strong); font-size:13px; line-height:1 }
+    .anchor-rail .label{ background:#fff; border:1px solid var(--rk-line); padding:6px 10px; border-radius:10px; box-shadow:var(--shadow-1); font-size:12px; white-space:nowrap }
+    .anchor-rail a:hover .label{ transform:translateX(-2px) }
+    .anchor-rail a.active .num{ background:var(--rk-cyan-soft); border-color:var(--rk-cyan); box-shadow:0 0 0 6px rgba(70,217,255,.15) }
+    .anchor-rail a.active .label{ border-color:var(--rk-cyan) }
+
+    /* ===== Mobile: Bottom Horizontal Bar ===== */
+    .anchor-rail-bottom{ position:fixed; left:0; right:0; bottom:0; height:72px; background:#ffffffcc; backdrop-filter: blur(10px); border-top:1px solid var(--rk-line); box-shadow:0 -4px 18px rgba(0,0,0,.06); display:none; align-items:center; justify-content:space-around; padding:0 max(16px, env(safe-area-inset-left)) env(safe-area-inset-bottom) max(16px, env(safe-area-inset-right)); z-index:80 }
+    .anchor-rail-bottom a{ text-decoration:none; color:var(--rk-navy); display:flex; flex-direction:column; align-items:center; gap:6px }
+    .anchor-rail-bottom .num{ width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:#fff; border:1px solid var(--rk-line); box-shadow:var(--shadow-1); font-weight:700; color:var(--rk-navy-strong); font-size:13px; line-height:1 }
+    .anchor-rail-bottom .label{ font-size:11px; color:var(--rk-muted) }
+    .anchor-rail-bottom a.active .num{ background:var(--rk-cyan-soft); border-color:var(--rk-cyan); box-shadow:0 0 0 6px rgba(70,217,255,.15) }
+    .anchor-rail-bottom a.active .label{ color:var(--rk-navy-strong) }
+
+    /* Responsive behavior */
+    @media (max-width: 900px){
+      body{ padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+      .anchor-rail{ display:none }
+      .anchor-rail-bottom{ display:flex }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Desktop Right Rail -->
+  <nav class="anchor-rail" aria-label="Numbered rail navigation">
+    <a href="#sec1"><span class="num">1</span><span class="label">Top</span></a>
+    <a href="#sec2"><span class="num">2</span><span class="label">Products</span></a>
+    <a href="#sec3"><span class="num">3</span><span class="label">Technology</span></a>
+    <a href="#sec4"><span class="num">4</span><span class="label">Contact</span></a>
+  </nav>
+
+  <!-- Mobile Bottom Bar -->
+  <nav class="anchor-rail-bottom" aria-label="Bottom rail navigation">
+    <a href="#sec1"><span class="num">1</span><span class="label">Top</span></a>
+    <a href="#sec2"><span class="num">2</span><span class="label">Products</span></a>
+    <a href="#sec3"><span class="num">3</span><span class="label">Technology</span></a>
+    <a href="#sec4"><span class="num">4</span><span class="label">Contact</span></a>
+  </nav>
+
+  <main>
+    <section id="sec1"><div class="card"><h1 class="u-underline">Ronda Korea</h1><p class="lead">Right Anchors — <strong>B. Numbered Rail</strong> (데스크톱) + <strong>하단 바</strong> (모바일)</p></div></section>
+    <section id="sec2"><div class="card"><h1 class="u-underline">Products</h1><p class="lead">Si / Quartz / Gasket / SiC / Ceramic Heater</p></div></section>
+    <section id="sec3"><div class="card"><h1 class="u-underline">Technology</h1><p class="lead">Process reliability · Particle suppression · Thermal design</p></div></section>
+    <section id="sec4"><div class="card"><h1 class="u-underline">Contact</h1><p class="lead">Sales / Tech / Estimate</p></div></section>
+  </main>
+
+  <script>
+    // Track sections and sync both navs
+    const sections = document.querySelectorAll('section');
+    const railLinks = document.querySelectorAll('.anchor-rail a');
+    const bottomLinks = document.querySelectorAll('.anchor-rail-bottom a');
+    const allLinks = [...railLinks, ...bottomLinks];
+
+    const map = new Map(allLinks.map(a => [a.getAttribute('href').slice(1), a]));
+
+    function setActive(id){
+      const href = `#${id}`;
+      allLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === href));
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){ setActive(entry.target.id); }
+      });
+    }, { threshold: 0.55 });
+
+    sections.forEach(sec => io.observe(sec));
+
+    // Smooth scroll for both navs
+    allLinks.forEach(a => a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior:'smooth', block:'start' });
+    }));
+  </script>
+</body>
+</html>

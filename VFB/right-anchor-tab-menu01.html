@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Right Anchored Tab Menu</title>
+<style>
+:root {
+  --accent: #ff4b2b;
+  --accent-2: #ff416c;
+  --bg: #f9f9f9;
+}
+
+/* 전체 레이아웃 */
+body {
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+/* 섹션 스타일 */
+section {
+  height: 100vh;
+  padding: 60px 80px;
+  box-sizing: border-box;
+}
+section:nth-child(even) { background: #fff; }
+section:nth-child(odd) { background: #fafafa; }
+
+/* 우측 앵커 메뉴 */
+.anchor-nav {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 100;
+}
+
+.anchor-nav a {
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ccc, #eee);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+.anchor-nav a:hover {
+  transform: scale(1.3);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 10px rgba(255,64,108,0.6);
+}
+
+/* 현재 섹션 하이라이트 */
+.anchor-nav a.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 12px rgba(255,64,108,0.6);
+  transform: scale(1.4);
+}
+
+/* 모바일에서는 숨김 */
+@media (max-width: 768px) {
+  .anchor-nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 앵커 메뉴 -->
+<nav class="anchor-nav">
+  <a href="#sec1"></a>
+  <a href="#sec2"></a>
+  <a href="#sec3"></a>
+  <a href="#sec4"></a>
+</nav>
+
+<!-- 섹션 -->
+<section id="sec1"><h1>Section 1</h1></section>
+<section id="sec2"><h1>Section 2</h1></section>
+<section id="sec3"><h1>Section 3</h1></section>
+<section id="sec4"><h1>Section 4</h1></section>
+
+<script>
+// 스크롤 시 현재 섹션 감지하여 active 클래스 토글
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".anchor-nav a");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (pageYOffset >= sectionTop - sectionHeight / 3) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href").includes(current)) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>
+
+</body>
+</html>
