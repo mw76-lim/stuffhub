@@ -35,10 +35,9 @@
         --section-gap: 42px;
         --edge: 20px;
 
-          
         --rk-navy: #232a52;
         --rk-navy-strong: #132b88;
-        --rk-line: rgba(19,43,136,0.14);
+        --rk-line: rgba(19, 43, 136, 0.14);
         --rk-text: #1c233a;
         --rk-muted: #5f6d8f;
         --rk-cyan: #46d9ff;
@@ -500,7 +499,7 @@
       .tech-tile .spacer {
         margin-top: auto;
       }
-      
+
       #rondakorea_gnb ul li {
         width: 180px;
       }
@@ -511,34 +510,139 @@
 
       /* 우측 앵커링 탭 메뉴 : START */
       /* ===== Desktop: B. Numbered Rail (Right side) ===== */
-      .anchor-rail{ position:fixed; right:30px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; gap:22px; padding-left:6px; z-index:60 }
-      .anchor-rail::before{ content:""; position:absolute; left:8px; top:4px; bottom:4px; width:2px; background:linear-gradient(#c7d2f3,#e3e9fb); border-radius:2px }
-      .anchor-rail a{ position:relative; display:grid; grid-template-columns:28px auto; align-items:center; gap:10px; text-decoration:none; color:var(--rk-navy) }
-      .anchor-rail .num{ width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:#fff; border:1px solid var(--rk-line); box-shadow:var(--shadow-1); font-weight:700; color:var(--rk-navy-strong); font-size:13px; line-height:1 }
-      .anchor-rail .label{ background:#fff; border:1px solid var(--rk-line); padding:6px 10px; border-radius:10px; box-shadow:var(--shadow-1); font-size:12px; white-space:nowrap }
-      .anchor-rail a:hover .label{ transform:translateX(-2px) }
-      .anchor-rail a.active .num{ background:var(--rk-cyan-soft); border-color:var(--rk-cyan); box-shadow:0 0 0 6px rgba(70,217,255,.15) }
-      .anchor-rail a.active .label{ border-color:var(--rk-cyan) }
+      .anchor-rail {
+        position: fixed;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+        padding-left: 6px;
+        z-index: 60;
+      }
+      .anchor-rail::before {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 4px;
+        bottom: 4px;
+        width: 2px;
+        background: linear-gradient(#c7d2f3, #e3e9fb);
+        border-radius: 2px;
+      }
+      .anchor-rail a {
+        position: relative;
+        display: grid;
+        grid-template-columns: 28px auto;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--rk-navy);
+      }
+      .anchor-rail .num {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #fff;
+        border: 1px solid var(--rk-line);
+        box-shadow: var(--shadow-1);
+        font-weight: 700;
+        color: var(--rk-navy-strong);
+        font-size: 14px;
+        line-height: 1;
+      }
+      .anchor-rail .label {
+        background: #fff;
+        border: 1px solid var(--rk-line);
+        padding: 6px 10px;
+        border-radius: 10px;
+        box-shadow: var(--shadow-1);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      .anchor-rail a:hover .label {
+        transform: translateX(-2px);
+      }
+      .anchor-rail a.active .num {
+        background: var(--rk-cyan-soft);
+        border-color: var(--rk-cyan);
+        box-shadow: 0 0 0 6px rgba(70, 217, 255, 0.15);
+      }
+      .anchor-rail a.active .label {
+        border-color: var(--rk-cyan);
+      }
 
       /* ===== Mobile: Bottom Horizontal Bar ===== */
-      .anchor-rail-bottom{ position:fixed; left:0; right:0; bottom:0; height:72px; background:#ffffffcc; backdrop-filter: blur(10px); border-top:1px solid var(--rk-line); box-shadow:0 -4px 18px rgba(0,0,0,.06); display:none; align-items:center; justify-content:space-around; padding:0 max(16px, env(safe-area-inset-left)) env(safe-area-inset-bottom) max(16px, env(safe-area-inset-right)); z-index:80 }
-      .anchor-rail-bottom a{ text-decoration:none; color:var(--rk-navy); display:flex; flex-direction:column; align-items:center; gap:6px }
-      .anchor-rail-bottom .num{ width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:#fff; border:1px solid var(--rk-line); box-shadow:var(--shadow-1); font-weight:700; color:var(--rk-navy-strong); font-size:13px; line-height:1 }
-      .anchor-rail-bottom .label{ font-size:11px; color:var(--rk-muted) }
-      .anchor-rail-bottom a.active .num{ background:var(--rk-cyan-soft); border-color:var(--rk-cyan); box-shadow:0 0 0 6px rgba(70,217,255,.15) }
-      .anchor-rail-bottom a.active .label{ color:var(--rk-navy-strong) }
+      .anchor-rail-bottom {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 72px;
+        background: #ffffffcc;
+        backdrop-filter: blur(10px);
+        border-top: 1px solid var(--rk-line);
+        box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.06);
+        display: none;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 max(16px, env(safe-area-inset-left)) env(safe-area-inset-bottom) max(16px, env(safe-area-inset-right));
+        z-index: 80;
+      }
+      .anchor-rail-bottom a {
+        text-decoration: none;
+        color: var(--rk-navy);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .anchor-rail-bottom .num {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #fff;
+        border: 1px solid var(--rk-line);
+        box-shadow: var(--shadow-1);
+        font-weight: 700;
+        color: var(--rk-navy-strong);
+        font-size: 13px;
+        line-height: 1;
+      }
+      .anchor-rail-bottom .label {
+        font-size: 11px;
+        color: var(--rk-muted);
+      }
+      .anchor-rail-bottom a.active .num {
+        background: var(--rk-cyan-soft);
+        border-color: var(--rk-cyan);
+        box-shadow: 0 0 0 6px rgba(70, 217, 255, 0.15);
+      }
+      .anchor-rail-bottom a.active .label {
+        color: var(--rk-navy-strong);
+      }
 
       /* Responsive behavior */
-      @media (max-width: 1400px){
-        body{ padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
-        .anchor-rail{ display:none }
-        .anchor-rail-bottom{ display:flex }
+      @media (max-width: 1400px) {
+        body {
+          padding-bottom: calc(72px + env(safe-area-inset-bottom));
+        }
+        .anchor-rail {
+          display: none;
+        }
+        .anchor-rail-bottom {
+          display: flex;
+        }
       }
       .label {
-        
       }
       /* 우측 앵커링 탭 메뉴 : END */
-
     </style>
     <!--[if lte IE 8]>
       <script src="https://rondakorea.mycafe24.com/js/html5.js"></script>
@@ -610,7 +714,9 @@
               <li class="active">
                 <a href="/ko/doc/technology/overview" title="Technology">Technology</a>
                 <ul>
-                  <li class="li-style1"><a href="/ko/doc/technology/overview#consumablepartsolution" title="Consumable Part Solution">Consumable Part Solution</a></li>
+                  <li class="li-style1">
+                    <a href="/ko/doc/technology/overview#consumablepartsolution" title="Consumable Part Solution">Consumable Part Solution</a>
+                  </li>
                   <li class="li-style1"><a href="/ko/doc/technology/overview#criticalcomponent" title="Critical Component">Critical Component</a></li>
                   <li class="li-style1"><a href="/ko/doc/technology/overview#powdercontrol" title="Powder Control">Powder Control</a></li>
                 </ul>
@@ -762,7 +868,7 @@
                 <div class="feature-summary">
                   <p>
                     <i class="fa-solid fa-thumbtack-angle"></i>
-                    <strong style="color: #132b88;">Highlight</strong>
+                    <strong style="color: #132b88">Highlight</strong>
                   </p>
 
                   <!-- 아카데믹 노트 리스트 -->
@@ -856,7 +962,7 @@
                 <div class="feature-summary">
                   <p>
                     <i class="fa-solid fa-thumbtack-angle"></i>
-                    <strong style="color: #132b88;">Highlight</strong>
+                    <strong style="color: #132b88">Highlight</strong>
                   </p>
 
                   <!-- 아카데믹 노트 리스트 -->
@@ -944,7 +1050,7 @@
                 <div class="feature-summary">
                   <p>
                     <i class="fa-solid fa-thumbtack-angle"></i>
-                    <strong style="color: #132b88;">Highlight</strong>
+                    <strong style="color: #132b88">Highlight</strong>
                   </p>
 
                   <!-- 아카데믹 노트 리스트 -->
@@ -993,32 +1099,32 @@
               </div>
             </section>
 
-            <section id="dummy1" class="section tech panel" style="height: 800px;">
+            <section id="dummy1" class="section tech panel" style="height: 800px">
               <div class="inner">
                 <div class="section-lead">
                   <h4>dummy #1</h4>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat nisi impedit quod, animi doloribus eos voluptas sapiente facere quos at quo exercitationem ducimus odit reiciendis accusamus eveniet facilis aspernatur atque.
-              
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat nisi impedit quod, animi doloribus eos voluptas sapiente facere
+                  quos at quo exercitationem ducimus odit reiciendis accusamus eveniet facilis aspernatur atque.
                 </div>
               </div>
             </section>
 
-            <section id="dummy2" class="section tech panel" style="height: 800px;">
+            <section id="dummy2" class="section tech panel" style="height: 800px">
               <div class="inner">
                 <div class="section-lead">
                   <h4>dummy #2</h4>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat nisi impedit quod, animi doloribus eos voluptas sapiente facere quos at quo exercitationem ducimus odit reiciendis accusamus eveniet facilis aspernatur atque.
-              
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat nisi impedit quod, animi doloribus eos voluptas sapiente facere
+                  quos at quo exercitationem ducimus odit reiciendis accusamus eveniet facilis aspernatur atque.
                 </div>
               </div>
             </section>
 
-            <section id="dummy3" class="section tech panel" style="height: 800px;">
+            <section id="dummy3" class="section tech panel" style="height: 800px">
               <div class="inner">
                 <div class="section-lead">
                   <h4>dummy #3</h4>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat nisi impedit quod, animi doloribus eos voluptas sapiente facere quos at quo exercitationem ducimus odit reiciendis accusamus eveniet facilis aspernatur atque.
-              
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat nisi impedit quod, animi doloribus eos voluptas sapiente facere
+                  quos at quo exercitationem ducimus odit reiciendis accusamus eveniet facilis aspernatur atque.
                 </div>
               </div>
             </section>
@@ -1060,7 +1166,7 @@
 
     <!-- 우측 세로 앵커탭 -->
     <!-- Desktop Right Rail -->
-    <nav class="anchor-rail" aria-label="Numbered rail navigation" style="width: 170px;">
+    <nav class="anchor-rail" aria-label="Numbered rail navigation" style="width: 170px">
       <a href="#consumablepartsolution"><span class="num">1</span><span class="label">Consumable Part Solution</span></a>
       <a href="#criticalcomponent"><span class="num">2</span><span class="label">Critical Component</span></a>
       <a href="#powdercontrol"><span class="num">3</span><span class="label">Powder Control</span></a>
@@ -1082,33 +1188,39 @@
     <script>
       // 우측 앵커링 탭 메뉴 : START
       // Track sections and sync both navs
-      const sections = document.querySelectorAll('section');
-      const railLinks = document.querySelectorAll('.anchor-rail a');
-      const bottomLinks = document.querySelectorAll('.anchor-rail-bottom a');
+      const sections = document.querySelectorAll("section");
+      const railLinks = document.querySelectorAll(".anchor-rail a");
+      const bottomLinks = document.querySelectorAll(".anchor-rail-bottom a");
       const allLinks = [...railLinks, ...bottomLinks];
 
-      const map = new Map(allLinks.map(a => [a.getAttribute('href').slice(1), a]));
+      const map = new Map(allLinks.map((a) => [a.getAttribute("href").slice(1), a]));
 
-      function setActive(id){
+      function setActive(id) {
         const href = `#${id}`;
-        allLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === href));
+        allLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === href));
       }
 
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if(entry.isIntersecting){ setActive(entry.target.id); }
-        });
-      }, { threshold: 0.55 });
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        },
+        { threshold: 0.55 }
+      );
 
-      sections.forEach(sec => io.observe(sec));
+      sections.forEach((sec) => io.observe(sec));
 
       // Smooth scroll for both navs
-      allLinks.forEach(a => a.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior:'smooth', block:'start' });
-      }));
+      allLinks.forEach((a) =>
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          document.querySelector(a.getAttribute("href")).scrollIntoView({ behavior: "smooth", block: "start" });
+        })
+      );
       // 우측 앵커링 탭 메뉴 : END
-      
     </script>
 
     <!-- } 하단 끝 -->
