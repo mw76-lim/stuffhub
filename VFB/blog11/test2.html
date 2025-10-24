@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>VFB | 베리티소식 — 신메뉴 ‘몽골리안 비프’</title>
+<meta name="description" content="라오충칭훠궈 신메뉴 ‘몽골리안 비프’ 조리 하이라이트. 9:16 컷 5장 롤링과 스토리 본문으로 구성된 SNS 콘텐츠형 블로그 글." />
+<meta name="theme-color" content="#f8f7f4" />
+
+<style>
+  :root{
+    --bg:#f8f7f4; --paper:#fff; --text:#161616; --muted:#6b7280; --line:#e7e5e4;
+    --accent:#ff6a00; --radius:16px; --shadow:0 12px 30px rgba(17,17,17,.08);
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif; line-height:1.75}
+  img{max-width:100%; display:block; border-radius:12px}
+  a{color:inherit; text-decoration:none}
+
+  .container{max-width:var(--maxw); margin:0 auto; padding:22px}
+
+  /* 상단 그리드: 좌상단 롤링 이미지, 우상단 텍스트 */
+  .top-grid{
+    display:grid; gap:18px; align-items:start;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 900px){
+    .top-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* 롤링 스테이지 (9:16) */
+  .stage{
+    background:#000; border-radius:var(--radius); box-shadow:var(--shadow);
+    overflow:hidden; position:relative; aspect-ratio:9/16; min-height:420px;
+  }
+  .slides{position:relative; width:100%; height:100%}
+  .slide{
+    position:absolute; inset:0; opacity:0; transition:opacity .6s ease;
+    background:#000 center/cover no-repeat;
+  }
+  .slide.active{opacity:1}
+  .slide::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.12) 40%, rgba(0,0,0,.18) 70%, rgba(0,0,0,.6));
+  }
+  .progress{position:absolute; left:0; right:0; bottom:0; height:3px; background:rgba(255,255,255,.2)}
+  .bar{height:100%; width:0%; background:var(--accent); transition:width .12s linear}
+  .cap{
+    position:absolute; left:12px; bottom:10px; right:12px;
+    color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.5);
+    font-weight:800; font-size:clamp(16px,2.6vw,22px); line-height:1.2;
+  }
+
+  /* 우상단 텍스트 카드 */
+  .hero{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:18px;
+  }
+  .crumbs{font-size:13px; color:var(--muted); margin-bottom:6px}
+  .crumbs a{color:var(--muted)}
+  h1{font-size:clamp(22px,3.8vw,30px); margin:.4em 0 .2em}
+  .subtitle{color:var(--muted); margin:0 0 .6em}
+  .meta{color:var(--muted); font-size:14px; margin-bottom:.6em}
+  .note{border-left:4px solid var(--accent); background:#fff7ef; padding:10px 12px; border-radius:12px; margin-top:10px}
+
+  /* 본문 카드 (하단 전폭) */
+  .post{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:18px; margin-top:18px;
+  }
+  .post h2{font-size:20px; margin:1em 0 .4em}
+  .scene{margin:14px 0}
+  .scene h3{margin:.2em 0 .2em; font-size:17px}
+  .quote{margin:10px 0; padding:12px 14px; background:#fafafa; border:1px solid var(--line); border-radius:12px; color:#333}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+  .tag{font-size:12px; border:1px solid var(--line); border-radius:999px; padding:6px 10px; background:#fafafa}
+
+  /* 액션 버튼 */
+  .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+  .btn{padding:10px 14px; border:1px solid var(--line); border-radius:12px; background:#fff; font-weight:700; cursor:pointer}
+  .btn.accent{background:var(--accent); color:#fff; border-color:transparent}
+
+  /* 접근성용 숨김 텍스트 */
+  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+</style>
+</head>
+<body>
+  <main class="container">
+    <!-- 상단: 좌(롤링) + 우(텍스트) -->
+    <section class="top-grid">
+      <!-- 좌상단: 9:16 롤링 이미지 5컷 -->
+      <div class="stage" aria-label="SNS 하이라이트 이미지 롤링">
+        <div class="slides" id="slides" aria-live="polite"></div>
+        <div class="cap" id="cap"></div>
+        <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+      </div>
+
+      <!-- 우상단: 제목/부제/요약 -->
+      <article class="hero">
+        <div class="crumbs"><a href="/vfb/news">베리티소식</a> › <span>SNS 콘텐츠</span></div>
+        <h1>신메뉴 ‘몽골리안 비프’ — 불향으로 완성되는 감칠맛의 정석</h1>
+        <p class="subtitle">소고기의 부드러움과 특제 양념장의 감칠맛이 어우러지는 라오충칭훠궈의 신메뉴 조리 하이라이트.</p>
+        <div class="meta">카테고리: 메뉴 스토리 · 게시일: <time datetime="2025-10-23">2025-10-23</time></div>
+        <p>라오충칭훠궈 키친은 언제나 ‘불맛’의 온도 위에 있습니다. 이번 포스트는 신메뉴 <strong>몽골리안 비프</strong>의 조리 과정을 담은 SNS 콘텐츠를 웹 아카이브로 재구성한 글입니다. 소고기의 풍미, 양념장의 깊이, 그리고 불맛이 어우러지는 하이라이트를 따라가 보세요.</p>
+        <div class="note"><strong>불향은 타이밍이 만든다.</strong> 재료의 온도, 불의 세기, 그리고 쉐프의 손끝이 만드는 찰나의 감칠맛.</div>
+      </article>
+    </section>
+
+    <!-- 하단: 본문 스토리 -->
+    <article class="post">
+      <h2>조리 스토리 — 다섯 장면으로 보는 ‘불향의 레시피’</h2>
+
+      <section class="scene" id="scene1">
+        <h3>① 재료 준비</h3>
+        <p>정갈하게 손질된 소고기, 양파, 부추, 다진 마늘. 모든 재료는 온도와 수분이 일정해야 불맛이 제대로 배어듭니다. 라오충칭 주방의 하루는 항상 이 준비에서 시작됩니다.</p>
+        <div class="quote">“좋은 재료는 좋은 불을 만났을 때 비로소 살아난다.”</div>
+      </section>
+
+      <section class="scene" id="scene2">
+        <h3>② 소고기 투하</h3>
+        <p>웍이 달아오르는 순간, 소고기가 투하됩니다. 고기의 수분이 빠르게 날아가며 첫 향이 피어오르고, 불꽃이 도드라지는 타이밍에 웍질이 붙습니다.</p>
+      </section>
+
+      <section class="scene" id="scene3">
+        <h3>③ 비법 양념장 완성</h3>
+        <p>소고기는 잠시 들어내고, 다진 마늘과 간장 베이스, 라오충칭만의 비법이 어우러집니다. 웍 안의 붉은 불빛과 함께 달큰한 향이 퍼져나가며 양념이 성격을 갖습니다.</p>
+      </section>
+
+      <section class="scene" id="scene4">
+        <h3>④ 다시 합쳐지는 불의 타이밍</h3>
+        <p>아까 뺀 소고기를 다시 투하해 빠른 웍질로 양념과 불, 고기가 하나가 됩니다. 불꽃이 웍 밖으로 번지는 순간이 바로 하이라이트입니다.</p>
+      </section>
+
+      <section class="scene" id="scene5">
+        <h3>⑤ 부추 넣고 마무리</h3>
+        <p>마지막으로 부추를 넣고 짧게 섞은 뒤 불을 끕니다. 그릇에 담기는 순간까지 김이 피어오르며 감칠맛이 완성됩니다. <strong>쫄깃 고소한 몽골리안 비프</strong>의 온도가 테이블에 닿습니다.</p>
+      </section>
+
+      <h2>SNS 하이라이트</h2>
+      <p>이번 조리 영상은 라오충칭훠궈 인스타그램 릴스에서 공개되었습니다. 불꽃과 소스의 끓는 소리가 생생하며, 현장의 열기를 그대로 느낄 수 있습니다.</p>
+      <div class="actions">
+        <a class="btn accent" href="https://instagram.com/TODO_handle" target="_blank" rel="noopener">인스타그램에서 보기</a>
+        <a class="btn" href="/vfb/news">목록으로</a>
+      </div>
+
+      <div class="tags" role="list" aria-label="해시태그">
+        <span class="tag" role="listitem">#라오충칭훠궈</span>
+        <span class="tag" role="listitem">#신메뉴</span>
+        <span class="tag" role="listitem">#몽골리안비프</span>
+        <span class="tag" role="listitem">#불향가득</span>
+        <span class="tag" role="listitem">#키친비하인드</span>
+        <span class="tag" role="listitem">#VFB</span>
+      </div>
+    </article>
+  </main>
+
+<script>
+  // 컷 데이터(이미지 경로와 캡션) — 실제 경로로 교체하세요.
+  const slidesData = [
+    {src:'TODO-01.jpg', cap:'재료 준비'},
+    {src:'TODO-02.jpg', cap:'소고기 투하'},
+    {src:'TODO-03.jpg', cap:'비법 양념장 완성'},
+    {src:'TODO-04.jpg', cap:'불향으로 완성되는 감칠맛'},
+    {src:'TODO-05.jpg', cap:'쫄깃 고소한 몽골리안 비프'}
+  ];
+  const DURATION = 3000; // 3초/컷
+
+  const slidesEl = document.getElementById('slides');
+  const capEl = document.getElementById('cap');
+  const barEl = document.getElementById('bar');
+
+  // 슬라이드 DOM 생성
+  const nodes = slidesData.map((s,i)=>{
+    const d = document.createElement('div');
+    d.className = 'slide' + (i===0 ? ' active' : '');
+    d.style.backgroundImage = `url('${s.src}')`;
+    d.setAttribute('role','img');
+    d.setAttribute('aria-label', s.cap);
+    slidesEl.appendChild(d);
+    return d;
+  });
+
+  let idx = 0, playing = true, start = performance.now();
+
+  function render(){
+    nodes.forEach((n,i)=> n.classList.toggle('active', i===idx));
+    capEl.textContent = slidesData[idx].cap;
+    barEl.style.width = '0%';
+    start = performance.now();
+  }
+  function tick(){
+    if(!playing) return;
+    const elapsed = performance.now() - start;
+    const pct = Math.min(100, (elapsed/DURATION)*100);
+    barEl.style.width = pct+'%';
+    if(elapsed >= DURATION){
+      idx = (idx+1) % nodes.length;
+      render();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // 초기화
+  render(); tick();
+
+  // 탭 전환 시 일시정지/재개
+  document.addEventListener('visibilitychange', ()=>{
+    playing = !document.hidden;
+    start = performance.now();
+  });
+
+  // 호버 시 일시정지(데스크탑)
+  slidesEl.parentElement.addEventListener('mouseenter', ()=>{ playing=false; });
+  slidesEl.parentElement.addEventListener('mouseleave', ()=>{ playing=true; start=performance.now(); });
+
+  // 스와이프(모바일)
+  let touchX=null;
+  slidesEl.parentElement.addEventListener('touchstart', e=>{ touchX=e.touches[0].clientX; }, {passive:true});
+  slidesEl.parentElement.addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if(Math.abs(dx)>40){
+      idx = (idx + (dx<0 ? 1 : -1) + nodes.length) % nodes.length;
+      render();
+    }
+    touchX=null;
+  }, {passive:true});
+</script>
+</body>
+</html>

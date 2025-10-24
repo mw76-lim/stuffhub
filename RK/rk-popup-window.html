@@ -1,195 +1,351 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>공지사항 - Ronda Korea</title>
-  <meta name="robots" content="noindex, nofollow" />
-  <style>
-    :root{
-      --brand:#002766;   /* RK 포인트 네이비 */
-      --bg:#f7f9fc;
-      --paper:#ffffff;
-      --line:#e5e7eb;
-      --text:#111827;
-      --muted:#6b7280;
-    }
-    *{box-sizing:border-box}
-    html,body{
-      margin:0; padding:0; background:var(--bg); color:var(--text);
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>공지사항 - Ronda Korea</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <style>
+      :root {
+        --brand: #002766; /* RK 포인트 네이비 */
+        --bg: #f7f9fc;
+        --paper: #ffffff;
+        --line: #e5e7eb;
+        --text: #111827;
+        --muted: #6b7280;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      }
 
-    /* 팝업 컨테이너 */
-    .popup{
-      max-width:840px; min-width:320px; margin:24px auto; padding:0 16px;
-    }
+      /* 팝업 컨테이너 */
+      .popup {
+        max-width: 840px;
+        min-width: 320px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
 
-    /* 카드 */
-    .card{
-      background:var(--paper);
-      border:1px solid var(--line);
-      border-radius:14px;
-      box-shadow:0 12px 28px rgba(15,23,42,.08);
-      overflow:hidden;
-    }
+      /* 카드 */
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        overflow: hidden;
+      }
 
-    /* 헤더 */
-    .header{
-      position:relative;
-      padding:18px 20px;
-      background:
-        radial-gradient(1100px 180px at 50% -60%, rgba(0,39,102,.14), transparent 60%),
-        linear-gradient(90deg,#fff 0%,#fbfdff 100%);
-      border-bottom:1px solid var(--line);
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-    }
-    .brand{display:flex; align-items:center; gap:10px}
-    .brand img{height:40px; display:block}
-    .close{
-      appearance:none; border:1px solid var(--line); background:#fff; color:#374151;
-      width:36px; height:36px; border-radius:10px; cursor:pointer;
-      display:inline-flex; align-items:center; justify-content:center;
-    }
-    .close:hover{background:#f9fafb}
-    .close:active{transform:translateY(1px)}
+      /* 헤더 */
+      .header {
+        position: relative;
+        padding: 18px 20px;
+        background: radial-gradient(1100px 180px at 50% -60%, rgba(0, 39, 102, 0.14), transparent 60%), linear-gradient(90deg, #fff 0%, #fbfdff 100%);
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand img {
+        height: 40px;
+        display: block;
+      }
+      .close {
+        appearance: none;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: #374151;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .close:hover {
+        background: #f9fafb;
+      }
+      .close:active {
+        transform: translateY(1px);
+      }
 
-    /* 본문 (에디터 출력 영역) */
-    .body{padding:22px 20px}
-    .editor-content{line-height:1.85; font-size:1rem}
-    .editor-content h1{font-size:1.6rem; margin:.2rem 0 .9rem; color:var(--brand)}
-    .editor-content h2{font-size:1.25rem; margin:1.2rem 0 .5rem}
-    .editor-content h3{font-size:1.1rem; margin:1rem 0 .4rem}
-    .editor-content p{margin:.7rem 0}
-    .editor-content ul,.editor-content ol{margin:.6rem 0 .8rem 1.2rem}
-    .editor-content li{margin:.3rem 0}
-    .editor-content blockquote{
-      margin:1rem 0; padding:.8rem 1rem; border-left:4px solid var(--brand);
-      background:#f3f7ff; color:#1e3a8a; border-radius:10px;
-    }
-    .editor-content code{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-      background:#f8fafc; border:1px solid var(--line); padding:.1rem .35rem; border-radius:6px;
-    }
-    .editor-content pre{
-      overflow:auto; padding:1rem; background:#0b1220; color:#e5e7eb; border-radius:12px;
-      border:1px solid #0f172a; line-height:1.6; font-size:.95rem;
-    }
-    .editor-content table{
-      width:100%; border-collapse:collapse; margin:1rem 0; font-size:.95rem;
-    }
-    .editor-content th,.editor-content td{
-      border:1px solid var(--line); padding:.6rem .7rem; text-align:left;
-    }
-    .editor-content thead th{background:#f5f7fb}
+      /* 본문 (에디터 출력 영역) */
+      .body {
+        padding: 22px 20px;
+      }
+      .editor-content {
+        line-height: 1.85;
+        font-size: 1rem;
+      }
+      .editor-content h1 {
+        font-size: 1.6rem;
+        margin: 0.2rem 0 0.9rem;
+        color: var(--brand);
+      }
+      .editor-content h2 {
+        font-size: 1.25rem;
+        margin: 1.2rem 0 0.5rem;
+      }
+      .editor-content h3 {
+        font-size: 1.1rem;
+        margin: 1rem 0 0.4rem;
+      }
+      .editor-content p {
+        margin: 0.7rem 0;
+      }
+      .editor-content ul,
+      .editor-content ol {
+        margin: 0.6rem 0 0.8rem 1.2rem;
+      }
+      .editor-content li {
+        margin: 0.3rem 0;
+      }
+      .editor-content blockquote {
+        margin: 1rem 0;
+        padding: 0.8rem 1rem;
+        border-left: 4px solid var(--brand);
+        background: #f3f7ff;
+        color: #1e3a8a;
+        border-radius: 10px;
+      }
+      .editor-content code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        background: #f8fafc;
+        border: 1px solid var(--line);
+        padding: 0.1rem 0.35rem;
+        border-radius: 6px;
+      }
+      .editor-content pre {
+        overflow: auto;
+        padding: 1rem;
+        background: #0b1220;
+        color: #e5e7eb;
+        border-radius: 12px;
+        border: 1px solid #0f172a;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+      .editor-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        font-size: 0.95rem;
+      }
+      .editor-content th,
+      .editor-content td {
+        border: 1px solid var(--line);
+        padding: 0.6rem 0.7rem;
+        text-align: left;
+      }
+      .editor-content thead th {
+        background: #f5f7fb;
+      }
 
-    /* 푸터 */
-    .footer{
-      padding:14px 16px;
-      border-top:1px solid var(--line);
-      background:
-        radial-gradient(900px 120px at 50% 0%, rgba(0,39,102,.08), transparent 60%),
-        #fff;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-    }
-    .fmark{
-      width:24px; height:24px; border-radius:7px;
-      background:linear-gradient(135deg, rgba(0,39,102,.9), rgba(0,39,102,.55));
-      box-shadow:0 1px 0 rgba(255,255,255,.4) inset;
-      border:1px solid rgba(0,39,102,.18);
-      flex:0 0 auto;
-    }
-    .fshapes{display:flex; gap:6px; align-items:center; opacity:.85}
-    .dot{width:6px; height:6px; border-radius:999px; background:#dbeafe; border:1px solid #bfdbfe}
-    .bar{height:6px; width:36px; border-radius:999px; background:#eaf1ff; border:1px solid #d9e3f5}
+      /* 푸터 */
+      .footer {
+        padding: 14px 16px;
+        border-top: 1px solid var(--line);
+        background: radial-gradient(900px 120px at 50% 0%, rgba(0, 39, 102, 0.08), transparent 60%), #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .fmark {
+        width: 24px;
+        height: 24px;
+        border-radius: 7px;
+        background: linear-gradient(135deg, rgba(0, 39, 102, 0.9), rgba(0, 39, 102, 0.55));
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+        border: 1px solid rgba(0, 39, 102, 0.18);
+        flex: 0 0 auto;
+      }
+      .fshapes {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        opacity: 0.85;
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: #dbeafe;
+        border: 1px solid #bfdbfe;
+      }
+      .bar {
+        height: 6px;
+        width: 36px;
+        border-radius: 999px;
+        background: #eaf1ff;
+        border: 1px solid #d9e3f5;
+      }
 
-    /* 버튼 */
-    .actions{margin-left:auto; display:flex; gap:8px}
-    .btn{
-      appearance:none; border:1px solid var(--line); background:#fff; color:#111827;
-      padding:10px 14px; border-radius:10px; cursor:pointer;
-    }
-    .btn:hover{background:#f9fafb}
-    .btn.primary{
-      border-color:transparent; background:linear-gradient(135deg,var(--brand),#3b82f6); color:#fff;
-    }
-    .btn.primary:hover{filter:brightness(.98)}
+      /* 버튼 */
+      .actions {
+        margin-left: auto;
+        display: flex;
+        gap: 8px;
+      }
+      .btn {
+        appearance: none;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: #111827;
+        padding: 10px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: #f9fafb;
+      }
+      .btn.primary {
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--brand), #3b82f6);
+        color: #fff;
+      }
+      .btn.primary:hover {
+        filter: brightness(0.98);
+      }
 
-    /* 상단 흰색으로 페이드 아웃(메인비주얼 톤 연계 필요 시) */
-    .fade-top{
-      position:absolute; inset:0 0 auto 0; height:60px; pointer-events:none;
-      background:linear-gradient(180deg,#fff,transparent);
-      opacity:.75;
-    }
+      /* 상단 흰색으로 페이드 아웃(메인비주얼 톤 연계 필요 시) */
+      .fade-top {
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 60px;
+        pointer-events: none;
+        background: linear-gradient(180deg, #fff, transparent);
+        opacity: 0.75;
+      }
 
-    @media (max-width:520px){
-      .brand img{height:34px}
-      .body{padding:18px 16px}
-    }
-    /* 인쇄 시 본문만 */
-    @media print{
-      .header,.footer,.close,.actions,.fade-top{display:none!important}
-      .card{box-shadow:none; border:none}
-      body{background:#fff}
-    }
-  </style>
-</head>
-<body>
-  <div class="popup">
-    <div class="card">
-      <div class="header">
-        <div class="brand">
-          <img src="https://mw76-lim.github.io/stuffhub/RK/logo.png" alt="Ronda Korea 로고" />
+      @media (max-width: 520px) {
+        .brand img {
+          height: 34px;
+        }
+        .body {
+          padding: 18px 16px;
+        }
+      }
+      /* 인쇄 시 본문만 */
+      @media print {
+        .header,
+        .footer,
+        .close,
+        .actions,
+        .fade-top {
+          display: none !important;
+        }
+        .card {
+          box-shadow: none;
+          border: none;
+        }
+        body {
+          background: #fff;
+        }
+      }
+
+      .btn-back-top {
+        position: absolute;
+        top: 20px;
+        right: 20px; /* ✅ 오른쪽 정렬 */
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        background: #ffffffcc;
+        color: #0f172a;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.2s ease;
+        backdrop-filter: blur(4px);
+      }
+
+      .btn-back-top:hover {
+        background: #f1f5f9;
+        border-color: #94a3b8;
+        transform: translateY(-2px);
+      }
+
+      .btn-back-top .arrow {
+        font-size: 1.1rem;
+        color: #2563eb; /* RK 브랜드 블루 */
+        line-height: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="popup">
+      <div class="card">
+        <div class="header">
+          <button class="btn-back-top" onclick="goBack()" title="이전 페이지로 돌아가기">
+            <span class="arrow">←</span>
+            <span>Back</span>
+          </button>
+
+          <div class="brand">
+            <img src="https://rondakorea.mycafe24.com/images/logo.png" alt="Ronda Korea 로고" />
+          </div>
+          <div class="fade-top" aria-hidden="true"></div>
         </div>
-        <button class="close" type="button" aria-label="창 닫기" onclick="window.close()">
-          ✕
-        </button>
-        <div class="fade-top" aria-hidden="true"></div>
-      </div>
 
-      <div class="body">
-        <!-- ✅ 관리자 WYSIWYG가 렌더링하는 영역 -->
-        <div class="editor-content">
-          <h1>[더미] 시스템 점검 안내</h1>
-          <p>안정적인 서비스 제공을 위해 아래 일정으로 정기 점검을 진행합니다. 본 문구는 샘플이며, 운영 시 관리자 에디터에서 입력한 내용이 노출됩니다.</p>
-          <ul>
-            <li><strong>일시</strong> : 2025-09-10(수) 01:00 ~ 04:00</li>
-            <li><strong>영향</strong> : 일부 메뉴 접속 지연</li>
-          </ul>
-          <blockquote>점검 시간은 작업 상황에 따라 변동될 수 있습니다.</blockquote>
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="fmark" aria-hidden="true"></div>
-        <div class="fshapes" aria-hidden="true">
-          <span class="dot"></span><span class="bar"></span><span class="dot"></span>
+        <div class="body">
+          <!-- ✅ 관리자 WYSIWYG가 렌더링하는 영역 -->
+          <div class="editor-content">
+            <h1>[더미] 시스템 점검 안내</h1>
+            <p>
+              안정적인 서비스 제공을 위해 아래 일정으로 정기 점검을 진행합니다. 본 문구는 샘플이며, 운영 시 관리자 에디터에서 입력한 내용이
+              노출됩니다.
+            </p>
+            <ul>
+              <li><strong>일시</strong> : 2025-09-10(수) 01:00 ~ 04:00</li>
+              <li><strong>영향</strong> : 일부 메뉴 접속 지연</li>
+            </ul>
+            <blockquote>점검 시간은 작업 상황에 따라 변동될 수 있습니다.</blockquote>
+          </div>
         </div>
 
-        <div class="actions">
-          <!-- 링크가 있을 때만 ‘자세히 보기’ 보여주고 target 설정 -->
-          <a id="moreLink" class="btn primary" href="#" target="_blank" rel="noopener" style="display:none">자세히 보기</a>
-          <button class="btn" type="button" onclick="window.close()">닫기</button>
+        <div class="footer">
+          <div class="fmark" aria-hidden="true"></div>
+          <div class="fshapes" aria-hidden="true"><span class="dot"></span><span class="bar"></span><span class="dot"></span></div>
+
+          <div class="actions">
+            <!-- 링크가 있을 때만 ‘자세히 보기’ 보여주고 target 설정 -->
+            <a id="moreLink" class="btn primary" href="#" target="_blank" rel="noopener" style="display: none">자세히 보기</a>
+            <button class="btn" type="button" onclick="goBack()">되돌아가기</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    // ESC 키로 닫기
-    addEventListener('keydown', (e)=>{ if(e.key==='Escape') window.close(); });
-
-    // opener(메인 딤 레이어)에서 전달받은 링크가 있으면 ‘자세히 보기’ 노출
-    (function(){
-      // URL 예: popup.html?link=https%3A%2F%2Frk.co.kr%2Fnotice%2F123
-      const params = new URLSearchParams(location.search);
-      const link = params.get('link');
-      const more = document.getElementById('moreLink');
-      if(link){
-        more.href = link;
-        more.style.display = 'inline-flex';
+    <script>
+      function goBack() {
+        if (document.referrer) {
+          history.back();
+        } else {
+          location.href = location.origin;
+        }
       }
-    })();
-  </script>
-</body>
+      // ESC 키로 되돌아가기
+      addEventListener("keydown", (e) => {
+        if (e.key === "Escape") goBack();
+      });
+    </script>
+  </body>
 </html>
