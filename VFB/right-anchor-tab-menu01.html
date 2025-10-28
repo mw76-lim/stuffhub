@@ -1,113 +1,331 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Right Anchored Tab Menu</title>
-<style>
-:root {
-  --accent: #ff4b2b;
-  --accent-2: #ff416c;
-  --bg: #f9f9f9;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ronda Korea — Right Anchored Tab (Numbered Rail + Mobile Bottom Bar)</title>
+    <style>
+      :root {
+        /* Light Navy theme based on #232a52 / #132b88 */
+        --rk-navy: #232a52;
+        --rk-navy-strong: #132b88;
+        --rk-line: rgba(19, 43, 136, 0.14);
+        --rk-text: #1c233a;
+        --rk-muted: #5f6d8f;
+        --rk-cyan: #46d9ff;
+        --rk-cyan-soft: #a2ebff;
+        --bg-1: #fafdff;
+        --bg-2: #f0f4fa;
+        --shadow-1: 0 6px 18px rgba(35, 42, 82, 0.12);
+        --shadow-2: 0 10px 30px rgba(19, 43, 136, 0.18);
+        --vfb-black: #000000;
+        --vfb-green: #4eb997; /* main */
+        --vfb-teal: #2fadbe; /* sub */
+        --vfb-gold: #f6c75e; /* highlight */
+        --vfb-line: rgba(0, 0, 0, 0.12);
+        --vfb-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+      }
 
-/* 전체 레이아웃 */
-body {
-  margin: 0;
-  font-family: "Pretendard", sans-serif;
-  background: var(--bg);
-  scroll-behavior: smooth;
-}
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        color: var(--rk-text);
+        background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+        scroll-behavior: smooth;
+      }
 
-/* 섹션 스타일 */
-section {
-  height: 100vh;
-  padding: 60px 80px;
-  box-sizing: border-box;
-}
-section:nth-child(even) { background: #fff; }
-section:nth-child(odd) { background: #fafafa; }
+      /* Sections */
+      section {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 56px 24px;
+        box-sizing: border-box;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--rk-line);
+        border-radius: 20px;
+        box-shadow: var(--shadow-1);
+        width: min(900px, 90vw);
+        padding: clamp(28px, 4vw, 48px);
+      }
+      h1 {
+        font-size: clamp(28px, 5vw, 42px);
+        margin: 0 0 12px;
+        color: var(--rk-navy-strong);
+        letter-spacing: -0.02em;
+      }
+      p.lead {
+        color: var(--rk-muted);
+        margin: 0 0 20px;
+        font-size: clamp(15px, 2.4vw, 18px);
+      }
+      .u-underline {
+        position: relative;
+        display: inline-block;
+      }
+      .u-underline::after {
+        content: "";
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: -6px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--rk-cyan), transparent);
+      }
 
-/* 우측 앵커 메뉴 */
-.anchor-nav {
-  position: fixed;
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  z-index: 100;
-}
+      /* ===== Desktop Right Rail (VFB style) ===== */
+      .anchor-rail {
+        position: fixed;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        padding-left: 8px;
+        z-index: 60;
+      }
+      .anchor-rail::before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 6px;
+        bottom: 6px;
+        width: 2px;
+        background: linear-gradient(180deg, var(--vfb-teal), var(--vfb-green));
+        border-radius: 2px;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03) inset;
+      }
+      .anchor-rail a {
+        position: relative;
+        display: grid;
+        grid-template-columns: 30px auto;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--vfb-black);
+        filter: saturate(1.02);
+      }
+      .anchor-rail .num {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #fff;
+        border: 1px solid var(--vfb-line);
+        box-shadow: var(--vfb-shadow);
+        font-weight: 800;
+        font-size: 12px;
+        line-height: 1;
+        color: var(--vfb-black);
+      }
+      .anchor-rail .label {
+        background: #fff;
+        border: 1px solid var(--vfb-line);
+        padding: 8px 12px;
+        border-radius: 12px;
+        box-shadow: var(--vfb-shadow);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--vfb-black);
+        white-space: nowrap;
+        transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+      }
+      .anchor-rail a:hover .label {
+        transform: translateX(-2px);
+        border-color: var(--vfb-gold);
+        box-shadow: 0 0 0 6px color-mix(in srgb, var(--vfb-gold) 22%, transparent);
+        background: #fffbe9; /* 골드 톤 아주 옅게 */
+      }
+      .anchor-rail a.active .num {
+        background: color-mix(in srgb, var(--vfb-green) 18%, #ffffff);
+        border-color: var(--vfb-green);
+        box-shadow: 0 0 0 8px color-mix(in srgb, var(--vfb-green) 18%, transparent);
+      }
+      .anchor-rail a.active .label {
+        border-color: var(--vfb-teal);
+        box-shadow: 0 0 0 6px color-mix(in srgb, var(--vfb-teal) 18%, transparent);
+      }
 
-.anchor-nav a {
-  position: relative;
-  display: block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ccc, #eee);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-}
-.anchor-nav a:hover {
-  transform: scale(1.3);
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 10px rgba(255,64,108,0.6);
-}
+      /* ===== Mobile Bottom Bar (VFB style) ===== */
+      .anchor-rail-bottom {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 72px;
+        background: #ffffffcc;
+        backdrop-filter: blur(10px);
+        border-top: 1px solid var(--vfb-line);
+        box-shadow: 0 -6px 22px rgba(0, 0, 0, 0.06);
+        display: none;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 max(16px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
+        z-index: 80;
+      }
+      .anchor-rail-bottom a {
+        text-decoration: none;
+        color: var(--vfb-black);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        font-weight: 700;
+      }
+      .anchor-rail-bottom .num {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #fff;
+        border: 1px solid var(--vfb-line);
+        box-shadow: var(--vfb-shadow);
+        font-size: 12px;
+        color: var(--vfb-black);
+      }
+      .anchor-rail-bottom .label {
+        font-size: 11px;
+        color: rgba(0, 0, 0, 0.65);
+      }
+      .anchor-rail-bottom a.active .num {
+        background: color-mix(in srgb, var(--vfb-green) 18%, #ffffff);
+        border-color: var(--vfb-green);
+        box-shadow: 0 0 0 8px color-mix(in srgb, var(--vfb-green) 18%, transparent);
+      }
+      .anchor-rail-bottom a.active .label {
+        color: var(--vfb-black);
+      }
 
-/* 현재 섹션 하이라이트 */
-.anchor-nav a.active {
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 12px rgba(255,64,108,0.6);
-  transform: scale(1.4);
-}
+      /* ===== Responsive toggle (동작은 기존과 동일) ===== */
+      @media (max-width: 900px) {
+        body {
+          padding-bottom: calc(72px + env(safe-area-inset-bottom));
+        }
+        .anchor-rail {
+          display: none;
+        }
+        .anchor-rail-bottom {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Desktop Right Rail -->
+    <nav class="anchor-rail" aria-label="Numbered rail navigation">
+      <a href="#intro"><span class="num">1</span><span class="label">인트로</span></a>
+      <a href="#story"><span class="num">2</span><span class="label">스토리</span></a>
+      <a href="#gallery"><span class="num">3</span><span class="label">갤러리</span></a>
+      <a href="#recipe"><span class="num">4</span><span class="label">베스트 레시피</span></a>
+      <a href="#cta"><span class="num">5</span><span class="label">액션</span></a>
+    </nav>
 
-/* 모바일에서는 숨김 */
-@media (max-width: 768px) {
-  .anchor-nav { display: none; }
-}
-</style>
-</head>
-<body>
+    <!-- Mobile Bottom Bar -->
+    <nav class="anchor-rail-bottom" aria-label="Bottom rail navigation">
+      <a href="#intro"><span class="num">1</span><span class="label">인트로</span></a>
+      <a href="#story"><span class="num">2</span><span class="label">스토리</span></a>
+      <a href="#gallery"><span class="num">3</span><span class="label">갤러리</span></a>
+      <a href="#recipe"><span class="num">4</span><span class="label">베스트 레시피</span></a>
+      <a href="#cta"><span class="num">5</span><span class="label">액션</span></a>
+    </nav>
 
-<!-- 앵커 메뉴 -->
-<nav class="anchor-nav">
-  <a href="#sec1"></a>
-  <a href="#sec2"></a>
-  <a href="#sec3"></a>
-  <a href="#sec4"></a>
-</nav>
+    <main>
+      <section id="intro">
+        <div class="card">
+          <h1 class="u-underline">인트로</h1>
+          <p class="lead">라오충칭훠궈의 콘텐츠 페이지에서 사용할 수 있는 우측 앵커링 탭 메뉴 예제입니다. 섹션이 길어도 우측 탭으로 바로 이동할 수 있어 탐색성이 좋아집니다.</p>
+          <p>
+            브랜드 톤에 맞춘 밝은 배경, 얇은 경계선, 둥근 모서리, 은은한 그림자를 유지합니다.
+          </p>
+        </div>
+      </section>
+      <section id="story">
+        <div class="card">
+          <h1 class="u-underline">스토리</h1>
+          <p class="lead">
+            섹션 이동 시 URL 해시가 동기화되므로, 새로고침/공유 시에도 동일 지점으로 진입 가능합니다. 접근성을 위해 키보드 포커스와 aria-current도 관리합니다.
+          </p>
+          <p>
+            IntersectionObserver를 활용해 스크롤 위치에 따라 활성 탭이 자동으로 갱신됩니다.
+          </p>
+        </div>
+      </section>
+      <section id="gallery">
+        <div class="card">
+          <h1 class="u-underline">갤러리</h1>
+          <p class="lead">
+            여기에 이미지 카드/롤링 등 다양한 블록을 배치할 수 있습니다. 본문 섹션은 각자 id만 부여하면 됩니다.
+          </p>
+          <p>
+            예: 9:16 롤링, 2열/3열 카드, 타임라인, Q&A 박스 등.
+          </p>
+        </div>
+      </section>
+      <section id="recipe">
+        <div class="card">
+          <h1 class="u-underline">베스트 레시피</h1>
+          <p class="lead">
+            콘텐츠가 길어질수록 앵커 내비의 가치가 커집니다. 스크롤-마진을 통해 탑 고정 헤더와 겹치지 않도록 했습니다.
+          </p>
+          <p>
+            필요 시 각 항목에 소요 시간/콘텐츠 수 등의 서브 레이블을 달 수 있습니다.
+          </p>
+        </div>
+      </section>
+      <section id="cta">
+        <div class="card">
+          <h1 class="u-underline">액션</h1>
+          <p class="lead">
+            마지막 구간에는 CTA 버튼(인스타 보기, 예약, 메뉴 보기 등)을 배치하세요.
+          </p>
+        </div>
+      </section>
+    </main>
 
-<!-- 섹션 -->
-<section id="sec1"><h1>Section 1</h1></section>
-<section id="sec2"><h1>Section 2</h1></section>
-<section id="sec3"><h1>Section 3</h1></section>
-<section id="sec4"><h1>Section 4</h1></section>
+    <script>
+      // Track sections and sync both navs
+      const sections = document.querySelectorAll("section");
+      const railLinks = document.querySelectorAll(".anchor-rail a");
+      const bottomLinks = document.querySelectorAll(".anchor-rail-bottom a");
+      const allLinks = [...railLinks, ...bottomLinks];
 
-<script>
-// 스크롤 시 현재 섹션 감지하여 active 클래스 토글
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".anchor-nav a");
+      const map = new Map(allLinks.map((a) => [a.getAttribute("href").slice(1), a]));
 
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-    if (pageYOffset >= sectionTop - sectionHeight / 3) {
-      current = section.getAttribute("id");
-    }
-  });
+      function setActive(id) {
+        const href = `#${id}`;
+        allLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === href));
+      }
 
-  navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href").includes(current)) {
-      link.classList.add("active");
-    }
-  });
-});
-</script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        },
+        { threshold: 0.55 }
+      );
 
-</body>
+      sections.forEach((sec) => io.observe(sec));
+
+      // Smooth scroll for both navs
+      allLinks.forEach((a) =>
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          document.querySelector(a.getAttribute("href")).scrollIntoView({ behavior: "smooth", block: "start" });
+        })
+      );
+    </script>
+  </body>
 </html>
