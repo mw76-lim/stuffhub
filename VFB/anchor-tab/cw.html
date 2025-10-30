@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>우측중앙 2뎁스 앵커 — 청운면관(CW) 현재 페이지</title>
+    <style>
+      :root {
+        --rail-w: 64px;
+        --gap: 6px;
+        --z: 60;
+        --bg: #fff;
+        --paper: #f6f8fb;
+        --ink: #0f172a;
+        --border: rgba(15, 23, 42, 0.1);
+        --border-light: color-mix(in srgb, rgba(15, 23, 42, 0.1) 35%, #ffffff);
+        --shadow: 0 10px 30px rgba(2, 6, 23, 0.12);
+        --accent: #2f68ff;
+        --accent-weak: rgba(47, 104, 255, 0.12);
+
+        --dur-open: 0.85s; /* 느린 열림 */
+        --dur-close: 0.12s; /* 빠른 닫힘 */
+        --ease-open: cubic-bezier(0.22, 1, 0.36, 1);
+        --ease-close: ease-in;
+
+        --overlap: 8px; /* 버튼과 메뉴 박스 겹침 폭 */
+        --fade-w: 16px; /* 메뉴 우측 페이드 폭 */
+
+        --vfb-green  : #4EB997 ;
+        --vfb-green-partner : #1B2B52;
+        --vfb-yellow  : #F6C75E ;
+        --vfb-yellow-partner : #755E2B;
+        --vfb-blue  : #2FADBE ;
+        --vfb-blue-partner : #EE8A00;
+        
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font: 14px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Pretendard, "Noto Sans KR", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      /* 데모 본문(현재 페이지: 라오충칭훠궈) */
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 60px 20px;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 28px;
+      }
+      section {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 120px 20px;
+        border-bottom: 1px dashed var(--border);
+      }
+      section:last-of-type {
+        border-bottom: none;
+      }
+
+      /* ===== 우측 중앙 레일 ===== */
+      .anchor-rail {
+        position: fixed;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap);
+        z-index: var(--z);
+      }
+      .brand-item {
+        position: relative;
+      }
+
+      /* Hover-Bridge: 버튼→탭 사이 갭 안전망 */
+      .brand-item::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 100%;
+        width: 14px;
+        pointer-events: auto;
+      }
+
+      /* 1뎁스 브랜드 박스(페이지 박스) */
+      .brand-link {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        text-decoration: none;
+        color: #0b1220;
+        font-weight: 900;
+        line-height: 1.25;
+        padding: 12px 14px;
+        min-height: 40px;
+        min-width: var(--rail-w);
+        width: auto;
+        max-width: 260px;
+        white-space: normal;
+        word-break: keep-all;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow: 0 4px 12px rgba(2, 6, 23, 0.06);
+        transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+      }
+      .brand-link:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(2, 6, 23, 0.12);
+      }
+      .brand-item.is-open .brand-link {
+        color: var(--vfb-green-partner);
+        /* background: linear-gradient(#fff, #f7f9ff); */
+        background: linear-gradient(180deg, color-mix(in srgb, var(--vfb-green) 10%, #fff), #fff);
+        border-color: var(--vfb-green);
+        box-shadow: 0 10px 24px var(--vfb-green);
+        /* color: var(--accent);
+        background: linear-gradient(#fff, #f7f9ff);
+        border-color: rgba(47, 104, 255, 0.35);
+        box-shadow: 0 10px 24px rgba(47, 104, 255, 0.18); */
+      }
+
+      /* 2뎁스 탭메뉴 박스: Top 정렬 + 우측 페이드 + 버튼과 일부 겹치기
+     - 너비를 "자식 컨텐츠 최대폭"에 맞추기 위해 inline-block + max-content */
+      .submenu {
+        position: absolute;
+        right: calc(100% - var(--overlap));
+        top: 0;
+
+        display: inline-block;
+        width: max-content; /* 자식 최대 줄 길이에 맞춤 */
+        white-space: normal;
+
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-right-color: var(--border-light);
+        border-radius: 14px;
+        padding: 10px;
+        box-shadow: var(--shadow);
+        z-index: 2;
+
+        max-height: 60vh; /* JS없이도 기본값 보장 */
+        overflow: auto;
+
+        /* 닫힘 기본 상태 */
+        --dur: var(--dur-close);
+        --ease: var(--ease-close);
+        visibility: hidden;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(6px) scale(0.98);
+        clip-path: inset(0 0 100% 0 round 14px);
+        transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), clip-path var(--dur) var(--ease),
+          visibility 0s linear var(--dur);
+      }
+      .submenu::after {
+        content: "";
+        position: sticky;
+        right: 0;
+        top: 0;
+        float: right;
+        display: block;
+        width: var(--fade-w);
+        height: 100%;
+        pointer-events: none;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+        filter: blur(0.2px);
+      }
+      .brand-item.is-open .submenu {
+        --dur: var(--dur-open);
+        --ease: var(--ease-open);
+        visibility: visible;
+        pointer-events: auto;
+        opacity: 1;
+        transform: none;
+        clip-path: inset(0 0 0 0 round 14px);
+        transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), clip-path var(--dur) var(--ease);
+        border-color: var(--vfb-blue-partner);
+        /* border: 1px solid transparent; */
+      }
+
+      /* 탭 항목: 부모폭 강제 채우지 않도록 width:auto 유지 */
+      .tablink {
+        display: flex;
+        width: auto;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: var(--ink);
+        border: 1px solid transparent;
+        font-weight: 800;
+        background: #fbfdff;
+      }
+      .tablink:hover {
+        background: #f5f9ff;
+        border-color: #e6eeff;
+      }
+
+      /* ✨ 스크롤 위치에 따른 Active 하이라이트 (개선) */
+      .tablink {
+        position: relative;
+        transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.2s ease, color 0.2s ease, padding 0.2s ease;
+        padding: 10px 12px 10px 14px; /* 왼쪽 살짝 여유 */
+      }
+      .tablink:hover {
+        background: #f5f9ff;
+        border-color: #e6eeff;
+      }
+      .tablink.is-active {
+        color: var(--vfb-green-partner);
+        background: linear-gradient(180deg, color-mix(in srgb, var(--vfb-yellow) 10%, #fff), #fff);
+        border-color: color-mix(in srgb, var(--vfb-yellow) 30%, transparent);
+        box-shadow: 0 4px 16px color-mix(in srgb, var(--vfb-yellow) 18%, transparent);
+        padding-left: 18px; /* 바 표시 공간 */
+      }
+      /* 왼쪽 인디케이터 바 */
+      .tablink.is-active::before {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 8px;
+        bottom: 8px;
+        width: 3px;
+        border-radius: 2px;
+        background: var(--vfb-blue-partner);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--vfb-green) 12%, transparent);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .submenu,
+        .brand-link,
+        .tablink {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>우측중앙 2뎁스 앵커 — 현재 페이지: 청운면관</h1>
+      <p>
+        청운면관의 2뎁스가 기본 오픈, 라오충칭훠궈/하버브루는 hover 시 팝아웃됩니다. 스크롤에 따라 청운면관 탭에 <code>is-active</code>가 적용돼요.
+      </p>
+    </div>
+
+    <!-- ===== 우측 중앙 레일 ===== -->
+    <nav class="anchor-rail" aria-label="브랜드별 페이지 및 탭">
+      <!-- 1) 라오충칭훠궈 (다른 페이지로 이동) -->
+      <div class="brand-item" data-brand="LCQ">
+        <a class="brand-link" href="lcq.html" aria-expanded="false">라오충칭훠궈</a>
+        <div class="submenu" aria-label="라오충칭훠궈 탭">
+          <a class="tablink" href="lcq.html">브랜드 스토리</a>
+          <a class="tablink" href="lcq.html#menu">메뉴 소개</a>
+          <a class="tablink" href="lcq.html#store">매장 안내</a>
+          <a class="tablink" href="lcq.html#booking">예약 안내</a>
+          <a class="tablink" href="lcq.html#insta">인스타그램</a>
+          <a class="tablink" href="lcq.html#faq">자주묻는 질문</a>
+        </div>
+      </div>
+
+      <!-- 2) 청운면관 (현재 페이지) -->
+      <div class="brand-item is-current" data-brand="CW">
+        <a class="brand-link" href="cw.html" aria-expanded="true">청운면관</a>
+        <div class="submenu" role="tablist" aria-label="청운면관 탭">
+          <a class="tablink" href="#s1" data-sub="s1">소개 1</a>
+          <a class="tablink" href="#s2" data-sub="s2">소개 2</a>
+          <a class="tablink" href="#s3" data-sub="s3">소개 3</a>
+          <a class="tablink" href="#s4" data-sub="s4">소개 4</a>
+          <a class="tablink" href="#s5" data-sub="s5">소개 5</a>
+          <a class="tablink" href="#s6" data-sub="s6">소개 6</a>
+        </div>
+      </div>
+
+      <!-- 3) 하버브루 (다른 페이지로 이동) -->
+      <div class="brand-item" data-brand="HB">
+        <a class="brand-link" aria-expanded="false">하버브루</a>
+        <div class="submenu" aria-label="하버브루 탭">
+          <a class="tablink" >소개 1</a>
+          <a class="tablink" >소개 2</a>
+          <a class="tablink" >소개 3</a>
+          <a class="tablink" >소개 4</a>
+          <a class="tablink" >소개 5</a>
+          <a class="tablink" >소개 6</a>
+        </div>
+      </div>
+
+      <!-- 4) New Comming -->
+      <div class="brand-item" data-brand="NC">
+        <a class="brand-link" aria-expanded="false">Next Brand</a>
+        <div class="submenu" aria-label="Next Brand">
+          <a class="tablink">Comming Soon</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== 현재 페이지(청운면관) 섹션 ===== -->
+    <section id="s1">
+      <h2>소개 1</h2>
+      <p>청운면관 소개 섹션 1.</p>
+    </section>
+    <section id="s2">
+      <h2>소개 2</h2>
+      <p>청운면관 소개 섹션 2.</p>
+    </section>
+    <section id="s3">
+      <h2>소개 3</h2>
+      <p>청운면관 소개 섹션 3.</p>
+    </section>
+    <section id="s4">
+      <h2>소개 4</h2>
+      <p>청운면관 소개 섹션 4.</p>
+    </section>
+    <section id="s5">
+      <h2>소개 5</h2>
+      <p>청운면관 소개 섹션 5.</p>
+    </section>
+    <section id="s6">
+      <h2>소개 6</h2>
+      <p style="height: 500px;">청운면관 소개 섹션 6.</p>
+    </section>
+
+    <script>
+      /* 현재 페이지 브랜드 하드코딩 */
+      const CURRENT = "CW";
+
+      const rail = document.querySelector(".anchor-rail");
+      const items = [...document.querySelectorAll(".brand-item")];
+
+      /* 서브메뉴 높이 계산 (버튼 top 기준) */
+      function layoutSubmenu(it) {
+        const btn = it.querySelector(".brand-link");
+        const menu = it.querySelector(".submenu");
+        if (!btn || !menu) return;
+        const avail = window.innerHeight - btn.getBoundingClientRect().top - 8;
+        menu.style.maxHeight = Math.max(160, avail) + "px";
+      }
+      function layoutAll() {
+        items.forEach(layoutSubmenu);
+      }
+      window.addEventListener("resize", layoutAll);
+      window.addEventListener("scroll", () => {
+        if (window.__submenuRAF) return;
+        window.__submenuRAF = requestAnimationFrame(() => {
+          layoutAll();
+          window.__submenuRAF = null;
+        });
+      });
+
+      // 초기 상태: CURRENT만 open, 나머지는 닫힘
+      items.forEach((it) => {
+        const isCurrent = (it.getAttribute("data-brand") || "").toUpperCase() === CURRENT;
+        it.classList.toggle("is-open", isCurrent);
+        it.classList.toggle("is-current", isCurrent);
+        it.querySelector(".brand-link")?.setAttribute("aria-expanded", isCurrent ? "true" : "false");
+      });
+      layoutAll();
+
+      // 단일 오픈: 타깃만 열리고, 레일 밖으로 나가면 CURRENT로 복귀
+      let closeTimer = null;
+      const CLOSE_DELAY = 140;
+
+      function openOnly(target) {
+        items.forEach((x) => {
+          const open = x === target;
+          x.classList.toggle("is-open", open);
+          x.querySelector(".brand-link")?.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      }
+      function scheduleClose(toItem) {
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(() => {
+          if (toItem) openOnly(toItem);
+          else {
+            const current = items.find((x) => (x.getAttribute("data-brand") || "").toUpperCase() === CURRENT);
+            if (current) openOnly(current);
+          }
+        }, CLOSE_DELAY);
+      }
+
+      items.forEach((it) => {
+        const submenu = it.querySelector(".submenu");
+
+        it.addEventListener("mouseenter", () => {
+          clearTimeout(closeTimer);
+          openOnly(it);
+        });
+        submenu?.addEventListener("mouseenter", () => {
+          clearTimeout(closeTimer);
+          openOnly(it);
+        });
+
+        it.addEventListener("mouseleave", (e) => {
+          clearTimeout(closeTimer);
+          const to = e.relatedTarget;
+          if (to && it.contains(to)) return;
+          const nextItem = to?.closest?.(".brand-item");
+          if (nextItem && items.includes(nextItem)) scheduleClose(nextItem);
+          else scheduleClose(null);
+        });
+        submenu?.addEventListener("mouseleave", (e) => {
+          clearTimeout(closeTimer);
+          const to = e.relatedTarget;
+          if (to && it.contains(to)) return;
+          const nextItem = to?.closest?.(".brand-item");
+          if (nextItem && items.includes(nextItem)) scheduleClose(nextItem);
+          else scheduleClose(null);
+        });
+      });
+
+      /* ✅ 스크롤 위치에 따른 '청운면관' 2뎁스 Active 동기화 */
+      const currentTabLinks = [...document.querySelectorAll('.brand-item[data-brand="CW"] .submenu .tablink[href^="#"]')];
+      const idList = currentTabLinks
+        .map((a) => a.getAttribute("href"))
+        .filter(Boolean)
+        .map((h) => h.slice(1));
+      const sections = idList.map((id) => document.getElementById(id)).filter(Boolean);
+
+      function setActive(id) {
+        currentTabLinks.forEach((a) => {
+          a.classList.toggle("is-active", a.dataset.sub === id);
+        });
+      }
+
+      function computeActiveFromScroll() {
+        const doc = document.documentElement;
+        const scrollTop = window.pageYOffset || doc.scrollTop || 0;
+        const vh = window.innerHeight || doc.clientHeight;
+        const pivot = scrollTop + vh * 0.3; // 상단 30% 지점 기준
+
+        let activeId = sections[0]?.id || null;
+
+        for (const sec of sections) {
+          const top = sec.offsetTop;
+          if (top <= pivot) activeId = sec.id;
+          else break;
+        }
+
+        const atBottom = Math.abs(scrollTop + vh - (doc.scrollHeight || document.body.scrollHeight)) < 2;
+        if (atBottom && sections.length) activeId = sections[sections.length - 1].id;
+
+        if (activeId) setActive(activeId);
+      }
+
+      let spyRAF = null;
+      function onScrollSpy() {
+        if (spyRAF) return;
+        spyRAF = requestAnimationFrame(() => {
+          computeActiveFromScroll();
+          spyRAF = null;
+        });
+      }
+
+      computeActiveFromScroll();
+      window.addEventListener("scroll", onScrollSpy, { passive: true });
+      window.addEventListener("resize", onScrollSpy);
+
+      // 탭 클릭 스크롤 + 즉시 active 반영
+      currentTabLinks.forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const href = a.getAttribute("href");
+          if (href?.startsWith("#")) {
+            e.preventDefault();
+            const el = document.querySelector(href);
+            if (!el) return;
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            setActive(href.slice(1));
+          }
+        });
+      });
+
+      // 해시 변경 대응
+      window.addEventListener("hashchange", () => {
+        const id = location.hash.replace("#", "");
+        if (id) setActive(id);
+      });
+    </script>
+  </body>
+</html>
