@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>우측중앙 2뎁스 앵커 — 청운면관(CW) 현재 페이지</title>
+    <title>우측중앙 2뎁스 앵커 — 하버브루(HB) 현재 페이지</title>
     <style>
       :root {
         --rail-w: 64px;
@@ -256,9 +256,9 @@
 
   <body>
     <div class="container">
-      <h1>우측중앙 2뎁스 앵커 — 현재 페이지: 청운면관</h1>
+      <h1>우측중앙 2뎁스 앵커 — 현재 페이지: 하버브루</h1>
       <p>
-        청운면관의 2뎁스가 기본 오픈, 라오충칭훠궈/하버브루는 hover 시 팝아웃됩니다. 스크롤에 따라 청운면관 탭에 <code>is-active</code>가 적용돼요.
+        하버브루의 2뎁스가 기본 오픈, 라오충칭훠궈/청운면관은 hover 시 팝아웃됩니다. 스크롤에 따라 하버브루 탭에 <code>is-active</code>가 적용돼요.
       </p>
     </div>
 
@@ -278,8 +278,8 @@
       </div>
 
       <!-- 2) 청운면관 (현재 페이지) -->
-      <div class="brand-item is-current" data-brand="CW">
-        <a class="brand-link" href="cw.html" aria-expanded="true">[가상] 청운면관</a>
+      <div class="brand-item" data-brand="CW">
+        <a class="brand-link" href="cw.html" aria-expanded="false">[가상] 청운면관</a>
         <div class="submenu" role="tablist" aria-label="청운면관 탭">
           <a class="tablink" href="#s1" data-sub="s1">소개 1</a>
           <a class="tablink" href="#s2" data-sub="s2">소개 2</a>
@@ -291,15 +291,15 @@
       </div>
 
       <!-- 3) 하버브루 (다른 페이지로 이동) -->
-      <div class="brand-item" data-brand="HB">
-        <a class="brand-link" href="hb.html" aria-expanded="false">[가상] 하버브루</a>
+      <div class="brand-item is-current" data-brand="HB">
+        <a class="brand-link" href="hb.html" aria-expanded="true">[가상] 하버브루</a>
         <div class="submenu" aria-label="하버브루 탭">
-          <a class="tablink" href="hb.html#s1">소개 1</a>
-          <a class="tablink" href="hb.html#s2">소개 2</a>
-          <a class="tablink" href="hb.html#s3">소개 3</a>
-          <a class="tablink" href="hb.html#s4">소개 4</a>
-          <a class="tablink" href="hb.html#s5">소개 5</a>
-          <a class="tablink" href="hb.html#s6">소개 6</a>
+          <a class="tablink" href="#s1" data-sub="s1">소개 1</a>
+          <a class="tablink" href="#s2" data-sub="s2">소개 2</a>
+          <a class="tablink" href="#s3" data-sub="s3">소개 3</a>
+          <a class="tablink" href="#s4" data-sub="s4">소개 4</a>
+          <a class="tablink" href="#s5" data-sub="s5">소개 5</a>
+          <a class="tablink" href="#s6" data-sub="s6">소개 6</a>
         </div>
       </div>
 
@@ -312,35 +312,35 @@
       </div>
     </nav>
 
-    <!-- ===== 현재 페이지(청운면관) 섹션 ===== -->
+    <!-- ===== 현재 페이지(하버브루) 섹션 ===== -->
     <section id="s1">
       <h2>소개 1</h2>
-      <p>청운면관 소개 섹션 1.</p>
+      <p>하버브루 소개 섹션 1.</p>
     </section>
     <section id="s2">
       <h2>소개 2</h2>
-      <p>청운면관 소개 섹션 2.</p>
+      <p>하버브루 소개 섹션 2.</p>
     </section>
     <section id="s3">
       <h2>소개 3</h2>
-      <p>청운면관 소개 섹션 3.</p>
+      <p>하버브루 소개 섹션 3.</p>
     </section>
     <section id="s4">
       <h2>소개 4</h2>
-      <p>청운면관 소개 섹션 4.</p>
+      <p>하버브루 소개 섹션 4.</p>
     </section>
     <section id="s5">
       <h2>소개 5</h2>
-      <p>청운면관 소개 섹션 5.</p>
+      <p>하버브루 소개 섹션 5.</p>
     </section>
     <section id="s6">
       <h2>소개 6</h2>
-      <p style="height: 500px;">청운면관 소개 섹션 6.</p>
+      <p style="height: 500px;">하버브루 소개 섹션 6.</p>
     </section>
 
     <script>
       /* 현재 페이지 브랜드 하드코딩 */
-      const CURRENT = "CW";
+      const CURRENT = "HB";
 
       const rail = document.querySelector(".anchor-rail");
       const items = [...document.querySelectorAll(".brand-item")];

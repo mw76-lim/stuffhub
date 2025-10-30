@@ -127,7 +127,7 @@
       .brand-item.is-open .brand-link {
         color: var(--vfb-green-partner);
         /* background: linear-gradient(#fff, #f7f9ff); */
-        background: linear-gradient(180deg, color-mix(in srgb, var(--vfb-green) 10%, #fff), #fff);
+        background: linear-gradient(180deg, color-mix(in srgb, var(--vfb-green) 20%, #fff), #fff);
         border-color: var(--vfb-green);
         box-shadow: 0 10px 24px var(--vfb-green);
         /* color: var(--accent);
@@ -264,7 +264,7 @@
     <nav class="anchor-rail" aria-label="브랜드별 페이지 및 탭">
       <!-- 1) 라오충칭훠궈 (현재 페이지) -->
       <div class="brand-item" data-brand="LCQ">
-        <a class="brand-link" href="/lcq.html" aria-expanded="true">라오충칭훠궈</a>
+        <a class="brand-link" href="lcq.html" aria-expanded="true">라오충칭훠궈</a>
         <div class="submenu" role="tablist" aria-label="라오충칭훠궈 탭">
           <a class="tablink" href="#story" data-sub="story">브랜드 스토리</a>
           <a class="tablink" href="#menu" data-sub="menu">메뉴 소개</a>
@@ -277,7 +277,7 @@
 
       <!-- 2) 청운면관 -->
       <div class="brand-item" data-brand="CW">
-        <a class="brand-link" href="cw.html" aria-expanded="false">청운면관</a>
+        <a class="brand-link" href="cw.html" aria-expanded="false">[가상] 청운면관</a>
         <div class="submenu" aria-label="청운면관 탭">
           <a class="tablink" href="cw.html#s1">소개 1</a>
           <a class="tablink" href="cw.html#s2">소개 2</a>
@@ -290,14 +290,14 @@
 
       <!-- 3) 하버브루 -->
       <div class="brand-item" data-brand="HB">
-        <a class="brand-link" aria-expanded="false">하버브루</a>
+        <a class="brand-link" href="hb.html" aria-expanded="false">[가상] 하버브루</a>
         <div class="submenu" aria-label="하버브루 탭">
-          <a class="tablink" >소개 1</a>
-          <a class="tablink" >소개 2</a>
-          <a class="tablink" >소개 3</a>
-          <a class="tablink" >소개 4</a>
-          <a class="tablink" >소개 5</a>
-          <a class="tablink" >소개 6</a>
+          <a class="tablink" href="hb.html#s1">소개 1</a>
+          <a class="tablink" href="hb.html#s2">소개 2</a>
+          <a class="tablink" href="hb.html#s3">소개 3</a>
+          <a class="tablink" href="hb.html#s4">소개 4</a>
+          <a class="tablink" href="hb.html#s5">소개 5</a>
+          <a class="tablink" href="hb.html#s6">소개 6</a>
         </div>
       </div>
 
@@ -340,7 +340,6 @@
     <script>
       /* 하드코딩된 현재 페이지 브랜드 */
       const CURRENT = "LCQ";
-
       const rail = document.querySelector(".anchor-rail");
       const items = [...document.querySelectorAll(".brand-item")];
 
@@ -434,13 +433,9 @@
       // (선택) 레일 전체를 벗어났을 때 즉시 복귀시키고 싶다면 아래 주석 해제
       // rail.addEventListener('mouseleave', () => scheduleClose(null));
 
-
-
-
-
-
       /* ✅ 스크롤 위치에 따른 LCQ 2뎁스 Active 동기화 (정밀 스크롤 스파이) */
-      const currentTabLinks = [...document.querySelectorAll('.brand-item[data-brand="LCQ"] .submenu .tablink[href^="#"]')];
+      let sql = `.brand-item[data-brand="${CURRENT}"] .submenu .tablink[href^="#"]`;
+      const currentTabLinks = [...document.querySelectorAll(sql)];
       const idList = currentTabLinks
         .map((a) => a.getAttribute("href"))
         .filter(Boolean)
