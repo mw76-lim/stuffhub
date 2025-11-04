@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>산업 수요 상승 → 반도체 장비/부품 수익구조 개선 흐름도</title>
+<style>
+  :root{
+    --bg:#f7f9fc; --paper:#ffffff; --ink:#1c233a; --muted:#5f6d8f; --line:rgba(0,0,0,.12);
+    --accent:#2563eb; --navy:#1b2b52; --aqua:#2fadbe; --mint:#4eb997; --gold:#f6c75e;
+  }
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Pretendard','Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1140px;margin:40px auto;padding:28px;background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 28px rgba(27,43,82,.08)}
+  h1{margin:0 0 6px;font-size:28px;letter-spacing:-.02em;color:var(--navy)}
+  p.lead{margin:0 0 18px;color:var(--muted)}
+
+  /* Grid + overlay canvas */
+  .flow{position:relative}
+  .grid{display:grid;grid-template-columns:1.05fr .9fr 1.15fr;gap:80px;align-items:start;position:relative;z-index:1}
+  .col{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 14px 18px;box-shadow:0 4px 16px rgba(0,0,0,.05)}
+  .col h2{margin:2px 0 10px;font-size:18px;letter-spacing:-.01em;color:var(--navy)}
+  .node{position:relative;border:1px solid var(--line);border-radius:12px;padding:12px 12px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.05);display:flex;gap:10px;align-items:flex-start}
+  .node+.node{margin-top:10px}
+  .node .icon{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#78a9ff);color:#fff;flex:0 0 26px;font-weight:800}
+  .icon.navy{background:linear-gradient(135deg,#263964,#1b2b52)}
+  .icon.mint{background:linear-gradient(135deg,#7fd9c3,#4eb997)}
+  .icon.aqua{background:linear-gradient(135deg,#63d0df,#2fadbe)}
+  .tag{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:12px;border:1px solid var(--line);background:#fff;color:var(--navy)}
+  .chip{font-size:12px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#333}
+  .chip.up{color:#0b8a59;background:rgba(11,138,89,.1);border-color:rgba(11,138,89,.25)}
+  .note{font-size:12px;color:var(--muted)}
+
+  /* SVG overlay that truly connects nodes */
+  .overlay{position:absolute;inset:0;z-index:0;pointer-events:none}
+  svg{width:100%;height:100%;display:block}
+  .arrow{fill:none;stroke:#91a3c7;stroke-width:2.2;opacity:.95}
+  .arrow.strong{stroke:#1b2b52}
+  .arrow.soft{stroke:#2563eb}
+  .arrow.good{stroke:#2fadbe}
+
+  .foot{margin-top:16px;padding-top:10px;border-top:1px dashed var(--line);font-size:12px;color:var(--muted)}
+
+  @media (max-width:1000px){.grid{grid-template-columns:1fr}}
+  /* 작은 화면에서는 선 숨김 + 간격 축소 */
+  @media (max-width: 980px){
+    .overlay{ display:none; }
+    .grid{ gap:20px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>산업 수요 상승 → 반도체 장비/부품 수익구조 개선 흐름도</h1>
+    <p class="lead">AI·HBM 증설, Advanced Packaging 확산 등 <strong>산업 수요/기술 트렌드</strong>가 장비·부품 기업(RK)의 수익성에 미치는 <strong>전이 경로</strong>를 실제 노드와 연결선으로 표현했습니다.</p>
+
+    <div class="flow" id="flow">
+      <!-- SVG overlay sits behind boxes and connects them dynamically -->
+      <div class="overlay" aria-hidden="true">
+        <svg id="wires" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+      </div>
+
+      <div class="grid" id="grid">
+        <!-- Col 1: Industry Demand & Tech Drivers -->
+        <div class="col">
+          <h2>① 산업 수요/기술 트렌드 (Demand ↑)</h2>
+          <div class="node" data-node="g1"><div class="icon">AI</div><div>
+            <strong>AI 서버 · HBM 증설</strong> <span class="chip up">CapEx ↑</span><br/>
+            <span class="note">미세공정/고집적화로 부품 성능·내구성 요구↑</span>
+          </div></div>
+          <div class="node" data-node="g2"><div class="icon navy">🧱</div><div>
+            <strong>Advanced Packaging</strong> <span class="chip up">COWOS/FO-PLP</span><br/>
+            <span class="note">ESC/Heater/Trap 등 정밀 열·플라즈마 제어 수요</span>
+          </div></div>
+          <div class="node" data-node="g3"><div class="icon mint">EV</div><div>
+            <strong>Si/SiC 채택 확대 · 규제 강화</strong> <span class="chip up">레트로핏/업그레이드</span><br/>
+            <span class="note">환경·안전 규제 강화 → 파티클/배출 관리 수요</span>
+          </div></div>
+        </div>
+
+        <!-- Col 2: Transmission Channels -->
+        <div class="col">
+          <h2>② 전이 경로 (Transmission)</h2>
+          <div class="node" data-node="t1"><div class="icon aqua">PO</div><div>
+            <strong>발주/프로젝트 증가</strong><br/>
+            <span class="note">라인 증설·개조에 따른 장비/소모품 구매 확대</span>
+          </div></div>
+          <div class="node" data-node="t2"><div class="icon navy">📜</div><div>
+            <strong>기술 인증 · QVL 확대</strong><br/>
+            <span class="note">공정 적합성 인증 확보 → 다품목 납품 기회</span>
+          </div></div>
+          <div class="node" data-node="t3"><div class="icon mint">🧩</div><div>
+            <strong>제품 믹스·ASP 상승</strong><br/>
+            <span class="note">고내식 Si/SiC, AlN Heater, 고사양 ESC 적용</span>
+          </div></div>
+          <div class="node" data-node="t4"><div class="icon">🔧</div><div>
+            <strong>애프터마켓 수요</strong><br/>
+            <span class="note">정기 교체·예방정비 주기 단축 → 소모품 반복 매출</span>
+          </div></div>
+        </div>
+
+        <!-- Col 3: Impacts on RK -->
+        <div class="col">
+          <h2>③ RK(장비/부품) 기업에의 영향</h2>
+          <div class="node" data-node="h1"><div class="icon aqua">📈</div><div>
+            <strong>매출 성장 ↑</strong> (<span class="tag">Order/Volume</span>)<br/>
+            <span class="note">신규/교체·소모성 부품 동시 확대</span>
+          </div></div>
+          <div class="node" data-node="h2"><div class="icon navy">💡</div><div>
+            <strong>수익성 개선 ↑</strong> (<span class="tag">Mix / ASP</span>)<br/>
+            <span class="note">고부가 소재·정밀 부품 비중 증가</span>
+          </div></div>
+          <div class="node" data-node="h3"><div class="icon mint">💸</div><div>
+            <strong>현금창출력 강화</strong> (<span class="tag">Opex Leverage</span>)<br/>
+            <span class="note">규모의 경제 및 운영 효율화</span>
+          </div></div>
+          <div class="node" data-node="h4"><div class="icon">🧪</div><div>
+            <strong>R&D 재투자 · 라인 확장</strong> (<span class="tag">Next-Gen</span>)<br/>
+            <span class="note">신공정 대응 제품 개발, 생산능력 증설</span>
+          </div></div>
+          <div class="node" data-node="h5"><div class="icon navy">⚠️</div><div>
+            <strong>제약 요인</strong> (<span class="tag">Cost/FX/Leadtime</span>)<br/>
+            <span class="note">원재료·환율 변동, 고객 검증 리드타임</span>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">※ 창 크기 변경이나 모바일 레이아웃에서도 화살표가 실제 박스를 따라 다시 그려집니다.</div>
+  </div>
+
+<script>
+(function(){
+  const flow = document.getElementById('flow');
+  const svg = document.getElementById('wires');
+  const grid = document.getElementById('grid');
+
+  // Define connections: [from, to, class]
+  const edges = [
+    // Left (g*) → Middle (t*)
+    ['g1','t1','strong'], ['g1','t2','soft'],
+    ['g2','t1','strong'], ['g2','t2','soft'], ['g2','t3','good'],
+    ['g3','t1','strong'], ['g3','t3','good'], ['g3','t4','soft'],
+    // Middle (t*) → Right (h*)
+    ['t1','h1','good'], ['t2','h2','strong'], ['t3','h2','good'], ['t4','h1','soft'], ['t3','h3','good'], ['t1','h4','soft'], ['t2','h5','strong']
+  ];
+
+  function rectCenter(el){
+    const r = el.getBoundingClientRect();
+    const c = flow.getBoundingClientRect();
+    return { x: r.left - c.left + r.width/2, y: r.top - c.top + r.height/2, w:r.width, h:r.height };
+  }
+
+  function anchorPoint(box, side){
+    const p = rectCenter(box);
+    if(side==='right') return {x:p.x + p.w/2 + 2, y:p.y};
+    if(side==='left')  return {x:p.x - p.w/2 - 2, y:p.y};
+    if(side==='top')   return {x:p.x, y:p.y - p.h/2 - 2};
+    if(side==='bottom')return {x:p.x, y:p.y + p.h/2 + 2};
+    return {x:p.x, y:p.y};
+  }
+
+  function pathD(fromPt, toPt){
+    const dx = (toPt.x - fromPt.x);
+    const mid = Math.max(40, Math.abs(dx)*0.35);
+    const c1x = fromPt.x + mid, c1y = fromPt.y;
+    const c2x = toPt.x - mid,   c2y = toPt.y;
+    return `M ${fromPt.x} ${fromPt.y} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${toPt.x} ${toPt.y}`;
+  }
+
+  function draw(){
+    const r = flow.getBoundingClientRect();
+    const minWidth = 980 - 50;
+    if(r.width < minWidth){
+      svg.style.display = 'none';
+      while(svg.lastChild) svg.removeChild(svg.lastChild);
+      return;
+    } else {
+      svg.style.display = 'block';
+    }
+
+    svg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`);
+    while(svg.lastChild) svg.removeChild(svg.lastChild);
+
+    const cache = new Map();
+    document.querySelectorAll('[data-node]').forEach(n=>cache.set(n.dataset.node, n));
+
+    edges.forEach(([a,b,cls])=>{
+      const A = cache.get(a), B = cache.get(b);
+      if(!A || !B) return;
+      const from = anchorPoint(A,'right');
+      const to   = anchorPoint(B,'left');
+      const p = document.createElementNS('http://www.w3.org/2000/svg','path');
+      p.setAttribute('d', pathD(from,to));
+      p.setAttribute('class', `arrow ${cls||''}`);
+      svg.appendChild(p);
+    });
+  }
+
+  const ro = new ResizeObserver(draw);
+  ro.observe(grid); ro.observe(flow);
+  window.addEventListener('resize', draw);
+  window.addEventListener('orientationchange', draw);
+  window.addEventListener('load', draw);
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(draw); }
+
+  const imgs = grid.querySelectorAll('img');
+  imgs.forEach(img=>{ if(!img.complete) img.addEventListener('load', draw); });
+})();
+</script>
+</body>
+</html>
