@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>VFB Dot Pattern Collection</title>
+    <style>
+      :root {
+        --vfb-green: #4eb997;
+        --vfb-gold: #f6c75e;
+        --vfb-cyan: #2fadbe;
+        --ink: #ffffff;
+        --paper: #0f1313;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #0f1313;
+        font-family: system-ui, -apple-system, "Noto Sans KR", sans-serif;
+        color: #fff;
+      }
+      .pattern-section {
+        min-height: 240px;
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 3.2rem 1.5rem;
+      }
+      .pattern-title {
+        position: relative;
+        z-index: 5;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        font-size: 1.05rem;
+      }
+      .badge {
+        position: relative;
+        z-index: 5;
+        font-size: 0.64rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        opacity: 0.78;
+        margin-bottom: 0.4rem;
+      }
+
+      /* 1. Diagonal Dot Carpet */
+      .diag-dots {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.75) 2px, transparent 3px) 0 0/48px 48px repeat;
+      }
+      .diag-dots::after {
+        content: "";
+        position: absolute;
+        inset: -140px -140px;
+        background: radial-gradient(circle, rgba(78, 185, 151, 0.9) 2.2px, transparent 3.2px) 0 0/52px 52px repeat,
+          radial-gradient(circle, rgba(246, 199, 94, 0.7) 2px, transparent 3px) 26px 26px/52px 52px repeat;
+        transform: rotate(18deg);
+        opacity: 0.36;
+        pointer-events: none;
+      }
+
+      /* 2. Center Motif Circles */
+      .center-motif {
+        background: radial-gradient(circle, #101616 0%, #151f1f 80%);
+      }
+      .center-motif::before {
+        content: "";
+        position: absolute;
+        width: 230px;
+        height: 230px;
+        inset: 50% auto auto 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(246, 199, 94, 0.95) 5px, transparent 6px) center/46px 46px repeat;
+        mask-image: radial-gradient(circle, #000 60%, transparent 65%);
+        opacity: 0.95;
+      }
+      .center-motif::after {
+        content: "";
+        position: absolute;
+        width: 360px;
+        height: 360px;
+        inset: 50% auto auto 50%;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(circle, rgba(78, 185, 151, 0.6) 4px, transparent 6px) center/60px 60px repeat;
+        mask-image: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0) 70%);
+        opacity: 0.25;
+      }
+
+      /* 3. Wave Dot Field */
+      .wave-dots {
+        background: linear-gradient(180deg, #0f1313 0%, #101717 40%, #0b0f0f 100%);
+      }
+      .wave-dots::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 1.8px, transparent 2.2px) 0 20px/56px 46px repeat,
+          radial-gradient(circle, rgba(47, 173, 190, 0.9) 2.4px, transparent 3px) 10px 90px/60px 54px repeat,
+          radial-gradient(circle, rgba(246, 199, 94, 0.55) 3px, transparent 3.4px) 0 150px/64px 56px repeat;
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 14%, #000 100%);
+        opacity: 0.85;
+      }
+      .wave-dots::after {
+        content: "";
+        position: absolute;
+        inset: -30px 0 -80px 0;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 10px, transparent 12px) 0 0/220px 160px repeat;
+        mix-blend-mode: screen;
+        opacity: 0.5;
+      }
+
+      /* 4. Tile Dot Mesh */
+      .tile-dots {
+        background: #101414;
+      }
+      .tile-dots::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle, rgba(246, 199, 94, 0.85) 2px, transparent 2.5px) 0 0/64px 64px repeat,
+          radial-gradient(circle, rgba(255, 255, 255, 0.4) 1.5px, transparent 2.5px) 32px 32px/64px 64px repeat;
+        opacity: 0.95;
+      }
+      .tile-dots::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(140deg, rgba(78, 185, 151, 0.4), rgba(15, 19, 19, 0) 55%);
+        mix-blend-mode: screen;
+      }
+
+      /* 5. Radial Burst Dots */
+      .radial-burst {
+        background: radial-gradient(circle, #0e1312 0%, #0a0d0d 90%);
+      }
+      .radial-burst::before {
+        content: "";
+        position: absolute;
+        inset: -40px;
+        background: radial-gradient(circle, rgba(78, 185, 151, 1) 3px, transparent 4px) center/42px 42px repeat;
+        mask-image: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0) 80%);
+        opacity: 0.65;
+      }
+      .radial-burst::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle, rgba(246, 199, 94, 0.35), rgba(0, 0, 0, 0) 65%);
+        mix-blend-mode: screen;
+      }
+
+      /* 6. Striped Dot Layer */
+      .striped-dots {
+        background: linear-gradient(135deg, #0f1313 0%, #0f1313 40%, #151818 100%);
+      }
+      .striped-dots::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(90deg, rgba(246, 199, 94, 0.05) 0 3px, transparent 3px 26px),
+          radial-gradient(circle, rgba(255, 255, 255, 0.85) 1.6px, transparent 3px) 0 0/48px 48px repeat;
+        opacity: 0.95;
+      }
+      .striped-dots::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, rgba(78, 185, 151, 0.25), rgba(47, 173, 190, 0));
+      }
+
+      /* 7. Offset Checker Dots */
+      .offset-dots {
+        background: #0d1111;
+      }
+      .offset-dots::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1.8px, transparent 2.3px) 0 0/48px 48px repeat,
+          radial-gradient(circle, rgba(246, 199, 94, 0.7) 1.8px, transparent 2.3px) 24px 24px/48px 48px repeat;
+        opacity: 0.9;
+      }
+      .offset-dots::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+      }
+
+      /* 8. Corner Glow Dots */
+      .corner-dots {
+        background: #0f1313;
+      }
+      .corner-dots::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1.5px, transparent 2.5px) 0 0/52px 52px repeat;
+        opacity: 0.4;
+      }
+      .corner-dots::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 0% 0%, rgba(78, 185, 151, 0.7), rgba(0, 0, 0, 0) 40%),
+          radial-gradient(circle at 100% 100%, rgba(246, 199, 94, 0.45), rgba(0, 0, 0, 0) 45%);
+        mix-blend-mode: screen;
+        opacity: 0.85;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="background-color: #2fadbe;padding: 10px;">
+      <li>1. Diagonal Dot Carpet: 도트를 두 겹 깔고 한 겹은 약간 돌려서 “직물 패턴” 느낌</li>
+      <li>2. Center Motif — Circular: 가운데 동그라미 안에만 dot가 찍히는 것처럼 mask-image로 문양처럼 보이게</li>
+      <li>3. Wave Dot Field: 위는 듬성, 아래로 갈수록 촘촘하게 내려가는 물결형 dot</li>
+      <li>4. Tile Dot Mesh – 타일처럼 규칙적인 도트</li>
+      <li>5. Radial Burst Dots – 가운데서 퍼지는 원형 도트</li>
+      <li>6. Striped Dot Layer – 줄무늬+도트 섞인 경량 배경</li>
+      <li>7. Offset Checker Dots – 어긋난 바둑판 도트</li>
+      <li>8. Corner Glow Dots – 모서리에서 들어오는 도트+빛</li>
+    </div>
+    <!-- 1 -->
+    <section class="pattern-section diag-dots">
+      <div class="badge">VFB DOT DESIGN</div>
+      <div class="pattern-title">1. Diagonal Dot Carpet</div>
+    </section>
+
+    <!-- 2 -->
+    <section class="pattern-section center-motif">
+      <div class="badge">VFB DOT DESIGN</div>
+      <div class="pattern-title">2. Center Motif — Circular</div>
+    </section>
+
+    <!-- 3 -->
+    <section class="pattern-section wave-dots">
+      <div class="badge">VFB DOT DESIGN</div>
+      <div class="pattern-title">3. Wave Dot Field</div>
+    </section>
+
+    <!-- 4 -->
+    <section class="pattern-section tile-dots">
+      <div class="badge">VFB DOT DESIGN</div>
+      <div class="pattern-title">4. Tile Dot Mesh</div>
+    </section>
+
+    <!-- 5 -->
+    <section class="pattern-section radial-burst">
+      <div class="badge">VFB DOT DESIGN</div>
+      <div class="pattern-title">5. Radial Burst Dots</div>
+    </section>
+
+    <!-- 6 -->
+    <section class="pattern-section striped-dots">
+      <div class="badge">VFB DOT DESIGN</div>
+      <div class="pattern-title">6. Striped Dot Layer</div>
+    </section>
+
+    <!-- 7 -->
+    <section class="pattern-section offset-dots">
+      <div class="badge">VFB DOT DESIGN</div>
+      <div class="pattern-title">7. Offset Checker Dots</div>
+    </section>
+
+    <!-- 8 -->
+    <section class="pattern-section corner-dots">
+      <div class="badge">VFB DOT DESIGN</div>
+      <div class="pattern-title">8. Corner Glow Dots</div>
+    </section>
+  </body>
+</html>
