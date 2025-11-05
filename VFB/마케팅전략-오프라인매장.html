@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>VFB 마케팅 전략 보드</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root {
+      --page: #fcf7f2;
+      --ink: #1f2937;
+      --ink-soft: rgba(31,41,55,.7);
+      --accent: #f46f55;
+      --accent-soft: rgba(244,111,85,.15);
+      --card: #ffffff;
+      --line: rgba(0,0,0,.06);
+      --radius-lg: 1.4rem;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Noto Sans KR", "Segoe UI", sans-serif;
+      background: var(--page);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    header.hero {
+      position: relative;
+      padding: 4.5rem clamp(1.1rem, 2.5vw, 3.5rem) 3rem;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #fff 15%, #fcf7f2 45%, #f6f0ea 95%);
+    }
+    /* 상단 dot 장식 */
+    header.hero::before {
+      content: "";
+      position: absolute;
+      inset: -110px 0 auto 0;
+      height: 280px;
+      background:
+        radial-gradient(circle, rgba(12,129,112,0.5) 2px, transparent 2px) 0 40px/46px 46px repeat,
+        radial-gradient(circle, rgba(12,129,112,0.27) 2.5px, transparent 2.5px) 0 80px/54px 54px repeat,
+        radial-gradient(circle, rgba(12,129,112,0.18) 3.5px, transparent 3.5px) 0 130px/62px 62px repeat;
+      opacity: .35;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 16%, #000 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 16%, #000 100%);
+      pointer-events: none;
+    }
+    .hero-body {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .tagline {
+      display: inline-flex;
+      gap: .45rem;
+      padding: .35rem .8rem;
+      background: rgba(244,111,85,.08);
+      border: 1px solid rgba(244,111,85,.14);
+      border-radius: 999px;
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+    .tagline-dot {
+      width: 6px; height: 6px; border-radius: 999px; background: var(--accent);
+      box-shadow: 0 0 12px rgba(244,111,85,.8);
+    }
+    h1 {
+      font-size: clamp(2.25rem, 4vw, 3.2rem);
+      margin-bottom: .75rem;
+    }
+    .lead {
+      max-width: 48rem;
+      font-size: 1rem;
+      color: var(--ink-soft);
+      margin-bottom: 1.5rem;
+    }
+    .tabs {
+      display: inline-flex;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(0,0,0,.03);
+      border-radius: 999px;
+      padding: .25rem;
+      gap: .25rem;
+      backdrop-filter: blur(12px);
+    }
+    .tabs a {
+      text-decoration: none;
+      color: #374151;
+      font-size: .78rem;
+      padding: .5rem 1.2rem;
+      border-radius: 999px;
+      display: inline-flex;
+      gap: .4rem;
+      align-items: center;
+    }
+    .tabs a.active,
+    .tabs a:hover {
+      background: #fff;
+      color: #111827;
+      box-shadow: 0 2px 8px rgba(244,111,85,.18);
+    }
+
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 2.5rem 1.2rem 4.5rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    /* 사이드 섹션 제목 */
+    .aside-title {
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .6rem;
+      color: rgba(0,0,0,.35);
+    }
+    .section-block {
+      margin-bottom: 3.5rem;
+    }
+
+    /* 컨텐츠 레이아웃 */
+    .content-area {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(0,0,0,.03);
+      border-radius: 1.1rem;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.03);
+      padding: 1.05rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+      min-height: 180px;
+    }
+    .card h3 {
+      font-size: .95rem;
+      margin: 0;
+      display: flex;
+      gap: .45rem;
+      align-items: center;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      background: rgba(244,111,85,.12);
+      color: #a1331c;
+      font-size: .62rem;
+      padding: .2rem .6rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+    .strategy-list {
+      display: grid;
+      gap: .35rem;
+    }
+    .strategy-item {
+      background: rgba(249,250,251,.4);
+      border-radius: .65rem;
+      padding: .4rem .35rem .45rem .65rem;
+      border: 1px solid rgba(244,111,85,.02);
+    }
+    .strategy-item-title {
+      font-size: .82rem;
+      font-weight: 600;
+    }
+    .strategy-item-text {
+      font-size: .72rem;
+      color: rgba(31,41,55,.6);
+    }
+    .tip-box {
+      background: #fffaf6;
+      border: 1px solid rgba(244,111,85,.12);
+      border-radius: 1rem;
+      padding: 1rem 1.05rem 1.01rem;
+      margin-top: 1.4rem;
+    }
+    .tip-box h4 {
+      margin: 0 0 .5rem;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      color: rgba(0,0,0,.55);
+    }
+    .tip-box ul {
+      margin: 0; padding-left: 1.15rem;
+    }
+    .tip-box li {
+      font-size: .72rem;
+      margin-bottom: .35rem;
+    }
+    /* 앵커가 보이도록 여백 */
+    [id] { scroll-margin-top: 90px; }
+
+    @media (max-width: 960px) {
+      main { flex-direction: column; }
+      header.hero { padding-bottom: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-body">
+      <div class="tagline">
+        <span class="tagline-dot"></span>
+        VFB MARKETING PLAYBOOK
+      </div>
+      <h1>오프라인 매장의 반복 가능한 VFB 마케팅 전략</h1>
+      <p class="lead">
+        기본 전략 6종으로 일단 돌리고, 반응이 오는 건 심화 전략 8종으로 확장합니다.
+        스마트플레이스·인스타·QR 어디에 올려도 읽히는 문장 구조로 정리했습니다.
+      </p>
+      <div class="tabs">
+        <a href="#basic" class="active">📘 기본 전략</a>
+        <a href="#advanced">🎓 심화 전략</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="content-area">
+      <!-- 기본 전략 -->
+      <section id="basic" class="section-block">
+        <h2>📘 기본 전략 (6 카테고리 × 각 3안)</h2>
+        <p class="aside-title">가장 먼저 돌려야 하는 이벤트 · 재방문 · 시간대 분산</p>
+        <div class="strategy-grid">
+          <!-- 1. 신규 고객 유치용 이벤트 -->
+          <article class="card">
+            <h3>🔹 신규 고객 유치용 이벤트</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">🎉 첫 방문 혜택</div>
+                <div class="strategy-item-text">첫 방문 고객, 사이드메뉴 1개 무료 → 진입 장벽 낮추기</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🎫 검색 유입 유도</div>
+                <div class="strategy-item-text">네이버 검색 후 방문 시 탄산음료 무료 → 검색 → 방문 연결</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">💬 톡톡 쿠폰</div>
+                <div class="strategy-item-text">톡톡 친구 추가 시 1,000원 할인 → 채널 팔로우 확보</div>
+              </div>
+            </div>
+          </article>
+          <!-- 2. 메뉴 홍보/신메뉴 이벤트 -->
+          <article class="card">
+            <h3>🔹 메뉴 홍보 / 신메뉴 이벤트</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">🆕 신메뉴 체험단</div>
+                <div class="strategy-item-text">시식 후 후기 작성 시 50% 할인 → 자연 노출</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🧪 인기 투표</div>
+                <div class="strategy-item-text">베스트 메뉴 투표 + 리뷰 = 추첨 쿠폰 → 참여 유도</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">📷 포토 인증</div>
+                <div class="strategy-item-text">SNS 사진 올리면 사이드 메뉴 무료 → 확산형</div>
+              </div>
+            </div>
+          </article>
+          <!-- 3. 재방문 유도/단골화 전략 -->
+          <article class="card">
+            <h3>🔹 재방문 유도 / 단골화</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">📆 2회 방문 혜택</div>
+                <div class="strategy-item-text">두 번째 방문 시 리필 무료 → 단기 반복 유도</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">📱 리뷰 인증</div>
+                <div class="strategy-item-text">리뷰 인증 시 다음 방문 10% 쿠폰 → 후기+재방문 동시</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🔄 스탬프 적립</div>
+                <div class="strategy-item-text">5회 방문 시 세트 무료 → 적립으로 락인</div>
+              </div>
+            </div>
+          </article>
+          <!-- 4. 날씨/시즌 마케팅 -->
+          <article class="card">
+            <h3>🔹 날씨 / 시즌 마케팅</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">☀️ 무더위 이벤트</div>
+                <div class="strategy-item-text">폭염주의보 날 냉면 주문 시 탄산 무료 → 공감형</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">❄️ 겨울 한정</div>
+                <div class="strategy-item-text">눈 오는 날 뜨끈한 사이드 제공 → 분위기 마케팅</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🎃 시즌 테마</div>
+                <div class="strategy-item-text">할로윈 코스튬 시 10% 할인 → 재미+SNS기록</div>
+              </div>
+            </div>
+          </article>
+          <!-- 5. 시간대별·요일별 매출 분산 -->
+          <article class="card">
+            <h3>🔹 시간대·요일 분산</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">🌞 브런치 이벤트</div>
+                <div class="strategy-item-text">10~12시 방문 시 커피 무료 → 오전 매출 생성</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🌙 저녁 한정</div>
+                <div class="strategy-item-text">20시 이후 안주 반값 → 야간 테이블 채우기</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">📅 요일 마케팅</div>
+                <div class="strategy-item-text">화요일엔 1+1 같은 고정 룰 → 노출 패턴 만들기</div>
+              </div>
+            </div>
+          </article>
+          <!-- 6. 지역/대상 고객 특화 -->
+          <article class="card">
+            <h3>🔹 지역 / 대상 고객 특화</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">🏫 학생 할인</div>
+                <div class="strategy-item-text">학생증 제시 시 1,000원 할인 → 학군 타깃</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🧳 관광객 환영</div>
+                <div class="strategy-item-text">외국인 1인당 음료 서비스 → 여행객 환대</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">👨‍👩‍👧‍👦 가족 고객</div>
+                <div class="strategy-item-text">어린이 동반 가족, 유아식 제공 → 패밀리 유입</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="tip-box">
+          <h4>📌 활용 팁 (기본편)</h4>
+          <ul>
+            <li>이벤트 제목은 짧고 직관적으로: “리뷰하면 서비스 증정”처럼 바로 이해되게.</li>
+            <li>이미지 포함 시 클릭률이 크게 올라가므로 메뉴 사진/포스터형을 함께 올린다.</li>
+            <li>항상 같은 이벤트보다 2~4주마다 교체하는 편이 체감상 더 반응이 좋다.</li>
+            <li>네이버 스마트플레이스 예약/공지와 연동해두면 리뷰 수집까지 한 번에 이어진다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 심화 전략 -->
+      <section id="advanced" class="section-block">
+        <h2>🎓 심화 전략 (8 카테고리 × 각 3안)</h2>
+        <p class="aside-title">기본이 한 번이라도 먹혔을 때 올려 쓰는 고급 플로우</p>
+        <div class="strategy-grid">
+          <!-- 1. 리뷰/포토 후기 강화 전략 -->
+          <article class="card">
+            <h3>💡 리뷰/포토 후기 강화</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">📸 포토존 설치</div>
+                <div class="strategy-item-text">예쁜 배경벽/메뉴 포토존 → 인증 자연 발생</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🏷 #해시태그 이벤트</div>
+                <div class="strategy-item-text">지정 해시태그 업로드 시 음료/사이드 제공</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">📝 리뷰 룰렛</div>
+                <div class="strategy-item-text">리뷰 쓰고 룰렛 돌려 랜덤 혜택 → 참여 재미</div>
+              </div>
+            </div>
+          </article>
+          <!-- 2. 고객 참여형 마케팅 -->
+          <article class="card">
+            <h3>💡 고객 참여형 마케팅</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">🗳 메뉴 인기투표</div>
+                <div class="strategy-item-text">1위 메뉴 무료/할인 → 고객이 메뉴 선정</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🍳 네이밍 공모전</div>
+                <div class="strategy-item-text">신메뉴 이름 선정 참여 → 채택 시 특별 혜택</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">📷 고객사진 메뉴판</div>
+                <div class="strategy-item-text">베스트 후기를 매장에 전시 → 참여 동기 부여</div>
+              </div>
+            </div>
+          </article>
+          <!-- 3. 지역 기반 마케팅 -->
+          <article class="card">
+            <h3>💡 지역 기반 마케팅</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">🎓 학교 연계</div>
+                <div class="strategy-item-text">근처 학교 학생증 제시 시 세트 할인</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🏢 직장인 런치</div>
+                <div class="strategy-item-text">점심시간 빠른 제공/10% 할인 → 상권 장악</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🧒 어린이집/학원 제휴</div>
+                <div class="strategy-item-text">쿠폰북 제공 + 아이 간식 할인</div>
+              </div>
+            </div>
+          </article>
+          <!-- 4. 브랜드/스토리 마케팅 -->
+          <article class="card">
+            <h3>💡 브랜드 / 스토리</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">📖 스토리메뉴판</div>
+                <div class="strategy-item-text">“이 메뉴가 생긴 이유”를 설명해서 기억 남기기</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🧾 영수증 쿠폰</div>
+                <div class="strategy-item-text">영수증 하단에 “리뷰 쓰면 1,000원 쿠폰” 출력</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🖼 키워드 공유</div>
+                <div class="strategy-item-text">“나에게 OOO란?” 손글씨 게시판 운영</div>
+              </div>
+            </div>
+          </article>
+          <!-- 5. 날씨/감성 마케팅 -->
+          <article class="card">
+            <h3>💡 날씨 / 감성</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">☂ 우산 이벤트</div>
+                <div class="strategy-item-text">비 오는 날 방문 시 미니 수건/1천원 할인</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🔥 감성문구</div>
+                <div class="strategy-item-text">“따뜻한 밥이 기다려요” 같은 문구로 SNS 유도</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🌙 밤손님 쿠폰</div>
+                <div class="strategy-item-text">21시 이후 고객에게 다음날 쿠폰 자동 발송</div>
+              </div>
+            </div>
+          </article>
+          <!-- 6. 인플루언서/소셜 -->
+          <article class="card">
+            <h3>💡 인플루언서 / 소셜</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">🤳 마이크로 인플 체험</div>
+                <div class="strategy-item-text">동네 인플루언서 5~10명 초청 리뷰</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🤝 블로그 체험단</div>
+                <div class="strategy-item-text">체험 후 블로그 리뷰 → 상위 노출</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">📲 SNS 릴스 이벤트</div>
+                <div class="strategy-item-text">릴스/쇼츠 업로드 시 사은품 제공</div>
+              </div>
+            </div>
+          </article>
+          <!-- 7. 단골 고객 락인 -->
+          <article class="card">
+            <h3>💡 단골 고객 락인</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">🧧 멤버십 쿠폰북</div>
+                <div class="strategy-item-text">5회 이상 방문한 고객에게만 주는 쿠폰북</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">📦 시즌패스</div>
+                <div class="strategy-item-text">“5끼 식사권 – 20% 할인” 선결제형</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🧡 생일 축하 문자</div>
+                <div class="strategy-item-text">생일 고객 자동 문자 발송 + 쿠폰</div>
+              </div>
+            </div>
+          </article>
+          <!-- 8. 이색/재미 요소 -->
+          <article class="card">
+            <h3>💡 이색 / 재미 요소</h3>
+            <div class="strategy-list">
+              <div class="strategy-item">
+                <div class="strategy-item-title">🎲 메뉴 랜덤박스</div>
+                <div class="strategy-item-text">“오늘 뭐 먹지?”를 재미로 해결</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">💌 손글씨 쿠폰</div>
+                <div class="strategy-item-text">직원이 직접 쓴 감성 쿠폰 → 기억에 남음</div>
+              </div>
+              <div class="strategy-item">
+                <div class="strategy-item-title">🎤 BGM 신청</div>
+                <div class="strategy-item-text">고객이 고른 음악을 틀어주는 경험형</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="tip-box">
+          <h4>📌 활용 팁 (심화편)</h4>
+          <ul>
+            <li>심화 아이디어는 한 번에 다 돌리는 것보다 반응을 본 뒤 그대로 재사용한다.</li>
+            <li>오프라인 공지 + SNS + 네이버 지도 설명란 3곳에 동시에 노출하면 회상률이 높다.</li>
+            <li>QR을 이벤트 랜딩으로 연결해두면 직원 안내 없이도 고객이 알아서 참여한다.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

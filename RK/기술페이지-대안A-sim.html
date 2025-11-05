@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="format-detection" content="telephone=no" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Ronda Korea" />
+        <!--<meta property="og:description" content="설명">
+        <meta name="description" content="설명">
+        <meta property="og:url" content="도메인">
+        <link rel="canonical" href="도메인">-->
+        <meta property="og:image" content="/images/ogimage.png" />
+        <link href="/images/rondakorea.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta http-equiv="imagetoolbar" content="no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <title></title>
+        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/default.css?ver=2303229" />
+        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/js/font-awesome/css/font-awesome.min.css?ver=2303229" />
+        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/all.min.css?ver=2303229" />
+        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_common.css?ver=2303229" />
+        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_css.css?ver=2303229" />
+        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_animate.css?ver=2303229" />
+        <!--[if lte IE 8]>
+            <script src="https://rondakorea.mycafe24.com/js/html5.js"></script>
+        <![endif]-->
+        <script>
+            // 자바스크립트에서 사용하는 전역변수 선언
+            var g5_url = "https://rondakorea.mycafe24.com";
+            var g5_bbs_url = "https://rondakorea.mycafe24.com/bbs";
+            var g5_is_member = "";
+            var g5_is_admin = "";
+            var g5_is_mobile = "";
+            var g5_bo_table = "";
+            var g5_sca = "";
+            var g5_editor = "";
+            var g5_cookie_domain = "";
+            var g5_shop_url = "https://rondakorea.mycafe24.com/shop";
+        </script>
+
+        <script src="https://rondakorea.mycafe24.com/js/jquery-1.12.4.min.js?ver=2304171"></script>
+        <script src="https://rondakorea.mycafe24.com/js/jquery-migrate-1.4.1.min.js?ver=2304171"></script>
+        <script src="https://rondakorea.mycafe24.com/js/jquery.menu.js?ver=2304171"></script>
+        <script src="https://rondakorea.mycafe24.com/js/common.js?ver=2304171"></script>
+        <script src="https://rondakorea.mycafe24.com/js/wrest.js?ver=2304171"></script>
+        <script src="https://rondakorea.mycafe24.com/js/placeholders.min.js?ver=2304171"></script>
+        <script src="https://rondakorea.mycafe24.com/js/rondakorea_common.js?ver=2304171"></script>
+        <script src="https://rondakorea.mycafe24.com/js/swiper.min.js?ver=2304171"></script>
+        <script src="https://rondakorea.mycafe24.com/js/wow.min.js?ver=2304171"></script>
+        <script>
+            new WOW().init();
+        </script>
+        <style>
+            
+      :root {
+        --ink: #0f172a;
+        --muted: #475569;
+        --line: #e2e8f0;
+        --accent: #2563eb;
+        --accent-2: #0ea5e9;
+        --paper: #ffffff;
+        --shadow: 0 10px 26px rgba(2, 6, 23, 0.08), 0 2px 8px rgba(2, 6, 23, 0.06);
+      }
+            .wrap {
+                max-width: 1300px;
+                margin: 24px auto;
+                padding: 0 16px 42px;
+            }
+            /* 공통 카드 */
+            .doc-card {
+                background: #fff;
+                border: 1px solid rgba(148, 163, 184, 0.3);
+                border-radius: 16px;
+                box-shadow: 0 14px 40px rgba(15, 23, 42, 0.03);
+                padding: 2.3rem 2.4rem 2.4rem;
+                margin-bottom: 1.2rem;
+            }
+            .doc-card-header {
+                display: flex;
+                align-items: baseline;
+                gap: 0.55rem;
+                margin-bottom: 1rem;
+            }
+            .doc-card-title {
+                font-size: 1.02rem;
+                font-weight: 800;
+                color: var(--ink);
+            }
+            .doc-card-meta {
+                font-size: 0.74rem;
+                color: var(--muted);
+            }
+            .doc-card-body {
+                margin-top: 0.5rem;
+            }
+
+            /* 페이지 헤더 (기술서 안쪽) */
+            .page-head {
+                margin: 0.2rem 0 1.1rem;
+            }
+            .page-head .title {
+                font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+                font-weight: 800;
+                letter-spacing: -0.01em;
+                color: var(--ink);
+            }
+            .page-head .subtitle {
+                margin-top: 0.38rem;
+                font-size: 0.93rem;
+                color: var(--muted);
+                line-height: 1.5;
+            }
+
+            /* Hero */
+            .hero {
+                margin: 10px;
+                position: relative;
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                overflow: hidden;
+                background: #f1f5f9;
+            }
+            .hero img {
+                display: block;
+                width: 100%;
+                object-fit: cover;
+            }
+            .hero .dim {
+                position: absolute;
+                inset: 0;
+                background: rgba(15, 23, 42, 0);
+                transition: background 0.2s ease;
+            }
+
+            .hero.highlighted .dim {
+                background: rgba(15, 23, 42, 0.35);
+                pointer-events: auto;
+            }
+            .spot {
+                position: absolute;
+                border: 2px solid rgba(37, 99, 235, 0);
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+                border-radius: 12px;
+                background: transparent;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.18s, box-shadow 0.18s, border-color 0.18s;
+            }
+            .spot.on {
+                opacity: 0.3;
+                border-color: rgba(37, 99, 235, 0.95);
+                box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25), 0 10px 28px rgba(2, 6, 23, 0.25);
+                background-color: #e7ab1c;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .spot,
+                .hero .dim {
+                transition: none;
+                }
+            }
+
+            /* 카드 목록 (기본 3컬럼) */
+            .pairs {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 0.9rem;
+                margin-top: 14px;
+            }
+            /* 2컬럼 전용 */
+            .pairs.is-2col {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .pair {
+                display: grid;
+                grid-template-rows: auto 1fr;
+                gap: 10px;
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                background: var(--paper);
+                box-shadow: var(--shadow);
+                cursor: pointer;
+                user-select: none;
+                transition: transform 0.12s, border-color 0.12s, box-shadow 0.12s;
+            }
+            .pair:hover {
+                transform: translateY(-2px);
+                border-color: #c7d2fe;
+                box-shadow: 0 12px 26px rgba(37, 99, 235, 0.08);
+            }
+            .pair.active {
+                outline: 2px solid #e7ab1c;
+                outline-offset: 2px;
+            }
+            .pair .thumb {
+                margin: 10px;
+                border-bottom: 1px solid var(--line);
+                overflow: hidden;
+                border-top-left-radius: 14px;
+                border-top-right-radius: 14px;
+                position: relative;
+            }
+
+            .pair .thumb figcaption {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background: rgba(15, 23, 42, 0.9);
+                color: #fff;
+                font-size: 0.7rem;
+                padding: 3px 9px 4px;
+                border-radius: 999px;
+                line-height: 1;
+                letter-spacing: -0.02em;
+                box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+            }
+
+            .pair .thumb img {
+                display: block;
+                width: 100%;
+                object-fit: cover;
+            }
+            .pair .note {
+                padding: 0.9rem 0.95rem 1rem;
+                background: #f8fafc;
+                border-bottom-left-radius: 14px;
+                border-bottom-right-radius: 14px;
+            }
+            .pair .note .k {
+                font-size: 0.78rem;
+                color: var(--accent-2);
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+            }
+            .pair .note .v {
+                font-weight: 800;
+                margin-top: 0.15rem;
+            }
+            .pair .note .d {
+                color: var(--muted);
+                margin-top: 0.2rem;
+                font-size: 0.95rem;
+            }
+
+            @media (max-width: 760px) {
+                .pairs {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 500px) {
+                figure.hero {
+                display: none;
+                }
+                .pairs,
+                .pairs.is-2col {
+                grid-template-columns: 1fr;
+                }
+            }
+
+            /* =========================
+                기술서 #3 전용 가로 1컬럼
+                ========================= */
+            .doc-card-body[data-doc="3"] .pair {
+                display: flex;
+                gap: 12px;
+                align-items: stretch;
+            }
+            .doc-card-body[data-doc="3"] .pair .thumb {
+                margin: 0;
+                border-bottom: none;
+                border-radius: 14px;
+                border: 1px solid var(--line);
+                flex: 0 0 50%;
+                max-width: 460px; /* ✅ 이미지 최대 폭 */
+                background: #fff;
+            }
+            .doc-card-body[data-doc="3"] .pair .thumb img {
+                width: 100%;
+                height: auto;
+            }
+            .doc-card-body[data-doc="3"] .pair .note {
+                flex: 1 1 50%;
+                border-bottom-left-radius: 14px;
+                border-bottom-right-radius: 14px;
+            }
+
+            /* 500px 이하에서 다시 세로 */
+            @media (max-width: 600px) {
+                .doc-card-body[data-doc="3"] .pair {
+                flex-direction: column;
+                }
+                .doc-card-body[data-doc="3"] .pair .thumb,
+                .doc-card-body[data-doc="3"] .pair .note {
+                flex: 1 1 100%;
+                max-width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 상단 시작 { -->
+        <div id="wrap">
+            <header id="rondakorea_header">
+                <div class="inner2">
+                    <p id="rondakorea_logo">
+                        <a href="/" title="메인으로 이동"><span class="text_hidden">Ronda Korea</span></a>
+                    </p>
+
+                    <nav id="rondakorea_gnb">
+                        <ul>
+                            <li>
+                                <a href="/ko/doc/company/ronda" title="Company">Company</a>
+                                <ul>
+                                    <li><a href="/ko/doc/company/ronda" title="CEO인사말">CEO인사말</a></li>
+                                    <li><a href="/ko/doc/company/ronda#section2" title="회사개요">회사개요</a></li>
+                                    <li><a href="/ko/doc/company/ronda#section3" title="경영철학">경영철학</a></li>
+                                    <li><a href="/ko/doc/company/ronda#section4" title="걸어온길">걸어온길</a></li>
+                                    <li><a href="/ko/doc/company/ronda#section5" title="찾아오시는길">찾아오시는길</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/ko/doc/business/overview" title="Business">Business</a>
+                                <ul>
+                                    <li><a href="/ko/doc/business/overview" title="사업개요">사업개요</a></li>
+                                    <li><a href="/ko/doc/business/core" title="핵심전략">핵심전략</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/consumable_parts" title="Products">Products</a>
+                                <ul>
+                                    <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
+                                    <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
+                                    <li><a href="/component" title="Component">Component</a></li>
+                                    <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/ko/doc/technology/overview" title="Technology">Technology</a>
+                                <ul>
+                                    <li><a href="/ko/doc/technology/overview#consumablepartsolution" title="Consumable Part Solution">Consumable Part Solution</a></li>
+                                    <li><a href="/ko/doc/technology/overview#criticalcomponent" title="Critical Component">Critical Component</a></li>
+                                    <li><a href="/ko/doc/technology/overview#powdercontrol" title="Powder Control">Powder Control</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/ko/doc/contact/inquiry" title="Support">Support</a>
+                                <ul>
+                                    <li><a href="/ko/doc/contact/inquiry" title="온라인문의">온라인문의</a></li>
+                                    <li><a href="/ronda_news" title="뉴스룸">뉴스룸</a></li>
+                                    <li><a href="/ronda_faq" title="FAQ">FAQ</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div>
+                        <div class="h_lang">
+                            <button type="button">Kor</button>
+                            <ul>
+                                <li class="on"><a href="/">Kor</a></li>
+                                <li><a href="/en">Eng</a></li>
+                                <li><a href="/cn">Chn</a></li>
+                            </ul>
+                        </div>
+
+                        <button type="button" id="menuToggle" title="사이트맵"><span></span><span></span><span></span><span></span></button>
+                    </div>
+                </div>
+
+                <div id="all_gnb">
+                    <ul class="inner">
+                        <li>
+                            <a href="/ko/doc/company/ronda" title="Company">Company</a>
+                            <ul>
+                                <li><a href="/ko/doc/company/ronda" title="CEO인사말">CEO인사말</a></li>
+                                <li><a href="/ko/doc/company/ronda#section2" title="회사개요">회사개요</a></li>
+                                <li><a href="/ko/doc/company/ronda#section3" title="경영철학">경영철학</a></li>
+                                <li><a href="/ko/doc/company/ronda#section4" title="걸어온길">걸어온길</a></li>
+                                <li><a href="/ko/doc/company/ronda#section5" title="찾아오시는길">찾아오시는길</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/ko/doc/business/overview" title="Business">Business</a>
+                            <ul>
+                                <li><a href="/ko/doc/business/overview" title="사업개요">사업개요</a></li>
+                                <li><a href="/ko/doc/business/core" title="핵심전략">핵심전략</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/consumable_parts" title="Products">Products</a>
+                            <ul>
+                                <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
+                                <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
+                                <li><a href="/component" title="Component">Component</a></li>
+                                <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/ko/doc/technology/overview" title="Technology">Technology</a>
+                            <ul>
+                                <li><a href="/ko/doc/technology/overview#consumablepartsolution" title="Consumable Part Solution">Consumable Part Solution</a></li>
+                                <li><a href="/ko/doc/technology/overview#criticalcomponent" title="Critical Component">Critical Component</a></li>
+                                <li><a href="/ko/doc/technology/overview#powdercontrol" title="Powder Control">Powder Control</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/ko/doc/contact/inquiry" title="Support">Support</a>
+                            <ul>
+                                <li><a href="/ko/doc/contact/inquiry" title="온라인문의">온라인문의</a></li>
+                                <li><a href="/ronda_news" title="뉴스룸">뉴스룸</a></li>
+                                <li><a href="/ronda_faq" title="FAQ">FAQ</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <!-- } 상단 끝 -->
+
+            <!-- 콘텐츠 시작 { -->
+
+            <div id="sVisu" class="sVisu4 case2">
+                <div class="s-inner">
+                    <h2 class="wow fadeInUp" data-wow-delay="0.2s">Technology <span>론다코리아의 제품과 기술력</span></h2>
+                    <p class="wow fadeInUp" data-wow-delay="0.4s">고정밀 반도체 부품과 첨단 설비 솔루션</p>
+                    <div class="sub_menu_wrap">
+                        <button type="button"></button>
+                        <ul>
+                            <li><a href="/ko/doc/technology/overview#consumablepartsolution" title="Consumable Part Solution">Consumable Part Solution</a></li>
+                            <li><a href="/ko/doc/technology/overview#criticalcomponent" title="Critical Component">Critical Component</a></li>
+                            <li><a href="/ko/doc/technology/overview#powdercontrol" title="Powder Control">Powder Control</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="img_box"></div>
+            </div>
+
+            <main class="wrap">
+
+                <!-- 기술서 #1 : 3컬럼 -->
+                <section class="doc-card" aria-label="기술서 #1">
+                    <header class="doc-card-header">
+                    <div class="doc-card-title">기술서 #1</div>
+                    <div class="doc-card-meta">이미지-카드 연동 데모 (3컬럼)</div>
+                    </header>
+                    <div class="doc-card-body" data-doc="1">
+                    <header class="page-head">
+                        <div class="title">큰 이미지 하이라이트 데모</div>
+                        <p class="subtitle">카드 선택에 따라 위의 기술 도식도 특정 영역을 하이라이트하는 구조입니다.</p>
+                    </header>
+
+                    <figure class="hero" id="hero-1">
+                        <img src="https://rondakorea.mycafe24.com/images/sTechnology_img1.png" alt="Technical schematic" />
+                        <div class="dim"></div>
+                        <div class="spot" id="spot1-esc" style="left: 18%; top: 54%; width: 20%; height: 22%"></div>
+                        <div class="spot" id="spot1-sh" style="left: 60%; top: 18%; width: 24%; height: 22%"></div>
+                        <div class="spot" id="spot1-rf" style="left: 52%; top: 54%; width: 22%; height: 24%"></div>
+                    </figure>
+
+                    <section class="pairs" id="pairs-1">
+                        <article class="pair" data-hit="spot1-esc, spot1-rf">
+                        <figure class="thumb">
+                            <img src="https://dummyimage.com/600x380/e8eef7/0f172a&text=ESC+Detail" alt="" />
+                            <figcaption>본이미지 캡셥</figcaption>
+                        </figure>
+                        <div class="note">
+                            <div class="k">Focus ①</div>
+                            <div class="v">Vaporizer</div>
+                            <div class="d">
+                            반도체 공정에 사용하는 Liquid gas(Precursor)를 정말한 온도와 압력 조건에서 기화시켜 균일한 농도, 유량을 Process Chamber로
+                            공급하는 장치이며, CVD 및 ALD 공정의 품질과 안정성을 극대화 시키는 장치입니다.
+                            </div>
+                        </div>
+                        </article>
+                        <article class="pair" data-hit="spot1-sh">
+                        <figure class="thumb">
+                            <img src="https://dummyimage.com/600x380/e8eef7/0f172a&text=Showerhead" alt="" />
+                            <figcaption>본이미지 캡셥</figcaption>
+                        </figure>
+                        <div class="note">
+                            <div class="k">Focus ②</div>
+                            <div class="v">Gas Distribution</div>
+                            <div class="d">Showerhead 미세 홀 분포 최적화로 반응 균일도 향상.</div>
+                        </div>
+                        </article>
+                        <article class="pair" data-hit="spot1-rf">
+                        <figure class="thumb">
+                            <img src="https://dummyimage.com/600x380/e8eef7/0f172a&text=RF+Electrode" alt="" />
+                        </figure>
+                        <div class="note">
+                            <div class="k">Focus ③</div>
+                            <div class="v">RF Bias & Matching</div>
+                            <div class="d">전극 형상/임피던스 매칭으로 이온 에너지/플럭스 제어.</div>
+                        </div>
+                        </article>
+                    </section>
+                    </div>
+                </section>
+                
+                <!-- 기술서 #2 : 2컬럼 -->
+                <section class="doc-card" aria-label="기술서 #2">
+                    <header class="doc-card-header">
+                    <div class="doc-card-title">기술서 #2</div>
+                    <div class="doc-card-meta">이미지-카드 연동 데모 (2컬럼)</div>
+                    </header>
+                    <div class="doc-card-body" data-doc="2">
+                    <header class="page-head">
+                        <div class="title">큰 이미지 하이라이트 데모</div>
+                        <p class="subtitle">같은 콘텐츠이지만, 하단 카드가 2컬럼 레이아웃인 버전입니다.</p>
+                    </header>
+
+                    <figure class="hero" id="hero-2">
+                        <img src="https://rondakorea.mycafe24.com/images/sTechnology_img1.png" alt="Technical schematic" />
+                        <div class="dim"></div>
+                        <div class="spot" id="spot2-esc" style="left: 18%; top: 54%; width: 20%; height: 22%"></div>
+                        <div class="spot" id="spot2-sh" style="left: 60%; top: 18%; width: 24%; height: 22%"></div>
+                        <div class="spot" id="spot2-rf" style="left: 52%; top: 54%; width: 22%; height: 24%"></div>
+                    </figure>
+
+                    <section class="pairs is-2col" id="pairs-2">
+                        <article class="pair" data-hit="spot2-esc, spot2-rf">
+                        <figure class="thumb">
+                            <img src="https://dummyimage.com/600x380/e8eef7/0f172a&text=ESC+Detail" alt="" />
+                            <figcaption>본이미지 캡셥</figcaption>
+                        </figure>
+                        <div class="note">
+                            <div class="k">Focus ①</div>
+                            <div class="v">ESC / Thermal Coupling</div>
+                            <div class="d">웨이퍼 클램핑 및 He backside 압력과 연동한 열전달 균일성.</div>
+                        </div>
+                        </article>
+                        <article class="pair" data-hit="spot2-sh">
+                        <figure class="thumb">
+                            <img src="https://dummyimage.com/600x380/e8eef7/0f172a&text=Showerhead" alt="" />
+                        </figure>
+                        <div class="note">
+                            <div class="k">Focus ②</div>
+                            <div class="v">Gas Distribution</div>
+                            <div class="d">Showerhead 미세 홀 분포 최적화로 반응 균일도 향상.</div>
+                        </div>
+                        </article>
+                    </section>
+                    </div>
+                </section>
+
+                <!-- 기술서 #3 : 1컬럼 가로형 -->
+                <section class="doc-card" aria-label="기술서 #3">
+                    <header class="doc-card-header">
+                    <div class="doc-card-title">기술서 #3</div>
+                    <div class="doc-card-meta">이미지-카드 연동 데모 (1컬럼 가로)</div>
+                    </header>
+                    <div class="doc-card-body" data-doc="3">
+                    <header class="page-head">
+                        <div class="title">큰 이미지 하이라이트 데모</div>
+                        <p class="subtitle">한 개의 아티클을 좌우 50:50으로 배치한 버전입니다.</p>
+                    </header>
+
+                    <figure class="hero" id="hero-3">
+                        <img src="https://rondakorea.mycafe24.com/images/sTechnology_img1.png" alt="Technical schematic" />
+                        <div class="dim"></div>
+                        <div class="spot" id="spot3-esc" style="left: 18%; top: 54%; width: 20%; height: 22%"></div>
+                        <div class="spot" id="spot3-sh" style="left: 60%; top: 18%; width: 24%; height: 22%"></div>
+                        <div class="spot" id="spot3-rf" style="left: 52%; top: 54%; width: 22%; height: 24%"></div>
+                    </figure>
+
+                    <article class="pair" data-hit="spot3-esc, spot3-rf">
+                        <figure class="thumb">
+                        <img src="https://dummyimage.com/600x380/e8eef7/0f172a&text=ESC+Detail" alt="" />
+                        <figcaption>ESC / RF</figcaption>
+                        </figure>
+                        <div class="note">
+                        <div class="k">Focus</div>
+                        <div class="v">ESC & RF Coupling Zone</div>
+                        <div class="d" style="margin-top:0.3rem;">
+                            ESC와 RF 전극이 동시에 관여하는 챔버 하부 영역을 설명하는 카드입니다. 위 도식도에서 해당 카드를 클릭하면 노란색 반투명
+                            하이라이트가 표시되고, dim을 다시 클릭하면 해제됩니다.
+                        </div>
+                        </div>
+                    </article>
+                    </div>
+                </section>
+            </main>
+
+            <div id="sub_content">
+                <script>
+                    subFun(1);
+                </script>
+
+                <div class="sTechnology_case1 s-inner">
+                    <section id="consumablepartsolution" class="section">
+                        <p class="sub_title">Consumable Part Solution</p>
+                        <p class="s_txt1 mt20"><strong class="fw_600">챔버 내부 소모성 부품</strong> : Si, SiC, Quartz, Polymer Sheet(GEL), Engineering Plastic, Gasket</p>
+                        <div class="img_box"><img src="https://rondakorea.mycafe24.com/images/sTechnology_img1.png" /></div>
+                        <div class="list1">
+                            <dl>
+                                <dt>공정 신뢰성을 위한 첨단 소재 기술</dt>
+                                <dd>
+                                    Si, SiC, Quartz, Polymer 등 고순도 재질을 적용해 다양한 챔버 환경에서 내구성과 화학적 안정성을 확보
+                                </dd>
+                            </dl>
+
+                            <dl>
+                                <dt>극한 조건에서도 안정된 성능</dt>
+                                <dd>
+                                    세라믹 및 폴리머 기반 부품이 고온·플라즈마 환경에서도 절연성과 내식성, 형상 안정성 유지.
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>공정 안정성을 위한 정밀 밀폐 기술</dt>
+                                <dd>
+                                    Engineering Plastic과 Gasket이 정밀한 체결, 우수한 기밀성, Gas 누출 및 파티클 발생을 방지.
+                                </dd>
+                            </dl>
+                        </div>
+
+                        <div class="list2">
+                            <p class="s_tit1">Highlight</p>
+                            <div>
+                                <p class="en">Process Optimization</p>
+                                <p class="t1">Solution Provider</p>
+                                <p class="t2">반도체 공정에 적합한 Part Engineering Solution 제공</p>
+                            </div>
+                            <div>
+                                <p class="en">Precision Machining</p>
+                                <p class="t1">우월한 가공 기술</p>
+                                <p class="t2">복잡한 형상과 정확한 도면 치수를 만족하는 우수한 가공 기술</p>
+                            </div>
+                            <div>
+                                <p class="en">Semiconductor-Grade Cleaning</p>
+                                <p class="t1">Quality Control</p>
+                                <p class="t2">반도체급 세정 및 우수한 품질 관리</p>
+                            </div>
+                            <div>
+                                <p class="en">Total Manufacturing Solution</p>
+                                <p class="t1">Benefit</p>
+                                <p class="t2">고객사 Cost 감소 및 Yield Improvement 위한 Total Solution 제공</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="criticalcomponent" class="section">
+                        <p class="sub_title">Critical Component</p>
+                        <p class="s_txt1 mt20">ESC, Ceramic Heater, Vaporizer는 공정 안정성과 박막 품질을 좌우하는 핵심 기술 요소로, 공정 신뢰성과 생산 수율 향상에 직접적으로 기여합니다</p>
+                        <div class="img_box"><img src="https://rondakorea.mycafe24.com/images/sTechnology_img2.png" /></div>
+                        <div class="list1">
+                            <dl>
+                                <dt>Vaporizer</dt>
+                                <dd>
+                                    반도체 공정에 사용하는 Liquid gas(Precursor)를 정말한 온도와 압력 조건에서 기화시켜 균일한 농도, 유량을 Process Chamber로 공급하는 장치이며, CVD 및 ALD 공정의 품질과 안정성을 극대화 시키는 장치입니다.
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>ESC</dt>
+                                <dd>
+                                    반도체 ESC(Electrostatic Chuck)는 반도체 제조 공정에서 웨이퍼를 정전기 힘으로 고정하는 핵심 부품으로, 진공 및 플라즈마 환경에서 웨이퍼의 위치와 온도를 정밀하게 제어하는 역할을 합니다.
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>Ceramic Heater</dt>
+                                <dd>
+                                    반도체 증착 (CVD/ALD) 공정에서 사용공정에서 웨이퍼를 일정한 온도로 가열하고 유지하는 핵심 부품으로 고온 안정성, 균일한 열 분포, 정밀한 온도 제어 등의 장점과 Chucking 및 Purge 기능을 접목할 수 있습니다.
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="list2">
+                            <p class="s_tit1">Highlight</p>
+                            <div>
+                                <p class="en">Precision Temperature Control</p>
+                                <p class="t1">우수한 온도 제어 능력</p>
+                                <p class="t2">고정밀 열선 인쇄 및 저항 제어를 통한 Zone to Zone 낮은 Temp Range 구현.</p>
+                            </div>
+                            <div>
+                                <p class="en">Uniform Wafer Heating</p>
+                                <p class="t1">Multi Heating Zone 온도 제어</p>
+                                <p class="t2">4 ~ Multi Heater Zone 구현으로 웨이퍼 전체에 균일한 온도 제어 가능.</p>
+                            </div>
+                            <div>
+                                <p class="en">Precision Depth Control</p>
+                                <p class="t1">정밀한 유전체층 균일도</p>
+                                <p class="t2">RF Mesh Layer 초정밀 제어 및 일정한 Depth Control -&gt; 균일한 박막 두께 증착.</p>
+                            </div>
+                            <div>
+                                <p class="en">Process Adaptability</p>
+                                <p class="t1">Chucking 및 Purge 기능 적용 유연성</p>
+                                <p class="t2">웨이퍼 Warpage 개선, Edge 수율 향상 목적 기능 추가 가능.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="powdercontrol" class="section">
+                        <p class="sub_title">Powder Control</p>
+                        <p class="s_txt1 mt20">
+                            반도체 공정 중 사용되는 Gas, Precursor로 인한 발생되는 공정부산물인 Powder의 생성, 확산, 제거 등을 제어하는 기술이며 이를 통해 반도체 제품의 품질 확보, 설비 수명 연장, 환경안전 사고 예방 등의 측면에서 매우
+                            중요하게 작용한다.
+                        </p>
+                        <div class="img_box"><img src="https://rondakorea.mycafe24.com/images/sTechnology_img3.png" /></div>
+                        <div class="list1">
+                            <dl>
+                                <dt>Plasma System</dt>
+                                <dd>
+                                    반도체 공정에서 사용하는 Precursor(Liquid, 인화성, 유독성) 가스를 안정적인 물질로 분해·제거·치환을 수행하는 장치이다. <br />
+                                    <strong class="fw_600">대표적인 물질</strong> : ZrO₂, HfO₂, TiO₂, Nb₂O₅, Ta₂O₅, WO₃.
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>Trap</dt>
+                                <dd>
+                                    반도체 공정 중 발생되는 부산물(Powder)을 진공 Pump 또는 Scrubber에 유입되기 전에 물리적으로 포집하며, 배관 내부 부산물(Powder) 증착을 최소화하는 장치입니다.
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>Heating System</dt>
+                                <dd>
+                                    진공 배관 내부와 밸브 하우징에 삽입형 열선을 설치해 직접 내부를 가열하는 장치로, 기존 외부 감싸는 Heating Jacket 대비 열 전달 효율이 우수하며 배관 내 온도를 균일하게 유지합니다.
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="list2">
+                            <p class="s_tit1">Highlight</p>
+                            <div>
+                                <p class="en">Equipment Protection</p>
+                                <p class="t1">설비 보호 및 수명연장</p>
+                                <p class="t2">설비 오동작 방지 및 부품 손상 방지.</p>
+                            </div>
+                            <div>
+                                <p class="en">Process Stability</p>
+                                <p class="t1">공정 안정성 확보</p>
+                                <p class="t2">설비 공정 재현성 확보로 인한 생산성 및 수율 향상.</p>
+                            </div>
+                            <div>
+                                <p class="en">Maintenance Efficiency</p>
+                                <p class="t1">유지보수 용이성 및 비용 절감</p>
+                                <p class="t2">Powder에 의한 부품 수명 증가 및 예방정비 가능.</p>
+                            </div>
+                            <div>
+                                <p class="en">Risk Prevention</p>
+                                <p class="t1">환경안전 사고 예방</p>
+                                <p class="t2">폭발, 화재, 누출 방지 및 법규 준수.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="side-nav" aria-label="세로 앵커탭 네비게이션">
+                    <div class="side-title">Sections</div>
+                    <button class="anchor" data-target="#consumablepartsolution" aria-current="false">Consumable Part Solution</button>
+                    <button class="anchor" data-target="#criticalcomponent" aria-current="false">Critical Component</button>
+                    <button class="anchor" data-target="#powdercontrol" aria-current="false">Powder Control</button>
+                </aside>
+            </div>
+
+            <!-- } 콘텐츠 끝 -->
+
+            <!-- 하단 시작 { -->
+            <footer id="rondakorea_footer">
+                <div class="inner">
+                    <p class="f_logo"><img src="https://rondakorea.mycafe24.com/images/logo_w.png" alt="Ronda Korea" /></p>
+                    <ul class="f_info">
+                        <li>대표 : 문병술</li>
+                        <li>사업자등록번호 : 882-86-01292</li>
+                        <li>개인정보관리자 : rondakorea@rondakorea.com</li>
+                        <br />
+                        <li>주소 : 경기도 화성시 동탄첨단산업1로 27 금강펜테리움IX타워 A동 1501~1505호</li>
+                        <li>대표번호 : 031-613-2360</li>
+                        <li>팩스 : 031-613-2320</li>
+                    </ul>
+                    <p class="copy">© RONDA KOREA. All Rights Reserved.</p>
+                    <div class="f_member">
+                        <a href="https://rondakorea.mycafe24.com/bbs/login.php">ADMIN</a>
+                    </div>
+                </div>
+            </footer>
+
+            <div id="Quick">
+                <a href="/ko/doc/contact/inquiry"><i class="fa-regular fa-message-lines"></i><span>문의하기</span></a>
+                <button type="button" class="go_top" title="상단으로 이동"><i class="fa-regular fa-arrow-up-long"></i></button>
+            </div>
+
+            <script>
+                (function () {
+                    const sections = [...document.querySelectorAll(".section")];
+                    const anchors = [...document.querySelectorAll(".anchor[data-target]")];
+                    //const toTopBtn = document.getElementById("toTop");
+
+                    // 클릭 시 부드러운 스크롤 (헤더 높이 보정)
+                    function scrollToHash(hash) {
+                        const target = document.querySelector(hash);
+                        if (!target) return;
+                        const headerH = document.querySelector("header")?.offsetHeight || 0;
+                        const y = target.getBoundingClientRect().top + window.scrollY - (headerH + 8);
+                        window.scrollTo({ top: y, behavior: "smooth" });
+                    }
+                    anchors.forEach((btn) => {
+                        btn.addEventListener("click", () => {
+                            const hash = btn.dataset.target;
+                            scrollToHash(hash);
+                            history.replaceState(null, "", hash);
+                        });
+                    });
+                    //toTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+                    // 현재 섹션 하이라이트 (IntersectionObserver)
+                    function setActive(id) {
+                        anchors.forEach((b) => {
+                            const on = b.dataset.target === "#" + id;
+                            b.setAttribute("aria-current", on ? "true" : "false");
+                        });
+                    }
+                    const io = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((e) => {
+                                if (e.isIntersecting) {
+                                    setActive(e.target.id);
+                                }
+                            });
+                        },
+                        {
+                            root: null,
+                            rootMargin: "-40% 0px -50% 0px", // 중앙 근처에 들어오면 활성
+                            threshold: 0,
+                        }
+                    );
+                    sections.forEach((s) => io.observe(s));
+
+                    // 초기 해시 위치 보정
+                    window.addEventListener("load", () => {
+                        if (location.hash) {
+                            setTimeout(() => scrollToHash(location.hash), 30);
+                        }
+                    });
+                })();
+
+                (function () {
+                    const target = document.querySelector("#myTagTabMenu"); // 감시할 태그
+                    // const headerH = document.querySelector("#rondakorea_header")?.offsetHeight || 0;
+                    const headerH = 0;
+                    const anchorTabMenu = document.getElementById("myTagAnchorTabMenu"); // 앵커탭메뉴
+
+                    const io = new IntersectionObserver(
+                        ([entry]) => {
+                            const rect = entry.boundingClientRect;
+                            const outAbove = !entry.isIntersecting && rect.top < 0 - headerH;
+
+                            if (outAbove) {
+                                anchorTabMenu.style.display = "";
+                            } else {
+                                anchorTabMenu.style.display = "none";
+                            }
+                        },
+                        {
+                            root: null, // 뷰포트 기준 (스크롤 컨테이너가 따로 있으면 그 요소를 지정)
+                            threshold: 0,
+                            // 헤더가 고정되어 있으면 그만큼 음수로 올려 사라짐 판정 시점을 보정
+                            //rootMargin: `-${headerH}px 0px 0px 0px`,
+                        }
+                    );
+
+                    io.observe(target);
+                })();
+            </script>
+        </div>
+
+    <script>
+      (function () {
+        const docs = document.querySelectorAll(".doc-card-body");
+
+        docs.forEach((doc) => {
+          const hero = doc.querySelector(".hero");
+          const spots = hero ? [...hero.querySelectorAll(".spot")] : [];
+          const pairs = doc.querySelectorAll(".pair[data-hit]");
+
+          function clearAll() {
+            if (!hero) return;
+            hero.classList.remove("highlighted");
+            spots.forEach((s) => s.classList.remove("on"));
+            pairs.forEach((p) => p.classList.remove("active"));
+          }
+
+          function activate(ids, origin) {
+            if (!hero) return;
+            const list = String(ids)
+              .split(/[,\s]+/)
+              .filter(Boolean);
+
+            spots.forEach((s) => s.classList.remove("on"));
+
+            let any = false;
+            list.forEach((id) => {
+              const t = doc.querySelector("#" + id);
+              if (t) {
+                t.classList.add("on");
+                any = true;
+              }
+            });
+            hero.classList.toggle("highlighted", any);
+
+            pairs.forEach((p) => p.classList.remove("active"));
+            if (origin) origin.classList.add("active");
+          }
+
+          pairs.forEach((card) => {
+            card.addEventListener("click", () => activate(card.dataset.hit, card));
+          });
+
+          if (hero) {
+            hero.addEventListener("click", (e) => {
+              if (e.target === hero || e.target.classList.contains("dim")) clearAll();
+            });
+          }
+
+          window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") clearAll();
+          });
+        });
+      })();
+    </script>
+        <!-- } 하단 끝 -->
+    </body>
+</html>
