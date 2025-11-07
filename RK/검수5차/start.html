@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>론다코리아 검수 5차 - 데모잉 버전</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#64748b;
+      --border:#e2e8f0; --accent:#2563eb; --accent-weak:#dbeafe;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+      background:var(--bg); color:var(--text);
+    }
+    .wrap{max-width:800px; margin:40px auto; padding:0 16px;}
+    h1{margin:0 0 16px; font-size:1.5rem}
+    p.desc{margin:0 0 24px; color:var(--muted)}
+    
+    /* 리스트 기본 */
+    .link-list{list-style:none; padding:0; margin:0; display:grid; gap:12px;}
+    
+    /* 항목(카드형 링크) */
+    .link-item a{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:16px 18px; background:var(--card); border:1px solid var(--border);
+      border-radius:12px; text-decoration:none; color:inherit;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .05s ease;
+    }
+    .link-item a:hover{ border-color:var(--accent); box-shadow:0 6px 18px rgba(0,0,0,.05); }
+    .link-item a:active{ transform:translateY(1px); }
+    .link-item a:focus{ outline:3px solid var(--accent-weak); outline-offset:2px; }
+    
+    /* 좌측 타이틀, 우측 아이콘 */
+    .title{
+      font-weight:700; letter-spacing:-.2px; line-height:1.3;
+    }
+    .meta{ font-size:.9rem; color:var(--muted); }
+    .chev{
+      flex:0 0 auto; width:10px; height:10px;
+      border-right:2px solid var(--muted); border-bottom:2px solid var(--muted);
+      transform:rotate(-45deg); transition: transform .2s ease, border-color .2s ease;
+    }
+    .link-item a:hover .chev{ transform:translateX(2px) rotate(-45deg); border-color:var(--accent); }
+    
+    /* active(현재 페이지) 표시 예시 */
+    .link-item.is-active a{
+      border-color:var(--accent); background:var(--accent-weak);
+    }
+    
+    @media (max-width:560px){
+      .meta{ display:none; } /* 모바일에서 부가텍스트 생략 */
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>론다코리아 검수 5차 - 데모잉 버전</h1>
+    <p class="desc">아래 항목을 클릭하면 해당 페이지로 이동합니다.</p>
+
+    <ul class="link-list" role="list">
+      <li class="link-item">
+        <a href="home.html" target="_blank">
+          <div>
+            <div class="title">HOME 페이지</div>
+          </div>
+          <span class="chev" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="company.html" target="_blank">
+          <div>
+            <div class="title">기업소개(Company)</div>
+          </div>
+          <span class="chev" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="business.html" target="_blank">
+          <div>
+            <div class="title">사업소개(Business)</div>
+          </div>
+          <span class="chev" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="product-consumable-parts.html" target="_blank">
+          <div>
+            <div class="title">상품소개 - Consumable Parts</div>
+          </div>
+          <span class="chev" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="product-subfab-solution.html" target="_blank">
+          <div>
+            <div class="title">상품소개 - SubFAB Solution</div>
+          </div>
+          <span class="chev" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="product-component.html" target="_blank">
+          <div>
+            <div class="title">상품소개 - Component</div>
+          </div>
+          <span class="chev" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="product-rawmaterials.html" target="_blank">
+          <div>
+            <div class="title">상품소개 - Raw Materials</div>
+          </div>
+          <span class="chev" aria-hidden="true"></span>
+        </a>
+      </li>
+      <li class="link-item">
+        <a href="technology.html" target="_blank">
+          <div>
+            <div class="title">기술페이지</div>
+          </div>
+          <span class="chev" aria-hidden="true"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
