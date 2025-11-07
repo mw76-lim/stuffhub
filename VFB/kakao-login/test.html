@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>카카오 계정 로그인</title>
+    <style>
+      /* CSS: 버튼을 중앙에 배치하고 스타일링 */
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f8f8f8;
+      }
+      .login-container {
+        text-align: center;
+        padding: 30px;
+        border-radius: 8px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #333;
+        margin-bottom: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>서비스 로그인</h2>
+      <div id="kakao-login-btn"></div>
+
+      <p style="margin-top: 20px; color: #777">소셜 로그인을 통해 간편하게 시작하세요.</p>
+    </div>
+
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+      integrity="sha384-y0Hx3z3fHhU3iKkU7N+N3n9oD9a7u+YlX1I0W+1g2R+hB1zKz7J/C7y1P1L1R7Q/t7"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      // 2. 카카오 SDK 초기화
+      // [YOUR_JAVASCRIPT_KEY]를 발급받은 실제 JavaScript 키로 변경하세요!
+      Kakao.init("f5ffd956b134727b0239a67311d99a9a");
+
+      // 3. 카카오 로그인 버튼 생성 및 이벤트 리스너 설정
+      Kakao.Auth.createLoginButton({
+        container: "#kakao-login-btn", // 버튼을 표시할 HTML 요소 ID
+        scope: "profile_nickname, profile_image", // 동의 받을 사용자 정보 범위
+        success: function (authObj) {
+          // 4. 로그인 성공 시 처리
+          console.log("로그인 성공:", authObj);
+
+          // 사용자 인증 코드를 서버로 전송합니다.
+          // 이 코드를 서버(PHP)에서 사용하여 Access Token을 발급받아야 합니다.
+          var authCode = authObj.access_token ? authObj.access_token : authObj.code;
+
+          // TODO: PHP 백엔드로 인증 코드를 보내는 로직을 여기에 구현해야 합니다.
+          // 예: window.location.href = '/login/kakao/callback?code=' + authCode;
+
+          alert("카카오 로그인 성공! 서버 연동을 진행합니다.");
+        },
+        fail: function (err) {
+          // 로그인 실패 시 처리
+          console.error("로그인 실패:", err);
+          alert("카카오 로그인 실패: " + JSON.stringify(err));
+        },
+      });
+    </script>
+  </body>
+</html>

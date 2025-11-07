@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>QR 코드 생성</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    #qrcode {
+      padding: 12px;
+      background: #fff;
+      border: 1px solid #ddd;
+    }
+    input {
+      width: 320px;
+      padding: 6px 10px;
+    }
+  </style>
+  <!-- QRCode.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <h1>QR 코드</h1>
+
+  <!-- 여기에 원하는 URL을 입력하게 해도 되고, 아래 JS에서 직접 지정해도 됩니다 -->
+  <input id="urlInput" value="http://127.0.0.1:5500/VFB/kakao-login/qr.html" />
+
+  <div id="qrcode"></div>
+
+  <script>
+    // 초기 값
+    const input = document.getElementById('urlInput');
+    const qrContainer = document.getElementById('qrcode');
+
+    let qr = new QRCode(qrContainer, {
+      text: input.value,
+      width: 200,
+      height: 200
+    });
+
+    // 입력값 바뀌면 다시 생성
+    input.addEventListener('change', () => {
+      qr.clear();              // 기존 것 지우고
+      qr.makeCode(input.value); // 새로 생성
+    });
+  </script>
+</body>
+</html>

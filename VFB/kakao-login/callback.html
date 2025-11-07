@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카카오 콜백</title>
+  </head>
+  <body>
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
+      integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      // callback.html
+      // Kakao.init("f5ffd956b134727b0239a67311d99a9a"); // 사용하려는 앱의 JavaScript 키 입력
+
+      // 1) JS SDK 초기화
+      Kakao.init("f5ffd956b134727b0239a67311d99a9a");
+
+      // 2) URL에서 code 추출
+      const params = new URL(location.href).searchParams;
+      const code = params.get("code");
+      console.log("kakao code:", code);
+
+      // 3) code → token 교환 (임시: 프론트에서 바로 요청)
+      // 주의: REST API 키 노출됨
+      fetch("https://kauth.kakao.com/oauth/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded;charset=utf-8" },
+        body: new URLSearchParams({
+          grant_type: "authorization_code",
+          client_id: "0809b8c9edb6a6ea9bd73da2b798ed8e", // ⚠️ 프론트 노출됨
+          redirect_uri: "http://127.0.0.1:5500/VFB/kakao-login/callback.html",
+          code: code,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("token response:", data);
+          // access_token만 뽑기
+          const accessToken = data.access_token;
+
+          // 4) 카카오 JS SDK에 토큰 넣어주면 이후 Kakao.API.request에서 사용 가능
+          Kakao.Auth.setAccessToken(accessToken);
+          // 4-대안)
+          // localStorage.setItem('kakao_token', accessToken);
+
+          // 5) 테스트: 사용자 정보 요청
+          // return Kakao.API.request({
+          //   url: "/v2/user/me",
+          // });
+          Kakao.API.request({
+            url: "/v2/user/me",
+          })
+            .then(function (res) {
+              console.log('here', JSON.stringify(res));
+            })
+            .catch(function (err) {
+              console.log("failed to request user information: " + JSON.stringify(err));
+            });
+        })
+        .then((res) => {
+          console.log("me:", res);
+        })
+        .catch((err) => console.error(err));
+    </script>
+
+    카카오 콜백 페이지
+  </body>
+</html>

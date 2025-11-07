@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그아웃</title>
+  </head>
+  <body>
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"
+      integrity="sha384-tJkjbtDbvoxO+diRuDtwRO9JXR7pjWnfjfRn5ePUpl7e7RJCxKCwwnfqUAdXh53p"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      Kakao.init("f5ffd956b134727b0239a67311d99a9a"); // 사용하려는 앱의 JavaScript 키 입력
+    </script>
+
+    <button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
+
+    <script>
+      function kakaoLogout() {
+        Kakao.Auth.logout()
+          .then(function () {
+            alert("logout ok\naccess token -> " + Kakao.Auth.getAccessToken());
+            deleteCookie();
+          })
+          .catch(function () {
+            alert("Not logged in");
+          });
+      }
+
+      // 아래는 데모를 위한 UI 코드입니다.
+      function deleteCookie() {
+        document.cookie = "authorize-access-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      }
+    </script>
+  </body>
+</html>
