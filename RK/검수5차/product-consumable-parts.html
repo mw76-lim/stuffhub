@@ -1,233 +1,233 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="format-detection" content="telephone=no" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no" />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Ronda Korea" />
-        <!--<meta property="og:description" content="설명">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ronda Korea" />
+    <!--<meta property="og:description" content="설명">
 <meta name="description" content="설명">
 <meta property="og:url" content="도메인">
 <link rel="canonical" href="도메인">-->
-        <meta property="og:image" content="/images/ogimage.png" />
-        <link href="/images/rondakorea.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta http-equiv="imagetoolbar" content="no" />
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <title></title>
-        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/default.css?ver=2303229" />
-        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/js/font-awesome/css/font-awesome.min.css?ver=2303229" />
-        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/all.min.css?ver=2303229" />
-        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_common.css?ver=2303229" />
-        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_css.css?ver=2303229" />
-        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_animate.css?ver=2303229" />
-        <link rel="stylesheet" href="https://rondakorea.mycafe24.com/skin/board/res_products/open-iconic.css?ver=2303229" />
-        <!--[if lte IE 8]>
-            <script src="https://rondakorea.mycafe24.com/js/html5.js"></script>
-        <![endif]-->
-        <script>
-            // 자바스크립트에서 사용하는 전역변수 선언
-            var g5_url = "https://rondakorea.mycafe24.com";
-            var g5_bbs_url = "https://rondakorea.mycafe24.com/bbs";
-            var g5_is_member = "";
-            var g5_is_admin = "";
-            var g5_is_mobile = "";
-            var g5_bo_table = "consumable_parts";
-            var g5_sca = "";
-            var g5_editor = "";
-            var g5_cookie_domain = "";
-            var g5_shop_url = "https://rondakorea.mycafe24.com/shop";
-        </script>
+    <meta property="og:image" content="/images/ogimage.png" />
+    <link href="/images/rondakorea.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title></title>
+    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/default.css?ver=2303229" />
+    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/js/font-awesome/css/font-awesome.min.css?ver=2303229" />
+    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/all.min.css?ver=2303229" />
+    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_common.css?ver=2303229" />
+    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_css.css?ver=2303229" />
+    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_animate.css?ver=2303229" />
+    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/skin/board/res_products/open-iconic.css?ver=2303229" />
+    <!--[if lte IE 8]>
+      <script src="https://rondakorea.mycafe24.com/js/html5.js"></script>
+    <![endif]-->
+    <script>
+      // 자바스크립트에서 사용하는 전역변수 선언
+      var g5_url = "https://rondakorea.mycafe24.com";
+      var g5_bbs_url = "https://rondakorea.mycafe24.com/bbs";
+      var g5_is_member = "";
+      var g5_is_admin = "";
+      var g5_is_mobile = "";
+      var g5_bo_table = "consumable_parts";
+      var g5_sca = "";
+      var g5_editor = "";
+      var g5_cookie_domain = "";
+      var g5_shop_url = "https://rondakorea.mycafe24.com/shop";
+    </script>
 
-        <script src="https://rondakorea.mycafe24.com/js/jquery-1.12.4.min.js?ver=2304171"></script>
-        <script src="https://rondakorea.mycafe24.com/js/jquery-migrate-1.4.1.min.js?ver=2304171"></script>
-        <script src="https://rondakorea.mycafe24.com/js/jquery.menu.js?ver=2304171"></script>
-        <script src="https://rondakorea.mycafe24.com/js/common.js?ver=2304171"></script>
-        <script src="https://rondakorea.mycafe24.com/js/wrest.js?ver=2304171"></script>
-        <script src="https://rondakorea.mycafe24.com/js/placeholders.min.js?ver=2304171"></script>
-        <script src="https://rondakorea.mycafe24.com/js/rondakorea_common.js?ver=2304171"></script>
-        <script src="https://rondakorea.mycafe24.com/js/swiper.min.js?ver=2304171"></script>
-        <script src="https://rondakorea.mycafe24.com/js/wow.min.js?ver=2304171"></script>
-        <script>
-            new WOW().init();
-        </script>
-    </head>
-    <body>
-        <!-- 상단 시작 { -->
-        <div id="wrap">
-            <header id="rondakorea_header">
-                <div class="inner2">
-                    <p id="rondakorea_logo">
-                        <a href="/" title="메인으로 이동"><span class="text_hidden">Ronda Korea</span></a>
-                    </p>
+    <script src="https://rondakorea.mycafe24.com/js/jquery-1.12.4.min.js?ver=2304171"></script>
+    <script src="https://rondakorea.mycafe24.com/js/jquery-migrate-1.4.1.min.js?ver=2304171"></script>
+    <script src="https://rondakorea.mycafe24.com/js/jquery.menu.js?ver=2304171"></script>
+    <script src="https://rondakorea.mycafe24.com/js/common.js?ver=2304171"></script>
+    <script src="https://rondakorea.mycafe24.com/js/wrest.js?ver=2304171"></script>
+    <script src="https://rondakorea.mycafe24.com/js/placeholders.min.js?ver=2304171"></script>
+    <script src="https://rondakorea.mycafe24.com/js/rondakorea_common.js?ver=2304171"></script>
+    <script src="https://rondakorea.mycafe24.com/js/swiper.min.js?ver=2304171"></script>
+    <script src="https://rondakorea.mycafe24.com/js/wow.min.js?ver=2304171"></script>
+    <script>
+      new WOW().init();
+    </script>
+  </head>
+  <body>
+    <!-- 상단 시작 { -->
+    <div id="wrap">
+      <header id="rondakorea_header">
+        <div class="inner2">
+          <p id="rondakorea_logo">
+            <a href="/" title="메인으로 이동"><span class="text_hidden">Ronda Korea</span></a>
+          </p>
 
-                    <nav id="rondakorea_gnb">
-                        <ul>
-                            <li>
-                                <a href="/ko/doc/company/ronda" title="Company">Company</a>
-                                <ul>
-                                    <li><a href="/ko/doc/company/ronda" title="CEO인사말">CEO인사말</a></li>
-                                    <li><a href="/ko/doc/company/ronda#section2" title="회사개요">회사개요</a></li>
-                                    <li><a href="/ko/doc/company/ronda#section3" title="경영철학">경영철학</a></li>
-                                    <li><a href="/ko/doc/company/ronda#section4" title="걸어온길">걸어온길</a></li>
-                                    <li><a href="/ko/doc/company/ronda#section5" title="찾아오시는길">찾아오시는길</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/ko/doc/business/overview" title="Business">Business</a>
-                                <ul>
-                                    <li><a href="/ko/doc/business/overview" title="사업개요">사업개요</a></li>
-                                    <li><a href="/ko/doc/business/core" title="핵심전략">핵심전략</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/consumable_parts" title="Products">Products</a>
-                                <ul>
-                                    <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
-                                    <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
-                                    <li><a href="/component" title="Component">Component</a></li>
-                                    <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/ko/doc/technology/overview" title="Technology">Technology</a>
-                                <ul>
-                                    <li><a href="/ko/doc/technology/overview#consumablepartsolution" title="Consumable Part Solution">Consumable Part Solution</a></li>
-                                    <li><a href="/ko/doc/technology/overview#criticalcomponent" title="Critical Component">Critical Component</a></li>
-                                    <li><a href="/ko/doc/technology/overview#powdercontrol" title="Powder Control">Powder Control</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/ko/doc/contact/inquiry" title="Support">Support</a>
-                                <ul>
-                                    <li><a href="/ko/doc/contact/inquiry" title="온라인문의">온라인문의</a></li>
-                                    <li><a href="/ronda_news" title="뉴스룸">뉴스룸</a></li>
-                                    <li><a href="/ronda_faq" title="FAQ">FAQ</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
+          <nav id="rondakorea_gnb">
+            <ul>
+              <li>
+                <a href="/ko/doc/company/ronda" title="Company">Company</a>
+                <ul>
+                  <li><a href="/ko/doc/company/ronda" title="CEO인사말">CEO인사말</a></li>
+                  <li><a href="/ko/doc/company/ronda#section2" title="회사개요">회사개요</a></li>
+                  <li><a href="/ko/doc/company/ronda#section3" title="경영철학">경영철학</a></li>
+                  <li><a href="/ko/doc/company/ronda#section4" title="걸어온길">걸어온길</a></li>
+                  <li><a href="/ko/doc/company/ronda#section5" title="찾아오시는길">찾아오시는길</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="/ko/doc/business/overview" title="Business">Business</a>
+                <ul>
+                  <li><a href="/ko/doc/business/overview" title="사업개요">사업개요</a></li>
+                  <li><a href="/ko/doc/business/core" title="핵심전략">핵심전략</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="/consumable_parts" title="Products">Products</a>
+                <ul>
+                  <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
+                  <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
+                  <li><a href="/component" title="Component">Component</a></li>
+                  <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="/ko/doc/technology/overview" title="Technology">Technology</a>
+                <ul>
+                  <li><a href="/ko/doc/technology/overview#consumablepartsolution" title="Consumable Part Solution">Consumable Part Solution</a></li>
+                  <li><a href="/ko/doc/technology/overview#criticalcomponent" title="Critical Component">Critical Component</a></li>
+                  <li><a href="/ko/doc/technology/overview#powdercontrol" title="Powder Control">Powder Control</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="/ko/doc/contact/inquiry" title="Support">Support</a>
+                <ul>
+                  <li><a href="/ko/doc/contact/inquiry" title="온라인문의">온라인문의</a></li>
+                  <li><a href="/ronda_news" title="뉴스룸">뉴스룸</a></li>
+                  <li><a href="/ronda_faq" title="FAQ">FAQ</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
 
-                    <div>
-                        <div class="h_lang">
-                            <button type="button">Kor</button>
-                            <ul>
-                                <li class="on"><a href="/">Kor</a></li>
-                                <li><a href="/en">Eng</a></li>
-                                <li><a href="/cn">Chn</a></li>
-                            </ul>
-                        </div>
-
-                        <button type="button" id="menuToggle" title="사이트맵"><span></span><span></span><span></span><span></span></button>
-                    </div>
-                </div>
-
-                <div id="all_gnb">
-                    <ul class="inner">
-                        <li>
-                            <a href="/ko/doc/company/ronda" title="Company">Company</a>
-                            <ul>
-                                <li><a href="/ko/doc/company/ronda" title="CEO인사말">CEO인사말</a></li>
-                                <li><a href="/ko/doc/company/ronda#section2" title="회사개요">회사개요</a></li>
-                                <li><a href="/ko/doc/company/ronda#section3" title="경영철학">경영철학</a></li>
-                                <li><a href="/ko/doc/company/ronda#section4" title="걸어온길">걸어온길</a></li>
-                                <li><a href="/ko/doc/company/ronda#section5" title="찾아오시는길">찾아오시는길</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/ko/doc/business/overview" title="Business">Business</a>
-                            <ul>
-                                <li><a href="/ko/doc/business/overview" title="사업개요">사업개요</a></li>
-                                <li><a href="/ko/doc/business/core" title="핵심전략">핵심전략</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/consumable_parts" title="Products">Products</a>
-                            <ul>
-                                <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
-                                <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
-                                <li><a href="/component" title="Component">Component</a></li>
-                                <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/ko/doc/technology/overview" title="Technology">Technology</a>
-                            <ul>
-                                <li><a href="/ko/doc/technology/overview#consumablepartsolution" title="Consumable Part Solution">Consumable Part Solution</a></li>
-                                <li><a href="/ko/doc/technology/overview#criticalcomponent" title="Critical Component">Critical Component</a></li>
-                                <li><a href="/ko/doc/technology/overview#powdercontrol" title="Powder Control">Powder Control</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="/ko/doc/contact/inquiry" title="Support">Support</a>
-                            <ul>
-                                <li><a href="/ko/doc/contact/inquiry" title="온라인문의">온라인문의</a></li>
-                                <li><a href="/ronda_news" title="뉴스룸">뉴스룸</a></li>
-                                <li><a href="/ronda_faq" title="FAQ">FAQ</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </header>
-            <!-- } 상단 끝 -->
-
-            <!-- 콘텐츠 시작 { -->
-
-            <div id="sVisu" class="sVisu3">
-                <div class="s-inner">
-                    <h2 class="wow fadeInUp" data-wow-delay="0.2s">Products <span>정밀한 기술력으로</span></h2>
-                    <p class="wow fadeInUp" data-wow-delay="0.4s">글로벌 반도체 시장을 선도합니다</p>
-                    <div class="sub_menu_wrap">
-                        <button type="button"></button>
-                        <ul>
-                            <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
-                            <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
-                            <li><a href="/component" title="Component">Component</a></li>
-                            <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="img_box"></div>
-                <div id="board"></div>
+          <div>
+            <div class="h_lang">
+              <button type="button">Kor</button>
+              <ul>
+                <li class="on"><a href="/">Kor</a></li>
+                <li><a href="/en">Eng</a></li>
+                <li><a href="/cn">Chn</a></li>
+              </ul>
             </div>
 
-            <script>
-                subFun(1);
-            </script>
+            <button type="button" id="menuToggle" title="사이트맵"><span></span><span></span><span></span><span></span></button>
+          </div>
+        </div>
 
-            <aside id="myTagAnchorTabMenu" class="side-nav page1" aria-label="세로 앵커탭 네비게이션">
-                <div class="side-title">Sections</div>
-                <ul>
-                    <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
-                    <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
-                    <li><a href="/component" title="Component">Component</a></li>
-                    <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
-                </ul>
-            </aside>
+        <div id="all_gnb">
+          <ul class="inner">
+            <li>
+              <a href="/ko/doc/company/ronda" title="Company">Company</a>
+              <ul>
+                <li><a href="/ko/doc/company/ronda" title="CEO인사말">CEO인사말</a></li>
+                <li><a href="/ko/doc/company/ronda#section2" title="회사개요">회사개요</a></li>
+                <li><a href="/ko/doc/company/ronda#section3" title="경영철학">경영철학</a></li>
+                <li><a href="/ko/doc/company/ronda#section4" title="걸어온길">걸어온길</a></li>
+                <li><a href="/ko/doc/company/ronda#section5" title="찾아오시는길">찾아오시는길</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/ko/doc/business/overview" title="Business">Business</a>
+              <ul>
+                <li><a href="/ko/doc/business/overview" title="사업개요">사업개요</a></li>
+                <li><a href="/ko/doc/business/core" title="핵심전략">핵심전략</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/consumable_parts" title="Products">Products</a>
+              <ul>
+                <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
+                <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
+                <li><a href="/component" title="Component">Component</a></li>
+                <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/ko/doc/technology/overview" title="Technology">Technology</a>
+              <ul>
+                <li><a href="/ko/doc/technology/overview#consumablepartsolution" title="Consumable Part Solution">Consumable Part Solution</a></li>
+                <li><a href="/ko/doc/technology/overview#criticalcomponent" title="Critical Component">Critical Component</a></li>
+                <li><a href="/ko/doc/technology/overview#powdercontrol" title="Powder Control">Powder Control</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/ko/doc/contact/inquiry" title="Support">Support</a>
+              <ul>
+                <li><a href="/ko/doc/contact/inquiry" title="온라인문의">온라인문의</a></li>
+                <li><a href="/ronda_news" title="뉴스룸">뉴스룸</a></li>
+                <li><a href="/ronda_faq" title="FAQ">FAQ</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <!-- } 상단 끝 -->
 
-            <div id="sub_content">
-                <div class="s-inner">
-                    <p class="sub_title mb30">Consumable Parts</p>
-                    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/skin/board/res_products/style.css" />
+      <!-- 콘텐츠 시작 { -->
 
-                    <!-- 게시판 검색 시작 { -->
-                    <div class="bo_sch_gall">
-                        <!-- 게시판 카테고리 시작 { -->
-                        <nav id="bo_cate">
-                            <h2>Consumable Parts 카테고리</h2>
-                            <ul id="bo_cate_ul">
-                                <li><a href="https://rondakorea.mycafe24.com/consumable_parts#board" id="bo_cate_on">All View</a></li>
-                                <li><a href="https://rondakorea.mycafe24.com/consumable_parts?sca=Si#board">Si</a></li>
-                                <li><a href="https://rondakorea.mycafe24.com/consumable_parts?sca=SiC#board">SiC</a></li>
-                                <li><a href="https://rondakorea.mycafe24.com/consumable_parts?sca=Engineering+Plastic#board">Engineering Plastic</a></li>
-                                <li><a href="https://rondakorea.mycafe24.com/consumable_parts?sca=Special+Gasket#board">Special Gasket</a></li>
-                                <li><a href="https://rondakorea.mycafe24.com/consumable_parts?sca=Quartz#board">Quartz</a></li>
-                            </ul>
-                        </nav>
-                        <!-- } 게시판 카테고리 끝 -->
+      <div id="sVisu" class="sVisu3">
+        <div class="s-inner">
+          <h2 class="wow fadeInUp" data-wow-delay="0.2s">Products <span>정밀한 기술력으로</span></h2>
+          <p class="wow fadeInUp" data-wow-delay="0.4s">글로벌 반도체 시장을 선도합니다</p>
+          <div class="sub_menu_wrap">
+            <button type="button"></button>
+            <ul>
+              <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
+              <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
+              <li><a href="/component" title="Component">Component</a></li>
+              <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="img_box"></div>
+        <div id="board"></div>
+      </div>
 
-                        <!--<fieldset id="bo_sch">
+      <script>
+        subFun(1);
+      </script>
+
+      <aside id="myTagAnchorTabMenu" class="side-nav page1" aria-label="세로 앵커탭 네비게이션">
+        <div class="side-title">Sections</div>
+        <ul>
+          <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
+          <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
+          <li><a href="/component" title="Component">Component</a></li>
+          <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
+        </ul>
+      </aside>
+
+      <div id="sub_content">
+        <div class="s-inner">
+          <p class="sub_title mb30">Consumable Parts</p>
+          <link rel="stylesheet" href="https://rondakorea.mycafe24.com/skin/board/res_products/style.css" />
+
+          <!-- 게시판 검색 시작 { -->
+          <div class="bo_sch_gall">
+            <!-- 게시판 카테고리 시작 { -->
+            <nav id="bo_cate">
+              <h2>Consumable Parts 카테고리</h2>
+              <ul id="bo_cate_ul">
+                <li><a href="https://rondakorea.mycafe24.com/consumable_parts#board" id="bo_cate_on">All View</a></li>
+                <li><a href="https://rondakorea.mycafe24.com/consumable_parts?sca=Si#board">Si</a></li>
+                <li><a href="https://rondakorea.mycafe24.com/consumable_parts?sca=SiC#board">SiC</a></li>
+                <li><a href="https://rondakorea.mycafe24.com/consumable_parts?sca=Engineering+Plastic#board">Engineering Plastic</a></li>
+                <li><a href="https://rondakorea.mycafe24.com/consumable_parts?sca=Special+Gasket#board">Special Gasket</a></li>
+                <li><a href="https://rondakorea.mycafe24.com/consumable_parts?sca=Quartz#board">Quartz</a></li>
+              </ul>
+            </nav>
+            <!-- } 게시판 카테고리 끝 -->
+
+            <!--<fieldset id="bo_sch">
 		<legend>게시물 검색</legend>
 
 		<form name="fsearch" method="get" autocomplete="off">
@@ -247,428 +247,456 @@
 		<button type="submit" value="검색" class="sch_btn"><i class="fa-regular fa-magnifying-glass"></i><span class="sound_only">검색</span></button>
 		</form>
 	</fieldset>-->
-                        <div></div>
+            <div></div>
+          </div>
+          <!--   } 게시판 검색 끝 -->
+
+          <!-- 게시판 목록 시작 { -->
+          <div id="bo_list">
+            <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post">
+              <input type="hidden" name="bo_table" value="consumable_parts" />
+              <input type="hidden" name="sfl" value="" />
+              <input type="hidden" name="stx" value="" />
+              <input type="hidden" name="spt" value="" />
+              <input type="hidden" name="sca" value="" />
+              <input type="hidden" name="sst" value="wr_datetime desc" />
+              <input type="hidden" name="sod" value="" />
+              <input type="hidden" name="page" value="1" />
+              <input type="hidden" name="sw" value="" />
+
+              <div class="tbl_head01 tbl_wrap">
+                <ul id="gall_ul" class="gall_row">
+                  <li class="gall_li col-gn-2">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 14 </span>
+                      </div>
+
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_wYLBTUPz_38b2ccce6b684b3f2a3c45c52727f1ad8dd3dba1_590x450.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Insert Ring</p>
+                          <p class="case">Wafer의 정밀한 위치 확보</p>
+                          <p class="case">Uniformity 향상 및 공정 효율을 좌우하는 핵심소재</p>
+                          <p class="case">반도체 공정 미세화와 대형화에 따른 MTBC 향상에 기여</p>
+                        </div>
+                      </div>
                     </div>
-                    <!--   } 게시판 검색 끝 -->
+                  </li>
+                  <li class="gall_li col-gn-2">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 13 </span>
+                      </div>
 
-                    <!-- 게시판 목록 시작 { -->
-                    <div id="bo_list">
-                        <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post">
-                            <input type="hidden" name="bo_table" value="consumable_parts" />
-                            <input type="hidden" name="sfl" value="" />
-                            <input type="hidden" name="stx" value="" />
-                            <input type="hidden" name="spt" value="" />
-                            <input type="hidden" name="sca" value="" />
-                            <input type="hidden" name="sst" value="wr_datetime desc" />
-                            <input type="hidden" name="sod" value="" />
-                            <input type="hidden" name="page" value="1" />
-                            <input type="hidden" name="sw" value="" />
-
-                            <div class="tbl_head01 tbl_wrap">
-                                <ul id="gall_ul" class="gall_row">
-                                    <li class="gall_li col-gn-2">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 14 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_wYLBTUPz_38b2ccce6b684b3f2a3c45c52727f1ad8dd3dba1_590x450.png" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Insert Ring</p>
-                                                    <p class="case">Unifiromity 향상 및 공정 안정성 제공</p>
-                                                    <p class="case">MTBC 향상</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 23일 전　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 7　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 13 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_bWXFO85C_ba4a295d52136f8c300ce93f9219dc283218051c_590x450.jpg" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Showerhead - Si</p>
-                                                    <p class="case">Gas 분사 Hole의 미세 가공 기술력 제공</p>
-                                                    <p class="case">높은 Yield 확보</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 24일 전　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 4　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2 box_clear">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 12 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_0flMWn6e_664ea87278763719d060e2f9b6b0fb781cec50ab_590x450.png" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Ground Ring</p>
-                                                    <p class="case">Wafer 중심과 가장자리 식각 편차 최소화</p>
-                                                    <p class="case">내플라즈마 특성이 우수하여 Life Time 향상</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 25일 전　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 3　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 11 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_oNw0uPLV_3e5c3ad158565f1817624ecabbbc43f1185afa24_590x450.png" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Edge Ring</p>
-                                                    <p class="case">고온, 고강도 플라즈마 환경에서도 우수한 내식성 유지</p>
-                                                    <p class="case">MTBC 향상</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 26일 전　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 4　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2 box_clear">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 10 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_BAn8Y7ZI_2dc7109313d6bfcc7b30fe1ed055276a93e3812b_590x450.jpg" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Showerhead - SiC</p>
-                                                    <p class="case">화학적 안정성이 뛰어나 부식성 가스에도 내구성 확보</p>
-                                                    <p class="case">높은 미세 Hole 가공 기술력으로 안정적인 공정 유지</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 27일 전　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 4　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 9 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_mTOGpkgo_ee722916fcbac7d8db892467bccdebb4eb1ee553_590x450.png" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Boat</p>
-                                                    <p class="case">고온 환경 및 급격한 온도 변화에도 정밀도 유지</p>
-                                                    <p class="case">Life time 향상으로 고객사 PM 비용 감소</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 25.10.09　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 3　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2 box_clear">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 8 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_pOIs6i7H_0210ae223b274c629247b3d7de7ce36b3d4771a6_590x450.jpg" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Engineering Plastic</p>
-                                                    <p class="case">챔버 내부 제품들에 다양한 목적으로 사용</p>
-                                                    <p class="case">주위 Part Protection 및 Wafer 보호</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 25.10.08　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 5　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 7 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_H7KlyLr5_402163c73ff930beda9bd6262b96ff16d07e5019_590x450.jpg" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Gasket</p>
-                                                    <p class="case">전기적인 특성 및 내열성등의 다양한 목적</p>
-                                                    <p class="case">스크레치 및 Arcing 방지</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 25.10.07　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 5　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2 box_clear">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 6 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_IgWLXTyn_85a5fa79786fc6e8b042668d72b43fe142b11efa_590x450.png" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Polymer Sheet</p>
-                                                    <p class="case">열 전도율을 맞춘 Thermal Interface 소재</p>
-                                                    <p class="case">Yield Rate 개선</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 25.10.06　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 4　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 5 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_aBfjFtuw_7bdf8bb239923076f9a23af65aef49e837027f16_590x450.png" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">EMI Gasket</p>
-                                                    <p class="case">장비 간 전자기파 간섭 및 RF Noise 억제</p>
-                                                    <p class="case">장비 시스템 안정성 향상</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 25.10.05　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 4　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2 box_clear">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 4 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_iVAeYD8Q_e7b38071b036004e4884d10ef169dfa98164fa3d_590x450.png" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Ring</p>
-                                                    <p class="case">고온/플라즈마 공정 시 내열성과 절연 특성 유지</p>
-                                                    <p class="case">Particle 발생 최소화로 Yield 개선 효과</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 25.10.04　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 2　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 3 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_CHXZom4S_118e864ccbc89e736f952b3bdcac326e563711fc_590x450.png" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Showerhead - Quartz</p>
-                                                    <p class="case">가스 확산 균일성과 화학적 안정성 우수</p>
-                                                    <p class="case">다양한 반도체 공정에서 오염 방지</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 25.10.03　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 2　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2 box_clear">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 2 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_ewuhlBA8_ec9de0f6d07b8afb5096fa126249cffa3c8e43dc_590x450.png" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Boat</p>
-                                                    <p class="case">고온 열처리 공정 내열 유리 특성 보유</p>
-                                                    <p class="case">장시간 고온 사용에도 형상 유지 및 파티클 방지</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 25.10.02　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 3　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="gall_li col-gn-2">
-                                        <div class="gall_box">
-                                            <div class="gall_chk">
-                                                <span class="sound_only"> 1 </span>
-                                            </div>
-
-                                            <div class="gall_con">
-                                                <div class="gall_img">
-                                                    <img src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_7scXwx1k_403abd937bd1c3aefc223d177fe334f29f4beb9b_590x450.png" alt="" />
-                                                </div>
-                                                <div class="list_title">
-                                                    <p class="tit">Tube</p>
-                                                    <p class="case">공정중 Particle 발생 최소화</p>
-                                                    <p class="case">안정적인 반도체 공정 유지로 Yield에 기여</p>
-                                                    <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 25.10.01　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 3　</span></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!-- 페이지 -->
-                        </form>
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_bWXFO85C_ba4a295d52136f8c300ce93f9219dc283218051c_590x450.jpg"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Showerhead - Si</p>
+                          <p class="case">다양한 공정 가스를 균일하게 분사하는 역할</p>
+                          <p class="case">Gas 분사 Hole의 미세 가공 기술로 파티클 제어</p>
+                          <p class="case">높은 Yield 확보에 핵심적인 파트</p>
+                        </div>
+                      </div>
                     </div>
+                  </li>
+                  <li class="gall_li col-gn-2 box_clear">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 12 </span>
+                      </div>
 
-                    <!-- } 게시판 목록 끝 -->
-                </div>
-            </div>
-            <!-- } 콘텐츠 끝 -->
-
-            <!-- 하단 시작 { -->
-            <footer id="rondakorea_footer">
-                <div class="inner">
-                    <p class="f_logo"><img src="/images/logo_w.png" alt="Ronda Korea" /></p>
-                    <ul class="f_info">
-                        <li>대표 : 문병술</li>
-                        <li>사업자등록번호 : 882-86-01292</li>
-                        <li>개인정보관리자 : rondakorea@rondakorea.com</li>
-                        <br />
-                        <li>주소 : 경기도 화성시 동탄첨단산업1로 27 금강펜테리움IX타워 A동 1501~1505호</li>
-                        <li>대표번호 : 031-613-2360</li>
-                        <li>팩스 : 031-613-2320</li>
-                    </ul>
-                    <p class="copy">© RONDA KOREA. All Rights Reserved.</p>
-                    <div class="f_member">
-                        <a href="https://rondakorea.mycafe24.com/bbs/login.php">ADMIN</a>
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_0flMWn6e_664ea87278763719d060e2f9b6b0fb781cec50ab_590x450.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Ground Ring</p>
+                          <p class="case">반도체 설비 내부의 전기적 접지와 플라즈마 안정성을 유지</p>
+                          <p class="case">Wafer 중심과 가장자리 식각 편차 최소화</p>
+                          <p class="case">내플라즈마 특성이 우수하여 Life Time 향상</p>
+                        </div>
+                      </div>
                     </div>
-                </div>
-            </footer>
+                  </li>
+                  <li class="gall_li col-gn-2">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 11 </span>
+                      </div>
 
-            <div id="Quick">
-                <a href="/ko/doc/contact/inquiry"><i class="fa-regular fa-message-lines"></i><span>문의하기</span></a>
-                <button type="button" class="go_top" title="상단으로 이동"><i class="fa-regular fa-arrow-up-long"></i></button>
-            </div>
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_oNw0uPLV_3e5c3ad158565f1817624ecabbbc43f1185afa24_590x450.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Edge Ring</p>
+                          <p class="case">Wafer Edge 부분에서의 플라즈마 환경 안정화</p>
+                          <p class="case">고온, 고강도 플라즈마 환경에서도 우수한 내식성 유지</p>
+                          <p class="case">반도체 공정 균일도와 수율을 높이는 핵심 소모성 파트</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="gall_li col-gn-2 box_clear">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 10 </span>
+                      </div>
 
-            <script>
-                (function () {
-                    const sections = [...document.querySelectorAll(".section")];
-                    const anchors = [...document.querySelectorAll(".anchor[data-target]")];
-                    //const toTopBtn = document.getElementById("toTop");
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_BAn8Y7ZI_2dc7109313d6bfcc7b30fe1ed055276a93e3812b_590x450.jpg"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Showerhead - SiC</p>
+                          <p class="case">High Energy를 가지는 플라즈마 분포를 정밀하게 제어</p>
+                          <p class="case">화학적 안정성이 뛰어나 부식성 가스에도 내구성 확보</p>
+                          <p class="case">높은 미세 Hole 가공 기술력으로 안정적인 공정 결과 제공</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="gall_li col-gn-2">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 9 </span>
+                      </div>
 
-                    // 클릭 시 부드러운 스크롤 (헤더 높이 보정)
-                    function scrollToHash(hash) {
-                        const target = document.querySelector(hash);
-                        if (!target) return;
-                        const headerH = document.querySelector("header")?.offsetHeight || 0;
-                        const y = target.getBoundingClientRect().top + window.scrollY - (headerH + 8);
-                        window.scrollTo({ top: y, behavior: "smooth" });
-                    }
-                    anchors.forEach((btn) => {
-                        btn.addEventListener("click", () => {
-                            const hash = btn.dataset.target;
-                            scrollToHash(hash);
-                            history.replaceState(null, "", hash);
-                        });
-                    });
-                    //toTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_mTOGpkgo_ee722916fcbac7d8db892467bccdebb4eb1ee553_590x450.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Boat</p>
+                          <p class="case">반도체 열처리 공정에서 웨이퍼 케리어로 사용</p>
+                          <p class="case">고온 환경 및 급격한 온도 변화에도 정밀도 유지</p>
+                          <p class="case">Life time 향상으로 고객사 PM 비용 감소</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="gall_li col-gn-2 box_clear">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 8 </span>
+                      </div>
 
-                    // 현재 섹션 하이라이트 (IntersectionObserver)
-                    function setActive(id) {
-                        anchors.forEach((b) => {
-                            const on = b.dataset.target === "#" + id;
-                            b.setAttribute("aria-current", on ? "true" : "false");
-                        });
-                    }
-                    const io = new IntersectionObserver(
-                        (entries) => {
-                            entries.forEach((e) => {
-                                if (e.isIntersecting) {
-                                    setActive(e.target.id);
-                                }
-                            });
-                        },
-                        {
-                            root: null,
-                            rootMargin: "-40% 0px -50% 0px", // 중앙 근처에 들어오면 활성
-                            threshold: 0,
-                        }
-                    );
-                    sections.forEach((s) => io.observe(s));
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_pOIs6i7H_0210ae223b274c629247b3d7de7ce36b3d4771a6_590x450.jpg"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Engineering Plastic</p>
+                          <p class="case">고성능 플라스틱으로 내열성, 내화학성, 내마모성을 제공하는 파트</p>
+                          <p class="case">ESC 또는 전극 어셈블리를 챔버 내부에 정밀하게 고정</p>
+                          <p class="case">Arcing 방지로 Critical Parts 및 Wafer 보호</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="gall_li col-gn-2">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 7 </span>
+                      </div>
 
-                    // 초기 해시 위치 보정
-                    window.addEventListener("load", () => {
-                        if (location.hash) {
-                            setTimeout(() => scrollToHash(location.hash), 30);
-                        }
-                    });
-                })();
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_H7KlyLr5_402163c73ff930beda9bd6262b96ff16d07e5019_590x450.jpg"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Gasket</p>
+                          <p class="case">반도체 설비 Part사이에 장착되어 사용되는 제품</p>
+                          <p class="case">전기적인 특성 및 내열성 향상 등의 다양한 목적</p>
+                          <p class="case">스크레치 및 Arcing 방지로 CoC (Cost of consumable) 감소</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="gall_li col-gn-2 box_clear">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 6 </span>
+                      </div>
 
-                (function () {
-                    const target = document.querySelector("#myTagTabMenu"); // 감시할 태그
-                    // const headerH = document.querySelector("#rondakorea_header")?.offsetHeight || 0;
-                    const headerH = 0;
-                    const anchorTabMenu = document.getElementById("myTagAnchorTabMenu"); // 앵커탭메뉴
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_IgWLXTyn_85a5fa79786fc6e8b042668d72b43fe142b11efa_590x450.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Polymer Sheet</p>
+                          <p class="case">열 전도율을 맞춘 Thermal Interface 소재</p>
+                          <p class="case">Wafer Edge 온도를 낮춰 Yield 개선</p>
+                          <p class="case">반도체 설비의 신뢰성 및 성능향상</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="gall_li col-gn-2">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 5 </span>
+                      </div>
 
-                    const io = new IntersectionObserver(
-                        ([entry]) => {
-                            const rect = entry.boundingClientRect;
-                            const outAbove = !entry.isIntersecting && rect.top < 0 - headerH;
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_aBfjFtuw_7bdf8bb239923076f9a23af65aef49e837027f16_590x450.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">EMI Gasket</p>
+                          <p class="case">전자기파 차폐 기능으로 장비 간 간섭 최소화</p>
+                          <p class="case">전기적 접촉 불량 방지 및 시스템 안정성 향상</p>
+                          <p class="case">RF 시스템 및 통신 모듈의 노이즈 억제에 효과적</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="gall_li col-gn-2 box_clear">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 4 </span>
+                      </div>
 
-                            if (outAbove) {
-                                anchorTabMenu.style.display = "";
-                            } else {
-                                anchorTabMenu.style.display = "none";
-                            }
-                        },
-                        {
-                            root: null, // 뷰포트 기준 (스크롤 컨테이너가 따로 있으면 그 요소를 지정)
-                            threshold: 0,
-                            // 헤더가 고정되어 있으면 그만큼 음수로 올려 사라짐 판정 시점을 보정
-                            //rootMargin: `-${headerH}px 0px 0px 0px`,
-                        }
-                    );
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_iVAeYD8Q_e7b38071b036004e4884d10ef169dfa98164fa3d_590x450.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Ring</p>
+                          <p class="case">Etch 공정등에서 웨이퍼와 전극, 가스 흐름을 정밀하게제어</p>
+                          <p class="case">고온/플라즈마 공정 시 내열성과 절연 특성 유지</p>
+                          <p class="case">고순도 제품으로 Particle 발생 최소화</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="gall_li col-gn-2">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 3 </span>
+                      </div>
 
-                    io.observe(target);
-                })();
-            </script>
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_CHXZom4S_118e864ccbc89e736f952b3bdcac326e563711fc_590x450.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Showerhead - Quartz</p>
+                          <p class="case">CVD 및 Dry Etch 공정에서 미세 가스 제어 가능</p>
+                          <p class="case">가스 확산 균일성과 플라즈마 안정성 우수</p>
+                          <p class="case">다양한 반도체 공정에서 오염 방지</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="gall_li col-gn-2 box_clear">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 2 </span>
+                      </div>
+
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_ewuhlBA8_ec9de0f6d07b8afb5096fa126249cffa3c8e43dc_590x450.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Boat</p>
+                          <p class="case">웨이퍼 운반 및 적재에 사용되는 부품</p>
+                          <p class="case">고온 열처리 공정에 사용되는 내열 유리 특성 보유</p>
+                          <p class="case">장시간 사용에 유리하여, CoC (Cost of Consumable) 감소</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="gall_li col-gn-2">
+                    <div class="gall_box">
+                      <div class="gall_chk">
+                        <span class="sound_only"> 1 </span>
+                      </div>
+
+                      <div class="gall_con">
+                        <div class="gall_img">
+                          <img
+                            src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_7scXwx1k_403abd937bd1c3aefc223d177fe334f29f4beb9b_590x450.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="list_title">
+                          <p class="tit">Tube</p>
+                          <p class="case">CVD, Diffusion 공정등에서 필수적인 파트로 맞춤형 제작 가능</p>
+                          <p class="case">반도체 공정 중 Particle 발생 최소화</p>
+                          <p class="case">안정적인 반도체 공정 유지로 Yield에 기여</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- 페이지 -->
+            </form>
+          </div>
+
+          <!-- } 게시판 목록 끝 -->
         </div>
+      </div>
+      <!-- } 콘텐츠 끝 -->
 
-        <!-- } 하단 끝 -->
-    </body>
+      <!-- 하단 시작 { -->
+      <footer id="rondakorea_footer">
+        <div class="inner">
+          <p class="f_logo"><img src="/images/logo_w.png" alt="Ronda Korea" /></p>
+          <ul class="f_info">
+            <li>대표 : 문병술</li>
+            <li>사업자등록번호 : 882-86-01292</li>
+            <li>개인정보관리자 : rondakorea@rondakorea.com</li>
+            <br />
+            <li>주소 : 경기도 화성시 동탄첨단산업1로 27 금강펜테리움IX타워 A동 1501~1505호</li>
+            <li>대표번호 : 031-613-2360</li>
+            <li>팩스 : 031-613-2320</li>
+          </ul>
+          <p class="copy">© RONDA KOREA. All Rights Reserved.</p>
+          <div class="f_member">
+            <a href="https://rondakorea.mycafe24.com/bbs/login.php">ADMIN</a>
+          </div>
+        </div>
+      </footer>
+
+      <div id="Quick">
+        <a href="/ko/doc/contact/inquiry"><i class="fa-regular fa-message-lines"></i><span>문의하기</span></a>
+        <button type="button" class="go_top" title="상단으로 이동"><i class="fa-regular fa-arrow-up-long"></i></button>
+      </div>
+
+      <script>
+        (function () {
+          const sections = [...document.querySelectorAll(".section")];
+          const anchors = [...document.querySelectorAll(".anchor[data-target]")];
+          //const toTopBtn = document.getElementById("toTop");
+
+          // 클릭 시 부드러운 스크롤 (헤더 높이 보정)
+          function scrollToHash(hash) {
+            const target = document.querySelector(hash);
+            if (!target) return;
+            const headerH = document.querySelector("header")?.offsetHeight || 0;
+            const y = target.getBoundingClientRect().top + window.scrollY - (headerH + 8);
+            window.scrollTo({ top: y, behavior: "smooth" });
+          }
+          anchors.forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const hash = btn.dataset.target;
+              scrollToHash(hash);
+              history.replaceState(null, "", hash);
+            });
+          });
+          //toTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+          // 현재 섹션 하이라이트 (IntersectionObserver)
+          function setActive(id) {
+            anchors.forEach((b) => {
+              const on = b.dataset.target === "#" + id;
+              b.setAttribute("aria-current", on ? "true" : "false");
+            });
+          }
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  setActive(e.target.id);
+                }
+              });
+            },
+            {
+              root: null,
+              rootMargin: "-40% 0px -50% 0px", // 중앙 근처에 들어오면 활성
+              threshold: 0,
+            }
+          );
+          sections.forEach((s) => io.observe(s));
+
+          // 초기 해시 위치 보정
+          window.addEventListener("load", () => {
+            if (location.hash) {
+              setTimeout(() => scrollToHash(location.hash), 30);
+            }
+          });
+        })();
+
+        (function () {
+          const target = document.querySelector("#myTagTabMenu"); // 감시할 태그
+          // const headerH = document.querySelector("#rondakorea_header")?.offsetHeight || 0;
+          const headerH = 0;
+          const anchorTabMenu = document.getElementById("myTagAnchorTabMenu"); // 앵커탭메뉴
+
+          const io = new IntersectionObserver(
+            ([entry]) => {
+              const rect = entry.boundingClientRect;
+              const outAbove = !entry.isIntersecting && rect.top < 0 - headerH;
+
+              if (outAbove) {
+                anchorTabMenu.style.display = "";
+              } else {
+                anchorTabMenu.style.display = "none";
+              }
+            },
+            {
+              root: null, // 뷰포트 기준 (스크롤 컨테이너가 따로 있으면 그 요소를 지정)
+              threshold: 0,
+              // 헤더가 고정되어 있으면 그만큼 음수로 올려 사라짐 판정 시점을 보정
+              //rootMargin: `-${headerH}px 0px 0px 0px`,
+            }
+          );
+
+          io.observe(target);
+        })();
+      </script>
+    </div>
+
+    <!-- } 하단 끝 -->
+  </body>
 </html>
 
 <!-- 사용스킨 : res_products -->
