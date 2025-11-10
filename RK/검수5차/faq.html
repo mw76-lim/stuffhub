@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_common.css?ver=2303229" />
     <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_css.css?ver=2303229" />
     <link rel="stylesheet" href="https://rondakorea.mycafe24.com/css/rondakorea_animate.css?ver=2303229" />
-    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/skin/board/res_products/open-iconic.css?ver=2303229" />
+    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/skin/board/res_faq/style.css?ver=2303229" />
+    <link rel="stylesheet" href="https://rondakorea.mycafe24.com/skin/board/res_faq/open-iconic.css?ver=2303229" />
     <!--[if lte IE 8]>
       <script src="https://rondakorea.mycafe24.com/js/html5.js"></script>
     <![endif]-->
@@ -33,7 +34,7 @@
       var g5_is_member = "";
       var g5_is_admin = "";
       var g5_is_mobile = "";
-      var g5_bo_table = "component";
+      var g5_bo_table = "ronda_faq";
       var g5_sca = "";
       var g5_editor = "";
       var g5_cookie_domain = "";
@@ -55,7 +56,6 @@
   </head>
   <body>
     <!-- 상단 시작 { -->
-
     <div id="wrap">
       <header id="rondakorea_header">
         <div class="inner2">
@@ -175,66 +175,57 @@
 
       <!-- 콘텐츠 시작 { -->
 
-      <div id="sVisu" class="sVisu3">
+      <div id="sVisu" class="sVisu5 case2">
         <div class="s-inner">
-          <h2 class="wow fadeInUp" data-wow-delay="0.2s">Products <span>정밀한 기술력으로</span></h2>
-          <p class="wow fadeInUp" data-wow-delay="0.4s">글로벌 반도체 시장을 선도하는 브랜드</p>
+          <h2 class="wow fadeInUp" data-wow-delay="0.2s">Support <span>관계로부터 힘을 얻어</span></h2>
+          <p class="wow fadeInUp" data-wow-delay="0.4s">함께 성장하고 나아가는 파트너십</p>
           <div class="sub_menu_wrap">
             <button type="button"></button>
             <ul>
-              <li><a href="product-consumable-parts.html" title="Consumable Parts">Consumable Parts</a></li>
-              <li><a href="product-subfab-solution.html" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
-              <li><a href="product-component.html" title="Component">Component</a></li>
-              <li><a href="product-rawmaterials.html" title="Raw Materials">Raw Materials</a></li>
+              <li><a href="support.html" title="온라인문의">온라인문의</a></li>
+              <li><a href="newsroom.html" title="뉴스룸">뉴스룸</a></li>
+              <li><a href="faq.html" title="FAQ">FAQ</a></li>
             </ul>
           </div>
         </div>
         <div class="img_box"></div>
-        <div id="board"></div>
       </div>
 
       <script>
-        function subFun_1(depth1){
-          var s_num = $("#sVisu").attr("class").substr(5, 1);
-          $("#rondakorea_gnb > ul > li:eq("+ (s_num) +")").addClass("active")
-
-          $(".sub_menu_wrap ul li:eq("+ (depth1 - 1) +")").addClass("on");
-          $(".sub_menu_wrap button").text($(".sub_menu_wrap ul li:eq("+ (depth1 - 1) +") a").text())
-        }
-        subFun_1(3);
+        subFun(3);
       </script>
-
-      <!-- <aside id="myTagAnchorTabMenu" class="side-nav page3" aria-label="세로 앵커탭 네비게이션">
-        <div class="side-title">Sections</div>
-        <ul>
-          <li><a href="#" title="Consumable Parts">Consumable Parts</a></li>
-          <li><a href="#" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
-          <li><a href="#" title="Component">Component</a></li>
-          <li><a href="#" title="Raw Materials">Raw Materials</a></li>
-        </ul>
-      </aside> -->
 
       <div id="sub_content">
         <div class="s-inner">
-          <p class="sub_title mb30">Component</p>
-          <link rel="stylesheet" href="https://rondakorea.mycafe24.com/skin/board/res_products/style.css" />
+          <div class="sub_title2 mb30">
+            <p class="t1">론다코리아에 자주하시는</p>
+            <p class="t2">질문에 대한 답변을 제공합니다</p>
+          </div>
 
           <!-- 게시판 검색 시작 { -->
           <div class="bo_sch_gall">
             <!-- 게시판 카테고리 시작 { -->
             <nav id="bo_cate">
-              <h2>Component 카테고리</h2>
+              <h2>FAQ 카테고리</h2>
               <ul id="bo_cate_ul">
-                <li><a id="bo_cate_on">All View</a></li>
-                <li><a>ESC</a></li>
-                <li><a>Ceramic Heater</a></li>
-                <li><a>MCA</a></li>
-                <li><a>APC Valve</a></li>
-                <li><a>RPS</a></li>
-                <li><a>Vaporizer</a></li>
-                <li><a>CO2 Bubbler</a></li>
-                <li><a>MFC</a></li>
-                <li><a>Filter</a></li>
+                <li><a href="https://rondakorea.mycafe24.com/ronda_faq#board" id="bo_cate_on">전체보기</a></li>
+                <li><a href="https://rondakorea.mycafe24.com/ronda_faq?sca=%ED%9A%8C%EC%82%AC+%EC%9D%BC%EB%B0%98#board">회사 일반</a></li>
+                <li><a href="https://rondakorea.mycafe24.com/ronda_faq?sca=%EC%A0%9C%ED%92%88#board">제품</a></li>
+                <li>
+                  <a href="https://rondakorea.mycafe24.com/ronda_faq?sca=%ED%92%88%EC%A7%88+%EB%B0%8F+%EA%B8%B0%EC%88%A0#board">품질 및 기술</a>
+                </li>
+                <li>
+                  <a href="https://rondakorea.mycafe24.com/ronda_faq?sca=%EC%A3%BC%EB%AC%B8+%EB%B0%8F+%EA%B3%B5%EA%B8%89#board">주문 및 공급</a>
+                </li>
+                <li>
+                  <a
+                    href="https://rondakorea.mycafe24.com/ronda_faq?sca=%EA%B8%B0%EC%88%A0+%EC%A7%80%EC%9B%90+%EB%B0%8F+%EC%84%9C%EB%B9%84%EC%8A%A4#board"
+                    >기술 지원 및 서비스</a
+                  >
+                </li>
+                <li>
+                  <a href="https://rondakorea.mycafe24.com/ronda_faq?sca=%ED%98%91%EB%A0%A5+%EB%B0%8F+%EC%B1%84%EC%9A%A9#board">협력 및 채용</a>
+                </li>
               </ul>
             </nav>
             <!-- } 게시판 카테고리 끝 -->
@@ -243,7 +234,7 @@
 		<legend>게시물 검색</legend>
 
 		<form name="fsearch" method="get" autocomplete="off">
-		<input type="hidden" name="bo_table" value="component">
+		<input type="hidden" name="bo_table" value="ronda_faq">
 		<input type="hidden" name="sca" value="">
 		<input type="hidden" name="sop" value="and">
 		<label for="sfl" class="sound_only">검색대상</label>
@@ -259,239 +250,217 @@
 		<button type="submit" value="검색" class="sch_btn"><i class="fa-regular fa-magnifying-glass"></i><span class="sound_only">검색</span></button>
 		</form>
 	</fieldset>-->
-            <div></div>
           </div>
           <!--   } 게시판 검색 끝 -->
+
+          <!--<div id="bo_list_total">
+	<span>총 <strong>16</strong>건</span>
+</div>-->
 
           <!-- 게시판 목록 시작 { -->
           <div id="bo_list">
             <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post">
-              <input type="hidden" name="bo_table" value="component" />
+              <input type="hidden" name="bo_table" value="ronda_faq" />
               <input type="hidden" name="sfl" value="" />
               <input type="hidden" name="stx" value="" />
               <input type="hidden" name="spt" value="" />
               <input type="hidden" name="sca" value="" />
-              <input type="hidden" name="sst" value="wr_datetime desc" />
+              <input type="hidden" name="sst" value="wr_datetime asc" />
               <input type="hidden" name="sod" value="" />
               <input type="hidden" name="page" value="1" />
               <input type="hidden" name="sw" value="" />
 
               <div class="tbl_head01 tbl_wrap">
-                <ul id="gall_ul" class="gall_row">
-                  <li class="gall_li col-gn-2">
-                    <div class="gall_box">
-                      <div class="gall_chk">
-                        <span class="sound_only"> 9 </span>
-                      </div>
+                <table>
+                  <caption>
+                    FAQ 목록
+                  </caption>
 
-                      <div class="gall_con">
-                        <div class="gall_img">
-                          <img
-                            src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_k0miHsq8_881bcfb25eb6b9889fe2e4ba88a47c4ed65e7ffc_590x450.png"
-                            alt=""
-                          />
+                  <tbody>
+                    <tr class="">
+                      <td>
+                        <button type="button">(주)론다코리아는 어떤 회사인가요?</button>
+                        <div class="cont">
+                          <p>
+                            (주)론다코리아는 반도체 제조 공정에 필수적인 고성능 장비 및 소모성 부품을 전문적으로 공급하며, 공정 효율과 생산성 향상에
+                            기여하는 종합 퍼실리티 솔루션을 제공하는 기업입니다. 고객사의 안정적인 생산 환경 구축을 위해 최선을 다하고 있습니다.
+                          </p>
                         </div>
-                        <div class="list_title">
-                          <p class="tit">ESC</p>
-                          <p class="case">정전기력 기반 웨이퍼 고정과 하부 전극을 통한 균일한 플라즈마 분포 구현</p>
-                          <p class="case">최대 172존 히터 제어로 정밀한 온도 균일성과 공정 재현성 확보</p>
-                          <p class="case">고순도 세라믹 소재로 내플라즈마성·내화학성 향상, 공정 신뢰성 극대화</p>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">론다코리아의 주요 사업 분야는 무엇인가요?</button>
+                        <div class="cont">
+                          <p>
+                            당사는 크게 두 가지 주요 사업 분야를 가지고 있습니다. - Consumable Parts (소모성 부품): 반도체 공정 중 주기적으로 교체되는
+                            핵심 부품들. - Facility Solution (퍼실리티 솔루션): 반도체 생산 설비의 효율적인 운영 및 유지보수를 위한 제품과 서비스.
+                            자세한 내용은 [제품 페이지 링크]에서 확인하실 수 있습니다.
+                          </p>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="gall_li col-gn-2">
-                    <div class="gall_box">
-                      <div class="gall_chk">
-                        <span class="sound_only"> 8 </span>
-                      </div>
-
-                      <div class="gall_con">
-                        <div class="gall_img">
-                          <img
-                            src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_NRBMKzba_09aeee20dbc1a91dade5c3b90fac9d63706c931a_590x450.png"
-                            alt=""
-                          />
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">론다코리아의 협력 파트너 및 공급망은 어떻게 되나요?</button>
+                        <div class="cont">
+                          <p>
+                            당사는 글로벌 파트너사들과의 긴밀한 협력을 통해 고품질의 제품을 안정적으로 공급받고 있습니다. 특히 중국은 당사의 메인
+                            공급처로서, 경쟁력 있는 가격과 우수한 기술력을 바탕으로 고객 만족을 위해 노력하고 있습니다.
+                          </p>
                         </div>
-                        <div class="list_title">
-                          <p class="tit">Ceramic Heater</p>
-                          <p class="case">고열전도 AlN 세라믹 적용으로 열전달 효율 및 온도 균일성 극대화</p>
-                          <p class="case">Dual Zone Heater 설계로 700 °C 이상 고온에서도 정밀한 온도 제어</p>
-                          <p class="case">정전력 기반 Chucking 기능으로 고온·진공 환경에서도 웨이퍼 안정 유지</p>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">론다코리아가 공급하는 **Consumable Parts (소모성 부품)**에는 어떤 것들이 있나요?</button>
+                        <div class="cont">
+                          <p>
+                            당사는 반도체 플라즈마 공정용 소모성 부품으로 Insert Ring, Showerhead, Ground Ring, Edge Ring과 더불어 웨이퍼 이송 및
+                            공정용 Boat, Tube 등 다양한 고품질 부품을 공급하고 있습니다. 각 제품은 공정 효율 및 수율 향상에 필수적인 역할을 합니다.
+                          </p>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="gall_li col-gn-2 box_clear">
-                    <div class="gall_box">
-                      <div class="gall_chk">
-                        <span class="sound_only"> 7 </span>
-                      </div>
-
-                      <div class="gall_con">
-                        <div class="gall_img">
-                          <img
-                            src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_29bKcVrh_ac06956663741279e636ef6e88a11a6a13754832_590x450.png"
-                            alt=""
-                          />
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">론다코리아의 **Facility Solution (퍼실리티 솔루션)**은 어떤 제품과 서비스를 포함하나요?</button>
+                        <div class="cont">
+                          <p>
+                            당사의 퍼실리티 솔루션은 챔버 및 라인 관리의 핵심인 APC Valve, Gate Valve, Slit Valve, Angle Valve를 포함한 다양한 **밸브
+                            및 밸브 액세서리(Valve Acc.)**를 제공합니다. 또한, 진공 시스템의 핵심인 Dry Type, Plasma Type, Wet Type 펌프와 Dry Pump,
+                            Turbo Pump 등의 공급 및 Pump Repair(펌프 수리) 서비스도 제공하여 고객사의 설비 최적화를 지원합니다.
+                          </p>
                         </div>
-                        <div class="list_title">
-                          <p class="tit">MCA</p>
-                          <p class="case">정전기력으로 웨이퍼를 고정해 진공·플라즈마 환경에서도 평탄도와 정밀도 유지</p>
-                          <p class="case">TiN·DLC 도트 코팅으로 내마모성과 절연 안정성 강화, 파티클 최소화</p>
-                          <p class="case">상온~400 °C의 넓은 온도 범위에서 안정 동작, 다양한 공정 조건 대응</p>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">특정 반도체 장비 모델에 맞는 부품도 공급 가능한가요?</button>
+                        <div class="cont">
+                          <p>
+                            네, 당사는 주요 반도체 장비 제조사들의 다양한 모델에 호환되는 부품을 공급하며, 고객사의 특정 장비 및 공정 요구사항에 맞춰
+                            [커스터마이징(Customizing)] 제작 및 솔루션 제안도 가능합니다. 상세한 호환 여부는 기술 문의를 통해 확인해 주십시오.
+                          </p>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="gall_li col-gn-2">
-                    <div class="gall_box">
-                      <div class="gall_chk">
-                        <span class="sound_only"> 6 </span>
-                      </div>
-
-                      <div class="gall_con">
-                        <div class="gall_img">
-                          <img
-                            src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_IJ6nK70s_7372d83a8ebdd20fdc4a7efdf905925aa5e52970_590x450.png"
-                            alt=""
-                          />
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">론다코리아 제품의 품질 관리는 어떻게 이루어지나요?</button>
+                        <div class="cont">
+                          <p>
+                            당사는 글로벌 파트너사와 협력하여 최고 등급의 원자재를 사용하고, [예: 엄격한 검수 절차, 정밀 가공 기술]을 통해 모든 제품의
+                            품질을 관리합니다. [예: ISO 9001] 등의 품질 관리 시스템을 기반으로, 고객사에 공급되는 모든 제품의 신뢰성과 성능을
+                            보장합니다.
+                          </p>
                         </div>
-                        <div class="list_title">
-                          <p class="tit">APC Valve</p>
-                          <p class="case">공정 챔버의 압력을 실시간으로 정밀하게 제어</p>
-                          <p class="case">피드백 기반의 자동 제어 기능으로 공정 정밀도 향상</p>
-                          <p class="case">고속 응답 특성으로 세밀한 진공 단계 전환 가능</p>
-                          <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 18일 전　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 3　</span></p>-->
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">론다코리아의 제품이 고객사의 수율 향상에 어떻게 기여하나요?</button>
+                        <div class="cont">
+                          <p>
+                            당사의 소모성 부품은 [예: 고순도 재료, 정밀한 가공, 최적화된 설계]를 통해 플라즈마 균일도, 오염 최소화, 안정적인 공정 환경
+                            조성에 기여합니다. 퍼실리티 솔루션은 장비의 효율적인 운영과 유지보수를 지원하여 불량률 감소 및 생산성 향상에 직접적인
+                            영향을 미칩니다.
+                          </p>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="gall_li col-gn-2 box_clear">
-                    <div class="gall_box">
-                      <div class="gall_chk">
-                        <span class="sound_only"> 5 </span>
-                      </div>
-
-                      <div class="gall_con">
-                        <div class="gall_img">
-                          <img
-                            src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_wmDANCSE_e31fa678718cbdcb605c8db08d2ddf7739d2a4f6_590x450.png"
-                            alt=""
-                          />
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">론다코리아의 기술 지원 역량은 어느 정도인가요?</button>
+                        <div class="cont">
+                          <p>
+                            당사는 제품 공급을 넘어, 고객사의 공정 문제를 해결하고 최적의 솔루션을 제공하기 위한 [전문 기술팀]을 운영하고 있습니다.
+                            [예: 챔버 컨설팅, 펌프 진단 및 수리] 등 폭넓은 기술 지원을 통해 고객사의 생산 안정화에 기여합니다.
+                          </p>
                         </div>
-                        <div class="list_title">
-                          <p class="tit">RPS</p>
-                          <p class="case">박막 증착, PR Strip, Chamber cleaning 등 다양한 기능으로 활용</p>
-                          <p class="case">Plasma 발생, Gas 유입 분리 가능, 정밀한 조건 제어 용이</p>
-                          <p class="case">ALD, ALE 등 소량의 Plasma가 필요한 공정에 적용 가능</p>
-                          <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 19일 전　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 1　</span></p>-->
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">제품 구매는 어떻게 진행되나요?</button>
+                        <div class="cont">
+                          <p>
+                            제품 구매 문의는 [영업 담당자에게 연락] 또는 [온라인 문의 양식]을 통해 접수해 주십시오. 고객사의 요구사항을 면밀히
+                            검토하여 견적 및 최적의 솔루션을 제안해 드립니다.
+                          </p>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="gall_li col-gn-2">
-                    <div class="gall_box">
-                      <div class="gall_chk">
-                        <span class="sound_only"> 4 </span>
-                      </div>
-
-                      <div class="gall_con">
-                        <div class="gall_img">
-                          <img
-                            src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_HqifnOS8_4f82f2b36fdaafd60d7b7ede96dc7bd5d7e1421e_590x450.png"
-                            alt=""
-                          />
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">제품 납기는 얼마나 소요되나요?</button>
+                        <div class="cont">
+                          <p>
+                            제품 종류, 주문 수량, 그리고 현재 재고 상황에 따라 납기는 상이할 수 있습니다. 당사는 메인 공급처인 중국을 포함한 글로벌
+                            공급망을 통해 안정적이고 신속한 납기를 위해 최선을 다하고 있으며, 주문 시 정확한 납기 일정을 안내해 드립니다.
+                          </p>
                         </div>
-                        <div class="list_title">
-                          <p class="tit">Vaporizer</p>
-                          <p class="case">기화 온도를 정밀하게 제어하여 응축 없이 균일한 Precursor 공급</p>
-                          <p class="case">TDMAT, TEOS, TEB 등 다양한 Precursor 호환</p>
-                          <p class="case">공정 시작/종료 시 즉각적인 증기 응답으로 생산성 향상</p>
-                          <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 20일 전　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 1　</span></p>-->
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">최소 주문 수량(MOQ)이 있나요?</button>
+                        <div class="cont">
+                          <p>제품군에 따라 최소 주문 수량이 적용될 수 있습니다. 자세한 내용은 영업 담당자와 상담해 주시기 바랍니다.</p>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="gall_li col-gn-2 box_clear">
-                    <div class="gall_box">
-                      <div class="gall_chk">
-                        <span class="sound_only"> 3 </span>
-                      </div>
-
-                      <div class="gall_con">
-                        <div class="gall_img">
-                          <img
-                            src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_l8mOLcQn_1ae0793e39112e22823721cca703c21665911f0b_590x450.png"
-                            alt=""
-                          />
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">해외 배송도 가능한가요?</button>
+                        <div class="cont">
+                          <p>네, 당사는 전 세계 고객사를 대상으로 편리하고 안전한 해외 배송 서비스를 제공하고 있습니다.</p>
                         </div>
-                        <div class="list_title">
-                          <p class="tit">CO2 Bubbler</p>
-                          <p class="case">공정 맞춤형 CO₂ 주입 모듈, Compact 설계로 효율 극대화</p>
-                          <p class="case">최적화 구조로 유지관리 부담을 최소화</p>
-                          <p class="case">멤브레인 방식 적용으로 균일 용해와 안정된 비저항 확보</p>
-                          <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 21일 전　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 1　</span></p>-->
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">구매한 제품에 대한 기술 지원을 받을 수 있나요?</button>
+                        <div class="cont">
+                          <p>
+                            네, 당사 제품 구매 고객께는 설치 지원, 공정 최적화 컨설팅, 문제 해결을 위한 기술 지원을 제공합니다. [기술 지원 전담팀]이
+                            언제든 지원할 준비가 되어 있습니다.
+                          </p>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="gall_li col-gn-2">
-                    <div class="gall_box">
-                      <div class="gall_chk">
-                        <span class="sound_only"> 2 </span>
-                      </div>
-
-                      <div class="gall_con">
-                        <div class="gall_img">
-                          <img
-                            src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_7wOLJUj0_39f64bc06af1d1733a90b3b2f02cb48badee85d9_590x450.png"
-                            alt=""
-                          />
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">제품 유지보수 또는 A/S는 어떻게 이루어지나요?</button>
+                        <div class="cont">
+                          <p>제품에 대한 유지보수 및 사후 서비스는 [고객센터]를 통해 문의하시면 담당자가 신속하게 처리 절차를 안내해 드립니다.</p>
                         </div>
-                        <div class="list_title">
-                          <p class="tit">MFC</p>
-                          <p class="case">Process에 투입되는 Gas의 유량을 측정 및 제어</p>
-                          <p class="case">고속 응답속도 및 높은 정확도로, 극소량 유량 정밀 제어</p>
-                          <p class="case">소유량에서 대유량, 고온사용 조건 등 다양한 환경에 적용</p>
-                          <!--<p><span class="bo_cate_link color-gray"><i class="oi oi-clock"></i> 22일 전　</span>
-						<span class="bo_cate_link color-gray"><i class="oi oi-eye"></i> 1　</span></p>-->
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <button type="button">론다코리아와 협력하고 싶습니다. 어떻게 문의해야 하나요?</button>
+                        <div class="cont">
+                          <p>
+                            새로운 사업 제휴 또는 파트너십 관련 문의는 [제휴 문의 담당자 이메일] 또는 [제휴 문의 전화번호]로 연락 주시면, 담당
+                            부서에서 검토 후 답변 드리겠습니다.
+                          </p>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="gall_li col-gn-2 box_clear">
-                    <div class="gall_box">
-                      <div class="gall_chk">
-                        <span class="sound_only"> 1 </span>
-                      </div>
-
-                      <div class="gall_con">
-                        <div class="gall_img">
-                          <img
-                            src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_elXOVwbY_ef9229c60bd58fcb752b02472017e0b9f489f321_590x450.png"
-                            alt=""
-                          />
-                        </div>
-                        <div class="list_title">
-                          <p class="tit">Filter</p>
-                          <p class="case">기체·액체 내 불순물 제거로 공정 라인의 고순도 환경 유지</p>
-                          <p class="case">초미세 파티클 제어로 결함률 최소화 및 품질 안정성 확보</p>
-                          <p class="case">공정 Gas·Chemical 특성에 맞춘 내식성·내화학성 강화형 맞춤 설계</p>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
               <!-- 페이지 -->
             </form>
           </div>
+
+          <script>
+            $("#bo_list .tbl_head01 td button").click(function () {
+              $(this).toggleClass("on");
+            });
+          </script>
 
           <!-- } 게시판 목록 끝 -->
         </div>
@@ -519,7 +488,7 @@
       </footer>
 
       <div id="Quick">
-        <a href="#"><i class="fa-regular fa-message-lines"></i><span>문의하기</span></a>
+        <a href="/ko/doc/contact/inquiry"><i class="fa-regular fa-message-lines"></i><span>문의하기</span></a>
         <button type="button" class="go_top" title="상단으로 이동"><i class="fa-regular fa-arrow-up-long"></i></button>
       </div>
 
@@ -611,4 +580,4 @@
   </body>
 </html>
 
-<!-- 사용스킨 : res_products -->
+<!-- 사용스킨 : res_faq -->
