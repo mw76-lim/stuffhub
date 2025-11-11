@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Ronda Korea | Business</title>
+  <style>
+    :root {
+      --main-color: #132b88;
+      --sub-color: #0e1a3d;
+      --text-color: #222;
+      --muted: #586070;
+      --bg: #f5f7fb;
+      --radius: 18px;
+      --shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans KR", sans-serif;
+      color: var(--text-color);
+      background: var(--bg);
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(145deg,#101c46 0%,#2f4fb0 100%);
+      color: white;
+      padding: 120px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .hero p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* General Section */
+    section {
+      width: min(1200px, 92%);
+      margin: 80px auto;
+    }
+
+    .biz-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 70px;
+    }
+    .biz-card:nth-child(even) .biz-visual { order: 2; }
+    .biz-card img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .biz-content {
+      padding: 48px 52px;
+    }
+    .biz-content h2 {
+      color: var(--main-color);
+      font-size: 1.4rem;
+      line-height: 1.35;
+      margin: 0 0 22px;
+    }
+    .biz-content p {
+      line-height: 1.6;
+      font-size: 0.93rem;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+
+    .biz-content p strong { color: var(--main-color); }
+
+    /* Icon Feature Section */
+    .features {
+      text-align: center;
+    }
+    .features h3 {
+      font-size: 1.4rem;
+      color: var(--sub-color);
+      margin-bottom: 40px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 24px;
+    }
+    .feature {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 36px 24px;
+      transition: transform 0.3s ease;
+    }
+    .feature:hover { transform: translateY(-4px); }
+    .feature img {
+      width: 54px; margin-bottom: 20px;
+    }
+    .feature h4 {
+      color: var(--main-color);
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+    .feature p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    /* Global Network */
+    .global {
+      background: white;
+      padding: 60px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .global h3 {
+      color: var(--main-color);
+      margin-bottom: 12px;
+    }
+    .global p {
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+    .map {
+      width: 100%;
+      height: 360px;
+      background: url('https://placehold.co/1000x360/ccd5ea/132b88?text=Global+Network+Map') center/cover no-repeat;
+      border-radius: var(--radius);
+    }
+
+    /* Closing Banner */
+    .closing {
+      background: linear-gradient(135deg,#162a76 0%,#4b62cc 100%);
+      color: white;
+      text-align: center;
+      padding: 90px 20px;
+      margin-top: 100px;
+    }
+    .closing h2 {
+      font-size: 1.8rem;
+      margin: 0 0 14px;
+      font-weight: 600;
+    }
+    .closing p {
+      color: rgba(255,255,255,0.85);
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      .biz-card {
+        grid-template-columns: 1fr;
+      }
+      .biz-content {
+        padding: 32px 24px;
+      }
+      .global {
+        padding: 40px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Business</h1>
+    <p>기술의 진보를 넘어 비즈니스의 미래를 설계하는 기업</p>
+  </section>
+
+  <!-- SECTION 1 -->
+  <section class="biz-card">
+    <figure class="biz-visual">
+      <img src="https://placehold.co/600x420/1d2d6b/ffffff?text=Process+Equipment" alt="">
+    </figure>
+    <div class="biz-content">
+      <h2>정밀부품과 설비 솔루션으로<br>반도체 공정을 완성하는 기술파트너</h2>
+      <p><strong>반도체 공정의 핵심, 론다코리아:</strong> 정밀 소재 가공 기술을 기반으로 식각(Etch), 증착(CVD), 세정 공정에 사용되는 소모성 부품과 주요 장비 솔루션을 제공합니다.</p>
+      <p>또한 반도체 제조공정에 특화된 공급망(SCM) 솔루션을 통해 고객 맞춤형 대응력을 강화하고 있습니다.</p>
+      <p><strong>글로벌 운영체계:</strong> 중국을 중심으로 한 글로벌 네트워크를 통해 고품질 제품을 안정적으로 공급하며, 다양한 제품군을 기반으로 국내외 시장에서 사업을 전개하고 있습니다.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="biz-card">
+    <figure class="biz-visual">
+      <img src="https://placehold.co/600x420/233b91/ffffff?text=Advanced+Material+Parts" alt="">
+    </figure>
+    <div class="biz-content">
+      <h2>핵심 기술력을 보유한<br>첨단 소재부품 전문기업</h2>
+      <p><strong>신뢰받는 제조 파트너:</strong> Si, Quartz, Gasket, SiC 등 핵심 소재 분야를 전략적으로 확장하며 정밀 가공 기술과 공정 대응 역량을 지속적으로 고도화하고 있습니다.</p>
+      <p><strong>고객 맞춤형 공급:</strong> 공정별 요구사항에 따른 대응력, 까다로운 검수 기준, 유연한 생산체계를 기반으로 경쟁력 있는 고품질 부품을 제공합니다.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Features -->
+  <section class="features">
+    <h3>RK의 핵심 역량</h3>
+    <div class="feature-grid">
+      <div class="feature">
+        <img src="https://placehold.co/80x80/132b88/ffffff/png?text=1" alt="">
+        <h4>정밀소재 가공기술</h4>
+        <p>나노 단위 공정에서 정밀도를 보장하는 고정밀 가공 기술과 품질관리 체계를 갖추고 있습니다.</p>
+      </div>
+      <div class="feature">
+        <img src="https://placehold.co/80x80/132b88/ffffff/png?text=2" alt="">
+        <h4>공정 대응 역량</h4>
+        <p>Etch, CVD, Cleaning 등 반도체 핵심 공정 전반에 최적화된 부품 설계·공급 체계를 운영합니다.</p>
+      </div>
+      <div class="feature">
+        <img src="https://placehold.co/80x80/132b88/ffffff/png?text=3" alt="">
+        <h4>글로벌 공급망 솔루션</h4>
+        <p>SCM 네트워크를 통한 안정적 납기와 품질 보증으로 고객 생산효율을 극대화합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: Global -->
+  <section class="global">
+    <h3>Global Network</h3>
+    <p>중국을 비롯한 아시아 주요 거점과 협력사를 중심으로 안정적 공급망을 운영하며,<br>글로벌 고객사와의 지속적인 파트너십을 확장하고 있습니다.</p>
+    <div class="map"></div>
+  </section>
+
+  <!-- Closing -->
+  <section class="closing">
+    <h2>Ronda Korea는 반도체 공정의 완성을 함께 설계합니다</h2>
+    <p>정밀기술과 신뢰를 기반으로, 글로벌 고객의 혁신을 지원합니다.</p>
+  </section>
+
+</body>
+</html>
