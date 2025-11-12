@@ -51,6 +51,366 @@
     <script>
       new WOW().init();
     </script>
+
+    <style>
+      .company-wrap {
+        width: min(1200px, 100%);
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      /* 타이틀 영역 (박스 없이) */
+      .hero-title {
+        text-align: center;
+        padding-bottom: 8px;
+      }
+      .hero-title h2 {
+        margin: 0;
+        font-size: 1.65rem;
+        font-weight: 600;
+        color: #132b88;
+        letter-spacing: -0.02em;
+      }
+      .hero-title p {
+        margin-top: 10px;
+        font-size: 0.95rem;
+        color: #555;
+        letter-spacing: -0.01em;
+      }
+
+      /* 콘텐츠 영역 */
+      .info-grid {
+        display: flex;
+        gap: 20px;
+        align-items: stretch;
+      }
+      .info-card {
+        background: #e6ecf8;
+        border-radius: 18px;
+        box-shadow: 0 10px 34px rgba(0, 0, 0, 0.05);
+        padding: 28px 28px 30px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .info-card h3 {
+        margin: 0 0 16px;
+        font-size: 1rem;
+        color: #132b88;
+      }
+
+      dl.meta {
+        margin: 0;
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        row-gap: 10px;
+        column-gap: 12px;
+        font-size: 0.9rem;
+      }
+      dl.meta dt {
+        font-weight: 600;
+        color: #3a4150;
+      }
+      dl.meta dd {
+        margin: 0;
+        color: #5f6775;
+      }
+
+      /* 핵심부품 리스트 */
+      .parts-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .parts-item {
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 12px 14px 10px;
+        border-left: 4px solid rgba(19, 43, 136, 0.25);
+      }
+      .parts-item strong {
+        display: block;
+        color: #121521;
+        font-size: 0.88rem;
+        margin-bottom: 4px;
+      }
+      .parts-item span {
+        font-size: 0.8rem;
+        color: #5d6675;
+        line-height: 1.4;
+      }
+
+      /* 특허·인증 섹션 */
+      .cert-section {
+        background: #e6ecf8;
+        border-radius: 18px;
+        box-shadow: 0 10px 34px rgba(0, 0, 0, 0.05);
+        padding: 42px 28px 54px;
+      }
+      .cert-section h3 {
+        font-size: 1.1rem;
+        color: #132b88;
+        margin-bottom: 26px;
+        position: relative;
+        display: inline-block;
+      }
+      .cert-section h3::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 36px;
+        height: 3px;
+        border-radius: 2px;
+        background: #132b88;
+      }
+
+      /* 롤링 이미지 (기존 가리기용) */
+      .cert-slider {
+        display: none;
+      }
+
+      /* 내부 롤링 레이어 */
+      .rolling-layer {
+        width: 100%;
+        height: 298px; /* 이미지 높이에 맞춤 */
+        background: #e6ecf8;
+        overflow: hidden;
+        border-radius: 14px;
+        position: relative;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .rolling-track {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        animation: slide-left 30s linear infinite;
+        height: 100%;
+      }
+
+      .rolling-item {
+        flex: 0 0 auto;
+        width: 226px;
+        height: 298px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        position: relative; /* 캡션용 */
+      }
+
+      .rolling-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* 캡션 추가 */
+      .rolling-item .caption {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 6px 10px 8px;
+        font-size: 0.78rem;
+        color: #6f1b1b;
+        text-align: center;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+        box-sizing: border-box;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      @keyframes slide-left {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* 좌우 페이드 (섹션배경 → 투명) */
+      .fade-left,
+      .fade-right {
+        position: absolute;
+        top: 0;
+        width: 100px;
+        height: 100%;
+        z-index: 3;
+        pointer-events: none;
+      }
+
+      .fade-left {
+        left: 0;
+        background: linear-gradient(to right, #e6ecf8 0%, rgba(230, 236, 248, 0) 100%);
+      }
+
+      .fade-right {
+        right: 0;
+        background: linear-gradient(to left, #e6ecf8 0%, rgba(230, 236, 248, 0) 100%);
+      }
+
+      @media (max-width: 980px) {
+        .info-grid {
+          flex-direction: column;
+        }
+        dl.meta {
+          grid-template-columns: 120px 1fr;
+        }
+        .rolling-layer {
+          height: 260px;
+        }
+      }
+
+      :root {
+        --bg: #f6f8fc;
+        --panel: #ffffff;
+        --primary: #132b88;
+        --accent: #4b62cc;
+        --muted: #616776;
+        --radius: 18px;
+        --shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+      }
+      .philo-section {
+        width: min(1200px, 100%);
+        margin: 60px auto 80px;
+        padding: 0 16px;
+      }
+      .philo-header {
+        text-align: center;
+        margin-bottom: 36px;
+      }
+      .philo-header h2 {
+        margin: 0;
+        font-size: 1.55rem;
+        color: var(--primary);
+        letter-spacing: -0.02em;
+      }
+      .philo-header p {
+        margin-top: 10px;
+        color: #666c7d;
+        font-size: 0.9rem;
+      }
+
+      /* FLOW CONTAINER */
+      .philo-flow {
+        background: var(--bg);
+        border-radius: 20px;
+        padding: 40px 28px 50px;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+      }
+      .flow-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: nowrap;
+      }
+
+      /* CARD DESIGN */
+      .flow-card {
+        background: var(--panel);
+        border-radius: var(--radius);
+        padding: 24px 24px 22px;
+        width: 300px;
+        min-height: 190px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        text-align: left;
+        position: relative;
+        transition: 0.25s ease;
+      }
+      .flow-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 14px 28px rgba(19, 43, 136, 0.15);
+      }
+      .flow-card h3 {
+        margin: 0 0 12px;
+        font-size: 1.2rem;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .flow-card small {
+        background: rgba(19, 43, 136, 0.08);
+        color: var(--primary);
+        font-size: 0.65rem;
+        padding: 3px 10px 2px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .flow-card p {
+        margin: 0;
+        font-size: 0.83rem;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      .cv-list {
+        margin: 8px 0 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .cv-list li {
+        font-size: 1rem;
+        color: #555e6d;
+        position: relative;
+        padding-left: 14px;
+      }
+      .cv-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--primary);
+      }
+
+      /* CONNECTOR */
+      .connector {
+        width: 50px;
+        height: 5px;
+        background: linear-gradient(90deg, rgba(19, 43, 136, 0) 0%, rgba(19, 43, 136, 0.9) 40%, rgba(75, 98, 204, 1) 100%);
+        border-radius: 5px;
+        box-shadow: 0 0 16px rgba(75, 98, 204, 0.7), 0 0 22px rgba(75, 98, 204, 0.4);
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+      .flow-card.mission {
+        background: linear-gradient(140deg, #ffffff 0%, #e3e7ff 100%);
+        border: 1px solid rgba(19, 43, 136, 0.12);
+      }
+
+      /* ✅ RESPONSIVE - 세로 정렬 전환 */
+      @media (max-width: 1020px) {
+        .flow-row {
+          flex-direction: column;
+          gap: 20px;
+        }
+        .connector {
+          width: 5px;
+          height: 30px;
+          background: linear-gradient(180deg, rgba(19, 43, 136, 0) 0%, rgba(19, 43, 136, 0.9) 50%, rgba(75, 98, 204, 1) 100%);
+          box-shadow: 0 0 16px rgba(75, 98, 204, 0.6), 0 0 20px rgba(75, 98, 204, 0.3);
+        }
+        .flow-card {
+          width: 100%;
+          max-width: 420px;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- 상단 시작 { -->
@@ -197,7 +557,7 @@
         </script>
 
         <section id="section1" class="section">
-          <div class="sCompany_case1 s-inner pt100" style="margin-bottom: 120px">
+          <div class="sCompany_case1 s-inner pt40" style="margin-bottom: 120px">
             <div class="img_box"><img src="https://rondakorea.mycafe24.com/images/sCompany_img7.png" alt="Ronda" /></div>
             <div class="txt_box">
               <p class="s_txt1">
@@ -224,7 +584,7 @@
 
           <div id="test1" style="background-color: #f1f3ff; padding: 10px 0">
             <div class="inner">
-              <img src="image/06.png" alt="" />
+              <img src="image/06.png" style="width: 100%;" />
             </div>
           </div>
 
@@ -249,236 +609,228 @@
           </div> -->
         </section>
 
-        <section id="section2" class="section">
-          <div class="sCompany_case2 s-inner pt100">
-            <div class="tit_box">
-              <p class="sub_title">론다코리아는 글로벌 반도체 산업에 <br />특화된 전문 기업입니다.</p>
-            </div>
-            <table class="sub_table_box1 mt50">
-              <tbody>
-                <tr>
-                  <th scope="row">회사명</th>
-                  <td>론다코리아주식회사 RONDA KOREA Co., Ltd.</td>
-                </tr>
-                <tr>
-                  <th scope="row">설립연도</th>
-                  <td>2019년</td>
-                </tr>
-                <!-- <tr>
-                  <th scope="row">핵심가치</th>
-                  <td>
-                    <ul>
-                      <li>Precision</li>
-                      <li>Trust</li>
-                      <li>Innovation</li>
-                      <li>Flexibility</li>
-                      <li>Global Presence</li>
-                    </ul>
-                  </td>
-                </tr> -->
-                <tr>
-                  <th scope="row">사업영역</th>
-                  <td>반도체 제조 장비의 핵심부품 및 소재</td>
-                </tr>
-                <tr>
-                  <th scope="row">핵심부품</th>
-                  <td>
-                    <ul>
-                      <li>Consumable Parts: 반도체제조 장비의 핵심 소모품을 직접 가공, 생산</li>
-                      <li>Sub-FAB Solution: 배기 불순물의 효과적 제거 및 설비 안정화 장치 제공</li>
-                      <li>Component: 반도체 제조장비의 핵심 부품 라인업 구축</li>
-                      <li>Raw Materials: 냉매를 비롯한 방진, 단열, 차폐 등 주변 부품의 친환경 원자재</li>
-                    </ul>
-                  </td>
-                </tr>
-                <!-- <tr>
-                  <th scope="row">비전</th>
-                  <td>
-                    <ul>
-                      <li>글로벌 반도체 산업을 선도하는 기술력 확보</li>
-                      <li>동북아를 잇는 전략적 공급망 구축</li>
-                      <li>지속 가능한 기술 혁신과 고객 신뢰 확보</li>
-                    </ul>
-                  </td>
-                </tr> -->
-              </tbody>
-            </table>
-          </div>
+        <section id="section2" class="section" style="margin-bottom: 40px">
+          <div class="sCompany_case2 s-inner pt40">
+            <main class="company-wrap">
+              <!-- 상단 텍스트 타이틀 -->
+              <header class="hero-title">
+                <h2>론다코리아는 글로벌 반도체 산업에 특화된 전문 기업입니다</h2>
+              </header>
 
-          <div class="overflow pt150" style="padding-bottom: 50px">
-            <div class="s-inner">
-              <p class="s_tit1">특허·인증 및 수상</p>
-              <div class="sCompany_slide2 mt30">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_1.jpg" alt="품질경영 ISO9001" /></div>
-                    <p>품질경영 ISO9001</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_2.jpg" alt="환경경영 ISO14001" /></div>
-                    <p>환경경영 ISO14001</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_3.jpg" alt="글로벌 강소기업 1000+" /></div>
-                    <p>글로벌 강소기업 1000+</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_4.jpg" alt="Inno-Biz 확인서" /></div>
-                    <p>Inno-Biz 확인서</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_5.jpg" alt="벤처기업 확인서" /></div>
-                    <p>벤처기업 확인서</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_6.jpg" alt="기업부설 연구소 인정서" /></div>
-                    <p>기업부설 연구소 인정서</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_7.jpg" alt="안전보건 CQM 인증" /></div>
-                    <p>안전보건 CQM 인증</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_8.jpg" alt="품질 CQM 인증" /></div>
-                    <p>품질 CQM 인증</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_9.jpg" alt="환경 CQM 인증" /></div>
-                    <p>환경 CQM 인증</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_10.jpg" alt="특허증" /></div>
-                    <p>특허증</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_11.jpg" alt="수출프론티어기업 인증서" /></div>
-                    <p>수출프론티어기업 인증서</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_12.jpg" alt="삼천만불 수출의 탑" /></div>
-                    <p>삼천만불 수출의 탑</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_13.jpg" alt="벤처기업인상" /></div>
-                    <p>벤처기업인상</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_14.jpg" alt="수출프론티어 신인왕상" /></div>
-                    <p>수출프론티어 신인왕상</p>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="img"><img src="https://rondakorea.mycafe24.com/images/sCompany_img2_15.jpg" alt="중소기업표창 도지사상" /></div>
-                    <p>중소기업표창 도지사상</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              <!-- 회사개요 + 핵심부품 -->
+              <div class="info-grid">
+                <section class="info-card">
+                  <h3>Company Overview</h3>
+                  <dl class="meta">
+                    <dt>회사명</dt>
+                    <dd>론다코리아주식회사 (RONDA KOREA Co., Ltd.)</dd>
+                    <dt>설립연도</dt>
+                    <dd>2019년</dd>
+                    <dt>사업영역</dt>
+                    <dd>반도체 제조 장비의 핵심부품 및 소재</dd>
+                    <dt>주요 고객사/시장</dt>
+                    <dd>국내외 반도체 장비·소재 기업, 동북아 생산 거점</dd>
+                    <dt>핵심 기술 키워드</dt>
+                    <dd>Precision Machining, Si/Quartz/SiC Processing, SCM for Semiconductor</dd>
+                  </dl>
+                </section>
 
-          <div class="sCompany_case3 pt150 pb200" style="display: none">
-            <div class="s-inner">
-              <div class="tit_box">
-                <p class="s_tit1">글로벌 네트워크</p>
-                <p class="s_txt1 mt30">
-                  론다코리아의 글로벌 네트워크는 반도체 기술, 영업, 마케팅 및 공급망 분야에서 <br class="mo_br" />미국과 중국 시장을 아우르는 풍부한
-                  인프라를 보유하고 있습니다.
-                </p>
-                <ul class="tab_box">
-                  <li class="on"><button type="button" data-location="all">All View</button></li>
-                  <li><button type="button" data-location="korea">Korea</button></li>
-                  <li><button type="button" data-location="china">China</button></li>
-                </ul>
+                <section class="info-card">
+                  <h3>Core Product Lines</h3>
+                  <ul class="parts-list">
+                    <li class="parts-item"><strong>Consumable Parts</strong><span>반도체 제조 장비의 핵심 소모품을 직접 가공·생산</span></li>
+                    <li class="parts-item"><strong>Sub-FAB Solution</strong><span>배기 불순물의 효과적 제거 및 설비 안정화 장치 제공</span></li>
+                    <li class="parts-item"><strong>Component</strong><span>반도체 제조장비의 핵심 부품 라인업 구축</span></li>
+                    <li class="parts-item"><strong>Raw Materials</strong><span>냉매, 방진, 단열, 차폐 등 주변 부품의 친환경 원자재 공급</span></li>
+                  </ul>
+                </section>
               </div>
-              <div class="map_box mt70">
-                <img src="https://rondakorea.mycafe24.com/images/mGlobal_map.png" />
-                <ul>
-                  <li class="on">
-                    <button type="button" data-location="korea"><span class="text_hidden">korea</span></button>
-                  </li>
-                  <li>
-                    <button type="button" data-location="china"><span class="text_hidden">xian</span></button>
-                  </li>
-                  <li>
-                    <button type="button" data-location="china"><span class="text_hidden">wuxi</span></button>
-                  </li>
-                </ul>
-              </div>
-              <div class="sCompany_slide3">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide" data-location="korea">
-                    <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/sCompany_img3_1.png)"></div>
-                    <div class="txt_box">
-                      <p class="en">Global Business & Technology Hub</p>
-                      <!--<p class="name">론다코리아</p>
-                            <ul>
-                                <li>분야 : 글로벌 비즈니스 기술/무역</li>
-                                <li>위치 : 경기도 동탄</li>
-                            </ul>-->
+
+              <!-- 특허/인증/수상 섹션 -->
+              <section class="cert-section">
+                <h3>특허·인증 및 수상</h3>
+
+                <div class="rolling-layer">
+                  <div class="fade-left"></div>
+                  <div class="fade-right"></div>
+
+                  <div class="rolling-track">
+                    <!-- 이미지 세트 1 -->
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_1.jpg" alt="품질경영 ISO14001" />
+                      <div class="caption">품질경영 ISO14001</div>
                     </div>
-                  </div>
-                  <div class="swiper-slide" data-location="korea">
-                    <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/sCompany_img3_2.png)"></div>
-                    <div class="txt_box">
-                      <p class="en">Precision Drilling & CNC Manufacturing Facility</p>
-                      <!--<p class="name">아론 메카닉스</p>
-                            <ul>
-                                <li>분야 : 드릴 및 CNC 기계 제조</li>
-                                <li>위치 : 경기도 화성</li>
-                            </ul>-->
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_2.jpg" alt="품질경영 ISO9001" />
+                      <div class="caption">품질경영 ISO9001</div>
                     </div>
-                  </div>
-                  <div class="swiper-slide" data-location="korea">
-                    <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/sCompany_img3_3.png)"></div>
-                    <div class="txt_box">
-                      <p class="en">Photo-Chemical Research & Development Center</p>
-                      <!--<p class="name">트론 포토닉스</p>
-                            <ul>
-                                <li>분야 : 포토 화학 연구 및 개발</li>
-                                <li>위치 : 경기도 안성</li>
-                            </ul>-->
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_3.jpg" alt="환경 안전 인증" />
+                      <div class="caption">환경·안전 관련 인증</div>
                     </div>
-                  </div>
-                  <div class="swiper-slide" data-location="china">
-                    <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/sCompany_img3_4.png)"></div>
-                    <div class="txt_box">
-                      <p class="en">Si / SiC Components Manufacturing Plant</p>
-                      <!--<p class="name">론다 머티리얼즈</p>
-                            <ul>
-                                <li>분야 : Si/SiC 부품 제조</li>
-                                <li>위치 : 중국 시안</li>
-                            </ul>-->
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_4.jpg" alt="기술특허 01" />
+                      <div class="caption">기술특허 제01호</div>
                     </div>
-                  </div>
-                  <div class="swiper-slide" data-location="china">
-                    <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/sCompany_img3_5.png)"></div>
-                    <div class="txt_box">
-                      <p class="en">Electronic Parts & Gasket Production Facility</p>
-                      <!--<p class="name">DGE 일렉트로닉스</p>
-                            <ul>
-                                <li>분야 : 가스켓, 소켓, 젤 부품 제조</li>
-                                <li>위치 : 중국 시안</li>
-                            </ul>-->
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_5.jpg" alt="기술특허 02" />
+                      <div class="caption">기술특허 제02호</div>
                     </div>
-                  </div>
-                  <div class="swiper-slide" data-location="china">
-                    <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/sCompany_img3_6.png)"></div>
-                    <div class="txt_box">
-                      <p class="en">Valve, Pump & Scrubber Manufacturing Base</p>
-                      <!--<p class="name">소아오 글로벌</p>
-                            <ul>
-                                <li>분야 : 밸브, 펌프, 스크러버 제조</li>
-                                <li>위치 : 중국 우시</li>
-                            </ul>-->
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_6.jpg" alt="장비부문 인증" />
+                      <div class="caption">장비 부문 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_7.jpg" alt="우수협력사" />
+                      <div class="caption">우수 협력사 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_8.jpg" alt="수출실적 인증" />
+                      <div class="caption">수출 실적 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_9.jpg" alt="벤처/기술기업 인증" />
+                      <div class="caption">벤처/기술기업 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_10.jpg" alt="지재권 등록" />
+                      <div class="caption">지재권 등록증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_11.jpg" alt="공정개선 수상" />
+                      <div class="caption">공정개선 우수상</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_12.jpg" alt="협력/파트너상" />
+                      <div class="caption">파트너십 어워드</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_13.jpg" alt="R&D 인증" />
+                      <div class="caption">R&D 성과 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_14.jpg" alt="SCM 우수상" />
+                      <div class="caption">SCM 우수상</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_15.jpg" alt="기술혁신 표창" />
+                      <div class="caption">기술혁신 표창</div>
+                    </div>
+
+                    <!-- 이미지 세트 2 (무한 롤링용 복제) -->
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_1.jpg" alt="품질경영 ISO14001" />
+                      <div class="caption">품질경영 ISO14001</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_2.jpg" alt="품질경영 ISO9001" />
+                      <div class="caption">품질경영 ISO9001</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_3.jpg" alt="환경 안전 인증" />
+                      <div class="caption">환경·안전 관련 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_4.jpg" alt="기술특허 01" />
+                      <div class="caption">기술특허 제01호</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_5.jpg" alt="기술특허 02" />
+                      <div class="caption">기술특허 제02호</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_6.jpg" alt="장비부문 인증" />
+                      <div class="caption">장비 부문 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_7.jpg" alt="우수협력사" />
+                      <div class="caption">우수 협력사 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_8.jpg" alt="수출실적 인증" />
+                      <div class="caption">수출 실적 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_9.jpg" alt="벤처/기술기업 인증" />
+                      <div class="caption">벤처/기술기업 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_10.jpg" alt="지재권 등록" />
+                      <div class="caption">지재권 등록증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_11.jpg" alt="공정개선 수상" />
+                      <div class="caption">공정개선 우수상</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_12.jpg" alt="협력/파트너상" />
+                      <div class="caption">파트너십 어워드</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_13.jpg" alt="R&D 인증" />
+                      <div class="caption">R&D 성과 인증</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_14.jpg" alt="SCM 우수상" />
+                      <div class="caption">SCM 우수상</div>
+                    </div>
+                    <div class="rolling-item">
+                      <img src="https://rondakorea.mycafe24.com/images/sCompany_img2_15.jpg" alt="기술혁신 표창" />
+                      <div class="caption">기술혁신 표창</div>
                     </div>
                   </div>
                 </div>
-                <div class="swiper-pagination"></div>
-              </div>
-            </div>
+              </section>
+            </main>
           </div>
         </section>
 
-        <section id="section3" class="section">
+        <section id="section3" class="section" style="background-color: #e9eaee; padding-bottom: 20px">
+          <div class="sCompany_case2 s-inner pt40">
+            <section class="philo-section">
+              <div class="philo-header">
+                <h2>경영철학 (Mission · Core Value · Vision)</h2>
+                <!-- <p>핵심가치(Core Value)에서 출발한 에너지가 비전(Vision)을 만들고,<br>그 비전을 실현하기 위한 미션(Mission)으로 이어집니다.</p> -->
+                <p>핵심가치(Core Value)를 기반으로 기업의 비전(Vision)을 수립하고, 그 비전을 실현하기 위한 실행체계(Mission)로 발전시킵니다.</p>
+              </div>
+
+              <div class="philo-flow" style="background: url('https://rondakorea.mycafe24.com/images/mGlobal_map.png') center/cover no-repeat">
+                <div class="flow-row">
+                  <!-- Core Value -->
+                  <article class="flow-card" style="">
+                    <h3>Core Value <small>foundation</small></h3>
+                    <!-- <p>RK가 어떤 방식으로 일하고 관계를 맺는지에 대한 근본 원칙입니다.</p> -->
+                    <ul class="cv-list">
+                      <li><strong>정직과 책임</strong>: 정직하게 행동하며 결과에 책임을 집니다.</li>
+                      <li><strong>상호 신뢰</strong>: 투명성과 존중을 바탕으로 신뢰를 구축합니다.</li>
+                      <li><strong>기술 리더십</strong>: 혁신과 전문성으로 시장을 선도합니다.</li>
+                      <li><strong>품질 중심 SCM</strong>: 공급망 전반에 걸쳐 품질을 최우선으로 합니다.</li>
+                      <li><strong>상생 전략</strong>: 파트너와의 상호 성장 추구.</li>
+                    </ul>
+                  </article>
+
+                  <div class="connector" aria-hidden="true"></div>
+
+                  <!-- Vision -->
+                  <article class="flow-card">
+                    <h3>Vision <small>direction</small></h3>
+                    <p>반도체 산업의 성장에 기여하고, 고객이 더 나은 세상을 만들 수 있도록 지원함으로써 사람들의 삶의 질 향상에 이바지합니다.</p>
+                  </article>
+
+                  <div class="connector" aria-hidden="true"></div>
+
+                  <!-- Mission -->
+                  <article class="flow-card mission">
+                    <h3>Mission <small>execution</small></h3>
+                    <p>고객에게 경쟁력 있는 제품과 고품질 서비스를 제공하며, 업계를 선도할 수 있는 혁신적인 반도체 제조 솔루션을 실현합니다.</p>
+                  </article>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section id="section3" class="section" style="display: none">
           <div class="sCompany_case4">
             <div class="s-inner">
               <p class="sub_title fc_w tc">론다코리아는 글로벌 반도체 시장을 <br />선도하는 기업으로 도약하겠습니다.</p>
@@ -574,7 +926,7 @@
         </section>
 
         <section id="section4" class="section">
-          <div class="sCompany_case6 s-inner pt200">
+          <div class="sCompany_case6 s-inner pt100">
             <p class="sub_title">걸어온길</p>
             <div class="box">
               <div>
@@ -671,7 +1023,7 @@
         </section>
 
         <section id="section5" class="section">
-          <div class="sCompany_case7 s-inner pt200">
+          <div class="sCompany_case7 s-inner pt40">
             <p class="sub_title">찾아오시는길</p>
             <div class="map_box mt50">
               <img src="image/map.png" />
