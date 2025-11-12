@@ -1,169 +1,76 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RK 경영철학 Circular Flow</title>
-<style>
-:root {
-  --primary: #132b88;
-  --accent: #4b62cc;
-  --bg: #f6f8fc;
-  --panel: #ffffff;
-  --muted: #5a6270;
-  --shadow: 0 8px 28px rgba(0,0,0,0.08);
-}
-body {
-  margin: 0;
-  background: var(--bg);
-  font-family: "Noto Sans KR", sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-section {
-  width: min(1000px, 90%);
-  text-align: center;
-  padding: 60px 10px 80px;
-  position: relative;
-}
-h2 {
-  color: var(--primary);
-  font-size: 1.6rem;
-  margin-bottom: 8px;
-}
-p.subtitle {
-  color: #636a7a;
-  font-size: 0.9rem;
-  margin-bottom: 60px;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background Image Fade Transition</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-/* === Circular Layout === */
-.circle-container {
-  position: relative;
-  width: 520px;
-  height: 520px;
-  margin: 0 auto;
-  border-radius: 50%;
-  border: 2px dashed rgba(19,43,136,0.15);
-}
-.circle-center {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle at center, #ffffff 0%, #e3e8ff 100%);
-  border-radius: 50%;
-  width: 170px; height: 170px;
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.circle-center h3 {
-  margin: 0;
-  color: var(--primary);
-  font-size: 1.1rem;
-}
-.circle-center p {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin: 4px 0 0;
-  line-height: 1.4;
-}
+      .bg-rotator {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+      }
 
-/* Node Cards around circle */
-.node {
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  background: var(--panel);
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-  padding: 18px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: 0.3s;
-}
-.node:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 24px rgba(19,43,136,0.15);
-}
-.node h4 {
-  color: var(--primary);
-  margin-bottom: 6px;
-}
-.node p {
-  font-size: 0.78rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
+      .bg-rotator div {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        animation: fadeCycle 18s infinite;
+      }
 
-/* 각 노드의 위치 */
-.node.core { top: -40px; left: 50%; transform: translateX(-50%); }
-.node.vision { right: -40px; top: 50%; transform: translateY(-50%); }
-.node.mission { bottom: -40px; left: 50%; transform: translateX(-50%); }
+      .bg-rotator .slide1 {
+        background-image: url("https://placehold.co/600x400/B68383/FFFFFF/png?text=image1");
+        animation-delay: 0s;
+      }
+      .bg-rotator .slide2 {
+        background-image: url("https://placehold.co/600x400/5073B8/FFFFFF/png?text=image2");
+        animation-delay: 6s;
+      }
+      .bg-rotator .slide3 {
+        background-image: url("https://placehold.co/600x400/78B850/FFFFFF/png?text=image3");
+        animation-delay: 12s;
+      }
 
-/* 연결 선 (Glow Line) */
-.connector {
-  position: absolute;
-  width: 3px;
-  height: 120px;
-  background: linear-gradient(180deg, rgba(19,43,136,0) 0%, rgba(19,43,136,0.8) 50%, rgba(75,98,204,1) 100%);
-  box-shadow: 0 0 12px rgba(75,98,204,0.6);
-  left: 50%; transform: translateX(-50%);
-}
-.connector.v1 { top: 140px; }
-.connector.v2 { bottom: 140px; transform: translateX(-50%) rotate(180deg); }
-
-/* 반응형 */
-@media (max-width: 800px) {
-  .circle-container { width: 360px; height: 360px; }
-  .circle-center { width: 130px; height: 130px; }
-  .node { width: 150px; height: 150px; font-size: 0.8rem; }
-  .node h4 { font-size: 0.9rem; }
-  .connector { height: 90px; }
-}
-</style>
-</head>
-<body>
-<section>
-  <h2>경영철학 (Circular Flow)</h2>
-  <p class="subtitle">핵심가치(Core Value)에서 시작된 에너지가 비전(Vision)으로 이어지고, 미션(Mission)을 통해 다시 가치를 강화하는 순환 구조</p>
-
-  <div class="circle-container">
-
-    <!-- Core Value -->
-    <div class="node core">
-      <h4>Core Value</h4>
-      <p>정직, 신뢰, 혁신, 품질, 상생의 가치를 바탕으로<br>모든 비즈니스의 근간을 세웁니다.</p>
+      /* 3장 × 6초씩 = 18초 한 사이클 */
+      @keyframes fadeCycle {
+        0% {
+          opacity: 0;
+        }
+        5% {
+          opacity: 1;
+        }
+        30% {
+          opacity: 1;
+        }
+        35% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-rotator">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, molestias id modi ipsam dolor assumenda aliquid, quasi alias nam eos magnam ex. Molestiae alias aut, natus quasi velit modi voluptas!
+      <div class="slide1"></div>
+      <div class="slide2"></div>
+      <div class="slide3"></div>
     </div>
-
-    <!-- Vision -->
-    <div class="node vision">
-      <h4>Vision</h4>
-      <p>혁신과 파트너십을 통해 반도체 산업을 성장시키고,<br>사람들의 삶을 풍요롭게 합니다.</p>
-    </div>
-
-    <!-- Mission -->
-    <div class="node mission">
-      <h4>Mission</h4>
-      <p>고객에게 경쟁력 있는 제품과<br>고품질 솔루션을 제공하며<br>산업의 혁신을 주도합니다.</p>
-    </div>
-
-    <!-- Center (Energy Flow Theme) -->
-    <div class="circle-center">
-      <h3>RK Energy Flow</h3>
-      <p>Core → Vision → Mission 순환 구조</p>
-    </div>
-
-    <!-- Glow Connectors -->
-    <div class="connector v1"></div>
-    <div class="connector v2"></div>
-  </div>
-</section>
-</body>
+  </body>
 </html>
