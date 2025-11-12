@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>RK 경영철학</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --page-bg: #ffffff;
+      --section-bg: #f6f8fc;
+      --white: #ffffff;
+      --primary: #132b88;
+      --primary1: #a6b3cd;
+      
+      --muted: #5b6271;
+      --radius: 18px;
+      --shadow: 0 12px 36px rgba(0,0,0,0.05);
+    }
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      font-family: "Noto Sans KR", sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 60px 16px 80px;
+      color: #1f2430;
+    }
+    .wrap {
+      width: min(1200px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* 공통 헤드라인 */
+    .section-head {
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+    .section-head p {
+      margin: 12px auto 0;
+      max-width: 680px;
+      font-size: 0.9rem;
+      color: #606776;
+    }
+
+    /* Mission 영역 */
+    .mission-block {
+      background: linear-gradient(120deg, #132b88 0%, #2d61d3 100%);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+      padding: 30px 30px 26px;
+      color: #fff;
+    }
+    .mission-text h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+    }
+    .mission-text p {
+      margin: 0;
+      line-height: 1.6;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    .mission-visual {
+      border-radius: 14px;
+      overflow: hidden;
+      background: url("https://placehold.co/520x200/303b6b/FFFFFF/png?text=Semiconductor+Innovation") center/cover no-repeat;
+      min-height: 140px;
+    }
+
+    /* Core Values */
+    .values-block {
+      background: var(--section-bg);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 28px 26px 30px;
+    }
+    .values-block h3 {
+      margin: 0 0 18px;
+      font-size: 1.05rem;
+      color: #1f2430;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+    }
+    .value-card {
+      background: var(--section-bg);
+      border-radius: 14px;
+      padding: 14px 14px 13px;
+      border: 1px solid rgba(19,43,136,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-height: 110px;
+    }
+    .value-card .label {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.88rem;
+    }
+    .value-card p {
+      margin: 0;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    /* Vision */
+    .vision-block {
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 28px 26px 26px;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .vision-text h3 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+    .vision-text p {
+      margin: 0;
+      color: #606776;
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+    .vision-visual {
+      background: url("https://placehold.co/560x200/f3f5fb/132b88?text=Better+Future+with+Semiconductor") center/cover no-repeat;
+      border-radius: 14px;
+      min-height: 140px;
+    }
+
+    @media (max-width: 980px) {
+      .mission-block {
+        grid-template-columns: 1fr;
+      }
+      .vision-block {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap" style="gap: 0;">
+
+    <!-- 섹션 타이틀 -->
+    <div class="section-head">
+      <h2>경영철학</h2>
+      <p>론다코리아는 정직과 신뢰, 기술 리더십을 기반으로 고객과 함께 성장하는 반도체 전문 기업을 지향합니다.</p>
+    </div>
+
+    <!-- Mission -->
+    <section class="mission-block" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;background-color: #2d61d3;">
+      <div class="mission-text">
+        <h3>Mission</h3>
+        <p>
+          우리는 고객에게 경쟁력 있는 제품과 고품질 서비스를 제공하며,<br>
+          업계를 선도할 수 있는 혁신적인 반도체 제조 솔루션을 실현합니다.
+        </p>
+      </div>
+      <div class="mission-visual" aria-label="Semiconductor mission visual"></div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="values-block" style="background-color: #a6b3cd; border-radius: 0;">
+      <h3>Core Values</h3>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="label">정직과 책임</div>
+          <p>우리는 정직하게 행동하며 결과에 책임을 집니다.</p>
+        </div>
+        <div class="value-card">
+          <div class="label">상호 신뢰</div>
+          <p>투명성과 존중을 바탕으로 신뢰를 구축합니다.</p>
+        </div>
+        <div class="value-card">
+          <div class="label">기술 리더십</div>
+          <p>혁신과 전문성으로 시장을 선도합니다.</p>
+        </div>
+        <div class="value-card">
+          <div class="label">품질 중심 SCM</div>
+          <p>공급망 전반에 걸쳐 품질을 최우선으로 합니다.</p>
+        </div>
+        <div class="value-card">
+          <div class="label">상생 전략</div>
+          <p>회사와 파트너 모두에게 이익이 되는 성장을 추구합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision -->
+    <section class="vision-block" style="background-color: #FAEFDD; border-top-left-radius: 0px;border-top-right-radius: 0;">
+      <div class="vision-text">
+        <h3>Vision</h3>
+        <p>
+          우리는 반도체 산업의 성장에 기여하고,<br>
+          고객이 더 나은 세상을 만들 수 있도록 지원함으로써,<br>
+          사람들의 삶의 질 향상에 이바지합니다.
+        </p>
+      </div>
+      <div class="vision-visual" aria-label="Vision visual"></div>
+    </section>
+
+  </main>
+</body>
+</html>
