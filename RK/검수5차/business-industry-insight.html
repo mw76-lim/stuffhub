@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>RK Industry Insight</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --page-bg: #f3f4f6;
+      --section-bg: #ffffff;
+      --accent-soft: #e6ecf8;
+      --primary: #132b88;
+      --primary-soft: #4b5fc8;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --radius: 18px;
+      --shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 16px 80px;
+      background: var(--page-bg);
+      font-family: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrap {
+      width: min(1200px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* 헤더 영역 */
+    .hero {
+      background: radial-gradient(circle at top left, #e0e7ff 0, #eff2fb 38%, #f9fafb 100%);
+      border-radius: 24px;
+      padding: 32px 28px 30px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.6fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero-main h1 {
+      margin: 0 0 10px;
+      font-size: 1.7rem;
+      letter-spacing: -0.04em;
+      color: var(--primary);
+    }
+
+    .hero-main .eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #6b7280;
+      letter-spacing: 0.12em;
+      margin-bottom: 5px;
+    }
+
+    .hero-main p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      align-items: flex-end;
+    }
+
+    .hero-tag {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      background: rgba(19, 43, 136, 0.06);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-tag span {
+      font-size: 0.75rem;
+      color: #4b5563;
+    }
+
+    .hero-card {
+      margin-top: 6px;
+      background: var(--section-bg);
+      border-radius: 16px;
+      padding: 12px 14px 13px;
+      border: 1px solid rgba(19, 43, 136, 0.08);
+      font-size: 0.8rem;
+      color: #4b5563;
+      max-width: 320px;
+    }
+
+    .hero-card strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.82rem;
+    }
+
+    /* 섹션 공통 */
+    section {
+      background: var(--section-bg);
+      border-radius: var(--radius);
+      padding: 26px 24px 28px;
+      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.05);
+    }
+
+    section + section {
+      margin-top: 4px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .section-header p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* 트렌드 카드 */
+    .trend-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .trend-card {
+      background: #f9fafb;
+      border-radius: 14px;
+      padding: 14px 14px 13px;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .trend-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+    }
+
+    .trend-card h3 {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #111827;
+    }
+
+    .trend-card p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    /* 축(축/가치) 섹션 */
+    .pill-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .pill {
+      padding: 12px 13px 12px;
+      border-radius: 14px;
+      background: #f3f4ff;
+      border: 1px solid rgba(19, 43, 136, 0.12);
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .pill-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--primary-soft);
+      margin-bottom: 3px;
+    }
+
+    .pill strong {
+      display: block;
+      color: #111827;
+      margin-bottom: 3px;
+      font-size: 0.86rem;
+    }
+
+    /* 밸류체인 섹션 */
+    .chain {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .chain-block {
+      padding: 13px 14px 12px;
+      border-radius: 14px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      position: relative;
+    }
+
+    .chain-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+
+    .chain-tag {
+      display: inline-block;
+      margin-bottom: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      background: #eef2ff;
+      color: #4b5fc8;
+    }
+
+    .chain-block p {
+      margin: 0;
+      font-size: 0.78rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    /* 이슈/응답 섹션 */
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr);
+      gap: 20px;
+    }
+
+    .sub-title {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 6px;
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding-left: 1.05rem;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .bullet-list li + li {
+      margin-top: 4px;
+    }
+
+    .note-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    /* 반응형 */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-badges {
+        align-items: flex-start;
+      }
+      .trend-grid,
+      .pill-grid,
+      .chain {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 24px 12px 40px;
+      }
+      .hero {
+        padding: 22px 18px 20px;
+      }
+      section {
+        padding: 20px 16px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">INDUSTRY INSIGHT</div>
+        <h1>반도체 산업 환경에 대한 RK의 시각</h1>
+        <p>
+          반도체 산업은 미세화·고집적·고신뢰성을 동시에 요구하는 복합적인 산업입니다.
+          RK Industry Insight는 기술 동향과 공정 환경의 변화를 데이터가 아닌
+          <strong>‘사업 관점’</strong>에서 해석하고, 우리가 어디에 기여할 수 있는지 정리한 내용입니다.
+        </p>
+      </div>
+      <div class="hero-badges">
+        <div class="hero-tag">
+          Industry Lens
+          <span>공급망 · 공정 · 소재 관점에서 바라보는 반도체 산업</span>
+        </div>
+        <div class="hero-card">
+          <strong>핵심 질문</strong>
+          반도체 공정의 복잡성이 커지는 환경에서, 어떤 부품과 소재가
+          <em>공정 안정성(Process Stability)</em>과 <em>생산성(Productivity)</em>에
+          실질적인 영향을 미치는가에 대한 인사이트를 제공합니다.
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. 산업 환경 핵심 변화 -->
+    <section>
+      <header class="section-header">
+        <h2>1. 반도체 산업 환경의 핵심 변화</h2>
+        <p>공정 미세화·소재 고도화·공급망 복잡화가 동시에 진행되는 환경</p>
+      </header>
+
+      <div class="trend-grid">
+        <article class="trend-card">
+          <div class="trend-label">TREND 01</div>
+          <h3>공정 미세화와 수율 리스크 확대</h3>
+          <p>
+            선폭이 줄어들수록 공정 허용 오차는 작아지고, 작은 파티클·미세 결함도
+            수율에 큰 영향을 미칩니다. 단순한 장비 성능뿐 아니라, 공정에서 사용되는
+            부품·소재의 안정성과 일관성이 중요해지고 있습니다.
+          </p>
+        </article>
+        <article class="trend-card">
+          <div class="trend-label">TREND 02</div>
+          <h3>소재·부품의 고기능·고신뢰성 요구</h3>
+          <p>
+            고온·플라즈마·고부식 환경에서 사용되는 소재는 내구성뿐 아니라
+            공정과의 화학적 상호작용까지 고려해야 합니다. Si, Quartz, SiC 등
+            핵심 소재의 가공·품질 관리 수준이 곧 공정 경쟁력으로 연결됩니다.
+          </p>
+        </article>
+        <article class="trend-card">
+          <div class="trend-label">TREND 03</div>
+          <h3>공급망 복잡성과 운영 리스크</h3>
+          <p>
+            글로벌 공급망의 복잡도가 높아지면서, 단일 부품·소재의 공급 이슈가
+            전체 라인의 다운타임으로 이어질 수 있습니다. 기술 역량과 함께
+            공급망 안정성 확보가 기업의 중요한 과제가 되고 있습니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 2. RK가 보는 핵심 가치 축 -->
+    <section>
+      <header class="section-header">
+        <h2>2. RK가 바라보는 핵심 가치 축</h2>
+        <p>공정 안정성, 오염 제어, 열·소재 관리 관점에서 본 사업 포지셔닝</p>
+      </header>
+
+      <div class="pill-grid">
+        <div class="pill">
+          <div class="pill-title">AXIS 01 · PROCESS STABILITY</div>
+          <strong>공정 안정성(Process Stability)</strong>
+          <p>
+            핵심 공정 장비에 사용되는 Consumable Parts와 Component는
+            공정 재현성과 장비 가동률에 직접적인 영향을 줍니다. RK는
+            공정 조건에 최적화된 소재·부품을 통해 공정 변동성 최소화를
+            지향합니다.
+          </p>
+        </div>
+        <div class="pill">
+          <div class="pill-title">AXIS 02 · CONTAMINATION CONTROL</div>
+          <strong>오염 제어(Contamination Control)</strong>
+          <p>
+            파티클, 부식 부산물, 가스·케미컬 이물질 등은 미세 공정 수율에
+            치명적인 리스크 요인입니다. Trap, Sub-FAB Solution, 고순도
+            Raw Materials는 라인의 청정도 유지와 장비 수명에 직결됩니다.
+          </p>
+        </div>
+        <div class="pill">
+          <div class="pill-title">AXIS 03 · THERMAL & MATERIAL</div>
+          <strong>열·소재 관리(Thermal & Material Management)</strong>
+          <p>
+            Heater, ESC, Coolant 등 열·에너지 관련 솔루션은 공정 온도
+            균일성과 장비 안정성에 영향을 미치며, FFKM·PFA 등 고기능
+            소재는 극한 조건에서의 신뢰성 확보에 기여합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Value Chain 관점 -->
+    <section>
+      <header class="section-header">
+        <h2>3. 반도체 Value Chain 관점에서 본 RK의 역할</h2>
+        <p>Upstream–Midstream–Downstream을 잇는 소재·부품 관점의 기여</p>
+      </header>
+
+      <div class="chain">
+        <div class="chain-block">
+          <div class="chain-label">Upstream</div>
+          <span class="chain-tag">Materials & Basic Parts</span>
+          <p>
+            고순도 Raw Materials와 공정 조건에 맞는 소재 선택은
+            전체 Value Chain의 출발점입니다. 소재 단계에서의
+            안정성·청정도 확보는 이후 공정 리스크를 선제적으로
+            줄이는 역할을 합니다.
+          </p>
+        </div>
+        <div class="chain-block">
+          <div class="chain-label">Midstream</div>
+          <span class="chain-tag">Process Equipment & Consumables</span>
+          <p>
+            Etch, CVD, Cleaning 등 주요 공정에 사용되는 Consumable Parts,
+            Ceramic Heater, ESC, Trap 등은 실제 공정이 이루어지는
+            구간에서 공정 품질과 장비 성능을 지지하는 핵심 요소입니다.
+          </p>
+        </div>
+        <div class="chain-block">
+          <div class="chain-label">Downstream</div>
+          <span class="chain-tag">Stability & Productivity</span>
+          <p>
+            설비 안정화 솔루션과 공정별 최적화된 부품 제안은
+            장기적인 관점에서 라인 다운타임 감소, 유지보수 비용
+            절감, 생산성 향상으로 이어집니다. RK는 이 구간에서
+            고객의 Total Cost 관점까지 함께 고려합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 고객 이슈 & RK의 응답 -->
+    <section>
+      <header class="section-header">
+        <h2>4. 고객 관점의 주요 이슈와 RK의 대응 방향</h2>
+        <p>기술·운영·공급망 측면에서 공통적으로 제기되는 과제를 정리</p>
+      </header>
+
+      <div class="two-col">
+        <div>
+          <div class="sub-title">고객이 자주 이야기하는 이슈</div>
+          <ul class="bullet-list">
+            <li>공정 조건 변화에 따라 부품 수명과 성능 편차가 커지는 문제</li>
+            <li>장비 공급사·부품 공급사가 분리되면서 책임 구분이 모호해지는 상황</li>
+            <li>글로벌 공급망 이슈로 인한 리드타임 증가와 대체 부품 검토 필요성</li>
+            <li>Sub-FAB 영역에서의 Trap/배기라인 관리 미흡으로 인한 공정 리스크</li>
+            <li>신규 공정·신규 소재 적용 시 검증 부담과 초기 셋업 리스크</li>
+          </ul>
+          <div class="note-box">
+            이러한 이슈들은 결국 “공정 안정성”과 “운영 리스크 관리”라는
+            공통된 질문으로 귀결됩니다. RK의 사업 방향 역시 이 지점에
+            초점을 맞추고 있습니다.
+          </div>
+        </div>
+        <div>
+          <div class="sub-title">RK의 대응 방향 (Business Response)</div>
+          <ul class="bullet-list">
+            <li>
+              <strong>Process-fit 제안</strong>  
+              공정별·장비별 특성을 이해한 후, 소재·부품·Sub-FAB Solution을
+              <em>프로세스 적합성(Process Fit)</em> 관점에서 제안합니다.
+            </li>
+            <li>
+              <strong>기술 및 공급 일체형 관점</strong>  
+              단순 공급이 아닌, 설계–소싱–제조–공급까지 연계해
+              고객의 운영 편의성과 안정성을 함께 고려합니다.
+            </li>
+            <li>
+              <strong>중장기 관점의 TCO(Total Cost of Ownership)</strong>  
+              초기 단가뿐 아니라 수명, 유지보수, 라인 가동률까지 고려한
+              중장기 비용 구조를 함께 검토합니다.
+            </li>
+            <li>
+              <strong>동북아 생산거점 기반 대응력 강화</strong>  
+              동북아 생산·공급 거점을 중심으로 리드타임, 커뮤니케이션,
+              기술 지원 속도를 높이는 방향성을 지향합니다.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
