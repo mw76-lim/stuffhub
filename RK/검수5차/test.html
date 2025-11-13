@@ -1,225 +1,654 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <title>RK 경영철학</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --page-bg: #ffffff;
-      --section-bg: #f6f8fc;
-      --white: #ffffff;
-      --primary: #132b88;
-      --primary1: #a6b3cd;
-      
-      --muted: #5b6271;
-      --radius: 18px;
-      --shadow: 0 12px 36px rgba(0,0,0,0.05);
-    }
-    body {
-      margin: 0;
-      background: var(--page-bg);
-      font-family: "Noto Sans KR", sans-serif;
-      display: flex;
-      justify-content: center;
-      padding: 60px 16px 80px;
-      color: #1f2430;
-    }
-    .wrap {
-      width: min(1200px, 100%);
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    /* 공통 헤드라인 */
-    .section-head {
-      text-align: center;
-      margin-bottom: 4px;
-    }
-    .section-head h2 {
-      margin: 0;
-      font-size: 1.5rem;
-      color: var(--primary);
-      letter-spacing: -0.02em;
-    }
-    .section-head p {
-      margin: 12px auto 0;
-      max-width: 680px;
-      font-size: 0.9rem;
-      color: #606776;
-    }
-
-    /* Mission 영역 */
-    .mission-block {
-      background: linear-gradient(120deg, #132b88 0%, #2d61d3 100%);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 14px;
-      padding: 30px 30px 26px;
-      color: #fff;
-    }
-    .mission-text h3 {
-      margin: 0 0 10px;
-      font-size: 1.1rem;
-    }
-    .mission-text p {
-      margin: 0;
-      line-height: 1.6;
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-    .mission-visual {
-      border-radius: 14px;
-      overflow: hidden;
-      background: url("https://placehold.co/520x200/303b6b/FFFFFF/png?text=Semiconductor+Innovation") center/cover no-repeat;
-      min-height: 140px;
-    }
-
-    /* Core Values */
-    .values-block {
-      background: var(--section-bg);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 28px 26px 30px;
-    }
-    .values-block h3 {
-      margin: 0 0 18px;
-      font-size: 1.05rem;
-      color: #1f2430;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 16px;
-    }
-    .value-card {
-      background: var(--section-bg);
-      border-radius: 14px;
-      padding: 14px 14px 13px;
-      border: 1px solid rgba(19,43,136,0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      min-height: 110px;
-    }
-    .value-card .label {
-      font-weight: 600;
-      color: var(--primary);
-      font-size: 0.88rem;
-    }
-    .value-card p {
-      margin: 0;
-      font-size: 0.8rem;
-      line-height: 1.5;
-      color: var(--muted);
-    }
-
-    /* Vision */
-    .vision-block {
-      background: var(--white);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 28px 26px 26px;
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 24px;
-      align-items: center;
-    }
-    .vision-text h3 {
-      margin: 0 0 14px;
-      color: var(--primary);
-      font-size: 1.05rem;
-    }
-    .vision-text p {
-      margin: 0;
-      color: #606776;
-      line-height: 1.6;
-      font-size: 0.9rem;
-    }
-    .vision-visual {
-      background: url("https://placehold.co/560x200/f3f5fb/132b88?text=Better+Future+with+Semiconductor") center/cover no-repeat;
-      border-radius: 14px;
-      min-height: 140px;
-    }
-
-    @media (max-width: 980px) {
-      .mission-block {
-        grid-template-columns: 1fr;
+  <head>
+    <meta charset="UTF-8" />
+    <title>RK Industry Insight</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --page-bg: #e6ecf8;
+        --section-bg: #ffffff;
+        --primary: #132b88;
+        --primary-soft: #4b5fc8;
+        --muted: #6b7280;
+        --line: #d4d9e8;
+        --radius-xl: 26px;
+        --radius-md: 18px;
+        --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
       }
-      .vision-block {
-        grid-template-columns: 1fr;
+
+      * {
+        box-sizing: border-box;
       }
-    }
-  </style>
-</head>
-<body>
-  <img src="image/회사소개v2.png" alt="">
-  <main class="wrap" style="gap: 0;">
 
-    <!-- 섹션 타이틀 -->
-    <div class="section-head">
-      <h2>경영철학</h2>
-      <p>론다코리아는 정직과 신뢰, 기술 리더십을 기반으로 고객과 함께 성장하는 반도체 전문 기업을 지향합니다.</p>
-    </div>
+      body {
+        margin: 0;
+        padding: 48px 16px 72px;
+        background: radial-gradient(circle at top, #f5f7ff 0, #dde5f5 40%, #e6ecf8 100%);
+        font-family: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: #111827;
+        display: flex;
+        justify-content: center;
+      }
 
-    <!-- Mission -->
-    <section class="mission-block" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;background-color: #2d61d3;">
-      <div class="mission-text">
-        <h3>Mission</h3>
-        <p>
-          우리는 고객에게 경쟁력 있는 제품과 고품질 서비스를 제공하며,<br>
-          업계를 선도할 수 있는 혁신적인 반도체 제조 솔루션을 실현합니다.
-        </p>
-      </div>
-      <div class="mission-visual" aria-label="Semiconductor mission visual"></div>
-    </section>
+      .page {
+        width: min(1200px, 100%);
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
 
-    <!-- Core Values -->
-    <section class="values-block" style="background-color: #a6b3cd; border-radius: 0;">
-      <h3>Core Values</h3>
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="label">정직과 책임</div>
-          <p>우리는 정직하게 행동하며 결과에 책임을 집니다.</p>
-        </div>
-        <div class="value-card">
-          <div class="label">상호 신뢰</div>
-          <p>투명성과 존중을 바탕으로 신뢰를 구축합니다.</p>
-        </div>
-        <div class="value-card">
-          <div class="label">기술 리더십</div>
-          <p>혁신과 전문성으로 시장을 선도합니다.</p>
-        </div>
-        <div class="value-card">
-          <div class="label">품질 중심 SCM</div>
-          <p>공급망 전반에 걸쳐 품질을 최우선으로 합니다.</p>
-        </div>
-        <div class="value-card">
-          <div class="label">상생 전략</div>
-          <p>회사와 파트너 모두에게 이익이 되는 성장을 추구합니다.</p>
-        </div>
-      </div>
-    </section>
+      /* HERO 섹션 */
 
-    <!-- Vision -->
-    <section class="vision-block" style="background-color: #FAEFDD; border-top-left-radius: 0px;border-top-right-radius: 0;">
-      <div class="vision-text">
-        <h3>Vision</h3>
-        <p>
-          우리는 반도체 산업의 성장에 기여하고,<br>
-          고객이 더 나은 세상을 만들 수 있도록 지원함으로써,<br>
-          사람들의 삶의 질 향상에 이바지합니다.
-        </p>
-      </div>
-      <div class="vision-visual" aria-label="Vision visual"></div>
-    </section>
+      .hero {
+        background: linear-gradient(135deg, #132b88 0%, #1f2f8f 40%, #4b5fc8 100%);
+        border-radius: var(--radius-xl);
+        padding: 28px 28px 26px;
+        box-shadow: var(--shadow-soft);
+        color: #e5e7eb;
+        display: grid;
+        grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.4fr);
+        gap: 26px;
+        position: relative;
+        overflow: hidden;
+      }
 
-  </main>
-</body>
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background:
+          radial-gradient(circle at 0% 0%, rgba(96, 165, 250, 0.25) 0, transparent 55%),
+          radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.3) 0, transparent 60%);
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      .hero-left,
+      .hero-right {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #cbd5f5;
+        margin-bottom: 6px;
+      }
+
+      .hero-title {
+        margin: 0;
+        font-size: 1.9rem;
+        letter-spacing: -0.05em;
+      }
+
+      .hero-sub {
+        margin: 10px 0 14px;
+        font-size: 0.95rem;
+        color: #e5e7eb;
+      }
+
+      .hero-sub span {
+        color: #facc15;
+        font-weight: 500;
+      }
+
+      .hero-points {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 4px;
+      }
+
+      .hero-tag {
+        font-size: 0.78rem;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.45);
+        border: 1px solid rgba(191, 219, 254, 0.6);
+      }
+
+      .hero-right-card {
+        background: rgba(15, 23, 42, 0.82);
+        border-radius: 18px;
+        padding: 14px 14px 16px;
+        border: 1px solid rgba(191, 219, 254, 0.4);
+        box-shadow: 0 14px 34px rgba(15, 23, 42, 0.65);
+      }
+
+      .hero-right-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .hero-right-top span {
+        font-size: 0.75rem;
+        color: #9ca3ff;
+      }
+
+      .hero-mini-chart {
+        height: 80px;
+        border-radius: 12px;
+        background:
+          linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(56, 189, 248, 0.12)),
+          radial-gradient(circle at 0% 100%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1));
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-mini-chart::before,
+      .hero-mini-chart::after {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        mask-image: radial-gradient(circle at top, transparent 30%, black 70%);
+        opacity: 0.9;
+      }
+
+      .chart-line {
+        position: absolute;
+        inset: 14px 14px 18px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(191, 219, 254, 0.8) 35%,
+          rgba(248, 250, 252, 0.95) 70%,
+          rgba(191, 219, 254, 0.75) 100%
+        );
+        clip-path: polygon(0% 70%, 15% 60%, 30% 68%, 45% 40%, 60% 50%, 75% 25%, 90% 35%, 100% 18%, 100% 100%, 0% 100%);
+        opacity: 0.85;
+      }
+
+      .hero-right-list {
+        margin: 10px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      .hero-right-list li {
+        font-size: 0.7rem;
+        color: #d1d5db;
+        padding: 5px 7px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid rgba(148, 163, 184, 0.55);
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      /* 섹션 공통 */
+
+      .section {
+        background: var(--section-bg);
+        border-radius: var(--radius-xl);
+        padding: 22px 22px 24px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .sec-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .sec-header h2 {
+        margin: 0;
+        font-size: 1.05rem;
+        color: var(--primary);
+        letter-spacing: -0.02em;
+      }
+
+      .sec-header p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      /* 1. RK Industry Insight란? */
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1.7fr;
+        gap: 18px;
+        align-items: center;
+      }
+
+      .about-image {
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: #f3f4ff;
+      }
+
+      .about-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .about-points {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .about-card {
+        border-radius: 16px;
+        padding: 10px 11px 11px;
+        border: 1px solid var(--line);
+        background: #f9fafb;
+        font-size: 0.8rem;
+        color: #4b5563;
+      }
+
+      .about-card strong {
+        display: block;
+        margin-bottom: 3px;
+        color: #111827;
+      }
+
+      .about-card span {
+        font-size: 0.75rem;
+      }
+
+      /* 2. 세 가지 관점 */
+
+      .perspective-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .perspective-card {
+        border-radius: var(--radius-md);
+        border: 1px solid var(--line);
+        background: #f9fafb;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .persp-img {
+        height: 140px;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .persp-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .persp-body {
+        padding: 10px 12px 11px;
+        font-size: 0.8rem;
+        color: #4b5563;
+      }
+
+      .persp-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--primary-soft);
+        margin-bottom: 4px;
+      }
+
+      .persp-body strong {
+        display: block;
+        margin-bottom: 4px;
+        color: #111827;
+      }
+
+      .persp-body ul {
+        margin: 0;
+        padding-left: 1rem;
+      }
+
+      .persp-body li {
+        font-size: 0.76rem;
+      }
+
+      .persp-body li + li {
+        margin-top: 2px;
+      }
+
+      /* 3. Value Chain 다이어그램 */
+
+      .value-diagram {
+        margin-top: 6px;
+        padding: 14px 14px 16px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--line);
+        background: linear-gradient(135deg, #f9fafb 0%, #edf2ff 100%);
+      }
+
+      .value-steps {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .value-step {
+        border-radius: 14px;
+        padding: 9px 10px 11px;
+        font-size: 0.8rem;
+        position: relative;
+      }
+
+      .value-step.up {
+        background: #fefce8;
+        border: 1px solid #facc15;
+      }
+
+      .value-step.mid {
+        background: #eff6ff;
+        border: 1px solid #3b82f6;
+        box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.35);
+      }
+
+      .value-step.down {
+        background: #ecfdf3;
+        border: 1px solid #22c55e;
+      }
+
+      .value-step strong {
+        display: block;
+        margin-bottom: 3px;
+      }
+
+      .value-step span {
+        font-size: 0.75rem;
+        color: #4b5563;
+      }
+
+      .value-note {
+        font-size: 0.78rem;
+        color: #4b5563;
+      }
+
+      .value-note em {
+        font-style: normal;
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      /* 4. 파트너에게 주는 가치 */
+
+      .benefit-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .benefit-card {
+        border-radius: var(--radius-md);
+        border: 1px solid var(--line);
+        background: #f9fafb;
+        padding: 11px 12px 12px;
+        font-size: 0.8rem;
+        color: #4b5563;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .benefit-num {
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        background: #132b88;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.78rem;
+        margin-bottom: 2px;
+      }
+
+      .benefit-card strong {
+        color: #111827;
+      }
+
+      /* 반응형 */
+
+      @media (max-width: 980px) {
+        body {
+          padding: 32px 12px 54px;
+        }
+        .hero {
+          grid-template-columns: minmax(0, 1fr);
+          padding: 22px 20px;
+        }
+        .about-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .about-points {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .perspective-grid,
+        .benefit-grid,
+        .value-steps {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 640px) {
+        .about-points,
+        .perspective-grid,
+        .benefit-grid,
+        .value-steps {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <!-- HERO: 요약 레이어 -->
+      <section class="hero">
+        <div class="hero-left">
+          <div class="hero-eyebrow">INDUSTRY INSIGHT</div>
+          <h1 class="hero-title">반도체 산업 환경에 대한 RK의 시각</h1>
+          <p class="hero-sub">
+            변화하는 <span>산업·공정·소재</span> 흐름을<br />
+            단순 데이터가 아니라 <span>사업 관점</span>에서 정리한 인사이트.
+          </p>
+          <div class="hero-points">
+            <div class="hero-tag">고객 공정 관점</div>
+            <div class="hero-tag">공급망·운영 관점</div>
+            <div class="hero-tag">RK 역할 정의</div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-right-card">
+            <div class="hero-right-top">
+              <span>RK Industry Insight</span>
+              <span style="font-size:0.7rem;color:#e5e7eb;">for Partners & Internal Use</span>
+            </div>
+            <div class="hero-mini-chart">
+              <div class="chart-line"></div>
+            </div>
+            <ul class="hero-right-list">
+              <li>Process View</li>
+              <li>Business View</li>
+              <li>RK’s Role</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1. RK Industry Insight란? -->
+      <section class="section">
+        <header class="sec-header">
+          <h2>1. RK Industry Insight란 무엇인가요?</h2>
+          <p>한눈에 이해할 수 있는 요약형 산업·사업 해설 콘텐츠</p>
+        </header>
+
+        <div class="about-grid">
+          <div class="about-image">
+            <!-- 실제 이미지로 교체 가능 -->
+            <img
+              src="https://placehold.co/520x260/CCD4FF/132B88/png?text=Industry+%0AInsight+Visual"
+              alt="RK Industry Insight Visual"
+            />
+          </div>
+          <div class="about-points">
+            <article class="about-card">
+              <strong>데이터 나열이 아닌 ‘이유’ 설명</strong>
+              <span>산업·공정의 변화가 왜 중요하고, 어떤 의미를 갖는지 사업 언어로 정리합니다.</span>
+            </article>
+            <article class="about-card">
+              <strong>고객 과제와 연결</strong>
+              <span>기술 트렌드를 고객의 공정 안정성, 수율, 운영 리스크와 연결해 해석합니다.</span>
+            </article>
+            <article class="about-card">
+              <strong>RK의 역할 정의</strong>
+              <span>그 흐름 속에서 RK의 소재·부품·솔루션이 어디에 기여할 수 있는지 정리합니다.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. 세 가지 관점 -->
+      <section class="section">
+        <header class="sec-header">
+          <h2>2. RK Industry Insight를 구성하는 세 가지 관점</h2>
+          <p>Process · Business · RK’s Role 세 축으로 구조화</p>
+        </header>
+
+        <div class="perspective-grid">
+          <article class="perspective-card">
+            <div class="persp-img">
+              <img
+                src="https://placehold.co/400x240/DBEAFE/1D4ED8/png?text=Process+View"
+                alt="Process View"
+              />
+            </div>
+            <div class="persp-body">
+              <div class="persp-label">PERSPECTIVE 01</div>
+              <strong>Process View</strong>
+              <ul>
+                <li>공정 조건 변화가 수율·안정성에 미치는 영향</li>
+                <li>장비·부품·소재가 공정 안에서 수행하는 역할</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="perspective-card">
+            <div class="persp-img">
+              <img
+                src="https://placehold.co/400x240/E0F2FE/0369A1/png?text=Business+View"
+                alt="Business View"
+              />
+            </div>
+            <div class="persp-body">
+              <div class="persp-label">PERSPECTIVE 02</div>
+              <strong>Business View</strong>
+              <ul>
+                <li>고객의 비용 구조·리스크·운영상 과제와의 연결</li>
+                <li>시장 변화 속에서 생기는 새로운 수요와 기회</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="perspective-card">
+            <div class="persp-img">
+              <img
+                src="https://placehold.co/400x240/DCFCE7/15803D/png?text=RK%27s+Role"
+                alt="RK's Role"
+              />
+            </div>
+            <div class="persp-body">
+              <div class="persp-label">PERSPECTIVE 03</div>
+              <strong>RK’s Role</strong>
+              <ul>
+                <li>RK가 집중해야 할 공정·소재·부품 영역 정리</li>
+                <li>고객과의 협업 포인트와 제공 가치 정의</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. Value Chain 관점 -->
+      <section class="section">
+        <header class="sec-header">
+          <h2>3. 반도체 Value Chain 속에서 보는 RK의 포지션</h2>
+          <p>Upstream – Midstream – Downstream 관점에서 해석</p>
+        </header>
+
+        <div class="value-diagram">
+          <div class="value-steps">
+            <div class="value-step up">
+              <strong>Upstream</strong>
+              <span>웨이퍼, 케미컬, Precursor 등<br />기초 소재·원재료 단계</span>
+            </div>
+            <div class="value-step mid">
+              <strong>Midstream (RK)</strong>
+              <span>소재·부품·정밀 가공·Sub-FAB Solution 등<br />공정에 직접 연결되는 영역</span>
+            </div>
+            <div class="value-step down">
+              <strong>Downstream</strong>
+              <span>칩 생산, 패키징, 최종 제품 제조 등<br />완제품·응용 단계</span>
+            </div>
+          </div>
+          <p class="value-note">
+            RK Industry Insight는 이 Value Chain 전체를 바라보되, 특히
+            <em>Midstream 영역</em>에서 RK가 공정 안정성과 생산성에
+            어떻게 기여할 수 있는지를 중심으로 다룹니다.
+          </p>
+        </div>
+      </section>
+
+      <!-- 4. 파트너에게 주는 가치 -->
+      <section class="section">
+        <header class="sec-header">
+          <h2>4. 왜 RK Industry Insight가 필요한가요?</h2>
+          <p>고객·파트너와의 대화 및 의사결정을 위한 공통 언어</p>
+        </header>
+
+        <div class="benefit-grid">
+          <article class="benefit-card">
+            <div class="benefit-num">1</div>
+            <strong>복잡한 산업 환경의 ‘한 페이지 요약’</strong>
+            <p>
+              산업·공정·소재의 복잡한 변화를 한 화면에서 이해할 수 있도록 정리하여,
+              내부 공유와 파트너 커뮤니케이션을 쉽게 만듭니다.
+            </p>
+          </article>
+          <article class="benefit-card">
+            <div class="benefit-num">2</div>
+            <strong>기술 이야기를 사업 언어로 전환</strong>
+            <p>
+              기술 데이터와 트렌드를 고객 과제, 비용 구조, 리스크 관점에서 재정리해
+              전략 수립과 제안서 작성의 기반 자료로 활용할 수 있습니다.
+            </p>
+          </article>
+          <article class="benefit-card">
+            <div class="benefit-num">3</div>
+            <strong>RK의 방향성과 역할을 명확하게</strong>
+            <p>
+              RK가 어디에 집중하고, 어떤 공정·소재·제품 라인에서
+              가장 큰 가치를 제공할 수 있는지를 내부·외부에 일관되게 설명할 수 있습니다.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
