@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RK Philosophy – Light Theme</title>
+  <style>
+    :root {
+      --ink: #1e293b;
+      --muted: #64748b;
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: #93c5fd;
+      --line: rgba(100, 116, 139, 0.25);
+      --radius-xl: 24px;
+      --shadow-soft: 0 10px 28px rgba(0,0,0,0.07);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      padding: 40px 16px;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .panel {
+      background: var(--panel);
+      border-radius: 28px;
+      padding: 32px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle decorative gradient */
+    .panel::before {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(147,197,253,0.45), transparent 70%);
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    h1.title {
+      margin: 0 0 8px;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    h2.section-title {
+      font-size: 1.25rem;
+      margin: 0 0 6px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    h2.section-title span {
+      color: var(--accent);
+    }
+
+    .sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .sub-kr {
+      font-size: 0.88rem;
+      color: var(--ink);
+      opacity: 0.85;
+      margin-bottom: 16px;
+    }
+
+    .core-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .core-item {
+      background: #f1f5f9;
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      border: 1px solid rgba(148,163,184,0.25);
+    }
+    .core-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: #475569;
+      flex-shrink: 0;
+      font-weight: 600;
+    }
+    .core-main {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .core-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 700px) {
+      .panel { padding: 24px; }
+      h1.title { font-size: 1.45rem; }
+      h2.section-title { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Vision -->
+  <section class="panel">
+    <div class="label">VISION</div>
+    <h2 class="section-title">Enabling a <span>Better World</span> Through Semiconductors</h2>
+    <h2 class="section-title">Enabling a <span>Better World</span><br>Through Semiconductors</h2>
+    <p class="sub-kr">
+      원문: 우리는 반도체 산업의 성장에 기여하고, 고객이 더 나은 세상을 만들 수 있도록 지원함으로써, 사람들의 삶의 질 향상에 이바지합니다.
+    </p>
+    <p class="sub">
+      원문: We contribute to the growth of the semiconductor industry and help our customers create a better world, ultimately improving the quality of life for people everywhere.
+    </p>
+    <p class="sub">
+      대안: By supporting our customers to build a better world, we contribute to the growth of the semiconductor industry and the improvement of quality of life.
+    </p>
+  </section>
+
+  <!-- Mission -->
+  <section class="panel">
+    <div class="label">MISSION</div>
+    <h2 class="section-title">Delivering <span>Smarter</span> Semiconductor Solutions</h2>
+    <h2 class="section-title">Delivering <span>Smarter</span><br>Semiconductor Solutions</h2>
+    <p class="sub-kr">
+      원문: 우리는 고객에게 경쟁력 있는 제품과 고품질 서비스를 제공하며, 업계를 선도할 수 있는 혁신적인 반도체 솔루션을 실현합니다.
+    </p>
+    <p class="sub">
+      원문: We deliver industry-leading semiconductor manufacturing solutions by providing cost-effective products and high-quality services that empower our customers.
+    </p>
+    <p class="sub">
+      대안: We provide competitive products and high-quality services, realizing innovative solutions that lead the industry.
+    </p>
+  </section>
+
+  <!-- Core Value -->
+  <section class="panel">
+    <div class="label">CORE VALUE</div>
+    <h2 class="section-title">Built on <span>Trust</span> Driven by <span>Technology</span></h2>
+    <h2 class="section-title">Built on <span>Trust</span><br>Driven by <span>Technology</span></h2>
+
+    <ul class="core-list">
+      <li class="core-item">
+        <div class="core-icon">01</div>
+        <div>
+          <div class="core-main">정직과 책임 (Integrity & Accountability)</div>
+          <div class="core-sub">정직하게 행동하고 결과에 책임을 집니다.</div>
+        </div>
+      </li>
+
+      <li class="core-item">
+        <div class="core-icon">02</div>
+        <div>
+          <div class="core-main">상호 신뢰 (Mutual Trust)</div>
+          <div class="core-sub">투명성과 존중을 바탕으로 신뢰를 구축합니다.</div>
+        </div>
+      </li>
+
+      <li class="core-item">
+        <div class="core-icon">03</div>
+        <div>
+          <div class="core-main">기술 리더십 (Technical Leadership)</div>
+          <div class="core-sub">혁신과 전문성으로 시장을 선도합니다.</div>
+        </div>
+      </li>
+
+      <li class="core-item">
+        <div class="core-icon">04</div>
+        <div>
+          <div class="core-main">품질 중심 SCM (Quality-Driven SCM)</div>
+          <div class="core-sub">공급망 전반에 걸쳐 품질을 최우선으로 합니다.</div>
+        </div>
+      </li>
+
+      <li class="core-item">
+        <div class="core-icon">05</div>
+        <div>
+          <div class="core-main">상생 전략 (Co-Growth Strategy, Win-Win Strategy)</div>
+          <div class="core-sub">회사와 파트너 모두가 성장하는 상생 전략을 추구합니다.</div>
+        </div>
+      </li>
+
+    </ul>
+    <p class="sub">
+      대안: Our values guide every decision—from engineering to long-term partnerships.
+    </p>
+    <p class="sub-kr">
+      대안: 정직과 책임, 상호 신뢰, 기술 리더십, 품질 중심 SCM, 상생 전략을 바탕으로 지속 가능한 성장을 추구합니다.
+    </p>
+  </section>
+</div>
+</body>
+</html>
