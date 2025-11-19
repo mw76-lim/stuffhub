@@ -1,654 +1,994 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <title>RK Industry Insight</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      :root {
-        --page-bg: #e6ecf8;
-        --section-bg: #ffffff;
-        --primary: #132b88;
-        --primary-soft: #4b5fc8;
-        --muted: #6b7280;
-        --line: #d4d9e8;
-        --radius-xl: 26px;
-        --radius-md: 18px;
-        --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
-      }
+<head>
+  <meta charset="UTF-8" />
+  <title>RK Industry Insight – Visual + Tooltip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --page-bg: #edf2ff;
+      --section-bg: #ffffff;
+      --accent-soft: #e6ecf8;
+      --primary: #132b88;
+      --primary-soft: #4b5fc8;
+      --muted: #6b7280;
+      --line: #d4d9e8;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.08);
+      --shadow-card: 0 10px 26px rgba(15, 23, 42, 0.06);
+    }
 
-      * {
-        box-sizing: border-box;
-      }
+    * {
+      box-sizing: border-box;
+    }
 
+    body {
+      margin: 0;
+      padding: 40px 16px 72px;
+      background: radial-gradient(circle at top, #f9fbff 0, #edf2ff 40%, #e2e8f0 100%);
+      font-family: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrap {
+      width: min(1180px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* HERO */
+
+    .hero {
+      background: radial-gradient(circle at top left, #e0e7ff 0, #eef2ff 40%, #f9fafb 100%);
+      border-radius: var(--radius-lg);
+      padding: 28px 26px 26px;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.4fr);
+      gap: 26px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -80px;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      border: 1px solid rgba(79, 70, 229, 0.24);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: 30%;
+      width: 160px;
+      height: 160px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.18);
+      pointer-events: none;
+    }
+
+    .hero-main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #6b7280;
+      letter-spacing: 0.18em;
+      margin-bottom: 5px;
+    }
+
+    .hero-main h1 {
+      margin: 0 0 10px;
+      font-size: 1.7rem;
+      letter-spacing: -0.04em;
+      color: var(--primary);
+    }
+
+    .hero-main p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .hero-main p strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .hero-tags {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hero-tag-pill {
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(19, 43, 136, 0.06);
+      color: var(--primary);
+      border: 1px solid rgba(19, 43, 136, 0.12);
+    }
+
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+      border-radius: var(--radius-md);
+      padding: 14px 14px 16px;
+      background: linear-gradient(135deg, #132b88, #2563eb);
+      color: #e5e7eb;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
+      overflow: hidden;
+    }
+
+    .hero-visual-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+    }
+
+    .hero-visual-header span:first-child {
+      font-weight: 600;
+    }
+
+    .hero-visual-chip {
+      font-size: 0.7rem;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(191, 219, 254, 0.7);
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    .hero-mini-chart {
+      height: 84px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 0% 100%, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 1)),
+        linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(56, 189, 248, 0.18));
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .hero-mini-chart::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      opacity: 0.9;
+      mask-image: radial-gradient(circle at top, transparent 32%, black 70%);
+    }
+
+    .chart-line {
+      position: absolute;
+      inset: 16px 16px 20px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(191, 219, 254, 0.8) 35%,
+        rgba(248, 250, 252, 0.98) 70%,
+        rgba(191, 219, 254, 0.75) 100%
+      );
+      clip-path: polygon(
+        0% 90%,
+        12% 64%,
+        26% 72%,
+        40% 45%,
+        55% 52%,
+        70% 28%,
+        86% 36%,
+        100% 20%,
+        100% 100%,
+        0% 100%
+      );
+    }
+
+    .hero-visual-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.7rem;
+    }
+
+    .hero-visual-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.75);
+    }
+
+    /* ✅ RK Industry Insight 박스 전체 위로 뜨는 팝업 */
+
+    .insight-tooltip {
+      position: absolute;
+      inset: 10px 12px 12px 12px; /* 상우하좌 여백 */
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: #e5e7eb;
+      padding: 10px 12px;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition:
+        opacity 0.2s ease-out,
+        transform 0.2s ease-out;
+      z-index: 3;
+    }
+
+    .insight-tooltip strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.8rem;
+    }
+
+    .hero-visual:hover .insight-tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 공통 섹션 */
+
+    section {
+      background: var(--section-bg);
+      border-radius: var(--radius-lg);
+      padding: 24px 22px 26px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    section + section {
+      margin-top: 4px;
+    }
+
+    .section-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(191, 219, 254, 0.4) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(219, 234, 254, 0.4) 0, transparent 60%);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .section-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sec-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: #e0e7ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.02rem;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .section-header p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* 1. 트렌드 섹션 */
+
+    .trend-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.8fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .trend-visual {
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      padding: 14px 14px 16px;
+      color: #e5e7eb;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trend-visual::before {
+      content: "";
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.6);
+    }
+
+    .trend-visual-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #bfdbfe;
+      margin-bottom: 6px;
+    }
+
+    .trend-visual-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .trend-visual-note {
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      opacity: 0.92;
+      margin-bottom: 10px;
+    }
+
+    .trend-visual-img {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: #020617;
+    }
+
+    .trend-visual-img img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .trend-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .trend-card {
+      background: #f9fafb;
+      border-radius: var(--radius-sm);
+      padding: 12px 12px 11px;
+      border: 1px solid #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .trend-card:hover {
+      border-color: rgba(37, 99, 235, 0.45);
+      box-shadow: 0 14px 26px rgba(148, 163, 184, 0.55);
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .trend-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+    }
+
+    .trend-card h3 {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #111827;
+    }
+
+    .trend-card p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    /* 2. 가치 축 섹션 */
+
+    .pill-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .pill {
+      padding: 12px 13px 12px;
+      border-radius: var(--radius-md);
+      background: #f3f4ff;
+      border: 1px solid rgba(19, 43, 136, 0.14);
+      font-size: 0.8rem;
+      color: #4b5563;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pill::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      top: 40%;
+      width: 70px;
+      height: 70px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.5);
+      opacity: 0.6;
+    }
+
+    .pill-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: #e0e7ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .pill-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--primary-soft);
+      margin-bottom: 3px;
+    }
+
+    .pill strong {
+      display: block;
+      color: #111827;
+      margin-bottom: 3px;
+      font-size: 0.86rem;
+    }
+
+    .pill p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    /* 3. Value Chain 섹션 */
+
+    .chain-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.8fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .chain-visual {
+      border-radius: var(--radius-md);
+      background: linear-gradient(145deg, #0f172a, #1f2937);
+      color: #e5e7eb;
+      padding: 14px 14px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chain-visual::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 16px;
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      opacity: 0.7;
+    }
+
+    .chain-visual-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chain-visual-note {
+      font-size: 0.78rem;
+      opacity: 0.9;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chain-visual-img {
+      position: relative;
+      z-index: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: #020617;
+    }
+
+    .chain-visual-img img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .chain {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .chain-block {
+      padding: 13px 14px 12px;
+      border-radius: var(--radius-md);
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      position: relative;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .chain-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+
+    .chain-tag {
+      display: inline-block;
+      margin-bottom: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      background: #eef2ff;
+      color: #4b5fc8;
+    }
+
+    .chain-block p {
+      margin: 0;
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    /* 4. 이슈 & 응답 섹션 */
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.45fr);
+      gap: 20px;
+    }
+
+    .sub-title {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sub-title-pill {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: #e0e7ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding-left: 1.05rem;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .bullet-list li + li {
+      margin-top: 4px;
+    }
+
+    .note-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .response-box {
+      margin-top: 4px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #f3f4ff;
+      border: 1px solid rgba(19, 43, 136, 0.15);
+      font-size: 0.78rem;
+      color: #4b5563;
+    }
+
+    .response-box strong {
+      color: var(--primary);
+    }
+
+    /* 반응형 */
+
+    @media (max-width: 960px) {
       body {
-        margin: 0;
-        padding: 48px 16px 72px;
-        background: radial-gradient(circle at top, #f5f7ff 0, #dde5f5 40%, #e6ecf8 100%);
-        font-family: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
-        color: #111827;
-        display: flex;
-        justify-content: center;
+        padding: 30px 12px 52px;
       }
-
-      .page {
-        width: min(1200px, 100%);
-        display: flex;
-        flex-direction: column;
-        gap: 28px;
-      }
-
-      /* HERO 섹션 */
-
       .hero {
-        background: linear-gradient(135deg, #132b88 0%, #1f2f8f 40%, #4b5fc8 100%);
-        border-radius: var(--radius-xl);
-        padding: 28px 28px 26px;
-        box-shadow: var(--shadow-soft);
-        color: #e5e7eb;
-        display: grid;
-        grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.4fr);
-        gap: 26px;
-        position: relative;
-        overflow: hidden;
+        grid-template-columns: minmax(0, 1fr);
+        padding: 24px 20px 22px;
       }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: -40%;
-        background:
-          radial-gradient(circle at 0% 0%, rgba(96, 165, 250, 0.25) 0, transparent 55%),
-          radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.3) 0, transparent 60%);
-        opacity: 0.4;
-        pointer-events: none;
+      .trend-layout {
+        grid-template-columns: minmax(0, 1fr);
       }
-
-      .hero-left,
-      .hero-right {
-        position: relative;
-        z-index: 1;
+      .chain-layout {
+        grid-template-columns: minmax(0, 1fr);
       }
-
-      .hero-eyebrow {
-        font-size: 0.78rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: #cbd5f5;
-        margin-bottom: 6px;
+      .trend-grid,
+      .pill-grid,
+      .chain {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-
-      .hero-title {
-        margin: 0;
-        font-size: 1.9rem;
-        letter-spacing: -0.05em;
+      .hero-visual {
+        max-width: 380px;
+        margin-left: auto;
       }
+    }
 
-      .hero-sub {
-        margin: 10px 0 14px;
-        font-size: 0.95rem;
-        color: #e5e7eb;
+    @media (max-width: 640px) {
+      section {
+        padding: 20px 16px 22px;
       }
-
-      .hero-sub span {
-        color: #facc15;
-        font-weight: 500;
+      .trend-grid,
+      .pill-grid,
+      .chain {
+        grid-template-columns: minmax(0, 1fr);
       }
-
-      .hero-points {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 4px;
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
       }
-
-      .hero-tag {
-        font-size: 0.78rem;
-        padding: 5px 10px;
-        border-radius: 999px;
-        background: rgba(15, 23, 42, 0.45);
-        border: 1px solid rgba(191, 219, 254, 0.6);
+      .hero-visual {
+        max-width: none;
       }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">INDUSTRY INSIGHT</div>
+        <h1>반도체 산업 환경에 대한 RK의 시각</h1>
+        <p>
+          반도체 산업은 미세화·고집적·고신뢰성을 동시에 요구하는 복합적인 산업입니다.
+          RK Industry Insight는 기술 동향과 공정 환경의 변화를 데이터가 아닌
+          <strong>‘사업 관점’</strong>에서 해석하고, 우리가 어디에 기여할 수 있는지 정리한 내용입니다.
+        </p>
+        <div class="hero-tags">
+          <div class="hero-tag-pill">Process &amp; Equipment</div>
+          <div class="hero-tag-pill">Materials &amp; Consumables</div>
+          <div class="hero-tag-pill">Business &amp; Supply Chain</div>
+        </div>
+      </div>
 
-      .hero-right-card {
-        background: rgba(15, 23, 42, 0.82);
-        border-radius: 18px;
-        padding: 14px 14px 16px;
-        border: 1px solid rgba(191, 219, 254, 0.4);
-        box-shadow: 0 14px 34px rgba(15, 23, 42, 0.65);
-      }
+      <aside class="hero-visual">
+        <div class="hero-visual-header">
+          <span>RK Industry Insight</span>
+          <span class="hero-visual-chip">for Partners &amp; Internal Use</span>
+        </div>
+        <div class="hero-mini-chart">
+          <div class="chart-line"></div>
+        </div>
+        <div class="hero-visual-tags">
+          <span class="hero-visual-tag">Process View</span>
+          <span class="hero-visual-tag">Business View</span>
+          <span class="hero-visual-tag">RK’s Role</span>
+        </div>
 
-      .hero-right-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-
-      .hero-right-top span {
-        font-size: 0.75rem;
-        color: #9ca3ff;
-      }
-
-      .hero-mini-chart {
-        height: 80px;
-        border-radius: 12px;
-        background:
-          linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(56, 189, 248, 0.12)),
-          radial-gradient(circle at 0% 100%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 1));
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero-mini-chart::before,
-      .hero-mini-chart::after {
-        content: "";
-        position: absolute;
-        inset: 12px;
-        border-radius: 12px;
-        border: 1px solid rgba(148, 163, 184, 0.5);
-        mask-image: radial-gradient(circle at top, transparent 30%, black 70%);
-        opacity: 0.9;
-      }
-
-      .chart-line {
-        position: absolute;
-        inset: 14px 14px 18px;
-        background: linear-gradient(
-          90deg,
-          transparent 0%,
-          rgba(191, 219, 254, 0.8) 35%,
-          rgba(248, 250, 252, 0.95) 70%,
-          rgba(191, 219, 254, 0.75) 100%
-        );
-        clip-path: polygon(0% 70%, 15% 60%, 30% 68%, 45% 40%, 60% 50%, 75% 25%, 90% 35%, 100% 18%, 100% 100%, 0% 100%);
-        opacity: 0.85;
-      }
-
-      .hero-right-list {
-        margin: 10px 0 0;
-        padding: 0;
-        list-style: none;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 6px;
-      }
-
-      .hero-right-list li {
-        font-size: 0.7rem;
-        color: #d1d5db;
-        padding: 5px 7px;
-        border-radius: 999px;
-        background: rgba(15, 23, 42, 0.85);
-        border: 1px solid rgba(148, 163, 184, 0.55);
-        text-align: center;
-        white-space: nowrap;
-      }
-
-      /* 섹션 공통 */
-
-      .section {
-        background: var(--section-bg);
-        border-radius: var(--radius-xl);
-        padding: 22px 22px 24px;
-        box-shadow: var(--shadow-soft);
-      }
-
-      .sec-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 12px;
-        margin-bottom: 18px;
-      }
-
-      .sec-header h2 {
-        margin: 0;
-        font-size: 1.05rem;
-        color: var(--primary);
-        letter-spacing: -0.02em;
-      }
-
-      .sec-header p {
-        margin: 0;
-        font-size: 0.8rem;
-        color: var(--muted);
-      }
-
-      /* 1. RK Industry Insight란? */
-
-      .about-grid {
-        display: grid;
-        grid-template-columns: 1.3fr 1.7fr;
-        gap: 18px;
-        align-items: center;
-      }
-
-      .about-image {
-        border-radius: var(--radius-md);
-        overflow: hidden;
-        border: 1px solid var(--line);
-        background: #f3f4ff;
-      }
-
-      .about-image img {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-
-      .about-points {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .about-card {
-        border-radius: 16px;
-        padding: 10px 11px 11px;
-        border: 1px solid var(--line);
-        background: #f9fafb;
-        font-size: 0.8rem;
-        color: #4b5563;
-      }
-
-      .about-card strong {
-        display: block;
-        margin-bottom: 3px;
-        color: #111827;
-      }
-
-      .about-card span {
-        font-size: 0.75rem;
-      }
-
-      /* 2. 세 가지 관점 */
-
-      .perspective-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-      }
-
-      .perspective-card {
-        border-radius: var(--radius-md);
-        border: 1px solid var(--line);
-        background: #f9fafb;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-      }
-
-      .persp-img {
-        height: 140px;
-        overflow: hidden;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .persp-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-
-      .persp-body {
-        padding: 10px 12px 11px;
-        font-size: 0.8rem;
-        color: #4b5563;
-      }
-
-      .persp-label {
-        font-size: 0.72rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--primary-soft);
-        margin-bottom: 4px;
-      }
-
-      .persp-body strong {
-        display: block;
-        margin-bottom: 4px;
-        color: #111827;
-      }
-
-      .persp-body ul {
-        margin: 0;
-        padding-left: 1rem;
-      }
-
-      .persp-body li {
-        font-size: 0.76rem;
-      }
-
-      .persp-body li + li {
-        margin-top: 2px;
-      }
-
-      /* 3. Value Chain 다이어그램 */
-
-      .value-diagram {
-        margin-top: 6px;
-        padding: 14px 14px 16px;
-        border-radius: var(--radius-md);
-        border: 1px solid var(--line);
-        background: linear-gradient(135deg, #f9fafb 0%, #edf2ff 100%);
-      }
-
-      .value-steps {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-        margin-bottom: 10px;
-      }
-
-      .value-step {
-        border-radius: 14px;
-        padding: 9px 10px 11px;
-        font-size: 0.8rem;
-        position: relative;
-      }
-
-      .value-step.up {
-        background: #fefce8;
-        border: 1px solid #facc15;
-      }
-
-      .value-step.mid {
-        background: #eff6ff;
-        border: 1px solid #3b82f6;
-        box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.35);
-      }
-
-      .value-step.down {
-        background: #ecfdf3;
-        border: 1px solid #22c55e;
-      }
-
-      .value-step strong {
-        display: block;
-        margin-bottom: 3px;
-      }
-
-      .value-step span {
-        font-size: 0.75rem;
-        color: #4b5563;
-      }
-
-      .value-note {
-        font-size: 0.78rem;
-        color: #4b5563;
-      }
-
-      .value-note em {
-        font-style: normal;
-        color: var(--primary);
-        font-weight: 600;
-      }
-
-      /* 4. 파트너에게 주는 가치 */
-
-      .benefit-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-      }
-
-      .benefit-card {
-        border-radius: var(--radius-md);
-        border: 1px solid var(--line);
-        background: #f9fafb;
-        padding: 11px 12px 12px;
-        font-size: 0.8rem;
-        color: #4b5563;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-      }
-
-      .benefit-num {
-        width: 26px;
-        height: 26px;
-        border-radius: 999px;
-        background: #132b88;
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.78rem;
-        margin-bottom: 2px;
-      }
-
-      .benefit-card strong {
-        color: #111827;
-      }
-
-      /* 반응형 */
-
-      @media (max-width: 980px) {
-        body {
-          padding: 32px 12px 54px;
-        }
-        .hero {
-          grid-template-columns: minmax(0, 1fr);
-          padding: 22px 20px;
-        }
-        .about-grid {
-          grid-template-columns: minmax(0, 1fr);
-        }
-        .about-points {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-        .perspective-grid,
-        .benefit-grid,
-        .value-steps {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-
-      @media (max-width: 640px) {
-        .about-points,
-        .perspective-grid,
-        .benefit-grid,
-        .value-steps {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="page">
-      <!-- HERO: 요약 레이어 -->
-      <section class="hero">
-        <div class="hero-left">
-          <div class="hero-eyebrow">INDUSTRY INSIGHT</div>
-          <h1 class="hero-title">반도체 산업 환경에 대한 RK의 시각</h1>
-          <p class="hero-sub">
-            변화하는 <span>산업·공정·소재</span> 흐름을<br />
-            단순 데이터가 아니라 <span>사업 관점</span>에서 정리한 인사이트.
+        <!-- ✅ 박스 전체 위로 뜨는 팝업 -->
+        <div class="insight-tooltip">
+          <strong>What is RK Industry Insight?</strong>
+          <p>
+            공정, 사업, 그리고 RK의 역할을 하나의 흐름으로 정리한<br />
+            인사이트 패널입니다. 실제 수치 그래프가 아니라,<br />
+            반도체 산업 환경 변화를 상징적으로 표현한 뷰입니다.
           </p>
-          <div class="hero-points">
-            <div class="hero-tag">고객 공정 관점</div>
-            <div class="hero-tag">공급망·운영 관점</div>
-            <div class="hero-tag">RK 역할 정의</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- 1. 산업 환경 핵심 변화 -->
+    <section>
+      <div class="section-inner">
+        <header class="section-header">
+          <div class="section-header-left">
+            <div class="sec-icon">①</div>
+            <h2>반도체 산업 환경의 핵심 변화</h2>
+          </div>
+          <p>공정 미세화·소재 고도화·공급망 복잡화가 동시에 진행되는 환경</p>
+        </header>
+
+        <div class="trend-layout">
+          <aside class="trend-visual">
+            <div class="trend-visual-eyebrow">INDUSTRY LANDSCAPE</div>
+            <div class="trend-visual-title">Technology · Process · Supply Chain</div>
+            <div class="trend-visual-note">
+              산업·공정·소재의 변화를 “하나의 그림”으로 이해하기 위한 RK의 관점입니다.
+            </div>
+            <div class="trend-visual-img">
+              <img
+                src="https://placehold.co/480x220/020617/E5E7EB/png?text=Semiconductor+%0AIndustry+Overview"
+                alt="Semiconductor Industry Visual"
+              />
+            </div>
+          </aside>
+
+          <div class="trend-grid">
+            <article class="trend-card">
+              <div class="trend-label">TREND 01</div>
+              <h3>공정 미세화와 수율 리스크 확대</h3>
+              <p>
+                선폭이 줄어들수록 공정 허용 오차는 작아지고, 작은 파티클·미세 결함도
+                수율에 큰 영향을 미칩니다. 단순한 장비 성능뿐 아니라, 공정에서 사용되는
+                부품·소재의 안정성과 일관성이 중요해지고 있습니다.
+              </p>
+            </article>
+            <article class="trend-card">
+              <div class="trend-label">TREND 02</div>
+              <h3>소재·부품의 고기능·고신뢰성 요구</h3>
+              <p>
+                고온·플라즈마·고부식 환경에서 사용되는 소재는 내구성뿐 아니라
+                공정과의 화학적 상호작용까지 고려해야 합니다. Si, Quartz, SiC 등
+                핵심 소재의 가공·품질 관리 수준이 곧 공정 경쟁력으로 연결됩니다.
+              </p>
+            </article>
+            <article class="trend-card">
+              <div class="trend-label">TREND 03</div>
+              <h3>공급망 복잡성과 운영 리스크</h3>
+              <p>
+                글로벌 공급망의 복잡도가 높아지면서, 단일 부품·소재의 공급 이슈가
+                전체 라인의 다운타임으로 이어질 수 있습니다. 기술 역량과 함께
+                공급망 안정성 확보가 기업의 중요한 과제가 되고 있습니다.
+              </p>
+            </article>
           </div>
         </div>
-        <div class="hero-right">
-          <div class="hero-right-card">
-            <div class="hero-right-top">
-              <span>RK Industry Insight</span>
-              <span style="font-size:0.7rem;color:#e5e7eb;">for Partners & Internal Use</span>
+      </div>
+    </section>
+
+    <!-- 2. RK가 보는 핵심 가치 축 -->
+    <section>
+      <div class="section-inner">
+        <header class="section-header">
+          <div class="section-header-left">
+            <div class="sec-icon">②</div>
+            <h2>RK가 바라보는 핵심 가치 축</h2>
+          </div>
+          <p>공정 안정성, 오염 제어, 열·소재 관리 관점에서 본 사업 포지셔닝</p>
+        </header>
+
+        <div class="pill-grid">
+          <article class="pill">
+            <div class="pill-icon">🌀</div>
+            <div class="pill-title">AXIS 01 · PROCESS STABILITY</div>
+            <strong>공정 안정성(Process Stability)</strong>
+            <p>
+              핵심 공정 장비에 사용되는 Consumable Parts와 Component는
+              공정 재현성과 장비 가동률에 직접적인 영향을 줍니다. RK는
+              공정 조건에 최적화된 소재·부품을 통해 공정 변동성 최소화를
+              지향합니다.
+            </p>
+          </article>
+          <article class="pill">
+            <div class="pill-icon">🧪</div>
+            <div class="pill-title">AXIS 02 · CONTAMINATION CONTROL</div>
+            <strong>오염 제어(Contamination Control)</strong>
+            <p>
+              파티클, 부식 부산물, 가스·케미컬 이물질 등은 미세 공정 수율에
+              치명적인 리스크 요인입니다. Trap, Sub-FAB Solution, 고순도
+              Raw Materials는 라인의 청정도 유지와 장비 수명에 직결됩니다.
+            </p>
+          </article>
+          <article class="pill">
+            <div class="pill-icon">🔥</div>
+            <div class="pill-title">AXIS 03 · THERMAL &amp; MATERIAL</div>
+            <strong>열·소재 관리(Thermal &amp; Material Management)</strong>
+            <p>
+              Heater, ESC, Coolant 등 열·에너지 관련 솔루션은 공정 온도
+              균일성과 장비 안정성에 영향을 미치며, FFKM·PFA 등 고기능
+              소재는 극한 조건에서의 신뢰성 확보에 기여합니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Value Chain 관점 -->
+    <section>
+      <div class="section-inner">
+        <header class="section-header">
+          <div class="section-header-left">
+            <div class="sec-icon">③</div>
+            <h2>반도체 Value Chain 관점에서 본 RK의 역할</h2>
+          </div>
+          <p>Upstream–Midstream–Downstream을 잇는 소재·부품 관점의 기여</p>
+        </header>
+
+        <div class="chain-layout">
+          <aside class="chain-visual">
+            <div class="chain-visual-title">Semiconductor Value Chain</div>
+            <div class="chain-visual-note">
+              Upstream–Midstream–Downstream 전체를 보되,
+              특히 공정과 직접 연결되는 Midstream에서의 RK 포지션을 정의합니다.
             </div>
-            <div class="hero-mini-chart">
-              <div class="chart-line"></div>
+            <div class="chain-visual-img">
+              <img
+                src="https://placehold.co/460x210/020617/E5E7EB/png?text=Value+Chain+Diagram"
+                alt="Value Chain Diagram"
+              />
             </div>
-            <ul class="hero-right-list">
-              <li>Process View</li>
-              <li>Business View</li>
-              <li>RK’s Role</li>
+          </aside>
+
+          <div class="chain">
+            <article class="chain-block">
+              <div class="chain-label">Upstream</div>
+              <span class="chain-tag">Materials &amp; Basic Parts</span>
+              <p>
+                고순도 Raw Materials와 공정 조건에 맞는 소재 선택은
+                전체 Value Chain의 출발점입니다. 소재 단계에서의
+                안정성·청정도 확보는 이후 공정 리스크를 선제적으로
+                줄이는 역할을 합니다.
+              </p>
+            </article>
+            <article class="chain-block">
+              <div class="chain-label">Midstream</div>
+              <span class="chain-tag">Process Equipment &amp; Consumables</span>
+              <p>
+                Etch, CVD, Cleaning 등 주요 공정에 사용되는 Consumable Parts,
+                Ceramic Heater, ESC, Trap 등은 실제 공정이 이루어지는
+                구간에서 공정 품질과 장비 성능을 지지하는 핵심 요소입니다.
+              </p>
+            </article>
+            <article class="chain-block">
+              <div class="chain-label">Downstream</div>
+              <span class="chain-tag">Stability &amp; Productivity</span>
+              <p>
+                설비 안정화 솔루션과 공정별 최적화된 부품 제안은
+                장기적인 관점에서 라인 다운타임 감소, 유지보수 비용
+                절감, 생산성 향상으로 이어집니다. RK는 이 구간에서
+                고객의 Total Cost 관점까지 함께 고려합니다.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 고객 이슈 & RK의 응답 -->
+    <section>
+      <div class="section-inner">
+        <header class="section-header">
+          <div class="section-header-left">
+            <div class="sec-icon">④</div>
+            <h2>고객 관점의 주요 이슈와 RK의 대응 방향</h2>
+          </div>
+          <p>기술·운영·공급망 측면에서 공통적으로 제기되는 과제를 정리</p>
+        </header>
+
+        <div class="two-col">
+          <div>
+            <div class="sub-title">
+              <div class="sub-title-pill">Q</div>
+              고객이 자주 이야기하는 이슈
+            </div>
+            <ul class="bullet-list">
+              <li>공정 조건 변화에 따라 부품 수명과 성능 편차가 커지는 문제</li>
+              <li>장비 공급사·부품 공급사가 분리되면서 책임 구분이 모호해지는 상황</li>
+              <li>글로벌 공급망 이슈로 인한 리드타임 증가와 대체 부품 검토 필요성</li>
+              <li>Sub-FAB 영역에서의 Trap/배기라인 관리 미흡으로 인한 공정 리스크</li>
+              <li>신규 공정·신규 소재 적용 시 검증 부담과 초기 셋업 리스크</li>
             </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- 1. RK Industry Insight란? -->
-      <section class="section">
-        <header class="sec-header">
-          <h2>1. RK Industry Insight란 무엇인가요?</h2>
-          <p>한눈에 이해할 수 있는 요약형 산업·사업 해설 콘텐츠</p>
-        </header>
-
-        <div class="about-grid">
-          <div class="about-image">
-            <!-- 실제 이미지로 교체 가능 -->
-            <img
-              src="https://placehold.co/520x260/CCD4FF/132B88/png?text=Industry+%0AInsight+Visual"
-              alt="RK Industry Insight Visual"
-            />
-          </div>
-          <div class="about-points">
-            <article class="about-card">
-              <strong>데이터 나열이 아닌 ‘이유’ 설명</strong>
-              <span>산업·공정의 변화가 왜 중요하고, 어떤 의미를 갖는지 사업 언어로 정리합니다.</span>
-            </article>
-            <article class="about-card">
-              <strong>고객 과제와 연결</strong>
-              <span>기술 트렌드를 고객의 공정 안정성, 수율, 운영 리스크와 연결해 해석합니다.</span>
-            </article>
-            <article class="about-card">
-              <strong>RK의 역할 정의</strong>
-              <span>그 흐름 속에서 RK의 소재·부품·솔루션이 어디에 기여할 수 있는지 정리합니다.</span>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 2. 세 가지 관점 -->
-      <section class="section">
-        <header class="sec-header">
-          <h2>2. RK Industry Insight를 구성하는 세 가지 관점</h2>
-          <p>Process · Business · RK’s Role 세 축으로 구조화</p>
-        </header>
-
-        <div class="perspective-grid">
-          <article class="perspective-card">
-            <div class="persp-img">
-              <img
-                src="https://placehold.co/400x240/DBEAFE/1D4ED8/png?text=Process+View"
-                alt="Process View"
-              />
-            </div>
-            <div class="persp-body">
-              <div class="persp-label">PERSPECTIVE 01</div>
-              <strong>Process View</strong>
-              <ul>
-                <li>공정 조건 변화가 수율·안정성에 미치는 영향</li>
-                <li>장비·부품·소재가 공정 안에서 수행하는 역할</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="perspective-card">
-            <div class="persp-img">
-              <img
-                src="https://placehold.co/400x240/E0F2FE/0369A1/png?text=Business+View"
-                alt="Business View"
-              />
-            </div>
-            <div class="persp-body">
-              <div class="persp-label">PERSPECTIVE 02</div>
-              <strong>Business View</strong>
-              <ul>
-                <li>고객의 비용 구조·리스크·운영상 과제와의 연결</li>
-                <li>시장 변화 속에서 생기는 새로운 수요와 기회</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="perspective-card">
-            <div class="persp-img">
-              <img
-                src="https://placehold.co/400x240/DCFCE7/15803D/png?text=RK%27s+Role"
-                alt="RK's Role"
-              />
-            </div>
-            <div class="persp-body">
-              <div class="persp-label">PERSPECTIVE 03</div>
-              <strong>RK’s Role</strong>
-              <ul>
-                <li>RK가 집중해야 할 공정·소재·부품 영역 정리</li>
-                <li>고객과의 협업 포인트와 제공 가치 정의</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- 3. Value Chain 관점 -->
-      <section class="section">
-        <header class="sec-header">
-          <h2>3. 반도체 Value Chain 속에서 보는 RK의 포지션</h2>
-          <p>Upstream – Midstream – Downstream 관점에서 해석</p>
-        </header>
-
-        <div class="value-diagram">
-          <div class="value-steps">
-            <div class="value-step up">
-              <strong>Upstream</strong>
-              <span>웨이퍼, 케미컬, Precursor 등<br />기초 소재·원재료 단계</span>
-            </div>
-            <div class="value-step mid">
-              <strong>Midstream (RK)</strong>
-              <span>소재·부품·정밀 가공·Sub-FAB Solution 등<br />공정에 직접 연결되는 영역</span>
-            </div>
-            <div class="value-step down">
-              <strong>Downstream</strong>
-              <span>칩 생산, 패키징, 최종 제품 제조 등<br />완제품·응용 단계</span>
+            <div class="note-box">
+              이러한 이슈들은 결국 “공정 안정성”과 “운영 리스크 관리”라는
+              공통된 질문으로 귀결됩니다. RK의 사업 방향 역시 이 지점에
+              초점을 맞추고 있습니다.
             </div>
           </div>
-          <p class="value-note">
-            RK Industry Insight는 이 Value Chain 전체를 바라보되, 특히
-            <em>Midstream 영역</em>에서 RK가 공정 안정성과 생산성에
-            어떻게 기여할 수 있는지를 중심으로 다룹니다.
-          </p>
+          <div>
+            <div class="sub-title">
+              <div class="sub-title-pill">A</div>
+              RK의 대응 방향 (Business Response)
+            </div>
+            <ul class="bullet-list">
+              <li>
+                <strong>Process-fit 제안</strong><br />
+                공정별·장비별 특성을 이해한 후, 소재·부품·Sub-FAB Solution을
+                <em>프로세스 적합성(Process Fit)</em> 관점에서 제안합니다.
+              </li>
+              <li>
+                <strong>기술 및 공급 일체형 관점</strong><br />
+                단순 공급이 아닌, 설계–소싱–제조–공급까지 연계해
+                고객의 운영 편의성과 안정성을 함께 고려합니다.
+              </li>
+              <li>
+                <strong>중장기 관점의 TCO(Total Cost of Ownership)</strong><br />
+                초기 단가뿐 아니라 수명, 유지보수, 라인 가동률까지 고려한
+                중장기 비용 구조를 함께 검토합니다.
+              </li>
+              <li>
+                <strong>동북아 생산거점 기반 대응력 강화</strong><br />
+                동북아 생산·공급 거점을 중심으로 리드타임, 커뮤니케이션,
+                기술 지원 속도를 높이는 방향성을 지향합니다.
+              </li>
+            </ul>
+            <div class="response-box">
+              <strong>결국 RK Industry Insight는,</strong><br />
+              기술 언어와 사업 언어를 연결해 고객·파트너와의 대화를 돕는
+              “공통의 레퍼런스 프레임” 역할을 합니다.
+            </div>
+          </div>
         </div>
-      </section>
-
-      <!-- 4. 파트너에게 주는 가치 -->
-      <section class="section">
-        <header class="sec-header">
-          <h2>4. 왜 RK Industry Insight가 필요한가요?</h2>
-          <p>고객·파트너와의 대화 및 의사결정을 위한 공통 언어</p>
-        </header>
-
-        <div class="benefit-grid">
-          <article class="benefit-card">
-            <div class="benefit-num">1</div>
-            <strong>복잡한 산업 환경의 ‘한 페이지 요약’</strong>
-            <p>
-              산업·공정·소재의 복잡한 변화를 한 화면에서 이해할 수 있도록 정리하여,
-              내부 공유와 파트너 커뮤니케이션을 쉽게 만듭니다.
-            </p>
-          </article>
-          <article class="benefit-card">
-            <div class="benefit-num">2</div>
-            <strong>기술 이야기를 사업 언어로 전환</strong>
-            <p>
-              기술 데이터와 트렌드를 고객 과제, 비용 구조, 리스크 관점에서 재정리해
-              전략 수립과 제안서 작성의 기반 자료로 활용할 수 있습니다.
-            </p>
-          </article>
-          <article class="benefit-card">
-            <div class="benefit-num">3</div>
-            <strong>RK의 방향성과 역할을 명확하게</strong>
-            <p>
-              RK가 어디에 집중하고, 어떤 공정·소재·제품 라인에서
-              가장 큰 가치를 제공할 수 있는지를 내부·외부에 일관되게 설명할 수 있습니다.
-            </p>
-          </article>
-        </div>
-      </section>
-    </main>
-  </body>
+      </div>
+    </section>
+  </main>
+</body>
 </html>
