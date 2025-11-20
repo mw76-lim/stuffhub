@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- =========================================
+        VFB · Our Brands — Brand Story · Split Layout
+        - Left : Long narrative story
+        - Right: Supporting / associative image (≈30% width)
+        ========================================= -->
+    <section class="vfb-brand-story-split" id="brand-story">
+      <div class="vfb-brand-story-split__bg"></div>
+      <div class="vfb-brand-story-split__glow vfb-brand-story-split__glow--tl"></div>
+      <div class="vfb-brand-story-split__glow vfb-brand-story-split__glow--br"></div>
+
+      <div class="vfb-brand-story-split__inner">
+        <!-- Eyebrow -->
+        <header class="vfb-brand-story-split__header">
+          <div class="vfb-brand-story-split__eyebrow">
+            <span class="vfb-brand-story-split__pill">Our Brands</span>
+            <span class="vfb-brand-story-split__dot"></span>
+            <!-- [EDIT] 브랜드명 -->
+            <span class="vfb-brand-story-split__label">Lao Chongqing Hotpot</span>
+          </div>
+
+          <!-- [EDIT] 메인 타이틀 -->
+          <h2 class="vfb-brand-story-split__title">
+            100년 전통 충칭 훠궈에서 시작된,
+            <span>라오충칭훠궈</span>
+          </h2>
+
+          <!-- [EDIT] 짧은 리드 문장 -->
+          <p class="vfb-brand-story-split__lead">
+            정통은 지키되, 경험은 새롭게. 라오충칭훠궈는 충칭 훠궈의 100년 스토리를 오늘의 테이블에 맞게 다시 풀어낸 프리미엄 훠궈 브랜드입니다.
+          </p>
+        </header>
+
+        <div class="vfb-brand-story-split__layout">
+          <!-- =======================
+        LEFT : LONG STORY
+      ======================== -->
+          <div class="vfb-brand-story-split__story">
+            <!-- [EDIT] 스토리 전체 텍스트 -->
+            <p>
+              100년 전통 충칭 훠궈를 기반으로 탄생한 라오충칭훠궈는 깊고 진한 육수와 정통 향신료를 현대적인 감성으로 풀어낸 프리미엄 훠궈
+              브랜드입니다.
+            </p>
+            <p>
+              중국 사천성 충칭 지역에서 시작된 마라 훠궈의 매력은 그 깊은 국물 맛과 함께 사람들이 한 자리에 모여 나누는 따뜻한 식문화에 있습니다.
+              우리는 이 문화를 한국에서도 자연스럽게 경험할 수 있도록 정통 조리법은 지키되 고객의 입맛에 맞춘 구성과 서비스를 더했습니다.
+            </p>
+            <p>
+              라오충칭훠궈는 현재 중국 23개 매장에서 운영 중이며 글로벌 15호점으로 한국에 상륙했습니다. 3대 훠궈 마스터
+              <strong>Mr. Tang Lin</strong>의 비법을 그대로 담은 육수와 50여 가지 재료를 취향대로 조합해 즐기는 자유로운 식경험을 제공합니다.
+            </p>
+            <p>
+              <strong>정통은 지키되, 경험은 새롭게.</strong><br />
+              라오충칭훠궈에서 진짜 마라의 세계를 만나보세요.
+            </p>
+          </div>
+
+          <!-- =======================
+        RIGHT : SUPPORTING IMAGE (≈30%)
+      ======================== -->
+          <aside class="vfb-brand-story-split__aside">
+            <div class="vfb-brand-story-split__image-frame">
+              <!-- [EDIT] 이미지 경로 / 대체텍스트 -->
+              <img
+                src="https://placehold.co/640x900/F1BF86/FFFFFF/png?text=Lao+Chongqing+Hotpot"
+                alt="100년 전통 충칭 훠궈와 라오충칭훠궈 매장 분위기"
+                class="vfb-brand-story-split__image"
+                loading="lazy"
+              />
+              <!-- 오버레이 라벨 (선택사항) -->
+              <!-- <div class="vfb-brand-story-split__image-tag">
+                <span class="vfb-brand-story-split__image-pill">Since 1920s Chongqing</span>
+                <p class="vfb-brand-story-split__image-caption">
+                  100년 전통의 충칭 훠궈 문화와<br />
+                  현대적인 동탄 매장의 한 장면.
+                </p>
+              </div> -->
+
+              <!-- 작은 메타 텍스트 (선택) -->
+              <!-- <div class="vfb-brand-story-split__image-meta">
+                <span>Global 15th Store · Korea</span>
+              </div> -->
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      /* Root */
+      .vfb-brand-story-split {
+        position: relative;
+        overflow: hidden;
+        padding: 80px 16px;
+        color: #0f172a;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans KR", sans-serif;
+      }
+
+      .vfb-brand-story-split__inner {
+        position: relative;
+        max-width: 1120px;
+        margin: 0 auto;
+      }
+
+      /* Local tokens */
+      .vfb-brand-story-split {
+        --vfb-green: #4eb997;
+        --vfb-yellow: #f6c75e;
+        --vfb-teal: #2fadbe;
+        --ink: #0f172a;
+        --muted: #6b7280;
+      }
+
+      /* Background */
+      .vfb-brand-story-split__bg {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(78, 185, 151, 0.14), transparent 55%),
+          radial-gradient(circle at bottom right, rgba(250, 204, 21, 0.16), transparent 55%), linear-gradient(135deg, #f9fafb, #f5faf8);
+        z-index: 0;
+      }
+
+      .vfb-brand-story-split__glow {
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        border-radius: 999px;
+        filter: blur(45px);
+        opacity: 0.7;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .vfb-brand-story-split__glow--tl {
+        top: -60px;
+        left: -40px;
+        background: radial-gradient(circle, rgba(79, 195, 150, 0.55), transparent 60%);
+      }
+
+      .vfb-brand-story-split__glow--br {
+        bottom: -60px;
+        right: -40px;
+        background: radial-gradient(circle, rgba(250, 204, 21, 0.55), transparent 60%);
+      }
+
+      /* Header */
+      .vfb-brand-story-split__header {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 36px;
+      }
+
+      .vfb-brand-story-split__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--muted);
+      }
+
+      .vfb-brand-story-split__pill {
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(78, 185, 151, 0.08);
+        border: 1px solid rgba(78, 185, 151, 0.25);
+        color: #047857;
+      }
+
+      .vfb-brand-story-split__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--vfb-green), var(--vfb-teal));
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.06);
+      }
+
+      .vfb-brand-story-split__label {
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .vfb-brand-story-split__title {
+        font-size: clamp(26px, 3vw, 32px);
+        margin: 0 0 10px;
+        line-height: 1.25;
+        letter-spacing: -0.03em;
+      }
+
+      .vfb-brand-story-split__title span {
+        background: linear-gradient(135deg, var(--vfb-green), var(--vfb-teal));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .vfb-brand-story-split__lead {
+        max-width: 640px;
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+
+      /* Layout: Left story / Right image */
+      .vfb-brand-story-split__layout {
+        position: relative;
+        z-index: 1;
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr); /* ≈ 70 / 30 */
+        gap: 32px;
+        align-items: flex-start;
+      }
+
+      .vfb-brand-story-split__story {
+        font-size: 14px;
+        line-height: 1.9;
+        color: var(--muted);
+      }
+
+      .vfb-brand-story-split__story p {
+        margin: 0 0 14px;
+      }
+
+      .vfb-brand-story-split__story p:last-child {
+        margin-bottom: 0;
+      }
+
+      .vfb-brand-story-split__story strong {
+        color: #111827;
+        font-weight: 600;
+      }
+
+      /* Right image panel */
+      .vfb-brand-story-split__aside {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .vfb-brand-story-split__image-frame {
+        position: relative;
+        width: 100%;
+        max-width: 320px;
+        border-radius: 22px;
+        padding: 10px;
+        background: linear-gradient(135deg, rgba(78, 185, 151, 0.18), rgba(246, 199, 94, 0.22));
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14), 0 3px 10px rgba(15, 23, 42, 0.1);
+        overflow: hidden;
+      }
+
+      .vfb-brand-story-split__image {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 18px;
+        object-fit: cover;
+        background: #0f172a;
+      }
+
+      .vfb-brand-story-split__image-tag {
+        position: absolute;
+        inset: auto 14px 18px 14px;
+        padding: 10px 12px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.82));
+        color: #e5e7eb;
+        font-size: 11px;
+        line-height: 1.5;
+        box-shadow: 0 12px 25px rgba(15, 23, 42, 0.5);
+      }
+
+      .vfb-brand-story-split__image-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 8px;
+        margin-bottom: 4px;
+        border-radius: 999px;
+        border: 1px solid rgba(248, 250, 252, 0.3);
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #f9fafb;
+      }
+
+      .vfb-brand-story-split__image-caption {
+        margin: 0;
+      }
+
+      .vfb-brand-story-split__image-meta {
+        margin-top: 8px;
+        font-size: 11px;
+        color: #4b5563;
+        text-align: right;
+      }
+
+      .vfb-brand-story-split__image-meta span {
+        border-radius: 999px;
+        padding: 4px 8px;
+        background: rgba(15, 23, 42, 0.04);
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .vfb-brand-story-split__layout {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 20px;
+        }
+
+        .vfb-brand-story-split__aside {
+          justify-content: flex-start;
+        }
+
+        .vfb-brand-story-split__image-frame {
+          max-width: 260px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .vfb-brand-story-split {
+          padding: 56px 16px;
+        }
+
+        .vfb-brand-story-split__title {
+          font-size: 24px;
+        }
+
+        .vfb-brand-story-split__lead {
+          font-size: 14px;
+        }
+
+        .vfb-brand-story-split__image-frame {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </body>
+</html>

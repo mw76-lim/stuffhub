@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>RONDA KOREA – Business Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --rk-ink: #111827;
+      --rk-muted: #6b7280;
+      --rk-soft: #9ca3af;
+      --rk-line: #e5e7eb;
+      --rk-bg: #f3f4f6;
+      --rk-white: #ffffff;
+      --rk-primary: #132b88;
+      --rk-primary-soft: #4b5fc8;
+      --rk-radius: 16px;
+      --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Noto Sans KR", sans-serif;
+      background: var(--rk-bg);
+      color: var(--rk-ink);
+    }
+
+    /* 바깥 래퍼: 페이지 안에서 섹션 하나로 사용 */
+    .biz-wrap {
+      max-width: 1140px;
+      margin: 50px auto;
+      padding: 28px 26px 30px;
+      background: var(--rk-white);
+      border: 1px solid var(--rk-line);
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .biz-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--rk-line);
+    }
+
+    .biz-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .biz-tag {
+      font-size: 11px;
+      color: var(--rk-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+    }
+
+    /* 카드 그리드 (1~5번 동일 패턴) */
+    .biz-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .biz-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .info-item {
+      position: relative;
+      border-radius: var(--rk-radius);
+      border: 1px solid var(--rk-line);
+      background: linear-gradient(135deg, #ffffff, #f9fafb);
+      padding: 13px 14px 13px 14px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .info-no {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--rk-primary), var(--rk-primary-soft));
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 0 0 3px rgba(19, 43, 136, 0.06);
+      margin-top: 2px;
+    }
+
+    .info-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .info-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--rk-ink);
+    }
+
+    .info-body {
+      font-size: 13px;
+      color: var(--rk-muted);
+      line-height: 1.7;
+    }
+
+    .info-body strong {
+      color: var(--rk-ink);
+    }
+
+    /* 키워드 칩 */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      color: var(--rk-muted);
+      white-space: nowrap;
+    }
+
+    /* 5번 Core Product Lines 내용: 리스트 정리 */
+    .prod-list {
+      margin: 6px 0 0;
+      padding-left: 0;
+      list-style: none;
+      font-size: 13px;
+      color: var(--rk-muted);
+    }
+
+    .prod-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .prod-dot {
+      margin-top: 6px;
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--rk-primary-soft);
+      flex-shrink: 0;
+    }
+
+    .prod-text {
+      line-height: 1.6;
+    }
+
+    .prod-text strong {
+      font-weight: 600;
+      color: var(--rk-ink);
+    }
+  </style>
+</head>
+<body>
+  <section class="biz-wrap">
+    <header class="biz-header">
+      <h2 class="biz-title">기업 프로필</h2>
+      <div class="biz-tag">Business Profile</div>
+    </header>
+
+    <div class="biz-grid">
+      <!-- 1. 회사명 -->
+      <div class="info-item">
+        <div class="info-no">1</div>
+        <div class="info-content">
+          <div class="info-title">회사명</div>
+          <div class="info-body">
+            론다코리아주식회사<br />
+            RONDA KOREA Co., Ltd.
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. 설립연도 -->
+      <div class="info-item">
+        <div class="info-no">2</div>
+        <div class="info-content">
+          <div class="info-title">설립연도</div>
+          <div class="info-body">
+            2019년
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 사업영역 -->
+      <div class="info-item">
+        <div class="info-no">3</div>
+        <div class="info-content">
+          <div class="info-title">사업영역</div>
+          <div class="info-body">
+            반도체 제조 장비의 핵심부품 및 소재
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. 핵심키워드 -->
+      <div class="info-item">
+        <div class="info-no">4</div>
+        <div class="info-content">
+          <div class="info-title">핵심 키워드</div>
+          <div class="info-body">
+            <div class="chip-row">
+              <span class="chip">Precision Machining</span>
+              <span class="chip">Si / Quartz / SiC Processing</span>
+              <span class="chip">SCM for Semiconductor</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Core Product Lines (하위 내용 포함, 하나의 박스) -->
+      <div class="info-item" style="grid-column: span 2;">
+        <div class="info-no">5</div>
+        <div class="info-content">
+          <div class="info-title">Core Product Lines</div>
+          <div class="info-body">
+            <ul class="prod-list">
+              <li class="prod-item">
+                <span class="prod-dot"></span>
+                <span class="prod-text">
+                  <strong>Consumable Parts</strong> ·
+                  반도체 제조 장비의 핵심 소모품을 직접 가공·생산
+                </span>
+              </li>
+              <li class="prod-item">
+                <span class="prod-dot"></span>
+                <span class="prod-text">
+                  <strong>Sub-FAB Solution</strong> ·
+                  배기 불순물의 효과적 제거 및 설비 안정화 장치 제공
+                </span>
+              </li>
+              <li class="prod-item">
+                <span class="prod-dot"></span>
+                <span class="prod-text">
+                  <strong>Component</strong> ·
+                  반도체 제조장비의 핵심 부품 라인업 구축
+                </span>
+              </li>
+              <li class="prod-item">
+                <span class="prod-dot"></span>
+                <span class="prod-text">
+                  <strong>Raw Materials</strong> ·
+                  냉매, 방진, 단열, 차폐 등 주변 부품의 친환경 원자재 공급
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</body>
+</html>

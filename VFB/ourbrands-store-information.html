@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VFB – Our Brands · Lao Chongqing Hotpot Store Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --vfb-green: #4eb997;
+        --vfb-yellow: #f6c75e;
+        --vfb-teal: #2fadbe;
+        --ink: #111827;
+        --muted: #6b7280;
+        --line: #e5e7eb;
+        --paper: #ffffff;
+        --bg-soft: #f5faf8;
+        --radius-xl: 24px;
+        --radius-md: 18px;
+        --radius-sm: 14px;
+        --shadow-soft: 0 14px 34px rgba(15, 23, 42, 0.08);
+        --shadow-card: 0 10px 26px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 40px 16px 72px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top, #fdfcfb 0, #f2f6ff 40%, #edf2f7 100%);
+        color: var(--ink);
+        display: flex;
+        justify-content: center;
+      }
+
+      .page {
+        width: min(1200px, 100%);
+      }
+
+      /* 섹션 전체 래퍼 */
+      .brand-locations {
+        background: linear-gradient(135deg, #f5faf8 0%, #fdfaf2 40%, #f5f7fb 100%);
+        border-radius: var(--radius-xl);
+        padding: 26px 24px 26px;
+        box-shadow: var(--shadow-soft);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .brand-locations::before {
+        content: "";
+        position: absolute;
+        inset: -30%;
+        background: radial-gradient(circle at 0% 0%, rgba(78, 185, 151, 0.14) 0, transparent 55%),
+          radial-gradient(circle at 100% 100%, rgba(250, 204, 21, 0.16) 0, transparent 60%);
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .brand-locations-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* 헤더 영역 */
+
+      .locations-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 18px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+      }
+
+      .locations-header-main {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .locations-title {
+        margin: 0;
+        font-size: 1.4rem;
+        letter-spacing: -0.03em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .locations-title span.brand {
+        font-weight: 700;
+      }
+
+      .locations-title span.suffix {
+        font-size: 1.02rem;
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .locations-sub {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .badge-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        font-size: 0.78rem;
+        margin-top: 6px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        backdrop-filter: blur(4px);
+      }
+
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--vfb-green);
+      }
+
+      .locations-stat {
+        min-width: 190px;
+        padding: 10px 12px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .locations-stat strong {
+        display: block;
+        font-size: 0.85rem;
+        margin-bottom: 3px;
+        color: var(--ink);
+      }
+
+      /* 상단: 매장 선택 바 (가로 버튼 + 모바일 select) */
+
+      .locations-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .store-selector {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .store-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .store-tab {
+        border-radius: 10px;
+        border: 1px solid rgba(148, 163, 184, 0.9);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        color: #4b5563;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+        white-space: nowrap;
+      }
+
+      .store-tab-badge {
+        font-size: 0.74rem;
+        padding: 2px 6px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.6);
+        background: #f9fafb;
+        color: #6b7280;
+      }
+
+      .store-tab.active {
+        background: var(--vfb-green);
+        color: #ffffff;
+        border-color: rgba(34, 197, 94, 0.9);
+        box-shadow: 0 8px 18px rgba(34, 197, 94, 0.3);
+        transform: translateY(-1px);
+      }
+
+      .store-tab.active .store-tab-badge {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.6);
+        color: #ecfdf5;
+      }
+
+      .store-select-wrap {
+        display: none; /* 모바일에서만 보이게 할 예정 */
+      }
+
+      .store-select-wrap label {
+        font-size: 0.76rem;
+        color: var(--muted);
+        margin-right: 6px;
+      }
+
+      .store-select {
+        padding: 5px 9px;
+        border-radius: 10px;
+        border: 1px solid rgba(148, 163, 184, 0.9);
+        font-size: 0.8rem;
+        background: #ffffff;
+        color: #374151;
+        outline: none;
+      }
+
+      /* 우측: 선택된 매장 상세 (가로 100%) */
+
+      .store-detail {
+        border-radius: var(--radius-md);
+        background: #ffffff;
+        border: 1px solid var(--line);
+        padding: 14px 14px 14px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.75fr);
+        grid-template-rows: auto auto;
+        grid-template-areas:
+          "left media"
+          "actions actions";
+        gap: 14px;
+        box-shadow: var(--shadow-card);
+        width: 100%; /* 가용 가로 영역 100% 사용 */
+      }
+
+      .store-detail-left {
+        grid-area: left;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      .store-detail-label {
+        font-size: 0.76rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #9ca3af;
+      }
+
+      .store-detail-title-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .store-detail-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .store-detail-branch {
+        font-size: 0.76rem;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: #f3f4ff;
+        color: #4b5563;
+        border: 1px solid rgba(148, 163, 184, 0.7);
+      }
+
+      .store-detail-sub {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .detail-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 6px;
+        margin-top: 4px;
+      }
+
+      .detail-row {
+        display: flex;
+        gap: 8px;
+        font-size: 0.8rem;
+        align-items: flex-start;
+      }
+
+      .detail-key {
+        min-width: 52px;
+        font-weight: 500;
+        color: #4b5563;
+      }
+
+      .detail-val {
+        flex: 1;
+      }
+
+      /* 하단 공통 액션 영역 (가로 100%) */
+
+      .store-actions {
+        grid-area: actions;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: flex-end;
+        width: 100%;
+        margin-top: 4px;
+        padding-top: 8px;
+        border-top: 1px solid #e5e7eb;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        border: 1px solid transparent;
+        cursor: pointer;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+      }
+
+      .btn-primary {
+        background: var(--vfb-green);
+        color: #ffffff;
+        border-color: rgba(34, 197, 94, 0.7);
+      }
+
+      .btn-primary:hover {
+        background: #3fa785;
+        transform: translateY(-1px);
+      }
+
+      .btn-outline {
+        background: #ffffff;
+        color: #374151;
+        border-color: rgba(148, 163, 184, 0.8);
+      }
+
+      .btn-outline:hover {
+        background: #f9fafb;
+        transform: translateY(-1px);
+      }
+
+      .btn-icon {
+        font-size: 0.92rem;
+      }
+
+      /* 미디어 슬라이더 영역 */
+
+      .store-detail-media {
+        grid-area: media;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: #edf2f7;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .media-slider {
+        position: relative;
+        width: 100%;
+        padding-top: 60%; /* 비율 유지 (약 5:3) */
+        overflow: hidden;
+        background: #e5e7eb;
+      }
+
+      .media-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .media-slide.active {
+        opacity: 1;
+      }
+
+      .media-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .media-slide-label {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        padding: 4px 9px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.76);
+        color: #f9fafb;
+        font-size: 0.7rem;
+      }
+
+      .media-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        border: none;
+        background: rgba(15, 23, 42, 0.7);
+        color: #f9fafb;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        transition: background 0.18s ease, transform 0.18s ease;
+      }
+
+      .media-nav:hover {
+        background: rgba(15, 23, 42, 0.9);
+        transform: translateY(-50%) scale(1.05);
+      }
+
+      .media-nav.prev {
+        left: 10px;
+      }
+
+      .media-nav.next {
+        right: 10px;
+      }
+
+      .media-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 10px;
+        background: rgba(255, 255, 255, 0.92);
+        font-size: 0.74rem;
+        color: var(--muted);
+      }
+
+      .media-dots {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+      }
+
+      .media-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.8);
+        background: #ffffff;
+        cursor: pointer;
+        transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+      }
+
+      .media-dot.active {
+        background: var(--vfb-green);
+        border-color: var(--vfb-green);
+        transform: scale(1.1);
+      }
+
+      .media-caption {
+        text-align: right;
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+
+      /* 반응형 */
+
+      @media (max-width: 960px) {
+        body {
+          padding: 32px 12px 54px;
+        }
+        .brand-locations {
+          padding: 22px 18px 24px;
+        }
+        .store-detail {
+          grid-template-columns: minmax(0, 1fr);
+          grid-template-rows: auto auto auto;
+          grid-template-areas:
+            "left"
+            "media"
+            "actions";
+        }
+        .store-actions {
+          justify-content: flex-start;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .store-tabs {
+          display: none;
+        }
+        .store-select-wrap {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.78rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .brand-locations {
+          padding: 20px 14px 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <!-- Our Brands > Lao Chongqing Hotpot > 매장 안내 섹션 -->
+      <section class="brand-locations">
+        <div class="brand-locations-inner">
+          <header class="locations-header">
+            <div class="locations-header-main">
+              <div class="eyebrow">STORE GUIDE</div>
+              <h2 class="locations-title">
+                <span class="brand">라오충칭훠궈</span>
+                <span class="suffix">매장 안내</span>
+              </h2>
+              <p class="locations-sub">
+                현재 동탄점을 중심으로 운영 중이며, 향후 판교 및 추가 지점 오픈 시 동일한 구조로 전체 매장 정보를 한눈에 확인하실 수 있습니다.
+              </p>
+              <div class="badge-row" style="display: none">
+                <div class="badge">
+                  <span class="badge-dot"></span>
+                  <span>정통 충칭 스타일 훠궈</span>
+                </div>
+                <div class="badge">
+                  <span class="badge-dot" style="background: var(--vfb-teal)"></span>
+                  <span>프리미엄 라오유 &amp; 수제 재료</span>
+                </div>
+              </div>
+            </div>
+            <aside class="locations-stat" style="display: none">
+              <strong>현재 / 예정 지점</strong>
+              · 1호점 동탄점 (운영 중)<br />
+              · 2호점 판교점 (가상 시나리오)<br />
+              · 3호점 (Coming Soon)
+            </aside>
+          </header>
+
+          <div class="locations-layout">
+            <!-- 상단: 매장 선택 바 -->
+            <div class="store-selector">
+              <!-- 데스크톱/태블릿: 가로 버튼 -->
+              <div class="store-tabs">
+                <button class="store-tab active" data-store-id="dongtan">
+                  <span class="store-tab-badge">1호점</span>
+                  <span>동탄점</span>
+                </button>
+                <button class="store-tab" data-store-id="pangyo">
+                  <span class="store-tab-badge">2호점</span>
+                  <span>판교점</span>
+                </button>
+                <button class="store-tab" data-store-id="soon3">
+                  <span class="store-tab-badge">3호점</span>
+                  <span>Coming Soon</span>
+                </button>
+              </div>
+
+              <!-- 모바일: 셀렉트 박스 -->
+              <div class="store-select-wrap">
+                <label for="store-select">지점 선택</label>
+                <select id="store-select" class="store-select">
+                  <option value="dongtan" selected>1호점 · 동탄점</option>
+                  <option value="pangyo">2호점 · 판교점</option>
+                  <option value="soon3">3호점 · Coming Soon</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 우측(전체 폭): 선택된 매장 상세 -->
+            <article class="store-detail" id="store-detail">
+              <div class="store-detail-left">
+                <div class="store-detail-label" id="detail-label">CURRENT LOCATION</div>
+                <div class="store-detail-title-row">
+                  <div class="store-detail-title" id="detail-title">라오충칭훠궈 동탄점</div>
+                  <div class="store-detail-branch" id="detail-branch">1호점 · Dongtan</div>
+                </div>
+                <div class="store-detail-sub" id="detail-sub">
+                  따뜻한 조명, 깊이 있는 육수, 정통 충칭 스타일의 라오유로 완성되는 라오충칭훠궈의 대표 매장입니다.
+                </div>
+
+                <div class="detail-grid">
+                  <div class="detail-row">
+                    <div class="detail-key">주소</div>
+                    <div class="detail-val" id="detail-address">
+                      (예시) 경기도 화성시 동탄 ○○로 ○○, ○층<br />
+                      ※ 실제 주소로 교체해주세요.
+                    </div>
+                  </div>
+                  <div class="detail-row">
+                    <div class="detail-key">영업</div>
+                    <div class="detail-val" id="detail-hours">
+                      평일 · 주말 11:30 – 22:00<br />
+                      브레이크타임 / 라스트오더 등은 향후 실제 운영시간 기준으로 기입
+                    </div>
+                  </div>
+                  <div class="detail-row">
+                    <div class="detail-key">문의</div>
+                    <div class="detail-val" id="detail-contact">
+                      000-0000-0000<br />
+                      예약 및 단체 문의는 전화로 먼저 상담해 주세요.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="store-detail-media">
+                <div class="media-slider" id="media-slider">
+                  <!-- JS에서 슬라이드 생성 -->
+                </div>
+                <button class="media-nav prev" id="media-prev" aria-label="이전 이미지">‹</button>
+                <button class="media-nav next" id="media-next" aria-label="다음 이미지">›</button>
+                <div class="media-bar">
+                  <div class="media-dots" id="media-dots"></div>
+                  <div class="media-caption" id="media-caption">1 / 4</div>
+                </div>
+              </div>
+
+              <!-- 하단 전체 폭 액션 영역 -->
+              <div class="store-actions" id="store-actions">
+                <a href="#" class="btn btn-primary" id="btn-map-main" aria-label="주요 지도 열기" target="_blank">
+                  <span class="btn-icon">📍</span>
+                  <span>네이버 지도 열기</span>
+                </a>
+                <a href="#" class="btn btn-outline" id="btn-map-sub" aria-label="보조 지도 열기" target="_blank">
+                  <span class="btn-icon">🗺️</span>
+                  <span>카카오맵 열기</span>
+                </a>
+                <a href="tel:0000000000" class="btn btn-outline" id="btn-call" aria-label="전화 문의">
+                  <span class="btn-icon">📞</span>
+                  <span>전화 문의</span>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // 매장 데이터 정의
+      const storeData = {
+        dongtan: {
+          label: "CURRENT LOCATION",
+          title: "라오충칭훠궈 동탄점",
+          branch: "1호점 · Dongtan",
+          sub: "따뜻한 조명, 깊이 있는 육수, 정통 충칭 스타일의 라오유로 완성되는 " + "라오충칭훠궈의 첫 번째 플래그십 매장입니다.",
+          address: "경기 화성시 동탄반석로 172 149,150호",
+          hours: "평일 17:30 - 22:00 (21:30 라스트오더)<br />" + "주말 12:00 - 22:00 <br />" + "(15:00~17:00 BreakTime, 21:30 라스트오더)<br />",
+          // "평일 · 주말 17:30 - 22:00<br />브레이크타임 / 라스트오더 등은 실제 운영 기준으로 기입",
+          contact: "123-4567-8900<br />예약 및 단체 문의는 전화로 먼저 상담해 주세요.",
+          tel: "123456789",
+          booking:
+            "https://m.place.naver.com/restaurant/1028459468/booking?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnV5XwQHl5k3IhZL8cSKz85L5UAJPmdK7G475WsXG16LeUiK6x4wVHc3A7V0Y_aem_HeghBO_62JDTcAn1fKYt_g",
+          mapMainHref: "https://naver.me/G6Q6QU5p", // 네이버 지도 링크 자리
+          mapSubHref: "https://kko.kakao.com/DbIUYOrcwm", // 카카오맵 링크 자리
+          images: [
+            {
+              type: "map",
+              label: "동탄점 위치 안내",
+              src: "https://placehold.co/800x480/F3F4F6/9CA3AF/png?text=Dongtan+Location+Map",
+            },
+            {
+              type: "store",
+              label: "홀 내부 전경",
+              src: "https://placehold.co/800x480/111827/F9FAFB/png?text=Dongtan+Hall+Interior",
+            },
+            {
+              type: "store",
+              label: "테이블 & 라오유",
+              src: "https://placehold.co/800x480/7F1D1D/FEE2E2/png?text=Table+%26+Lao+You",
+            },
+            {
+              type: "store",
+              label: "메인 훠궈 세팅",
+              src: "https://placehold.co/800x480/0F172A/F9FAFB/png?text=Main+Hotpot+Setting",
+            },
+          ],
+        },
+        pangyo: {
+          label: "PLANNED LOCATION",
+          title: "라오충칭훠궈 판교점",
+          branch: "2호점 · Pangyo (Concept)",
+          sub: "비즈니스 타운 판교에서, 점심엔 비즈니스 런치, 저녁엔 여유 있는 다이닝을 " + "제공하는 컨셉으로 준비 중인 가상의 시나리오 매장입니다.",
+          address: "(예시) 경기도 성남시 분당구 판교○로 ○○, ○층<br />※ 실제 오픈 시 정보 업데이트 예정",
+          hours: "예상 운영시간 11:30 – 22:00<br />구체적인 영업 시간은 오픈 시 확정됩니다.",
+          contact: "오픈 일정 확정 후 예약 및 문의 연락처가 안내될 예정입니다.",
+          tel: "",
+          mapMainHref: "#",
+          mapSubHref: "#",
+          images: [
+            {
+              type: "map",
+              label: "판교 예상 상권",
+              src: "https://placehold.co/800x480/0B1120/E5E7EB/png?text=Pangyo+Business+District+Map",
+            },
+            {
+              type: "store",
+              label: "비즈니스 다이닝 컨셉",
+              src: "https://placehold.co/800x480/111827/F9FAFB/png?text=Business+Dining+Mood",
+            },
+            {
+              type: "store",
+              label: "바 좌석 & 하이테이블",
+              src: "https://placehold.co/800x480/020617/E5E7EB/png?text=Bar+%26+High+Table",
+            },
+            {
+              type: "store",
+              label: "판교 야경 연출",
+              src: "https://placehold.co/800x480/1F2937/E5E7EB/png?text=Pangyo+Night+Concept",
+            },
+          ],
+        },
+        soon3: {
+          label: "COMING SOON",
+          title: "라오충칭훠궈 3호점",
+          branch: "3호점 · Coming Soon",
+          sub: "세 번째 매장은 새로운 지역과 콘셉트로 준비 중입니다. " + "라오충칭훠궈만의 라오유와 스토리를 담은 또 하나의 공간을 기대해 주세요.",
+          address: "지역 및 상세 주소는 오픈 확정 후 공식 채널을 통해 안내드립니다.",
+          hours: "영업시간 및 운영 정책은 추후 공지 예정입니다.",
+          contact: "오픈 일정 및 위치는 VFB / 라오충칭훠궈 공식 채널에서 순차적으로 안내됩니다.",
+          tel: "",
+          mapMainHref: "#",
+          mapSubHref: "#",
+          images: [
+            {
+              type: "map",
+              label: "새로운 상권 후보지",
+              src: "https://placehold.co/800x480/030712/E5E7EB/png?text=New+Area+Coming+Soon",
+            },
+            {
+              type: "store",
+              label: "브랜드 비주얼 컨셉",
+              src: "https://placehold.co/800x480/7C2D12/FFF7ED/png?text=Brand+Visual+Concept",
+            },
+            {
+              type: "store",
+              label: "라오유 & 시그니처 디쉬",
+              src: "https://placehold.co/800x480/9A3412/FFEDD5/png?text=Lao+You+%26+Signature+Dish",
+            },
+            {
+              type: "store",
+              label: "3호점 무드 스케치",
+              src: "https://placehold.co/800x480/111827/E5E7EB/png?text=3rd+Branch+Sketch",
+            },
+          ],
+        },
+      };
+
+      const storeTabs = document.querySelectorAll(".store-tab");
+      const storeSelect = document.getElementById("store-select");
+
+      const detailLabel = document.getElementById("detail-label");
+      const detailTitle = document.getElementById("detail-title");
+      const detailBranch = document.getElementById("detail-branch");
+      const detailSub = document.getElementById("detail-sub");
+      const detailAddress = document.getElementById("detail-address");
+      const detailHours = document.getElementById("detail-hours");
+      const detailContact = document.getElementById("detail-contact");
+      const btnMapMain = document.getElementById("btn-map-main");
+      const btnMapSub = document.getElementById("btn-map-sub");
+      const btnCall = document.getElementById("btn-call");
+
+      const mediaSlider = document.getElementById("media-slider");
+      const mediaDots = document.getElementById("media-dots");
+      const mediaCaption = document.getElementById("media-caption");
+      const mediaPrev = document.getElementById("media-prev");
+      const mediaNext = document.getElementById("media-next");
+
+      let currentStoreId = "dongtan";
+      let currentSlideIndex = 0;
+
+      // 🔁 자동 롤링용 타이머
+      let autoplayTimer = null;
+      const AUTOPLAY_INTERVAL = 4000; // 4초
+
+      function renderStore(storeId) {
+        const data = storeData[storeId];
+        if (!data) return;
+
+        currentStoreId = storeId;
+        currentSlideIndex = 0;
+
+        // 탭 active 처리
+        storeTabs.forEach(function (tab) {
+          tab.classList.toggle("active", tab.dataset.storeId === storeId);
+        });
+
+        // 셀렉트 동기화
+        if (storeSelect && storeSelect.value !== storeId) {
+          storeSelect.value = storeId;
+        }
+
+        // 텍스트 정보 채우기
+        detailLabel.textContent = data.label;
+        detailTitle.textContent = data.title;
+        detailBranch.textContent = data.branch;
+        detailSub.innerHTML = data.sub;
+        detailAddress.innerHTML = data.address;
+        detailHours.innerHTML = data.hours;
+        detailContact.innerHTML = data.contact;
+
+        // 버튼 링크 / tel
+        btnMapMain.href = data.mapMainHref || "#";
+        btnMapSub.href = data.mapSubHref || "#";
+
+        if (data.tel) {
+          btnCall.style.display = "inline-flex";
+          btnCall.href = "tel:" + data.tel;
+        } else {
+          btnCall.style.display = "none";
+        }
+
+        // 슬라이더 이미지 렌더링
+        mediaSlider.innerHTML = "";
+        mediaDots.innerHTML = "";
+
+        data.images.forEach(function (img, index) {
+          var slide = document.createElement("div");
+          slide.className = "media-slide" + (index === 0 ? " active" : "");
+          slide.innerHTML = '<img src="' + img.src + '" alt="' + img.label + '" />' + '<div class="media-slide-label">' + img.label + "</div>";
+          mediaSlider.appendChild(slide);
+
+          var dot = document.createElement("button");
+          dot.className = "media-dot" + (index === 0 ? " active" : "");
+          dot.type = "button";
+          dot.setAttribute("aria-label", "이미지 " + (index + 1) + " 보기");
+          dot.addEventListener("click", function () {
+            setSlide(index);
+          });
+          mediaDots.appendChild(dot);
+
+          startAutoplay(); // 매장 바뀔 때마다 자동 롤링 시작/리셋
+        });
+
+        updateCaption();
+      }
+
+      function setSlide(index) {
+        var slides = mediaSlider.querySelectorAll(".media-slide");
+        var dots = mediaDots.querySelectorAll(".media-dot");
+        if (!slides.length) return;
+
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        currentSlideIndex = index;
+
+        slides.forEach(function (slide, i) {
+          slide.classList.toggle("active", i === index);
+        });
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle("active", i === index);
+        });
+
+        updateCaption();
+      }
+
+      function updateCaption() {
+        const data = storeData[currentStoreId];
+        if (!data) return;
+        const total = data.images.length;
+        mediaCaption.textContent = currentSlideIndex + 1 + " / " + total;
+      }
+      // 🔁 자동 롤링 시작 / 리셋
+      function startAutoplay() {
+        // 이전 타이머 제거
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+        }
+
+        autoplayTimer = setInterval(function () {
+          // 자동 롤링에서 넘어갈 때는 fromAutoplay: true
+          setSlide(currentSlideIndex + 1, { fromAutoplay: true });
+        }, AUTOPLAY_INTERVAL);
+      }
+
+      // 이전/다음 버튼 이벤트
+      mediaPrev.addEventListener("click", function () {
+        setSlide(currentSlideIndex - 1);
+      });
+
+      mediaNext.addEventListener("click", function () {
+        setSlide(currentSlideIndex + 1);
+      });
+
+      // 탭 클릭 이벤트
+      storeTabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          const storeId = tab.dataset.storeId;
+          if (storeId) renderStore(storeId);
+        });
+      });
+
+      // 셀렉트 변경 이벤트 (모바일)
+      if (storeSelect) {
+        storeSelect.addEventListener("change", function (e) {
+          const storeId = e.target.value;
+          renderStore(storeId);
+        });
+      }
+
+      // 초기 렌더
+      renderStore("dongtan");
+    </script>
+  </body>
+</html>

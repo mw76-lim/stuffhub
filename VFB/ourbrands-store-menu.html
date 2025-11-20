@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VFB – Lao Chongqing Hotpot Menu Highlight</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --lcq-red: #b3261e;
+        --lcq-red-soft: #fef3f2;
+        --lcq-gold: #f6c75e;
+        --lcq-deep: #431407;
+        --ink: #111827;
+        --muted: #6b7280;
+        --line: #e5e7eb;
+        --paper: #ffffff;
+        --radius-xl: 24px;
+        --radius-md: 18px;
+        --radius-sm: 14px;
+        --shadow-soft: 0 14px 34px rgba(15, 23, 42, 0.08);
+        --shadow-card: 0 10px 26px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 40px 16px 72px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top, #fff7ed 0, #fefce8 40%, #f9fafb 100%);
+        color: var(--ink);
+        display: flex;
+        justify-content: center;
+      }
+
+      .page {
+        width: min(1200px, 100%);
+      }
+
+      /* 메뉴 섹션 전체 */
+
+      .brand-menu {
+        background: radial-gradient(circle at top left, #fef3f2 0, rgba(254, 243, 242, 0.1) 40%, transparent 60%),
+          radial-gradient(circle at bottom right, #fef9c3 0, rgba(254, 249, 195, 0.12) 45%, transparent 70%),
+          linear-gradient(135deg, #fff7ed 0%, #f9fafb 60%, #fefce8 100%);
+        border-radius: var(--radius-xl);
+        padding: 26px 24px 26px;
+        box-shadow: var(--shadow-soft);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .brand-menu::before {
+        content: "";
+        position: absolute;
+        inset: -30%;
+        background: radial-gradient(circle at 0% 0%, rgba(179, 38, 30, 0.12) 0, transparent 55%),
+          radial-gradient(circle at 100% 100%, rgba(246, 199, 94, 0.18) 0, transparent 60%);
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .brand-menu-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* 헤더 */
+
+      .menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-bottom: 22px;
+      }
+
+      .menu-header-main {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .menu-title {
+        margin: 0;
+        font-size: 1.4rem;
+        letter-spacing: -0.03em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .menu-title span.brand {
+        font-weight: 700;
+      }
+
+      .menu-title span.suffix {
+        font-size: 1.02rem;
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .menu-sub {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .badge-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        font-size: 0.78rem;
+        margin-top: 6px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(248, 113, 113, 0.3);
+        backdrop-filter: blur(4px);
+      }
+
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--lcq-red);
+      }
+
+      .menu-note {
+        min-width: 210px;
+        padding: 10px 12px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(252, 165, 165, 0.4);
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .menu-note strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.84rem;
+        color: var(--lcq-deep);
+      }
+
+      /* 메인 레이아웃: 위에 대표메뉴(100%), 아래 카테고리+그리드 */
+
+      .menu-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      /* 대표 메뉴 카드 (가로 100%) */
+
+      article.hero-menu-card {
+        width: 100%;
+        border-radius: var(--radius-md);
+        background: #ffffff;
+        border: 1px solid rgba(248, 113, 113, 0.3);
+        box-shadow: var(--shadow-card);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hero-menu-image {
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+        /* 이미지 세로 길이 늘림 */
+        height: 260px;
+      }
+
+      @media (min-width: 1024px) {
+        .hero-menu-image {
+          height: 300px;
+        }
+      }
+
+      .hero-menu-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .hero-tag-top {
+        position: absolute;
+        left: 12px;
+        top: 10px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.85);
+        color: #f9fafb;
+        font-size: 0.7rem;
+      }
+
+      .hero-tag-bottom {
+        position: absolute;
+        right: 12px;
+        bottom: 10px;
+        padding: 4px 9px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #b91c1c;
+        font-size: 0.7rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .hero-tag-bottom span.dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #b91c1c;
+      }
+
+      .hero-menu-body {
+        padding: 14px 16px 14px;
+        font-size: 0.82rem;
+        color: var(--muted);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .hero-menu-title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .hero-menu-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--lcq-deep);
+      }
+
+      .hero-menu-sub {
+        font-size: 0.76rem;
+        color: #b91c1c;
+        font-weight: 500;
+      }
+
+      .hero-menu-desc {
+        font-size: 0.8rem;
+        line-height: 1.7;
+      }
+
+      .hero-menu-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .chip {
+        font-size: 0.72rem;
+        padding: 3px 8px;
+        border-radius: 999px;
+        border: 1px solid #fecaca;
+        background: #fff7ed;
+        color: #7f1d1d;
+      }
+
+      /* 아래: 카테고리 & 메뉴 카드 */
+
+      .menu-right {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .menu-category-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 0.78rem;
+      }
+
+      .category-pill {
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: #fef3f2;
+        border: 1px solid rgba(248, 113, 113, 0.4);
+        color: #7f1d1d;
+      }
+
+      .category-pill span.label {
+        font-weight: 500;
+      }
+
+      .category-pill span.en {
+        font-size: 0.72rem;
+        color: #9f1239;
+      }
+
+      /* ✅ 메뉴 카드 그리드: 기본 2컬럼, 좁으면 1컬럼 */
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 기본 2컬럼 */
+        gap: 12px;
+      }
+
+      /* 작은 화면: 1컬럼 */
+      @media (max-width: 720px) {
+        .menu-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      article.menu-card {
+        border-radius: var(--radius-sm);
+        background: #ffffff;
+        border: 1px solid var(--line);
+        padding: 10px 11px 11px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(150px, 0.9fr);
+        gap: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        min-height: 150px;
+      }
+
+      .menu-card-main {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .menu-card-title {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--lcq-deep);
+      }
+
+      .menu-card-sub {
+        font-size: 0.74rem;
+        color: #9f1239;
+      }
+
+      .menu-card-desc {
+        font-size: 0.78rem;
+        line-height: 1.6;
+      }
+
+      .menu-card-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: 2px;
+      }
+
+      .meta-tag {
+        font-size: 0.7rem;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: #fef2f2;
+        color: #7f1d1d;
+      }
+
+      .meta-tag.light {
+        background: #fefce8;
+        color: #854d0e;
+      }
+
+      .menu-card-image {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #fee2e2;
+        background: #fef2f2;
+        position: relative;
+      }
+
+      .menu-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .menu-card-badge {
+        position: absolute;
+        left: 8px;
+        bottom: 8px;
+        padding: 3px 7px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.78);
+        color: #f9fafb;
+        font-size: 0.68rem;
+      }
+
+      /* 하단 안내 텍스트 */
+
+      .menu-footnote {
+        margin-top: 16px;
+        font-size: 0.75rem;
+        color: var(--muted);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .menu-footnote-em {
+        font-size: 0.76rem;
+        color: #7f1d1d;
+        font-weight: 500;
+      }
+
+      @media (max-width: 960px) {
+        body {
+          padding: 32px 12px 54px;
+        }
+        .brand-menu {
+          padding: 22px 18px 24px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .brand-menu {
+          padding: 20px 14px 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <!-- Our Brands > Lao Chongqing Hotpot > 메뉴 소개 섹션 -->
+      <section class="brand-menu">
+        <div class="brand-menu-inner">
+          <header class="menu-header">
+            <div class="menu-header-main">
+              <div class="eyebrow">MENU HIGHLIGHT</div>
+              <h2 class="menu-title">
+                <span class="brand">라오충칭훠궈</span>
+                <span class="suffix">메뉴 소개</span>
+              </h2>
+              <p class="menu-sub">
+                깊이 있는 마라 향과 균형 잡힌 백탕, 그리고 직접 손질한 재료들로<br />
+                충칭 현지 감성을 그대로 담은 훠궈 테이블을 완성합니다.
+              </p>
+              <div class="badge-row">
+                <div class="badge">
+                  <span class="badge-dot"></span>
+                  <span>정통 충칭 마라 &amp; 라오유</span>
+                </div>
+                <div class="badge">
+                  <span class="badge-dot" style="background: #ea580c"></span>
+                  <span>수제 완자 &amp; 엄선된 재료</span>
+                </div>
+                <div class="badge">
+                  <span class="badge-dot" style="background: #f59e0b"></span>
+                  <span>취향에 맞춘 맵기 &amp; 코스 느낌 구성</span>
+                </div>
+              </div>
+            </div>
+            <aside class="menu-note">
+              <strong>지점 공통 구성</strong>
+              라오충칭훠궈의 메뉴 구성은 지점에 따라 소폭 변동될 수 있으나,
+              <br />대표 육수, 시그니처 재료, 수제 메뉴 라인업은 공통 콘셉트를 유지합니다.
+            </aside>
+          </header>
+
+          <div class="menu-layout">
+            <!-- 대표 메뉴 카드: 가로 100% -->
+            <article class="hero-menu-card">
+              <div class="hero-menu-image">
+                <!-- 실제 훠궈 테이블 사진으로 교체 -->
+                <img
+                  src="https://placehold.co/1200x400/7F1D1D/FEE2E2/png?text=Lao+Chongqing+Hotpot+Table"
+                  alt="라오충칭훠궈 시그니처 훠궈 세트 이미지"
+                />
+                <div class="hero-tag-top">Signature Hotpot Set</div>
+                <div class="hero-tag-bottom">
+                  <span class="dot"></span>
+                  <span>마라/백탕 반반 · 2–3인 기준</span>
+                </div>
+              </div>
+              <div class="hero-menu-body">
+                <div class="hero-menu-title-row">
+                  <div class="hero-menu-title">시그니처 훠궈 세트</div>
+                  <div class="hero-menu-sub">Lao Chongqing Signature Set</div>
+                </div>
+                <p class="hero-menu-desc">
+                  충칭 스타일 마라탕과 깊고 순한 백탕을 한 번에 즐길 수 있는 기본 구성입니다. 소고기/양고기 슬라이스, 각종 수제 완자, 채소 플래터,
+                  면류까지 훠궈의 핵심을 한 상에 담았습니다. 인원수와 취향에 따라 재료를 자유롭게 추가할 수 있습니다.
+                </p>
+                <div class="hero-menu-tags">
+                  <span class="chip">· 2–3인 / 3–4인 선택</span>
+                  <span class="chip">· 마라 맵기 단계 조절 가능</span>
+                  <span class="chip">· 베지테리언 옵션 일부 지원</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 하단: 카테고리 + 메뉴 카드 그리드 -->
+            <div class="menu-right">
+              <div class="menu-category-row">
+                <div class="category-pill">
+                  <span class="label">육수 &amp; 라오유</span>
+                  <span class="en"> · Broth &amp; Spiced Oil</span>
+                </div>
+                <div class="category-pill">
+                  <span class="label">수제 완자 &amp; 메인 재료</span>
+                  <span class="en"> · Handcrafted Specials</span>
+                </div>
+                <div class="category-pill">
+                  <span class="label">사이드 &amp; 탄수화물</span>
+                  <span class="en"> · Sides &amp; Noodles</span>
+                </div>
+              </div>
+
+              <div class="menu-grid">
+                <!-- 육수 & 라오유 -->
+                <article class="menu-card">
+                  <div class="menu-card-main">
+                    <div class="menu-card-title">충칭 마라탕 · 백탕 베이스</div>
+                    <div class="menu-card-sub">Chongqing Mala / Classic Bone Broth</div>
+                    <p class="menu-card-desc">
+                      화자오와 각종 향신료를 직접 블렌딩한 마라 육수와, 뼈와 야채를 오래 끓인 부드러운 백탕이 기본 베이스입니다. 라오유(향신료 오일)는
+                      고기와 채소의 풍미를 살리도록 별도 제공됩니다.
+                    </p>
+                    <div class="menu-card-meta">
+                      <span class="meta-tag">맵기 단계 선택 (1–3)</span>
+                      <span class="meta-tag light">Low/Non-Spicy 옵션 가능</span>
+                    </div>
+                  </div>
+                  <div class="menu-card-image">
+                    <img src="https://placehold.co/320x220/B91C1C/FEE2E2/png?text=Mala+%26+White+Broth" alt="마라탕과 백탕 이미지" />
+                    <div class="menu-card-badge">Broth &amp; Lao You</div>
+                  </div>
+                </article>
+
+                <!-- 수제 완자 & 메인 재료 -->
+                <article class="menu-card">
+                  <div class="menu-card-main">
+                    <div class="menu-card-title">수제 완자 &amp; 메인 플래터</div>
+                    <div class="menu-card-sub">Handcrafted Meat &amp; Seafood Balls</div>
+                    <p class="menu-card-desc">
+                      직접 다지고 반죽한 수제 새우완자, 오징어완자, 고기완자와 소고기/양고기 슬라이스, 각종 모둠 재료가 플래터로 제공됩니다. 식감과
+                      풍미를 고려해 한 번에 어울리는 구성으로 큐레이션했습니다.
+                    </p>
+                    <div class="menu-card-meta">
+                      <span class="meta-tag">수제 완자 라인업</span>
+                      <span class="meta-tag light">Meat / Seafood Mix</span>
+                    </div>
+                  </div>
+                  <div class="menu-card-image">
+                    <img src="https://placehold.co/320x220/7C2D12/FFEDD5/png?text=Handmade+Meatballs" alt="수제 완자 플래터 이미지" />
+                    <div class="menu-card-badge">Handcrafted</div>
+                  </div>
+                </article>
+
+                <!-- 채소 & 사이드 -->
+                <article class="menu-card">
+                  <div class="menu-card-main">
+                    <div class="menu-card-title">채소 플래터 &amp; 사이드</div>
+                    <div class="menu-card-sub">Veggie Platter &amp; Small Plates</div>
+                    <p class="menu-card-desc">
+                      훠궈에 잘 어울리는 각종 채소와 버섯, 두부류를 조합한 플래터와 입맛을 돋우는 전채 메뉴가 함께 제공됩니다. 시즌에 따라 일부 구성이
+                      달라질 수 있습니다.
+                    </p>
+                    <div class="menu-card-meta">
+                      <span class="meta-tag light">Seasonal Veggies</span>
+                    </div>
+                  </div>
+                  <div class="menu-card-image">
+                    <img src="https://placehold.co/320x220/15803D/DCFCE7/png?text=Vegetable+Platter" alt="채소 플래터 이미지" />
+                    <div class="menu-card-badge">Veggie &amp; Sides</div>
+                  </div>
+                </article>
+
+                <!-- 탄수화물 & 마무리 -->
+                <article class="menu-card">
+                  <div class="menu-card-main">
+                    <div class="menu-card-title">면류 &amp; 마무리 볶음</div>
+                    <div class="menu-card-sub">Noodles &amp; Finishing Dishes</div>
+                    <p class="menu-card-desc">
+                      당면, 라면, 우동, 중국식 면류 등 다양한 선택지로 훠궈의 마무리를 완성합니다. 식사 후 마라 소스를 활용한 볶음류 메뉴도 준비되어
+                      있습니다.
+                    </p>
+                    <div class="menu-card-meta">
+                      <span class="meta-tag">다양한 면 선택</span>
+                      <span class="meta-tag light">After-Hotpot Dishes</span>
+                    </div>
+                  </div>
+                  <div class="menu-card-image">
+                    <img src="https://placehold.co/320x220/92400E/FFEDD5/png?text=Noodles+%26+Rice" alt="면류 및 마무리 요리 이미지" />
+                    <div class="menu-card-badge">Noodles &amp; Rice</div>
+                  </div>
+                </article>
+                <!-- 주류 (고량주) -->
+<article class="menu-card">
+  <div class="menu-card-main">
+    <div class="menu-card-title">중국 전통주 &amp; 고량주 셀렉션</div>
+    <div class="menu-card-sub">Premium Chinese Spirits &amp; Baijiu</div>
+    <p class="menu-card-desc">
+      마오타이, 우량예, 교량춘 등 충칭 스타일 훠궈와 가장 잘 어울리는 고량주 중심으로 
+      구성된 셀렉션입니다. 도수, 향, 숙성 기간에 따라 취향별 추천이 가능합니다.
+    </p>
+    <div class="menu-card-meta">
+      <span class="meta-tag">Maotai · Wuliangye</span>
+      <span class="meta-tag light">Baijiu Sampler</span>
+    </div>
+  </div>
+  <div class="menu-card-image">
+    <img
+      src="https://placehold.co/320x220/B45309/FFF7ED/png?text=Chinese+Liquor"
+      alt="중국 전통 고량주 이미지"
+    />
+    <div class="menu-card-badge">Liquor Selection</div>
+  </div>
+</article>
+<!-- 고기류 (육류 셀렉션) -->
+<article class="menu-card">
+  <div class="menu-card-main">
+    <div class="menu-card-title">육류 셀렉션 · 쇠고기 &amp; 양고기</div>
+    <div class="menu-card-sub">Premium Beef &amp; Lamb Cuts</div>
+    <p class="menu-card-desc">
+      훠궈에 최적화된 마블링의 소고기 슬라이스부터 풍미 깊은 양고기까지
+      부위별 특성을 살린 셀렉션입니다. 지방/식감/향 선택에 따라 세분화된 구성도 가능합니다.
+    </p>
+    <div class="menu-card-meta">
+      <span class="meta-tag">Beef · Lamb · Mixed Set</span>
+      <span class="meta-tag light">Marbling Level Choice</span>
+    </div>
+  </div>
+  <div class="menu-card-image">
+    <img
+      src="https://placehold.co/320x220/7F1D1D/FEE2E2/png?text=Beef+%26+Lamb+Cuts"
+      alt="고기류 셀렉션 이미지"
+    />
+    <div class="menu-card-badge">Meat Selection</div>
+  </div>
+</article>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-footnote">
+            <span class="menu-footnote-em"> ※ 실제 메뉴 구성 및 가격, 시즌 한정 메뉴는 지점 및 운영 시기에 따라 다를 수 있습니다. </span>
+            <span>상세 메뉴 및 가격은 매장 메뉴판 또는 공식 채널을 통해 확인해 주세요.</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
