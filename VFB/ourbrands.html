@@ -2328,6 +2328,10 @@
       let currentStoreId = "dongtan";
       let currentSlideIndex = 0;
 
+      // 🔁 자동 롤링용 타이머
+      let autoplayTimer = null;
+      const AUTOPLAY_INTERVAL = 3000; // 3초
+
       function renderStore(storeId) {
         const data = storeData[storeId];
         if (!data) return;
@@ -2398,6 +2402,8 @@
             setSlide(index);
           });
           mediaDots.appendChild(dot);
+
+          startAutoplay(); // 매장 바뀔 때마다 자동 롤링 시작/리셋
         });
 
         updateCaption();
@@ -2429,6 +2435,18 @@
         mediaCaption.textContent = currentSlideIndex + 1 + " / " + total;
       }
 
+      // 🔁 자동 롤링 시작 / 리셋
+      function startAutoplay() {
+        // 이전 타이머 제거
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+        }
+
+        autoplayTimer = setInterval(function () {
+          // 자동 롤링에서 넘어갈 때는 fromAutoplay: true
+          setSlide(currentSlideIndex + 1, { fromAutoplay: true });
+        }, AUTOPLAY_INTERVAL);
+      }
       mediaPrev.addEventListener("click", function () {
         setSlide(currentSlideIndex - 1);
       });
