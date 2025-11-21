@@ -38,6 +38,7 @@
         margin: 0;
         padding: 40px 16px 72px;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", sans-serif;
+        /* background: radial-gradient(circle at top, #fdfcfb 0, #f2f6ff 40%, #edf2f7 100%); */
         color: var(--ink);
         display: flex;
         justify-content: center;
@@ -47,6 +48,7 @@
         width: min(1200px, 100%);
         display: flex;
         flex-direction: column;
+        /* gap: 32px; */
       }
 
       @media (max-width: 960px) {
@@ -103,8 +105,6 @@
         overflow: hidden;
         padding: 80px 16px;
         color: #0f172a;
-        background: radial-gradient(circle at 0% 100%, rgba(179, 38, 30, 0.12) 0, transparent 20%);
-        opacity: 0.7;
       }
 
       .vfb-brand-story-split__inner {
@@ -124,6 +124,7 @@
       .vfb-brand-story-split__bg {
         position: absolute;
         inset: 0;
+        /* background: radial-gradient(circle at top left, rgba(78, 185, 151, 0.14), transparent 55%), radial-gradient(circle at bottom right, rgba(250, 204, 21, 0.16), transparent 55%), linear-gradient(135deg, #f9fafb, #f5faf8); */
         z-index: 0;
       }
 
@@ -214,7 +215,7 @@
         z-index: 1;
         margin-top: 28px;
         display: grid;
-        grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr); /* ≈ 70 / 30 */
         gap: 32px;
         align-items: flex-start;
       }
@@ -300,21 +301,22 @@
          2. 메뉴 소개 섹션
          ============================== */
       .brand-menu {
+        /* background: radial-gradient(circle at top left, #fef3f2 0, rgba(254, 243, 242, 0.1) 40%, transparent 60%),
+          radial-gradient(circle at bottom right, #fef9c3 0, rgba(254, 249, 195, 0.12) 45%, transparent 70%),
+          linear-gradient(135deg, #fff7ed 0%, #f9fafb 60%, #fefce8 100%); */
+        /* border-radius: var(--radius-xl); */
         padding: 80px 24px;
         box-shadow: var(--shadow-soft);
         position: relative;
         overflow: hidden;
-        
-        background: radial-gradient(circle at 0% 0%, rgba(179, 38, 30, 0.12) 0, transparent 20%), radial-gradient(circle at 100% 100%, rgba(246, 199, 94, 0.18) 0, transparent 60%);
-        opacity: 0.7;
       }
 
       .brand-menu::before {
         content: "";
         position: absolute;
         inset: -30%;
-        /* background: radial-gradient(circle at 0% 0%, rgba(179, 38, 30, 0.12) 0, transparent 55%), radial-gradient(circle at 100% 100%, rgba(246, 199, 94, 0.18) 0, transparent 60%); */
-        /* opacity: 0.7; */
+        background: radial-gradient(circle at 0% 0%, rgba(179, 38, 30, 0.12) 0, transparent 55%), radial-gradient(circle at 100% 100%, rgba(246, 199, 94, 0.18) 0, transparent 60%);
+        opacity: 0.7;
         pointer-events: none;
       }
 
@@ -365,6 +367,7 @@
         line-height: 1.6;
       }
 
+      /* 메뉴 섹션에서만 사용하는 배지 스타일 오버라이드 */
       .brand-menu .badge {
         background: rgba(255, 255, 255, 0.92);
         border: 1px solid rgba(248, 113, 113, 0.3);
@@ -412,6 +415,13 @@
         position: relative;
         overflow: hidden;
         border-bottom: 1px solid var(--line);
+        /* height: 260px; */
+      }
+
+      @media (min-width: 1024px) {
+        .hero-menu-image {
+          /* height: 300px; */
+        }
       }
 
       .hero-menu-image img {
@@ -658,21 +668,21 @@
          3. 매장 안내 섹션
          ============================== */
       .brand-locations {
+        /* background: linear-gradient(135deg, #f5faf8 0%, #fdfaf2 40%, #f5f7fb 100%); */
+        /* border-radius: var(--radius-xl); */
         padding: 80px 24px;
         box-shadow: var(--shadow-soft);
         position: relative;
         overflow: hidden;
-        background: radial-gradient(circle at 0% 0%, rgba(78, 185, 151, 0.14) 0, transparent 55%),
-          radial-gradient(circle at 100% 100%, rgba(250, 204, 21, 0.16) 0, transparent 60%);
-        opacity: 0.7;
       }
 
       .brand-locations::before {
         content: "";
         position: absolute;
         inset: -30%;
-        /* background: radial-gradient(circle at 0% 0%, rgba(78, 185, 151, 0.14) 0, transparent 55%),radial-gradient(circle at 100% 100%, rgba(250, 204, 21, 0.16) 0, transparent 60%); */
-        /* opacity: 0.7; */
+        background: radial-gradient(circle at 0% 0%, rgba(78, 185, 151, 0.14) 0, transparent 55%),
+          radial-gradient(circle at 100% 100%, rgba(250, 204, 21, 0.16) 0, transparent 60%);
+        opacity: 0.7;
         pointer-events: none;
       }
 
@@ -893,7 +903,7 @@
 
       .detail-key {
         min-width: 60px;
-        font-weight: bolder;
+        font-weight:bolder;
         color: #4b5563;
       }
 
@@ -1108,376 +1118,6 @@
           padding: 20px 14px 22px;
         }
       }
-
-      /* ==============================
-         4. SNS / Instagram 섹션
-         ============================== */
-      .vfb-sns {
-        position: relative;
-        padding: 80px 22px;
-        background: radial-gradient(circle at 0% 100%, rgba(78, 185, 151, 0.14) 0, transparent 20%),
-          radial-gradient(circle at 100% 0%, rgba(250, 204, 21, 0.16) 0, transparent 40%);
-        
-        /* background: radial-gradient(circle at top left, rgba(78, 185, 151, 0.12), transparent 55%),
-          radial-gradient(circle at bottom right, rgba(246, 199, 94, 0.18), transparent 60%),
-          linear-gradient(135deg, #f9fafb 0%, #f5faf8 40%, #fefcf7 100%); */
-        /* box-shadow: var(--shadow-soft); */
-        overflow: hidden;
-      }
-
-      .vfb-sns::before {
-        content: "";
-        position: absolute;
-        inset: -40%;
-        opacity: 0.8;
-        pointer-events: none;
-      }
-
-      .vfb-sns__inner {
-        position: relative;
-        z-index: 1;
-        max-width: 1120px;
-        margin: 0 auto;
-      }
-
-      .vfb-sns__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 18px;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-      }
-
-      .vfb-sns__header-main {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      .vfb-sns__eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.8rem;
-        color: var(--muted);
-      }
-
-      .vfb-sns__pill {
-        padding: 4px 10px;
-        border-radius: 999px;
-        background: rgba(78, 185, 151, 0.1);
-        border: 1px solid rgba(78, 185, 151, 0.35);
-        color: #047857;
-        font-size: 0.75rem;
-      }
-
-      .vfb-sns__dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 999px;
-        background: linear-gradient(135deg, var(--vfb-green), var(--vfb-teal));
-        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.04);
-      }
-
-      .vfb-sns__label {
-        font-size: 0.78rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-      }
-
-      .vfb-sns__title {
-        margin: 2px 0 4px;
-        font-size: 1.4rem;
-        letter-spacing: -0.03em;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        align-items: baseline;
-      }
-
-      .vfb-sns__title span.brand {
-        font-weight: 700;
-      }
-
-      .vfb-sns__title span.suffix {
-        font-size: 1.02rem;
-        color: var(--muted);
-        font-weight: 500;
-      }
-
-      .vfb-sns__sub {
-        margin: 0;
-        font-size: 0.9rem;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-
-      .vfb-sns__meta {
-        font-size: 0.8rem;
-        color: var(--muted);
-        padding: 10px 12px;
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.96);
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        min-width: 210px;
-      }
-
-      .vfb-sns__meta strong {
-        font-size: 0.84rem;
-        color: var(--ink);
-      }
-
-      .vfb-sns__handle {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 2px;
-      }
-
-      .vfb-sns__handle-tag {
-        font-size: 0.78rem;
-        padding: 3px 8px;
-        border-radius: 999px;
-        background: #eef2ff;
-        color: #4338ca;
-        border: 1px solid rgba(129, 140, 248, 0.5);
-      }
-
-      .vfb-sns__layout {
-        display: grid;
-        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-        gap: 18px;
-      }
-
-      .vfb-sns__featured {
-        border-radius: var(--radius-md);
-        background: #ffffff;
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        box-shadow: var(--shadow-card);
-        padding: 10px 10px 12px;
-        display: grid;
-        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-        gap: 10px;
-      }
-
-      .vfb-sns__featured-media {
-        border-radius: 16px;
-        overflow: hidden;
-        position: relative;
-        background: #fefce8;
-      }
-
-      .vfb-sns__featured-media::after {
-        content: "Reels Highlight";
-        position: absolute;
-        left: 10px;
-        top: 10px;
-        padding: 3px 8px;
-        border-radius: 999px;
-        background: rgba(15, 23, 42, 0.86);
-        color: #f9fafb;
-        font-size: 0.7rem;
-      }
-
-      .vfb-sns__featured-media img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-      }
-
-      .vfb-sns__featured-body {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        font-size: 0.8rem;
-        color: var(--muted);
-      }
-
-      .vfb-sns__featured-title {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--ink);
-      }
-
-      .vfb-sns__featured-text {
-        font-size: 0.8rem;
-        line-height: 1.7;
-      }
-
-      .vfb-sns__featured-note {
-        margin-top: auto;
-        font-size: 0.77rem;
-        color: #9ca3af;
-      }
-
-      .vfb-sns__grid {
-        display: grid;
-        grid-template-rows: auto minmax(0, 1fr);
-        gap: 10px;
-      }
-
-      .vfb-sns__grid-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.8rem;
-      }
-
-      .vfb-sns__grid-label {
-        font-weight: 500;
-        color: #4b5563;
-      }
-
-      .vfb-sns__grid-main {
-        border-radius: var(--radius-md);
-        background: #ffffff;
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        padding: 8px;
-        box-shadow: var(--shadow-card);
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: repeat(2, minmax(0, 1fr));
-        gap: 6px;
-      }
-
-      .vfb-sns__grid-item {
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-        background: #f3f4f6;
-        cursor: default;
-        transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
-        border: 1px solid transparent;
-      }
-
-      .vfb-sns__grid-item:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 12px 22px rgba(15, 23, 42, 0.18);
-        border-color: rgba(148, 163, 184, 0.9);
-      }
-
-      .vfb-sns__grid-item img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-      }
-
-      .vfb-sns__grid-item-label {
-        position: absolute;
-        left: 7px;
-        bottom: 7px;
-        padding: 3px 6px;
-        border-radius: 999px;
-        background: rgba(15, 23, 42, 0.82);
-        color: #e5e7eb;
-        font-size: 0.68rem;
-      }
-
-      .vfb-sns__footer {
-        margin-top: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        flex-wrap: wrap;
-        font-size: 0.78rem;
-        color: var(--muted);
-      }
-
-      .vfb-sns__footer-note {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        align-items: center;
-      }
-
-      .vfb-sns__footer-note strong {
-        color: #4b5563;
-      }
-
-      .vfb-sns__btn-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-      }
-
-      .vfb-sns__btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        padding: 7px 12px;
-        border-radius: 999px;
-        font-size: 0.78rem;
-        text-decoration: none;
-        border: 1px solid transparent;
-        cursor: pointer;
-        white-space: nowrap;
-        transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
-      }
-
-      .vfb-sns__btn-primary {
-        background: linear-gradient(135deg, #18181b, #020617);
-        color: #f9fafb;
-        border-color: #111827;
-      }
-
-      .vfb-sns__btn-primary:hover {
-        transform: translateY(-1px);
-        background: linear-gradient(135deg, #020617, #020617);
-      }
-
-      .vfb-sns__btn-outline {
-        background: #ffffff;
-        color: #374151;
-        border-color: rgba(148, 163, 184, 0.8);
-      }
-
-      .vfb-sns__btn-outline:hover {
-        background: #f9fafb;
-        transform: translateY(-1px);
-      }
-
-      .vfb-sns__btn-icon {
-        font-size: 0.95rem;
-      }
-
-      @media (max-width: 1024px) {
-        .vfb-sns__featured {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
-
-      @media (max-width: 840px) {
-        .vfb-sns__layout {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
-
-      @media (max-width: 640px) {
-        .vfb-sns {
-          padding: 20px 14px 22px;
-        }
-
-        .vfb-sns__title {
-          font-size: 1.2rem;
-        }
-
-        .vfb-sns__meta {
-          width: 100%;
-        }
-
-        .vfb-sns__grid-main {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
     </style>
   </head>
 
@@ -1506,6 +1146,20 @@
               </p>
             </div>
           </header>
+          <header class="vfb-brand-story-split__header" style="display: none;">
+            <div class="vfb-brand-story-split__eyebrow">
+              <span class="vfb-brand-story-split__pill">Our Brands</span>
+              <span class="vfb-brand-story-split__dot"></span>
+              <span class="vfb-brand-story-split__label">Lao Chongqing Hotpot</span>
+            </div>
+            <h2 class="vfb-brand-story-split__title">
+              100년 전통 충칭 훠궈에서 시작된,
+              <span>라오충칭훠궈</span>
+            </h2>
+            <p class="vfb-brand-story-split__lead">
+              정통은 지키되, 경험은 새롭게. 라오충칭훠궈는 충칭 훠궈의 100년 스토리를 오늘의 테이블에 맞게 다시 풀어낸 프리미엄 훠궈 브랜드입니다.
+            </p>
+          </header>
 
           <div class="vfb-brand-story-split__layout">
             <div class="vfb-brand-story-split__story">
@@ -1518,8 +1172,25 @@
                 우리는 이 문화를 한국에서도 자연스럽게 경험할 수 있도록 정통 조리법은 지키되 고객의 입맛에 맞춘 구성과 서비스를 더했습니다.
               </p>
               <p>
-                라오충칭훠궈는 현재 중국 전역 23개 매장에서 운영되고 있으며, 이 노하우를 바탕으로 글로벌 15호점으로 한국에 상륙했습니다. 오랜 시간 다듬어 온
-                비법 육수와 다채로운 향신료, 그리고 50여 가지 재료를 취향대로 조합해, 방문할 때마다 다른 조합과 무드를 즐길 수 있는 자유로운 식경험을 지향합니다.
+                라오충칭훠궈는 현재 중국 23개 매장에서 운영 중이며 글로벌 15호점으로 한국에 상륙했습니다. 3대 훠궈 마스터
+                <strong>Mr. Tang Lin</strong>의 비법을 그대로 담은 육수와 50여 가지 재료를 취향대로 조합해 즐기는 자유로운 식경험을 제공합니다.
+              </p>
+              <br>
+              <p>
+                <strong>정통은 지키되, 경험은 새롭게.</strong><br />
+                라오충칭훠궈에서 진짜 마라의 세계를 만나보세요.
+              </p>
+            </div>
+            <div class="vfb-brand-story-split__story" style="display: none;">
+
+              <p>
+                100년 전통 충칭 훠궈를 기반으로 탄생한 라오충칭훠궈는 깊고 진한 육수와 정통 향신료를 현대적인 감성으로 풀어낸 프리미엄 훠궈 브랜드입니다. 한 그릇의 훠궈 안에 충칭의 오랜 역사와 한국 미식 문화가 자연스럽게 어우러지도록, 레시피와 서비스 전반을 세심하게 설계했습니다.
+              </p>
+              <p>
+                중국 사천성 충칭 지역에서 시작된 마라 훠궈의 매력은 얼얼한 마라의 자극적인 맛만이 아니라, 사람들이 한 자리에 둘러앉아 국물을 나누고 재료를 건져 올리며 자연스럽게 대화를 이어가는 따뜻한 식문화에 있습니다. 라오충칭훠궈는 이 문화를 한국에서도 부담 없이 즐길 수 있도록, 깊은 국물과 향신료의 밸런스는 유지하면서도 한국 고객의 취향에 맞춘 맵기 조절, 재료 구성, 서비스 동선을 더했습니다.
+              </p>
+              <p>
+                라오충칭훠궈는 현재 중국 전역 23개 매장에서 운영되고 있으며, 이 노하우를 바탕으로 글로벌 15호점으로 한국에 상륙했습니다. 오랜 시간 다듬어 온 비법 육수와 다채로운 향신료, 그리고 50여 가지 재료를 취향대로 조합해, 방문할 때마다 다른 조합과 무드를 즐길 수 있는 자유로운 식경험을 지향합니다. 한 번의 방문으로 끝나는 식사가 아니라, 서로 다른 동행과 상황에 따라 여러 번 다시 찾고 싶은 훠궈 테이블을 만드는 것이 라오충칭훠궈의 목표입니다.
               </p>
               <p>
                 <strong>정통은 지키되, 경험은 새롭게.</strong><br />
@@ -1529,12 +1200,8 @@
 
             <aside class="vfb-brand-story-split__aside">
               <div class="vfb-brand-story-split__image-frame">
-                <!-- 
-                  image/brands-story.png
-                  https://placehold.co/640x900/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot
-                 -->
                 <img
-                  src="https://placehold.co/640x900/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot"
+                  src="https://placehold.co/640x900/A0A0A0/FFFFFF/png?text==Lao+Chongqing+Hotpot"
                   alt="100년 전통 충칭 훠궈와 라오충칭훠궈 매장 분위기"
                   class="vfb-brand-story-split__image"
                   loading="lazy"
@@ -1556,7 +1223,7 @@
                 <span class="suffix">메뉴 소개</span>
               </h2>
               <p class="menu-sub">
-                깊이 있는 마라 향과 균형 잡힌 백탕, 직접 손질한 재료들로 충칭 현지 감성을 그대로 담은 훠궈 테이블을 완성하고, 정통 훠궈 육수와 50여 가지 식재료를 취향에 맞게 조합해 즐길 수 있습니다. 여기에 중국 대표 백주와 와인 등 다양한 주류를 곁들이면 한 끼 식사가 아니라, 완성도 높은 식경험을 누리실 수 있습니다.
+                깊이 있는 마라 향과 균형 잡힌 백탕, 그리고 직접 손질한 재료들로 충칭 현지 감성을 그대로 담은 훠궈 테이블을 완성합니다.
               </p>
             </div>
           </header>
@@ -1595,7 +1262,6 @@
               <div style="margin: 10px 0 0 10px; font-weight: bolder">베스트 메뉴</div>
 
               <div class="menu-grid">
-                <!-- 메뉴 카드들 (생략 없이 그대로 유지) -->
                 <article class="menu-card">
                   <div class="menu-card-main">
                     <div class="menu-card-title">충칭 마라탕 · 백탕 베이스</div>
@@ -1799,8 +1465,8 @@
                   <div class="detail-row">
                     <div class="detail-key">주차안내</div>
                     <div class="detail-val" id="detail-booking">
-                      자차 이용시 동탄 파라곤 지하주차장에 주차하신 뒤 <br />
-                      103동 엘리베이터를 이용하여 1층으로 올라오시면 <br />
+                      자차 이용시 동탄 파라곤 지하주차장에 주차하신 뒤 <br>
+                      103동 엘리베이터를 이용하여 1층으로 올라오시면 <br>
                       '라오충칭훠궈' 입구가 보입니다.
                     </div>
                   </div>
@@ -1836,118 +1502,24 @@
         </div>
       </section>
 
-      <!-- 4. 인스타그램 섹션 -->
-      <section class="vfb-sns">
-        <div class="vfb-sns__inner">
-          <header class="vfb-sns__header">
-            <div class="vfb-sns__header-main">
-              <div class="vfb-sns__eyebrow">
-                <span class="vfb-sns__pill">Our Brands</span>
-                <span class="vfb-sns__dot"></span>
-                <span class="vfb-sns__label">LAO CHONGQING HOTPOT · INSTAGRAM</span>
-              </div>
-              <h2 class="vfb-sns__title">
+      <!-- 4. 매장 안내 섹션 -->
+      <section class="vfb-brand-story-split">
+        <div class="vfb-brand-story-split__inner">
+          <header class="menu-header" style="margin-bottom: 36px;">
+            <div class="menu-header-main">
+              <div class="eyebrow">Instagram</div>
+              <h2 class="menu-title">
                 <span class="brand">라오충칭훠궈</span>
-                <span class="suffix">Instagram</span>
+                <span class="suffix">인스타그램</span>
               </h2>
-              <p class="vfb-sns__sub">
-                테이블 위 김과 조명, 한 숟갈의 라오유, 그리고 손님들의 순간까지. 리얼스와 피드를 통해 라오충칭훠궈의 분위기를 가장 생생하게
-                전해드립니다. 시즌 한정 메뉴와 매장 소식도 인스타그램에서 가장 먼저 만나보세요.
-              </p>
             </div>
-            <aside class="vfb-sns__meta" style="width: 100%;">
-              <div>
-                <strong>Official Account</strong> @laochongqing_hotpot
-              </div>
-              <span>운영 시간 변경, 신규 메뉴, 이벤트 공지는 공식 인스타그램 스토리와 피드를 통해 안내됩니다.</span>
-            </aside>
           </header>
-
-          <div class="vfb-sns__layout">
-            <!-- LEFT: Featured Reels -->
-            <article class="vfb-sns__featured">
-              <div class="vfb-sns__featured-media">
-                <img
-                  src="https://placehold.co/640x900/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot"
-                  alt="라오충칭훠궈 인스타그램 리얼스 캡처 이미지"
-                  loading="lazy"
-                />
-              </div>
-              <div class="vfb-sns__featured-body">
-                <h3 class="vfb-sns__featured-title">한 냄비 위에서 시작되는 오늘의 이야기</h3>
-                <p class="vfb-sns__featured-text">
-                  보글거리는 마라 육수, 부드러운 백탕, 정성껏 준비한 라오유와 재료들이 동영상 안에서 천천히 펼쳐집니다. 인스타그램 리얼스에서는
-                  라오충칭훠궈 테이블의 온도감과 움직임을 짧지만 인상적인 장면들로 담아냅니다. 집에서도, 길 위에서도 브랜드의 공기를 느껴볼 수 있도록
-                  구성했습니다.
-                </p>
-                <p class="vfb-sns__featured-note">
-                  이 영역에는 대표 리얼스 또는 브랜드 무드를 잘 보여주는 세로형(9:16) 캡처 이미지를 배치하는 것을 권장합니다.
-                </p>
-              </div>
-            </article>
-
-            <!-- RIGHT: Feed Grid -->
-            <div class="vfb-sns__grid">
-              <div class="vfb-sns__grid-header">
-                <span class="vfb-sns__grid-label" style="font-weight: bold;">Feed Highlights</span>
-              </div>
-              <div class="vfb-sns__grid-main">
-                <div class="vfb-sns__grid-item">
-                  <img
-                    src="https://placehold.co/400x400/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot"
-                    alt="테이블 위 훠궈와 재료들"
-                    loading="lazy"
-                  />
-                  <span class="vfb-sns__grid-item-label">Hotpot Table</span>
-                </div>
-                <div class="vfb-sns__grid-item">
-                  <img
-                    src="https://placehold.co/400x400/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot"
-                    alt="라오유와 소스 바"
-                    loading="lazy"
-                  />
-                  <span class="vfb-sns__grid-item-label">Lao You &amp; Sauce Bar</span>
-                </div>
-                <div class="vfb-sns__grid-item">
-                  <img
-                    src="https://placehold.co/400x400/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot"
-                    alt="매장 내부 조명과 좌석 분위기"
-                    loading="lazy"
-                  />
-                  <span class="vfb-sns__grid-item-label">Store Mood</span>
-                </div>
-                <div class="vfb-sns__grid-item">
-                  <img
-                    src="https://placehold.co/400x400/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot"
-                    alt="수제 완자와 재료 클로즈업"
-                    loading="lazy"
-                  />
-                  <span class="vfb-sns__grid-item-label">Handmade Bites</span>
-                </div>
-              </div>
-            </div>
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nesciunt quam cupiditate odit doloremque harum eaque illo accusamus, fugit magnam officiis sequi eos similique voluptatibus quaerat labore dolores, optio consequuntur.
           </div>
-
-          <footer class="vfb-sns__footer">
-            <div class="vfb-sns__footer-note">
-              <strong>브랜드의 지금을 가장 빨리 확인하는 창</strong>
-              <span>실제 운영 시에는 이 영역을 인스타그램 연동 위젯 또는 주기적으로 교체되는 피드 캡처 이미지로 활용할 수 있습니다.</span>
-            </div>
-            <div class="vfb-sns__btn-row">
-              <a href="https://www.instagram.com/" class="vfb-sns__btn vfb-sns__btn-primary" target="_blank" rel="noreferrer">
-                <span class="vfb-sns__btn-icon">📷</span>
-                <span>공식 인스타그램 바로가기</span>
-              </a>
-              <a href="#" class="vfb-sns__btn vfb-sns__btn-outline">
-                <span class="vfb-sns__btn-icon">✨</span>
-                <span>@laochongqing_hotpot 해시태그 보기</span>
-              </a>
-            </div>
-          </footer>
         </div>
       </section>
 
-      <!-- 아래 섹션들은 아직 더미 (원래 있던 Lorem ipsum 섹션) -->
       <section class="vfb-brand-story-split">
         <div class="vfb-brand-story-split__inner">
           <header class="menu-header" style="margin-bottom: 36px;">
@@ -1959,42 +1531,26 @@
               </h2>
             </div>
           </header>
-          <div style="height: 400px;">
+          <div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nesciunt quam cupiditate odit doloremque harum eaque illo accusamus, fugit magnam officiis sequi eos similique voluptatibus quaerat labore dolores, optio consequuntur.
           </div>
         </div>
       </section>
 
-      <div style="height: 200px;"></div>
-
       <section class="vfb-brand-story-split">
         <div class="vfb-brand-story-split__bg"></div>
         <div class="vfb-brand-story-split__glow vfb-brand-story-split__glow--tl"></div>
         <div class="vfb-brand-story-split__glow vfb-brand-story-split__glow--br"></div>
-        <div class="vfb-brand-story-split__inner" style="height: 300px;">
-          브랜드 스토리 섹션
+        <div class="vfb-brand-story-split__inner">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nesciunt quam cupiditate odit doloremque harum eaque illo accusamus, fugit magnam officiis sequi eos similique voluptatibus quaerat labore dolores, optio consequuntur.
         </div>
       </section>
-
+      
       <section class="brand-menu">
-        <div style="height: 300px;">
-          메뉴 소개 섹션
-        </div>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi sed nulla nostrum? Sint sit pariatur incidunt ut consequuntur quaerat porro asperiores non! Quasi quos ut eius rem voluptatibus iusto quaerat.
       </section>
       <section class="brand-locations">
-        <div style="height: 300px;">
-          매장 안내 섹션
-        </div>
-      </section>
-      <section class="vfb-sns">
-        <!-- background: 
-         radial-gradient(circle at top left, rgba(78, 185, 151, 0.12), transparent 55%),
-         radial-gradient(circle at bottom right, rgba(246, 199, 94, 0.18), transparent 60%),
-         linear-gradient(135deg, #f9fafb 0%, #f5faf8 40%, #fefcf7 100%)
-         ; -->
-        <div style="height: 300px;">
-          인스타그램 섹션
-        </div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, dolore! Eligendi aspernatur ratione hic fugiat sunt cumque magni iure? Pariatur fugit soluta asperiores quibusdam nobis eligendi similique velit maxime accusamus.
       </section>
     </main>
 
@@ -2006,15 +1562,15 @@
           branch: "1호점 · Dongtan",
           sub: "따뜻한 조명, 깊이 있는 육수, 정통 충칭 스타일의 라오유로 완성되는 " + "라오충칭훠궈의 첫 번째 플래그십 매장입니다.",
           address: "경기 화성시 동탄반석로 172 149,150호",
-          hours:
-            "월~금 17:00 ~ 22:00 (라스트오더 21:30) <br />" +
-            "토~일 12:00 ~ 22:00 (라스트오더 21:30) <br />" +
+          hours: 
+            "월~금 17:00 ~ 22:00 (라스트오더 21:30) <br />" + 
+            "토~일 12:00 ~ 22:00 (라스트오더 21:30) <br />" + 
             "* 브레이크타임 15:00 ~ 17:00<br />",
           contact: "123-4567-8900<br />" + "예약 및 단체 문의는 전화로 먼저 상담해 주세요.",
           tel: "123456789",
           bookingUrl:
-            "https://m.place.naver.com/restaurant/1028459468/booking",
-          bookingDesc:
+            "https://m.place.naver.com/restaurant/1028459468/booking?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnV5XwQHl5k3IhZL8cSKz85L5UAJPmdK7G475WsXG16LeUiK6x4wVHc3A7V0Y_aem_HeghBO_62JDTcAn1fKYt_g",
+          bookingDesc: 
             "자차 이용시 동탄 파라곤 지하주차장에 주차하신 뒤" +
             "103동 엘리베이터를 이용하여 1층으로 올라오시면" +
             "'라오충칭훠궈' 입구가 보입니다.",
@@ -2047,11 +1603,8 @@
           label: "PLANNED LOCATION",
           title: "라오충칭훠궈 판교점",
           branch: "2호점 · Pangyo (Concept)",
-          sub:
-            "비즈니스 타운 판교에서, 점심엔 비즈니스 런치, 저녁엔 여유 있는 다이닝을 " +
-            "제공하는 컨셉으로 준비 중인 가상의 시나리오 매장입니다.",
-          address:
-            "(예시) 경기도 성남시 분당구 판교○로 ○○, ○층<br />※ 실제 오픈 시 정보 업데이트 예정",
+          sub: "비즈니스 타운 판교에서, 점심엔 비즈니스 런치, 저녁엔 여유 있는 다이닝을 " + "제공하는 컨셉으로 준비 중인 가상의 시나리오 매장입니다.",
+          address: "(예시) 경기도 성남시 분당구 판교○로 ○○, ○층<br />※ 실제 오픈 시 정보 업데이트 예정",
           hours: "예상 운영시간 11:30 – 22:00<br />구체적인 영업 시간은 오픈 시 확정됩니다.",
           contact: "오픈 일정 확정 후 예약 및 문의 연락처가 안내될 예정입니다.",
           tel: "",
@@ -2086,9 +1639,7 @@
           label: "COMING SOON",
           title: "라오충칭훠궈 3호점",
           branch: "3호점 · Coming Soon",
-          sub:
-            "세 번째 매장은 새로운 지역과 콘셉트로 준비 중입니다. " +
-            "라오충칭훠궈만의 라오유와 스토리를 담은 또 하나의 공간을 기대해 주세요.",
+          sub: "세 번째 매장은 새로운 지역과 콘셉트로 준비 중입니다. " + "라오충칭훠궈만의 라오유와 스토리를 담은 또 하나의 공간을 기대해 주세요.",
           address: "지역 및 상세 주소는 오픈 확정 후 공식 채널을 통해 안내드립니다.",
           hours: "영업시간 및 운영 정책은 추후 공지 예정입니다.",
           contact: "오픈 일정 및 위치는 VFB / 라오충칭훠궈 공식 채널에서 순차적으로 안내됩니다.",
@@ -2146,6 +1697,10 @@
       let currentStoreId = "dongtan";
       let currentSlideIndex = 0;
 
+      // 🔁 자동 롤링용 타이머
+      let autoplayTimer = null;
+      const AUTOPLAY_INTERVAL = 3000; // 3초
+
       function renderStore(storeId) {
         const data = storeData[storeId];
         if (!data) return;
@@ -2168,23 +1723,26 @@
         detailAddress.innerHTML = data.address;
         detailHours.innerHTML = data.hours;
         detailContact.innerHTML = data.contact;
-        detailBooking.innerHTML = data.bookingDesc || "";
 
+        detailBooking.innerHTML = data.bookingDesc;
+
+        // 버튼(네이버지도 열기)
         btnMapMain.href = data.mapMainHref || "#";
-        btnMapSub.href = data.mapSubHref || "#";
-
         if (data.mapMainHref) {
           btnMapMain.style.display = "inline-flex";
+          btnMapMain.href = data.mapMainHref;
         } else {
           btnMapMain.style.display = "none";
         }
-
+        // 버튼(카카오맵 열기)
+        btnMapSub.href = data.mapSubHref || "#";
         if (data.mapSubHref) {
           btnMapSub.style.display = "inline-flex";
+          btnMapSub.href = data.mapSubHref;
         } else {
           btnMapSub.style.display = "none";
         }
-
+        // 버튼(전화 문의)
         if (data.tel) {
           btnCall.style.display = "inline-flex";
           btnCall.href = "tel:" + data.tel;
@@ -2192,20 +1750,13 @@
           btnCall.style.display = "none";
         }
 
+        // 이미지 슬라이더 세팅
         mediaSlider.innerHTML = "";
         mediaDots.innerHTML = "";
         data.images.forEach(function (img, index) {
           var slide = document.createElement("div");
           slide.className = "media-slide" + (index === 0 ? " active" : "");
-          slide.innerHTML =
-            '<img src="' +
-            img.src +
-            '" alt="' +
-            img.label +
-            '" />' +
-            '<div class="media-slide-label">' +
-            img.label +
-            "</div>";
+          slide.innerHTML = '<img src="' + img.src + '" alt="' + img.label + '" />' + '<div class="media-slide-label">' + img.label + "</div>";
           mediaSlider.appendChild(slide);
 
           var dot = document.createElement("button");
@@ -2216,6 +1767,8 @@
             setSlide(index);
           });
           mediaDots.appendChild(dot);
+          
+          startAutoplay(); // 매장 바뀔 때마다 자동 롤링 시작/리셋
         });
 
         updateCaption();
@@ -2246,6 +1799,20 @@
         const total = data.images.length;
         mediaCaption.textContent = currentSlideIndex + 1 + " / " + total;
       }
+
+      // 🔁 자동 롤링 시작 / 리셋
+      function startAutoplay() {
+        // 이전 타이머 제거
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+        }
+
+        autoplayTimer = setInterval(function () {
+          // 자동 롤링에서 넘어갈 때는 fromAutoplay: true
+          setSlide(currentSlideIndex + 1, { fromAutoplay: true });
+        }, AUTOPLAY_INTERVAL);
+      }
+
 
       mediaPrev.addEventListener("click", function () {
         setSlide(currentSlideIndex - 1);

@@ -1,611 +1,556 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <title>VFB Our Brands – Instagram Static Showcase</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    :root {
-      --vfb-green: #4eb997;
-      --vfb-yellow: #f6c75e;
-      --vfb-teal: #2fadbe;
-      --ink: #0f172a;
-      --muted: #6b7280;
-      --bg: #f3f4f6;
-      --white: #ffffff;
-      --line: #e5e7eb;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.10);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans KR",
-        "Apple SD Gothic Neo", sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-    }
-
-    .shell {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 16px;
-    }
-
-    /* ===== Instagram Showcase Section ===== */
-
-    .ig-section {
-      width: 100%;
-      max-width: 1120px;
-      background: radial-gradient(circle at top left, #fefce8 0, #ffffff 40%, #eef9f6 100%);
-      border-radius: 28px;
-      box-shadow: var(--shadow-soft);
-      padding: 26px 22px 26px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ig-section::before,
-    .ig-section::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(40px);
-      opacity: 0.55;
-      pointer-events: none;
-    }
-
-    .ig-section::before {
-      width: 220px;
-      height: 220px;
-      background: conic-gradient(
-        from 160deg,
-        rgba(78,185,151,0.45),
-        rgba(246,199,94,0.55),
-        rgba(47,173,190,0.65)
-      );
-      top: -80px;
-      right: -40px;
-    }
-
-    .ig-section::after {
-      width: 180px;
-      height: 180px;
-      background: radial-gradient(circle, rgba(47,173,190,0.6), transparent 60%);
-      bottom: -60px;
-      left: -40px;
-    }
-
-    .ig-inner {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.2fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 900px) {
-      .shell {
-        padding: 24px 12px;
+  <head>
+    <meta charset="UTF-8" />
+    <title>VFB – Our Brands · Instagram Section Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --vfb-green: #4eb997;
+        --vfb-yellow: #f6c75e;
+        --vfb-teal: #2fadbe;
+        --ink: #0f172a;
+        --muted: #6b7280;
+        --line: #e5e7eb;
+        --paper: #ffffff;
+        --radius-xl: 24px;
+        --radius-md: 18px;
+        --radius-sm: 14px;
+        --shadow-soft: 0 14px 34px rgba(15, 23, 42, 0.08);
+        --shadow-card: 0 10px 26px rgba(15, 23, 42, 0.08);
       }
 
-      .ig-section {
-        padding: 20px 16px 22px;
-        border-radius: 22px;
+      * {
+        box-sizing: border-box;
       }
 
-      .ig-inner {
-        grid-template-columns: minmax(0, 1fr);
+      body {
+        margin: 0;
+        padding: 40px 16px 72px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", sans-serif;
+        /* background: #e5e7eb; */
+        color: var(--ink);
+        display: flex;
+        justify-content: center;
       }
-    }
 
-    /* Left column as flex so brand card sticks to bottom of its box */
-
-    .ig-left {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    @media (max-width: 900px) {
-      .ig-left {
-        gap: 16px;
+      .page {
+        width: min(1200px, 100%);
       }
-    }
 
-    /* ===== Left: Heading / Brand copy ===== */
+      /* ======================================
+         VFB · Our Brands – SNS/Instagram Section
+         - 브랜드별 템플릿용
+         ====================================== */
 
-    .ig-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(78,185,151,0.10);
-      border: 1px solid rgba(78,185,151,0.35);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #047857;
-      margin-bottom: 4px;
-      backdrop-filter: blur(8px);
-    }
-
-    .ig-badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--vfb-green), var(--vfb-teal));
-    }
-
-    .ig-subtitle {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .ig-title {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin: 0 0 8px;
-    }
-
-    .ig-title span {
-      background: linear-gradient(120deg, var(--vfb-green), var(--vfb-teal));
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .ig-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 12px;
-    }
-
-    .ig-desc strong {
-      color: #111827;
-    }
-
-    .ig-meta-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 12px;
-      color: #4b5563;
-      margin-bottom: 10px;
-    }
-
-    .ig-meta-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .ig-meta-dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 999px;
-      background: #d1d5db;
-    }
-
-    .ig-brand-card {
-      padding: 12px 12px 10px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(226,232,240,0.95);
-      backdrop-filter: blur(14px);
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 12px;
-      margin-top: auto; /* 하단 정렬 */
-    }
-
-    .ig-brand-left {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .ig-brand-name {
-      font-weight: 600;
-      font-size: 13px;
-    }
-
-    .ig-brand-loc {
-      color: #6b7280;
-    }
-
-    .ig-brand-right {
-      text-align: right;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .ig-brand-handle {
-      font-weight: 500;
-    }
-
-    .ig-brand-link a {
-      color: #0f766e;
-      text-decoration: none;
-      font-size: 11px;
-    }
-
-    .ig-brand-link a::after {
-      content: "↗";
-      font-size: 10px;
-      margin-left: 2px;
-    }
-
-    /* ===== Right: Static Instagram Post Grid (2 posts) ===== */
-
-    .ig-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 14px;
-    }
-
-    @media (max-width: 720px) {
-      .ig-grid {
-        grid-template-columns: minmax(0, 1fr);
+      .vfb-sns {
+        position: relative;
+        /* border-radius: var(--radius-xl); */
+        padding: 80px 22px;
+        background: radial-gradient(circle at top left, rgba(78, 185, 151, 0.12), transparent 55%),
+          radial-gradient(circle at bottom right, rgba(246, 199, 94, 0.18), transparent 60%),
+          linear-gradient(135deg, #f9fafb 0%, #f5faf8 40%, #fefcf7 100%);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
       }
-    }
 
-    .ig-post {
-      background: rgba(255,255,255,0.96);
-      border-radius: var(--radius-md);
-      padding: 10px 10px 9px;
-      border: 1px solid rgba(226,232,240,0.95);
-      box-shadow: 0 10px 26px rgba(15,23,42,0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.18s ease;
-    }
+      .vfb-sns::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        /* background: radial-gradient(circle at 15% 10%, rgba(79, 209, 197, 0.25), transparent 55%), radial-gradient(circle at 85% 85%, rgba(248, 250, 252, 0.6), transparent 65%); */
+        opacity: 0.8;
+        pointer-events: none;
+      }
 
-    .ig-post-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 11px;
-    }
+      .vfb-sns__inner {
+        position: relative;
+        z-index: 1;
+      }
 
-    .ig-account-mini {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
+      /* Header */
 
-    .ig-avatar-mini {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 0%,
-        #fef9c3,
-        #f97316 40%,
-        #ec4899 80%
-      );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: #f9fafb;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
+      .vfb-sns__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
 
-    .ig-account-text-mini {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
+      .vfb-sns__header-main {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
 
-    .ig-account-name-mini {
-      font-size: 11px;
-      font-weight: 600;
-    }
+      .vfb-sns__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
 
-    .ig-account-handle-mini {
-      font-size: 10px;
-      color: #6b7280;
-    }
+      .vfb-sns__pill {
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(78, 185, 151, 0.1);
+        border: 1px solid rgba(78, 185, 151, 0.35);
+        color: #047857;
+        font-size: 0.75rem;
+      }
 
-    .ig-pill-mini {
-      font-size: 10px;
-      padding: 3px 7px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.95);
-      color: #f9fafb;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
+      .vfb-sns__dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--vfb-green), var(--vfb-teal));
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.04);
+      }
 
-    .ig-pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%,
-        #facc15,
-        #f97316 40%,
-        #ec4899 75%,
-        #3b82f6 100%
-      );
-    }
+      .vfb-sns__label {
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
 
-    .ig-post-thumb {
-      border-radius: 14px;
-      position: relative;
-      overflow: hidden;
-      /* 4:5 비율 정도 */
-      padding-top: 125%;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+      .vfb-sns__title {
+        margin: 2px 0 4px;
+        font-size: 1.4rem;
+        letter-spacing: -0.03em;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: baseline;
+      }
 
-    .ig-post-thumb::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(15,23,42,0.7), transparent 45%);
-      opacity: 0.55;
-      pointer-events: none;
-    }
+      .vfb-sns__title span.brand {
+        font-weight: 700;
+      }
 
-    /* 각 카드별 썸네일 이미지는 여기에서 교체 */
-    .ig-post-thumb--1 {
-      /* 예: background-image: url("/images/ig-lao-best1.jpg"); */
-      background-image: linear-gradient(135deg, #f97316, #b91c1c);
-    }
+      .vfb-sns__title span.suffix {
+        font-size: 1.02rem;
+        color: var(--muted);
+        font-weight: 500;
+      }
 
-    .ig-post-thumb--2 {
-      /* 예: background-image: url("/images/ig-lao-best2.jpg"); */
-      background-image: linear-gradient(135deg, #06b6d4, #0f172a);
-    }
+      .vfb-sns__sub {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.7;
+      }
 
-    .ig-thumb-label {
-      position: absolute;
-      left: 10px;
-      bottom: 8px;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      color: #fefce8;
-      font-size: 11px;
-    }
+      .vfb-sns__meta {
+        font-size: 0.8rem;
+        color: var(--muted);
+        padding: 10px 12px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 210px;
+      }
 
-    .ig-thumb-label strong {
-      font-size: 12px;
-      font-weight: 700;
-    }
+      .vfb-sns__meta strong {
+        font-size: 0.84rem;
+        color: var(--ink);
+      }
 
-    .ig-thumb-stat {
-      position: absolute;
-      right: 10px;
-      bottom: 8px;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 7px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.7);
-      color: #f9fafb;
-      font-size: 10px;
-    }
+      .vfb-sns__handle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 2px;
+      }
 
-    .ig-post-caption {
-      font-size: 11px;
-      color: #111827;
-      line-height: 1.5;
-    }
+      .vfb-sns__handle-tag {
+        font-size: 0.78rem;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: #eef2ff;
+        color: #4338ca;
+        border: 1px solid rgba(129, 140, 248, 0.5);
+      }
 
-    .ig-post-caption span.highlight {
-      background: linear-gradient(120deg, var(--vfb-green), var(--vfb-teal));
-      -webkit-background-clip: text;
-      color: transparent;
-    }
+      /* Layout: Left Featured (Reels) · Right Grid (Posts) */
 
-    .ig-post-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 10px;
-      color: #6b7280;
-      margin-top: 2px;
-    }
+      .vfb-sns__layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: 18px;
+      }
 
-    .ig-post-meta-left {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
+      /* Left: Featured Reels capture */
 
-    .ig-time-dot {
-      width: 3px;
-      height: 3px;
-      border-radius: 999px;
-      background: #d1d5db;
-    }
+      .vfb-sns__featured {
+        border-radius: var(--radius-md);
+        background: #ffffff;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: var(--shadow-card);
+        padding: 10px 10px 12px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: 10px;
+      }
 
-    .ig-tag-pill {
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.04);
-      font-size: 10px;
-    }
+      .vfb-sns__featured-media {
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        background: #fefce8;
+      }
 
-    .ig-post-link {
-      text-decoration: none;
-      color: inherit;
-    }
+      .vfb-sns__featured-media::after {
+        content: "Reels Highlight";
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.86);
+        color: #f9fafb;
+        font-size: 0.7rem;
+      }
 
-    .ig-post-link:hover .ig-post {
-      border-color: rgba(148,163,184,0.9);
-      box-shadow: 0 14px 36px rgba(15,23,42,0.14);
-      transform: translateY(-2px);
-    }
-  </style>
-</head>
-<body>
-  <div class="shell">
-    <section class="ig-section" aria-labelledby="ig-static-title">
-      <div class="ig-inner">
-        <!-- Left: Text / brand explanation (brand card bottom-aligned) -->
-        <div class="ig-left">
-          <div>
-            <!-- <div class="ig-badge">
-              <span class="ig-badge-dot"></span>
-              VFB INSTAGRAM
-            </div> -->
-            <p class="ig-subtitle">
-              라오충칭훠궈 · Instagram Best Posts
-            </p>
+      .vfb-sns__featured-media img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
 
-            <h2 id="ig-static-title" class="ig-title">
-              베스트 샷으로 보는 <span>라오충칭훠궈의 분위기</span>
-            </h2>
+      .vfb-sns__featured-body {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
 
-            <p class="ig-desc">
-              <strong>라오충칭훠궈</strong> 인스타그램 피드에서 반응이 좋았던 사진과 릴스 가운데  
-              매장의 공간, 테이블 셋팅, 시그니처 메뉴를 보여주는 컷만 골라 담았습니다.  
-              실제 계정에서는 계절별 메뉴와 이벤트 소식이 조금 더 빠르게 업데이트됩니다.
-            </p>
+      .vfb-sns__featured-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
 
-            <div class="ig-meta-list">
-              <div class="ig-meta-item">
-                <span class="ig-meta-dot"></span>
-                공간·메뉴·무드를 대표하는 베스트 포스트 2선
+      .vfb-sns__featured-text {
+        font-size: 0.8rem;
+        line-height: 1.7;
+      }
+
+      .vfb-sns__featured-note {
+        margin-top: auto;
+        font-size: 0.77rem;
+        color: #9ca3af;
+      }
+
+      /* Right: Simple Grid (Posts) */
+
+      .vfb-sns__grid {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 10px;
+      }
+
+      .vfb-sns__grid-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+      }
+
+      .vfb-sns__grid-label {
+        font-weight: 500;
+        color: #4b5563;
+      }
+
+      .vfb-sns__grid-main {
+        border-radius: var(--radius-md);
+        background: #ffffff;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        padding: 8px;
+        box-shadow: var(--shadow-card);
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      .vfb-sns__grid-item {
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        background: #f3f4f6;
+        cursor: default;
+        transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+        border: 1px solid transparent;
+      }
+
+      .vfb-sns__grid-item:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 22px rgba(15, 23, 42, 0.18);
+        border-color: rgba(148, 163, 184, 0.9);
+      }
+
+      .vfb-sns__grid-item img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .vfb-sns__grid-item-label {
+        position: absolute;
+        left: 7px;
+        bottom: 7px;
+        padding: 3px 6px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.82);
+        color: #e5e7eb;
+        font-size: 0.68rem;
+      }
+
+      /* Footer CTA */
+
+      .vfb-sns__footer {
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .vfb-sns__footer-note {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+      }
+
+      .vfb-sns__footer-note strong {
+        color: #4b5563;
+      }
+
+      .vfb-sns__btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .vfb-sns__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        text-decoration: none;
+        border: 1px solid transparent;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+      }
+
+      .vfb-sns__btn-primary {
+        background: linear-gradient(135deg, #18181b, #020617);
+        color: #f9fafb;
+        border-color: #111827;
+      }
+
+      .vfb-sns__btn-primary:hover {
+        transform: translateY(-1px);
+        background: linear-gradient(135deg, #020617, #020617);
+      }
+
+      .vfb-sns__btn-outline {
+        background: #ffffff;
+        color: #374151;
+        border-color: rgba(148, 163, 184, 0.8);
+      }
+
+      .vfb-sns__btn-outline:hover {
+        background: #f9fafb;
+        transform: translateY(-1px);
+      }
+
+      .vfb-sns__btn-icon {
+        font-size: 0.95rem;
+      }
+
+      /* Responsive */
+
+      @media (max-width: 1024px) {
+        body {
+          padding: 32px 12px 54px;
+        }
+
+        .vfb-sns__featured {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 840px) {
+        .vfb-sns__layout {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .vfb-sns {
+          padding: 20px 14px 22px;
+        }
+
+        .vfb-sns__title {
+          font-size: 1.2rem;
+        }
+
+        .vfb-sns__meta {
+          width: 100%;
+        }
+
+        .vfb-sns__grid-main {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <!-- Our Brands > Lao Chongqing Hotpot > SNS / Instagram 섹션 -->
+      <section class="vfb-sns" id="brand-sns">
+        <div class="vfb-sns__inner">
+          <header class="vfb-sns__header">
+            <div class="vfb-sns__header-main">
+              <div class="vfb-sns__eyebrow">
+                <span class="vfb-sns__pill">Our Brands</span>
+                <span class="vfb-sns__dot"></span>
+                <!-- [EDIT] 템플릿: 브랜드명 변경 -->
+                <span class="vfb-sns__label">LAO CHONGQING HOTPOT · INSTAGRAM</span>
               </div>
-              <div class="ig-meta-item">
-                <span class="ig-meta-dot"></span>
-                이미지 교체만으로 쉽게 업데이트 가능한 스테틱 섹션
+              <h2 class="vfb-sns__title">
+                <!-- [EDIT] 브랜드 한글명 -->
+                <span class="brand">라오충칭훠궈</span>
+                <span class="suffix">Instagram</span>
+              </h2>
+              <p class="vfb-sns__sub">
+                테이블 위 김과 조명, 한 숟갈의 라오유, 그리고 손님들의 순간까지. 리얼스와 피드를 통해 라오충칭훠궈의 분위기를 가장 생생하게
+                전해드립니다. 시즌 한정 메뉴와 매장 소식도 인스타그램에서 가장 먼저 만나보세요.
+              </p>
+            </div>
+            <aside class="vfb-sns__meta" style="width: 100%;">
+              <!-- [EDIT] 인스타그램 계정명 -->
+              <div>
+                <strong>Official Account</strong> @laochongqing_hotpot
               </div>
-              <div class="ig-meta-item">
-                <span class="ig-meta-dot"></span>
-                각 카드 클릭 시 실제 인스타그램 게시물로 이동하도록 링크 설정 가능
+              <span>운영 시간 변경, 신규 메뉴, 이벤트 공지는 공식 인스타그램 스토리와 피드를 통해 안내됩니다.</span>
+              <!-- [EDIT] 인스타그램 계정명 -->
+              <!-- <strong>Official Account</strong>
+              <div class="vfb-sns__handle">
+                <span class="vfb-sns__handle-tag">@laochongqing_hotpot</span>
+              </div>
+              <span>운영 시간 변경, 신규 메뉴, 이벤트 공지는 공식 인스타그램 스토리와 피드를 통해 안내됩니다.</span> -->
+            </aside>
+          </header>
+
+          <div class="vfb-sns__layout">
+            <!-- LEFT: Featured Reels (세로형 캡처 이미지 활용) -->
+            <article class="vfb-sns__featured">
+              <div class="vfb-sns__featured-media">
+                <!-- [EDIT] 리얼스 캡처 이미지로 교체 -->
+                <img
+                  src="https://placehold.co/640x900/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot"
+                  alt="라오충칭훠궈 인스타그램 리얼스 캡처 이미지"
+                  loading="lazy"
+                />
+              </div>
+              <div class="vfb-sns__featured-body">
+                <h3 class="vfb-sns__featured-title">한 냄비 위에서 시작되는 오늘의 이야기</h3>
+                <p class="vfb-sns__featured-text">
+                  보글거리는 마라 육수, 부드러운 백탕, 정성껏 준비한 라오유와 재료들이 동영상 안에서 천천히 펼쳐집니다. 인스타그램 리얼스에서는
+                  라오충칭훠궈 테이블의 온도감과 움직임을 짧지만 인상적인 장면들로 담아냅니다. 집에서도, 길 위에서도 브랜드의 공기를 느껴볼 수 있도록
+                  구성했습니다.
+                </p>
+                <p class="vfb-sns__featured-note">
+                  이 영역에는 대표 리얼스 또는 브랜드 무드를 잘 보여주는 세로형(9:16) 캡처 이미지를 배치하는 것을 권장합니다.
+                </p>
+              </div>
+            </article>
+
+            <!-- RIGHT: Posts Grid (피드용 이미지 4컷) -->
+            <div class="vfb-sns__grid">
+              <div class="vfb-sns__grid-header">
+                <span class="vfb-sns__grid-label" style="font-weight: bold;">Feed Highlights</span>
+              </div>
+              <div class="vfb-sns__grid-main">
+                <!-- [EDIT] 게시물 캡처 이미지로 교체 -->
+                <div class="vfb-sns__grid-item">
+                  <img src="https://placehold.co/400x400/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot" alt="테이블 위 훠궈와 재료들" loading="lazy" />
+                  <span class="vfb-sns__grid-item-label">Hotpot Table</span>
+                </div>
+                <div class="vfb-sns__grid-item">
+                  <img src="https://placehold.co/400x400/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot" alt="라오유와 소스 바" loading="lazy" />
+                  <span class="vfb-sns__grid-item-label">Lao You &amp; Sauce Bar</span>
+                </div>
+                <div class="vfb-sns__grid-item">
+                  <img
+                    src="https://placehold.co/400x400/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot"
+                    alt="매장 내부 조명과 좌석 분위기"
+                    loading="lazy"
+                  />
+                  <span class="vfb-sns__grid-item-label">Store Mood</span>
+                </div>
+                <div class="vfb-sns__grid-item">
+                  <img
+                    src="https://placehold.co/400x400/F1BF86/FFFFFF/png?text==Lao+Chongqing+Hotpot"
+                    alt="수제 완자와 재료 클로즈업"
+                    loading="lazy"
+                  />
+                  <span class="vfb-sns__grid-item-label">Handmade Bites</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="ig-brand-card">
-            <div class="ig-brand-left">
-              <div class="ig-brand-name">라오충칭훠궈 Lao Chongqing Hotpot</div>
-              <div class="ig-brand-loc">동탄 · 충칭 스타일 훠궈 전문</div>
+          <footer class="vfb-sns__footer">
+            <div class="vfb-sns__footer-note">
+              <strong>브랜드의 지금을 가장 빨리 확인하는 창</strong>
+              <span>실제 운영 시에는 이 영역을 인스타그램 연동 위젯 또는 주기적으로 교체되는 피드 캡처 이미지로 활용할 수 있습니다.</span>
             </div>
-            <div class="ig-brand-right">
-              <div class="ig-brand-handle">@laochongqing</div>
-              <div class="ig-brand-link">
-                <a href="https://www.instagram.com/laochongqing/" target="_blank" rel="noopener noreferrer">
-                  인스타그램 계정으로 이동
-                </a>
-              </div>
+            <div class="vfb-sns__btn-row">
+              <!-- [EDIT] 실제 인스타그램 URL로 교체 -->
+              <a href="https://www.instagram.com/" class="vfb-sns__btn vfb-sns__btn-primary" target="_blank" rel="noreferrer">
+                <span class="vfb-sns__btn-icon">📷</span>
+                <span>공식 인스타그램 바로가기</span>
+              </a>
+              <a href="#" class="vfb-sns__btn vfb-sns__btn-outline">
+                <span class="vfb-sns__btn-icon">✨</span>
+                <span>@laochongqing_hotpot 해시태그 보기</span>
+              </a>
             </div>
-          </div>
+          </footer>
         </div>
+      </section>
 
-        <!-- Right: Static best post cards (2 posts) -->
-        <div class="ig-grid">
-          <!-- Post 1 -->
-          <a class="ig-post-link" href="#" target="_blank" rel="noopener noreferrer">
-            <article class="ig-post">
-              <header class="ig-post-header">
-                <div class="ig-account-mini">
-                  <div class="ig-avatar-mini">LC</div>
-                  <div class="ig-account-text-mini">
-                    <div class="ig-account-name-mini">라오충칭훠궈</div>
-                    <div class="ig-account-handle-mini">@laochongqing</div>
-                  </div>
-                </div>
-                <div class="ig-pill-mini">
-                  <span class="ig-pill-dot"></span>
-                  Feed Highlight
-                </div>
-              </header>
+      <section class="vfb-sns" id="brand-sns">
+        <div class="vfb-sns__inner">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita, itaque quos! Earum, voluptatibus distinctio? Error perferendis reprehenderit hic aliquam magnam, voluptatibus dolorem velit sit saepe distinctio magni, veritatis nulla culpa.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita, itaque quos! Earum, voluptatibus distinctio? Error perferendis reprehenderit hic aliquam magnam, voluptatibus dolorem velit sit saepe distinctio magni, veritatis nulla culpa.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita, itaque quos! Earum, voluptatibus distinctio? Error perferendis reprehenderit hic aliquam magnam, voluptatibus dolorem velit sit saepe distinctio magni, veritatis nulla culpa.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita, itaque quos! Earum, voluptatibus distinctio? Error perferendis reprehenderit hic aliquam magnam, voluptatibus dolorem velit sit saepe distinctio magni, veritatis nulla culpa.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita, itaque quos! Earum, voluptatibus distinctio? Error perferendis reprehenderit hic aliquam magnam, voluptatibus dolorem velit sit saepe distinctio magni, veritatis nulla culpa.
 
-              <div class="ig-post-thumb ig-post-thumb--1">
-                <div class="ig-thumb-label">
-                  <strong>오늘 저녁, 훠궈 몇 시야?</strong>
-                  <span>홍등 아래 완성된 테이블 셋팅</span>
-                </div>
-                <div class="ig-thumb-stat">❤️ 1,2k+</div>
-              </div>
-
-              <p class="ig-post-caption">
-                홍등 불빛 아래 뜨거운 훠궈 한 상.  
-                약속이 <span class="highlight">라오충칭훠궈</span>라면,  
-                오늘은 이미 좋은 날입니다.
-              </p>
-              <div class="ig-post-meta">
-                <div class="ig-post-meta-left">
-                  <span>피드 포스트</span>
-                  <span class="ig-time-dot"></span>
-                  <span>대표 무드컷</span>
-                </div>
-                <span class="ig-tag-pill">#오늘은이미좋은날</span>
-              </div>
-            </article>
-          </a>
-
-          <!-- Post 2 -->
-          <a class="ig-post-link" href="#" target="_blank" rel="noopener noreferrer">
-            <article class="ig-post">
-              <header class="ig-post-header">
-                <div class="ig-account-mini">
-                  <div class="ig-avatar-mini">LC</div>
-                  <div class="ig-account-text-mini">
-                    <div class="ig-account-name-mini">라오충칭훠궈</div>
-                    <div class="ig-account-handle-mini">@laochongqing</div>
-                  </div>
-                </div>
-                <div class="ig-pill-mini">
-                  <span class="ig-pill-dot"></span>
-                  Reels Highlight
-                </div>
-              </header>
-
-              <div class="ig-post-thumb ig-post-thumb--2">
-                <div class="ig-thumb-label">
-                  <strong>라오유 한 숟갈의 순간</strong>
-                  <span>수프 위로 붓는 라오유 스위링</span>
-                </div>
-                <div class="ig-thumb-stat">▶ 8.4k</div>
-              </div>
-
-              <p class="ig-post-caption">
-                끓는 수프 위에 천천히 돌려 붓는 라오유.  
-                한 숟갈의 라오유는 <span class="highlight">하나의 문화</span>입니다.
-              </p>
-              <div class="ig-post-meta">
-                <div class="ig-post-meta-left">
-                  <span>릴스 · 0:09</span>
-                  <span class="ig-time-dot"></span>
-                  <span>라오유 하이라이트</span>
-                </div>
-                <span class="ig-tag-pill">#라오유 #훠궈영상</span>
-              </div>
-            </article>
-          </a>
         </div>
-      </div>
-    </section>
-  </div>
-</body>
+      </section>
+    </main>
+  </body>
 </html>
