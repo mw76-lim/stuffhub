@@ -123,7 +123,7 @@
         padding: 80px 16px;
         color: #0f172a;
         background: radial-gradient(circle at 0% 100%, rgba(179, 38, 30, 0.12) 0, transparent 20%);
-        opacity: 0.7;
+        /* opacity: 0.7; */
       }
 
       .vfb-brand-story-split__inner {
@@ -325,7 +325,7 @@
         overflow: hidden;
         
         background: radial-gradient(circle at 0% 0%, rgba(179, 38, 30, 0.12) 0, transparent 20%), radial-gradient(circle at 100% 100%, rgba(246, 199, 94, 0.18) 0, transparent 60%);
-        opacity: 0.7;
+        /* opacity: 0.7; */
       }
 
       .brand-menu::before {
@@ -681,9 +681,8 @@
         box-shadow: var(--shadow-soft);
         position: relative;
         overflow: hidden;
-        background: radial-gradient(circle at 0% 0%, rgba(78, 185, 151, 0.14) 0, transparent 55%),
-          radial-gradient(circle at 100% 100%, rgba(250, 204, 21, 0.16) 0, transparent 60%);
-        opacity: 0.7;
+        background: radial-gradient(circle at 0% 0%, rgba(78, 185, 151, 0.14) 0, transparent 55%), radial-gradient(circle at 100% 100%, rgba(250, 204, 21, 0.16) 0, transparent 60%);
+        /* opacity: 0.7; */
       }
 
       .brand-locations::before {
@@ -1921,13 +1920,13 @@
                   <span class="store-tab-badge">1호점</span>
                   <span>동탄점</span>
                 </button>
-                <button class="store-tab" data-store-id="pangyo">
+                <button class="store-tab" data-store-id="soon3" style="cursor: default; pointer-events: none; opacity: 0.6;">
                   <span class="store-tab-badge">2호점</span>
-                  <span>판교점</span>
-                </button>
-                <button class="store-tab" data-store-id="soon3">
-                  <span class="store-tab-badge">3호점</span>
                   <span>Coming Soon</span>
+                </button>
+                <button class="store-tab" data-store-id="pangyo">
+                  <span class="store-tab-badge">3호점</span>
+                  <span>판교점</span>
                 </button>
               </div>
 
@@ -2137,7 +2136,7 @@
               </h2>
             </div>
           </header>
-          <div style="height: 400px;">
+          <div style="height: 700px;">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nesciunt quam cupiditate odit doloremque harum eaque illo accusamus, fugit magnam officiis sequi eos similique voluptatibus quaerat labore dolores, optio consequuntur.
           </div>
         </div>
@@ -2181,7 +2180,7 @@
       /**********************
        * 페이지 세팅
        * *********************/
-      const storeData = {
+      const tmpData = {
         dongtan: {
           label: "CURRENT LOCATION",
           title: "라오충칭훠궈 동탄점",
@@ -2299,6 +2298,48 @@
               type: "store",
               label: "3호점 무드 스케치",
               src: "https://placehold.co/800x480/111827/E5E7EB/png?text=3rd+Branch+Sketch",
+            },
+          ],
+        },
+      };
+      const storeData = {
+        dongtan: {
+          label: "CURRENT LOCATION",
+          title: "라오충칭훠궈 동탄점",
+          branch: "1호점 · Dongtan",
+          sub: "따뜻한 조명, 깊이 있는 육수, 정통 충칭 스타일의 라오유로 완성되는 " + "라오충칭훠궈의 첫 번째 플래그십 매장입니다.",
+          address: "경기 화성시 동탄반석로 172 149,150호",
+          hours: "",
+          contact: "123-4567-8900<br />" + "예약 및 단체 문의는 전화로 먼저 상담해 주세요.",
+          tel: "123456789",
+          bookingUrl:
+            "https://m.place.naver.com/restaurant/1028459468/booking",
+          bookingDesc:
+            "자차 이용시 동탄 파라곤 지하주차장에 주차하신 뒤" +
+            "103동 엘리베이터를 이용하여 1층으로 올라오시면" +
+            "'라오충칭훠궈' 입구가 보입니다.",
+          mapMainHref: "https://naver.me/G6Q6QU5p",
+          mapSubHref: "https://kko.kakao.com/DbIUYOrcwm",
+          images: [
+            {
+              type: "map",
+              label: "동탄점 위치 안내",
+              src: "https://placehold.co/800x480/F3F4F6/9CA3AF/png?text=Dongtan+Location+Map",
+            },
+            {
+              type: "store",
+              label: "홀 내부 전경",
+              src: "https://placehold.co/800x480/111827/F9FAFB/png?text=Dongtan+Hall+Interior",
+            },
+            {
+              type: "store",
+              label: "테이블 & 라오유",
+              src: "https://placehold.co/800x480/7F1D1D/FEE2E2/png?text=Table+%26+Lao+You",
+            },
+            {
+              type: "store",
+              label: "메인 훠궈 세팅",
+              src: "https://placehold.co/800x480/0F172A/F9FAFB/png?text=Main+Hotpot+Setting",
             },
           ],
         },
