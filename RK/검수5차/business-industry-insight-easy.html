@@ -709,6 +709,1265 @@
         max-width: none;
       }
     }
+
+    /* 섹션1 – 완전 시각화용 레이아웃 보정 */
+.trend-layout-visualized {
+  align-items: stretch;
+}
+
+/* 왼쪽 비주얼 패널 */
+.trend-visual-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 인더스트리 맵 전체 박스 */
+.industry-map {
+  margin-top: 8px;
+  border-radius: 14px;
+  position: relative;
+  padding: 16px 16px 18px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(191, 219, 254, 0.35), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.4), transparent 60%),
+    linear-gradient(135deg, #020617, #0b1220);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  overflow: hidden;
+  min-height: 210px;
+}
+
+/* FAB 중앙 블록 */
+.industry-fab {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 54%;
+  max-width: 260px;
+  border-radius: 14px;
+  background: radial-gradient(circle at top, #111827, #020617);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  padding: 12px 12px 10px;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.7);
+}
+
+.fab-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: #e5e7eb;
+  opacity: 0.9;
+}
+
+.fab-label::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #60a5fa, #2563eb);
+}
+
+.fab-wafer {
+  margin: 8px auto 8px;
+  width: 70px;
+  height: 70px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(248, 250, 252, 0.9), transparent 60%),
+    conic-gradient(
+      from 0deg,
+      #38bdf8,
+      #4f46e5,
+      #22c55e,
+      #f97316,
+      #38bdf8
+    );
+  opacity: 0.95;
+  position: relative;
+}
+
+.fab-wafer::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(1px);
+}
+
+.fab-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.fab-tool-chip {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  color: #e5e7eb;
+}
+
+/* 상단/좌측/우측 태그 공통 */
+.map-tag {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 150px;
+}
+
+.map-tag-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #bfdbfe;
+}
+
+.map-tag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.map-chip {
+  font-size: 0.7rem;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  color: #e5e7eb;
+}
+
+/* 태그 위치 지정 */
+.map-tag-process {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.map-tag-materials {
+  left: 12px;
+  bottom: 22px;
+}
+
+.map-tag-supply {
+  right: 12px;
+  bottom: 22px;
+}
+
+/* RK Focus 영역 */
+.industry-rk-focus {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.rk-pill-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(191, 219, 254, 0.9);
+}
+
+.rk-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.rk-pill {
+  font-size: 0.7rem;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(96, 165, 250, 0.9);
+  color: #e5e7eb;
+}
+
+/* 오른쪽 트렌드 카드 – 시각화 버전 */
+.trend-grid-visual {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (min-width: 880px) {
+  .trend-grid-visual {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+.trend-card-visual {
+  padding: 13px 13px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.trend-card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.trend-card-tagline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trend-mini-pill {
+  font-size: 0.68rem;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4b5fc8;
+  border: 1px solid rgba(129, 140, 248, 0.6);
+}
+
+.trend-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.trend-card-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.trend-card-sub {
+  margin: 2px 0 0;
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+/* 트렌드 키워드 칩 */
+.trend-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.trend-chip {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #f3f4ff;
+  border: 1px solid rgba(19, 43, 136, 0.16);
+  color: #4b5563;
+}
+
+/* Insight 툴팁 */
+.trend-tooltip-trigger {
+  margin-top: 3px;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  color: #6b7280;
+  position: relative;
+  cursor: default;
+}
+
+.trend-info-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #60a5fa, #2563eb);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.trend-info-label {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.trend-tooltip {
+  position: absolute;
+  left: 0;
+  top: 170%;
+  min-width: 220px;
+  max-width: 280px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-size: 0.74rem;
+  line-height: 1.6;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.8);
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out;
+  z-index: 5;
+}
+
+.trend-tooltip::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  background: #0f172a;
+  border-left: 1px solid rgba(148, 163, 184, 0.8);
+  border-top: 1px solid rgba(148, 163, 184, 0.8);
+  transform: rotate(45deg);
+}
+
+.trend-tooltip-trigger:hover .trend-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 반응형 보정 */
+@media (max-width: 960px) {
+  .industry-map {
+    min-height: 230px;
+  }
+  .map-tag-process {
+    top: 8px;
+  }
+  .map-tag-materials,
+  .map-tag-supply {
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .industry-map {
+    padding: 14px 12px 18px;
+  }
+  .industy-fab {
+    width: 60%;
+  }
+}
+
+/* 섹션2 – 가치 축 맵 레이아웃 */
+.value-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.75fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.value-visual {
+  border-radius: var(--radius-md);
+  background: linear-gradient(145deg, #0f172a, #111827);
+  color: #e5e7eb;
+  padding: 14px 14px 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.45);
+}
+
+.value-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #bfdbfe;
+  margin-bottom: 4px;
+}
+
+.value-title {
+  font-size: 0.96rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.value-note {
+  font-size: 0.78rem;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+
+/* 레이더/삼각 맵 */
+.value-radar {
+  position: relative;
+  border-radius: 14px;
+  padding: 18px 12px 20px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(191, 219, 254, 0.25), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.35), transparent 60%),
+    radial-gradient(circle at 50% 120%, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.94));
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  min-height: 210px;
+  overflow: hidden;
+}
+
+/* 내부 삼각형 */
+.radar-triangle {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(248, 250, 252, 0.2), transparent 60%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  opacity: 0.5;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.5);
+  border-left: 1px solid rgba(148, 163, 184, 0.35);
+  border-right: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+/* 중심 포인트 */
+.radar-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(248, 250, 252, 0.95), transparent 60%),
+    linear-gradient(135deg, #38bdf8, #4f46e5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 6px rgba(15, 23, 42, 0.8);
+}
+
+.radar-center-label {
+  font-size: 0.72rem;
+  text-align: center;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* 각 축 공통 스타일 */
+.radar-axis {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+}
+
+/* 축별 위치 */
+.radar-axis-1 {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
+  align-items: center;
+}
+
+.radar-axis-2 {
+  bottom: 12px;
+  left: 6px;
+}
+
+.radar-axis-3 {
+  bottom: 12px;
+  right: 6px;
+}
+
+/* 축 포인트 */
+.radar-axis-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #60a5fa, #2563eb);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.3);
+}
+
+/* 축 라벨 */
+.radar-axis-label {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  padding: 6px 8px;
+  max-width: 150px;
+}
+
+.radar-axis-tag {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(191, 219, 254, 0.9);
+}
+
+.radar-axis-label strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8rem;
+  color: #e5e7eb;
+}
+
+.radar-axis-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.radar-chip {
+  font-size: 0.68rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  color: #e5e7eb;
+}
+
+/* 오른쪽 카드 – 키워드 중심 스타일 */
+.value-pill-grid {
+  margin-top: 0;
+}
+
+.value-pill {
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.pill-sub {
+  margin: 3px 0 6px;
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+.pill-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pill-chip {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(19, 43, 136, 0.16);
+  color: #4b5563;
+}
+
+/* Insight 툴팁 (섹션1과 톤 맞춤) */
+.pill-tooltip-trigger {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  color: #6b7280;
+  position: relative;
+  cursor: default;
+}
+
+.pill-info-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #4f46e5, #1d4ed8);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+}
+
+.pill-info-label {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.pill-tooltip {
+  position: absolute;
+  left: 0;
+  top: 170%;
+  min-width: 220px;
+  max-width: 280px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-size: 0.74rem;
+  line-height: 1.6;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.8);
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out;
+  z-index: 5;
+}
+
+.pill-tooltip::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  background: #0f172a;
+  border-left: 1px solid rgba(148, 163, 184, 0.8);
+  border-top: 1px solid rgba(148, 163, 184, 0.8);
+  transform: rotate(45deg);
+}
+
+.pill-tooltip-trigger:hover .pill-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 반응형 */
+@media (max-width: 960px) {
+  .value-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .value-radar {
+    min-height: 220px;
+  }
+}
+
+/* 섹션3 – Value Chain 시각화 레이아웃 */
+.chain-layout-visual {
+  align-items: stretch;
+}
+
+/* 왼쪽 플로우 패널 */
+.chain-visual-panel {
+  background: linear-gradient(145deg, #020617, #0b1120);
+  padding: 14px 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.45);
+}
+
+.vc-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #bfdbfe;
+  margin-bottom: 4px;
+}
+
+.vc-title {
+  font-size: 0.96rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #e5e7eb;
+}
+
+.vc-note {
+  font-size: 0.78rem;
+  color: #cbd5f5;
+  opacity: 0.95;
+  margin-bottom: 12px;
+}
+
+/* Value Chain 메인 밴드 */
+.vc-band {
+  position: relative;
+  border-radius: 14px;
+  padding: 18px 12px 20px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(191, 219, 254, 0.3), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.4), transparent 60%),
+    linear-gradient(135deg, #020617, #020617);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  overflow: hidden;
+  min-height: 220px;
+}
+
+/* 중앙 플로우 라인 */
+.vc-flow-line {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, #60a5fa, #4f46e5, #22c55e);
+  opacity: 0.7;
+}
+
+/* 흐름 세그먼트 공통 */
+.vc-segment {
+  position: relative;
+  z-index: 1;
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  padding: 8px 9px 9px;
+  font-size: 0.76rem;
+  color: #e5e7eb;
+  max-width: 220px;
+}
+
+/* 세그먼트 위치 */
+.vc-segment-up {
+  position: absolute;
+  top: 12%;
+  left: 8%;
+}
+
+.vc-segment-mid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.85);
+}
+
+.vc-segment-down {
+  position: absolute;
+  bottom: 12%;
+  right: 8%;
+}
+
+/* 세그먼트 헤더 */
+.vc-segment-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.vc-step {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  background: radial-gradient(circle, #60a5fa, #2563eb);
+  color: #0f172a;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.vc-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.vc-sub {
+  font-size: 0.7rem;
+  color: #cbd5f5;
+}
+
+/* 세그먼트 키워드 */
+.vc-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.vc-chip {
+  font-size: 0.68rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  color: #e5e7eb;
+}
+
+/* Role / RK Core 표시 */
+.vc-focus {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  font-size: 0.68rem;
+}
+
+.vc-focus-light .vc-focus-chip {
+  border-color: rgba(191, 219, 254, 0.85);
+}
+
+.vc-focus-label {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(191, 219, 254, 0.9);
+}
+
+.vc-focus-chip {
+  font-size: 0.68rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(125, 211, 252, 0.9);
+  background: rgba(15, 23, 42, 0.95);
+}
+
+/* RK Position 설명 */
+.vc-rk-tag {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 0.72rem;
+  color: #cbd5f5;
+}
+
+.vc-rk-tag p {
+  margin: 4px 0 0;
+}
+
+.vc-rk-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  background: #f97316;
+  color: #0f172a;
+}
+
+/* 오른쪽 카드 – 키워드 중심 */
+.chain-grid-visual {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 0;
+}
+
+@media (min-width: 880px) {
+  .chain-grid-visual {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+.chain-card {
+  background: #f9fafb;
+  border-radius: var(--radius-md);
+  border: 1px solid #e5e7eb;
+  padding: 12px 13px 11px;
+  font-size: 0.8rem;
+  color: #4b5563;
+  box-shadow: 0 10px 24px rgba(148, 163, 184, 0.4);
+}
+
+.chain-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.chain-card-badge {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: #ffffff;
+}
+
+.chain-card-badge.upstream {
+  background: #0ea5e9;
+}
+
+.chain-card-badge.midstream {
+  background: #4f46e5;
+}
+
+.chain-card-badge.downstream {
+  background: #22c55e;
+}
+
+.chain-card-sub {
+  margin: 2px 0 6px;
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+.chain-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.chain-chip {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(19, 43, 136, 0.16);
+  color: #4b5563;
+}
+
+/* Insight 툴팁 – 섹션1·2와 톤 맞춤 */
+.chain-tooltip-trigger {
+  margin-top: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  color: #6b7280;
+  position: relative;
+  cursor: default;
+}
+
+.chain-info-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #60a5fa, #2563eb);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
+
+.chain-info-label {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.chain-tooltip {
+  position: absolute;
+  left: 0;
+  top: 170%;
+  min-width: 220px;
+  max-width: 300px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-size: 0.74rem;
+  line-height: 1.6;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.8);
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out;
+  z-index: 5;
+}
+
+.chain-tooltip::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  background: #0f172a;
+  border-left: 1px solid rgba(148, 163, 184, 0.8);
+  border-top: 1px solid rgba(148, 163, 184, 0.8);
+  transform: rotate(45deg);
+}
+
+.chain-tooltip-trigger:hover .chain-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 반응형 보정 */
+@media (max-width: 960px) {
+  .chain-grid-visual {
+    margin-top: 8px;
+  }
+  .vc-band {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 640px) {
+  .vc-band {
+    padding: 16px 10px 22px;
+  }
+}
+
+/* 섹션4 – Q&A 레이아웃 */
+.qa-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.qa-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qa-column-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.qa-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.qa-badge-q {
+  background: #e0e7ff;
+  color: #132b88;
+}
+
+.qa-badge-a {
+  background: #132b88;
+}
+
+.qa-title {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.qa-sub {
+  margin: 1px 0 0;
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+/* 말풍선 공통 */
+.qa-bubble {
+  border-radius: 14px;
+  padding: 10px 11px 10px;
+  font-size: 0.8rem;
+  position: relative;
+  border: 1px solid #e5e7eb;
+}
+
+.qa-bubble-q {
+  background: #f9fafb;
+}
+
+.qa-bubble-a {
+  background: #f3f4ff;
+  border-color: rgba(19, 43, 136, 0.18);
+}
+
+.qa-bubble-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.qa-bubble-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #9ca3af;
+}
+
+.qa-bubble-text {
+  margin: 2px 0 6px;
+  font-size: 0.8rem;
+  color: #111827;
+  line-height: 1.6;
+}
+
+/* Q/A 태그 */
+.qa-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.qa-tag {
+  font-size: 0.7rem;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.qa-tag-soft {
+  background: #ffffff;
+  border: 1px solid rgba(19, 43, 136, 0.16);
+}
+
+/* A 컬럼 – Response 헤더 */
+.qa-response-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.qa-response-pill {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: #ffffff;
+}
+
+.qa-response-pill.process {
+  background: #2563eb;
+}
+.qa-response-pill.integration {
+  background: #0ea5e9;
+}
+.qa-response-pill.tco {
+  background: #f97316;
+}
+.qa-response-pill.region {
+  background: #22c55e;
+}
+
+.qa-response-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Detail 툴팁 – Q 컬럼용 */
+.qa-tooltip-trigger {
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  color: #6b7280;
+  position: relative;
+  cursor: default;
+}
+
+.qa-info-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #4f46e5, #1d4ed8);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+}
+
+.qa-info-label {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.qa-tooltip {
+  position: absolute;
+  left: 0;
+  top: 170%;
+  min-width: 220px;
+  max-width: 280px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-size: 0.74rem;
+  line-height: 1.6;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.8);
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.18s ease-out;
+  z-index: 5;
+}
+
+.qa-tooltip::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  background: #0f172a;
+  border-left: 1px solid rgba(148, 163, 184, 0.8);
+  border-top: 1px solid rgba(148, 163, 184, 0.8);
+  transform: rotate(45deg);
+}
+
+.qa-tooltip-trigger:hover .qa-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 하단 하이라이트 */
+.qa-highlight {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #eef2ff;
+  border: 1px solid rgba(129, 140, 248, 0.5);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.qa-highlight-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #4f46e5;
+  color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.qa-highlight-title {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.qa-highlight p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+/* 반응형 */
+@media (max-width: 960px) {
+  .qa-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .qa-column-a {
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 640px) {
+  .qa-bubble {
+    padding: 9px 10px 9px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -989,6 +2248,773 @@
         </div>
       </div>
     </section>
+
+    
+<!-- 1. 산업 환경 핵심 변화 – 완전 시각화 버전 -->
+<section>
+  <div class="section-inner">
+    <header class="section-header">
+      <div class="section-header-left">
+        <div class="sec-icon">①</div>
+        <h2>반도체 산업 환경의 핵심 변화</h2>
+      </div>
+      <p>공정 · 소재 · 공급망 변화를 하나의 그림으로 표현한 RK의 시각</p>
+    </header>
+
+    <div class="trend-layout trend-layout-visualized">
+      <!-- 왼쪽: 인더스트리 맵 비주얼 -->
+      <aside class="trend-visual trend-visual-panel">
+        <div class="trend-visual-eyebrow">INDUSTRY LANDSCAPE</div>
+        <div class="trend-visual-title">Technology · Process · Supply Chain</div>
+        <div class="trend-visual-note">
+          미세화, 소재 고도화, 공급망 복잡화를<br />
+          하나의 플로우로 정리한 인더스트리 맵입니다.
+        </div>
+
+        <div class="industry-map">
+          <!-- FAB 중심 블록 -->
+          <div class="industry-fab">
+            <span class="fab-label">FAB · 공정 라인</span>
+            <div class="fab-wafer"></div>
+            <div class="fab-tools">
+              <span class="fab-tool-chip">Etch</span>
+              <span class="fab-tool-chip">CVD</span>
+              <span class="fab-tool-chip">Cleaning</span>
+            </div>
+          </div>
+
+          <!-- 상단: Process -->
+          <div class="map-tag map-tag-process">
+            <span class="map-tag-label">PROCESS</span>
+            <div class="map-tag-chips">
+              <span class="map-chip">선폭 ↓</span>
+              <span class="map-chip">수율 민감도 ↑</span>
+              <span class="map-chip">허용 오차 축소</span>
+            </div>
+          </div>
+
+          <!-- 좌측: Materials -->
+          <div class="map-tag map-tag-materials">
+            <span class="map-tag-label">MATERIALS</span>
+            <div class="map-tag-chips">
+              <span class="map-chip">Si / Quartz / SiC</span>
+              <span class="map-chip">고온 · 플라즈마</span>
+              <span class="map-chip">화학적 상호작용</span>
+            </div>
+          </div>
+
+          <!-- 우측: Supply Chain -->
+          <div class="map-tag map-tag-supply">
+            <span class="map-tag-label">SUPPLY CHAIN</span>
+            <div class="map-tag-chips">
+              <span class="map-chip">리드타임</span>
+              <span class="map-chip">대체 부품</span>
+              <span class="map-chip">라인 다운타임</span>
+            </div>
+          </div>
+
+          <!-- 하단: RK Focus -->
+          <div class="industry-rk-focus">
+            <span class="rk-pill-label">RK FOCUS</span>
+            <div class="rk-pill-row">
+              <span class="rk-pill">공정 인접 Consumable</span>
+              <span class="rk-pill">소재 선택 &amp; 가공</span>
+              <span class="rk-pill">운영 리스크 · TCO</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 오른쪽: 3 트렌드 카드 (키워드 + 툴팁) -->
+      <div class="trend-grid trend-grid-visual">
+        <!-- TREND 01 -->
+        <article class="trend-card trend-card-visual">
+          <div class="trend-card-top">
+            <div class="trend-card-tagline">
+              <div class="trend-label">TREND 01</div>
+              <span class="trend-mini-pill">PROCESS</span>
+            </div>
+            <div class="trend-card-header">
+              <div class="trend-card-icon">⚙️</div>
+              <div>
+                <h3>공정 미세화와 수율 리스크 확대</h3>
+                <p class="trend-card-sub">더 민감해진 라인, 더 좁아진 허용 오차</p>
+              </div>
+            </div>
+          </div>
+          <div class="trend-chip-group">
+            <span class="trend-chip">선폭 축소</span>
+            <span class="trend-chip">공정 허용 오차 ↓</span>
+            <span class="trend-chip">미세 결함 영향 ↑</span>
+            <span class="trend-chip">장비·부품 일관성</span>
+          </div>
+          <div class="trend-tooltip-trigger">
+            <span class="trend-info-dot"></span>
+            <span class="trend-info-label">Insight</span>
+            <div class="trend-tooltip">
+              선폭이 줄어들수록 공정 허용 오차는 작아지고, 작은 파티클·미세 결함도
+              수율에 큰 영향을 줍니다. 단순한 장비 성능뿐 아니라, 공정에서 사용되는
+              부품·소재의 안정성과 일관성이 중요해지고 있습니다.
+            </div>
+          </div>
+        </article>
+
+        <!-- TREND 02 -->
+        <article class="trend-card trend-card-visual">
+          <div class="trend-card-top">
+            <div class="trend-card-tagline">
+              <div class="trend-label">TREND 02</div>
+              <span class="trend-mini-pill">MATERIALS</span>
+            </div>
+            <div class="trend-card-header">
+              <div class="trend-card-icon">🧪</div>
+              <div>
+                <h3>소재·부품의 고기능·고신뢰성 요구</h3>
+                <p class="trend-card-sub">환경 조건이 극단적일수록 소재가 핵심</p>
+              </div>
+            </div>
+          </div>
+          <div class="trend-chip-group">
+            <span class="trend-chip">고온 · 플라즈마 · 부식</span>
+            <span class="trend-chip">소재-공정 상호작용</span>
+            <span class="trend-chip">정밀 가공 품질</span>
+            <span class="trend-chip">Si / Quartz / SiC</span>
+          </div>
+          <div class="trend-tooltip-trigger">
+            <span class="trend-info-dot"></span>
+            <span class="trend-info-label">Insight</span>
+            <div class="trend-tooltip">
+              고온·플라즈마·고부식 환경에서 사용되는 소재는 내구성뿐 아니라
+              공정과의 화학적 상호작용까지 고려해야 합니다. Si, Quartz, SiC 등
+              핵심 소재의 가공·품질 관리 수준이 곧 공정 경쟁력으로 연결됩니다.
+            </div>
+          </div>
+        </article>
+
+        <!-- TREND 03 -->
+        <article class="trend-card trend-card-visual">
+          <div class="trend-card-top">
+            <div class="trend-card-tagline">
+              <div class="trend-label">TREND 03</div>
+              <span class="trend-mini-pill">SUPPLY CHAIN</span>
+            </div>
+            <div class="trend-card-header">
+              <div class="trend-card-icon">🌐</div>
+              <div>
+                <h3>공급망 복잡성과 운영 리스크</h3>
+                <p class="trend-card-sub">한 부품 이슈가 라인 전체를 멈추게 되는 시대</p>
+              </div>
+            </div>
+          </div>
+          <div class="trend-chip-group">
+            <span class="trend-chip">글로벌 공급망 복잡도</span>
+            <span class="trend-chip">리드타임 이슈</span>
+            <span class="trend-chip">대체 부품 검토</span>
+            <span class="trend-chip">다운타임 리스크</span>
+          </div>
+          <div class="trend-tooltip-trigger">
+            <span class="trend-info-dot"></span>
+            <span class="trend-info-label">Insight</span>
+            <div class="trend-tooltip">
+              글로벌 공급망의 복잡도가 높아지면서, 단일 부품·소재의 공급 이슈가
+              전체 라인의 다운타임으로 이어질 수 있습니다. 기술 역량과 함께
+              공급망 안정성 확보가 기업의 중요한 과제가 되고 있습니다.
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 2. RK가 보는 핵심 가치 축 – 시각화 버전 -->
+<section>
+  <div class="section-inner">
+    <header class="section-header">
+      <div class="section-header-left">
+        <div class="sec-icon">②</div>
+        <h2>RK가 바라보는 핵심 가치 축</h2>
+      </div>
+      <p>공정 안정성 · 오염 제어 · 열·소재 관리, 세 축으로 본 RK의 사업 포지션</p>
+    </header>
+
+    <div class="value-layout">
+      <!-- 왼쪽: 3축 레이더/삼각 맵 비주얼 -->
+      <aside class="value-visual">
+        <div class="value-eyebrow">RK VALUE AXIS MAP</div>
+        <div class="value-title">Process · Contamination · Thermal</div>
+        <div class="value-note">
+          RK가 공정 인접 영역에서 바라보는<br />
+          세 가지 핵심 가치 축을 하나의 맵으로 표현했습니다.
+        </div>
+
+        <div class="value-radar">
+          <!-- 배경 삼각형 -->
+          <div class="radar-triangle"></div>
+
+          <!-- 중심점 -->
+          <div class="radar-center">
+            <span class="radar-center-label">RK<br />Position</span>
+          </div>
+
+          <!-- 축 1: Process Stability -->
+          <div class="radar-axis radar-axis-1">
+            <div class="radar-axis-dot"></div>
+            <div class="radar-axis-label">
+              <span class="radar-axis-tag">AXIS 01</span>
+              <strong>Process<br />Stability</strong>
+              <div class="radar-axis-chips">
+                <span class="radar-chip">공정 재현성</span>
+                <span class="radar-chip">장비 가동률</span>
+                <span class="radar-chip">Consumable 품질</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 축 2: Contamination Control -->
+          <div class="radar-axis radar-axis-2">
+            <div class="radar-axis-dot"></div>
+            <div class="radar-axis-label">
+              <span class="radar-axis-tag">AXIS 02</span>
+              <strong>Contamination<br />Control</strong>
+              <div class="radar-axis-chips">
+                <span class="radar-chip">파티클</span>
+                <span class="radar-chip">부식 부산물</span>
+                <span class="radar-chip">Trap · Sub-FAB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 축 3: Thermal & Material -->
+          <div class="radar-axis radar-axis-3">
+            <div class="radar-axis-dot"></div>
+            <div class="radar-axis-label">
+              <span class="radar-axis-tag">AXIS 03</span>
+              <strong>Thermal &amp;<br />Material</strong>
+              <div class="radar-axis-chips">
+                <span class="radar-chip">온도 균일성</span>
+                <span class="radar-chip">Heater · ESC</span>
+                <span class="radar-chip">FFKM · PFA 소재</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 오른쪽: 3개 축 상세 카드 (아이콘 + 키워드 중심) -->
+      <div class="pill-grid value-pill-grid">
+        <!-- AXIS 01 -->
+        <article class="pill value-pill">
+          <div class="pill-icon">🌀</div>
+          <div class="pill-title">AXIS 01 · PROCESS STABILITY</div>
+          <strong>공정 안정성(Process Stability)</strong>
+          <p class="pill-sub">
+            “공정 재현성과 장비 가동률을 지키는 Consumable”
+          </p>
+          <div class="pill-keywords">
+            <span class="pill-chip">공정 재현성</span>
+            <span class="pill-chip">장비 가동률</span>
+            <span class="pill-chip">수명 편차 관리</span>
+            <span class="pill-chip">공정 조건 최적화</span>
+          </div>
+          <div class="pill-tooltip-trigger">
+            <span class="pill-info-dot"></span>
+            <span class="pill-info-label">Insight</span>
+            <div class="pill-tooltip">
+              핵심 공정 장비에 사용되는 Consumable Parts와 Component는
+              공정 재현성과 장비 가동률에 직접적인 영향을 줍니다. RK는
+              공정 조건에 최적화된 소재·부품을 통해 공정 변동성 최소화를
+              지향합니다.
+            </div>
+          </div>
+        </article>
+
+        <!-- AXIS 02 -->
+        <article class="pill value-pill">
+          <div class="pill-icon">🧪</div>
+          <div class="pill-title">AXIS 02 · CONTAMINATION CONTROL</div>
+          <strong>오염 제어(Contamination Control)</strong>
+          <p class="pill-sub">
+            “보이지 않는 이물·부산물을 줄이는 라인 청정도 관점”
+          </p>
+          <div class="pill-keywords">
+            <span class="pill-chip">파티클 저감</span>
+            <span class="pill-chip">부식 부산물 관리</span>
+            <span class="pill-chip">Trap · Powder Trap</span>
+            <span class="pill-chip">Sub-FAB 솔루션</span>
+          </div>
+          <div class="pill-tooltip-trigger">
+            <span class="pill-info-dot"></span>
+            <span class="pill-info-label">Insight</span>
+            <div class="pill-tooltip">
+              파티클, 부식 부산물, 가스·케미컬 이물질 등은 미세 공정 수율에
+              치명적인 리스크 요인입니다. Trap, Sub-FAB Solution, 고순도
+              Raw Materials는 라인의 청정도 유지와 장비 수명에 직결됩니다.
+            </div>
+          </div>
+        </article>
+
+        <!-- AXIS 03 -->
+        <article class="pill value-pill">
+          <div class="pill-icon">🔥</div>
+          <div class="pill-title">AXIS 03 · THERMAL &amp; MATERIAL</div>
+          <strong>열·소재 관리(Thermal &amp; Material Management)</strong>
+          <p class="pill-sub">
+            “극한 공정 조건에서의 온도·소재 신뢰성”
+          </p>
+          <div class="pill-keywords">
+            <span class="pill-chip">온도 균일성</span>
+            <span class="pill-chip">Heater · ESC · Chiller</span>
+            <span class="pill-chip">극한 환경 소재</span>
+            <span class="pill-chip">FFKM · PFA 등 고기능 재질</span>
+          </div>
+          <div class="pill-tooltip-trigger">
+            <span class="pill-info-dot"></span>
+            <span class="pill-info-label">Insight</span>
+            <div class="pill-tooltip">
+              Heater, ESC, Coolant 등 열·에너지 관련 솔루션은 공정 온도
+              균일성과 장비 안정성에 영향을 미치며, FFKM·PFA 등 고기능
+              소재는 극한 조건에서의 신뢰성 확보에 기여합니다.
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 3. Value Chain 관점 – 시각화 버전 -->
+<section>
+  <div class="section-inner">
+    <header class="section-header">
+      <div class="section-header-left">
+        <div class="sec-icon">③</div>
+        <h2>반도체 Value Chain 관점에서 본 RK의 역할</h2>
+      </div>
+      <p>Upstream–Midstream–Downstream을 잇는 소재·부품 관점의 기여 지점</p>
+    </header>
+
+    <div class="chain-layout chain-layout-visual">
+      <!-- 왼쪽: Value Chain 플로우 다이어그램 -->
+      <aside class="chain-visual chain-visual-panel">
+        <div class="vc-eyebrow">VALUE CHAIN VIEW</div>
+        <div class="vc-title">Upstream – Midstream – Downstream</div>
+        <div class="vc-note">
+          소재에서 공정, 그리고 생산성까지 이어지는 흐름 속에서<br />
+          RK가 어디에 깊게 관여하는지 시각적으로 표현했습니다.
+        </div>
+
+        <div class="vc-band">
+          <!-- 타임라인/플로우 라인 -->
+          <div class="vc-flow-line"></div>
+
+          <!-- Upstream -->
+          <div class="vc-segment vc-segment-up">
+            <div class="vc-segment-header">
+              <span class="vc-step">01</span>
+              <div>
+                <div class="vc-label">Upstream</div>
+                <div class="vc-sub">Materials &amp; Basic Parts</div>
+              </div>
+            </div>
+            <div class="vc-chip-row">
+              <span class="vc-chip">고순도 Raw Materials</span>
+              <span class="vc-chip">소재 선택</span>
+              <span class="vc-chip">청정도 확보</span>
+            </div>
+            <div class="vc-focus vc-focus-light">
+              <span class="vc-focus-label">Role</span>
+              <span class="vc-focus-chip">리스크 선제 제거</span>
+            </div>
+          </div>
+
+          <!-- Midstream -->
+          <div class="vc-segment vc-segment-mid">
+            <div class="vc-segment-header">
+              <span class="vc-step">02</span>
+              <div>
+                <div class="vc-label">Midstream</div>
+                <div class="vc-sub">Process Equipment &amp; Consumables</div>
+              </div>
+            </div>
+            <div class="vc-chip-row">
+              <span class="vc-chip">Etch · CVD · Cleaning</span>
+              <span class="vc-chip">Ceramic Heater · ESC</span>
+              <span class="vc-chip">Trap · Powder Trap</span>
+            </div>
+            <div class="vc-focus">
+              <span class="vc-focus-label">RK Core</span>
+              <span class="vc-focus-chip">공정 인접 소재·부품</span>
+              <span class="vc-focus-chip">Process-fit 솔루션</span>
+            </div>
+          </div>
+
+          <!-- Downstream -->
+          <div class="vc-segment vc-segment-down">
+            <div class="vc-segment-header">
+              <span class="vc-step">03</span>
+              <div>
+                <div class="vc-label">Downstream</div>
+                <div class="vc-sub">Stability &amp; Productivity</div>
+              </div>
+            </div>
+            <div class="vc-chip-row">
+              <span class="vc-chip">라인 안정화</span>
+              <span class="vc-chip">다운타임 감소</span>
+              <span class="vc-chip">장기 TCO</span>
+            </div>
+            <div class="vc-focus vc-focus-light">
+              <span class="vc-focus-label">Outcome</span>
+              <span class="vc-focus-chip">생산성 향상</span>
+            </div>
+          </div>
+
+          <!-- RK Position 태그 -->
+          <div class="vc-rk-tag">
+            <span class="vc-rk-badge">RK POSITION</span>
+            <p>
+              Upstream–Midstream–Downstream 전체를 보되,<br />
+              특히 공정에 직접 연결되는 Midstream에 집중합니다.
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 오른쪽: 각 구간별 카드 + Insight 툴팁 -->
+      <div class="chain chain-grid-visual">
+        <!-- Upstream 카드 -->
+        <article class="chain-block chain-card">
+          <div class="chain-card-header">
+            <div class="chain-card-badge upstream">Upstream</div>
+            <span class="chain-tag">Materials &amp; Basic Parts</span>
+          </div>
+          <p class="chain-card-sub">
+            “소재 단계에서 리스크를 먼저 줄이는 구간”
+          </p>
+          <div class="chain-keywords">
+            <span class="chain-chip">고순도 Raw Materials</span>
+            <span class="chain-chip">공정 조건 맞춤 소재</span>
+            <span class="chain-chip">청정도 · 안정성</span>
+          </div>
+          <div class="chain-tooltip-trigger">
+            <span class="chain-info-dot"></span>
+            <span class="chain-info-label">Insight</span>
+            <div class="chain-tooltip">
+              고순도 Raw Materials와 공정 조건에 맞는 소재 선택은
+              전체 Value Chain의 출발점입니다. 소재 단계에서의
+              안정성·청정도 확보는 이후 공정 리스크를 선제적으로
+              줄이는 역할을 합니다.
+            </div>
+          </div>
+        </article>
+
+        <!-- Midstream 카드 -->
+        <article class="chain-block chain-card">
+          <div class="chain-card-header">
+            <div class="chain-card-badge midstream">Midstream</div>
+            <span class="chain-tag">Process Equipment &amp; Consumables</span>
+          </div>
+          <p class="chain-card-sub">
+            “실제 공정이 이루어지는 RK의 핵심 관여 구간”
+          </p>
+          <div class="chain-keywords">
+            <span class="chain-chip">Etch · CVD · Cleaning</span>
+            <span class="chain-chip">Ceramic Heater · ESC</span>
+            <span class="chain-chip">Trap · Powder Trap</span>
+            <span class="chain-chip">Consumable Parts</span>
+          </div>
+          <div class="chain-tooltip-trigger">
+            <span class="chain-info-dot"></span>
+            <span class="chain-info-label">Insight</span>
+            <div class="chain-tooltip">
+              Etch, CVD, Cleaning 등 주요 공정에 사용되는 Consumable Parts,
+              Ceramic Heater, ESC, Trap 등은 실제 공정이 이루어지는
+              구간에서 공정 품질과 장비 성능을 지지하는 핵심 요소입니다.
+              RK의 주요 역할이 집중되는 지점입니다.
+            </div>
+          </div>
+        </article>
+
+        <!-- Downstream 카드 -->
+        <article class="chain-block chain-card">
+          <div class="chain-card-header">
+            <div class="chain-card-badge downstream">Downstream</div>
+            <span class="chain-tag">Stability &amp; Productivity</span>
+          </div>
+          <p class="chain-card-sub">
+            “라인 안정성과 TCO 관점의 결과 구간”
+          </p>
+          <div class="chain-keywords">
+            <span class="chain-chip">라인 안정화</span>
+            <span class="chain-chip">다운타임 감소</span>
+            <span class="chain-chip">유지보수 비용 절감</span>
+            <span class="chain-chip">장기 TCO</span>
+          </div>
+          <div class="chain-tooltip-trigger">
+            <span class="chain-info-dot"></span>
+            <span class="chain-info-label">Insight</span>
+            <div class="chain-tooltip">
+              설비 안정화 솔루션과 공정별 최적화된 부품 제안은
+              장기적인 관점에서 라인 다운타임 감소, 유지보수 비용
+              절감, 생산성 향상으로 이어집니다. RK는 이 구간에서
+              고객의 Total Cost 관점까지 함께 고려합니다.
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 4. 고객 이슈 & RK의 응답 – Q&A 시각화 버전 -->
+<section>
+  <div class="section-inner">
+    <header class="section-header">
+      <div class="section-header-left">
+        <div class="sec-icon">④</div>
+        <h2>고객 관점의 주요 이슈와 RK의 대응 방향</h2>
+      </div>
+      <p>라인에서 실제로 제기되는 질문과, 이에 대한 RK의 답변 프레임</p>
+    </header>
+
+    <div class="qa-layout">
+      <!-- 왼쪽: 고객 이슈(Q) 말풍선 -->
+      <div class="qa-column qa-column-q">
+        <div class="qa-column-header">
+          <div class="qa-badge qa-badge-q">Q</div>
+          <div>
+            <div class="qa-title">고객이 자주 이야기하는 이슈</div>
+            <p class="qa-sub">라인 엔지니어·구매·기술팀에서 실제로 나오는 질문들</p>
+          </div>
+        </div>
+
+        <!-- Q1 -->
+        <div class="qa-bubble qa-bubble-q">
+          <div class="qa-bubble-header">
+            <span class="qa-bubble-label">ISSUE 01</span>
+          </div>
+          <p class="qa-bubble-text">
+            공정 조건 변화에 따라<br />
+            부품 수명과 성능 편차가 커지는 문제
+          </p>
+          <div class="qa-tag-row">
+            <span class="qa-tag">공정 조건 변화</span>
+            <span class="qa-tag">수명 편차</span>
+            <span class="qa-tag">성능 안정성</span>
+          </div>
+          <div class="qa-tooltip-trigger">
+            <span class="qa-info-dot"></span>
+            <span class="qa-info-label">Detail</span>
+            <div class="qa-tooltip">
+              공정 조건이 바뀔 때마다 동일 부품이라도 수명·성능 편차가 커지면서
+              라인 안정성이 흔들리는 문제에 대한 이슈입니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="qa-bubble qa-bubble-q">
+          <div class="qa-bubble-header">
+            <span class="qa-bubble-label">ISSUE 02</span>
+          </div>
+          <p class="qa-bubble-text">
+            장비 공급사와 부품 공급사가 분리되면서<br />
+            책임 구분이 모호해지는 상황
+          </p>
+          <div class="qa-tag-row">
+            <span class="qa-tag">장비 vs 부품</span>
+            <span class="qa-tag">책임 구분</span>
+            <span class="qa-tag">이슈 트래킹</span>
+          </div>
+          <div class="qa-tooltip-trigger">
+            <span class="qa-info-dot"></span>
+            <span class="qa-info-label">Detail</span>
+            <div class="qa-tooltip">
+              동일 이슈에 대해 장비사와 부품사가 서로 다른 입장을 보이며,
+              Root Cause와 책임 소재를 명확히 하기 어려운 상황입니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="qa-bubble qa-bubble-q">
+          <div class="qa-bubble-header">
+            <span class="qa-bubble-label">ISSUE 03</span>
+          </div>
+          <p class="qa-bubble-text">
+            글로벌 공급망 이슈로 인한 리드타임 증가와<br />
+            대체 부품 검토 필요성
+          </p>
+          <div class="qa-tag-row">
+            <span class="qa-tag">글로벌 공급망</span>
+            <span class="qa-tag">리드타임</span>
+            <span class="qa-tag">대체 부품</span>
+          </div>
+          <div class="qa-tooltip-trigger">
+            <span class="qa-info-dot"></span>
+            <span class="qa-info-label">Detail</span>
+            <div class="qa-tooltip">
+              특정 소재·부품의 공급 제약으로 리드타임이 길어지고,
+              라인 유지 관점에서 호환 가능한 대체 솔루션이 필요하다는 이슈입니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="qa-bubble qa-bubble-q">
+          <div class="qa-bubble-header">
+            <span class="qa-bubble-label">ISSUE 04</span>
+          </div>
+          <p class="qa-bubble-text">
+            Sub-FAB 영역 Trap/배기라인 관리 미흡으로 인한<br />
+            공정 리스크와 유지보수 부담
+          </p>
+          <div class="qa-tag-row">
+            <span class="qa-tag">Sub-FAB</span>
+            <span class="qa-tag">Trap · 배기라인</span>
+            <span class="qa-tag">공정 리스크</span>
+          </div>
+          <div class="qa-tooltip-trigger">
+            <span class="qa-info-dot"></span>
+            <span class="qa-info-label">Detail</span>
+            <div class="qa-tooltip">
+              챔버 외부, Sub-FAB 영역에서의 Trap·배기라인 관리 부족으로
+              공정 리스크와 유지보수 난이도가 커지는 이슈입니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="qa-bubble qa-bubble-q">
+          <div class="qa-bubble-header">
+            <span class="qa-bubble-label">ISSUE 05</span>
+          </div>
+          <p class="qa-bubble-text">
+            신규 공정·신규 소재 적용 시<br />
+            검증 부담과 초기 셋업 리스크
+          </p>
+          <div class="qa-tag-row">
+            <span class="qa-tag">신규 공정</span>
+            <span class="qa-tag">신규 소재</span>
+            <span class="qa-tag">초기 셋업</span>
+          </div>
+          <div class="qa-tooltip-trigger">
+            <span class="qa-info-dot"></span>
+            <span class="qa-info-label">Detail</span>
+            <div class="qa-tooltip">
+              신규 공정·소재 도입 시 라인 테스트·검증에 필요한 리소스와
+              초기 셋업 실패에 따른 리스크가 부담이 되는 상황입니다.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 오른쪽: RK 대응(A) 카드 -->
+      <div class="qa-column qa-column-a">
+        <div class="qa-column-header">
+          <div class="qa-badge qa-badge-a">A</div>
+          <div>
+            <div class="qa-title">RK의 대응 방향 (Business Response)</div>
+            <p class="qa-sub">
+              기술 언어와 사업 언어를 연결하는 네 가지 응답 축
+            </p>
+          </div>
+        </div>
+
+        <!-- Response 01 -->
+        <div class="qa-bubble qa-bubble-a">
+          <div class="qa-response-header">
+            <span class="qa-response-pill process">Process-fit</span>
+            <span class="qa-response-label">공정 적합성 기반 제안</span>
+          </div>
+          <p class="qa-bubble-text">
+            공정별·장비별 특성을 이해한 후 소재·부품·Sub-FAB Solution을
+            <em>프로세스 적합성(Process Fit)</em> 관점에서 제안합니다.
+          </p>
+          <div class="qa-tag-row">
+            <span class="qa-tag qa-tag-soft">공정 조건 매칭</span>
+            <span class="qa-tag qa-tag-soft">수명·성능 편차 완화</span>
+          </div>
+        </div>
+
+        <!-- Response 02 -->
+        <div class="qa-bubble qa-bubble-a">
+          <div class="qa-response-header">
+            <span class="qa-response-pill integration">Integration</span>
+            <span class="qa-response-label">기술 및 공급 일체형 관점</span>
+          </div>
+          <p class="qa-bubble-text">
+            단순 부품 공급을 넘어, 설계–소싱–제조–공급까지 연계해
+            이슈 발생 시 책임 구분과 대응 체계를 명확히 합니다.
+          </p>
+          <div class="qa-tag-row">
+            <span class="qa-tag qa-tag-soft">설계–소싱–제조–공급 연계</span>
+            <span class="qa-tag qa-tag-soft">책임 구분 명확화</span>
+          </div>
+        </div>
+
+        <!-- Response 03 -->
+        <div class="qa-bubble qa-bubble-a">
+          <div class="qa-response-header">
+            <span class="qa-response-pill tco">TCO View</span>
+            <span class="qa-response-label">중장기 TCO(Total Cost) 관점</span>
+          </div>
+          <p class="qa-bubble-text">
+            초기 단가뿐 아니라 수명, 유지보수, 라인 가동률까지 함께 고려해
+            중장기 관점의 비용 구조를 설계합니다.
+          </p>
+          <div class="qa-tag-row">
+            <span class="qa-tag qa-tag-soft">다운타임 감소</span>
+            <span class="qa-tag qa-tag-soft">유지보수 비용 절감</span>
+            <span class="qa-tag qa-tag-soft">장기 TCO 최적화</span>
+          </div>
+        </div>
+
+        <!-- Response 04 -->
+        <div class="qa-bubble qa-bubble-a">
+          <div class="qa-response-header">
+            <span class="qa-response-pill region">NE Asia Base</span>
+            <span class="qa-response-label">동북아 생산거점 기반 대응력</span>
+          </div>
+          <p class="qa-bubble-text">
+            동북아 생산·공급 거점을 기반으로 리드타임, 커뮤니케이션,
+            기술 지원 속도를 높여 공급망 리스크에 대응합니다.
+          </p>
+          <div class="qa-tag-row">
+            <span class="qa-tag qa-tag-soft">리드타임 단축</span>
+            <span class="qa-tag qa-tag-soft">현지 커뮤니케이션</span>
+            <span class="qa-tag qa-tag-soft">기술 지원 속도</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 하단 하이라이트 박스: RK Industry Insight의 역할 -->
+    <div class="qa-highlight">
+      <div class="qa-highlight-icon">“</div>
+      <div>
+        <div class="qa-highlight-title">RK Industry Insight의 역할</div>
+        <p>
+          RK Industry Insight는 기술 언어와 사업 언어를 연결해<br />
+          고객·파트너와의 대화를 돕는 <strong>공통의 레퍼런스 프레임</strong>입니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-inner">
+    <a target="_blank" href="https://skhynix-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2024/11/%EB%B0%98%EB%8F%84%EC%B2%B4-%ED%9B%84%EA%B3%B5%EC%A0%95_8%ED%8E%B8-1.png">
+      아이디어 #1
+    </a><br>
+    <a target="_blank" href="https://skhynix-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2024/11/%EB%B0%98%EB%8F%84%EC%B2%B4%ED%9B%84%EA%B3%B5%EC%A0%95_%EC%BB%A8%EB%B2%A4%EC%85%94%EB%84%90-%ED%8C%A8%ED%82%A4%EC%A7%80-%EA%B3%B5%EC%A0%95-1.png">
+      아이디어 #2
+    </a><br>
+    <a target="_blank" href="https://img.khan.co.kr/news/r/700xX/2022/12/21/l_2022122201001018700080911.webp">
+      아이디어 #3
+    </a><br>
+  </div>
+  
+</section>
+
   </main>
 </body>
 </html>

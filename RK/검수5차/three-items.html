@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>제목 + 3개 구성 예제</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --paper: #ffffff;
+      --ink: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --line: #e5e7eb;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 32px 16px 40px;
+      background: radial-gradient(circle at top, #f9fafb 0, #e5e7eb 40%, #d1d5db 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+    }
+
+    main {
+      width: min(1100px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+    }
+
+    /* 공통 라벨 */
+    .demo-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    /* =========================
+       예제 1: 카드 3개 가로 배치
+       ========================= */
+    .block {
+      background: var(--paper);
+      border-radius: var(--radius-lg);
+      padding: 22px 20px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .block-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .block-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .feature-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      padding: 14px 13px 13px;
+      background: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        border-color 0.18s ease-out,
+        background 0.18s ease-out;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+      border-color: rgba(37, 99, 235, 0.45);
+      background: #ffffff;
+    }
+
+    .feature-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: #e5edff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .feature-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .feature-text {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* =========================
+       예제 2: 타임라인/세로 단계형
+       ========================= */
+    .timeline {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.5fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .timeline-intro {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .timeline-steps {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .timeline-steps::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), rgba(37, 99, 235, 0.05));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 6px 0 10px 10px;
+    }
+
+    .timeline-bullet {
+      position: absolute;
+      left: -4px;
+      top: 10px;
+      width: 13px;
+      height: 13px;
+      border-radius: 999px;
+      background: #fff;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
+    }
+
+    .timeline-step-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .timeline-step-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .timeline-step-text {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* =========================
+       예제 3: 가로 탭 / 라벨 + 내용
+       ========================= */
+    .tabs-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .tab-list {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      background: #e5e7eb;
+    }
+
+    .tab-pill {
+      font-size: 0.78rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: #4b5563;
+    }
+
+    .tab-pill.is-active {
+      background: #ffffff;
+      border-color: rgba(37, 99, 235, 0.5);
+      color: var(--accent);
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .tab-panels {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .tab-panel {
+      border-radius: var(--radius-md);
+      background: #f9fafb;
+      border: 1px dashed var(--line);
+      padding: 12px 12px 11px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .tab-panel strong {
+      color: var(--ink);
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.88rem;
+    }
+
+    /* ===== 반응형 ===== */
+    @media (max-width: 900px) {
+      .three-grid,
+      .tab-panels {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .timeline {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 24px 12px 32px;
+      }
+      .block {
+        padding: 18px 16px 20px;
+      }
+      .three-grid,
+      .tab-panels {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+main {
+  position: relative;
+  width: min(1100px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  /* 🔵🟣🟢 3단 흐름을 표현하는 배경 */
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(37, 99, 235, 0.08) 0%,
+      rgba(37, 99, 235, 0.08) 32%,
+      rgba(129, 140, 248, 0.08) 32%,
+      rgba(129, 140, 248, 0.08) 66%,
+      rgba(16, 185, 129, 0.08) 66%,
+      rgba(16, 185, 129, 0.08) 100%
+    ),
+    #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.18);
+  padding: 26px 22px 34px;
+  overflow: hidden;
+}
+
+/* 메인 배경 위에 흐름감을 주는 라이트 패턴 */
+main::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.22), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.2), transparent 55%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* 왼쪽을 따라 내려오는 흐름 라인 (1→2→3) */
+main::after {
+  content: "";
+  position: absolute;
+  left: 34px;
+  top: 26px;
+  bottom: 32px;
+  width: 2px;
+  background: linear-gradient(to bottom, #60a5fa, #a855f7, #22c55e);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+main > .block:nth-of-type(1)::before {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.22);
+}
+
+/* 2번째 섹션 노드: 보라톤 */
+main > .block:nth-of-type(2)::before {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.22);
+}
+
+/* 3번째 섹션 노드: 초록톤 */
+main > .block:nth-of-type(3)::before {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.22);
+}
+  </style>
+</head>
+<body>
+<main>
+
+  <!-- 예제 1: 제목 + 카드 3개 (가장 기본 “3컬럼 요소”) -->
+  <section class="block">
+    <div class="demo-label">Example 01 · Three Feature Cards</div>
+    <header class="block-header">
+      <h2 class="block-title">서비스 구성 3가지</h2>
+      <p class="block-sub">한 눈에 보기 좋게, 카드 3개로 나누어 설명하는 방식</p>
+    </header>
+
+    <div class="three-grid">
+      <article class="feature-card">
+        <div class="feature-icon">①</div>
+        <h3 class="feature-title">구성 내용 1</h3>
+        <p class="feature-text">
+          첫 번째 구성에 대한 간단한 설명이 들어갑니다. 핵심 이점이나 특징 위주로 2~3줄 정도.
+        </p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">②</div>
+        <h3 class="feature-title">구성 내용 2</h3>
+        <p class="feature-text">
+          두 번째 구성 설명입니다. 상단 아이콘과 제목만으로도 어떤 내용인지 감이 오도록 설계합니다.
+        </p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon">③</div>
+        <h3 class="feature-title">구성 내용 3</h3>
+        <p class="feature-text">
+          세 번째 구성은 다른 두 요소와 균형 있게 보여주되, 차별 포인트를 한 줄로 정리합니다.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 예제 2: 제목 + 세로 타임라인 3단계 -->
+  <section class="block">
+    <div class="demo-label">Example 02 · Vertical Timeline</div>
+    <header class="block-header">
+      <h2 class="block-title">진행 단계 3단 구성</h2>
+      <p class="block-sub">시간/순서의 흐름이 중요한 경우에 어울리는 표현</p>
+    </header>
+
+    <div class="timeline">
+      <div class="timeline-intro">
+        <p>
+          하나의 서비스를 3단계로 설명해야 할 때, 단순 나열 대신
+          타임라인 형태로 보여주면 사용자가 “흐름”을 더 쉽게 이해할 수 있습니다.
+        </p>
+      </div>
+      <div class="timeline-steps">
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-step-label">Step 01</div>
+          <div class="timeline-step-title">구성 내용 1 – 시작 단계</div>
+          <p class="timeline-step-text">
+            첫 번째 단계에서 사용자가 무엇을 준비하거나 경험하게 되는지 요약합니다.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-step-label">Step 02</div>
+          <div class="timeline-step-title">구성 내용 2 – 진행 단계</div>
+          <p class="timeline-step-text">
+            본격적인 서비스/프로세스가 진행되는 구간에 대한 설명을 넣습니다.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-bullet"></div>
+          <div class="timeline-step-label">Step 03</div>
+          <div class="timeline-step-title">구성 내용 3 – 결과 단계</div>
+          <p class="timeline-step-text">
+            이 과정을 통해 사용자가 어떤 결과나 가치를 얻게 되는지 마무리합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 예제 3: 제목 + 탭 라벨처럼 보이는 3개 구성 -->
+  <section class="block">
+    <div class="demo-label">Example 03 · Tab-like Sections</div>
+    <header class="block-header">
+      <h2 class="block-title">카테고리형 3개 구성</h2>
+      <p class="block-sub">기능/유형이 다른 3가지를 탭 느낌으로 표현</p>
+    </header>
+
+    <div class="tabs-wrap">
+      <!-- 실제 탭 기능은 없고, 디자인만 탭 형태 -->
+      <div class="tab-list">
+        <button type="button" class="tab-pill is-active">구성 내용 1</button>
+        <button type="button" class="tab-pill">구성 내용 2</button>
+        <button type="button" class="tab-pill">구성 내용 3</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel">
+          <strong>구성 내용 1</strong>
+          3개 중 대표/기본 구성을 강조하고 싶을 때, 첫 번째 탭을 활성 상태로 둡니다.
+        </div>
+        <div class="tab-panel">
+          <strong>구성 내용 2</strong>
+          다른 유형의 서비스를 함께 보여주되, 동일한 레이아웃으로 통일감을 줍니다.
+        </div>
+        <div class="tab-panel">
+          <strong>구성 내용 3</strong>
+          부가 서비스나 선택 옵션처럼 상대적으로 보조적인 내용을 배치할 수 있습니다.
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
