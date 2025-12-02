@@ -30,8 +30,8 @@
       // 자바스크립트에서 사용하는 전역변수 선언
       var g5_url = "https://rondakorea.mycafe24.com";
       var g5_bbs_url = "https://rondakorea.mycafe24.com/bbs";
-      var g5_is_member = "";
-      var g5_is_admin = "";
+      var g5_is_member = "1";
+      var g5_is_admin = "super";
       var g5_is_mobile = "";
       var g5_bo_table = "";
       var g5_sca = "";
@@ -54,13 +54,15 @@
     </script>
     <script src="https://rondakorea.mycafe24.com/js/jquery.bxslider.js?ver=2304171"></script>
   </head>
-  <body style="font-family: 'noto sans sc';">
+  <body>
+    <div id="hd_login_msg">최고관리자 론다코리아님 로그인 중 <a href="https://rondakorea.mycafe24.com/bbs/logout.php">로그아웃</a></div>
+
     <!-- 상단 시작 { -->
     <div id="wrap">
       <header id="rondakorea_header">
         <div class="inner2">
           <p id="rondakorea_logo">
-            <a href="home.html" title="메인으로 이동"><span class="text_hidden">Ronda Korea</span></a>
+            <a href="/" title="메인으로 이동"><span class="text_hidden">Ronda Korea</span></a>
           </p>
 
           <nav id="rondakorea_gnb">
@@ -114,9 +116,9 @@
             <div class="h_lang">
               <button type="button">Kor</button>
               <ul>
-                <li class="on"><a href="#">Kor</a></li>
-                <li><a href="#">Eng</a></li>
-                <li><a href="#">Chn</a></li>
+                <li class="on"><a href="/">Kor</a></li>
+                <li><a href="/en">Eng</a></li>
+                <li><a href="/cn">Chn</a></li>
               </ul>
             </div>
 
@@ -127,45 +129,45 @@
         <div id="all_gnb">
           <ul class="inner">
             <li>
-              <a href="company.html" title="Company">Company</a>
+              <a href="/ko/doc/company/ronda" title="Company">Company</a>
               <ul>
-                <li><a href="company.html#section1" title="CEO인사말">CEO인사말</a></li>
-                <li><a href="company.html#section2" title="회사개요">회사개요</a></li>
-                <li><a href="company.html#section3" title="경영철학">경영철학</a></li>
-                <li><a href="company.html#section4" title="걸어온길">걸어온길</a></li>
-                <li><a href="company.html#section5" title="찾아오시는길">찾아오시는길</a></li>
+                <li><a href="/ko/doc/company/ronda" title="CEO인사말">CEO인사말</a></li>
+                <li><a href="/ko/doc/company/ronda#section2" title="회사개요">회사개요</a></li>
+                <li><a href="/ko/doc/company/ronda#section3" title="경영철학">경영철학</a></li>
+                <li><a href="/ko/doc/company/ronda#section4" title="걸어온길">걸어온길</a></li>
+                <li><a href="/ko/doc/company/ronda#section5" title="찾아오시는길">찾아오시는길</a></li>
               </ul>
             </li>
             <li>
-              <a href="business.html" title="Business">Business</a>
+              <a href="/ko/doc/business/overview" title="Business">Business</a>
               <ul>
-                <li><a href="business.html" title="사업전략">사업전략</a></li>
+                <li><a href="/ko/doc/business/overview" title="사업전략">사업전략</a></li>
               </ul>
             </li>
             <li>
-              <a href="technology.html" title="Technology">Technology</a>
+              <a href="/ko/doc/technology/overview" title="Technology">Technology</a>
               <ul>
-                <li><a href="technology.html#consumablepartsolution" title="Consumable Parts">Consumable Parts</a></li>
-                <li><a href="technology.html#criticalcomponent" title="Powder Control">Sub-FAB Solution</a></li>
-                <li><a href="technology.html#powdercontrol" title="Critical Component">Critical Component</a></li>
-                <li><a href="technology.html#rawmaterials" title="Raw Materials">Raw Materials</a></li>
+                <li><a href="/ko/doc/technology/overview#consumablepartsolution" title="Consumable Part Solution">Consumable Part Solution</a></li>
+                <li><a href="/ko/doc/technology/overview#powdercontrol" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
+                <li><a href="/ko/doc/technology/overview#criticalcomponent" title="Critical Component">Critical Component</a></li>
+                <li><a href="/ko/doc/technology/overview#rawmaterials" title="Raw Materials">Raw Materials</a></li>
               </ul>
             </li>
             <li>
-              <a href="product-consumable-parts.html" title="Products">Products</a>
+              <a href="/consumable_parts" title="Products">Products</a>
               <ul>
-                <li><a href="product-consumable-parts.html" title="Consumable Parts">Consumable Parts</a></li>
-                <li><a href="product-subfab-solution.html" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
-                <li><a href="product-component.html" title="Critical Component">Critical Component</a></li>
-                <li><a href="product-rawmaterials.html" title="Raw Materials">Raw Materials</a></li>
+                <li><a href="/consumable_parts" title="Consumable Parts">Consumable Parts</a></li>
+                <li><a href="/facility_solution" title="Sub-FAB Solution">Sub-FAB Solution</a></li>
+                <li><a href="/component" title="Component">Component</a></li>
+                <li><a href="/rawmaterials" title="Raw Materials">Raw Materials</a></li>
               </ul>
             </li>
             <li>
-              <a href="support.html" title="Support">Support</a>
+              <a href="/ko/doc/contact/inquiry" title="Support">Support</a>
               <ul>
-                <li><a href="support.html" title="온라인문의">온라인문의</a></li>
-                <li><a href="newsroom.html" title="뉴스룸">뉴스룸</a></li>
-                <li><a href="faq.html" title="FAQ">FAQ</a></li>
+                <li><a href="/ko/doc/contact/inquiry" title="온라인문의">온라인문의</a></li>
+                <li><a href="/ronda_news" title="뉴스룸">뉴스룸</a></li>
+                <li><a href="/ronda_faq" title="FAQ">FAQ</a></li>
               </ul>
             </li>
           </ul>
@@ -174,6 +176,11 @@
       <!-- } 상단 끝 -->
 
       <!-- 콘텐츠 시작 { -->
+
+      <!-- 팝업레이어 시작 { -->
+      <div id="hd_pop">
+        <h2>팝업레이어 알림</h2>
+      </div>
 
       <script>
         $(function () {
@@ -233,10 +240,8 @@
               <div class="img" style="background-image: url(https://rondakorea.mycafe24.com/images/mVisu_img1.jpg)"></div>
               <div class="txt_box inner">
                 <div class="tit">
-                  <!-- <p style="font-size: 100px;padding-bottom: 20px;text-align: center;">
-                    Delivering <span style="display: contents;color: #E0D18D;">Smarter</span> Semiconductor Solutions
-                  </p> -->
-                  <p style="font-size: 100px;padding-bottom: 20px;"><span style="text-align: center;">Delivering Smarter Semiconductor Solutions</span></p>
+                  <p><span>Delivering Smarter </span></p>
+                  <p><span>Semiconductor Solutions</span></p>
                 </div>
               </div>
             </div>
@@ -244,11 +249,8 @@
               <div class="img" style="background-image: url(https://rondakorea.mycafe24.com/images/mVisu_img2.jpg)"></div>
               <div class="txt_box inner">
                 <div class="tit">
-                  <!-- <p style="font-size: 100px;padding-bottom: 20px;text-align: center;">
-                    Built on <span style="display: contents;color: #E0D18D;">Trust</span>
-                    <br> Driven by <span style="display: contents;color: #E0D18D;">Technology</span>
-                  </p> -->
-                  <p style="font-size: 100px;padding-bottom: 20px;text-align: center;">Built on Trust<br> Driven by Technology</p>
+                  <p><span>Built on Trust, </span></p>
+                  <p><span>Driven by Technology</span></p>
                 </div>
               </div>
             </div>
@@ -256,11 +258,8 @@
               <div class="img" style="background-image: url(https://rondakorea.mycafe24.com/images/mVisu_img3.jpg)"></div>
               <div class="txt_box inner">
                 <div class="tit">
-                  <!-- <p style="font-size: 100px;padding-bottom: 20px; text-align: center;">
-                    Enabling a <span style="display: contents;color: #E0D18D;">Better World</span> 
-                    <br> Through Semiconductors
-                  </p> -->
-                  <p style="font-size: 100px;padding-bottom: 20px;"><span style="text-align: center;">Enabling a Better World <br> Through Semiconductors</span></p>
+                  <p><span>Enabling a Better World </span></p>
+                  <p><span>Through Semiconductors</span></p>
                 </div>
               </div>
             </div>
@@ -273,11 +272,11 @@
         </div>
       </div>
 
-      <div id="mCore" style="display: none;">
+      <div id="mCore">
         <div class="inner">
           <div class="txt_box wow fadeInUp">
             <span>Global Core Hub</span>
-            <p>글로벌 네트워크의 핵심 허브로, <br />반도체 산업의 새로운 흐름을 만듭니다.</p>
+            <p>글로벌 네트워크의 핵심 허브로서 <br />반도체 산업의 새로운 흐름을 만듭니다.</p>
           </div>
           <div class="mCore_slide wow fadeInUp">
             <div class="swiper-wrapper">
@@ -285,109 +284,62 @@
                 <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mCore_img1.png)"></div>
                 <dl>
                   <dt>Expertise</dt>
-                  <dd>다양한 기술분야의 풍부한 <br />경험을 갖춘 전문가들로 구성</dd>
-                </dl>
-              </div>
-              <div class="swiper-slide">
-                <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mCore_img2.png)"></div>
-                <dl>
-                  <dt>Knowhow</dt>
-                  <dd>글로벌 반도체 현장에서 <br />축적한 경험과 노하우 내재화</dd>
+                  <dd>다양한 기술 분야에서 풍부한 경험과 전문성을 갖춘 인재들이 모여, 공정별 맞춤형 기술 지원과 안정적인 품질 향상을 실현합니다.</dd>
                 </dl>
               </div>
               <div class="swiper-slide">
                 <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mCore_img3.png)"></div>
                 <dl>
                   <dt>Connectivity</dt>
-                  <dd>글로벌 시장에 최적화된 <br />유연하고 강력한 공급망 네트워크 구축</dd>
+                  <dd>
+                    전 세계 주요 거점을 연결하는 유연하고 견고한 공급망 네트워크를 기반으로, 고객에게 최적화된 솔루션과 지속 가능한 파트너십을
+                    제공합니다.
+                  </dd>
+                </dl>
+              </div>
+              <div class="swiper-slide">
+                <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mCore_img2.png)"></div>
+                <dl>
+                  <dt>Knowhow</dt>
+                  <dd>글로벌 반도체 현장의 실무 경험과 기술 노하우를 체계적으로 내재화해, 변화하는 지장에 신속히 대응할 경쟁력을 갖추고 있습니다.</dd>
                 </dl>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <div id="test1">
+
+      <div id="mProducts">
         <div class="inner">
-            <img src="image/01.png" alt="">
+          <div class="tit_box wow fadeInUp">
+            <span>Our Brands</span>
+            <p>전 공정에 대한 폭넓은 기술 기반과 <br />공정 최적화 역량을 통해 고성능 생산을 구현합니다.</p>
+          </div>
+          <ul>
+            <li class="wow fadeInUp">
+              <a href="/ko/doc/technology/overview">
+                <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mProducts_img2.png)"></div>
+                <div class="txt_box">
+                  <h3>Technology</h3>
+                </div>
+              </a>
+            </li>
+            <li class="wow fadeInUp">
+              <a href="/consumable_parts">
+                <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mProducts_img1.png)"></div>
+                <div class="txt_box">
+                  <h3>Products</h3>
+                </div>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
-      <div id="test3" style="background-color: #f1f3ff;">
-        <div class="inner">
-            <img src="image/02.png" alt="">
-        </div>
-      </div>
-      
-      <div id="test4">
-        <div class="inner">
-            <img src="image/03.png" alt="">
-        </div>
-      </div>
-
-      <div id="mGlobal" style="display: none">
-        <div class="inner2">
-          <div class="main_title tc">
-            <h2 class="wow fadeInUp">Global Network</h2>
-            <p class="t2 wow fadeInUp">반도체 공급망 전반을 관리할 수 있는 역량으로 <br />글로벌 고객에게 신뢰할 수 있는 솔루션을 제공합니다.</p>
-          </div>
-          <div class="map_box wow fadeIn">
-            <img src="https://rondakorea.mycafe24.com/images/mGlobal_map.png" />
-            <ul>
-              <li class="on">
-                <button type="button" data-location="korea"><span class="text_hidden">korea</span></button>
-              </li>
-              <li>
-                <button type="button" data-location="xian"><span class="text_hidden">xian</span></button>
-              </li>
-              <li>
-                <button type="button" data-location="wuxi"><span class="text_hidden">wuxi</span></button>
-              </li>
-            </ul>
-          </div>
-          <div class="mGlobal_slide_wrap">
-            <div class="mGlobal_slide">
-              <div class="swiper-wrapper1">
-                <div class="swiper-slide on wow fadeInRight" data-location="korea">
-                  <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mGlobal_img1.png)"></div>
-                  <p class="t1">Dongtan, Korea</p>
-                  <p class="t2">Global Hub</p>
-                </div>
-                <div class="swiper-slide on wow fadeInRight" data-location="korea" data-wow-delay="0.2s">
-                  <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mGlobal_img2.png)"></div>
-                  <p class="t1">Hwasung, Korea</p>
-                  <p class="t2">Precision Manufacturing</p>
-                </div>
-                <div class="swiper-slide on wow fadeInRight" data-location="korea" data-wow-delay="0.4s">
-                  <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mGlobal_img3.png)"></div>
-                  <p class="t1">Ansung, Korea</p>
-                  <p class="t2">Photonics R&D</p>
-                </div>
-                <div class="swiper-slide wow fadeInRight" data-location="xian" data-wow-delay="0.6s">
-                  <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mGlobal_img4.png)"></div>
-                  <p class="t1">Xian, China</p>
-                  <p class="t2">SiC Plant</p>
-                </div>
-                <div class="swiper-slide wow fadeInRight" data-location="xian" data-wow-delay="0.8s">
-                  <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mGlobal_img5.png)"></div>
-                  <p class="t1">Xian, China</p>
-                  <p class="t2">Electronics Factory</p>
-                </div>
-                <div class="swiper-slide wow fadeInRight" data-location="wuxi" data-wow-delay="1s">
-                  <div class="img_box" style="background-image: url(https://rondakorea.mycafe24.com/images/mGlobal_img6.png)"></div>
-                  <p class="t1">Wuxi, China</p>
-                  <p class="t2">Valve Systems</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- <div id="mNews" class="inner" style="padding: 70px 0;">
-        <div class="main_title tc">
-          <h2 class="wow fadeInUp" style="color: #001e69; font-size: 24px;">Latest Updates</h2>
-          <p class="t2 wow fadeInUp" style="font-size: 32px;">론다코리아의 최신 소식을 안내드립니다.</p>
+      <div id="mNews" class="inner">
+        <div class="txt_box">
+          <h2 class="wow fadeInUp">Latest Updates</h2>
+          <p class="t2 wow fadeInUp">론다코리아의 최신 소식을 안내드립니다.</p>
         </div>
         <div class="mNews_slide wow fadeInUp">
           <div class="swiper-wrapper">
@@ -458,52 +410,30 @@
           </div>
           <div class="swiper-pagination"></div>
         </div>
-      </div> -->
+      </div>
 
-      <div id="mCustomers" class="inner2" style="height: 500px; display: none;">
-        <div class="main_title wow fadeInLeft">
-          <h2 class="fc_w">Customers Oriented</h2>
-          <p class="t1 fc_w">
-            고객 중심의 가치 아래, 품질·가격·기술 지원에서 최적의 솔루션을 제공합니다.
-          </p>
-        </div>
-        <ul class="wow fadeInRight">
+      <div id="mCustomers">
+        <ul class="inner wow fadeInRight">
           <li>
-            <a href="#">
-              <i class="fa-light fa-comments-question"></i>
-              <p>자주묻는 질문</p>
+            <a href="/ko/doc/contact/inquiry">
+              <i class="icon icon1"></i>
+              <p>문의하기</p>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="fa-light fa-files"></i>
-              <p>자료실</p>
+            <a href="/ronda_faq">
+              <i class="icon icon2"></i>
+              <p>자주 묻는 질문</p>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="fa-light fa-location-dot"></i>
+            <a href="/ko/doc/company/ronda#section5">
+              <i class="icon icon3"></i>
               <p>찾아오시는 길</p>
             </a>
           </li>
         </ul>
       </div>
-      
-      <div id="test5" style="margin: 40px 0 0 0;background:url('./image/05_배경.png')">
-        <div class="inner">
-            <img src="image/04.png" alt="">
-        </div>
-      </div>
-
-      <!-- <div id="mContact" style="display: none">
-        <div class="inner">
-          <div class="main_title wow fadeInLeft">
-            <h2 class="fc_w">Contact Us</h2>
-            <p class="t2 fc_w">도움이 필요하신가요?</p>
-          </div>
-          <a href="#" class="wow fadeInLeft" data-wow-delay="0.3s"><i class="fa-thin fa-arrow-right-long"></i></a>
-        </div>
-      </div> -->
 
       <script>
         var swiper2 = new Swiper(".mVisu_slide", {
@@ -589,16 +519,11 @@
         });
 
         var swiper2 = new Swiper(".mCore_slide", {
-          slidesPerView: 1,
-          spaceBetween: 20,
-          loop: true,
-          autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-          },
+          slidesPerView: 3,
+          spaceBetween: 30,
           breakpoints: {
             1024: {
-              slidesPerView: 1,
+              slidesPerView: 3,
               spaceBetween: 15,
             },
             767: {
@@ -654,7 +579,6 @@
         <div class="inner">
           <p class="f_logo"><img src="https://rondakorea.mycafe24.com/images/logo_w.png" alt="Ronda Korea" /></p>
           <ul class="f_info">
-            <li>대표 : 문병술</li>
             <li>사업자등록번호 : 882-86-01292</li>
             <li>개인정보관리자 : rondakorea@rondakorea.com</li>
             <br />
@@ -664,13 +588,18 @@
           </ul>
           <p class="copy">© RONDA KOREA. All Rights Reserved.</p>
           <div class="f_member">
-            <a href="https://rondakorea.mycafe24.com/bbs/login.php">ADMIN</a>
+            <a href="https://rondakorea.mycafe24.com/bbs/logout.php">LOGOUT</a>
+            <a href="/ronda_contact">Contact Us</a>
+            <a href="/ronda_privacy">개인정보처리방침</a>
+            <a href="/ronda_company">회사소개서</a>
+            <a href="/adm/newwinlist.php">팝업등록</a>
+            <a href="/popup_notice">팝업공지</a>
           </div>
         </div>
       </footer>
 
       <div id="Quick">
-        <a href="#"><i class="fa-regular fa-message-lines"></i><span>문의하기</span></a>
+        <a href="/ko/doc/contact/inquiry"><i class="fa-regular fa-message-lines"></i><span>문의하기</span></a>
         <button type="button" class="go_top" title="상단으로 이동"><i class="fa-regular fa-arrow-up-long"></i></button>
       </div>
 
@@ -753,11 +682,13 @@
             }
           );
 
-          io.observe(target);
+          //io.observe(target);
         })();
       </script>
     </div>
 
     <!-- } 하단 끝 -->
+
+    <!-- <div style='float:left; text-align:center;'>RUN TIME : 0.0021729469299316<br></div> -->
   </body>
 </html>
