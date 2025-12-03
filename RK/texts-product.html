@@ -1,0 +1,2409 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>RK - 제품 텍스트 종합</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --paper: #ffffff;
+        --line: #e2e8f0;
+        --ink: #0f172a;
+        --muted: #64748b;
+        --accent: #2563eb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 24px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Noto Sans SC", "Segoe UI", sans-serif;
+        background: #f1f5f9;
+        color: var(--ink);
+      }
+
+      .page {
+        max-width: 1600px;
+        margin: 0 auto;
+        background: var(--paper);
+        border-radius: 16px;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+        padding: 24px 24px 40px;
+      }
+
+      .page-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .page-sub {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+
+      /* 섹션 공통 */
+      .product-section {
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: #f8fafc;
+        margin-bottom: 18px;
+        overflow: hidden;
+      }
+
+      .section-header {
+        width: 100%;
+        text-align: left;
+        background: #e5edff;
+        border: none;
+        padding: 12px 16px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        color: #1e293b;
+      }
+
+      .section-header span.label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .section-header span.label::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--accent);
+      }
+
+      .section-header span.chevron {
+        font-size: 1.25rem;
+        color: var(--muted);
+        transition: transform 0.2s ease;
+      }
+
+      .product-section.is-collapsed .section-header span.chevron {
+        transform: rotate(-90deg);
+      }
+
+      .section-body {
+        padding: 8px 10px 12px;
+      }
+
+      .product-section.is-collapsed .section-body {
+        display: none;
+      }
+
+      /* 제품 row */
+      .product-row {
+        display: flex;
+        gap: 16px;
+        padding: 14px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: #ffffff;
+        margin-top: 8px;
+      }
+
+      .product-row:first-of-type {
+        margin-top: 4px;
+      }
+
+      .product-image {
+        flex: 0 0 180px;
+        max-width: 180px;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+        object-fit: cover;
+        /* background: #cbd5f5; */
+      }
+
+      .product-content {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .lang-block {
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .lang-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+      }
+
+      .lang-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+      }
+
+      .lang-desc p {
+        margin: 0 0 0.25rem;
+      }
+
+      .lang-desc p:last-child {
+        margin-bottom: 0;
+      }
+
+      .lang-ko .lang-title {
+        color: #0f172a;
+      }
+
+      .lang-zh .lang-title {
+        color: #047857;
+      }
+
+      .lang-en .lang-title {
+        color: #1d4ed8;
+      }
+
+      /* 반응형 */
+      @media (max-width: 900px) {
+        .product-row {
+          flex-direction: column;
+        }
+
+        .product-image {
+          max-width: 100%;
+          flex-basis: auto;
+        }
+
+        .product-content {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <h1 class="page-title">제품 텍스트 종합 </h1>
+        <p class="page-sub">각 제품은 이미지와 국문/중문/영문 설명으로 구성되며, 섹션 헤더를 클릭하면 해당 섹션의 제품 목록이 토글됩니다.</p>
+      </header>
+
+      <!-- =================== Section 1 =================== -->
+      <section class="product-section">
+        <button class="section-header" type="button">
+          <span class="label">Section 1 – Consumable Parts</span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="section-body">
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_wYLBTUPz_38b2ccce6b684b3f2a3c45c52727f1ad8dd3dba1_590x450.png"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Insert Ring</div>
+                <div class="lang-desc">
+                  <p>- Wafer의 정밀한 위치 확보</p>
+                  <p>- Uniformity 향상 및 공정 효율을 좌우하는 핵심소재</p>
+                  <p>- 반도체 공정 미세화와 대형화에 따른 MTBC 향상에 기여</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Insert Ring</div>
+                <div class="lang-desc">
+                  <p>- 确保 Wafer 的精确定位</p>
+                  <p>- 提升 Uniformity，并决定整体工艺效率的关键材料</p>
+                  <p>- 随着半导体工艺的微缩化和设备大型化，提高 MTBC</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Insert Ring</div>
+                <div class="lang-desc">
+                  <p>- Ensures precise wafer positioning</p>
+                  <p>- A key material that improves uniformity and determines overall process efficiency</p>
+                  <p>- Contributes to MTBC improvement as semiconductor processes become finer and equipment grows larger</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_bWXFO85C_ba4a295d52136f8c300ce93f9219dc283218051c_590x450.jpg"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Showerhead - Si</div>
+                <div class="lang-desc">
+                  <p>- 다양한 공정 가스를 균일하게 분사하는 역할</p>
+                  <p>- Gas 분사 Hole의 미세 가공 기술로 파티클 제어</p>
+                  <p>- 높은 Yield 확보에 핵심적인 파트</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Showerhead - Si</div>
+                <div class="lang-desc">
+                  <p>- 负责将多种工艺 Gas 均匀喷射</p>
+                  <p>- 通过微细 Hole 加工技术实现 Particle 控制</p>
+                  <p>- 是确保高 Yield 的核心部件</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Showerhead - Si</div>
+                <div class="lang-desc">
+                  <p>- Disperses various process gases uniformly</p>
+                  <p>- Precise micro-machining of gas injection holes enables particle control</p>
+                  <p>- A critical part for securing high yield</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_0flMWn6e_664ea87278763719d060e2f9b6b0fb781cec50ab_590x450.png"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Ground Ring</div>
+                <div class="lang-desc">
+                  <p>- 반도체 설비 내부의 전기적 접지와 플라즈마 안정성을 유지</p>
+                  <p>- Wafer 중심과 가장자리 식각 편차 최소화</p>
+                  <p>- 내플라즈마 특성이 우수하여 Life Time 향상</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Ground Ring</div>
+                <div class="lang-desc">
+                  <p>- 维持设备内部的电气接地及 Plasma 稳定性</p>
+                  <p>- 将 Wafer 中心与边缘的 Etch 差异降到最低</p>
+                  <p>- 具有优秀的耐 Plasma 特性，延长 Life Time</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Ground Ring</div>
+                <div class="lang-desc">
+                  <p>- Maintains electrical grounding and plasma stability inside semiconductor equipment</p>
+                  <p>- Minimizes etching deviation between wafer center and edge</p>
+                  <p>- Excellent plasma-resistant properties extend life time</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_oNw0uPLV_3e5c3ad158565f1817624ecabbbc43f1185afa24_590x450.png"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Edge Ring</div>
+                <div class="lang-desc">
+                  <p>- Wafer Edge 부분에서의 플라즈마 환경 안정화</p>
+                  <p>- 고온, 고강도 플라즈마 환경에서도 우수한 내식성 유지</p>
+                  <p>- 반도체 공정 균일도와 수율을 높이는 핵심 소모성 파트</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Edge Ring</div>
+                <div class="lang-desc">
+                  <p>- 稳定 Wafer Edge 区域的 Plasma 环境</p>
+                  <p>- 在高温、高能 Plasma 下也保持优异的耐腐蚀性</p>
+                  <p>- 提升工艺 Uniformity 与 Yield 的关键耗材</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Edge Ring</div>
+                <div class="lang-desc">
+                  <p>- Stabilizes the plasma environment at the wafer edge region</p>
+                  <p>- Maintains superior corrosion resistance even under high-temperature/high-intensity plasma</p>
+                  <p>- A key consumable part that enhances process uniformity and yield</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_BAn8Y7ZI_2dc7109313d6bfcc7b30fe1ed055276a93e3812b_590x450.jpg"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Showerhead - Sic</div>
+                <div class="lang-desc">
+                  <p>- High Energy를 가지는 플라즈마 분포를 정밀하게 제어</p>
+                  <p>- 화학적 안정성이 뛰어나 부식성 가스에도 내구성 확보</p>
+                  <p>- 높은 미세 Hole 가공 기술력으로 안정적인 공정 결과 제공</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Showerhead - Sic</div>
+                <div class="lang-desc">
+                  <p>- 精准控制 High Energy Plasma 的分布</p>
+                  <p>- 化学稳定性强，耐腐蚀性 Gas 的环境也能保持耐用</p>
+                  <p>- 通过高精度微 Hole 加工提供稳定的工艺结果</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Showerhead - Sic</div>
+                <div class="lang-desc">
+                  <p>- Precisely controls high-energy plasma distribution</p>
+                  <p>- Exceptional chemical stability ensures durability against corrosive gases</p>
+                  <p>- High-precision micro-hole machining provides stable process results</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_mTOGpkgo_ee722916fcbac7d8db892467bccdebb4eb1ee553_590x450.png"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Boat</div>
+                <div class="lang-desc">
+                  <p>- 반도체 열처리 공정에서 웨이퍼 케리어로 사용</p>
+                  <p>- 고온 환경 및 급격한 온도 변화에도 정밀도 유지</p>
+                  <p>- Life time 향상으로 고객사 PM 비용 감소</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Boat</div>
+                <div class="lang-desc">
+                  <p>- 用于半导体热处理工艺中的 Wafer Carrier</p>
+                  <p>- 在高温及快速温度变化下仍保持精密度</p>
+                  <p>- 延长 Life Time，降低客户 PM 成本</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Boat</div>
+                <div class="lang-desc">
+                  <p>- Used as a wafer carrier in thermal treatment processes</p>
+                  <p>- Maintains dimensional accuracy even under high temperatures and rapid temperature changes</p>
+                  <p>- Longer life time reduces customer PM costs</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_pOIs6i7H_0210ae223b274c629247b3d7de7ce36b3d4771a6_590x450.jpg"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Engineering Plastic</div>
+                <div class="lang-desc">
+                  <p>- 고성능 플라스틱으로 내열성, 내화학성, 내마모성을 제공하는 파트</p>
+                  <p>- ESC 또는 전극 어셈블리를 챔버 내부에 정밀하게 고정</p>
+                  <p>- Arcing 방지로 Critical Parts 및 Wafer 보호</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Engineering Plastic</div>
+                <div class="lang-desc">
+                  <p>- 高性能塑料，具备耐热、耐化学、耐磨特性</p>
+                  <p>- 精准固定 ESC 或电极组件于 Chamber 内</p>
+                  <p>- 防止 Arcing，保护 Critical Parts 和 Wafer</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Engineering Plastic</div>
+                <div class="lang-desc">
+                  <p>- High-performance plastic offering heat, chemical, and wear resistance</p>
+                  <p>- Precisely secures ESC or electrode assemblies inside the chamber</p>
+                  <p>- Prevents arcing, protecting critical parts and wafers</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-c20d0acd579a3f02fd9cbbf5d295f446_H7KlyLr5_402163c73ff930beda9bd6262b96ff16d07e5019_590x450.jpg"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Gasket</div>
+                <div class="lang-desc">
+                  <p>- 반도체 설비 Part사이에 장착되어 사용되는 제품</p>
+                  <p>- 전기적인 특성 및 내열성 향상 등의 다양한 목적</p>
+                  <p>- 스크레치 및 Arcing 방지로 CoC (Cost of consumable) 감소</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Gasket</div>
+                <div class="lang-desc">
+                  <p>- 安装于设备 Part 之间使用</p>
+                  <p>- 提升电气特性与耐热性能</p>
+                  <p>- 防止 Scratches 与 Arcing，降低 CoC</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Gasket</div>
+                <div class="lang-desc">
+                  <p>- Installed between semiconductor equipment parts</p>
+                  <p>- Improves electrical and heat-resistant properties</p>
+                  <p>- Reduces CoC (Cost of Consumable) by preventing scratches and arcing</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_IgWLXTyn_85a5fa79786fc6e8b042668d72b43fe142b11efa_590x450.png"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Polymer Sheet</div>
+                <div class="lang-desc">
+                  <p>- 열 전도율을 맞춘 Thermal Interface 소재</p>
+                  <p>- Wafer Edge 온도를 낮춰 Yield 개선</p>
+                  <p>- 반도체 설비의 신뢰성 및 성능향상</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Polymer Sheet</div>
+                <div class="lang-desc">
+                  <p>- 调整热传导率的 Thermal Interface 材料</p>
+                  <p>- 降低 Wafer Edge 温度以改善 Yield</p>
+                  <p>- 提升设备可靠性与性能</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Polymer Sheet</div>
+                <div class="lang-desc">
+                  <p>- Thermal interface material with optimized thermal conductivity</p>
+                  <p>- Lowers wafer edge temperature to improve yield</p>
+                  <p>- Enhances equipment reliability and performance</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_aBfjFtuw_7bdf8bb239923076f9a23af65aef49e837027f16_590x450.png"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">EMI Gasket</div>
+                <div class="lang-desc">
+                  <p>- 전자기파 차폐 기능으로 장비 간 간섭 최소화</p>
+                  <p>- 전기적 접촉 불량 방지 및 시스템 안정성 향상</p>
+                  <p>- RF 시스템 및 통신 모듈의 노이즈 억제에 효과적</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">EMI Gasket</div>
+                <div class="lang-desc">
+                  <p>- 具备电磁屏蔽功能，最小化设备间干扰</p>
+                  <p>- 防止电气接触不良，提高系统稳定性</p>
+                  <p>- 对 RF 系统及通信模块的噪声抑制效果显著</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">EMI Gasket</div>
+                <div class="lang-desc">
+                  <p>- Provides electromagnetic shielding to minimize interference between equipment</p>
+                  <p>- Prevents poor electrical contact and improves system stability</p>
+                  <p>- Effective in suppressing noise in RF systems and communication modules</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_iVAeYD8Q_e7b38071b036004e4884d10ef169dfa98164fa3d_590x450.png"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Ring</div>
+                <div class="lang-desc">
+                  <p>- Etch 공정등에서 웨이퍼와 전극, 가스 흐름을 정밀하게제어</p>
+                  <p>- 고온/플라즈마 공정 시 내열성과 절연 특성 유지</p>
+                  <p>- 고순도 제품으로 Particle 발생 최소화</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Ring</div>
+                <div class="lang-desc">
+                  <p>- 在 Etch 工艺等过程中精确控制 Wafer、Electrode、Gas 流向</p>
+                  <p>- 在高温/Plasma 工艺中保持耐热与绝缘特性</p>
+                  <p>- 以高纯度材料将 Particle 生成降到最低</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Ring</div>
+                <div class="lang-desc">
+                  <p>- Precisely controls wafer, electrode, and gas flow during etch processes</p>
+                  <p>- Maintains heat-resistant and insulating properties in high-temperature/plasma environments</p>
+                  <p>- High-purity product minimizes particle generation</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_CHXZom4S_118e864ccbc89e736f952b3bdcac326e563711fc_590x450.png"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Showerhead</div>
+                <div class="lang-desc">
+                  <p>- CVD 및 Dry Etch 공정에서 미세 가스 제어 가능</p>
+                  <p>- 가스 확산 균일성과 플라즈마 안정성 우수</p>
+                  <p>- 다양한 반도체 공정에서 오염 방지</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Showerhead</div>
+                <div class="lang-desc">
+                  <p>- 在 CVD 与 Dry Etch 工艺中实现精细 Gas 控制</p>
+                  <p>- 具备优秀的 Gas 扩散均匀性与 Plasma 稳定性</p>
+                  <p>- 在多种工艺中防止污染</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Showerhead</div>
+                <div class="lang-desc">
+                  <p>- Enables fine gas control in CVD and dry etch processes</p>
+                  <p>- Excellent gas diffusion uniformity and plasma stability</p>
+                  <p>- Prevents contamination across various semiconductor processes</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_ewuhlBA8_ec9de0f6d07b8afb5096fa126249cffa3c8e43dc_590x450.png"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Boat</div>
+                <div class="lang-desc">
+                  <p>- 웨이퍼 운반 및 적재에 사용되는 부품</p>
+                  <p>- 고온 열처리 공정에 사용되는 내열 유리 특성 보유</p>
+                  <p>- 장시간 사용에 유리하여, CoC (Cost of Consumable) 감소</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Boat</div>
+                <div class="lang-desc">
+                  <p>- 用于 Wafer 搬运与装载</p>
+                  <p>- 具备适用于高温热处理工艺的耐热玻璃特性</p>
+                  <p>- 适合长时间使用，降低 CoC</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Boat</div>
+                <div class="lang-desc">
+                  <p>- Used for wafer transport and loading</p>
+                  <p>- Heat-resistant glass suitable for high-temperature thermal processes</p>
+                  <p>- Long-term usage reduces CoC (Cost of Consumable)</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/consumable_parts/thumb-4a50c801dddfd4cc90094e342a091668_7scXwx1k_403abd937bd1c3aefc223d177fe334f29f4beb9b_590x450.png"
+                alt=""
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Tube</div>
+                <div class="lang-desc">
+                  <p>- CVD, Diffusion 공정등에서 필수적인 파트로 맞춤형 제작 가능</p>
+                  <p>- 반도체 공정 중 Particle 발생 최소화</p>
+                  <p>- 안정적인 반도체 공정 유지로 Yield에 기여</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Tube</div>
+                <div class="lang-desc">
+                  <p>- CVD、Diffusion 工艺中的必需部件，可定制</p>
+                  <p>- 在工艺中将 Particle 生成降到最低</p>
+                  <p>- 维持稳定工艺条件，对 Yield 有积极贡献</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Tube</div>
+                <div class="lang-desc">
+                  <p>- Essential for CVD and diffusion processes, customizable design</p>
+                  <p>- Minimizes particle generation during semiconductor processing</p>
+                  <p>- Maintains stable processing conditions and contributes to yield improvement</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product row 1 -->
+          <article style="display: none;" class="product-row">
+            <div class="product-image">
+              <img src="https://placehold.co/400x300/png?text=Product+Image+1" alt="Product 1" />
+            </div>
+            <div class="product-content">
+              <!-- KO -->
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">제품명 1 (국문)</div>
+                <div class="lang-desc">
+                  <p>국문 설명 1줄</p>
+                  <p>국문 설명 2줄</p>
+                  <p>국문 설명 3줄</p>
+                </div>
+              </div>
+              <!-- ZH -->
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">产品名称 1（中文）</div>
+                <div class="lang-desc">
+                  <p>中文说明第 1 行</p>
+                  <p>中文说明第 2 行</p>
+                  <p>中文说明第 3 行</p>
+                </div>
+              </div>
+              <!-- EN -->
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Product Name 1 (EN)</div>
+                <div class="lang-desc">
+                  <p>English description line 1.</p>
+                  <p>English description line 2.</p>
+                  <p>English description line 3.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product row 2 -->
+          <article style="display: none;" class="product-row">
+            <div class="product-image">
+              <img src="https://placehold.co/400x300/png?text=Product+Image+2" alt="Product 2" />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">제품명 2 (국문)</div>
+                <div class="lang-desc">
+                  <p>국문 설명 1줄</p>
+                  <p>국문 설명 2줄</p>
+                  <p>국문 설명 3줄</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">产品名称 2（中文）</div>
+                <div class="lang-desc">
+                  <p>中文说明第 1 行</p>
+                  <p>中文说明第 2 行</p>
+                  <p>中文说明第 3 行</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Product Name 2 (EN)</div>
+                <div class="lang-desc">
+                  <p>English description line 1.</p>
+                  <p>English description line 2.</p>
+                  <p>English description line 3.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =================== Section 2 =================== -->
+      <section class="product-section">
+        <button class="section-header" type="button">
+          <span class="label">Section 2 – Sub-FAB Systems</span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="section-body">
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_513cYpde_b4c744c1d658392b059fad1216d05a301a03b592_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Dry Pump</div>
+                <div class="lang-desc">
+                  <p>- 정밀 진공 단계 조절 및 가변 압력 대응 가능</p>
+                  <p>- 내부 부식 방지를 위한 코팅 처리 및 긴 수명</p>
+                  <p>- 반도체 공정에 최적화된 설계 및 안정성 확보</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Dry Pump</div>
+                <div class="lang-desc">
+                  <p>- 可实现精密的真空阶段调节及可变压力响应</p>
+                  <p>- 通过防腐蚀涂层处理，延长使用寿命</p>
+                  <p>- 采用针对半导体工艺优化的设计，确保高稳定性</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Dry Pump</div>
+                <div class="lang-desc">
+                  <p>- Enables precise vacuum stage control and variable pressure response</p>
+                  <p>- Features anti-corrosion coating for long lifespan</p>
+                  <p>- Optimized design for semiconductor process stability</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_XRkhBYcJ_021dbd733ef36e956ebb3887bd3d6a44a4313f37_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Turbo Pump</div>
+                <div class="lang-desc">
+                  <p>- 고속 회전 블레이드를 이용해 고진공 영역 실현</p>
+                  <p>- 분자 흐름 구간에서도 안정적인 진공 유지</p>
+                  <p>- 장시간 운전, 고온, Powder 환경에서도 안정된 진공상태 유지</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Turbo Pump</div>
+                <div class="lang-desc">
+                  <p>- 通过高速旋转叶片实现高真空区域</p>
+                  <p>- 在分子流动阶段保持稳定真空</p>
+                  <p>- 即使在长时间运行、高温及Powder环境下也能维持稳定真空状态</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Turbo Pump</div>
+                <div class="lang-desc">
+                  <p>- Achieves high-vacuum conditions with high-speed rotating blades</p>
+                  <p>- Maintains stable vacuum even in molecular flow regions</p>
+                  <p>- Ensures reliable vacuum performance under long operation, high temperature, and powder environments</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_MFtBmYh2_2cdb24f45033239b3df58dd7329f70ec6d05fe55_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Bellows Pump</div>
+                <div class="lang-desc">
+                  <p>- Chemical 이송용 Pump</p>
+                  <p>- H2SO4, HCL, IPA Chemical 등 이송</p>
+                  <p>- 완전 밀폐구조로 내부 유체 누출 위험없음</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Bellows Pump</div>
+                <div class="lang-desc">
+                  <p>- 专用于Chemical输送的泵</p>
+                  <p>- 适用于H₂SO₄、HCl、IPA等化学品的传输</p>
+                  <p>- 采用全密封结构，无内部流体泄漏风险</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Bellows Pump</div>
+                <div class="lang-desc">
+                  <p>- Pump designed for chemical transfer applications</p>
+                  <p>- Handles chemicals such as H₂SO₄, HCl, and IPA</p>
+                  <p>- Fully sealed structure prevents internal fluid leakage</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_0XCyoHAq_003b120b567a18962cba8ce3d8125743607ac06f_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Pump Repair</div>
+                <div class="lang-desc">
+                  <p>- 펌프 내부 구성품 정밀 진단 및 부품 교체 서비스</p>
+                  <p>- 성능 복원 및 수명 연장을 위한 균형 조정 및 재윤활</p>
+                  <p>- 오리지널 스펙 복원 보장으로 공정 신뢰도 유지</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Pump Repair</div>
+                <div class="lang-desc">
+                  <p>- 提供泵内部组件的精密诊断与部件更换服务</p>
+                  <p>- 通过平衡调整与再润滑实现性能恢复与寿命延长</p>
+                  <p>- 恢复原始规格，确保工艺可靠性</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Pump Repair</div>
+                <div class="lang-desc">
+                  <p>- Precision inspection and component replacement service for internal pump parts</p>
+                  <p>- Balancing and re-lubrication to restore performance and extend lifespan</p>
+                  <p>- Guarantees restoration to original specifications, ensuring process reliability</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_TD4NyIe2_c2b39439c920a91dfb5c7e337869b7ca59858b8f_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">전기식 Chiller</div>
+                <div class="lang-desc">
+                  <p>- 정밀 제어(±0.1°C)로 CVD,Etch 공정 등 민감한 공정 대응</p>
+                  <p>- Cleanroom 환경에 적합한 설계로 정숙성 확보</p>
+                  <p>- 원격 모니터링, 자동 진단 등 실시간 관리 가능</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">电气式 Chiller</div>
+                <div class="lang-desc">
+                  <p>- 通过精密控制（±0.1°C）可应对CVD、Etch等高灵敏度工艺</p>
+                  <p>- 采用适合Cleanroom环境的设计，确保低噪音运行</p>
+                  <p>- 支持远程监控与自动诊断，实现实时管理</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Electric Chiller</div>
+                <div class="lang-desc">
+                  <p>- Precision control (±0.1°C) for sensitive processes such as CVD and Etch</p>
+                  <p>- Designed for cleanroom environments, ensuring low-noise operation</p>
+                  <p>- Enables real-time management with remote monitoring and auto-diagnosis</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_Jrdges0q_e20bce66c6404e3781f4c5bd747379cc67950c89_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">냉동기 Chiller</div>
+                <div class="lang-desc">
+                  <p>- 안정된 냉수 공급으로 공정 품질 향상</p>
+                  <p>- 고온 및 부하변동 대응력 우수</p>
+                  <p>- 초저온/고온 대응 가능</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">冷冻机 Chiller</div>
+                <div class="lang-desc">
+                  <p>- 通过稳定的冷却水供应提升工艺品质</p>
+                  <p>- 具备出色的高温与负载变化响应能力</p>
+                  <p>- 可支持超低温与高温双向控制</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Refrigeration Chiller</div>
+                <div class="lang-desc">
+                  <p>- Provides stable chilled-water supply to improve process quality</p>
+                  <p>- Excellent adaptability to temperature and load fluctuations</p>
+                  <p>- Supports both ultra-low and high-temperature operations</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_Ro80ehyM_eadc67e9cfca1c22bd1137d51883f17e0c7eb14c_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">극저온 Chiller</div>
+                <div class="lang-desc">
+                  <p>- -40℃ ~ -120℃까지 대응 가능하며, ±0.1℃ 수준의 정밀 제어 가능</p>
+                  <p>- 연속 운전 시에도 동일한 온도 유지</p>
+                  <p>- 설비에 따른 맞춤 대응 가능(용량, 냉각 범위, 인터페이스 등)</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">极低温 Chiller</div>
+                <div class="lang-desc">
+                  <p>- 可在-40°C至-120°C范围内运行，并实现±0.1°C的精密控制</p>
+                  <p>- 即使连续运行也能保持恒定温度</p>
+                  <p>- 可根据设备需求进行定制（容量、冷却范围、接口等）</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Cryogenic Chiller</div>
+                <div class="lang-desc">
+                  <p>- Operates from -40°C to -120°C with ±0.1°C precision control</p>
+                  <p>- Maintains consistent temperature even during continuous operation</p>
+                  <p>- Customizable per equipment needs (capacity, cooling range, interface, etc.)</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_oXHgs0QE_0e0259f3c6a008cfad0b442f3abf44c1f14d75ec_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Heat Exchanger</div>
+                <div class="lang-desc">
+                  <p>- 공정에서 발생하는 열을 재활용하여 에너지 절감</p>
+                  <p>- 고효율 설계로 짧은 시간 내에 많은 열량 교환 가능</p>
+                  <p>- 장기산 연속 운전에도 안정적인 성능 유지</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Heat Exchanger</div>
+                <div class="lang-desc">
+                  <p>- 回收工艺过程中产生的热量以实现节能</p>
+                  <p>- 通过高效率设计在短时间内实现大量热交换</p>
+                  <p>- 即使长时间连续运行也能保持稳定性能</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Heat Exchanger</div>
+                <div class="lang-desc">
+                  <p>- Recycles process-generated heat for energy savings</p>
+                  <p>- High-efficiency design enables rapid heat transfer</p>
+                  <p>- Maintains stable performance during long-term continuous operation</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_TPw2Xf04_714ad3a1fa89032f09f5114295edd6c8df93297a_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Burn-Wet Scrubber</div>
+                <div class="lang-desc">
+                  <p>- 고온(650°C ~ 800°C)에서 안정적인 분해 성능</p>
+                  <p>- 99% 이상 Gas 처리 효율(공정에 따라 99.9% 처리 가능)</p>
+                  <p>- Gas 누출 감지 등 자동 운전/알람 시스템으로 안정성 확보</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Burn-Wet Scrubber</div>
+                <div class="lang-desc">
+                  <p>- 在高温（650°C~800°C）条件下保持稳定的分解性能</p>
+                  <p>- 气体处理效率可达99%以上（根据工艺可实现99.9%）</p>
+                  <p>- 通过气体泄漏检测及自动运行与报警系统，确保系统运行的安全与稳定</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Burn-Wet Scrubber</div>
+                <div class="lang-desc">
+                  <p>- Maintains stable decomposition performance at high temperatures (650°C–800°C)</p>
+                  <p>- Achieves over 99% gas treatment efficiency (up to 99.9% depending on process conditions)</p>
+                  <p>- Ensures safe and stable operation with gas leak detection, automatic operation, and alarm systems</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_GrHUQ8xL_0dc016927ea72eb70ed0668fec25512ba66147b2_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Plasma Scrubber</div>
+                <div class="lang-desc">
+                  <p>- Plasma를 이용한 Gas 분해 및 무해화 처리</p>
+                  <p>- 난분해성 Gas에 대해 고효율 반응 제공</p>
+                  <p>- 고온 Plasma 환경에서도 안정적인 장기 운용 가능</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Plasma Scrubber</div>
+                <div class="lang-desc">
+                  <p>- 利用Plasma实现气体分解与无害化处理</p>
+                  <p>- 对难分解气体提供高效反应性能</p>
+                  <p>- 在高温Plasma环境下可长期稳定运行</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Plasma Scrubber</div>
+                <div class="lang-desc">
+                  <p>- Decomposes and neutralizes gases using plasma technology</p>
+                  <p>- Provides high-efficiency reaction for refractory gases</p>
+                  <p>- Enables long-term stable operation under high-temperature plasma conditions</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_IrXB415t_4c9d7548f45bd7bd66c44bdf350b43de01ec9765_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Dry Scrubber</div>
+                <div class="lang-desc">
+                  <p>- 고체 흡착제로 유해 Gas를 물리적/화학적으로 제거</p>
+                  <p>- 반응 후 부산물 입자 발생이 적어 Chamber 오염 최소화</p>
+                  <p>- 전력 소모가 적고 유지관리 비용이 낮음</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Dry Scrubber</div>
+                <div class="lang-desc">
+                  <p>- 采用固体吸附剂，通过物理与化学反应去除有害气体</p>
+                  <p>- 反应后副产物颗粒较少，最大限度减少Chamber污染</p>
+                  <p>- 功耗低、维护成本低，运行经济高效</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Dry Scrubber</div>
+                <div class="lang-desc">
+                  <p>- Removes harmful gases through physical and chemical reactions using solid adsorbents</p>
+                  <p>- Minimizes chamber contamination with low particle generation after reaction</p>
+                  <p>- Features low power consumption and low maintenance cost for efficient operation</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_mzXyTkhg_31cafbabce84545468f3e69f2b047964cdc432ba_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Wet Scrubber</div>
+                <div class="lang-desc">
+                  <p>- 액체 흡수제를 이용하여 수용성 유해가스를 세정</p>
+                  <p>- 대용량 처리에 적합하며 유지관리 용이</p>
+                  <p>- 장비 배기 시 수분 기반의 무해 처리 가능</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Wet Scrubber</div>
+                <div class="lang-desc">
+                  <p>- 使用液体吸收剂清洗水溶性有害气体</p>
+                  <p>- 适用于大流量气体处理，维护简便</p>
+                  <p>- 在设备排气过程中实现基于水的无害化处理</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Wet Scrubber</div>
+                <div class="lang-desc">
+                  <p>- Cleans water-soluble harmful gases using liquid absorbents</p>
+                  <p>- Suitable for large-capacity gas treatment with easy maintenance</p>
+                  <p>- Provides water-based neutralization during exhaust process</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_MUdwNbcf_bdb83a4d5e36417776221efb11a7e1787b61067c_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">PPS (Plasma Pretreatment System)</div>
+                <div class="lang-desc">
+                  <p>- 유독성/발화성 Gas를 안전하게 처리</p>
+                  <p>- 다량의 공정부산물을 분해하여 배출</p>
+                  <p>- Pump MFBF 연장(설비 생산성 향상, 운영비 절감)</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">PPS (Plasma Pretreatment System)</div>
+                <div class="lang-desc">
+                  <p>- 安全处理有毒性及易燃性气体(Gas)</p>
+                  <p>- 分解并排放大量工艺副产物(Process By-products)</p>
+                  <p>- 延长Pump MFBF，提高设备生产效率并降低运营成本</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">PPS (Plasma Pretreatment System)</div>
+                <div class="lang-desc">
+                  <p>- Safely treats toxic and flammable gases</p>
+                  <p>- Decomposes and exhausts large volumes of process by-products</p>
+                  <p>- Extends pump MFBF, improving equipment productivity and reducing operating costs</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_30JEb8DY_267268e361fb0a620ed304ded07324958f87bbae_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">CPS (Compact Plasma System)</div>
+                <div class="lang-desc">
+                  <p>- Throttle Valve 내부 부산물 제거</p>
+                  <p>- Chamber Pressure 안정화 및 수명 연장</p>
+                  <p>- 최적화된 설계로 Dimension 최소화</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">CPS (Compact Plasma System)</div>
+                <div class="lang-desc">
+                  <p>- 去除Throttle Valve内部生成的副产物</p>
+                  <p>- 稳定Chamber Pressure并延长系统使用寿命</p>
+                  <p>- 通过优化设计，实现最小化结构尺寸</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">CPS (Compact Plasma System)</div>
+                <div class="lang-desc">
+                  <p>- Removes by-products generated inside the throttle valve</p>
+                  <p>- Stabilizes chamber pressure and extends system lifetime</p>
+                  <p>- Minimizes overall dimension through optimized design</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_ld8qgmey_c086169f7d07fdd2ee63109b82754ca56c83c823_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">APS (After Treatment Plasma System)</div>
+                <div class="lang-desc">
+                  <p>- Pump와 Scrubber 연결 배관 Powder 증착 개선</p>
+                  <p>- 다량의 Powder를 분리해서 Gas 상태로 배출</p>
+                  <p>- Scrubber MFBF 연장(설비 생산성 향상, 운영비 절감)</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">APS (After Treatment Plasma System)</div>
+                <div class="lang-desc">
+                  <p>- 改善Pump与Scrubber连接管路中的Powder沉积</p>
+                  <p>- 分离大量Powder并以气体形式排出</p>
+                  <p>- 延长Scrubber MFBF，提高设备生产效率并降低运营成本</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">APS (After Treatment Plasma System)</div>
+                <div class="lang-desc">
+                  <p>- Improves powder deposition condition in piping between pump and scrubber</p>
+                  <p>- Separates and exhausts large quantities of powder in gas form</p>
+                  <p>- Extends scrubber MFBF, enhancing productivity and reducing operating costs</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_j8ELkRPd_85d12a9ababaf62aa5aece5bce711996ddf7e61e_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">RPS (Remote Plasma System)</div>
+                <div class="lang-desc">
+                  <p>- Pump 내부 Powder 및 막질 제거</p>
+                  <p>- 비정기 Pump Fail 감소</p>
+                  <p>- Pump MFBF 연장(설비 생산성 향상, 운영비 절감)</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">RPS (Remote Plasma System)</div>
+                <div class="lang-desc">
+                  <p>- 去除Pump内部Powder与薄膜沉积物</p>
+                  <p>- 减少非计划性Pump故障(Fail)发生</p>
+                  <p>- 延长Pump MFBF，提高设备生产效率并降低运营成本</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">RPS (Remote Plasma System)</div>
+                <div class="lang-desc">
+                  <p>- Removes powder and film residues inside the pump</p>
+                  <p>- Reduces unplanned pump failures</p>
+                  <p>- Extends pump MFBF, improving productivity and reducing operating costs</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_3hBaK0XV_c94144921986d5f63b934e08ef7b82d9500a6c9b_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Powder Trap</div>
+                <div class="lang-desc">
+                  <p>- Thhinfilm W-CVD 공정에 주로 사용</p>
+                  <p>- 효율이 높으며 Customizing 가능</p>
+                  <p>- 설비 생산성 향상 및 운영비 절감 효과</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Powder Trap</div>
+                <div class="lang-desc">
+                  <p>- 主要应用于Thhinfilm W-CVD工艺</p>
+                  <p>- 具有高效率，可根据需求进行定制</p>
+                  <p>- 提高设备生产效率并降低运行成本</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Powder Trap</div>
+                <div class="lang-desc">
+                  <p>- Mainly used in Thhinfilm W-CVD processes</p>
+                  <p>- Provides high efficiency and can be customized as required</p>
+                  <p>- Improves equipment productivity and reduces operating costs</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_AuHyTZav_80d8abf180e48bc8a64a64c2a603fb75a1fc6aeb_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Hot Trap</div>
+                <div class="lang-desc">
+                  <p>- ALD, TiCl4, TiN 공정에 주로 사용</p>
+                  <p>- 대용량화 및 Spare Trap 제품으로 Main 설비 Down없이 Trap 교체 가능</p>
+                  <p>- 설비 생산성 향상 및 운영비 절감 효과</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Hot Trap</div>
+                <div class="lang-desc">
+                  <p>- 主要应用于ALD、TiCl₄、TiN工艺</p>
+                  <p>- 可实现大容量化，并可通过备用Trap更换实现不停机维护</p>
+                  <p>- 提高设备生产效率并降低运行成本</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Hot Trap</div>
+                <div class="lang-desc">
+                  <p>- Mainly used in ALD, TiCl₄, and TiN processes</p>
+                  <p>- Supports large-capacity operation and allows trap replacement without main equipment downtime</p>
+                  <p>- Enhances equipment productivity and reduces operating costs</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_nE71ca4d_a9e486babb363d371995a050d124133bab63ef8f_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Cold Trap</div>
+                <div class="lang-desc">
+                  <p>- PECVD, Cabon 공정에 주로 사용</p>
+                  <p>- 설계 최적화를 통한 Slim화를 통한 Dimension 최소화</p>
+                  <p>- 설비 생산성 향상 및 운영비 절감 효과</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Cold Trap</div>
+                <div class="lang-desc">
+                  <p>- 主要应用于PECVD、Carbon工艺</p>
+                  <p>- 通过优化设计实现结构Slim化，最小化Dimension</p>
+                  <p>- 提高设备生产效率并降低运行成本</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Cold Trap</div>
+                <div class="lang-desc">
+                  <p>- Mainly used in PECVD and Carbon processes</p>
+                  <p>- Achieves slim structural design and minimized dimension through optimization</p>
+                  <p>- Improves equipment productivity and reduces operating costs</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_kA09XvTO_7abc1c3bfd48c2f0d321bf8e3bada854e1c70c22_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Heating Pipe</div>
+                <div class="lang-desc">
+                  <p>- 직접적인 Gas 온도 조절 및 효율적인 열 에너지 전달</p>
+                  <p>- 공정부산물 형성 억제</p>
+                  <p>- 설비 생산성 향상 및 운영비 절감 효과</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Heating Pipe</div>
+                <div class="lang-desc">
+                  <p>- 实现气体温度的直接调节与高效热能传递</p>
+                  <p>- 抑制工艺副产物的生成</p>
+                  <p>- 提高设备生产效率并降低运行成本</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Heating Pipe</div>
+                <div class="lang-desc">
+                  <p>- Enables direct gas temperature control and efficient heat transfer</p>
+                  <p>- Suppresses formation of process by-products</p>
+                  <p>- Improves equipment productivity and reduces operating costs</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_AuGfzEid_9b346afa9d8dd698e39684dfc7ba1dc4fe25c896_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Heating Valve</div>
+                <div class="lang-desc">
+                  <p>- 공정부산물 형성 예방</p>
+                  <p>- 환경안전 사고 예방 효과</p>
+                  <p>- 설비 생산성 향상 및 운영비 절감 효과</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Heating Valve</div>
+                <div class="lang-desc">
+                  <p>- 防止工艺副产物形成</p>
+                  <p>- 有效预防环境及安全事故</p>
+                  <p>- 提高设备生产效率并降低运行成本</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Heating Valve</div>
+                <div class="lang-desc">
+                  <p>- Prevents formation of process by-products</p>
+                  <p>- Contributes to environmental and safety accident prevention</p>
+                  <p>- Enhances productivity and reduces operating costs</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_zF1WN9IH_1278a1c9c543d09e041591497d87a1636d4964b5_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Shield Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- Powder 많은 공정에 주로 사용</p>
+                  <p>- Powder가 Valve 내부로 유입 방지</p>
+                  <p>- Valve 수명 연장 및 설비 생산성 향상</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Shield Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- 主要应用于粉末(Powder)较多的工艺</p>
+                  <p>- 防止粉末进入Valve内部</p>
+                  <p>- 延长Valve寿命并提高设备生产效率</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Shield Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- Mainly used in processes with high powder generation</p>
+                  <p>- Prevents powder inflow into the valve interior</p>
+                  <p>- Extends valve lifetime and improves equipment productivity</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_YD6BZkbJ_261e9c0a3c48701854dd97b1be129120c95530e1_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Heating Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- Powder 많은 공정에 주로 사용</p>
+                  <p>- Heater Insert, Heating Jacket Type 대응 가능</p>
+                  <p>- Valve 동작속도 0.2sec ~ 3sec , 성능 보증 200,000회</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Heating Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- 主要应用于粉末较多的工艺</p>
+                  <p>- 可适配Heater Insert与Heating Jacket类型</p>
+                  <p>- Valve动作速度为0.2秒至3秒，性能保证200,000次</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Heating Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- Mainly used in processes with high powder concentration</p>
+                  <p>- Compatible with heater insert and heating jacket types</p>
+                  <p>- Valve operation speed: 0.2–3 seconds, guaranteed performance up to 200,000 cycles</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_OZXi49q2_71c3966d472c0fb635768419c566ef353549b2af_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">AL Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- Powder 많은 공정에 주로 사용</p>
+                  <p>- Heater Insert, Heating Jacket Type 대응 가능</p>
+                  <p>- Valve 동작속도 0.2sec ~ 3sec , 성능 보증 200,000회</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">AL Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- 主要应用于粉末较多的工艺</p>
+                  <p>- 可适配Heater Insert与Heating Jacket类型</p>
+                  <p>- Valve动作速度为0.2秒至3秒，性能保证200,000次</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">AL Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- Mainly used in processes with high powder concentration</p>
+                  <p>- Supports heater insert and heating jacket configurations</p>
+                  <p>- Valve operation speed: 0.2–3 seconds, performance guaranteed up to 200,000 cycles</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_OJfis40N_689bacf0c99ac115e90ae165f5a4946f6e972df5_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Control System Gate Val</div>
+                <div class="lang-desc">
+                  <p>- APC Valve + Gate Valve 기능을 합친 제품</p>
+                  <p>- Shield 기능을 추가하여 Powder 유입 방지</p>
+                  <p>- 성능 보증 200,000회</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Control System Gate Val</div>
+                <div class="lang-desc">
+                  <p>- 集成APC Valve与Gate Valve功能于一体</p>
+                  <p>- 增加Shield功能以防止粉末进入</p>
+                  <p>- 性能保证200,000次</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Control System Gate Val</div>
+                <div class="lang-desc">
+                  <p>- Combines APC valve and gate valve functions in a single unit</p>
+                  <p>- Includes shield function to prevent powder intrusion</p>
+                  <p>- Guaranteed performance up to 200,000 cycles</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_LJXfBkTa_7bfee51b3d8dbf57ba17710542bf4a5689b8d2d5_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">3rd Position Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- 기존 ON/OFF 기능 외 추가 Position 위치 제어 기능</p>
+                  <p>- 급격한 Pressure 변화 방지(설비, 부품 보호)</p>
+                  <p>- 성능 보증 200,000회</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">3rd Position Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- 在原有ON/OFF功能基础上增加中间位置控制功能</p>
+                  <p>- 防止压力(Pressure)急剧变化，保护设备与部件</p>
+                  <p>- 性能保证200,000次</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">3rd Position Gate Valve</div>
+                <div class="lang-desc">
+                  <p>- Adds intermediate position control in addition to standard ON/OFF operation</p>
+                  <p>- Prevents sudden pressure changes to protect equipment and components</p>
+                  <p>- Guaranteed performance up to 200,000 cycles</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/facility_solution/thumb-c20d0acd579a3f02fd9cbbf5d295f446_sQrMCE93_ce88066b5a9a52681890f67bed3cea9a1e65b0fb_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Slit Valve</div>
+                <div class="lang-desc">
+                  <p>- I-Motion, L-Motion Slit Valve 대응 가능</p>
+                  <p>- 내식성 코팅 적용으로 다양한 Gas 환경에서 사용 가능</p>
+                  <p>- 성능 보증 100,00회 ~ 200,000회</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Slit Valve</div>
+                <div class="lang-desc">
+                  <p>- 可适用于I-Motion及L-Motion Slit Valve结构</p>
+                  <p>- 采用防腐蚀涂层(Corrosion-resistant Coating)，可在多种气体环境中使用</p>
+                  <p>- 性能保证100,000至200,000次</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Slit Valve</div>
+                <div class="lang-desc">
+                  <p>- Compatible with I-Motion and L-Motion slit valve configurations</p>
+                  <p>- Uses corrosion-resistant coating for operation in various gas environments</p>
+                  <p>- Performance guaranteed between 100,000 and 200,000 cycles</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product row -->
+          <article style="display: none;" class="product-row">
+            <div class="product-image">
+              <img src="https://placehold.co/400x300/png?text=Product+Image+3" alt="Product 3" />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">제품명 3 (국문)</div>
+                <div class="lang-desc">
+                  <p>국문 설명 1줄</p>
+                  <p>국문 설명 2줄</p>
+                  <p>국문 설명 3줄</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">产品名称 3（中文）</div>
+                <div class="lang-desc">
+                  <p>中文说明第 1 行</p>
+                  <p>中文说明第 2 行</p>
+                  <p>中文说明第 3 行</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Product Name 3 (EN)</div>
+                <div class="lang-desc">
+                  <p>English description line 1.</p>
+                  <p>English description line 2.</p>
+                  <p>English description line 3.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =================== Section 3 =================== -->
+      <section class="product-section">
+        <button class="section-header" type="button">
+          <span class="label">Section 3 – Critical Component</span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="section-body">
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_k0miHsq8_881bcfb25eb6b9889fe2e4ba88a47c4ed65e7ffc_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">ESC</div>
+                <div class="lang-desc">
+                  <p>- 정전기력 기반 웨이퍼 고정과 하부 전극을 통한 균일한 플라즈마 분포 구현</p>
+                  <p>- 최대 172존 히터 제어로 정밀한 온도 균일성과 공정 재현성 확보</p>
+                  <p>- 고순도 세라믹 소재로 내플라즈마성·내화학성 향상, 공정 신뢰성 극대화</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">ESC</div>
+                <div class="lang-desc">
+                  <p>- 通过静电力固定 Wafer，并利用下部 Electrode 实现均匀的 Plasma 分布</p>
+                  <p>- 最多 172 Zone Heater 控制，实现高度精密的温度 Uniformity 与工艺再现性</p>
+                  <p>- 采用高纯度 Ceramic 材料，提高耐 Plasma 性与耐化学性，最大化工艺可靠性</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">ESC</div>
+                <div class="lang-desc">
+                  <p>- Enables wafer clamping based on electrostatic force and provides uniform plasma distribution through the lower electrode.</p>
+                  <p>- Up to 172-zone heater control ensures precise temperature uniformity and excellent process repeatability.</p>
+                  <p>- High-purity ceramic material improves plasma and chemical resistance, maximizing process reliability</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_NRBMKzba_09aeee20dbc1a91dade5c3b90fac9d63706c931a_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Ceramic Heater</div>
+                <div class="lang-desc">
+                  <p>- 고열전도 AlN 세라믹 적용으로 열전달 효율 및 온도 균일성 극대화</p>
+                  <p>- Dual Zone Heater 설계로 700 °C 이상 고온에서도 정밀한 온도 제어</p>
+                  <p>- 정전력 기반 Chucking 기능으로 고온·진공 환경에서도 웨이퍼 안정 유지</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Ceramic Heater</div>
+                <div class="lang-desc">
+                  <p>- 采用高热导系数的 AlN Ceramic，实现更高的热传递效率与温度均匀性</p>
+                  <p>- Dual Zone Heater 设计，可在 700 °C 以上的高温下实现精密温度控制</p>
+                  <p>- 具备静电力 Chucking 功能，在高温与真空环境中也能保持 Wafer 稳定</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Ceramic Heater</div>
+                <div class="lang-desc">
+                  <p>- Utilizes high-thermal-conductivity AlN ceramic to maximize heat transfer efficiency and temperature uniformity</p>
+                  <p>- Dual-Zone Heater design enables precise temperature control even above 700 °C</p>
+                  <p>- Electrostatic-based chucking function maintains wafer stability in high-temperature and vacuum environments</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_29bKcVrh_ac06956663741279e636ef6e88a11a6a13754832_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">MCA</div>
+                <div class="lang-desc">
+                  <p>- 정전기력으로 웨이퍼를 고정해 진공·플라즈마 환경에서도 평탄도와 정밀도 유지</p>
+                  <p>- TiN·DLC 도트 코팅으로 내마모성과 절연 안정성 강화, 파티클 최소화</p>
+                  <p>- 상온 ~ 400 °C의 넓은 온도 범위에서 안정 동작, 다양한 공정 조건 대응</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">MCA</div>
+                <div class="lang-desc">
+                  <p>- 通过静电力固定 Wafer，在 Vacuum·Plasma 环境中也能保持平坦度与精密度</p>
+                  <p>- TiN、DLC Dot Coating 提升耐磨性与绝缘稳定性，将 Particle 生成降到最低</p>
+                  <p>- 在室温至 400 °C 的宽温区内稳定运行，可适应多种工艺条件</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">MCA</div>
+                <div class="lang-desc">
+                  <p>- Uses electrostatic force to clamp the wafer, maintaining flatness and precision even in vacuum/plasma conditions</p>
+                  <p>- TiN and DLC dot coatings enhance wear resistance and insulation stability, minimizing particle generation</p>
+                  <p>
+                    - Operates reliably across a wide temperature range from room temperature to 400 °C, supporting various process conditions Filter
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_IJ6nK70s_7372d83a8ebdd20fdc4a7efdf905925aa5e52970_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">APC Valve</div>
+                <div class="lang-desc">
+                  <p>- 공정 챔버의 압력을 실시간으로 정밀하게 제어</p>
+                  <p>- 피드백 기반의 자동 제어 기능으로 공정 정밀도 향상</p>
+                  <p>- 고속 응답 특성으로 세밀한 진공 단계 전환 가능</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">APC Valve</div>
+                <div class="lang-desc">
+                  <p>- 对工艺腔体压力(Chamber Pressure)进行实时精密控制</p>
+                  <p>- 通过基于反馈的自动控制功能提高工艺精度</p>
+                  <p>- 具备快速响应特性，可实现精细真空阶段切换</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">APC Valve</div>
+                <div class="lang-desc">
+                  <p>- Precisely controls process chamber pressure in real time</p>
+                  <p>- Improves process precision with feedback-based automatic control</p>
+                  <p>- Enables fine vacuum stage transitions with high-speed response characteristics</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_wmDANCSE_e31fa678718cbdcb605c8db08d2ddf7739d2a4f6_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">RPS</div>
+                <div class="lang-desc">
+                  <p>- 박막 증착, PR Strip, Chamber cleaning 등 다양한 기능으로 활용</p>
+                  <p>- Plasma 발생, Gas 유입 분리 가능, 정밀한 조건 제어 용이</p>
+                  <p>- ALD, ALE 등 소량의 Plasma가 필요한 공정에 적용 가능</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">RPS</div>
+                <div class="lang-desc">
+                  <p>- 适用于薄膜沉积(Film Deposition)、PR Strip、腔体清洗(Chamber Cleaning)等多种工艺</p>
+                  <p>- 可分离Plasma生成与气体注入，便于精确条件控制</p>
+                  <p>- 应用于ALD、ALE等需要少量Plasma的工艺</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">RPS</div>
+                <div class="lang-desc">
+                  <p>- Used for various processes such as thin film deposition, PR strip, and chamber cleaning</p>
+                  <p>- Separates plasma generation from gas injection for precise condition control</p>
+                  <p>- Applicable to ALD, ALE, and other processes requiring low plasma levels</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_HqifnOS8_4f82f2b36fdaafd60d7b7ede96dc7bd5d7e1421e_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Vaporizer</div>
+                <div class="lang-desc">
+                  <p>- 기화 온도를 정밀하게 제어하여 응축 없이 균일한 Precursor 공급</p>
+                  <p>- TDMAT, TEOS, TEB 등 다양한 Precursor 호환</p>
+                  <p>- 공정 시작/종료 시 즉각적인 증기 응답으로 생산성 향상</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Vaporizer</div>
+                <div class="lang-desc">
+                  <p>- 精确控制汽化温度，确保无冷凝且均匀的Precursor供应</p>
+                  <p>- 兼容TDMAT、TEOS、TEB等多种Precursor</p>
+                  <p>- 工艺启停时即刻响应，提高生产效率</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Vaporizer</div>
+                <div class="lang-desc">
+                  <p>- Precisely controls vaporization temperature to supply uniform precursor without condensation</p>
+                  <p>- Compatible with multiple precursors such as TDMAT, TEOS, and TEB</p>
+                  <p>- Provides immediate vapor response at process start and stop, enhancing productivity</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_l8mOLcQn_1ae0793e39112e22823721cca703c21665911f0b_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">CO2 Bubbler</div>
+                <div class="lang-desc">
+                  <p>- 공정 맞춤형 CO₂ 주입 모듈, Compact 설계로 효율 극대화</p>
+                  <p>- 최적화 구조로 유지관리 부담을 최소화</p>
+                  <p>- 멤브레인 방식 적용으로 균일 용해와 안정된 비저항 확보</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">CO2 Bubbler</div>
+                <div class="lang-desc">
+                  <p>- 基于工艺需求设计的CO₂注入模块，采用Compact结构实现高效运行</p>
+                  <p>- 通过优化结构降低维护负担</p>
+                  <p>- 采用膜分离(Membrane)方式，实现均匀溶解与稳定电阻率</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">CO2 Bubbler</div>
+                <div class="lang-desc">
+                  <p>- CO₂ injection module optimized for process conditions with compact design for high efficiency</p>
+                  <p>- Optimized structure minimizes maintenance requirements</p>
+                  <p>- Membrane-based system ensures uniform dissolution and stable resistivity</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_7wOLJUj0_39f64bc06af1d1733a90b3b2f02cb48badee85d9_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">MFC</div>
+                <div class="lang-desc">
+                  <p>- Process에 투입되는 Gas의 유량을 측정 및 제어</p>
+                  <p>- 고속 응답속도 및 높은 정확도로, 극소량 유량 정밀 제어</p>
+                  <p>- 소유량에서 대유량, 고온사용 조건 등 다양한 환경에 적용</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">MFC</div>
+                <div class="lang-desc">
+                  <p>- 对工艺气体(Gas)流量进行测量与控制</p>
+                  <p>- 具备高速响应与高精度，适用于超低流量控制</p>
+                  <p>- 从小流量到大流量、高温条件等多种环境均可应用</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">MFC</div>
+                <div class="lang-desc">
+                  <p>- Measures and controls gas flow for semiconductor processes</p>
+                  <p>- Provides high-speed response and high precision for ultra-low flow control</p>
+                  <p>- Applicable across a wide range of conditions, from low to high flow and high temperatures</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/component/thumb-c20d0acd579a3f02fd9cbbf5d295f446_elXOVwbY_ef9229c60bd58fcb752b02472017e0b9f489f321_590x450.png"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Filter</div>
+                <div class="lang-desc">
+                  <p>- 기체·액체 내 불순물 제거로 공정 라인의 고순도 환경 유지</p>
+                  <p>- 초미세 파티클 제어로 결함률 최소화 및 품질 안정성 확보</p>
+                  <p>- 공정 Gas·Chemical 특성에 맞춘 내식성·내화학성 강화형 맞춤 설계</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Filter</div>
+                <div class="lang-desc">
+                  <p>- 去除 Gas·Liquid 内的杂质，保持工艺管线的高纯度环境</p>
+                  <p>- 控制超微细 Particle，降低缺陷率并确保产品质量稳定</p>
+                  <p>- 根据工艺 Gas·Chemical 特性进行强化耐腐蚀·耐化学性的定制设计</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Filter</div>
+                <div class="lang-desc">
+                  <p>- Removes impurities from gases and liquids to maintain a high-purity process line environment.</p>
+                  <p>- Ultra-fine particle control minimizes defect rates and ensures stable product quality.</p>
+                  <p>- Custom-designed for enhanced corrosion and chemical resistance to match specific process gases and chemicals.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- Product row -->
+          <article style="display: none;" class="product-row">
+            <div class="product-image">
+              <img src="https://placehold.co/400x300/png?text=Product+Image+4" alt="Product 4" />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">제품명 4 (국문)</div>
+                <div class="lang-desc">
+                  <p>국문 설명 1줄</p>
+                  <p>국문 설명 2줄</p>
+                  <p>국문 설명 3줄</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">产品名称 4（中文）</div>
+                <div class="lang-desc">
+                  <p>中文说明第 1 行</p>
+                  <p>中文说明第 2 行</p>
+                  <p>中文说明第 3 行</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Product Name 4 (EN)</div>
+                <div class="lang-desc">
+                  <p>English description line 1.</p>
+                  <p>English description line 2.</p>
+                  <p>English description line 3.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =================== Section 4 =================== -->
+      <section class="product-section">
+        <button class="section-header" type="button">
+          <span class="label">Section 4 – Raw Materials</span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="section-body">
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/rawmaterials/thumb-c20d0acd579a3f02fd9cbbf5d295f446_cZqguLSO_4289ba3c331209f99767f6f1f067644125415344_590x450.jpg"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Coolant</div>
+                <div class="lang-desc">
+                  <p>- 반도체 핵심공정에서 소자 및 장비의 온도를 효과적으로 제어</p>
+                  <p>- 우수한 열전도성으로 극저온부터 고온까지 균일한 냉각 성능 유지</p>
+                  <p>- 환경 친화적 제품 설계</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Coolant</div>
+                <div class="lang-desc">
+                  <p>- 在半导体核心工艺中有效控制器件及设备温度</p>
+                  <p>- 具备优异的导热性能，从极低温到高温均保持均匀冷却效果</p>
+                  <p>- 采用环保设计，符合绿色制造理念</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Coolant</div>
+                <div class="lang-desc">
+                  <p>- Effectively controls device and equipment temperature in core semiconductor processes</p>
+                  <p>- Provides excellent thermal conductivity, maintaining uniform cooling from cryogenic to high temperatures</p>
+                  <p>- Designed with an eco-friendly concept for sustainable operation</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/rawmaterials/thumb-c20d0acd579a3f02fd9cbbf5d295f446_uNvW32J8_84489cf7640d3d5a7b30155e733fe81988cdea76_590x450.jpg"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">Carbon Hard Mask</div>
+                <div class="lang-desc">
+                  <p>- 정밀하고 효율적인 반도체 미세 패터닝을 위한 재료</p>
+                  <p>- 우수한 식각 저항성을 제공하여 높은 수율과 고해상도 패턴 구현</p>
+                  <p>- 뛰어난 코팅 성능으로 정확하고 안정적인 패턴 형성</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">Carbon Hard Mask</div>
+                <div class="lang-desc">
+                  <p>- 用于精密且高效的半导体微细图形化(Patterning)材料</p>
+                  <p>- 提供优异的抗蚀刻性能(Etching Resistance)，实现高良率与高分辨率图形</p>
+                  <p>- 具备出色的涂层性能，确保精确且稳定的图形形成</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Carbon Hard Mask</div>
+                <div class="lang-desc">
+                  <p>- Material for precise and efficient semiconductor fine patterning</p>
+                  <p>- Offers excellent etching resistance for high yield and high-resolution pattern formation</p>
+                  <p>- Ensures accurate and stable coating performance for reliable process results</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/rawmaterials/thumb-c20d0acd579a3f02fd9cbbf5d295f446_ORmCr1SQ_3ce37e56baa58f9ea8bb5e3657459e5004a5ae44_590x450.jpg"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">FFKM</div>
+                <div class="lang-desc">
+                  <p>- 과불소 엘라스토머 기반으로, 우수한 탄성력과 내화학성을 갖춘 고기능성 원소재 솔루션 제공</p>
+                  <p>- 반도체·항공우주 등 다양한 산업의 Sealing Solution에 적용되며, 화학·열·플라즈마 환경에서 탁월한 내성 발휘</p>
+                  <p>- 친환경 규격과 고객 요구 조건에 따른 맞춤형 설계 가능하며, FKM 솔루션 라인업도 함께 보유</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">FFKM</div>
+                <div class="lang-desc">
+                  <p>- 以 Perfluoroelastomer 为基础材料，提供具备优异弹性与耐化学性的高性能原材料解决方案</p>
+                  <p>- 广泛应用于半导体、航空航天等产业的 Sealing Solution，在化学、热与 Plasma 环境下展现卓越耐性</p>
+                  <p>- 可根据环保标准与客户需求进行 Customized 设计，同时也提供 FKM 产品线</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">FFKM</div>
+                <div class="lang-desc">
+                  <p>
+                    - A high-performance base material solution made from perfluoroelastomer, offering excellent elasticity and chemical resistance.
+                  </p>
+                  <p>
+                    - Used in sealing solutions across semiconductor, aerospace, and various industries, demonstrating outstanding resistance in
+                    chemical, thermal, and plasma environments.
+                  </p>
+                  <p>
+                    - Supports eco-friendly specifications and can be custom-designed to meet customer requirements; FKM product lineup also
+                    available.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-row">
+            <div class="product-image">
+              <img
+                src="https://rondakorea.mycafe24.com/data/file/rawmaterials/thumb-c20d0acd579a3f02fd9cbbf5d295f446_HSFwxWUl_05e6bb02569f4b47c540319b505d73578bf67f16_590x450.jpg"
+              />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">PFA</div>
+                <div class="lang-desc">
+                  <p>- PTFE와 FEP의 장점을 모두 가지는 불소수지</p>
+                  <p>- 우수한 내화학성 , 고온 안정성 및 기계적 강도를 가지는 특성</p>
+                  <p>- 반도체 및 LCD 제조 장비 부품, Wet Etch, Photo 공정등에 사용됨</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">PFA</div>
+                <div class="lang-desc">
+                  <p>- 兼具 PTFE 与 FEP 优点的 Fluororesin</p>
+                  <p>- 具有优异的耐化学性、高温稳定性与机械强度</p>
+                  <p>- 用于半导体与 LCD 制造设备部件，以及 Wet Etch、Photo 等工艺</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">PFA</div>
+                <div class="lang-desc">
+                  <p>- A fluororesin that combines the advantages of PTFE and FEP.</p>
+                  <p>- Features excellent chemical resistance, high-temperature stability, and strong mechanical durability.</p>
+                  <p>- Used in semiconductor and LCD manufacturing equipment parts, as well as Wet Etch and Photo processes.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- Product row -->
+          <article style="display: none;" class="product-row">
+            <div class="product-image">
+              <img src="https://placehold.co/400x300/png?text=Product+Image+5" alt="Product 5" />
+            </div>
+            <div class="product-content">
+              <div class="lang-block lang-ko">
+                <div class="lang-label">KO</div>
+                <div class="lang-title">제품명 5 (국문)</div>
+                <div class="lang-desc">
+                  <p>국문 설명 1줄</p>
+                  <p>국문 설명 2줄</p>
+                  <p>국문 설명 3줄</p>
+                </div>
+              </div>
+              <div class="lang-block lang-zh">
+                <div class="lang-label">ZH</div>
+                <div class="lang-title">产品名称 5（中文）</div>
+                <div class="lang-desc">
+                  <p>中文说明第 1 行</p>
+                  <p>中文说明第 2 行</p>
+                  <p>中文说明第 3 行</p>
+                </div>
+              </div>
+              <div class="lang-block lang-en">
+                <div class="lang-label">EN</div>
+                <div class="lang-title">Product Name 5 (EN)</div>
+                <div class="lang-desc">
+                  <p>English description line 1.</p>
+                  <p>English description line 2.</p>
+                  <p>English description line 3.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll(".product-section");
+
+        sections.forEach(function (section) {
+          const header = section.querySelector(".section-header");
+          header.addEventListener("click", function () {
+            section.classList.toggle("is-collapsed");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
