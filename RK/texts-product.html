@@ -194,13 +194,31 @@
           grid-template-columns: 1fr;
         }
       }
+.blink {
+  animation: blink 2s step-start infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+    background-color: #D0F4F5;
+  }
+}
+.del-strong {
+  text-decoration: line-through;
+  font-style: italic;
+  text-decoration-color: #ef4444; /* 빨간색 강조 */
+}
+.text-right {
+  text-align: right;
+}
+
     </style>
   </head>
   <body>
     <main class="page">
       <header>
         <h1 class="page-title">제품 텍스트 종합 </h1>
-        <p class="page-sub">각 제품은 이미지와 국문/중문/영문 설명으로 구성되며, 섹션 헤더를 클릭하면 해당 섹션의 제품 목록이 토글됩니다.</p>
+        <p class="page-sub blink" style="color: #852323;">각 제품은 이미지와 국문/중문/영문 설명으로 구성되며, 섹션 헤더를 클릭하면 해당 섹션의 제품 목록이 토글됩니다.</p>
       </header>
 
       <!-- =================== Section 1 =================== -->

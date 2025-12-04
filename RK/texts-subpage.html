@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>RK - 서브페이지 텍스트 종합</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --paper: #ffffff;
+        --line: #e2e8f0;
+        --ink: #0f172a;
+        --muted: #64748b;
+        --accent: #2563eb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 24px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont,
+          "Noto Sans KR", "Noto Sans SC", "Segoe UI", sans-serif;
+        background: #f1f5f9;
+        color: var(--ink);
+      }
+
+      .page {
+        max-width: 1600px;
+        margin: 0 auto;
+        background: var(--paper);
+        border-radius: 16px;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+        padding: 24px 24px 40px;
+      }
+
+      .page-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .page-sub {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+
+      /* 섹션 공통 */
+      .section {
+        margin-top: 32px;
+        border-top: 1px solid var(--line);
+        padding-top: 24px;
+      }
+
+      .section:first-of-type {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .section-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .section-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      .section-tag::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--accent);
+      }
+
+      /* 3컬럼 테이블 레이아웃 */
+      .tri-table {
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        overflow: hidden;
+        margin-top: 8px;
+      }
+
+      .tri-header,
+      .tri-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .tri-header {
+        background: #f8fafc;
+        border-bottom: 1px solid var(--line);
+        cursor: pointer;
+        position: relative;
+      }
+
+      .tri-header::after {
+        content: "▾";
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.7rem;
+        color: var(--muted);
+      }
+
+      /* 접힌 상태일 때 아이콘 회전 */
+      .tri-table.is-collapsed .tri-header::after {
+        transform: translateY(-50%) rotate(-90deg);
+      }
+
+      /* 접힌 상태에서는 row 숨김 */
+      .tri-table.is-collapsed .tri-row {
+        display: none;
+      }
+
+      .tri-header-cell {
+        padding: 10px 14px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        border-right: 1px solid var(--line);
+      }
+
+      .tri-header-cell:last-child {
+        border-right: none;
+      }
+
+      .tri-row + .tri-row {
+        border-top: 1px solid var(--line);
+      }
+
+      .tri-cell {
+        padding: 14px 14px 16px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        border-right: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      .tri-cell:last-child {
+        border-right: none;
+      }
+
+      .tri-cell p {
+        margin: 0 0 0.4em;
+      }
+
+      .tri-cell p:last-child {
+        margin-bottom: 0;
+      }
+
+      .tri-label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+        display: none; /* 데스크탑에서는 숨김, 모바일에서 표시 */
+      }
+
+      .tri-heading {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+
+      /* 언어별 약간의 톤 조절 (원하면 삭제 가능) */
+      .lang-ko .tri-heading {
+        color: #111827;
+      }
+
+      .lang-zh .tri-heading {
+        color: #0f766e;
+      }
+
+      .lang-en .tri-heading {
+        color: #1d4ed8;
+      }
+
+      /* 반응형: 모바일에서 1컬럼, 데스크탑에서 3컬럼 */
+      @media (max-width: 900px) {
+        .tri-row {
+          grid-template-columns: 1fr;
+        }
+
+        .tri-cell {
+          border-right: none !important;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .tri-row .tri-cell:last-child {
+          border-bottom: none;
+        }
+
+        .tri-label {
+          display: inline-block;
+        }
+      }
+      b {
+        color: #9B6C5F;
+      }
+
+.blink {
+  animation: blink 2s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+    background-color: #D0F4F5;
+  }
+}
+
+.del-strong {
+  text-decoration: line-through;
+  font-style: italic;
+  text-decoration-color: #ef4444; /* 빨간색 강조 */
+}
+.text-right {
+  text-align: right;
+}
+
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <h1 class="page-title">서브페이지 텍스트 종합</h1>
+        <p class="page-sub" style="color: #E94513;">
+          국문 / 중문 / 영문 컨텍스트를 3컬럼으로 나란히 비교·관리하기 위한
+          레이아웃 템플릿입니다. 각 섹션의 언어 헤더를 클릭하면 내용을
+          접기/펼치기 할 수 있습니다.
+        </p>
+      </header>
+
+      <!-- 공통 -->
+      <section class="section" id="gnb">
+        <!-- <div class="section-tag">공통</div> -->
+        <h2 class="section-title">GNB : 상단 메뉴</h2>
+
+        <div class="tri-table">
+          <!-- 헤더 클릭 시 아래 tri-row 토글 -->
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p>
+                <b>Company</b> <br>
+                - CEO인사말 <br>
+                - 회사개요 <br>
+                - 경영철학 <br>
+                - 걸어온길 <br>
+                - 찾아오시는길 <br>
+                <b>Business</b> <br>
+                - 사업전략 <br>
+                <b>Technology</b> <br>
+                - Consumable Parts <br>
+                - Sub-FAB Solution <br>
+                - Critical Component <br>
+                - Raw Materials <br>
+                <b>Products</b> <br>
+                - Consumable Parts <br>
+                - Sub-FAB Systems <br>
+                - Critical Component <br>
+                - Raw Materials <br>
+                <b>Support</b> <br>
+                - 온라인문의 <br>
+                - 뉴스룸 <br>
+                - FAQ <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p>
+                <b>Company</b> <br>
+                - 首席执行官致辞 <br>
+                - 公司简介 <br>
+                - 经营哲学 <br>
+                - 发展历程 <br>
+                - 前往方式 <br>
+                <b>Business</b> <br>
+                - 业务战略 <br>
+                <b>Technology</b> <br>
+                - Consumable Parts <br>
+                - Sub-FAB Solution <br>
+                - Critical Component <br>
+                - Raw Materials <br>
+                <b>Products</b> <br>
+                - Consumable Parts <br>
+                - Sub-FAB Systems <br>
+                - Critical Component <br>
+                - Raw Materials <br>
+                <b>Support</b> <br>
+                - 在线咨询 <br>
+                - 新闻中心 <br>
+                - 常见问题（FAQ） <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p>
+                <b>Company</b> <br>
+                - CEO Greetings <br>
+                - Company Overview <br>
+                - Philosophy <br>
+                - Our Journey <br>
+                - Location <br>
+                <b>Business</b> <br>
+                - Business Strategy <br>
+                <b>Technology</b> <br>
+                - Consumable Parts <br>
+                - Sub-FAB Solution <br>
+                - Critical Component <br>
+                - Raw Materials <br>
+                <b>Products</b> <br>
+                - Consumable Parts <br>
+                - Sub-FAB Systems <br>
+                - Critical Component <br>
+                - Raw Materials <br>
+                <b>Support</b> <br>
+                - Online Inquiry <br>
+                - Newsroom <br>
+                - FAQ <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- HOME -->
+      <section class="section" id="page-home">
+        <h2 class="section-title">Home : 메인 페이지</h2>
+
+        <div class="tri-table">
+          <!-- 헤더 클릭 시 아래 tri-row 토글 -->
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">1. 슬로건 파트</p>
+              <p>
+                - Delivering Smarter Semiconductor Solutions  <br>
+                - Built on Trust, Driven by Technology <br>
+                - Enabling a Better World Through Semiconductors  <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">1. 슬로건 파트</p>
+              <p>
+                - Delivering Smarter Semiconductor Solutions  <br>
+                - Built on Trust, Driven by Technology <br>
+                - Enabling a Better World Through Semiconductors  <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">1. 슬로건 파트</p>
+              <p>
+                - Delivering Smarter Semiconductor Solutions  <br>
+                - Built on Trust, Driven by Technology <br>
+                - Enabling a Better World Through Semiconductors  <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">2. Semiconductor Materials & Solutions 파트</p>
+              <p>
+                Semiconductor Materials & Solutions <br>
+                <br>
+                글로벌 네트워크의 핵심 허브로서 <br>
+                반도체 산업의 새로운 흐름을 만듭니다. <br>
+                <br>
+                <b>Expertise</b>: 다양한 기술 분야에서 풍부한 경험과 전문성을 갖춘 인재들이 모여, 공정별 맞춤형 기술 지원과 안정적인 품질 향상을 실현합니다. <br>
+                <b>Connectivity</b>: 전 세계 주요 거점을 연결하는 유연하고 견고한 공급망 네트워크를 기반으로, 고객에게 최적화된 솔루션과 지속 가능한 파트너십을 제공합니다. <br>
+                <b>Knowhow</b>: 글로벌 반도체 현장의 실무 경험과 기술 노하우를 체계적으로 내재화해, 변화하는 지장에 신속히 대응할 경쟁력을 갖추고 있습니다. <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">2. Semiconductor Materials & Solutions 파트</p>
+              <p>
+                Semiconductor Materials & Solutions <br>
+                <br>
+                作为全球网络的核心枢纽， <br>
+                引领半导体产业的新潮流。 <br>
+                <br>
+                <b>Expertise</b>: 具备丰富技术背景的专业人才汇聚于此，通过工序定制化技术支持，实现稳定且持续提升的品质。 <br>
+                <b>Connectivity</b>: 依托覆盖全球主要区域的灵活且稳健的供应链网络，为客户提供最优化的解决方案与可持续的合作伙伴关系。 <br>
+                <b>Knowhow</b>: 系统化沉淀来自全球半导体现场的实务经验与技术 Knowhow，构建能够快速响应市场变化的核心竞争力。 <br>
+
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">2. Semiconductor Materials & Solutions 파트</p>
+              <p>
+                Semiconductor Materials & Solutions <br>
+                <br>
+                As a central hub in the global network, <br>
+                we drive new trends in the semiconductor industry. <br>
+                <br>
+                <b>Expertise</b>: Experienced professionals delivering specialized support and reliable quality. <br>
+                <b>Connectivity</b>: A flexible global supply chain ensuring optimized solutions and lasting partnerships. <br>
+                <b>Knowhow</b>: Field-proven expertise enabling fast response to shifting market needs. <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">3. Business Expertise 파트</p>
+              <p>
+                Business Expertise <br>
+                전 공정에 대한 폭넓은 기술 기반과 <br>
+                공정 최적화 역량을 통해 고성능 생산을 구현합니다. <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">3. Business Expertise 파트</p>
+              <p>
+                Business Expertise <br>
+                凭借Ronda的技术实力，在半导体先进工艺中覆盖材料、部件与设备领域，实现卓越品质。 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">3. Business Expertise 파트</p>
+              <p>
+                Business Expertise <br>
+                We enable high-performance production through extensive technical expertise across the full semiconductor process and advanced process-optimization capabilities. <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">4. Latest Updates 파트</p>
+              <p>
+                Latest Updates <br>
+                론다코리아의 최신 소식을 안내드립니다. <br>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">4. Latest Updates 파트</p>
+              <p>
+                Latest Updates <br>
+                为您提供 Ronda Korea 的最新动态。 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">4. Latest Updates 파트</p>
+              <p>
+                Latest Updates <br>
+                Latest News from Ronda Korea. <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">5. Support Customer 파트</p>
+              <p>
+                Support Customer <br>
+                문의하기 <br>
+                자주 묻는 질문 <br>
+                찾아오시는 길 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">5. Support Customer 파트</p>
+              <p>
+                Support Customer <br>
+                联系我们 <br>
+                常见问题（FAQ） <br>
+                访问路线 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">5. Support Customer 파트</p>
+              <p>
+                Support Customer <br>
+                Contact Us <br>
+                Frequently Asked Questions <br>
+                Directions <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- COMPANY -->
+      <section class="section" id="page-company">
+        <h2 class="section-title">COMPANY : 기업소개 페이지</h2>
+
+        <div class="tri-table">
+          <!-- 헤더 클릭 시 아래 tri-row 토글 -->
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                COMPANY / 가치를 나누는 파트너십 <br>
+                산업의 흐름을 바꾸는 힘 <br>
+                <br>
+                CEO인사말 | 회사개요 | 경영철학 | 걸어온길 | 찾아오시는길 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                COMPANY / 分享价值的合作伙伴关系 <br>
+                改变产业格局的力量 <br>
+                <br>
+                首席执行官致辞 | 公司简介 | 经营哲学 | 发展历程 | 前往方式 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                COMPANY / Partnerships that share value <br>
+                The power to reshape industry <br>
+                <br>
+                CEO Greetings | Company Overview | Philosophy | Our Journey | Location <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">CEO 인사말</p>
+              <p>
+                <b>파트 #1</b> <br>
+                론다코리아는 신뢰·혁신·도전의 핵심가치를 바탕으로, 빠르게 변화하는 반도체 산업 속에서 고객과 함께 성장하며 더 높은 가치를 창출하는 기업이 되겠습니다. <br>
+                <br>
+                <b>파트 #2</b> <br>
+                반도체 산업은 오늘날 기술 발전의 심장부에서, 그 어느 때보다 빠르게 변화하고 있습니다. 공정의 미세화와 소재의 고도화가 동시에 진행되는 이 시점에서, 정밀성과 안정성, 그리고 지속 가능한 품질 경쟁력은 모든 기업의 생존을 좌우하는 핵심 요소가 되었습니다. <br>
+                <br>
+                론다코리아는 이러한 산업 환경 속에서 ‘신뢰할 수 있는 기술 파트너’가 되기 위해 끊임없이 도전하고 있습니다. 우리는 단순히 부품을 공급하는 회사가 아니라, 고객의 공정 특성과 기술적 요구를 깊이 이해하고, 이에 부합하는 맞춤형 솔루션과 기술 지원을 통해 고객의 경쟁력 강화에 실질적으로 기여하는 종합 반도체 솔루션 기업입니다. <br>
+                <br>
+                또한, 끊임없는 기술 혁신과 품질 개선, 그리고 공급망의 신뢰성 확보를 통해 고객의 생산성 향상과 공정 안정성 확보에 도움을 드리고자 최선을 다하고 있습니다. 우리는 고객의 성장을 곧 우리의 성장으로 여기며, ‘파트너십 그 이상의 가치’를 함께 만들어가고 있습니다.  <br>
+                <br>
+                앞으로도 론다코리아는 ‘신뢰·혁신·도전’의 핵심가치를 바탕으로, 빠르게 변화하는 반도체 산업 속에서 지속 가능한 미래와 산업 생태계의 건강한 발전에 기여하겠습니다. 변함없는 신뢰와 열정으로, 고객과 함께 성장하며 더 높은 가치를 창출하는 기업이 되겠습니다. <br>
+                감사합니다. <br>
+                <br>
+                <div class="text-right">론다코리아 임직원 일동</div>
+                <br>
+                <b>파트 #3</b> <br>
+                - 론다코리아는 반도체 공정에 특화된 소재·부품·장비 제조하며, 고객맞춤형 공급망 솔루션을 함께 제공합니다. <br>
+                - 반도체산업의 주요 공정 및 장비 부야에서 실무 경험을 갖춘 전문가들로 구성되어 있습니다. <br>
+                - 푹 넓은 포트폴리오를 바탕으로, 국내외 시장에서 활발한 사업을 전개하고 있습니다. <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">CEO 인사말</p>
+              <p>
+                <b>파트 #1</b> <br>
+                Ronda Korea 以“信任·创新·挑战”的核心价值为基础， <br>
+                在快速变化的半导体产业中与客户共同成长，创造更高价值。 <br>
+                <br>
+                <b>파트 #2</b> <br>
+                半导体产业作为当今技术发展的核心，比以往任何时候都在更快速地演进。 <br>
+                在制程微缩与材料高端化同步推进的当下，精密性、稳定性以及可持续的品质竞争力，已经成为企业生存的关键要素。 <br>
+                <br>
+                在这样的产业环境中，Ronda Korea 始终致力于成为客户可信赖的 技术合作伙伴。 <br>
+                我们不仅是零部件供应商，更深入理解客户的工艺特性与技术需求， <br>
+                通过提供定制化解决方案与技术支持，切实推动客户竞争力的提升， <br>
+                成为综合性的半导体解决方案企业。 <br>
+                <br>
+                同时，我们通过持续的技术创新、品质改善以及稳定的供应链体系， <br>
+                全力协助客户提升生产效率与工艺稳定性。 <br>
+                我们相信客户的成长即是我们的成长，并共同创造 “超越合作伙伴关系的价值”。 <br>
+                <br>
+                未来，Ronda Korea 将继续以 “信任·创新·挑战” 的核心价值为根基， <br>
+                为可持续的未来和健康的半导体生态系统发展贡献力量。 <br>
+                我们将以始终如一的热忱，与客户共同成长，创造更高价值。 <br>
+                谢谢。 <br>
+                <br>
+                <div class="text-right">谨代表 Ronda Korea 全体员工</div>
+                <br>
+                <b>파트 #3</b> <br>
+                - Ronda Korea 专注于半导体工艺领域的材料、零部件及设备制造，并提供客户定制型供应链解决方案。 <br>
+                - 团队由具备半导体主要工序与设备领域实务经验的专业人才组成。 <br>
+                - 凭借多元化的产品组合，在国内外市场开展积极而稳健的业务。 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">CEO 인사말</p>
+              <p>
+                <b>파트 #1</b> <br>
+                <span class="del-strong">Ronda Korea pursues continuous growth together with our customers based on our core values of trust, innovation, and challenge. In the rapidly evolving semiconductor industry, we are committed to creating higher value and becoming a company that advances alongside our partners.</span> <br>
+                <span class="blink">Ronda Korea is committed to trust, innovation, and challenge, growing with our customers and creating greater value in the rapidly evolving semiconductor industry.</span> <br>
+                <br>
+                <b>파트 #2</b> <br>
+                The semiconductor industry is evolving faster than ever, standing at the center of global technological advancement. With process miniaturization and material sophistication progressing simultaneously, precision, stability, and sustainable quality competitiveness have become essential for corporate survival. <br>
+                <br>
+                In this environment, Ronda Korea is committed to becoming a trusted technology partner. We are more than a parts supplier—we deeply understand each customer’s process characteristics and technical requirements, delivering tailored solutions and technical support that strengthen our customers’ competitiveness. As a comprehensive semiconductor solutions provider, we contribute meaningfully to process optimization and operational performance. <br>
+                <br>
+                Through continuous technological innovation, quality improvement, and a reliable supply chain, we strive to support our customers with enhanced productivity and process stability. We believe our customers' growth is our own, and we continue to build “value beyond partnership.” <br>
+                <br>
+                Moving forward, Ronda Korea will uphold the core values of trust, innovation, and challenge, contributing to a sustainable future and a healthier semiconductor ecosystem. With unwavering dedication, we will continue to grow alongside our customers and create greater value. <br>
+                Thank you. <br>
+                <br>
+                <div class="text-right">On behalf of all employees of Ronda Korea</div>
+                <br>
+                <b>파트 #3</b> <br>
+                - Ronda Korea specializes in the manufacturing of semiconductor materials, parts, and equipment, providing customized supply chain solutions for diverse customer requirements. <br>
+                - Our team is composed of experts with extensive hands-on experience in major semiconductor processes and equipment fields. <br>
+                - Based on a broad product portfolio, we actively expand our business in both domestic and global markets. <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">회사 개요</p>
+              <p>
+                <b>기업 프로필</b> <br>
+                <b>회사명</b> : 론다코리아주식회사 RONDA KOREA Co., Ltd. <br>
+                <b>설립연도</b> : 2019년 <br>
+                <b>사업영역</b> : 반도체 제조 장비의 핵심부품 및 소재 <br>
+                <b>핵심키워드</b> : Precision Machining, Si/Quartz/SiC Processing, SCM for Semiconductor <br>
+                <b>Core Product Lines</b> <br>
+                - Consumable Parts : 반도체 제조 장비의 핵심 소모품을 직접 가공·생산 <br>
+                - Sub-FAB Systems : 배기 불순물의 효과적 제거 및 설비 안정화 장치 제공 <br>
+                - Component : 반도체 제조장비의 핵심 부품 라인업 구축 <br>
+                - Raw Materials : 냉매, 방진, 단열, 차폐 등 주변 부품의 친환경 원자재 공급 <br>
+                <br>
+                <b>특허 · 인증 및 수상</b> <br>
+                - 특허증 <br>
+                - 수출프론티어기업 인증서 <br>
+                - 삼천만불 수출의 탑 <br>
+                - 벤처기업인상 <br>
+                - 수출프론티어 신인왕상 <br>
+                - 중소기업표창 도지사상 <br>
+                - 품질경영 ISO9001 <br>
+                - 환경경영 ISO14001 <br>
+                - 글로벌 강소기업 1000+ <br>
+                - Inno-Biz 확인서 <br>
+                - 벤처기업 확인서 <br>
+                - 기업부설 연구소 인정서 <br>
+                - 안전보건 CQM 인증 <br>
+                - 품질 CQM 인증 <br>
+                - 환경 CQM 인증 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">회사 개요</p>
+              <p>
+                <b>企业概况</b> <br>
+                <b>公司名称</b> : Ronda Korea Co., Ltd. <br>
+                <b>成立年份</b> : 2019 年 <br>
+                <b>业务领域</b> : 半导体制造设备的核心部件与材料 <br>
+                <b>核心关键词</b> : Precision Machining, Si/Quartz/SiC Processing, SCM for Semiconductor <br>
+                <b>核心产品线</b> <br>
+                - Consumable Parts : 直接加工与生产半导体制造设备的核心消耗性零部件 <br>
+                - Sub-FAB Systems : 用于有效去除排气杂质并稳定设备运行的系统 <br>
+                - Component :构建半导体制造设备的核心部件产品线 <br>
+                - Raw Materials : 提供用于冷媒、隔热、防振、屏蔽等用途的环保原材料 <br>
+                <br>
+                <b>专利·认证及获奖</b> <br>
+                - 专利证书 <br>
+                - 出口先锋企业认证书 <br>
+                - 三千万美元出口塔奖 <br>
+                - 风险企业人奖 <br>
+                - 出口先锋新人王奖 <br>
+                - 中小企业表彰 道知事奖 <br>
+                - 质量管理 ISO9001 <br>
+                - 环境管理 ISO14001 <br>
+                - 全球强小企业 1000 <br>
+                - Inno-Biz 确认书 <br>
+                - 风险企业确认书 <br>
+                - 企业附属研究所认证书 <br>
+                - 安全与健康 CQM 认证 <br>
+                - 质量 CQM 认证 <br>
+                - 环境 CQM 认证 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">회사 개요</p>
+              <p>
+                <b>Business Profile</b> <br>
+                <b>Company Name</b>: Ronda Korea Co., Ltd. <br>
+                <b>Established</b>: 2019 <br>
+                <b>Business Area</b>: Core components and materials for semiconductor manufacturing equipment <br>
+                <b>Key Keywords</b>: Precision Machining, Si/Quartz/SiC Processing, SCM for Semiconductor <br>
+                <b>Core Product Lines</b>:  <br>
+                - Consumable Parts : Manufacturing of key consumable components for semiconductor process equipment <br>
+                - Sub-FAB Systems : Systems for effective removal of exhaust impurities and stabilization of equipment <br>
+                - Component : Full lineup of core components for semiconductor manufacturing equipment <br>
+                - Raw Materials : Eco-friendly raw materials for coolant, insulation, vibration control, and shielding applications <br>
+                <br>
+                <b>Patents · Certifications & Awards</b> <br>
+                - Patent Certificate <br>
+                - Export Frontier Company Certificate <br>
+                - 30 Million Dollar Export Tower Award <br>
+                - Venture Businessperson Award <br>
+                - Export Frontier Rookie Award <br>
+                - Governor’s Award for SME Achievement <br>
+                - Quality Management ISO9001 <br>
+                - Environmental Management ISO14001 <br>
+                - Global Strong SME 1000+ Program <br>
+                - Inno-Biz Certification <br>
+                - Venture Company Certification <br>
+                - Corporate Research Institute Accreditation <br>
+                - Safety & Health CQM Certification <br>
+                - Quality CQM Certification <br>
+                - Environment CQM Certification <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">경영철학</p>
+              <p>
+                <b>VISION</b>: 우리는 반도체 산업의 성장에 기여하고, 고객이 더 나은 세상을 만들 수 있도록 지원함으로써, 사람들의 삶의 질 향상에 이바지합니다. <br>
+                <b>Mission</b>: 우리는 고객에게 경쟁력 있는 제품과 고품질 서비스를 제공하며, 업계를 선도할 수 있는 혁신적인 반도 제조 솔루션을 실현합니다. <br>
+                <b>Core Value</b>: <br>
+                - 정직과 책임: 우리는 정직하게 행동하며 결과에 책임을 집니다. <br>
+                - 상호 신뢰: 투명성과 존중을 바탕으로 신뢰를 구축합니다. <br>
+                - 기술 리더십: 혁신과 전문성으로 시장을 선도합니다. <br>
+                - 품질 중심 SCM: 공급망 전반에 걸쳐 품질을 최우선으로 합니다. <br>
+                - 상생 전략: 회사와 파트너 모두에게 이익이 되는 성장을 추구합니다. <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">경영철학</p>
+              <p>
+                <b>VISION</b>: 我们致力于推动半导体产业的增长，支持客户创造更美好的世界，从而提升人们的生活质量。 <br>
+                <b>Mission</b>: 我们通过提供具有竞争力的产品与高品质服务，实现引领行业的创新型半导体制造解决方案。 <br>
+                <b>Core Value</b>: <br>
+                - 诚信与责任 ：以诚信行事，并对结果承担责任。 <br>
+                - 相互信任 ：以透明与尊重为基础建立信任。 <br>
+                - 技术领导力 ：以创新与专业性引领市场。 <br>
+                - 品质导向的 SCM ：在整个供应链中坚持品质优先。 <br>
+                - 共赢战略 ：追求公司与合作伙伴共同受益的成长。 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">경영철학</p>
+              <p>
+                <b>VISION</b>: We contribute to the growth of the semiconductor industry and support our customers in creating a better world, ultimately enhancing the quality of life for people. <br>
+                <b>Mission</b>: We deliver competitive products and high-quality services, providing innovative semiconductor manufacturing solutions that lead the industry. <br>
+                <b>Core Value</b>:  <br>
+                - Trust & Ownership: We act with integrity and take responsibility for our results. <br>
+                - Mutual Trust: We build trust based on transparency and respect. <br>
+                - Tech Leadership: We lead the market through innovation and expertise. <br>
+                - Quality SCM: We prioritize quality across the entire supply chain. <br>
+                - Win-Win Strategy: We pursue growth that benefits both the company and our partners. <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">걸어온길</p>
+              <p>
+                <b>걸어온길</b> <br>
+                <b>2025</b> <br>
+                <b>Q3</b> <br>
+                - 소모품 제조 라인 <br>
+                - 2차 외부 투자 유치 성공 <br>
+                - 칩메이커대상으로본격마케팅시작 <br>
+                <b>Q2</b> <br>
+                - 절연,단열,전기차폐소모품제조시설 <br>
+                - 주요고객Audit 통과 <br>
+                <b>Q1</b> <br>
+                - 소모품 제조 라인 <br>
+                - 1차 외부 투자 유치 성공 <br>
+                - 본격적인 중규모 생산 라인 구축 <br>
+                <b>2024</b> <br>
+                <b>Q4</b> <br>
+                - 고난이도 구조의 실리콘(Silicon) <br>
+                - 소재의 챔버 구성품들의 자체 기술 개발 성공 및 양산 준비 완료 <br>
+                <b>Q3</b> <br>
+                - Valve, Pump, Scrubber 생산 라인업 제조 라인 가동  <br>
+                - Facility Solution 라인업 추진 및 수직 계열화 완성 <br>
+                <b>Q2</b> <br>
+                - 절연,단열,전기 차폐 기능 <br>
+                - 향상을 위한 소모성 부품 생산 라인 가동 <br>
+                <b>Q1</b> <br>
+                - 자체 제작 Drill/CNC 설비 생산라인 도입 <br>
+                - 고정밀 가공 역량 강화 <br>
+                <b>Q1</b> <br>
+                - Silicon, Silicon Carbide 소모품 자체 가공 시작 <br>
+                - 고내열/고강도 소재 부품의 독자 기술개발을 바탕으로 생산 라인 가동 <br>
+                <b>2023</b> <br>
+                <b>Q4</b> <br>
+                - 포토케미컬(Photo Chemical) 파일럿 생산 라인 가동 <br>
+                - 반도체 포토 공정용 화학소재 자체 개발 성공 <br>
+                <b>Q1</b> <br>
+                - 로컬 생산공장 투자 계약 체결 <br>
+                - 현지 생산 및 기술 거점 확보 <br>
+                <b>2022</b> <br>
+                <b>Q1</b> <br>
+                - 중국내 영업역량 확대를 위한 현지 법인 설립 <br>
+                - 영업 및 로컬 공급망 기반 확립 <br>
+                <b>2019</b> <br>
+                <b>Q4</b> <br>
+                - 유럽 소재 칩메이커 기술/생산 컨설팅 <br>
+                - 설비 가동률 및 생산성 향상 계약 성공 <br>
+                <b>Q2</b> <br>
+                - 론다코리아(RONDA KOREA Co., Ltd.) 설립 <br>
+                - 반도체 소부장 전문 기업으로 출범 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">걸어온길</p>
+              <p>
+                <b>发展历程</b> <br>
+                <b>2025</b> <br>
+                <b>Q3</b> <br>
+                - 启动耗材制造生产线 <br>
+                - 成功完成第二轮外部投资引进 <br>
+                - 面向芯片制造商正式启动市场营销活动 <br>
+                <b>Q2</b> <br>
+                - 建立绝缘、隔热及电磁屏蔽耗材制造设施 <br>
+                - 通过主要客户的审计（Audit） <br>
+                <b>Q1</b> <br>
+                - 启动耗材制造生产线 <br>
+                - 成功完成第一轮外部投资引进 <br>
+                - 建立中规模量产生产线 <br>
+                <b>2024</b> <br>
+                <b>Q4</b> <br>
+                - 成功自主开发复杂结构的硅（Silicon）材料腔室组件，并完成量产准备 <br>
+                <b>Q3</b> <br>
+                - 启动 Valve、Pump、Scrubber 生产线 <br>
+                - 推进 Facility Solution 产品线并完成垂直整合 <br>
+                <b>Q2</b> <br>
+                - 启动提升绝缘、隔热、电磁屏蔽性能的耗材生产线 <br>
+                <b>Q1</b> <br>
+                - 引进自主制造的 Drill / CNC 加工生产线， <br>
+                - 强化高精密加工能力 <br>
+                <b>Q1</b> <br>
+                - 开始自主加工 Silicon / Silicon Carbide 耗材  <br>
+                - 以耐高温、高强度材料的自有技术为基础，启动量产生产线 <br>
+                <b>2023</b> <br>
+                <b>Q4</b> <br>
+                - 启动 Photo-Chemical 试生产线 <br>
+                - 成功自主开发半导体光刻工艺用化学材料 <br>
+                <b>Q1</b> <br>
+                - 签订本地生产工厂投资合同 <br>
+                - 建立本地生产及技术据点 <br>
+                <b>2022</b> <br>
+                <b>Q1</b> <br>
+                - 在中国设立当地法人，扩大半导体销售网络 <br>
+                - 建立销售与本地供应链基础 <br>
+                <b>2019</b> <br>
+                <b>Q4</b> <br>
+                - 为欧洲芯片制造商提供技术与生产咨询 <br>
+                - 成功签订提升设备稼动率及生产效率的合同 <br>
+                <b>Q2</b> <br>
+                - 成立 Ronda Korea Co., Ltd. <br>
+                - 作为半导体材料·零部件·设备专业企业正式成立 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">걸어온길</p>
+              <p>
+                <b>Company History</b> <br>
+                <b>2025</b> <br>
+                <b>Q3</b> <br>
+                - Launched consumables manufacturing line <br>
+                - Successfully completed the 2nd round of external investment <br>
+                - Began full-scale marketing targeting chipmakers <br>
+                <b>Q2</b> <br>
+                - Established facilities for insulation, thermal, and electromagnetic shielding consumables <br>
+                - Passed major customer audits <br>
+                <b>Q1</b> <br>
+                - Initiated consumables manufacturing line <br>
+                - Completed the 1st round of external investment <br>
+                - Built medium-scale mass production line <br>
+                <b>2024</b> <br>
+                <b>Q4</b> <br>
+                - Successfully developed in-house chamber components using high-complexity Silicon materials and completed mass production preparation <br>
+                <b>Q3</b> <br>
+                - Began operation of Valve, Pump, and Scrubber production lines <br>
+                - Advanced Facility Solution lineup and achieved vertical integration <br>
+                <b>Q2</b> <br>
+                - Activated consumables production lines for improved insulation, thermal, and EMI shielding performance <br>
+                <b>Q1</b> <br>
+                - Introduced in-house Drill / CNC machining line to strengthen precision manufacturing capabilities <br>
+                <b>Q1</b> <br>
+                - Started in-house processing of Silicon and Silicon Carbide consumables  <br>
+                - Operated production based on proprietary high-temperature and high-strength material technology <br>
+                <b>2023</b> <br>
+                <b>Q4</b> <br>
+                - Launched Photo-Chemical pilot production line <br>
+                - Successfully developed chemical materials for semiconductor photolithography processes <br>
+                <b>Q1</b> <br>
+                - Signed investment agreement for a local manufacturing plant <br>
+                - Secured local production and technology base <br>
+                <b>2022</b> <br>
+                <b>Q1</b> <br>
+                - Established a local subsidiary in China to expand semiconductor sales network <br>
+                - Built local sales and supply chain infrastructure <br>
+                <b>2019</b> <br>
+                <b>Q4</b> <br>
+                - Provided technology and production consulting for a European chipmaker <br>
+                - Secured a contract for improving equipment utilization and productivity <br>
+                <b>Q2</b> <br>
+                - Founded Ronda Korea Co., Ltd. <br>
+                - Officially launched as a specialized company in semiconductor materials, components, and equipment <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">찾아오시는 길</p>
+              <p>
+                경기도 화성시 동탄첨단산업1로 27 <br>
+                금강펜테리움IX타워 A동 1501~1505호 <br>
+                <br>
+                대표번호 031-613-2360 <br>
+                팩스번호 031-613-2320 <br>
+                이메일 sales@rondakorea.com <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">찾아오시는 길</p>
+              <p>
+                韩国京畿道华城市东滩先进产业1路27号 金刚Penterium IX大厦A栋1501–1505室 <br>
+                <br>
+                代表电话 031-613-2360 <br>
+                传真号码 031-613-2320 <br>
+                电子邮箱 sales@rondakorea.com <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">찾아오시는 길</p>
+              <p>
+                #1501–1505, Geumgang Penterium IX Tower A, 27, <br>
+                Dongtanchemdansaneop 1-ro, Hwaseong-si, Gyeonggi-do, Republic of Korea <br>
+                <br>
+                Main Phone 031-613-2360 <br>
+                Fax 031-613-2320 <br>
+                Email sales@rondakorea.com <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- BUSINESS -->
+      <section class="section" id="page-business">
+        <h2 class="section-title">BUSINESS : 사업소개 페이지</h2>
+
+        <div class="tri-table">
+          <!-- 헤더 클릭 시 아래 tri-row 토글 -->
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                BUSINESS / 기술의 진보를 넘어 <br>
+                비즈니스의 미래를 설계하는 기업 <br>
+                <br>
+                사업전략 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                BUSINESS / 超越技术的进步 <br>
+                塑造商业未来的企业 <br>
+                <br>
+                业务战略 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                BUSINESS / Beyond technological progress <br>
+                Designing the future of business <br>
+                <br>
+                Business Strategy <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">사업전략</p>
+              <p>
+                <b>정밀부품과 설비 솔루션으로 반도체 공정을 완성하는 기술파트너</b> <br>
+                1. 반도체 공정의 핵심, 론다코리아 <br>
+                - 정밀 소재 가공 기술을 기반으로, 식각(Etch), 증착(CVD), 세정 공정에 사용되는 소모성 부품과 밸브, 펌프 등 주요 장비 솔루션을 제공합니다. 반도체 제조공정에서 특화된 공급망(SCM) 솔루션을 통해 고객 맞춤형 대응력을 강화하고 있습니다. <br>
+                2. 변화에 유연하게 대응하는 글로벌 운영 체계 <br>
+                - 론다코리아는 중국을 중심으로 한 글로벌 네트워크를 통해 고품질의 제품을 안정적으로 제공하고 있으며, 40개 이상의 제품군과 500개 이상의 제품을 취급하며 활발한 비즈니스 활동을 전개하고 있습니다. <br>
+                <br>
+                <b>핵심 기술력을 보유한 첨단 소재부품 전문기업</b> <br>
+                1. 신뢰받는 제조 파트너 <br>
+                - 론다코리아는 Si, Quartz, Gasket, SiC 등 핵심 소재 분야를 전략적으로 확장하며, 정밀 가공 기술과 공정 대응 역량을 지속적으로 고도화하여 고객과 함께 성장하는 신뢰받는 제조 파트너로 자리하고 있습니다. <br>
+                2. 고객이 필요로 하는 제품을 안정적으로 신속하게 <br>
+                - 론다코리아는 고객 공정별 요구사항에 맞춘 맞춤형 대응과 전 공정에 걸친 정밀하고 까다로운 검수 기준, 유연한 생산 및 공급체계를 기반으로 보다 경쟁력 있는 고품질 부품을 제공하고 있습니다. <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">사업전략</p>
+              <p>
+                <b>通过精密部件与设备解决方案完善半导体工艺的技术合作伙伴</b> <br>
+                1. 半导体制造工艺的核心，Ronda Korea <br>
+                - 依托精密材料加工技术，我们提供适用于蚀刻（Etch）、化学气相沉积（CVD）及清洗工艺的耗材与关键设备解决方案，如阀门和泵。通过专注于半导体制造的定制化供应链（SCM）解决方案，增强客户定制响应能力。 <br>
+                2. 灵活应变的全球运营体系 <br>
+                - Ronda Korea 以中国为中心构建全球网络，稳定提供高品质产品。我们拥有超过40个产品系列与500多种产品，积极拓展海内外业务。 <br>
+                <br>
+                <b>拥有核心技术力的先进材料零部件专业企业</b> <br>
+                1. 实质性的制造合作伙伴 <br>
+                - Ronda Korea 战略性切入 Si、石英、垫圈、SiC 等高需求材料市场，不断提升精密材料加工与工艺响应能力。 <br>
+                2. 稳定快速地提供客户所需产品 <br>
+                - Ronda Korea 以客户工艺需求为基础，提供定制化服务，基于全流程严格的检验标准与灵活的生产供应体系，提供更具竞争力的高品质部件。 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">사업전략</p>
+              <p>
+                <b>Completing semiconductor processes</b> <br>
+                <b>with precision and facility solutions</b> <br>
+                1. Ronda Korea, Core of Semiconductor Processing <br>
+                - Ronda Korea specializes in precision material processing and supplies consumable parts and facility solutions such as valves and pumps for etching, deposition, and cleaning processes. We provide SCM solutions tailored for high-volume manufacturing (HVM) in memory and logic sectors, with a focus on Etch, CVD, and PVD processes. <br>
+                2. A globally agile operational system <br>
+                - Ronda Korea leverages a China-centered global network to stably supply high-quality products. With over 40 product categories and more than 500 individual items, we actively expand our business both domestically and internationally. <br>
+                <br>
+                <b>Advanced materials and components</b> <br>
+                <b>driven by core technology</b> <br>
+                1. A Practical Manufacturing Partner <br>
+                - Ronda Korea strategically targets high-demand materials such as Si, Quartz, Gasket, and SiC, and continuously enhances its capabilities in precision material processing and process responsiveness. <br>
+                2. Reliable and Rapid Delivery of Customer-Specific Products <br>
+                - Ronda Korea offers customized solutions tailored to each customer’s process requirements, based on strict quality control across all manufacturing stages and a flexible production and supply system to deliver highly competitive, high-quality components. <br>
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- TECHNOLOGY -->
+      <section class="section" id="page-technology">
+        <h2 class="section-title">TECHNOLOGY : 기술 페이지</h2>
+
+        <div class="tri-table">
+          <!-- 헤더 클릭 시 아래 tri-row 토글 -->
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                TECHNOLOGY / 론다코리아의 제품과 기술력 <br>
+                고정밀 반도체 부품과 첨단 설비 솔루션 <br>
+                <br>
+                Consumable Parts | Sub-FAB Solution | Critical Component | Raw Materials <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                TECHNOLOGY / <span class="del-strong">RK的产品与技术实力</span> <span class="blink">Ronda Korea 的产品与技术实力</span> <br>
+                探索高精度半导体部件与先进解决方案 <br>
+                <br>
+                Consumable Parts | Sub-FAB Solution | Critical Component | Raw Materials <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                  TECHNOLOGY / Ronda Korea · Products and Expertise <br>
+                  Explore precision semiconductor solutions <br>
+                <br>
+                Consumable Parts | Sub-FAB Solution | Critical Component | Raw Materials <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">Consumable Parts</p>
+              <p>
+                <b>챔버 내부 소모성 부품</b>: Showerhead, Ground Ring, Thermal Pad, Focus Ring, Gasket <br>
+                <br>
+                <b>1. 공정 신뢰성을 위한 첨단 소재 기술</b>: Si, SiC, Quartz, Polymer 등 고순도 재질을 적용해 다양한 챔버 환경에서 내구성과 화학적 안정성을 확보 <br>
+                <b>2. 극한 조건에서도 안정된 성능</b>: 세라믹 및 폴리머 기반 부품이 고온·플라즈마 환경에서도 절연성과 내식성, 형상 안정성 유지. <br>
+                <b>3. 공정 안정성을 위한 정밀 밀폐 기술</b>: Engineering Plastic과 Gasket이 정밀한 체결, 우수한 기밀성, Gas 누출 및 파티클 발생을 방지. <br>
+                <br>
+                <b>Highlight</b> <br>
+                1. Process Optimization / Solution Provider <br>
+                반도체 공정에 적합한 Part Engineering Solution 제공 <br>
+                2. Precision Machining / 우월한 가공 기술 <br>
+                복잡한 형상과 정확한 도면 치수를 만족하는 우수한 가공 기술 <br>
+                3. Semiconductor-Grade Cleaning / Quality Control <br>
+                반도체급 세정 및 우수한 품질 관리 <br>
+                4. Total Manufacturing Solution / Benefit <br>
+                고객사 Cost 감소 및 Yield Improvement 위한 Total Solution 제공 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">Consumable Parts</p>
+              <p>
+                <b>腔体内部耗材部件</b>: Si、SiC、Quartz、Polymer Sheet（GEL）、Engineering Plastic、Gasket <br>
+                <br>
+                <b>1. 工艺可靠性的先进材料技术</b>: 采用Si、SiC、Quartz、Polymer等高纯度材料，在多种腔室环境下实现优异的耐久性和化学稳定性。 <br>
+                <b>2. 在极端条件下仍保持稳定性能</b>: 基于陶瓷和聚合物(Ceramic & Polymer)的部件在高温和Plasma环境中仍能保持绝缘性、耐腐蚀性和结构稳定性。 <br>
+                <b>3. 工艺稳定性的精密密封技术</b>: Engineering Plastic与Gasket提供精密配合与优异密封性能，有效防止气体泄漏及颗粒产生。 <br>
+                <br>
+                <b>Highlight</b> <br>
+                1. Process Optimization / Solution Provider <br>
+                提供适用于半导体工艺的 Part Engineering Solution <br>
+                2. Precision Machining / 卓越的加工技术 <br>
+                满足复杂形状与精确图纸尺寸的优异加工能力 <br>
+                3. Semiconductor-Grade Cleaning / Quality Control <br>
+                半导体级清洗及卓越的品质管理 <br>
+                4. Total Manufacturing Solution / Benefit <br>
+                提供面向客户成本降低与良率提升的整体解决方案 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">Consumable Parts</p>
+              <p>
+                <b>Chamber consumable parts</b>: Showerhead, Ground Ring, Thermal Pad, Focus Ring, Gasket <br>
+                <br>
+                <b>1. Advanced Material Technology for Process Reliability</b>: High-purity materials such as Si, SiC, Quartz, and Polymer ensure durability and chemical stability across various chamber environments. <br>
+                <b>2. Stable Performance under Extreme Conditions</b>: Ceramic and polymer-based components maintain insulation, corrosion resistance, and structural stability even under high-temperature and plasma conditions. <br>
+                <b>3. Precision Sealing Technology for Process Stability</b>: Engineering Plastic and Gasket ensure precise fitting and excellent sealing, effectively preventing gas leakage and particle generation. <br>
+                <br>
+                <b>Highlight</b> <br>
+                1. Process Optimization / Solution Provider <br>
+                Providing part engineering solutions optimized for semiconductor processes <br>
+                2. Precision Machining / Superior machining technology <br>
+                Delivering complex geometries with high dimensional accuracy <br>
+                3. Semiconductor-Grade Cleaning / Quality Control <br>
+                Semiconductor-grade cleaning and excellent quality management <br>
+                4. Total Manufacturing Solution / Benefit <br>
+                Providing total solutions for cost reduction and yield improvement <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">Sub-FAB Solution</p>
+              <p>
+                반도체 공정 중 사용되는 Gas, Precursor로 인한 발생되는 공정부산물인 Powder의 생성, 확산, 제거 등을 제어하는 기술이며 이를 통해 반도체 제품의 품질 확보, 설비 수명 연장, 환경안전 사고 예방 등의 측면에서 매우 중요하게 작용한다. <br>
+                <br>
+                <b>1. Plasma System:</b> <br>
+                반도체 공정에서 사용하는 Precursor(Liquid, 인화성, 유독성) 가스를 안정적인 물질로 분해·제거·치환을 수행하는 장치이다. <br>
+                대표적인 물질 : ZrO₂, HfO₂, TiO₂, Nb₂O₅, Ta₂O₅, WO₃. <br>
+                <b>2. Trap:</b> <br>
+                반도체 공정 중 발생되는 부산물(Powder)을 진공 Pump 또는 Scrubber에 유입되기 전에 물리적으로 포집하며, 배관 내부 부산물(Powder) 증착을 최소화하는 장치입니다. <br>
+                <b>3. Heating System:</b> <br>
+                진공 배관 내부와 밸브 하우징에 삽입형 열선을 설치해 직접 내부를 가열하는 장치로, 기존 외부 감싸는 Heating Jacket 대비 열 전달 효율이 우수하며 배관 내 온도를 균일하게 유지합니다. <br>
+                <br>
+                <b>Highlight</b> <br>
+                <b>1. Equipment Protection</b> / 설비 보호 및 수명연장 <br>
+                설비 오동작 방지 및 부품 손상 방지. <br>
+                <b>2. Process Stability</b> / 공정 안정성 확보 <br>
+                설비 공정 재현성 확보로 인한 생산성 및 수율 향상. <br>
+                <b>3. Maintenance Efficiency</b> / 유지보수 용이성 및 비용 절감 <br>
+                Powder에 의한 부품 수명 증가 및 예방정비 가능. <br>
+                <b>4. Risk Prevention</b> / 환경안전 사고 예방 <br>
+                폭발, 화재, 누출 방지 및 법규 준수. <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">Sub-FAB Solution</p>
+              <p>
+                该技术用于控制因半导体工艺中使用的 Gas 和 Precursor 所产生的工艺副产物 Powder 的生成、扩散与去除。通过此技术，可在确保半导体产品品质、延长设备寿命以及防止环境安全事故等方面发挥重要作用。 <br>
+                <br>
+                <b>1. Plasma System: </b> <br>
+                该装置在半导体工艺中，对使用的 Precursor（液体、易燃、有毒气体）进行分解、去除和置换，将其转化为稳定物质。 <br>
+                代表性材料 : ZrO₂、HfO₂、TiO₂、Nb₂O₅、Ta₂O₅、WO₃。 <br>
+                <b>2. Trap:</b> <br>
+                在半导体工艺过程中，于真空 Pump 或 Scrubber 之前物理捕捉产生的副产物（Powder），以最小化管路内部的 Powder 沉积。 <br>
+                <b>3. Heating System:</b> <br>
+                在真空管路内部和阀门外壳中安装嵌入式加热丝以直接加热内部。与外部包覆式 Heating Jacket 相比，具有更高的热传导效率并可保持管路内部温度均匀。 <br>
+                <br>
+                <b>Highlight</b> <br>
+                <b>1. Equipment Protection</b> / 设备保护与寿命延长 <br>
+                防止设备异常运行及部件损伤。 <br>
+                <b>2. Process Stability</b> / 工艺稳定性确保 <br>
+                通过提升设备工艺再现性，提高生产效率与良率。 <br>
+                <b>3. Maintenance Efficiency</b> / 维护便捷性与成本节约 <br>
+                延长因 Powder 造成的部件寿命，并可进行预防性维护。 <br>
+                <b>4. Risk Prevention</b> / 环境安全事故预防 <br>
+                防止爆炸、火灾、泄漏等事故，并确保符合法规要求。 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">Sub-FAB Solution</p>
+              <p>
+                A technology that controls the generation, diffusion, and removal of powder by-products produced from gases and precursors used in semiconductor processes. This technology plays a crucial role in maintaining product quality, extending equipment life, and preventing environmental and safety incidents. <br>
+                <br>
+                <b>Plasma System:</b> <br>
+                A device that decomposes, removes, and replaces Precursor gases (liquid, flammable, or toxic) used in semiconductor processes into stable compounds. <br>
+                Representative materials : ZrO₂, HfO₂, TiO₂, Nb₂O₅, Ta₂O₅, WO₃. <br>
+                <b>Trap:</b> <br>
+                A device that physically captures by-products (Powder) generated during semiconductor processes before they enter the vacuum Pump or Scrubber, minimizing Powder deposition inside the piping. <br>
+                <b>Heating System:</b> <br>
+                A device that installs embedded heating elements inside vacuum pipelines and valve housings to directly heat the internal structure. Compared to external Heating Jackets, it provides superior heat transfer efficiency and maintains uniform internal temperature. <br>
+                <br>
+                <b>Highlight</b> <br>
+                <b>1. Equipment Protection</b> / Enhancing Equipment Reliability and Longevity <br>
+                Prevents equipment malfunction and component damage. <br>
+                <b>2. Process Stability</b> / Stable and Reproducible Process Control <br>
+                Ensures process reproducibility, improving productivity and yield. <br>
+                <b>3. Maintenance Efficiency</b> / Ease of maintenance and cost reduction <br>
+                Extends component lifespan affected by powder and enables preventive maintenance. <br>
+                <b>4. Risk Prevention</b> / Environmental and safety incident prevention <br>
+                Prevents explosion, fire, and leakage while ensuring regulatory compliance. <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">Critical Component</p>
+              <p>
+                ESC, Ceramic Heater, Vaporizer는 공정 안정성과 박막 품질을 좌우하는 핵심 기술 요소로, 공정 신뢰성과 생산 수율 향상에 직접적으로 기여합니다. <br>
+                <br>
+                <b>1. Vaporizer:</b> 반도체 공정에 사용하는 Liquid gas(Precursor)를 정말한 온도와 압력 조건에서 기화시켜 균일한 농도, 유량을 Process Chamber로 공급하는 장치이며, CVD 및 ALD 공정의 품질과 안정성을 극대화 시키는 장치입니다. <br>
+                <b>2. ESC:</b> 반도체 ESC(Electrostatic Chuck)는 반도체 제조 공정에서 웨이퍼를 정전기 힘으로 고정하는 핵심 부품으로, 진공 및 플라즈마 환경에서 웨이퍼의 위치와 온도를 정밀하게 제어하는 역할을 합니다. <br>
+                <b>3. Ceramic Heater:</b> 반도체 증착 (CVD/ALD) 공정에서 사용공정에서 웨이퍼를 일정한 온도로 가열하고 유지하는 핵심 부품으로 고온 안정성, 균일한 열 분포, 정밀한 온도 제어 등의 장점과 Chucking 및 Purge 기능을 접목할 수 있습니다. <br>
+                <br>
+                <b>Highlight</b> <br>
+                <b>1. Precision Temperature Control</b> / 우수한 온도 제어 능력 <br>
+                고정밀 열선 인쇄 및 저항 제어를 통한 Zone to Zone 낮은 Temp Range 구현. <br>
+                <b>2. Uniform Wafer Heating</b> / Multi Heating Zone 온도 제어 <br>
+                4 ~ Multi Heater Zone 구현으로 웨이퍼 전체에 균일한 온도 제어 가능. <br>
+                <b>3. Precision Depth Control</b> / 정밀한 유전체층 균일도 <br>
+                RF Mesh Layer 초정밀 제어 및 일정한 Depth Control -> 균일한 박막 두께 증착. <br>
+                <b>4. Process Adaptability</b> / Chucking 및 Purge 기능 적용 유연성 <br>
+                웨이퍼 Warpage 개선, Edge 수율 향상 목적 기능 추가 가능. <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">Critical Component</p>
+              <p>
+                ESC、Ceramic Heater、Vaporizer 是决定工艺稳定性和薄膜质量的核心技术要素，直接提升工艺可靠性与生产良率。 <br>
+                <br>
+                <b>1. Vaporizer:</b> 在特定温度和压力条件下，将液态前驱体（Precursor）均匀汽化并输送至工艺腔体的装置。在 CVD 与 ALD 工艺中，对薄膜质量与工艺稳定性起着关键作用。通过精密的温度与流量控制技术，实现颗粒减少与高效汽化性能。 <br>
+                <b>2. ESC:</b> 半导体 ESC（Electrostatic Chuck）是在半导体制造过程中利用静电力固定晶圆的关键部件。它在真空及等离子体环境中精确控制晶圆的位置与温度。 <br>
+                <b>3. Ceramic Heater:</b> 用于半导体沉积（CVD/ALD）工艺中加热并维持晶圆恒定温度的核心部件，具有高温稳定性、均匀的热分布和精确的温度控制，并可结合 Chucking 与 Purge 功能以提高性能。 <br>
+                <br>
+                <b>Highlight</b> <br>
+                <b>1. Precision Temperature Control</b> / 卓越的温度控制能力 <br>
+                通过高精度电热丝印刷与电阻控制，实现 Zone to Zone 的低温差范围。 <br>
+                <b>2. Uniform Wafer Heating</b> / 多加热区温度控制 <br>
+                通过 4 至多加热区（Multi Heating Zone）设计，实现晶圆整体温度的均匀控制。 <br>
+                <b>3. Precision Depth Control</b> / 精确的介电层均匀性 <br>
+                通过对 RF Mesh Layer 的超精密控制与稳定的 Depth Control，确保薄膜厚度均匀沉积。 <br>
+                <b>4. Process Adaptability</b> / Chucking 与 Purge 功能的灵活应用 <br>
+                可增加功能以改善晶圆翘曲（Warpage）并提升边缘良率。 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">Critical Component</p>
+              <p>
+                ESC, Ceramic Heater, and Vaporizer are essential technologies that determine process stability and film quality, directly contributing to reliability and yield enhancement. <br>
+                <br>
+                <b>1. Vaporizer</b>: A device that vaporizes liquid precursors under controlled temperature and pressure conditions and supplies them uniformly to the process chamber. It plays a key role in securing film quality and process stability in CVD and ALD applications, achieving high vaporization efficiency and reduced particle generation through precise temperature and flow control. <br>
+                <b>2. ESC</b>: The Electrostatic Chuck (ESC) is a core component that holds the wafer by electrostatic force in semiconductor manufacturing, enabling precise position and temperature control in vacuum and plasma environments. <br>
+                <b>3. Ceramic Heater</b>: A key component in CVD and ALD processes that heats and maintains wafer temperature uniformly. It offers high thermal stability, even heat distribution, and precise temperature control, with integrated chucking and purge functionality for enhanced process performance. <br>
+                <br>
+                <b>Highlight</b> <br>
+                <b>1. Precision Temperature Control</b> / Superior temperature control capability <br>
+                Low zone-to-zone temperature range achieved through high-precision printed heaters and resistance control. <br>
+                <b>2. Uniform Wafer Heating</b> / Multi-zone temperature control <br>
+                Uniform temperature management across the wafer with 4 to multiple heating zones. <br>
+                <b>3. Precision Depth Control</b> / Accurate dielectric layer uniformity <br>
+                Ultra-precise RF mesh layer and stable depth control ensure consistent thin-film deposition. <br>
+                <b>4. Process Adaptability</b> / Flexible application of chucking and purge functions <br>
+                Enables wafer warpage improvement and enhanced edge yield through additional adaptive functions. <br>
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">Raw Materials</p>
+              <p>
+                반도체 제조공정의 핵심인 고청정, 고내열 환경을 위해, 높은 열적.화학적 안정성을 지닌 고순도 소재의 중요성이 높아지고 있습니다. 반도체 공정용 소재 및 부품에 사용되어, 다양한 공정에서 장비 안정성 및 수율 향상에 기여합니다. <br>
+                <br>
+                <b>Coolant:</b> 반도체 제조 장비의 온도 제어에 사용되는 열전달 유체(heat transfer fluid)이며 높은 열전달 효율(thermal conductivity), 점도 안정성(viscosity stability), 화학적 안정성(chemical inertness)을 기반으로 공정 중 발생하는 열을 효율적으로 흡수·이송·방출하여 장비 온도 안정 유지 및 공정 정밀도 확보. <br>
+                <br>
+                <b>Carbon Hard Mask:</b> 반도체 미세 패터닝 공정에서 포토레지스트(PR)의 한계를 보완하기 위해 적용되는 고밀도·고내식성(etch-resistant) 박막이며 액상 코팅 후 경화를 통해 평탄성과 식각 내성이 우수한 박막 형성, 초미세 패터닝 및 high aspect ratio 구조 구현 필수 소재. <br>
+                <br>
+                <b>FFKM:</b> 모든 C–H 결합이 C–F 결합으로 치환된 고성능 불소계 탄성체로, 가장 우수한 화학적·열적 안정성을 가진 재료에 분류되며 반도체 장비의 플라즈마 및 고온·고부식 환경에 대응하기 위한 sealing 및 절연용 부품 소재로 사용. <br>
+                <br>
+                <b>PFA:</b> 완전 불소화(perfluorinated)된 열가소성 수지로, 내화학성·내열성 유지와 함께 사출·압출·용접 등 다양한 가공성 확보하며 고순도·비오염성 특성으로 반도체 공정 내 약품 저항이 요구되는 핵심 구조재로 적용. <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">Raw Materials</p>
+              <p>
+                在半导体制造过程中，为了实现高洁净、高耐热的工艺环境，具有优异热稳定性和化学稳定性的高纯度材料变得愈加重要。这些材料广泛应用于半导体工艺用材料及部件，在多个工序中有助于提升设备稳定性和良率（Yield）。 <br>
+                <br>
+                <b>Coolant:</b> 用于半导体制造设备温度控制的热传导液体（heat transfer fluid）。其基于优异的热传导效率（thermal conductivity）、粘度稳定性（viscosity stability）和化学惰性（chemical inertness），能够有效吸收、传递和散热工艺过程中产生的热量，从而保证设备温度稳定和工艺精确度。 <br>
+                <br>
+                <b>Carbon Hard Mask:</b> 在半导体超微细图形（patterning）工艺中，为弥补PR（Photoresist）的局限而使用的高密度、高耐蚀性（etch-resistant）薄膜材料。通过液态涂布与固化工序，可形成具有平坦性和优异蚀刻耐受性的薄膜，是实现超微细图形及高深宽比（High Aspect Ratio）结构的关键材料。 <br>
+                <br>
+                <b>FFKM:</b> 属于高性能氟系弹性体材料，所有C–H键完全被C–F键取代，具有最优异的化学及热稳定性。主要应用于半导体设备的Plasma、高温及高腐蚀环境中的密封（Sealing）及绝缘（Insulation）部件材料。 <br>
+                <br>
+                <b>PFA:</b> 完全氟化（Perfluorinated）的热塑性树脂，具有出色的耐化学性与耐热性，并支持注塑、挤出、焊接等多种加工方式。其高纯度和无污染特性，使其成为半导体工艺中对化学耐受性要求较高的核心结构材料之一。 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">Raw Materials</p>
+              <p>
+                In semiconductor manufacturing, the importance of high-purity materials with excellent thermal and chemical stability is increasing, as high cleanliness and high heat resistance environments are critical to the process. These materials are essential for semiconductor process equipment and components, helping improve equipment stability and yield across various manufacturing stages. <br>
+                <br>
+                <b>Coolant</b>: A heat transfer fluid used for temperature control in semiconductor manufacturing equipment. Based on high thermal conductivity, viscosity stability, and chemical inertness, it efficiently absorbs, transfers, and dissipates heat generated during processing, ensuring equipment temperature stability and process precision. <br>
+                <br>
+                <b>Carbon Hard Mask</b>: A high-density, etch-resistant thin film applied to complement the limitations of photoresist (PR) in advanced semiconductor patterning. After liquid coating and curing, it forms a film with excellent planarity and etch resistance, making it essential for ultra-fine patterning and high aspect ratio structure formation. <br>
+                <br>
+                <b>FFKM</b>: A high-performance fluorinated elastomer in which all C–H bonds are replaced with C–F bonds, classified as having the highest chemical and thermal stability. It is used as a sealing and insulating material for semiconductor equipment operating in plasma, high-temperature, and highly corrosive environments. <br>
+                <br>
+                <b>PFA</b>: A fully perfluorinated thermoplastic resin with excellent chemical and heat resistance, while maintaining processability such as injection molding, extrusion, and welding. Its high purity and non-contaminating properties make it a key structural material for semiconductor processes that require chemical resistance. <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PRODUCT -->
+      <section class="section" id="page-product">
+        <h2 class="section-title">PRODUCT : 제품 소개 페이지</h2>
+
+        <div class="tri-table">
+          <!-- 헤더 클릭 시 아래 tri-row 토글 -->
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                PRODUCTS / 정밀한 기술력으로 <br>
+                글로벌 반도체 시장을 선도하는 브랜드 <br>
+                <br>
+                Consumable Parts | Sub-FAB Systems | Critical Component | Raw Materials <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                PRODUCTS / 以精密技术 <br>
+                引领全球半导体市场 <br>
+                <br>
+                Consumable Parts | Sub-FAB Systems | Critical Component | Raw Materials <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">페이지 상단</p>
+              <p>
+                PRODUCTS / With precision technology <br>
+                Leading the global semiconductor market <br>
+                <br>
+                Consumable Parts | Sub-FAB Systems | Critical Component | Raw Materials <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- SUPPORT -->
+      <section class="section" id="page-support">
+        <h2 class="section-title">SUPPORT 페이지</h2>
+
+        <div class="tri-table">
+          <!-- 헤더 클릭 시 아래 tri-row 토글 -->
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">3 페이지 통합</p>
+              <p>
+                CONTACT US / 고객과 파트너가 함께 <br>
+                지속 가능한 가치를 만들어가는 관계 <br>
+                <br>
+                Support / 관계로부터 힘을 얻어 <br>
+                함께 성장하고 나아가는 파트너십 <br>
+                <br>
+                온라인문의 | 뉴스룸 | FAQ <br>
+                <br>
+                정밀한 반도체 공정을 완성할 기술파트너 <br>
+                지금 론다코리아에 문의하세요 <br>
+                <br>
+                론다코리아에 자주하시는 <br>
+                질문에 대한 답변을 제공합니다 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">3 페이지 통합</p>
+              <p>
+                CONTACT US / 与客户和合作伙伴携手 <br>
+                共建可持续价值的合作关系 <br>
+                <br>
+                SUPPORT / 从关系中汲取力量 <br>
+                共同成长，共同前行 <br>
+                <br>
+                Online Inquiry | Newsroom | FAQ <br>
+                <br>
+                半导体精密制造工艺的理想合作伙伴， <br>
+                欢迎立即咨询 Ronda Korea。 <br>
+                <br>
+                Ronda Korea 常见问题 <br>
+                我们为您提供问题的解答。 <br>
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">3 페이지 통합</p>
+              <p>
+                CONTACT US / Together with our customers and partners <br>
+                Building relationships that create sustainable value <br>
+                <br>
+                SUPPORT / Strength through relationships <br>
+                Growing and moving forward together <br>
+                <br>
+                Online Inquiry | Newsroom | FAQ <br>
+                <br>
+                Your Partner for Precision in Semiconductors <br>
+                Contact Ronda Korea today <br>
+                <br>
+                Frequently asked at Ronda Korea <br>
+                We provide answers to your questions. <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 복사용 -->
+      <section style="display: none;" class="section" id="gnb">
+        <h2 class="section-title">GNB</h2>
+
+        <div class="tri-table">
+          <!-- 헤더 클릭 시 아래 tri-row 토글 -->
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">Semiconductor Materials &amp; Solutions</p>
+              <p>
+                kor....
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">Semiconductor Materials &amp; Solutions</p>
+              <p>
+                ch ...
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">Semiconductor Materials &amp; Solutions</p>
+              <p>
+                eng ...
+              </p>
+            </div>
+          </div>
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">Semiconductor Materials &amp; Solutions</p>
+              <p>
+                kor....
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">Semiconductor Materials &amp; Solutions</p>
+              <p>
+                ch ...
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">Semiconductor Materials &amp; Solutions</p>
+              <p>
+                eng ...
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= 예: HOME / Semiconductor Materials & Solutions ======================= -->
+      <section style="display: none;" class="section" id="home-semiconductor">
+        <div class="section-tag">Home</div>
+        <h2 class="section-title">2. Semiconductor Materials &amp; Solutions</h2>
+
+        <div class="tri-table">
+          <!-- 헤더 클릭 시 아래 tri-row 토글 -->
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <!-- ① 메인 문장 -->
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p class="tri-heading">Semiconductor Materials &amp; Solutions</p>
+              <p>글로벌 반도체 네트워크의 중심에서 산업의 미래를 설계합니다.</p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p class="tri-heading">半导体材料与解决方案</p>
+              <p>立足全球半导体网络核心，规划产业的未来。</p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p class="tri-heading">Semiconductor Materials &amp; Solutions</p>
+              <p>
+                At the core of the global semiconductor network, we design the
+                future of the industry.
+              </p>
+            </div>
+          </div>
+
+          <!-- ② Expertise / Connectivity / Know-how -->
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p>
+                <strong>Expertise:</strong>
+                반도체 제조·공정·설비 전 분야의 전문 인재들이 모여 고객의 기술
+                경쟁력과 품질 혁신을 실현합니다.
+              </p>
+              <p>
+                <strong>Connectivity:</strong>
+                첨단 공정 중심의 차별화된 반도체 공급망을 기반으로, 고객의
+                경쟁력을 높이는 최적의 솔루션과 파트너십을 제공합니다.
+              </p>
+              <p>
+                <strong>Knowhow:</strong>
+                첨단공정 양산에서 축적한 실전 경험을 기반으로, 고객의 비용
+                효율과 생산성을 극대화합니다.
+              </p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p>
+                <strong>专业力（Expertise）：</strong>
+                汇聚半导体制造、工艺、设备全领域的专家，为客户实现技术竞争力与品质革新。
+              </p>
+              <p>
+                <strong>连接力（Connectivity）：</strong>
+                依托以先进工艺为中心的差异化半导体供应链，为客户提供增强竞争力的最优解决方案与合作体系。
+              </p>
+              <p>
+                <strong>技术力（Know-how）：</strong>
+                基于在先进工艺量产中积累的丰富实战经验，最大化客户的成本效率与生产力。
+              </p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p>
+                <strong>Expertise:</strong>
+                Our specialists across semiconductor manufacturing, processes,
+                and equipment empower customers with technological leadership
+                and breakthrough quality.
+              </p>
+              <p>
+                <strong>Connectivity:</strong>
+                With a differentiated, advanced-process–centered supply chain,
+                we deliver optimal solutions and partnerships that elevate
+                customer competitiveness.
+              </p>
+              <p>
+                <strong>Know-how:</strong>
+                Leveraging extensive hands-on experience in high-volume advanced
+                processes, we maximize our customers’ cost efficiency and
+                productivity.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= Company 섹션 예시 ======================= -->
+      <section style="display: none;" class="section" id="company">
+        <div class="section-tag">Company</div>
+        <h2 class="section-title">Company / 가치를 나누는 파트너십</h2>
+
+        <div class="tri-table">
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <!-- ① 한 줄(블록) 예시 -->
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p>산업의 흐름을 바꾸는 힘</p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p>改变产业格局的力量</p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p>The power to reshape the industry.</p>
+            </div>
+          </div>
+
+          <!-- 여기에 CEO 인사말 / 회사개요 / 경영철학 / 걸어온길 등 tri-row 계속 추가 -->
+        </div>
+      </section>
+
+      <!-- ======================= Business 섹션 예시 ======================= -->
+      <section style="display: none;" class="section" id="business">
+        <div class="section-tag">Business</div>
+        <h2 class="section-title">
+          Business / 기술의 진보를 넘어 비즈니스의 미래를 설계하는 기업
+        </h2>
+
+        <div class="tri-table">
+          <div class="tri-header">
+            <div class="tri-header-cell">Korean</div>
+            <div class="tri-header-cell">Chinese</div>
+            <div class="tri-header-cell">English</div>
+          </div>
+
+          <div class="tri-row">
+            <div class="tri-cell lang-ko">
+              <div class="tri-label">KO</div>
+              <p>정밀부품과 설비 솔루션으로 반도체 공정을 완성하는 기술파트너</p>
+            </div>
+            <div class="tri-cell lang-zh">
+              <div class="tri-label">ZH</div>
+              <p>以精密部件与设备解决方案完成半导体工艺的技术合作伙伴。</p>
+            </div>
+            <div class="tri-cell lang-en">
+              <div class="tri-label">EN</div>
+              <p>
+                A technology partner that completes semiconductor processes with
+                precision parts and equipment solutions.
+              </p>
+            </div>
+          </div>
+
+          <!-- Business 하위 문단들도 tri-row 로 계속 추가 -->
+        </div>
+      </section>
+
+      <!-- 같은 패턴으로 Technology / Products / Support 섹션을 복제해서 사용하면 됩니다 -->
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const headers = document.querySelectorAll(".tri-header");
+
+        headers.forEach(function (header) {
+          header.addEventListener("click", function () {
+            const table = header.closest(".tri-table");
+            if (!table) return;
+            table.classList.toggle("is-collapsed");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -215,6 +215,27 @@
       b {
         color: #9B6C5F;
       }
+
+.blink {
+  animation: blink 2s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+    background-color: #D0F4F5;
+  }
+}
+
+.del-strong {
+  text-decoration: line-through;
+  font-style: italic;
+  text-decoration-color: #ef4444; /* 빨간색 강조 */
+}
+.text-right {
+  text-align: right;
+}
+
     </style>
   </head>
   <body>
