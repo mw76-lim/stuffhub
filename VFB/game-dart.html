@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>라오충칭훠궈 — 다트게임 이벤트 시나리오(2컬럼)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --red: #b6241e;
+    --dark: #1c0f0c;
+    --paper: #fff8f3;
+    --gold: #f6c56e;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Noto Sans KR", sans-serif;
+    background: var(--paper);
+    color: var(--dark);
+    line-height: 1.65;
+  }
+
+  header {
+    background: var(--red);
+    color: white;
+    padding: 1.8rem 1rem;
+    text-align: center;
+    font-size: 1.45rem;
+    letter-spacing: .02em;
+    font-weight: 700;
+  }
+
+  .container {
+    max-width: 1250px;
+    margin: 2rem auto 4.5rem;
+    padding: 0 1.3rem;
+  }
+
+  /* 2컬럼 그리드 */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 1.6rem;
+  }
+
+  .scenario {
+    background: #ffffff;
+    border-radius: 1rem;
+    border: 1px solid #f0e0d8;
+    padding: 1.6rem 1.4rem 1.8rem;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    transition: transform .2s ease;
+  }
+
+  .scenario:hover {
+    transform: translateY(-4px);
+  }
+
+  .scenario h2 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    font-size: 1.28rem;
+    color: var(--red);
+  }
+
+  .scenario small {
+    display: inline-block;
+    margin-bottom: .4rem;
+    background: var(--gold);
+    color: #5a3c01;
+    padding: .22rem .6rem;
+    border-radius: .4rem;
+    font-size: .7rem;
+    font-weight: 600;
+  }
+
+  .difficulty {
+    font-size: .74rem;
+    color: #6b4a1a;
+    margin-bottom: .6rem;
+  }
+
+  ul {
+    margin-top: .5rem;
+    padding-left: 1.2rem;
+  }
+
+  ul li {
+    margin-bottom: .4rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2.8rem 1rem;
+    color: #7c706c;
+    font-size: .85rem;
+  }
+
+  /* 모바일(좁은 화면)에서는 1컬럼 */
+  @media(max-width: 600px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>라오충칭훠궈 — 다트게임 이벤트 시나리오 (2컬럼)</header>
+
+<div class="container">
+
+  <div class="grid">
+
+    <!-- 1: 럭키샷 -->
+    <div class="scenario">
+      <small>Scenario 1</small>
+      <h2>🎯 럭키샷 — 즉석 경품 이벤트</h2>
+      <div class="difficulty">난이도: ★☆☆☆☆ (쉬움)</div>
+      <p>“훠궈 한입 전에, 럭키샷 한 번!” 테이블당 1회 참여 가능한 즉석 다트 이벤트입니다.</p>
+
+      <h3>운영 방식</h3>
+      <ul>
+        <li>주문 또는 계산 시 직원이 “럭키샷 참여권” 제공</li>
+        <li>고객은 다트보드 앞에서 3발 던짐</li>
+        <li>맞은 점수대에 따라 즉석 경품 제공</li>
+      </ul>
+
+      <h3>경품 예시</h3>
+      <ul>
+        <li>30점 이상 → 청포도에이드 1잔</li>
+        <li>40점 이상 → 훠궈 소스 무료</li>
+        <li>50점 이상 → 디저트 서비스 또는 다음 방문 쿠폰</li>
+      </ul>
+    </div>
+
+    <!-- 2: 타오르는 운명 -->
+    <div class="scenario">
+      <small>Scenario 2</small>
+      <h2>🔥 타오르는 운명 — 미션형 이벤트</h2>
+      <div class="difficulty">난이도: ★★☆☆☆ (보통)</div>
+      <p>마라(매운맛)/온화(순한맛) 중 하나를 선택하고, 보드의 색상에 따라 운명이 결정되는 스토리형 게임입니다.</p>
+
+      <h3>운영 방식</h3>
+      <ul>
+        <li>고객이 “마라” 또는 “온화” 진영을 선택</li>
+        <li>색상은 기존의 보드 색상에서, 빨강(매운 운명), 하양(온화한 운명) 섹션 결정</li>
+        <li>던진 다트가 맞은 색상에 따라 운명 카드 또는 경품 제공</li>
+      </ul>
+
+      <h3>운명/보상 예시</h3>
+      <ul>
+        <li>붉은색: 3발 적중 → “오늘은 매운 하루! 맵단조합 서비스”</li>
+        <li>흰색: 3발 적중 → “따뜻한 인연! 10% 쿠폰”</li>
+        <li>불스아이: 특별 보너스 → “라오의 축복! 드링크 2잔 제공”</li>
+      </ul>
+    </div>
+
+    <!-- 3: 라오 다트챌린지 -->
+    <div class="scenario">
+      <small>Scenario 3</small>
+      <h2>🥢 “라오 상차림 다트” — 메뉴 구성 완성 게임</h2>
+      <div class="difficulty">난이도: ★★☆☆☆ (쉬움)</div>
+      <p>라오충칭훠궈의 인기 재료(버섯, 고기, 감자, 마라볼 등)를 다트로 "상차림"처럼 모아가는 미니 게임.</p>
+
+      <h3>운영 방식</h3>
+      <ul>
+        <li>
+            다트판을 라오 재료 6종으로 구역 표시
+            <br> 예시)
+            <br> ① 버섯 (트리플/더블 라인 for 20)
+            <br> ② 마라볼 (불아이)
+            <br> ③ 감자 (트리플/더블 라인 for 19)
+            <br> ④ 야채 믹스 (싱글 for 17,2,15)
+            <br> ⑤ 면사리 (싱글 for 19,7,16)
+            <br> ⑥ 고기 추가존 (싱글 for 14,9,12)
+        </li>
+        <li>참여자는 3발의 기회를 갖고 재료를 “모아가기”</li>
+        <li>던진 3발에서 맞힌 재료 조합으로 리워드 결정</li>
+
+      </ul>
+
+      <h3>포인트 리워드 예시</h3>
+      <ul>
+        <li>(버섯,감자,마라볼) 조합으로 3개 모두 성공 → 프리미엄 사이드(예: 꿔바로우, 향라닭날개 중 택1)</li>
+        <li>(버섯,감자,마라볼) 중 1개 포함 2개 성공 → 음료 2잔</li>
+        <li>2개 성공 → 음료 1잔</li>
+        <li>1개 성공 → 참여 감사 사탕 또는 소형 스티커</li>
+      </ul>
+    </div>
+
+    <!-- 4: 행운의 숫자 다트 -->
+    <div class="scenario">
+      <small>Scenario 4</small>
+      <h2>🎁 행운의 숫자 다트 — 번호 매칭 게임</h2>
+      <div class="difficulty">난이도: ★★☆☆☆ (보통)</div>
+      <p>보드에 적힌 번호를 맞춰서 경품을 받는 직관적인 룰의 숫자 다트 게임입니다.</p>
+
+      <h3>운영 방식</h3>
+      <ul>
+        <li>
+          다트판의 각 영역에 번호(1,3,5,7 등) 부여
+          <br> 1번: T20
+          <br> 2번: T19
+          <br> 3번: 불아이 (inner/outer)
+          <br> .... 
+          <br> 10번: 싱글 1
+        </li>
+        <li>고객은 3발을 던져 맞춘 번호들을 기록</li>
+        <li>가장 높은 등급의 번호에 해당하는 경품 지급</li>
+      </ul>
+
+      <h3>경품 예시</h3>
+      <ul>
+        <li>1번 → 꿔바로우 반접시</li>
+        <li>2번 → 마라오일 샘플</li>
+        <li>3번 → 탄산음료 1캔</li>
+        <li> .... </li>
+        <li>10번 → 격려 인사</li>
+      </ul>
+    </div>
+
+    <!-- 5: 제안1 — 지정 점수 도전 게임 -->
+    <div class="scenario">
+      <small>Scenario 5</small>
+      <h2>🎯 지정 점수 3개 도전 — 전략형 게임</h2>
+      <div class="difficulty">난이도: ★★★★ (어려움)</div>
+      <p>참여자가 트리플 라인에서 ‘내가 노릴 점수’를 스스로 정하고, 실제로 그 점수를 맞출 수 있는지 도전하는 전략형 다트 게임입니다.</p>
+
+      <h3>운영 방식</h3>
+      <ul>
+        <li>
+          참여자가 다트보드의 점수 3개를 미리 선택
+          <br> (예: T10점, T18점, T20점)
+        </li>
+        <li>선택한 점수는 직원이 보드 앞에 메모하거나 체크</li>
+        <li>주어진 기회: 3발</li>
+        <li>3발 안에 선택한 점수 3개를 모두 맞추면 미션 성공</li>
+      </ul>
+
+      <h3>보상 설정 예시</h3>
+      <ul>
+        <li>3개 모두 성공 → 프리미엄 사이드(예: 꿔바로우, 향라닭날개 중 택1)</li>
+        <li>1개 성공 → 음료 1잔</li>
+        <li>0개 성공 → 환영인사</li>
+      </ul>
+
+      <h3>포인트</h3>
+      <ul>
+        <li>실력자들이 도전하기 좋은 “어려운 미션형” 이벤트</li>
+        <li>“내가 선택한 숫자에 얼마나 근접했는지” 이야기 소재가 많음</li>
+      </ul>
+    </div>
+
+    <!-- 6: 제안2 — 관리자 vs 1:1 대결 -->
+    <div class="scenario">
+      <small>Scenario 6</small>
+      <h2>⚔ 라오 vs 손님 — 1:1 대결 게임</h2>
+      <div class="difficulty">난이도: ★★★☆☆ (보통)</div>
+      <p>라오(직원)와 참여자가 번갈아 다트를 던지는 1:1 대결 형식의 게임입니다. 최종 점수 차이가 크지 않을수록 손님이 유리한 룰로 설계합니다.</p>
+
+      <h3>운영 방식</h3>
+      <ul>
+        <li>관리자, 참여자 순으로 3발씩 던져 총합 점수 계산</li>
+        <li>모든 투구가 끝나면 양쪽 점수를 “10점 단위로 반올림”</li>
+        <li>반올림된 점수가 같으면 “참여자 승리”로 처리</li>
+      </ul>
+
+      <h3>예시</h3>
+      <ul>
+        <li>참여자: 37점 → 반올림 40점</li>
+        <li>관리자: 42점 → 반올림 40점</li>
+        <li>→ 반올림 점수가 같으므로 참여자 승리</li>
+      </ul>
+
+      <h3>보상 예시</h3>
+      <ul>
+        <li>참여자 승리 → 사이드 메뉴 또는 디저트 제공</li>
+        <li>무승부/관리자 승 → 다음 방문용 작은 혜택(소스 쿠폰 등)</li>
+      </ul>
+
+      <h3>포인트</h3>
+      <ul>
+        <li>직원 캐릭터(유쾌한 매니저, 마라 마스터 등)를 살리기 좋은 콘텐츠</li>
+        <li>“손님 vs 라오” 구도로 스토리 만들기 쉽고, SNS 영상 촬영 소재도 풍부</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2025 라오충칭훠궈 — Dart Event Scenario Page
+</footer>
+
+</body>
+</html>
