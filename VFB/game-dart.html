@@ -36,7 +36,80 @@
     padding: 0 1.3rem;
   }
 
-  /* 2컬럼 그리드 */
+  /* 운영 플로우 박스 */
+  .flow-box {
+    background: #ffffff;
+    border-radius: 1rem;
+    border: 1px solid #f0e0d8;
+    padding: 1.8rem 1.6rem 1.8rem;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    margin-bottom: 2.2rem;
+  }
+  .flow-box h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: var(--red);
+    margin-bottom: .3rem;
+  }
+  .flow-tag {
+    display: inline-block;
+    margin-bottom: .4rem;
+    background: var(--gold);
+    color: #5a3c01;
+    padding: .22rem .7rem;
+    border-radius: .4rem;
+    font-size: .7rem;
+    font-weight: 600;
+  }
+  .flow-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem 1.6rem;
+    margin-top: 1.2rem;
+  }
+  .flow-step {
+    background: #fffaf5;
+    border-radius: .8rem;
+    border: 1px solid #f3e1d4;
+    padding: 1rem .9rem .9rem;
+  }
+  .flow-step h3 {
+    margin: 0 0 .4rem;
+    font-size: .95rem;
+  }
+  .flow-step small {
+    display: inline-block;
+    font-size: .7rem;
+    color: #8b5a3a;
+    margin-bottom: .25rem;
+  }
+  .flow-step ul {
+    margin: .25rem 0 0;
+    padding-left: 1.15rem;
+  }
+  .flow-step ul li {
+    margin-bottom: .25rem;
+    font-size: .85rem;
+  }
+  .flow-summary {
+    margin-top: 1.5rem;
+    font-size: .9rem;
+  }
+  .flow-summary-title {
+    font-weight: 600;
+    margin-bottom: .3rem;
+  }
+  .flow-arrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: .78rem;
+    white-space: pre-wrap;
+    background: #fffaf5;
+    border-radius: .6rem;
+    padding: .7rem .8rem;
+    border: 1px solid #f3e1d4;
+  }
+
+  /* 2컬럼 그리드 (시나리오) */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -101,6 +174,9 @@
     .grid {
       grid-template-columns: 1fr;
     }
+    .flow-steps {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 </head>
@@ -110,6 +186,114 @@
 
 <div class="container">
 
+  <!-- 운영 플로우 섹션 -->
+  <section class="flow-box">
+    <div class="flow-tag">운영 가이드</div>
+    <h2>다트게임 이벤트 운영 플로우</h2>
+    <p>
+      라오충칭훠궈 매장에서 다트게임 이벤트가 자연스럽게 돌아가도록, 손님 동선과 직원 업무를
+      함께 고려한 운영 플로우입니다. 입장 → 참여권 지급 → 식사 중 자유 참여 → 카운터 방문 → 게임 진행 → 보상 지급 → 기록까지 한 눈에 볼 수 있습니다.
+    </p>
+
+    <div class="flow-steps">
+
+      <!-- 1. 입장 / 테이블 배정 -->
+      <div class="flow-step">
+        <small>STEP 1</small>
+        <h3>입장 & 테이블 배정</h3>
+        <ul>
+          <li>손님 입장 시 기본 안내와 함께 다트 이벤트 간단 소개.</li>
+          <li>테이블당 기본 참여권 1매 지급 (입장 시 or 주문 완료 시).</li>
+          <li>직원이 참여권에 테이블 번호와 발급 시간 간단 메모.</li>
+        </ul>
+      </div>
+
+      <!-- 2. 추가 참여권 조건 -->
+      <div class="flow-step">
+        <small>STEP 2</small>
+        <h3>추가 참여권 지급 조건</h3>
+        <ul>
+          <li>음식 주문 금액에 따른 추가 참여권 지급 기준 설정.</li>
+          <li>예: 15만원 이상 주문 시 +1회, 25만원 이상 시 +2회 등.</li>
+          <li>한 장에 횟수(●●)를 표시하거나, 참여권을 여러 장 발급하는 방식 중 선택.</li>
+        </ul>
+      </div>
+
+      <!-- 3. 식사 중 자유 참여 -->
+      <div class="flow-step">
+        <small>STEP 3</small>
+        <h3>식사 중 자유 참여 안내</h3>
+        <ul>
+          <li>손님이 식사 중, 원하는 타이밍에 카운터로 참여 가능하도록 안내.</li>
+          <li>“식사하시다가 여유 되실 때, 참여권 들고 카운터로 오시면 바로 게임 참여 가능합니다.”</li>
+          <li>회전율과 서비스 흐름을 방해하지 않는 자연스러운 방식.</li>
+        </ul>
+      </div>
+
+      <!-- 4. 카운터 방문 / 접수 -->
+      <div class="flow-step">
+        <small>STEP 4</small>
+        <h3>카운터 방문 & 게임 접수</h3>
+        <ul>
+          <li>손님이 참여권을 들고 카운터/다트존으로 이동.</li>
+          <li>직원이 참여권 회수 후 테이블 번호 및 남은 횟수 확인.</li>
+          <li>오늘 진행 중인 게임 시나리오(1~6번 중 선택) 간단 설명.</li>
+          <li>대기자가 있으면 간단 대기 순번 관리.</li>
+        </ul>
+      </div>
+
+      <!-- 5. 게임 진행 -->
+      <div class="flow-step">
+        <small>STEP 5</small>
+        <h3>다트 게임 진행</h3>
+        <ul>
+          <li>안전 거리 확보 후, 손님에게 다트 3발 지급.</li>
+          <li>각 시나리오 룰에 맞게 투구 진행 (점수/색상/번호/미션 등).</li>
+          <li>보드에 꽂히지 않은 투구는 0점으로 처리(재투구 없음 원칙).</li>
+          <li>직원이 점수와 조건을 확인 후 결과를 즉시 안내.</li>
+        </ul>
+      </div>
+
+      <!-- 6. 보상 지급 -->
+      <div class="flow-step">
+        <small>STEP 6</small>
+        <h3>보상 지급 & 안내</h3>
+        <ul>
+          <li>점수·조건에 따라 즉석 경품 또는 쿠폰 지급.</li>
+          <li>음식/사이드 보상은 키친에 “이벤트 보상”으로 전달 후 서빙.</li>
+          <li>다음 방문 쿠폰은 카운터에서 바로 인쇄/수기 발급.</li>
+          <li>간단 멘트로 분위기 업: “마라신이 도와주셨네요!” 등.</li>
+        </ul>
+      </div>
+
+      <!-- 7. 기록 / 마감 -->
+      <div class="flow-step">
+        <small>STEP 7</small>
+        <h3>기록 & 마감 정리</h3>
+        <ul>
+          <li>참여 테이블 번호, 시나리오, 결과, 지급 보상 간단 기록.</li>
+          <li>일 마감 시 보상 사용량·참여 수 체크 → 비용 및 효과 분석.</li>
+          <li>다트, 보드, 주변 장비 상태 점검 후 안전하게 정리.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="flow-summary">
+      <div class="flow-summary-title">한 줄 플로우 요약</div>
+      <div class="flow-arrow">
+입장 & 테이블 배정
+  → 참여권 지급 (기본 + 추가조건)
+    → 식사 중 자유 시간에 카운터 방문
+      → 참여권 제출 & 게임 시나리오 안내
+        → 다트 게임 진행 (3발 기준)
+          → 점수/조건 확인 후 보상 지급
+            → 참여 기록 & 일 마감 정리
+      </div>
+    </div>
+  </section>
+
+  <!-- 시나리오 2컬럼 그리드 -->
   <div class="grid">
 
     <!-- 1: 럭키샷 -->
@@ -137,26 +321,30 @@
     <!-- 2: 타오르는 운명 -->
     <div class="scenario">
       <small>Scenario 2</small>
-      <h2>🔥 타오르는 운명 — 미션형 이벤트</h2>
-      <div class="difficulty">난이도: ★★☆☆☆ (보통)</div>
-      <p>마라(매운맛)/온화(순한맛) 중 하나를 선택하고, 보드의 색상에 따라 운명이 결정되는 스토리형 게임입니다.</p>
+      <h2>🔥 타오르는 운명 (레드 존 미션)</h2>
+      <div class="difficulty">난이도: ★★★★☆ (어려움)</div>
+      <p>라오의 붉은 기운(마라 불꽃)이 깃든 레드존(Triple, Double, Bull) 만 맞혀라!</p>
 
       <h3>운영 방식</h3>
       <ul>
-        <li>고객이 “마라” 또는 “온화” 진영을 선택</li>
-        <li>색상은 기존의 보드 색상에서, 빨강(매운 운명), 하양(온화한 운명) 섹션 결정</li>
-        <li>던진 다트가 맞은 색상에 따라 운명 카드 또는 경품 제공</li>
+        <li>
+          레드존(Red Zone) 정의
+          <br> 트리플(Treble) 전 구역 = T1~T20
+          <br> 더블(Double) 전 구역 = D1~D20
+          <br> 불스아이(Inner Bull 50점)
+        </li>
+        <li>참여자는 3발을 던져 레드존에 맞은 색상에 따라 경품 제공</li>
       </ul>
 
       <h3>운명/보상 예시</h3>
       <ul>
-        <li>붉은색: 3발 적중 → “오늘은 매운 하루! 맵단조합 서비스”</li>
-        <li>흰색: 3발 적중 → “따뜻한 인연! 10% 쿠폰”</li>
-        <li>불스아이: 특별 보너스 → “라오의 축복! 드링크 2잔 제공”</li>
+        <li>붉은색: 3발 적중 → 고급 경품</li>
+        <li>붉은색: 1발 적중 → 일반 경품</li>
+        <li>붉은색: 0발 적중 → 없음</li>
       </ul>
     </div>
 
-    <!-- 3: 라오 다트챌린지 -->
+    <!-- 3: 라오 상차림 다트 -->
     <div class="scenario">
       <small>Scenario 3</small>
       <h2>🥢 “라오 상차림 다트” — 메뉴 구성 완성 게임</h2>
@@ -166,18 +354,17 @@
       <h3>운영 방식</h3>
       <ul>
         <li>
-            다트판을 라오 재료 6종으로 구역 표시
-            <br> 예시)
-            <br> ① 버섯 (D20, T20)
-            <br> ② 마라볼 (불아이)
-            <br> ③ 감자 (D19,T19)
-            <br> ④ 야채 믹스 (S2, S15, S17)
-            <br> ⑤ 면사리 (S7, S16, S19)
-            <br> ⑥ 고기 추가존 (S9, S12, S14)
+          다트판을 라오 재료 6종으로 구역 표시
+          <br> 예시)
+          <br> ① 버섯 (D20, T20)
+          <br> ② 마라볼 (불아이)
+          <br> ③ 감자 (D19,T19)
+          <br> ④ 야채 믹스 (S2, S15, S17)
+          <br> ⑤ 면사리 (S7, S16, S19)
+          <br> ⑥ 고기 추가존 (S9, S12, S14)
         </li>
         <li>참여자는 3발의 기회를 갖고 재료를 “모아가기”</li>
         <li>던진 3발에서 맞힌 재료 조합으로 리워드 결정</li>
-
       </ul>
 
       <h3>포인트 리워드 예시</h3>
@@ -220,11 +407,11 @@
       </ul>
     </div>
 
-    <!-- 5: 제안1 — 지정 점수 도전 게임 -->
+    <!-- 5: 지정 점수 도전 게임 -->
     <div class="scenario">
       <small>Scenario 5</small>
       <h2>🎯 지정 점수 3개 도전 — 전략형 게임</h2>
-      <div class="difficulty">난이도: ★★★★ (어려움)</div>
+      <div class="difficulty">난이도: ★★★★★ (어려움)</div>
       <p>참여자가 트리플 라인에서 ‘내가 노릴 점수’를 스스로 정하고, 실제로 그 점수를 맞출 수 있는지 도전하는 전략형 다트 게임입니다.</p>
 
       <h3>운영 방식</h3>
@@ -252,7 +439,7 @@
       </ul>
     </div>
 
-    <!-- 6: 제안2 — 관리자 vs 1:1 대결 -->
+    <!-- 6: 관리자 vs 1:1 대결 -->
     <div class="scenario">
       <small>Scenario 6</small>
       <h2>⚔ 라오 vs 손님 — 1:1 대결 게임</h2>
