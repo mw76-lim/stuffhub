@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>Verity F&B — 회사 소개</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --vfb-green: #4eb997;
+      --vfb-gold: #f6c75e;
+      --vfb-blue: #2fadbe;
+      --ink: #141518;
+      --muted: #6b7280;
+      --paper: #f7f5f2;
+      --card: #ffffff;
+      --line: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #ffffff 0, #f7f5f2 40%, #efeae2 100%);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    header {
+      padding: 2.4rem 1.5rem 1.8rem;
+      text-align: center;
+    }
+
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .25rem .7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.9);
+      font-size: .7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .9rem;
+    }
+
+    .logo-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--vfb-green), var(--vfb-gold));
+    }
+
+    header h1 {
+      margin: 0 0 .5rem;
+      font-size: clamp(1.9rem, 4vw, 2.4rem);
+      letter-spacing: .03em;
+    }
+
+    header p {
+      margin: 0;
+      max-width: 640px;
+      margin-inline: auto;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .section {
+      position: relative;
+      margin-top: 2rem;
+      border-radius: 1.4rem;
+      background: var(--card);
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.06),
+        0 0 0 1px rgba(148, 163, 184, 0.12);
+      padding: 1.9rem 1.8rem 2.1rem;
+      overflow: hidden;
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.08;
+      background:
+        radial-gradient(circle at 0% 0%, var(--vfb-green), transparent 55%),
+        radial-gradient(circle at 100% 0%, var(--vfb-blue), transparent 60%),
+        radial-gradient(circle at 20% 100%, var(--vfb-gold), transparent 55%);
+      pointer-events: none;
+    }
+
+    .section-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--vfb-blue);
+      margin-bottom: .35rem;
+    }
+
+    .section-label-line {
+      width: 26px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--vfb-blue), transparent);
+    }
+
+    .section h2 {
+      margin: 0 0 .5rem;
+      font-size: 1.4rem;
+    }
+
+    .section-sub {
+      margin: 0 0 1.4rem;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .section p {
+      margin: 0 0 .8rem;
+      font-size: .9rem;
+    }
+
+    .quote {
+      margin-top: 1.2rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--vfb-green);
+      font-size: .92rem;
+    }
+
+    .quote-title {
+      font-weight: 600;
+      margin-bottom: .15rem;
+    }
+
+    .signature {
+      margin-top: 1.4rem;
+      font-size: .82rem;
+      color: var(--muted);
+    }
+
+    /* Philosophy + Vision/Mission */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 1.6rem;
+      margin-top: 1rem;
+    }
+
+    .pill-heading {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: .25rem .75rem;
+      border-radius: 999px;
+      background: rgba(78,185,151,0.08);
+      color: #065f46;
+      margin-bottom: .4rem;
+    }
+
+    .pill-heading span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--vfb-green);
+    }
+
+    .tagline {
+      font-weight: 600;
+      margin-bottom: .3rem;
+      font-size: 1rem;
+    }
+
+    .list {
+      margin: .3rem 0 1rem;
+      padding-left: 1.1rem;
+      font-size: .9rem;
+    }
+
+    .list li {
+      margin-bottom: .25rem;
+    }
+
+    .kv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: .8rem;
+      margin-top: .6rem;
+    }
+
+    .kv-card {
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,0.4);
+      padding: .85rem .9rem .8rem;
+      background: linear-gradient(145deg, #ffffff, #f7fafc);
+      font-size: .85rem;
+    }
+
+    .kv-label {
+      font-weight: 600;
+      margin-bottom: .25rem;
+      color: #111827;
+    }
+
+    /* CI / BI section */
+    .ci-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 1.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .ci-block h3 {
+      margin: 0 0 .4rem;
+      font-size: 1rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .4rem;
+    }
+
+    .chip {
+      font-size: .78rem;
+      padding: .22rem .6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(255,255,255,0.9);
+    }
+
+
+    /* --- Brand Color System : 3분할 캡슐 스타일 --- */
+    .color-row {
+      margin-top: 1.2rem;
+      display: flex;
+      justify-content: center;
+    }
+    .color-band {
+      width: 100%;
+      max-width: 620px;
+      border-radius: 999px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      box-shadow:
+        0 14px 30px rgba(15, 23, 42, 0.16),
+        0 0 0 1px rgba(148, 163, 184, 0.35);
+      background: #111827;
+    }
+    /* 각 컬러 세그먼트 공통 스타일 */
+    .color-segment {
+      position: relative;
+      padding: 0.9rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: #0b1120;
+      font-size: 0.8rem;
+    }
+    /* 가운데, 오른쪽 경계선 살짝 */
+    .color-segment + .color-segment {
+      box-shadow: inset 1px 0 0 rgba(15, 23, 42, 0.15);
+    }
+    /* 세그먼트별 배경색 */
+    .color-segment--green {
+      background: radial-gradient(circle at 0% 0%, #ffffffaa, transparent 55%), #4eb997;
+    }
+    .color-segment--yellow {
+      background: radial-gradient(circle at 0% 0%, #ffffffaa, transparent 55%), #f6c75e;
+    }
+    .color-segment--blue {
+      background: radial-gradient(circle at 0% 0%, #ffffffaa, transparent 55%), #2fadbe;
+    }
+    .color-name {
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .color-code {
+      font-size: 0.72rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.72);
+      color: #e5e7eb;
+    }
+    /* 모바일에서 조금 여유 있게 */
+    @media (max-width: 600px) {
+      .color-band {
+        max-width: 360px;
+      }
+    }
+
+    .example-list {
+      margin-top: .6rem;
+      padding-left: 1.1rem;
+      font-size: .88rem;
+    }
+
+    .example-list li {
+      margin-bottom: .2rem;
+    }
+
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: .7rem;
+      margin-top: .6rem;
+    }
+
+    .thumb {
+      border-radius: .9rem;
+      border: 1px dashed rgba(148,163,184,0.7);
+      padding: .6rem .7rem;
+      font-size: .78rem;
+      color: var(--muted);
+      text-align: center;
+      background: rgba(249,250,251,0.9);
+    }
+
+    @media (max-width: 900px) {
+      .grid-2,
+      .ci-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 2rem 1.25rem 1.6rem;
+      }
+      main {
+        padding-inline: 1.25rem;
+      }
+      .section {
+        padding: 1.5rem 1.35rem 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-mark">
+    <span class="logo-dot"></span>
+    VERITY F&amp;B · COMPANY PROFILE
+  </div>
+  <h1>진실된 미식으로 식문화의 내일을 짓습니다</h1>
+  <p>
+    Verity F&amp;B는 정직한 재료와 진심 어린 서비스, 그리고 차별화된 브랜드 철학으로
+    고객의 식탁 위에 새로운 미식 경험을 제안합니다.
+  </p>
+</header>
+
+<main>
+
+  <!-- 1. CEO 인사말 -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">
+        <span class="section-label-line"></span>
+        CEO Message
+      </div>
+      <h2>요리의 시작은 재료가 아닌 진심입니다</h2>
+      <p class="section-sub">
+        베리티 F&amp;B는 이름 그대로, ‘진실된 미식(Verity in F&amp;B)’을 지향합니다.
+        정직한 재료와 깊이 있는 맛, 그리고 브랜드가 담고 있는 철학을 통해
+        고객의 식탁 위에 오래 기억되는 경험을 전하고자 합니다.
+      </p>
+
+      <p>
+        우리는 단순히 음식을 만드는 데서 그치지 않고,
+        고객의 일상 속에서 다시 떠올리고 싶고, 다시 찾고 싶은
+        맛과 공간을 만드는 것을 목표로 하고 있습니다.
+      </p>
+      <p>
+        현재 베리티 F&amp;B는 정통 충칭 훠궈의 진수를 선보이는
+        <strong>‘라오충칭훠궈’</strong>를 시작으로,
+        한식, 중식, 글로벌 다이닝 등 다양한 콘셉트의 외식 브랜드를
+        순차적으로 선보이며 ‘미식의 브랜드 하우스’로 성장해 나가고자 합니다.
+      </p>
+      <p>
+        앞으로도 베리티 F&amp;B는 고객의 미식 경험을 한 단계 끌어올리는
+        정직하고 감동 있는 브랜드를 만들어 가겠습니다.
+        변함없는 관심과 응원 부탁드립니다.
+      </p>
+
+      <div class="signature">
+        베리티 F&amp;B 대표이사 드림
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 경영 철학 + 비전 및 미션 (통합 섹션) -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">
+        <span class="section-label-line"></span>
+        Philosophy · Vision &amp; Mission
+      </div>
+      <h2>진실, 그 본질을 요리하다</h2>
+      <p class="section-sub">
+        베리티 F&amp;B는 ‘Verity(진실)’이라는 이름처럼,
+        정직한 재료와 정성 어린 조리, 진심이 담긴 서비스로
+        식사를 넘어서는 미식 경험을 만들어 갑니다.
+      </p>
+
+      <!-- 2컬럼 구조: 경영철학 / 비전&미션 -->
+      <div class="grid-2" style="margin-bottom:2rem;">
+
+        <!-- Left: 경영 철학 -->
+        <div>
+          <div class="pill-heading">
+            <span></span>
+            경영 철학
+          </div>
+          <div class="tagline">“진실, 그 본질을 요리하다”</div>
+
+          <p>
+            베리티 F&amp;B는 음식의 출발점을 ‘재료’가 아닌 ‘진심’에 둡니다.
+            정직한 재료 선택, 정성 어린 조리 과정, 진심이 전해지는 서비스가 모여
+            한 끼의 식사가 한 사람의 하루를 의미 있게 바꿀 수 있다고 믿습니다.
+          </p>
+          <p>
+            우리는 ‘식(食)’을 단순한 소비가 아닌,
+            <strong>삶의 품격을 나누는 문화적 경험</strong>으로 바라보며
+            지속가능한 외식 문화를 만들어가고자 합니다.
+          </p>
+
+          <ul class="list">
+            <li>진실된 재료 사용과 투명한 과정</li>
+            <li>고객 중심의 서비스와 공간 경험</li>
+            <li>지속가능성을 고려한 책임 있는 외식 운영</li>
+          </ul>
+        </div>
+
+        <!-- Right: 비전 / 미션 -->
+        <div>
+          <div class="pill-heading">
+            <span></span>
+            Vision &amp; Mission
+          </div>
+
+          <div class="tagline">Vision · 비전</div>
+          <p>
+            <strong>“대한민국을 대표하는 프리미엄 다이닝 브랜드 그룹으로 성장하겠습니다.”</strong>
+          </p>
+          <p>
+            베리티 F&amp;B는 단일 브랜드에 머무르지 않고
+            <strong>브랜드 포트폴리오 전략</strong>을 기반으로,
+            다양한 콘셉트에 적합한 F&amp;B 브랜드를 전개합니다.
+          </p>
+          <p>
+            한국인의 입맛과 라이프스타일을 깊이 이해하는 감각으로  
+            지속가능한 외식 트렌드를 제시하고,  
+            미식 브랜드 하우스로서의 역할을 확장합니다.
+          </p>
+
+          <div class="tagline" style="margin-top:1rem;">Mission · 미션</div>
+          <p>
+            <strong>“음식이 전하는 감동의 가치를 더 많은 사람에게”</strong>
+          </p>
+          <ul class="list">
+            <li>고객에게는 단순한 식사가 아닌 기억에 남는 식문화 경험 제공</li>
+            <li>직원에게는 성장과 자부심을 느낄 수 있는 일터 제공</li>
+            <li>사회에는 지속가능하고 윤리적인 식문화를 선도하는 기업으로 기여</li>
+          </ul>
+        </div>
+
+      </div><!-- /grid-2 -->
+
+      <!-- 단일 컬럼: 핵심가치 Core Values -->
+      <div style="margin-top:1.6rem;">
+        <div class="pill-heading">
+          <span></span>
+          Core Values · 핵심가치
+        </div>
+
+        <div class="kv-grid" style="margin-top:.9rem;">
+          <div class="kv-card">
+            <div class="kv-label">정직함</div>
+            <div>좋은 음식은 정직한 재료와 과정에서 탄생합니다. 원칙을 지키는 것이 우리의 출발점입니다.</div>
+          </div>
+          <div class="kv-card">
+            <div class="kv-label">정성</div>
+            <div>고객 한 분, 한 접시, 한 끼에 마음을 담아 대하며 세심한 디테일로 만족을 완성합니다.</div>
+          </div>
+          <div class="kv-card">
+            <div class="kv-label">창의성</div>
+            <div>기존의 외식 틀을 넘어서는 새로운 경험과 콘셉트를 제안해 미식의 가능성을 확장합니다.</div>
+          </div>
+          <div class="kv-card">
+            <div class="kv-label">확장성</div>
+            <div>시대와 시장의 변화에 유연하게 대응하며, 브랜드 포트폴리오를 통해 지속적으로 성장합니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 하단 인용문 유지 -->
+      <div class="quote" style="margin-top:2rem;">
+        <div class="quote-title">베리티 F&amp;B가 지향하는 한 줄 정의</div>
+        <div>
+          “진실된 재료와 정직한 과정으로, 한 끼의 식사를 넘어  
+          삶의 품격을 높이는 미식 경험을 만든다.”
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. CI / BI -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">
+        <span class="section-label-line"></span>
+        CI / BI
+      </div>
+      <h2>맛의 가치를 전하고 식문화의 내일을 엽니다</h2>
+      <p class="section-sub">
+        Verity의 CI/BI는 ‘진실(Verity)’이라는 이름의 의미와 커틀러리, 테이블 매너에서 착안한
+        상징을 기반으로 설계된 브랜드 아이덴티티 시스템입니다.  
+        심볼 구조, 워드마크, 컬러 가이드를 통해 브랜드의 정체성과 미식 기업으로서의 철학을 시각적으로 표현합니다.
+      </p>
+
+      <h3 style="margin-top:1.6rem;">CI/BI 컨셉</h3>
+      <p>
+        Verity의 심볼은 ‘진실(Verity)’의 어원을 바탕으로,  
+        식문화를 구성하는 핵심 요소인 <strong>커틀러리</strong>와 <strong>테이블 매너</strong>에서 모티브를 얻어 제작되었습니다.  
+        기하학적 구조와 균형감 있는 형태를 통해 신뢰성과 전문성을 나타내며,  
+        다양한 브랜드 접점에서 일관된 이미지를 전달할 수 있도록 설계되었습니다.
+      </p>
+
+      <!-- 실제 이미지 영역 -->
+      <div class="thumb-grid" style="margin-top:1rem;">
+        <div class="thumb" style="height: 200px;">로고 세로형 이미지</div>
+        <div class="thumb" style="height: 200px;">로고 가로형 이미지</div>
+        <div class="thumb" style="height: 200px;">심볼로고 이미지</div>
+        <div class="thumb" style="height: 200px;">워드마크 이미지</div>
+      </div>
+
+      <h3 style="margin-top:1.8rem;">브랜드 컨셉 그래픽</h3>
+      <p>
+        Verity의 그래픽 모티브는 커틀러리·테이블 매너와 함께  
+        폭넓고 보편적인 식문화의 상징인 <strong>‘젓가락’</strong> 라인을 주요 그래픽 요소로 활용합니다.  
+        단순한 직선이 아닌, 질서와 조화를 담은 상징 요소로 표현하여  
+        브랜드의 확장성과 ‘정직한 미식’이라는 방향성을 담아냈습니다.
+      </p>
+
+      <!-- 메인 그래픽 예시 이미지 -->
+      <div class="thumb" style="height: 600px; margin-top:.7rem; padding:1.5rem;">
+        1000 × 600 메인 심볼 그래픽 이미지
+      </div>
+
+      <h3 style="margin-top:1.8rem;">브랜드 컬러 시스템</h3>
+      <p>
+        Verity의 컬러 팔레트는 F&B 기업에 적합한  
+        <strong>신선함(Fresh Green) · 조화(Mix Yellow) · 정직함(Clean Blue)</strong>  
+        세 가지 이미지를 조합한 컬러 시스템으로 구성됩니다.
+      </p>
+
+
+      <div class="color-row">
+        <div class="color-band">
+          <div class="color-segment color-segment--green">
+            <div class="color-name">Fresh Green</div>
+            <div class="color-code">#4EB997</div>
+          </div>
+          <div class="color-segment color-segment--yellow">
+            <div class="color-name">Mix Yellow</div>
+            <div class="color-code">#F6C75E</div>
+          </div>
+          <div class="color-segment color-segment--blue">
+            <div class="color-name">Clean Blue</div>
+            <div class="color-code">#2FADBE</div>
+          </div>
+        </div>
+      </div>
+
+
+      <h3 style="margin-top:1.8rem;">적용 사례</h3>
+      <p>
+        Verity의 심볼 및 컬러 시스템은 온라인·오프라인 전반에서  
+        브랜드 정체성을 강화하는 핵심 요소로 활용됩니다.
+      </p>
+      <div class="example-grid" style="
+        margin-top:1rem;
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+        gap:1.2rem;
+      ">
+        
+        <!-- 이미지 #1 -->
+        <div class="example-card" style="text-align:center;">
+          <div class="example-thumb" style="
+            width:100%;
+            height:0;
+            padding-bottom:66.66%; /* 300x200 비율 유지 */
+            background:#f3f3f3 url('https://placehold.co/300x200?text=Sample+1') center/cover no-repeat;
+            border-radius:.8rem;
+            border:1px solid rgba(148,163,184,0.45);
+          "></div>
+          <div class="example-caption" style="margin-top:.5rem; font-size:.85rem; color:#6b7280;">
+            사례 이미지 #1
+          </div>
+        </div>
+
+        <!-- 이미지 #2 -->
+        <div class="example-card" style="text-align:center;">
+          <div class="example-thumb" style="
+            width:100%;
+            height:0;
+            padding-bottom:66.66%;
+            background:#f3f3f3 url('https://placehold.co/300x200?text=Sample+2') center/cover no-repeat;
+            border-radius:.8rem;
+            border:1px solid rgba(148,163,184,0.45);
+          "></div>
+          <div class="example-caption" style="margin-top:.5rem; font-size:.85rem; color:#6b7280;">
+            사례 이미지 #2
+          </div>
+        </div>
+
+        <!-- 이미지 #3 -->
+        <div class="example-card" style="text-align:center;">
+          <div class="example-thumb" style="
+            width:100%;
+            height:0;
+            padding-bottom:66.66%;
+            background:#f3f3f3 url('https://placehold.co/300x200?text=Sample+3') center/cover no-repeat;
+            border-radius:.8rem;
+            border:1px solid rgba(148,163,184,0.45);
+          "></div>
+          <div class="example-caption" style="margin-top:.5rem; font-size:.85rem; color:#6b7280;">
+            사례 이미지 #3
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="thumb-grid" style="margin-top:.7rem;">
+        <div class="thumb">CI 적용 사례 #1</div>
+        <div class="thumb">CI 적용 사례 #2</div>
+        <div class="thumb">CI 적용 사례 #3</div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
