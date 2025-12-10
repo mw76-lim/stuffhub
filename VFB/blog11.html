@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      :root {
+        --bg: #f8f7f4;
+        --paper: #ffffff;
+        --text: #161616;
+        --muted: #6b7280;
+        --line: #e7e5e4;
+        --accent: #ff6a00;
+        --radius: 16px;
+        --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
+        --maxw: 1200px;
+      }
+      div#bo_v_con {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 22px;
+      }
+      .post-container {
+        padding: 40px 90px;
+        background-color: #FFFCFB;
+        border-radius: 12px;
+      }
+      .post-container a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .cover-img {
+        aspect-ratio: 16 / 9;
+        background: center / cover;
+        border-radius: 14px;
+        margin-bottom: 16px;
+      }
+      .prose h2 {
+        margin: 2em 0 0.5em;
+        font-size: 20px;
+      }
+      .prose p {
+        margin: 0.9em 0;
+      }
+      .note {
+        border-left: 4px solid var(--accent);
+        background: #fff7ef;
+        padding: 12px 14px;
+        border-radius: 12px;
+        margin: 14px 0;
+      }
+
+      /* Q&A */
+      .qna {
+        display: grid;
+        gap: 14px;
+        margin: 16px 0;
+      }
+      .qna-q {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 14px;
+      }
+      .qna-q b {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      /* Timeline */
+      .timeline {
+        border-left: 3px solid var(--line);
+        margin: 16px 0 8px 4px;
+        padding-left: 14px;
+      }
+      .tl-item {
+        margin: 10px 0;
+      }
+      .tl-date {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .tl-title {
+        font-weight: 800;
+        margin: 0.2em 0;
+      }
+      /* === 2-Column Timeline (Weekday / Weekend) === */
+      .timeline-2col {
+        display: grid;
+        gap: 14px;
+        margin: 16px 0 8px 0;
+      }
+      @media (min-width: 840px) {
+        .timeline-2col {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .tl-col {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .tl-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 6px 0 10px;
+        border-bottom: 1px solid var(--line);
+      }
+      .tl-head h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+      .tl-badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #fafafa;
+        border: 1px solid var(--line);
+        white-space: nowrap;
+      }
+      .tl-list {
+        position: relative;
+        border-left: 3px solid var(--line);
+        margin: 12px 0 0 4px;
+        padding-left: 14px;
+      }
+      .tl-item {
+        margin: 12px 0;
+        padding-left: 0;
+      }
+      .tl-date {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .tl-title {
+        font-weight: 800;
+        margin: 0.2em 0;
+      }
+      .tl-desc {
+        margin: 0.2em 0 0.4em;
+      }
+
+      /* 가독성을 위한 미세 강조 */
+      .tl-col.weekend .tl-head {
+        background: linear-gradient(180deg, rgba(255, 106, 0, 0.08), rgba(255, 106, 0, 0));
+        border-radius: 10px;
+        padding: 10px;
+        margin: -6px -10px 10px -10px;
+      }
+      .tl-col.weekday .tl-head {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0));
+        border-radius: 10px;
+        padding: 10px;
+        margin: -6px -10px 10px -10px;
+      }
+
+      /* People */
+      .people {
+        display: grid;
+        gap: 14px;
+        margin: 14px 0;
+      }
+      @media (min-width: 800px) {
+        .people {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .people-panel {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 14px;
+        display: grid;
+        gap: 8px;
+      }
+      .avatar {
+        aspect-ratio: 1/1;
+        border-radius: 10px;
+        overflow: hidden; /* 이미지가 네모 밖으로 넘치지 않게 */
+        position: relative;
+        background: #eee; /* 이미지 로딩 전 배경 */
+      }
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* background-size: cover 와 동일 */
+        object-position: center; /* background-position: center 동일 */
+        display: block;
+      }
+
+      /* tags */
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .tag {
+        font-size: 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 10px;
+        background: #fafafa;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .btn.accent {
+        background: var(--accent);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      /* stepas */
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 10px;
+        margin: 16px 0;
+      }
+      .step {
+        background: #fdefc9;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .step h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+
+      .grid-textarea {
+        padding: 0 10px;
+      }
+      .grid-3 {
+        grid-column: span 3;
+      }
+      .grid-4 {
+        grid-column: span 4;
+      }
+      .grid-6 {
+        grid-column: span 6;
+      }
+      .grid-8 {
+        grid-column: span 8;
+      }
+      .grid-9 {
+        grid-column: span 9;
+      }
+      .grid-12 {
+        grid-column: span 12;
+      }
+      [class^="grid-"] img {
+        width: 100%;
+        border-radius: 12px;
+      }
+      @media (max-width: 820px) {
+        .grid-3,
+        .grid-4,
+        .grid-6,
+        .grid-8,
+        .grid-9 {
+          grid-column: span 12;
+        }
+      }
+
+      .text-center {
+        text-align: center;
+      }
+      .callout {
+        border: 1px solid rgba(46, 125, 50, 0.45);
+        background: rgba(46, 125, 50, 0.05);
+        padding: 16px;
+        border-radius: 14px;
+        color: #2e7d32;
+      }
+      .diagram {
+        margin: 20px 0;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="bo_v_con">
+      <div class="post-container">
+        <!-- 문서스타일[prose] -->
+        <div class="prose">
+          <h2>제목: #SNS 콘텐츠 | 불향이 감싸는 부드러운 한입 — 몽골리안 비프의 탄생</h2>
+
+          <!-- 커버 이미지 -->
+          <div class="steps">
+            <div class="grid-3">
+              <img src="blog11/cut1-2.png" />
+            </div>
+            <div class="grid-3">
+              <img src="blog11/cut2-1.png" />
+            </div>
+            <div class="grid-6 grid-textarea">
+              <h3>불앞에서 태어난 새로운 맛</h3>
+              <p>
+                라오충칭훠궈의 주방은 언제나 ‘불맛’의 온도 위에 있습니다.
+                이번에 공개하는 신메뉴 <strong>〈몽골리안 비프〉</strong>는 소고기의 풍미와 달큰한 양념,
+                그리고 화려한 웍질이 어우러지는 한 접시의 드라마입니다.
+                <br><br>
+                SNS에 공개된 짧은 영상은 단 15초, 하지만 그 안에는 수십 번의 불길과 향의 교차가 담겨 있습니다.
+                이번 블로그에서는 그 영상 속 다섯 장면을 따라가며 ‘불향의 레시피’를 함께 살펴봅니다.
+              </p>
+              <h3>🔹 장면 1. 재료 준비</h3>
+              <p>
+                정갈하게 손질된 소고기, 양파, 부추, 다진 마늘. 모든 재료는 온도와 수분이 일정해야 불맛이 제대로 배어듭니다.
+                라오충칭 주방의 하루는 항상 이 준비에서 시작됩니다.
+              </p>
+              <div class="note">
+                “좋은 재료는 좋은 불을 만났을 때 비로소 살아난다.”
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div class="steps">
+            <div class="grid-6 grid-textarea">
+              <h3>🔹 장면 2. 소고기 투하</h3>
+              <p>
+                웍에 기름이 뜨거워지는 순간, 소고기가 투하됩니다. 쉐프의 손목이 반 바퀴만 돌아가도 불꽃이 튑니다.
+                고기의 수분이 순간적으로 증발하며, 첫 번째 향이 피어오릅니다.
+              </p>
+              <div class="note">
+                이 짧은 찰나가 ‘불향’의 시작점입니다.
+              </div>
+
+              <h3>🔹 장면 3. 비법 양념장 완성</h3>
+              <p>
+                다진 마늘과 간장 베이스, 그리고 라오충칭만의 비법 양념이 들어갑니다. 웍 안의 불빛이 붉게 번지고, 달큰한 향이 퍼져나갑니다.
+                소고기는 잠시 쉬어가고, 양념은 온전히 불과 마주하며 깊어집니다.
+              </p>
+              <div class="note">
+                “양념이 끓는 순간, 맛은 성격을 갖는다.”
+              </div>
+            </div>
+            <div class="grid-3">
+              <img src="blog11/cut3-1.png" />
+            </div>
+            <div class="grid-3">
+              <img src="blog11/cut4-1.png" />
+            </div>
+          </div>
+          
+          <br>
+          <div class="steps">            
+            <div class="grid-3">
+              <img src="blog11/cut5-1.png" />
+            </div>
+            <div class="grid-3">
+              <img src="blog11/cut5-3.png" />
+            </div>
+            <div class="grid-6 grid-textarea">
+              <h3>🔹 장면 4. 다시 합쳐지는 불의 타이밍</h3>
+              <p>
+                아까 잠시 뺀 소고기를 다시 웍에 넣고, 쉐프의 웍질이 이어집니다. 양념과 불, 고기가 하나가 되는 순간—불꽃이 웍 밖으로 번지며 라오충칭 특유의 ‘불쇼’가 완성됩니다.
+              </p>
+              <div class="note">
+                이 장면이 바로 영상 속 하이라이트 컷. <br>
+                “불향으로 완성되는 감칠맛”이란 표현이 딱 이때의 순간입니다.
+              </div>
+              <h3>🔹 장면 5. 부추를 넣고 마무리</h3>
+              <p>
+                뜨거운 웍 위에서 마지막으로 부추가 들어갑니다. 짧게 섞이고, 빠르게 불을 끕니다. 그릇에 담기는 순간까지 김이 피어오르며 향이 이어집니다.
+              </p>
+              <div class="note">
+                감칠맛 폭발. 쫄깃하고 고소한 몽골리안 비프 완성.
+              </div>
+            </div>
+          </div>
+
+          <h2>🍽️ 쉐프의 한마디</h2>
+          <div class="note">
+            “불맛은 화려함이 아니라 정확한 타이밍이에요. 
+            한 컷의 영상에 담기지 않는 건, 
+            그 타이밍을 위해 쌓아온 손의 기억입니다.”
+          </div>
+
+          <h2>SNS 하이라이트</h2>
+          <p>
+            이번 조리 영상은 라오충칭훠궈 인스타그램 릴스에서 공개되었습니다. 불꽃과 소스의 끓는 소리가 생생하며, 현장의 열기를 그대로 느낄 수 있습니다.
+          </p>
+          <div class="note">
+            <a href="https://www.instagram.com/reel/DQGFVpsjXSs/">👉 인스타그램에서 보기: @laochongqing_hotpot</a>
+          </div>
+
+          <div class="tags" role="list">
+            <span class="tag" role="listitem">#라오충칭훠궈</span>
+            <span class="tag" role="listitem">#신메뉴</span>
+            <span class="tag" role="listitem">#몽골리안비프</span>
+            <span class="tag" role="listitem">#불향가득</span>
+            <span class="tag" role="listitem">#중식요리</span>
+            <span class="tag" role="listitem">#키친비하인드</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

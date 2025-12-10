@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verity F&B — 메인 로고 레이어 (젓가락 6개 애니메이션 시안)</title>
+  <meta name="description" content="중앙 로고 상·하단 문구와, 로고의 유래인 젓가락 6개 심볼을 활용한 애니메이션 로고 레이어 시안." />
+  <style>
+    /* ==========================
+       THEME TOKENS
+       필요 시 색상·크기만 조정해 전체 톤 변경
+    ========================== */
+    :root{
+      --bg: #ffffff;
+      --fg: #151515;
+      --muted: #5b6067;
+      --accent: #e74f31;
+      --halo: 0 0 0 0 rgba(231,79,49,.0), 0 0 96px 20px rgba(231,79,49,.08);
+      --radius: clamp(120px, 24vw, 260px); /* 젓가락 최종 반경 */
+      --stick-w: clamp(120px, 18vw, 220px);
+      --stick-h: 10px;
+      --stick-br: 999px;
+
+      /* 6개 젓가락 색상 (브랜드 서브 팔레트 권장) */
+      /* --c1: #e74f31;
+      --c2: #2ec4b6;
+      --c3: #6c5ce7;
+      --c4: #00b894;
+      --c5: #ffd166;
+      --c6: #ff6b6b; */
+      --c1: #4eb997;
+      --c2: #f6c75e;
+      --c3: #2fadbe;
+      --c4: #4eb997;
+      --c5: #f6c75e;
+      --c6: #2fadbe;
+    }
+
+    /* ==========================
+       LAYER LAYOUT
+    ========================== */
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,Apple SD Gothic Neo,Noto Sans KR,Malgun Gothic,sans-serif}
+    .logo-layer{position:relative;isolation:isolate;overflow:hidden;min-height:70vh;display:grid;place-items:center;padding:clamp(48px,8vw,96px) 20px;}
+    .logo-layer::before{ /* 은은한 할로우 */
+      content:"";position:absolute;inset:-10%;background:radial-gradient(60% 40% at 50% 50%, rgba(231,79,49,.06), transparent 60%);z-index:0;}
+
+    .inner{position:relative;z-index:1;display:grid;gap:14px;justify-items:center;text-align:center;}
+
+    .tagline-top{margin:0;font-weight:300;letter-spacing:.02em;color:var(--muted);font-size:clamp(14px,2vw,18px)}
+    .logo-wrap{position:relative;display:grid;place-items:center;width:min(520px,82vw);aspect-ratio:3/1;filter:drop-shadow(0 8px 24px rgba(0,0,0,.08));}
+    .logo-wrap .halo{position:absolute;inset:10%;border-radius:50%;box-shadow:var(--halo);opacity:.9;}
+    .logo{max-width:100%;height:auto;display:block}
+    .logo-text{font-weight:800;letter-spacing:.02em;font-size:clamp(28px,6vw,56px)}
+
+    .tagline-bottom{margin:2px 0 0;color:#2b2f36;font-weight:600;font-size:clamp(14px,2.2vw,18px)}
+
+    /* ==========================
+       CHOPSTICKS (6 SYMBOLS)
+    ========================== */
+    .sticks{position:absolute;inset:0;pointer-events:none;}
+    .stick{position:absolute;left:50%;top:50%;width:var(--stick-w);height:var(--stick-h);border-radius:var(--stick-br);transform-origin:center;opacity:0;filter:blur(1.2px);}
+    .stick::after{content:"";position:absolute;right:8px;top:50%;width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.55);transform:translateY(-50%);} /* 끝부분 하이라이트 */
+
+    /* 초기: 흩어진 상태 */
+    .stick{transform:translate(-50%,-50%) rotate(var(--deg)) translateY(calc(-1 * (var(--radius) * 1.8))) scale(.7)}
+
+    /* 조립(assemble) 상태 */
+    .assemble .stick{opacity:1;filter:blur(0);transform:translate(-50%,-50%) rotate(var(--deg)) translateY(calc(-1 * var(--radius))) scale(1);transition:transform .9s cubic-bezier(.2,.7,.2,1),opacity .6s ease,filter .6s ease;}
+    .assemble .stick:nth-child(1){transition-delay:.0s}
+    .assemble .stick:nth-child(2){transition-delay:.06s}
+    .assemble .stick:nth-child(3){transition-delay:.12s}
+    .assemble .stick:nth-child(4){transition-delay:.18s}
+    .assemble .stick:nth-child(5){transition-delay:.24s}
+    .assemble .stick:nth-child(6){transition-delay:.30s}
+
+    /* 미세 떠다니기 효과 */
+    @keyframes float{0%{transform:translate(-50%,-50%) rotate(var(--deg)) translateY(calc(-1 * var(--radius))) }50%{transform:translate(-50%,-50%) rotate(var(--deg)) translateY(calc(-1 * var(--radius) - 6px)) }100%{transform:translate(-50%,-50%) rotate(var(--deg)) translateY(calc(-1 * var(--radius))) }}
+    .assembled .stick{animation:float 5s ease-in-out infinite;animation-delay:var(--delay)}
+
+    /* 색상 배정 & 그라디언트 결 */
+    .stick:nth-child(1){background:linear-gradient(90deg, rgba(255,255,255,.35), rgba(0,0,0,.08)), var(--c1)}
+    .stick:nth-child(2){background:linear-gradient(90deg, rgba(255,255,255,.35), rgba(0,0,0,.08)), var(--c2)}
+    .stick:nth-child(3){background:linear-gradient(90deg, rgba(255,255,255,.35), rgba(0,0,0,.08)), var(--c3)}
+    .stick:nth-child(4){background:linear-gradient(90deg, rgba(255,255,255,.35), rgba(0,0,0,.08)), var(--c4)}
+    .stick:nth-child(5){background:linear-gradient(90deg, rgba(255,255,255,.35), rgba(0,0,0,.08)), var(--c5)}
+    .stick:nth-child(6){background:linear-gradient(90deg, rgba(255,255,255,.35), rgba(0,0,0,.08)), var(--c6)}
+
+    /* 접근성: 모션 최소화 선호 시 즉시 조립 상태 */
+    @media (prefers-reduced-motion: reduce){
+      .stick{transition:none !important;animation:none !important;opacity:1;filter:none;transform:translate(-50%,-50%) rotate(var(--deg)) translateY(calc(-1 * var(--radius))) !important}
+    }
+
+    /* 반응형 미세 조정 */
+    @media (max-width:680px){
+      :root{--radius: 150px;}
+      .logo-wrap{width:min(420px,86vw)}
+    }
+    .test {
+        color: #00b894;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================
+       LOGO LAYER
+       상단 철학 문구 / 중앙 로고 / 하단 사업 문구 + 젓가락 6개 심볼
+       - 이미지 로고가 없으면 .logo-text 텍스트가 표시됩니다.
+       - 색상은 :root 토큰 변경으로 손쉽게 테마 교체 가능합니다.
+  ========================== -->
+  <section class="logo-layer" id="verity-logo-layer" aria-label="Verity F&B Logo Layer">
+    <div class="sticks" aria-hidden="true">
+      <!-- 각 젓가락의 --deg(최종 각도)와 --delay(부유 시작 딜레이) -->
+      <div class="stick" style="--deg: 0deg;   --delay: .0s"></div>
+      <div class="stick" style="--deg: 60deg;  --delay: .4s"></div>
+      <div class="stick" style="--deg: 120deg; --delay: .8s"></div>
+      <div class="stick" style="--deg: 180deg; --delay: 1.2s"></div>
+      <div class="stick" style="--deg: 240deg; --delay: 1.6s"></div>
+      <div class="stick" style="--deg: 300deg; --delay: 2.0s"></div>
+    </div>
+
+    <div class="inner">
+      <p class="tagline-top" aria-label="브랜드 철학 문구">베리티 F&B는 차별화된 브랜드 철학을 바탕으로</p>
+
+
+      <div class="logo-wrap" role="img" aria-label="Verity F&B 로고">
+        <div class="halo" aria-hidden="true"></div>
+        <!-- 로고 이미지가 있으면 아래 img src 교체 -->
+        <img class="logo" src="https://placehold.co/480x160/111111/FFFFFF/svg?text=VERITY+F%26B+LOGO" alt="Verity F&B" />
+        <!-- 텍스트 로고(백업) → 필요하면 이미지 제거 시 보임
+        <span class="logo-text">VERITY F&amp;B</span> -->
+      </div>
+
+      <p class="tagline-bottom" aria-label="비즈니스 문구">고객에게 새로운 경험을 전하고자 합니다.</p>
+    </div>
+  </section>
+
+  <script>
+    // 뷰포트 진입 시 조립 애니메이션 트리거
+    (function(){
+      const layer = document.getElementById('verity-logo-layer');
+      if(!('IntersectionObserver' in window)){
+        layer.classList.add('assemble','assembled');
+        return;
+      }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            layer.classList.add('assemble');
+            // float 애니메이션은 약간 늦게 시작해 안정된 상태로 전환
+            setTimeout(()=>layer.classList.add('assembled'), 1200);
+            io.unobserve(layer);
+          }
+        });
+      },{threshold: .4});
+      io.observe(layer);
+    })();
+  </script>
+</body>
+</html>

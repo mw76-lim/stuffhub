@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      :root {
+        --bg: #f8f7f4;
+        --paper: #ffffff;
+        --text: #161616;
+        --muted: #6b7280;
+        --line: #e7e5e4;
+        --accent: #ff6a00;
+        --radius: 16px;
+        --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
+        --maxw: 1200px;
+      }
+      div#bo_v_con {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 22px;
+      }
+      .post-container {
+        padding: 40px 90px;
+        background-color: #FFFCFB;
+        border-radius: 12px;
+      }
+      .post-container a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .cover-img {
+        aspect-ratio: 16 / 9;
+        background: center / cover;
+        border-radius: 14px;
+        margin-bottom: 16px;
+      }
+      .prose h2 {
+        margin: 2em 0 0.5em;
+        font-size: 20px;
+      }
+      .prose p {
+        margin: 0.9em 0;
+      }
+      .note {
+        border-left: 4px solid var(--accent);
+        background: #fff7ef;
+        padding: 12px 14px;
+        border-radius: 12px;
+        margin: 14px 0;
+      }
+
+      /* Q&A */
+      .qna {
+        display: grid;
+        gap: 14px;
+        margin: 16px 0;
+      }
+      .qna-q {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 14px;
+      }
+      .qna-q b {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      /* Timeline */
+      .timeline {
+        border-left: 3px solid var(--line);
+        margin: 16px 0 8px 4px;
+        padding-left: 14px;
+      }
+      .tl-item {
+        margin: 10px 0;
+      }
+      .tl-date {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .tl-title {
+        font-weight: 800;
+        margin: 0.2em 0;
+      }
+      /* === 2-Column Timeline (Weekday / Weekend) === */
+      .timeline-2col {
+        display: grid;
+        gap: 14px;
+        margin: 16px 0 8px 0;
+      }
+      @media (min-width: 840px) {
+        .timeline-2col {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .tl-col {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .tl-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 6px 0 10px;
+        border-bottom: 1px solid var(--line);
+      }
+      .tl-head h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+      .tl-badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #fafafa;
+        border: 1px solid var(--line);
+        white-space: nowrap;
+      }
+      .tl-list {
+        position: relative;
+        border-left: 3px solid var(--line);
+        margin: 12px 0 0 4px;
+        padding-left: 14px;
+      }
+      .tl-item {
+        margin: 12px 0;
+        padding-left: 0;
+      }
+      .tl-date {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .tl-title {
+        font-weight: 800;
+        margin: 0.2em 0;
+      }
+      .tl-desc {
+        margin: 0.2em 0 0.4em;
+      }
+
+      /* 가독성을 위한 미세 강조 */
+      .tl-col.weekend .tl-head {
+        background: linear-gradient(180deg, rgba(255, 106, 0, 0.08), rgba(255, 106, 0, 0));
+        border-radius: 10px;
+        padding: 10px;
+        margin: -6px -10px 10px -10px;
+      }
+      .tl-col.weekday .tl-head {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0));
+        border-radius: 10px;
+        padding: 10px;
+        margin: -6px -10px 10px -10px;
+      }
+
+      /* People */
+      .people {
+        display: grid;
+        gap: 14px;
+        margin: 14px 0;
+      }
+      @media (min-width: 800px) {
+        .people {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .people-panel {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 14px;
+        display: grid;
+        gap: 8px;
+      }
+      .avatar {
+        aspect-ratio: 1/1;
+        border-radius: 10px;
+        overflow: hidden; /* 이미지가 네모 밖으로 넘치지 않게 */
+        position: relative;
+        background: #eee; /* 이미지 로딩 전 배경 */
+      }
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* background-size: cover 와 동일 */
+        object-position: center; /* background-position: center 동일 */
+        display: block;
+      }
+
+      /* tags */
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .tag {
+        font-size: 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 10px;
+        background: #fafafa;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .btn.accent {
+        background: var(--accent);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      /* stepas */
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 10px;
+        margin: 16px 0;
+      }
+      .step {
+        background: #fdefc9;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .step h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+
+      .grid-textarea {
+        padding: 0 10px;
+      }
+      .grid-3 {
+        grid-column: span 3;
+      }
+      .grid-4 {
+        grid-column: span 4;
+      }
+      .grid-6 {
+        grid-column: span 6;
+      }
+      .grid-8 {
+        grid-column: span 8;
+      }
+      .grid-9 {
+        grid-column: span 9;
+      }
+      .grid-12 {
+        grid-column: span 12;
+      }
+      [class^="grid-"] img {
+        width: 100%;
+        border-radius: 12px;
+      }
+      @media (max-width: 820px) {
+        .grid-3,
+        .grid-4,
+        .grid-6,
+        .grid-8,
+        .grid-9 {
+          grid-column: span 12;
+        }
+      }
+
+      .text-center {
+        text-align: center;
+      }
+      .callout {
+        border: 1px solid rgba(46, 125, 50, 0.45);
+        background: rgba(46, 125, 50, 0.05);
+        padding: 16px;
+        border-radius: 14px;
+        color: #2e7d32;
+      }
+      .diagram {
+        margin: 20px 0;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="bo_v_con">
+      <div class="post-container">
+        <!-- 문서스타일[prose] -->
+        <div class="prose">
+          <h2>제목: 중국 현지에서 시작되는 정통의 맛</h2>
+
+          <!-- 커버 이미지 -->
+          <div class="steps">
+            <div
+              class="grid-12 cover-img"
+              style="background-image: url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1600&auto=format&fit=crop')"
+            ></div>
+          </div>
+          <div class="steps">
+            <div class="grid-6 ">
+              <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1600&auto=format&fit=crop" alt="">              
+            </div>
+            <div class="grid-6">
+              <img src="https://placehold.co/600x400/B4753A/FFFFFF/png?text=Grid+6+Img3:2" />
+            </div>
+          </div>
+
+          <p>
+            정통 충칭 훠궈의 깊은 맛은 결국 <strong>좋은 재료</strong>에서 시작합니다. VFB가 말하는 ‘Local Farm’은 행정적 의미의 지역 농가만을 뜻하지
+            않습니다. 우리의 로컬은, 정통의 뿌리가 있는 <strong>충칭과 중국 현지</strong> 그 자체입니다.
+          </p>
+
+          <h2>핵심은 정통 — 중국 현지 조달 원칙</h2>
+          <p>
+            마라 향신료, 두반장, 화자오 등 <strong>맛의 뿌리를 이루는 핵심 재료</strong>는 충칭·쓰촨 등 현지에서 엄선해 들여옵니다. 수입 과정이
+            까다롭고 비용이 더 들더라도, 정체성을 지키기 위한 최소한의 원칙입니다.
+          </p>
+
+          <h2>국내 신선 공급망과의 조화</h2>
+          <p>
+            채소·육류 등 신선 식재는 국내에서 안정적인 공급망을 통해 보완합니다. 이렇게 <strong>중국 현지 조달(핵심) + 국내 신선 공급(보완)</strong>의
+            조합으로, 한 그릇 안에서 정통성과 신선함의 균형을 맞춥니다.
+          </p>
+
+          <div class="note">
+            “Food & Beyond — 음식을 넘어, 경험으로” VFB는 정직한 원산지 표기와 투명한 조달 과정을 통해, 맛 이상의 가치를 전합니다.
+          </div>
+
+          <h2>공급 흐름(예시)</h2>
+          <div class="diagram">
+            <img src="https://dummyimage.com/480x240/eee/333.png&text=China+Origin+→+LCH" alt="중국 현지 조달 + 국내 신선 공급망 다이어그램" />
+          </div>
+
+          <h2>대표 재료 한 줄 소개</h2>
+          <p>
+            <em>마라 향신료</em> — 얼얼한 화자오 향으로 훠궈의 골격을 세웁니다. <br />
+            <em>두반장</em> — 깊고 풍부한 감칠맛의 중심. <br />
+            <em>수제 새우완자</em> — 탱글한 식감은 신선도와 반죽 비율의 결과입니다.
+          </p>
+
+          <div class="steps">
+            <div class="grid-6">
+              <img src="blog09/두반장4.jpg" alt="국내 신선 채소" />
+            </div>
+            <div class="grid-6">
+              <img src="blog09/화자오2.jpg" alt="해산물·새우 손질" />
+            </div>
+          </div>
+
+          <h2>정직하게, 투명하게</h2>
+          <p>
+            우리는 “로컬”을 <strong>맛의 근원</strong>으로 정의합니다. 한국 매장에서 만나는 한 그릇의 훠궈가, 중국 현지의 진짜 맛과 국내의 신선함을
+            동시에 담아낼 수 있도록 원산지와 공정을 투명하게 공개하겠습니다.
+          </p>
+
+
+          <div class="tags">
+            <span class="tag">#음식철학</span>
+            <span class="tag">#원재료</span>
+            <span class="tag">#라오충칭훠궈</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

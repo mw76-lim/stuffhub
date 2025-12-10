@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pure HTML/CSS Charts – Stable Set</title>
+  <style>
+    :root {
+      --ink:#0f172a;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --paper:#ffffff;
+      --accent:#2563eb;
+      --accent-2:#0ea5e9;
+      --accent-3:#22c55e;
+      --accent-4:#f97316;
+      --accent-5:#ef4444;
+    }
+    
+    *{box-sizing:border-box;}
+    
+    body{
+      margin:0;
+      font-family:ui-sans-serif,system-ui,-apple-system,"Noto Sans KR",Arial,sans-serif;
+      background:#f3f4f6;
+      color:var(--ink);
+    }
+    
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:24px 16px 60px;
+    }
+    
+    h1{
+      margin:0 0 6px;
+      font-size:1.5rem;
+    }
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:.9rem;
+    }
+    
+    /* 카드 그리드 */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,minmax(0,1fr));
+      gap:16px;
+    }
+    .card{
+      grid-column:span 6;
+      background:var(--paper);
+      border-radius:16px;
+      border:1px solid var(--line);
+      box-shadow:0 10px 26px rgba(15,23,42,.05);
+      padding:14px 16px 18px;
+      min-width:0;
+    }
+    .card.full{
+      grid-column:span 12;
+    }
+    .card h2{
+      margin:0 0 4px;
+      font-size:1rem;
+    }
+    .card .note{
+      margin:0 0 10px;
+      font-size:.82rem;
+      color:var(--muted);
+    }
+    
+    @media (max-width:900px){
+      .card{grid-column:span 12;}
+    }
+    
+    /* 공통 axis 라벨 */
+    .axis{
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      font-size:.78rem;
+      color:#9ca3af;
+      margin-top:8px;
+    }
+    .axis span{
+      flex:1;
+      text-align:center;
+      white-space:nowrap;
+    }
+    
+    /* 1) Simple Bar – px 기반, absolute 없음 */
+    .bar-area{
+      display:flex;
+      align-items:flex-end;
+      gap:16px;
+      padding:16px 14px;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      height:220px;
+    }
+    .bar{
+      flex:1;
+      min-width:32px;
+      background:#e5e7eb;
+      border-radius:10px;
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+    }
+    .bar-fill{
+      width:100%;
+      background:var(--accent);
+      border-radius:10px 10px 0 0;
+      /* 높이는 인라인 style="height:120px" 로 직접 지정 */
+    }
+    
+    /* 2) Grouped Bar */
+    .gbar-area{
+      display:flex;
+      align-items:flex-end;
+      gap:24px;
+      padding:16px 14px;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      height:220px;
+    }
+    .gbar-group{
+      flex:1;
+      min-width:54px;
+      display:flex;
+      align-items:flex-end;
+      gap:8px;
+      justify-content:center;
+    }
+    .gbar-bar{
+      width:18px;
+      background:#e5e7eb;
+      border-radius:8px;
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+    }
+    .gbar-fill{
+      width:100%;
+      border-radius:8px 8px 0 0;
+    }
+    
+    /* 3) Stacked Bar (세로) */
+    .stackv-area{
+      display:flex;
+      align-items:flex-end;
+      gap:16px;
+      padding:16px 14px;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      height:220px;
+    }
+    .stackv-col{
+      flex:1;
+      min-width:40px;
+      border-radius:10px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column-reverse; /* 아래에서부터 쌓이게 */
+    }
+    .stackv-seg{
+      width:100%;
+      /* height 인라인 style로 px 지정 */
+    }
+    
+    /* 4) Stacked Bar (가로) */
+    .stackh-area{
+      padding:12px;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+    }
+    .stackh-row{
+      display:flex;
+      height:34px;
+      border-radius:999px;
+      overflow:hidden;
+      background:#e5e7eb;
+    }
+    .stackh-seg{
+      height:100%;
+      /* width 인라인 style="width:40%" */
+    }
+    
+    /* 5) Line Chart (SVG) */
+    .chart-box{
+      padding:10px 4px 6px;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+    }
+    .line-svg{
+      width:100%;
+      height:220px;
+      display:block;
+    }
+    .line-grid{
+      stroke:#e5e7eb;
+      stroke-width:1;
+    }
+    .line-path{
+      fill:none;
+      stroke:var(--accent);
+      stroke-width:2.4;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .line-dot{
+      fill:#fff;
+      stroke:var(--accent);
+      stroke-width:1.6;
+    }
+    
+    /* 6) Area Chart */
+    .area-path{
+      fill:rgba(37,99,235,.12);
+      stroke:var(--accent);
+      stroke-width:2.2;
+      stroke-linejoin:round;
+    }
+    
+    /* 7) Donut Progress (SVG) */
+    .donut-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 0 4px;
+    }
+    .donut-svg{
+      width:160px;
+      height:160px;
+      display:block;
+    }
+    .donut-ring{
+      fill:none;
+      stroke:#e5e7eb;
+      stroke-width:14;
+    }
+    .donut-seg{
+      fill:none;
+      stroke:var(--accent);
+      stroke-width:14;
+      stroke-linecap:round;
+      transform:rotate(-90deg);
+      transform-origin:60px 60px; /* 중심 회전 */
+    }
+    .donut-center-text{
+      font-size:14px;
+      fill:var(--ink);
+      font-weight:bold;
+      text-anchor:middle;
+      dominant-baseline:middle;
+    }
+    
+    /* 8) Bullet Chart */
+    .bullet-area{
+      padding:10px 8px 6px;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      display:grid;
+      gap:8px;
+    }
+    .bullet-track{
+      position:relative;
+      height:18px;
+      border-radius:999px;
+      background:#e5e7eb;
+      overflow:hidden;
+    }
+    .bullet-fill{
+      height:100%;
+      background:var(--accent-3);
+      border-radius:999px;
+      /* width 인라인 style="width:60%" */
+    }
+    .bullet-target{
+      position:absolute;
+      top:-3px;
+      bottom:-3px;
+      width:2px;
+      background:#111827;
+      /* left 인라인 style="left:70%" */
+    }
+    
+    /* 9) Heatmap */
+    .heat-area{
+      padding:10px 8px;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+    }
+    .heat-grid{
+      display:grid;
+      grid-template-columns:repeat(10,18px);
+      gap:4px;
+    }
+    .heat-cell{
+      width:18px;
+      height:18px;
+      border-radius:4px;
+      background:#e5e7eb;
+    }
+    .heat-1{background:#dbeafe;}
+    .heat-2{background:#bfdbfe;}
+    .heat-3{background:#93c5fd;}
+    .heat-4{background:#60a5fa;}
+    .heat-5{background:#3b82f6;}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>HTML/CSS 그래프 샘플 세트 (안정 버전)</h1>
+    <p class="sub">
+      JS 없이, 복잡한 CSS 변수/마스크 없이, 브라우저 호환성 위주로 작성한 예시입니다.<br />
+      값은 대부분 <code>style="height:120px"</code>, <code>style="width:60%"</code> 처럼 인라인으로 바로 수정 가능합니다.
+    </p>
+    
+    <section class="grid">
+      <!-- 1) Simple Bar -->
+      <article class="card">
+        <h2>1) Simple Bar</h2>
+        <p class="note">각 막대의 높이를 px 단위로 직접 지정하는 기본 막대 그래프입니다.</p>
+        <div class="bar-area">
+          <div class="bar"><div class="bar-fill" style="height:80px;"></div></div>
+          <div class="bar"><div class="bar-fill" style="height:140px;"></div></div>
+          <div class="bar"><div class="bar-fill" style="height:60px;"></div></div>
+          <div class="bar"><div class="bar-fill" style="height:170px;"></div></div>
+          <div class="bar"><div class="bar-fill" style="height:200px;"></div></div>
+          <div class="bar"><div class="bar-fill" style="height:120px;"></div></div>
+        </div>
+        <div class="axis">
+          <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+        </div>
+      </article>
+      
+      <!-- 2) Grouped Bar -->
+      <article class="card">
+        <h2>2) Grouped Bar</h2>
+        <p class="note">각 분기별로 A/B 두 개의 막대를 묶어서 보여주는 형태입니다.</p>
+        <div class="gbar-area">
+          <!-- Q1 -->
+          <div class="gbar-group">
+            <div class="gbar-bar">
+              <div class="gbar-fill" style="height:90px; background:var(--accent);"></div>
+            </div>
+            <div class="gbar-bar">
+              <div class="gbar-fill" style="height:140px; background:var(--accent-3);"></div>
+            </div>
+          </div>
+          <!-- Q2 -->
+          <div class="gbar-group">
+            <div class="gbar-bar">
+              <div class="gbar-fill" style="height:120px; background:var(--accent);"></div>
+            </div>
+            <div class="gbar-bar">
+              <div class="gbar-fill" style="height:160px; background:var(--accent-3);"></div>
+            </div>
+          </div>
+          <!-- Q3 -->
+          <div class="gbar-group">
+            <div class="gbar-bar">
+              <div class="gbar-fill" style="height:150px; background:var(--accent);"></div>
+            </div>
+            <div class="gbar-bar">
+              <div class="gbar-fill" style="height:110px; background:var(--accent-3);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="axis">
+          <span>Q1</span><span>Q2</span><span>Q3</span>
+        </div>
+      </article>
+      
+      <!-- 3) Stacked Bar (Vertical) -->
+      <article class="card">
+        <h2>3) Stacked Bar (세로)</h2>
+        <p class="note">하나의 막대 안에 여러 구간(A/B/C)을 쌓아서 구성 비율을 표현합니다.</p>
+        <div class="stackv-area">
+          <!-- Day 1 -->
+          <div class="stackv-col">
+            <div class="stackv-seg" style="height:60px; background:var(--accent-3);"></div>
+            <div class="stackv-seg" style="height:40px; background:var(--accent-2);"></div>
+            <div class="stackv-seg" style="height:80px; background:var(--accent);"></div>
+          </div>
+          <!-- Day 2 -->
+          <div class="stackv-col">
+            <div class="stackv-seg" style="height:50px; background:var(--accent-3);"></div>
+            <div class="stackv-seg" style="height:70px; background:var(--accent-2);"></div>
+            <div class="stackv-seg" style="height:60px; background:var(--accent);"></div>
+          </div>
+          <!-- Day 3 -->
+          <div class="stackv-col">
+            <div class="stackv-seg" style="height:40px; background:var(--accent-3);"></div>
+            <div class="stackv-seg" style="height:50px; background:var(--accent-2);"></div>
+            <div class="stackv-seg" style="height:100px; background:var(--accent);"></div>
+          </div>
+        </div>
+        <div class="axis">
+          <span>Day 1</span><span>Day 2</span><span>Day 3</span>
+        </div>
+      </article>
+      
+      <!-- 4) Stacked Bar (Horizontal) -->
+      <article class="card">
+        <h2>4) Stacked Bar (가로)</h2>
+        <p class="note">가로 방향으로 100%를 나누어 구성 비율을 표현합니다.</p>
+        <div class="stackh-area">
+          <div class="stackh-row">
+            <div class="stackh-seg" style="width:40%; background:var(--accent);"></div>
+            <div class="stackh-seg" style="width:30%; background:var(--accent-3);"></div>
+            <div class="stackh-seg" style="width:20%; background:var(--accent-4);"></div>
+            <div class="stackh-seg" style="width:10%; background:var(--accent-5);"></div>
+          </div>
+        </div>
+        <div class="axis">
+          <span>A</span><span>B</span><span>C</span><span>D</span>
+        </div>
+      </article>
+      
+      <!-- 5) Line Chart -->
+      <article class="card">
+        <h2>5) Line Chart (SVG)</h2>
+        <p class="note">뷰박스 0~100 기준으로 좌표만 조정해서 손쉽게 수정 가능한 라인 차트입니다.</p>
+        <div class="chart-box">
+          <svg class="line-svg" viewBox="0 0 100 60">
+            <!-- 가로 그리드 -->
+            <g>
+              <line class="line-grid" x1="0" y1="50" x2="100" y2="50" />
+              <line class="line-grid" x1="0" y1="37" x2="100" y2="37" />
+              <line class="line-grid" x1="0" y1="24" x2="100" y2="24" />
+              <line class="line-grid" x1="0" y1="11" x2="100" y2="11" />
+            </g>
+            
+            <!-- 라인 -->
+            <polyline class="line-path"
+            points="5,48 20,44 35,40 50,30 65,26 80,20 95,18" />
+            
+            <!-- 포인트 -->
+            <circle class="line-dot" cx="35" cy="40" r="1.8" />
+            <circle class="line-dot" cx="50" cy="30" r="1.8" />
+            <circle class="line-dot" cx="80" cy="20" r="1.8" />
+          </svg>
+        </div>
+      </article>
+      
+      <!-- 6) Area Chart -->
+      <article class="card">
+        <h2>6) Area Chart (SVG)</h2>
+        <p class="note">라인 아래 영역을 채운 형태의 에어리어 차트입니다.</p>
+        <div class="chart-box">
+          <svg class="line-svg" viewBox="0 0 100 60">
+            <g>
+              <line class="line-grid" x1="0" y1="50" x2="100" y2="50" />
+              <line class="line-grid" x1="0" y1="37" x2="100" y2="37" />
+              <line class="line-grid" x1="0" y1="24" x2="100" y2="24" />
+              <line class="line-grid" x1="0" y1="11" x2="100" y2="11" />
+            </g>
+            
+            <!-- 영역 + 라인 (하단 기준 55) -->
+            <path class="area-path"
+            d="
+            M 5 55
+            L 5 46
+            L 20 42
+            L 35 39
+            L 50 32
+            L 65 27
+            L 80 22
+            L 95 21
+            L 95 55
+            Z
+            " />
+          </svg>
+        </div>
+      </article>
+      
+      <!-- 7) Donut Progress -->
+      <article class="card">
+        <h2>7) Donut Progress</h2>
+        <p class="note">SVG 원 둘레를 이용해 % 진행률을 도넛 형태로 표현합니다. (여기서는 65%)</p>
+        <div class="donut-wrap">
+          <svg class="donut-svg" viewBox="0 0 120 120">
+            <!-- 배경 링 -->
+            <circle class="donut-ring" cx="60" cy="60" r="40" />
+            <!-- 진행 구간 (65%) : 둘레 ≈ 251.3, 남는 구간 ≈ 87.96 -->
+            <circle class="donut-seg"
+            cx="60" cy="60" r="40"
+            stroke-dasharray="251.3"
+            stroke-dashoffset="87.9" />
+            <!-- 중앙 텍스트 -->
+            <text class="donut-center-text" x="60" y="60">65%</text>
+          </svg>
+        </div>
+      </article>
+      
+      <!-- 8) Bullet Chart -->
+      <article class="card">
+        <h2>8) Bullet Chart</h2>
+        <p class="note">목표 대비 실적을 단일 바와 타깃 마커로 표현합니다. (목표 80%, 실적 60%)</p>
+        <div class="bullet-area">
+          <div class="bullet-track">
+            <!-- 실적 -->
+            <div class="bullet-fill" style="width:60%;"></div>
+            <!-- 타깃 마커 -->
+            <div class="bullet-target" style="left:80%;"></div>
+          </div>
+          <div class="axis">
+            <span>0%</span><span>50%</span><span>100%</span>
+          </div>
+        </div>
+      </article>
+      
+      <!-- 9) Heatmap -->
+      <article class="card">
+        <h2>9) Heatmap</h2>
+        <p class="note">칸별 강도를 클래스 이름(heat-1 ~ heat-5)으로 지정하는 히트맵입니다.</p>
+        <div class="heat-area">
+          <div class="heat-grid">
+            <!-- row1 -->
+            <div class="heat-cell heat-1"></div>
+            <div class="heat-cell heat-1"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-3"></div>
+            <div class="heat-cell heat-4"></div>
+            <div class="heat-cell heat-5"></div>
+            <div class="heat-cell heat-4"></div>
+            <div class="heat-cell heat-3"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-1"></div>
+            <!-- row2 -->
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-3"></div>
+            <div class="heat-cell heat-4"></div>
+            <div class="heat-cell heat-5"></div>
+            <div class="heat-cell heat-5"></div>
+            <div class="heat-cell heat-3"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-1"></div>
+            <!-- row3 -->
+            <div class="heat-cell heat-1"></div>
+            <div class="heat-cell heat-3"></div>
+            <div class="heat-cell heat-4"></div>
+            <div class="heat-cell heat-4"></div>
+            <div class="heat-cell heat-5"></div>
+            <div class="heat-cell heat-3"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-1"></div>
+            <div class="heat-cell heat-1"></div>
+            <!-- row4 -->
+            <div class="heat-cell heat-1"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-3"></div>
+            <div class="heat-cell heat-3"></div>
+            <div class="heat-cell heat-4"></div>
+            <div class="heat-cell heat-4"></div>
+            <div class="heat-cell heat-5"></div>
+            <div class="heat-cell heat-3"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-1"></div>
+            <!-- row5 -->
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-1"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-3"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-4"></div>
+            <div class="heat-cell heat-5"></div>
+            <div class="heat-cell heat-4"></div>
+            <div class="heat-cell heat-2"></div>
+            <div class="heat-cell heat-1"></div>
+          </div>
+        </div>
+      </article>
+      
+      <article class="card">
+        <h2>9) Heatmap</h2>
+        <p class="note">칸별 강도를 클래스 이름(heat-1 ~ heat-5)으로 지정하는 히트맵입니다.</p>
+        <div class="heat-area">
+          <div class="heat-grid">
+            <!-- row1 -->
+            <div class="heat-cell heat-1"></div><div class="heat-cell heat-1"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-1"></div>
+            <!-- row2 -->
+            <div class="heat-cell heat-2"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-1"></div>
+            <!-- row3 -->
+            <div class="heat-cell heat-1"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-1"></div><div class="heat-cell heat-1"></div>
+            <!-- row4 -->
+            <div class="heat-cell heat-1"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-1"></div>
+            <!-- row5 -->
+            <div class="heat-cell heat-2"></div><div class="heat-cell heat-1"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-3"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-5"></div><div class="heat-cell heat-4"></div><div class="heat-cell heat-2"></div><div class="heat-cell heat-1"></div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
