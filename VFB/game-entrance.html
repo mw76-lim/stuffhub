@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verity F&B × 라오충칭훠궈 | 이벤트 엔트런스</title>
+    <style>
+      :root{
+        --bg:#f8f7f4;
+        --paper:#fffdfb;
+        --ink:#161616;
+        --muted:#6b7280;
+        --line:#e7e5e4;
+
+        --accent:#ff6a00;
+        --accent2:#f1bf86;
+
+        --radius-xl:22px;
+        --radius-lg:18px;
+        --radius-md:14px;
+
+        --shadow:0 16px 44px rgba(17,17,17,.12);
+        --shadow-soft:0 10px 26px rgba(0,0,0,.07);
+      }
+
+      *{ box-sizing:border-box; margin:0; padding:0; }
+      html,body{ height:100%; }
+
+      body{
+        font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+        background:
+          radial-gradient(circle at 10% 10%, rgba(255,106,0,.12), rgba(255,255,255,0) 42%),
+          radial-gradient(circle at 92% 18%, rgba(241,191,134,.26), rgba(255,255,255,0) 48%),
+          var(--bg);
+        color:var(--ink);
+        min-height:100%;
+        display:grid;
+        place-items:center;
+        padding:18px;
+      }
+
+      /* ===== Desktop/Tablet fixed canvas (design target: 840x580) ===== */
+      .screen{
+        width:840px;
+        height:580px;
+        background:var(--paper);
+        border:1px solid var(--line);
+        border-radius:var(--radius-xl);
+        box-shadow:var(--shadow);
+        overflow:hidden;
+        display:grid;
+        grid-template-rows: 1fr 150px;
+      }
+
+      /* ===== Top Event (cover bg) ===== */
+      section.event{
+        position:relative;
+        overflow:hidden;
+        background-image:url("https://placehold.co/1100x620/000000/FFFFFF/png?text=Cover+Image");
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+        display:grid;
+        border-bottom:1px solid rgba(255,255,255,.35);
+      }
+      .event::before{
+        content:"";
+        position:absolute; inset:0;
+        background:
+          radial-gradient(circle at 15% 10%, rgba(255,106,0,.28), rgba(255,255,255,0) 45%),
+          radial-gradient(circle at 85% 0%, rgba(241,191,134,.22), rgba(255,255,255,0) 52%),
+          linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.62));
+        z-index:0;
+      }
+      .event::after{
+        content:"";
+        position:absolute; inset:-20px;
+        background: radial-gradient(circle at 50% 30%, rgba(0,0,0,0), rgba(0,0,0,.35));
+        z-index:0;
+        pointer-events:none;
+      }
+      .event-inner{
+        position:relative;
+        z-index:1;
+        padding:20px 20px 14px;
+        display:grid;
+        grid-template-rows:auto 1fr auto;
+        gap:10px;
+      }
+
+      .top-row{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+      }
+      .kicker{
+        font-size:11px;
+        letter-spacing:.14em;
+        text-transform:uppercase;
+        color:rgba(255,255,255,.82);
+      }
+      .state{
+        font-size:12px;
+        color:rgba(255,255,255,.78);
+        white-space:nowrap;
+      }
+
+      .copy{
+        display:grid;
+        align-content:center;
+        gap:10px;
+        max-width: 66ch;
+      }
+      .headline{
+        font-size:28px;
+        line-height:1.10;
+        letter-spacing:-0.04em;
+        font-weight:950;
+        color:rgba(255,255,255,.96);
+        text-shadow: 0 10px 26px rgba(0,0,0,.35);
+      }
+      .headline b{ color: var(--accent2); }
+      .subcopy{
+        font-size:13.5px;
+        line-height:1.65;
+        color:rgba(255,255,255,.86);
+        text-shadow: 0 10px 24px rgba(0,0,0,.32);
+        max-width: 58ch;
+      }
+
+      .rule-row{
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+        margin-top:2px;
+      }
+      .pill{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:8px 10px;
+        border-radius:999px;
+        border:1px solid rgba(255,255,255,.22);
+        background: rgba(255,255,255,.10);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        font-size:12px;
+        color:rgba(255,255,255,.88);
+        white-space:nowrap;
+      }
+      .dot{
+        width:8px; height:8px;
+        border-radius:999px;
+        background: rgba(255,106,0,.98);
+        box-shadow: 0 0 0 4px rgba(255,106,0,.18);
+      }
+
+      .cta-row{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+        flex-wrap:wrap;
+        padding-top:6px;
+      }
+      .btns{
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+      }
+      .btn{
+        padding:10px 12px;
+        border-radius:14px;
+        border:1px solid rgba(255,255,255,.22);
+        background: rgba(255,255,255,.10);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        cursor:pointer;
+        font-weight:900;
+        font-size:12.5px;
+        color:rgba(255,255,255,.92);
+        transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease, background .12s ease;
+        user-select:none;
+      }
+      .btn:hover{
+        transform: translateY(-1px);
+        box-shadow: 0 14px 30px rgba(0,0,0,.22);
+        background: rgba(255,255,255,.14);
+      }
+      .btn:active{ transform: translateY(0); box-shadow:none; }
+      .btn.primary{
+        background: rgba(255,106,0,.92);
+        border-color: transparent;
+        color: #fff;
+      }
+      .btn.primary:hover{ background: rgba(255,106,0,.98); }
+
+      .micro{
+        font-size:11.5px;
+        color: rgba(255,255,255,.74);
+        line-height:1.45;
+        text-shadow: 0 10px 22px rgba(0,0,0,.30);
+        white-space:nowrap;
+      }
+
+      /* ===== Bottom: 3 games ===== */
+      .games{
+        padding:12px;
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap:10px;
+        background:#fff;
+      }
+      .g{
+        border:1px solid var(--line);
+        border-radius:var(--radius-lg);
+        background:#fff;
+        box-shadow:var(--shadow-soft);
+        padding:10px;
+        display:grid;
+        gap:8px;
+        cursor:pointer;
+        position:relative;
+        overflow:hidden;
+        transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+        user-select:none;
+      }
+      .g:hover{ transform: translateY(-1px); box-shadow:0 16px 34px rgba(0,0,0,.12); }
+      .g:active{ transform: translateY(0); box-shadow:var(--shadow-soft); }
+      .g::before{
+        content:"";
+        position:absolute; inset:-1px;
+        background:
+          radial-gradient(circle at 22% 0%, rgba(255,106,0,.08), rgba(255,255,255,0) 62%),
+          radial-gradient(circle at 88% 30%, rgba(241,191,134,.16), rgba(255,255,255,0) 60%);
+        pointer-events:none;
+      }
+      .g > *{ position:relative; z-index:1; }
+
+      .ghead{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+      }
+      .gleft{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        min-width:0;
+      }
+      .icon{
+        width:40px;
+        height:40px;
+        border-radius:14px;
+        display:grid;
+        place-items:center;
+        font-size:19px;
+        border:1px solid rgba(0,0,0,.06);
+        background: linear-gradient(180deg, rgba(255,106,0,.12), rgba(255,106,0,0));
+      }
+      .gtitle{
+        font-size:13px;
+        font-weight:950;
+        letter-spacing:-0.02em;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+      .gtag{
+        font-size:11px;
+        padding:6px 10px;
+        border-radius:999px;
+        border:1px solid var(--line);
+        background:#fafafa;
+        color:#374151;
+        white-space:nowrap;
+      }
+
+      .gmini{
+        border-radius:var(--radius-md);
+        border:1px solid rgba(0,0,0,.06);
+        background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,0));
+        padding:8px;
+      }
+      .gdesc{
+        font-size:11.8px;
+        color:#4b5563;
+        line-height:1.45;
+        display:-webkit-box;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+      }
+
+      /* mini previews */
+      .pv-shell{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; align-items:end; }
+      .cup{ height:24px; border-radius:12px 12px 8px 8px; background:linear-gradient(180deg,#fff,#f0e2d2); border:1px solid rgba(0,0,0,.06); box-shadow:0 8px 16px rgba(0,0,0,.06); }
+      .ball{ width:8px; height:8px; border-radius:999px; background:rgba(255,106,0,.92); margin:0 auto 3px; box-shadow:0 0 0 4px rgba(255,106,0,.12); }
+
+      .pv-roulette{
+        height:34px; border-radius:12px; border:1px solid rgba(0,0,0,.06);
+        background: conic-gradient(from 12deg,
+          rgba(255,106,0,.95) 0 20%,
+          rgba(241,191,134,.95) 20% 40%,
+          rgba(15,23,42,.85) 40% 60%,
+          rgba(255,106,0,.55) 60% 80%,
+          rgba(241,191,134,.65) 80% 100%);
+        position:relative; overflow:hidden;
+      }
+      .pv-roulette::after{
+        content:""; position:absolute; top:-4px; left:50%;
+        width:0; height:0;
+        border-left:6px solid transparent;
+        border-right:6px solid transparent;
+        border-bottom:10px solid rgba(0,0,0,.55);
+        transform:translateX(-50%);
+        filter: drop-shadow(0 6px 6px rgba(0,0,0,.12));
+      }
+
+      .pv-ladder{
+        height:34px; border-radius:12px; border:1px solid rgba(0,0,0,.06);
+        background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,0));
+        display:grid; grid-template-columns:repeat(5,1fr); gap:6px; padding:8px;
+      }
+      .line{ width:100%; height:100%; border-radius:999px; background:rgba(0,0,0,.10); position:relative; overflow:hidden; }
+      .line::before{ content:""; position:absolute; left:0; right:0; top:50%; height:3px; background:rgba(255,106,0,.55); transform:translateY(-50%); opacity:.9; }
+
+      /* locked */
+      .g.locked{ opacity:.55; filter: grayscale(0.25); cursor:not-allowed; }
+      .g.locked:hover{ transform:none; box-shadow:var(--shadow-soft); }
+
+      /* =========================================================
+         ✅ MOBILE RESPONSIVE
+         - 작은 화면에서는 고정 840x580 캔버스 해제
+         - 세로 스택: event → games(1열)
+         ========================================================= */
+      @media (max-width: 520px) {
+        body{
+          place-items: stretch;
+          padding: 12px;
+        }
+
+        .screen{
+          width: 100%;
+          height: auto;              /* 고정 높이 해제 */
+          border-radius: 18px;
+          grid-template-rows: auto auto; /* 상단/하단 모두 auto */
+        }
+
+        .event-inner{
+          padding: 16px 14px 12px;
+          gap: 10px;
+        }
+
+        .headline{
+          font-size: 22px;
+        }
+
+        .subcopy{
+          font-size: 13px;
+        }
+
+        .cta-row{
+          gap: 10px;
+        }
+
+        .btns{
+          width: 100%;
+        }
+        .btn{
+          flex: 1;                  /* 버튼을 가로로 꽉 */
+          justify-content: center;
+          text-align: center;
+        }
+
+        .micro{
+          white-space: normal;      /* 모바일에서는 줄바꿈 허용 */
+        }
+
+        .games{
+          grid-template-columns: 1fr; /* 3개를 1열로 */
+          padding: 12px;
+          gap: 10px;
+        }
+
+        .g{
+          padding: 12px;
+        }
+
+        .gdesc{
+          -webkit-line-clamp: 3;    /* 모바일에서 설명 조금 더 */
+        }
+      }
+
+      /* 중간 사이즈(큰 폰/작은 태블릿) */
+      @media (min-width: 521px) and (max-width: 900px) {
+        body{
+          place-items: stretch;
+          padding: 14px;
+        }
+        .screen{
+          width: 100%;
+          height: min(92vh, 640px); /* 너무 길어지지 않게 */
+          grid-template-rows: 1fr 170px;
+        }
+        .headline{ font-size: 26px; }
+        .games{ gap: 10px; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="screen" role="application" aria-label="이벤트 엔트런스">
+      <!-- TOP EVENT (background image) -->
+      <section class="event" aria-label="이벤트 안내">
+        <div class="event-inner">
+          <div class="top-row">
+            <div class="kicker">Verity F&amp;B × Lao Chongqing Hotpot</div>
+            <div class="state" id="state">선택 상태: 없음</div>
+          </div>
+
+          <div class="copy">
+            <div class="headline">오늘의 혜택, <b>게임 1개</b>만 골라서 받기</div>
+            <p class="subcopy">
+              아래 3가지 게임 중 하나를 선택해 참여하세요. 선택 후에는 변경이 불가하며,
+              결과는 쿠폰/서비스로 즉시 안내됩니다.
+            </p>
+
+            <div class="rule-row" aria-label="요약 규칙">
+              <span class="pill"><span class="dot"></span> 1인 1회 참여</span>
+              <span class="pill">⏱️ 5~10초</span>
+              <span class="pill">🎁 즉시 결과</span>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <div class="btns">
+              <button class="btn primary" id="btnHow" type="button">참여 방법</button>
+              <button class="btn" id="btnPolicy" type="button">유의사항</button>
+              <button class="btn" id="btnReset" type="button" title="직원/테스트용">선택 초기화</button>
+            </div>
+            <div class="micro">* 혜택/운영은 매장 상황에 따라 달라질 수 있습니다.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BOTTOM 3 GAMES -->
+      <section class="games" aria-label="게임 선택">
+        <!-- Shell -->
+        <article class="g" data-game="shell" data-href="game-shell.html" tabindex="0" role="button" aria-label="컵 셔플 야바위 선택">
+          <div class="ghead">
+            <div class="gleft">
+              <div class="icon" aria-hidden="true">🎩</div>
+              <div class="gtitle">컵 셔플 야바위</div>
+            </div>
+            <div class="gtag">집중형</div>
+          </div>
+
+          <div class="gmini" aria-hidden="true">
+            <div class="pv-shell">
+              <div>
+                <div class="ball"></div>
+                <div class="cup"></div>
+              </div>
+              <div>
+                <div class="ball" style="opacity:.18;"></div>
+                <div class="cup"></div>
+              </div>
+              <div>
+                <div class="ball" style="opacity:.18;"></div>
+                <div class="cup"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gdesc">섞인 컵을 따라가 공이 들어있는 컵을 맞추는 게임.</div>
+        </article>
+
+        <!-- Roulette -->
+        <article class="g" data-game="roulette" data-href="game-roulette.html" tabindex="0" role="button" aria-label="쿠폰 룰렛 선택">
+          <div class="ghead">
+            <div class="gleft">
+              <div class="icon" aria-hidden="true">🎯</div>
+              <div class="gtitle">쿠폰 룰렛</div>
+            </div>
+            <div class="gtag">즉시결과</div>
+          </div>
+
+          <div class="gmini" aria-hidden="true">
+            <div class="pv-roulette"></div>
+          </div>
+
+          <div class="gdesc">한 번 돌리면 결과 확정. 직관적인 확률형 보상.</div>
+        </article>
+
+        <!-- Ladder -->
+        <article class="g" data-game="ladder" data-href="game-ladder.html" tabindex="0" role="button" aria-label="사다리 타기 선택">
+          <div class="ghead">
+            <div class="gleft">
+              <div class="icon" aria-hidden="true">🪜</div>
+              <div class="gtitle">사다리 타기</div>
+            </div>
+            <div class="gtag">클래식</div>
+          </div>
+
+          <div class="gmini" aria-hidden="true">
+            <div class="pv-ladder">
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+            </div>
+          </div>
+
+          <div class="gdesc">START 선택 후 자동 진행. 이벤트 감성의 정석.</div>
+        </article>
+      </section>
+    </div>
+
+    <script>
+      (() => {
+        const STORAGE_KEY = "vfb_event_choice_responsive_v1";
+
+        const stateEl = document.getElementById("state");
+        const btnReset = document.getElementById("btnReset");
+        const btnPolicy = document.getElementById("btnPolicy");
+        const btnHow = document.getElementById("btnHow");
+        const cards = document.querySelectorAll(".g");
+
+        function getChoice() {
+          try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); }
+          catch { return null; }
+        }
+        function setChoice(v) { localStorage.setItem(STORAGE_KEY, JSON.stringify(v)); }
+        function clearChoice() { localStorage.removeItem(STORAGE_KEY); }
+
+        function lockUI(choice) {
+          const has = !!choice;
+          stateEl.textContent = has ? `선택 상태: ${choice.title} (고정)` : "선택 상태: 없음";
+
+          cards.forEach((c) => {
+            const game = c.dataset.game;
+            c.classList.remove("locked");
+            if (has && game !== choice.game) c.classList.add("locked");
+          });
+        }
+
+        function go(href) {
+          // 연결 파일: game-shell.html / game-roulette.html / game-ladder.html
+          window.location.href = href;
+        }
+
+        function pick(card) {
+          if (card.classList.contains("locked")) return;
+          const current = getChoice();
+
+          const game = card.dataset.game;
+          const href = card.dataset.href;
+          const title = card.querySelector(".gtitle").textContent.trim();
+
+          if (current && current.game !== game) return;
+
+          if (!current) {
+            setChoice({ game, href, title, chosenAt: new Date().toISOString() });
+            lockUI(getChoice());
+          }
+          go(href);
+        }
+
+        cards.forEach((card) => {
+          card.addEventListener("click", () => pick(card));
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              pick(card);
+            }
+          });
+        });
+
+        btnReset.addEventListener("click", () => {
+          clearChoice();
+          lockUI(null);
+        });
+
+        btnPolicy.addEventListener("click", () => {
+          alert(
+            "유의사항\n" +
+              "- 본 이벤트는 매장 사정에 따라 예고 없이 변경/종료될 수 있습니다.\n" +
+              "- 쿠폰/혜택은 1인 1회 참여 기준이며 중복 적용이 제한될 수 있습니다.\n" +
+              "- 실제 지급 및 사용 조건은 매장 운영 정책을 따릅니다."
+          );
+        });
+
+        btnHow.addEventListener("click", () => {
+          alert(
+            "참여 방법\n" +
+              "1) 아래 3가지 게임 중 1개를 선택합니다.\n" +
+              "2) 선택한 게임을 진행하고 결과를 확인합니다.\n" +
+              "3) 결과 화면을 직원에게 보여주면 혜택이 적용됩니다.\n\n" +
+              "* 게임 선택 후에는 변경할 수 없습니다."
+          );
+        });
+
+        lockUI(getChoice());
+      })();
+    </script>
+  </body>
+</html>
