@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게임 이벤트 등록/리스트 (게시판 리소스 활용)</title>
+    <style>
+      :root {
+        --bg: #f8f7f4;
+        --paper: #fffcfb;
+        --text: #161616;
+        --muted: #6b7280;
+        --line: #e7e5e4;
+        --accent: #ff6a00;
+        --accent2: #f1bf86;
+        --radius: 16px;
+        --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
+        --maxw: 1100px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 22px;
+      }
+      .panel {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+
+      .head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+      .title {
+        margin: 0;
+        font-size: 18px;
+        letter-spacing: -0.02em;
+      }
+      .sub {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.45;
+      }
+
+      .register {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        padding: 14px;
+        display: grid;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .reg-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+        gap: 10px;
+        align-items: end;
+      }
+      .field label {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      select {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #fff;
+        font-weight: 700;
+        color: #111827;
+        outline: none;
+      }
+      select:focus {
+        border-color: rgba(255, 106, 0, 0.55);
+        box-shadow: 0 0 0 4px rgba(255, 106, 0, 0.12);
+      }
+
+      .btn {
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #fff;
+        font-weight: 900;
+        cursor: pointer;
+        transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+        height: 42px;
+        white-space: nowrap;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      }
+      .btn:active {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+      .btn.primary {
+        background: var(--accent);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      .hint {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .table-wrap {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      thead th {
+        background: #fafafa;
+        text-align: left;
+        padding: 12px 14px;
+        font-size: 12px;
+        color: #374151;
+        border-bottom: 1px solid var(--line);
+        letter-spacing: 0.02em;
+      }
+      tbody td {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        font-size: 13px;
+        color: #111827;
+      }
+      tbody tr:hover {
+        background: rgba(255, 106, 0, 0.04);
+      }
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #fafafa;
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #9ca3af;
+        box-shadow: 0 0 0 4px rgba(156, 163, 175, 0.16);
+      }
+      .badge.ready .dot {
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgba(255, 106, 0, 0.14);
+      }
+      .badge.done .dot {
+        background: #16a34a;
+        box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.14);
+      }
+
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+      .meta {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .pager {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .page-btn {
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: #fff;
+        cursor: pointer;
+        font-weight: 800;
+        font-size: 12px;
+      }
+      .page-btn[aria-current="page"] {
+        background: rgba(255, 106, 0, 0.1);
+        border-color: rgba(255, 106, 0, 0.35);
+      }
+
+      /* Responsive */
+      @media (max-width: 720px) {
+        .reg-row {
+          grid-template-columns: 1fr;
+        }
+        .btn {
+          width: 100%;
+        }
+
+        thead {
+          display: none;
+        }
+        tbody tr {
+          display: grid;
+          grid-template-columns: 1fr;
+          padding: 10px 12px;
+          border-bottom: 1px solid var(--line);
+        }
+        tbody td {
+          border-bottom: 0;
+          padding: 6px 0;
+        }
+        tbody td[data-label]::before {
+          content: attr(data-label);
+          display: block;
+          font-size: 12px;
+          color: var(--muted);
+          margin-bottom: 2px;
+          font-weight: 700;
+        }
+        tbody tr:last-child {
+          border-bottom: 0;
+        }
+      }
+      .link-btn {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 900;
+        text-decoration: none;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: #111827;
+        white-space: nowrap;
+      }
+
+      .link-btn.play {
+        background: rgba(255, 106, 0, 0.12);
+        border-color: rgba(255, 106, 0, 0.35);
+        color: #ff6a00;
+      }
+
+      .link-btn.result {
+        background: rgba(22, 163, 74, 0.12);
+        border-color: rgba(22, 163, 74, 0.35);
+        color: #16a34a;
+      }
+
+      .link-btn:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="panel">
+        <div class="head">
+          <div>
+            <h1 class="title">게임 이벤트 등록/리스트</h1>
+            <p class="sub">
+              게시판 리소스를 활용해 “테이블 1회 참여권”을 발급하고 상태(Ready/Done)를 관리합니다.<br />
+              리스트는 <b>등록시간 역순</b>이며 <b>페이지당 20개</b>로 노출됩니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 등록 섹션 -->
+        <section class="register" aria-label="이벤트 등록">
+          <div class="reg-row">
+            <div class="field">
+              <label for="staff">등록자명</label>
+              <select id="staff" name="staff">
+                <option value="">선택하세요</option>
+                <option>직원A</option>
+                <option>직원B</option>
+                <option>직원C</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="table">테이블명</label>
+              <select id="table" name="table">
+                <option value="">선택하세요</option>
+                <option>A-1</option>
+                <option>A-2</option>
+                <option>A-3</option>
+                <option>B-1</option>
+                <option>7번 테이블</option>
+              </select>
+            </div>
+
+            <button class="btn primary" type="button">등록</button>
+          </div>
+
+          <div class="hint">* 실제 구현 시: “등록” 클릭 → 게시글/세션 생성 → 목록 상단에 최신 항목이 추가됩니다.</div>
+        </section>
+
+        <!-- 리스트 -->
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 8%">순번</th>
+                <th style="width: 18%">등록자명</th>
+                <th>테이블명</th>
+                <th style="width: 20%">등록 시간</th>
+                <th style="width: 14%">상태</th>
+                <th style="width: 12%">보기</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="순번"><b>524</b></td>
+                <td data-label="등록자명">직원B</td>
+                <td data-label="테이블명">A-3</td>
+                <td data-label="등록 시간" class="time">2025-01-12 19:42</td>
+                <td data-label="상태">
+                  <span class="badge ready"><span class="dot"></span>Ready</span>
+                </td>
+                <td data-label="보기">
+                  <a href="game-entrance.html" class="link-btn play">게임 진행</a>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="순번"><b>523</b></td>
+                <td data-label="등록자명">직원A</td>
+                <td data-label="테이블명">7번 테이블</td>
+                <td data-label="등록 시간" class="time">2025-01-12 19:35</td>
+                <td data-label="상태">
+                  <span class="badge done"><span class="dot"></span>Done</span>
+                </td>
+                <td data-label="보기">
+                  <a href="game-result.html" class="link-btn result">결과 보기</a>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="순번"><b>522</b></td>
+                <td data-label="등록자명">직원B</td>
+                <td data-label="테이블명">A-3</td>
+                <td data-label="등록 시간" class="time">2025-01-12 19:42</td>
+                <td data-label="상태">
+                  <span class="badge ready"><span class="dot"></span>Ready</span>
+                </td>
+                <td data-label="보기">
+                  <a href="game-entrance.html" class="link-btn play">게임 진행</a>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="순번"><b>521</b></td>
+                <td data-label="등록자명">직원A</td>
+                <td data-label="테이블명">7번 테이블</td>
+                <td data-label="등록 시간" class="time">2025-01-12 19:35</td>
+                <td data-label="상태">
+                  <span class="badge done"><span class="dot"></span>Done</span>
+                </td>
+                <td data-label="보기">
+                  <a href="game-result.html" class="link-btn result">결과 보기</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 페이지네이션 -->
+        <div class="footer" aria-label="리스트 하단 컨트롤">
+          <div class="meta">총 <b>524</b>건 · 페이지당 <b>20</b>개 · 1/27 페이지 · 최신 등록순</div>
+
+          <nav class="pager" aria-label="페이지네이션">
+            <button class="page-btn" type="button" aria-label="이전 페이지">‹</button>
+            <button class="page-btn" type="button" aria-current="page">1</button>
+            <button class="page-btn" type="button">2</button>
+            <button class="page-btn" type="button">3</button>
+            <button class="page-btn" type="button">4</button>
+            <button class="page-btn" type="button">5</button>
+            <button class="page-btn" type="button">…</button>
+            <button class="page-btn" type="button">27</button>
+            <button class="page-btn" type="button" aria-label="다음 페이지">›</button>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

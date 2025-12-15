@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게임 결과 | 라오충칭훠궈 이벤트</title>
+    <style>
+      :root{
+        --bg:#f8f7f4;
+        --paper:#FFFCFB;
+        --text:#161616;
+        --muted:#6b7280;
+        --line:#e7e5e4;
+        --accent:#ff6a00;
+        --good:#16a34a;
+        --radius-xl:22px;
+        --radius-lg:18px;
+        --shadow:0 16px 44px rgba(17,17,17,.12);
+        --shadow-soft:0 10px 26px rgba(0,0,0,.07);
+        --maxw: 820px;
+      }
+      *{ box-sizing:border-box; margin:0; padding:0; }
+      body{
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+        background:
+          radial-gradient(circle at 12% 12%, rgba(255,106,0,.12), rgba(255,255,255,0) 42%),
+          radial-gradient(circle at 92% 18%, rgba(241,191,134,.26), rgba(255,255,255,0) 48%),
+          var(--bg);
+        color:var(--text);
+        min-height:100vh;
+        display:grid;
+        place-items:center;
+        padding:18px;
+      }
+
+      .wrap{ width:min(var(--maxw), 100%); }
+
+      .card{
+        background: var(--paper);
+        border:1px solid var(--line);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow);
+        overflow:hidden;
+      }
+
+      /* Header (no cover image) */
+      .head{
+        padding:16px 18px 10px;
+        border-bottom:1px solid var(--line);
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-start;
+        gap:12px;
+      }
+      .brand{
+        font-size:11px;
+        letter-spacing:.14em;
+        text-transform:uppercase;
+        color: var(--muted);
+        margin-bottom:6px;
+      }
+      .title{
+        font-size:20px;
+        font-weight:950;
+        letter-spacing:-0.03em;
+        line-height:1.15;
+      }
+      .subtitle{
+        margin-top:8px;
+        font-size:13px;
+        line-height:1.6;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+      .status-pill{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:8px 10px;
+        border-radius:999px;
+        border:1px solid var(--line);
+        background: #fff;
+        font-size:12px;
+        font-weight:900;
+        color:#111827;
+        white-space:nowrap;
+      }
+      .status-dot{
+        width:8px; height:8px; border-radius:999px;
+        background: var(--good);
+        box-shadow: 0 0 0 4px rgba(22,163,74,.14);
+      }
+
+      .body{ padding:18px; }
+
+      /* grid */
+      .grid{
+        display:grid;
+        gap:12px;
+      }
+
+      .panel{
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+        padding:14px;
+      }
+
+      .badge{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:6px 10px;
+        border-radius:999px;
+        border:1px solid rgba(255,106,0,.35);
+        background: rgba(255,106,0,.10);
+        font-size:12px;
+        font-weight:900;
+        color: var(--accent);
+        white-space:nowrap;
+      }
+      .badge .b-dot{
+        width:8px; height:8px; border-radius:999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgba(255,106,0,.12);
+      }
+
+      .msg{
+        margin-top:10px;
+        padding:12px 14px;
+        border-radius:16px;
+        border:1px solid rgba(22,163,74,.35);
+        background: rgba(22,163,74,.08);
+        color:#166534;
+        font-weight:950;
+        letter-spacing:-0.02em;
+        line-height:1.35;
+      }
+
+      /* ✅ 꽝(미당첨) 메시지 스타일 추가 */
+      .msg.fail{
+        border:1px solid rgba(107,114,128,.35);
+        background: rgba(107,114,128,.10);
+        color:#374151;
+      }
+
+      .prize{
+        margin-top:12px;
+        font-size:22px;
+        font-weight:950;
+        letter-spacing:-0.03em;
+        line-height:1.2;
+      }
+      .prize small{
+        display:block;
+        margin-top:8px;
+        font-size:12.5px;
+        font-weight:700;
+        color: var(--muted);
+      }
+
+      .info{
+        margin-top:14px;
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:10px;
+      }
+      .kv{
+        border:1px solid var(--line);
+        border-radius: 14px;
+        background:#fafafa;
+        padding:10px 12px;
+      }
+      .kv .k{
+        font-size:12px;
+        color: var(--muted);
+        margin-bottom:4px;
+      }
+      .kv .v{
+        font-size:13px;
+        font-weight:900;
+        color:#111827;
+      }
+      .mono{
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        letter-spacing:.02em;
+        white-space:nowrap;
+      }
+
+      .actions{
+        margin-top:14px;
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+      }
+      .btn{
+        padding:10px 14px;
+        border-radius: 14px;
+        border:1px solid var(--line);
+        background:#fff;
+        font-weight:950;
+        cursor:pointer;
+        transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+        text-decoration:none;
+        color:inherit;
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+      }
+      .btn:hover{
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(0,0,0,.10);
+      }
+      .btn:active{ transform: translateY(0); box-shadow:none; }
+      .btn.primary{
+        background: var(--accent);
+        color:#fff;
+        border-color: transparent;
+      }
+
+      .foot{
+        margin-top:10px;
+        font-size:11.5px;
+        color: var(--muted);
+        line-height:1.5;
+      }
+
+      @media (max-width: 560px){
+        .head{ flex-direction:column; align-items:flex-start; }
+        .info{ grid-template-columns: 1fr; }
+        .title{ font-size:19px; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <!-- Header -->
+        <header class="head" aria-label="결과 헤더">
+          <div>
+            <div class="brand">Verity F&amp;B × Lao Chongqing Hotpot</div>
+            <div class="title">게임 결과</div>
+            <p class="subtitle">
+              아래 결과 화면을 직원에게 보여주시면 혜택이 적용됩니다.
+            </p>
+          </div>
+        </header>
+
+        <!-- Body -->
+        <main class="body">
+          <div class="grid">
+            <!-- ✅ 당첨 결과 panel -->
+            <section class="panel" aria-label="당첨 결과">
+              <h4>당첨 결과</h4>
+
+              <div class="msg">
+                🎉 축하합니다! <span class="mono">라오충칭훠궈 포켓 핫팩</span> 당첨!
+              </div>
+
+              <div class="info" aria-label="참여 정보">
+                <div class="kv">
+                  <div class="k">테이블명</div>
+                  <div class="v">A-3</div>
+                </div>
+                <div class="kv">
+                  <div class="k">등록자(직원)</div>
+                  <div class="v">직원B</div>
+                </div>
+                <div class="kv">
+                  <div class="k">게임 종류</div>
+                  <div class="v">룰렛 (Roulette)</div>
+                </div>
+                <div class="kv">
+                  <div class="k">완료 시각</div>
+                  <div class="v mono">2025-01-12 19:46</div>
+                </div>
+              </div>
+
+              <div class="actions" style="font-size: 12px;">
+                <a class="btn primary" href="game-manager.html" aria-label="리스트로 돌아가기">↩︎ 리스트로</a>
+              </div>
+
+              <div class="foot">
+                * 본 결과는 이벤트 운영 정책에 따라 변경될 수 있습니다.<br/>
+                * 부정 참여가 의심되는 경우 혜택 제공이 제한될 수 있습니다.
+              </div>
+            </section>
+
+            <!-- ✅ 꽝 결과 panel 추가 -->
+            <section class="panel" aria-label="꽝 결과">
+              <h4>당첨 결과</h4>
+
+              <div class="msg fail">
+                😅 아쉽지만 이번에는 꽝입니다
+              </div>
+
+              <div class="info" aria-label="참여 정보 (예시)">
+                <div class="kv">
+                  <div class="k">테이블명</div>
+                  <div class="v">B-1</div>
+                </div>
+                <div class="kv">
+                  <div class="k">등록자(직원)</div>
+                  <div class="v">직원A</div>
+                </div>
+                <div class="kv">
+                  <div class="k">게임 종류</div>
+                  <div class="v">룰렛 (Roulette)</div>
+                </div>
+                <div class="kv">
+                  <div class="k">완료 시각</div>
+                  <div class="v mono">2025-01-12 19:52</div>
+                </div>
+              </div>
+
+              <div class="actions" style="font-size: 12px;">
+                <a class="btn primary" href="game-manager.html" aria-label="리스트로 돌아가기">↩︎ 리스트로</a>
+              </div>
+
+              <div class="foot">
+                * 다음 참여 기회를 기대해주세요.<br/>
+                * 직원 안내에 따라 추가 참여 가능 여부가 달라질 수 있습니다.
+              </div>
+            </section>
+
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

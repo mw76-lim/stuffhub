@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>라오충칭훠궈 웹게임 이벤트 기획/개발 플로우</title>
+    <style>
+      :root {
+        --bg: #f8f7f4;
+        --paper: #ffffff;
+        --text: #161616;
+        --muted: #6b7280;
+        --line: #e7e5e4;
+        --accent: #ff6a00;
+        --radius: 16px;
+        --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
+        --maxw: 1100px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR",
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 22px;
+      }
+      .paper {
+        background: #fffcfb;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        padding: 40px 44px;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 24px;
+        letter-spacing: -0.02em;
+      }
+      .sub {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      h2 {
+        margin: 28px 0 10px;
+        font-size: 18px;
+        letter-spacing: -0.02em;
+      }
+      h3 {
+        margin: 18px 0 8px;
+        font-size: 15px;
+        letter-spacing: -0.01em;
+      }
+      p { margin: 10px 0; }
+      ul { margin: 8px 0 0; padding-left: 18px; }
+      li { margin: 6px 0; }
+
+      .note {
+        border-left: 4px solid var(--accent);
+        background: #fff7ef;
+        padding: 12px 14px;
+        border-radius: 12px;
+        margin: 14px 0;
+        color: #2d2d2d;
+      }
+
+      .grid-2 {
+        display: grid;
+        gap: 12px;
+      }
+      @media (min-width: 900px) {
+        .grid-2 {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 14px;
+      }
+      .k {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 900;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgba(255, 106, 0, 0.12);
+      }
+
+      .steps {
+        display: grid;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .step {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        padding: 14px;
+        display: grid;
+        gap: 6px;
+      }
+      .step b {
+        font-size: 13px;
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+      .table th,
+      .table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+        font-size: 13px;
+      }
+      .table th {
+        background: #fafafa;
+        text-align: left;
+        font-weight: 900;
+      }
+      .table tr:last-child td { border-bottom: 0; }
+
+      .tagrow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .tag {
+        font-size: 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 10px;
+        background: #fafafa;
+        color: #374151;
+      }
+
+      @media (max-width: 560px) {
+        .paper { padding: 20px 16px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="paper">
+        <h1>라오충칭훠궈 웹페이지 게임 이벤트 기획/개발 플로우</h1>
+        <p class="sub">
+          환경: PHP/MySQL + 기존 빌트인 게시판(글 등록/보기 기반).<br />
+          컨셉: <b>게시글 1개 = 테이블 1회 참여권</b>
+        </p>
+
+        <div class="note">
+          원칙: “룰렛/사다리/야바위” 등 어떤 게임이든 <b>결과 확정은 서버</b>에서 처리하고, 화면은 연출(애니메이션) 중심으로 구성하면
+          부정참여 리스크를 크게 줄일 수 있습니다.
+        </div>
+
+        <h2>1) 서비스 구조 요약</h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="k"><span class="dot"></span>핵심 컨셉</div>
+            <ul>
+              <li><b>직원</b>이 참여권(게시글)을 생성</li>
+              <li><b>고객(또는 직원)</b>이 글(뷰 페이지)에서 게임 1회 진행</li>
+              <li>완료 시 뷰 페이지는 <b>결과 화면(DONE)</b>으로 전환되어 재참여 불가</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="k"><span class="dot"></span>역할 정의</div>
+            <ul>
+              <li><b>직원</b>: 참여권 발급, 결과 확인, 필요 시 리셋(권한 필요)</li>
+              <li><b>고객</b>: 게임 선택, 닉네임 입력(선택), 플레이</li>
+              <li><b>관리자</b>: 이벤트 ON/OFF, 상품/확률/기간 관리, 로그/통계 확인</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>2) 화면/기능 정의 (IA)</h2>
+
+        <h3>A. 직원용: 참여권 생성(게시글 등록)</h3>
+        <div class="steps">
+          <div class="step">
+            <b>게시판 글쓰기 폼(직원 전용)</b>
+            <div class="meta">필드 예시</div>
+            <ul>
+              <li>직원명(필수)</li>
+              <li>테이블명(필수) 예: A-3, 7번 테이블</li>
+              <li>인원수/메모(선택)</li>
+              <li>(시스템) 발급시각/발급자/참여 토큰 자동 생성</li>
+            </ul>
+          </div>
+          <div class="step">
+            <b>등록 완료 후</b>
+            <ul>
+              <li>생성된 글 URL(또는 토큰 URL)로 고객 참여 화면 오픈</li>
+              <li>태블릿 고정 실행 or QR로 손님에게 전달 가능</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>B. 고객용: 게시글 보기(상태 기반 분기)</h3>
+        <table class="table" aria-label="상태별 화면 분기">
+          <thead>
+            <tr>
+              <th style="width: 16%">상태</th>
+              <th>보여주는 화면</th>
+              <th style="width: 30%">주요 요소</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>READY</b></td>
+              <td>이벤트 안내 + 게임 선택/시작</td>
+              <td>
+                게임 택1, 닉네임(선택), 시작 버튼
+              </td>
+            </tr>
+            <tr>
+              <td><b>PLAYING</b></td>
+              <td>게임 진행 화면</td>
+              <td>
+                선택한 1개 게임 UI, 진행 저장(새로고침 대비)
+              </td>
+            </tr>
+            <tr>
+              <td><b>DONE</b></td>
+              <td>게임 결과 화면(잠금)</td>
+              <td>
+                당첨 품목, 직원 확인 코드, “직원에게 보여주세요”
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>C. 게임 진행 페이지(공통)</h3>
+        <div class="steps">
+          <div class="step">
+            <b>입력/선택</b>
+            <ul>
+              <li>게임 선택(3개 중 1개)</li>
+              <li>닉네임 입력(선택)</li>
+              <li>(권장) 전화번호 미수집 — 운영 난이도/책임 리스크↓</li>
+            </ul>
+          </div>
+          <div class="step">
+            <b>완료 처리</b>
+            <ul>
+              <li>완료 버튼/이벤트 시 서버로 결과 확정 요청</li>
+              <li>성공 저장 후 DONE 화면으로 전환</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>3) 상태 전환 로직 (핵심)</h2>
+        <div class="steps">
+          <div class="step">
+            <b>1. 직원 발급</b>
+            <div class="meta">게시글 등록 → READY 세션 생성</div>
+          </div>
+          <div class="step">
+            <b>2. 고객 오픈</b>
+            <div class="meta">글 보기 → READY면 게임 선택/시작 노출</div>
+          </div>
+          <div class="step">
+            <b>3. START</b>
+            <div class="meta">READY → PLAYING (게임/닉네임 저장, started_at 기록)</div>
+          </div>
+          <div class="step">
+            <b>4. COMPLETE</b>
+            <div class="meta">PLAYING → DONE (서버에서 당첨 결정 후 결과 저장)</div>
+          </div>
+          <div class="step">
+            <b>5. 재방문</b>
+            <div class="meta">DONE 상태면 결과만 노출(재참여 불가)</div>
+          </div>
+        </div>
+
+        <h2>4) 게임 구현 방식 (현장 운영 친화)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="k"><span class="dot"></span>공통 원칙</div>
+            <ul>
+              <li>애니메이션: 프론트</li>
+              <li>당첨 결정/확정: 서버(PHP)</li>
+              <li>새로고침/뒤로가기: DONE이면 결과 유지</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="k"><span class="dot"></span>게임별 팁</div>
+            <ul>
+              <li><b>룰렛</b>: 서버가 prize_id 결정 → 프론트가 그 구간으로 멈추게 연출</li>
+              <li><b>사다리</b>: 서버가 결과 결정 → 프론트가 해당 경로로 내려가는 연출</li>
+              <li><b>야바위</b>: 서버가 정답 컵 결정 → 프론트가 섞기 후 선택 연출</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>5) 운영 플로우 (매장)</h2>
+        <div class="steps">
+          <div class="step">
+            <b>1) 참여권 등록 / 게임 진행</b>
+            <div class="meta">착석/결제 타이밍에 직원이 글 등록 후 / 게임페이지 오픈후 고객에게 전달</div>
+          </div>
+          <div class="step">
+            <b>2) 참여</b>
+            <div class="meta">태블릿/브라우저로 고객이 게임 선택 → 플레이</div>
+          </div>
+          <div class="step">
+            <b>3) 혜택 지급</b>
+            <div class="meta">결과 화면을 직원에게 보여주고 즉시 제공</div>
+          </div>
+          <div class="step">
+            <b>(선택) 4) 지급 완료 체크</b>
+            <div class="meta">관리 편의용 “지급완료” 표시 기능</div>
+          </div>
+        </div>
+
+        <h2>6) 보안/부정 사용 방지</h2>
+        <ul>
+          <li>URL은 post_id 직노출 대신 <b>token</b> 방식 권장</li>
+          <li>상태 기반 잠금(READY → DONE 이후 재참여 불가)</li>
+          <li>attempt_count/중복 요청 방지(서버에서 원자적으로 처리)</li>
+          <li>직원만 RESET 가능(권한 체크)</li>
+          <li>로그/이력 기반으로 이상 패턴(과도한 참여/리셋) 감지</li>
+        </ul>
+
+        <h2>7) 개발 작업 플로우 (권장 순서)</h2>
+        <div class="steps">
+          <div class="step">
+            <b>Phase 0. 기획 확정</b>
+            <div class="meta">상품/확률/수량 제한, 이벤트 기간/운영시간, 수집 항목 확정</div>
+          </div>
+          <div class="step">
+            <b>Phase 1. 관리자/운영 도구</b>
+            <div class="meta">이벤트 ON/OFF, 상품/확률 관리, 통계/로그 확인</div>
+          </div>
+          <div class="step">
+            <b>Phase 2. 게시판 연동</b>
+            <div class="meta">글 등록 시 세션 생성(훅), view에서 세션 매핑</div>
+          </div>
+          <div class="step">
+            <b>Phase 3. 고객 UI(상태 분기)</b>
+            <div class="meta">READY/PLAYING/DONE 화면 템플릿</div>
+          </div>
+          <div class="step">
+            <b>Phase 4. 서버 결과 처리</b>
+            <div class="meta">start/complete API, 결과 결정 로직(가중치/제한)</div>
+          </div>
+          <div class="step">
+            <b>Phase 5. 현장 테스트</b>
+            <div class="meta">새로고침/뒤로가기/네트워크 끊김/권한/리셋 케이스</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
