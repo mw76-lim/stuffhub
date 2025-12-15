@@ -445,9 +445,62 @@
               <img src="blog10/현장스냅3.jpg" alt="">
             </div>
           </div>
+
+          <div class="tags" role="list">
+            <span class="tag" role="listitem">#라오충칭훠궈</span>
+            <span class="tag" role="listitem">#팀인터뷰</span>
+            <span class="tag" role="listitem">#키친비하인드</span>
+          </div>
+
+          <div class="actions">
+            <a class="btn accent" href="blogpage.html">목록으로</a>
+            <a id="shareBtn" class="btn">공유하기</a>
+          </div>
         </div>
 
       </div>
     </div>
+
+    <script>
+      // 공유 & 링크 복사
+      (function () {
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        document.getElementById("shareBtn").addEventListener("click", async () => {
+          const shareData = {
+            title: document.getElementById("content-title")?.textContent,
+            text: "라오충칭훠궈 소식 확인해보세요!",
+            url: location.href,
+          };
+
+          const canWebShare =
+            typeof navigator !== "undefined" &&
+            typeof navigator.share === "function" &&
+            (typeof navigator.canShare !== "function" || navigator.canShare(shareData)) &&
+            (location.protocol === "https:" || location.hostname === "localhost") &&
+            isMobile; // 데스크톱 크롬의 반쪽 지원 회피
+
+          if (canWebShare) {
+            try {
+              // 일부 환경에서 무반응으로 바로 resolve/close 되는 것을 대비해 타임아웃 적용
+              const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error("share-timeout")), 2500));
+              await Promise.race([navigator.share(shareData), timeout]);
+              return; // 정상 공유
+            } catch (err) {
+              // 사용자 취소/미지원/무반응 타임아웃 등 모두 fallback
+            }
+          } else {
+            // Fallback: 링크 복사
+            try {
+              await navigator.clipboard.writeText(location.href);
+              alert("공유 기능이 제한되어 링크를 복사했습니다. 원하는 앱에 붙여넣어 공유해주세요.");
+            } catch {
+              // 클립보드 API 미지원 시 마지막 수단
+              const ok = prompt("공유 기능이 제한됩니다. 아래 링크를 복사해주세요:", location.href);
+              // 사용자가 취소해도 추가 처리 불필요
+            }
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

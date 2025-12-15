@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Radial Sweep Reveal (10% → 40% → 70% → 100%)</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f3f4f6;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      .wrap {
+        position: relative;
+        width: 360px;
+        aspect-ratio: 4 / 3;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #111;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .wrap img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* 이전 단계의 투명도로 전체가 보이는 바닥 레이어 */
+      .base-img {
+        opacity: 0.1; /* 시작 10% */
+      }
+
+      /* 회전하면서 다음 단계 투명도로 채워지는 레이어 */
+      .sweep-img {
+        --progress: 0;
+        opacity: 0.4; /* 첫 번째 전환 목표: 40% */
+
+        /* 보이는 영역(흰색)이 시계처럼 회전하면서 퍼지는 마스크 */
+        -webkit-mask-image: conic-gradient(
+          from -90deg,
+          #fff 0turn,
+          #fff calc(var(--progress) * 1turn),
+          transparent calc(var(--progress) * 1turn),
+          transparent 1turn
+        );
+        mask-image: conic-gradient(
+          from -90deg,
+          #fff 0turn,
+          #fff calc(var(--progress) * 1turn),
+          transparent calc(var(--progress) * 1turn),
+          transparent 1turn
+        );
+        mask-position: center;
+        mask-repeat: no-repeat;
+        mask-size: cover;
+      }
+
+      .caption {
+        margin-top: 14px;
+        text-align: center;
+        font-size: 14px;
+        color: #4b5563;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="wrap">
+        <!-- 바닥: 이전 단계 투명도로 항상 전체 이미지 -->
+        <img
+          id="base-img"
+          class="base-img"
+          src="https://placehold.co/800x600/png?text=Hidden+Image"
+          alt="base"
+        />
+        <!-- 위: 마스크로 회전하며 다음 단계 투명도로 채워지는 레이어 -->
+        <img
+          id="sweep-img"
+          class="sweep-img"
+          src="https://placehold.co/800x600/png?text=Hidden+Image"
+          alt="sweep"
+        />
+      </div>
+      <div class="caption">
+        3회전 동안 10% → 40% → 70% → 100%로 선명해지는 Radial Sweep Reveal
+      </div>
+    </div>
+
+    <script>
+      const baseImg = document.getElementById("base-img");
+      const sweepImg = document.getElementById("sweep-img");
+
+      // opacity 단계: 10 → 40 → 70 → 100 (%)
+      const opacitySteps = [0.1, 0.4, 0.7, 1.0];
+      const transitionCount = opacitySteps.length - 1; // 3번 전환 (3회전)
+      const loopDuration = 1000; // 1바퀴 = 1초
+
+      let currentStep = 0; // 0: 10→40, 1: 40→70, 2: 70→100
+      let startTime = null;
+
+      // 초기 상태 세팅
+      baseImg.style.opacity = opacitySteps[0].toString(); // 0.1
+      sweepImg.style.opacity = opacitySteps[1].toString(); // 0.4
+      sweepImg.style.setProperty("--progress", "0");
+
+      function animate(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+
+        // 현재 바퀴 진행률 (0 ~ 1)
+        const p = Math.min(elapsed / loopDuration, 1);
+        sweepImg.style.setProperty("--progress", p.toString());
+
+        if (p >= 1) {
+          // 한 바퀴(= 한 단계 전환) 종료
+          currentStep++;
+
+          // 바닥 레이어를 이번 목표 투명도로 업데이트
+          baseImg.style.opacity = opacitySteps[currentStep].toString();
+
+          if (currentStep >= transitionCount) {
+            // 마지막 단계까지 완료 → 최종 상태 고정
+            sweepImg.style.setProperty("--progress", "1");
+            sweepImg.style.opacity = opacitySteps[transitionCount].toString();
+            return;
+          } else {
+            // 다음 전환 단계 준비
+            startTime = timestamp; // 다음 바퀴 타이밍 리셋
+            // sweep 레이어는 다음 목표 투명도로 설정
+            sweepImg.style.opacity = opacitySteps[currentStep + 1].toString();
+            sweepImg.style.setProperty("--progress", "0");
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      requestAnimationFrame(animate);
+    </script>
+  </body>
+</html>

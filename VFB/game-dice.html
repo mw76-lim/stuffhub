@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>주사위 게임 - 이벤트용 웹 게임</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f7f2ea;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        color: #3a2415;
+      }
+
+      .game-shell {
+        width: 100%;
+        max-width: 520px;
+        padding: 32px 26px 30px;
+        background: #fffaf5;
+        border-radius: 24px;
+        border: 1px solid rgba(193, 160, 120, 0.5);
+        box-shadow: 0 16px 40px rgba(120, 72, 37, 0.18);
+      }
+
+      .game-header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .game-title {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 4px;
+      }
+
+      .game-sub {
+        font-size: 13px;
+        color: #6b4a30;
+      }
+
+      .dice-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .dice-wrap {
+        width: 140px;
+        height: 140px;
+        perspective: 600px;
+      }
+
+      .dice {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        background: radial-gradient(circle at 30% 20%, #ffffff, #f5f0e8);
+        box-shadow:
+          0 10px 25px rgba(120, 72, 37, 0.45),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        padding: 16px;
+        transform-style: preserve-3d;
+        transition: transform 0.2s ease-out;
+      }
+
+      .dice.rolling {
+        animation: dice-roll 0.6s ease-in-out;
+      }
+
+      @keyframes dice-roll {
+        0%   { transform: rotateX(0deg) rotateY(0deg); }
+        30%  { transform: rotateX(20deg) rotateY(-20deg); }
+        60%  { transform: rotateX(-10deg) rotateY(25deg); }
+        100% { transform: rotateX(0deg) rotateY(0deg); }
+      }
+
+      .pip {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, #ffffff, #111827);
+        margin: auto;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+      }
+
+      /* 3x3 그리드 위치 지정 (1~9) */
+      .pos-1 { grid-area: 1 / 1; }
+      .pos-2 { grid-area: 1 / 2; }
+      .pos-3 { grid-area: 1 / 3; }
+      .pos-4 { grid-area: 2 / 1; }
+      .pos-5 { grid-area: 2 / 2; }
+      .pos-6 { grid-area: 2 / 3; }
+      .pos-7 { grid-area: 3 / 1; }
+      .pos-8 { grid-area: 3 / 2; }
+      .pos-9 { grid-area: 3 / 3; }
+
+      /* 각 눈(1~6)에 대한 점 배치 */
+      .face-1 .pip.pos-5 { opacity: 1; }
+
+      .face-2 .pip.pos-1,
+      .face-2 .pip.pos-9 { opacity: 1; }
+
+      .face-3 .pip.pos-1,
+      .face-3 .pip.pos-5,
+      .face-3 .pip.pos-9 { opacity: 1; }
+
+      .face-4 .pip.pos-1,
+      .face-4 .pip.pos-3,
+      .face-4 .pip.pos-7,
+      .face-4 .pip.pos-9 { opacity: 1; }
+
+      .face-5 .pip.pos-1,
+      .face-5 .pip.pos-3,
+      .face-5 .pip.pos-5,
+      .face-5 .pip.pos-7,
+      .face-5 .pip.pos-9 { opacity: 1; }
+
+      .face-6 .pip.pos-1,
+      .face-6 .pip.pos-3,
+      .face-6 .pip.pos-4,
+      .face-6 .pip.pos-6,
+      .face-6 .pip.pos-7,
+      .face-6 .pip.pos-9 { opacity: 1; }
+
+      .dice-label {
+        font-size: 14px;
+        color: #6b4a30;
+      }
+
+      .dice-label strong {
+        color: #b45309;
+      }
+
+      .btn-row {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .btn {
+        border-radius: 999px;
+        padding: 11px 22px;
+        font-size: 14px;
+        border: 1px solid rgba(148, 104, 63, 0.7);
+        background: #fff;
+        color: #3a2415;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: 0.15s ease;
+      }
+
+      .btn.primary {
+        background: linear-gradient(120deg, #f97316, #fbbf24);
+        border-color: transparent;
+        color: #3b1f0a;
+        box-shadow: 0 10px 24px rgba(201, 93, 39, 0.5);
+      }
+
+      .btn:hover:not([disabled]) {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 26px rgba(201, 93, 39, 0.55);
+      }
+
+      .btn:active:not([disabled]) {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+
+      .btn[disabled] {
+        opacity: 0.6;
+        cursor: default;
+        box-shadow: none;
+      }
+
+      .result-box {
+        margin-top: 18px;
+        padding: 12px 14px;
+        border-radius: 16px;
+        background: #fff7ec;
+        border: 1px solid rgba(193, 160, 120, 0.6);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .result-box strong {
+        color: #b45309;
+      }
+
+      .hint {
+        margin-top: 8px;
+        font-size: 11px;
+        color: #8b6544;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-shell">
+      <header class="game-header">
+        <h1 class="game-title">주사위 게임</h1>
+        <p class="game-sub">
+          주사위를 굴려서 나온 숫자에 따라 쿠폰/서비스를 제공할 수 있는 이벤트용 웹 게임입니다.
+        </p>
+      </header>
+
+      <section class="dice-area">
+        <div class="dice-wrap">
+          <div class="dice face-1" id="dice">
+            <!-- 3x3 배치용 pip 9개 -->
+            <div class="pip pos-1"></div>
+            <div class="pip pos-2"></div>
+            <div class="pip pos-3"></div>
+            <div class="pip pos-4"></div>
+            <div class="pip pos-5"></div>
+            <div class="pip pos-6"></div>
+            <div class="pip pos-7"></div>
+            <div class="pip pos-8"></div>
+            <div class="pip pos-9"></div>
+          </div>
+        </div>
+        <div class="dice-label" id="diceLabel">
+          현재 눈: <strong>1</strong>
+        </div>
+      </section>
+
+      <div class="btn-row">
+        <button type="button" class="btn primary" id="rollButton">
+          주사위 굴리기 🎲
+        </button>
+      </div>
+
+      <div class="result-box" id="resultBox">
+        버튼을 눌러 주사위를 굴려보세요.
+      </div>
+
+      <p class="hint">
+        * 실제 운영 시, 각 숫자(1~6)에 원하는 쿠폰/서비스를 매핑해서 사용하시면 됩니다.
+      </p>
+    </div>
+
+    <script>
+      (function () {
+        const dice = document.getElementById("dice");
+        const rollButton = document.getElementById("rollButton");
+        const diceLabel = document.getElementById("diceLabel");
+        const resultBox = document.getElementById("resultBox");
+
+        // 숫자별 보상 매핑 (이 부분만 매장 정책에 맞게 수정하면 됨)
+        const prizes = {
+          1: "캔 음료 1개",
+          2: "면류 1접시",
+          3: "포켓 핫팩 1개",
+          4: "당일 결제금액 5,000원 할인",
+          5: "재방문 시 30% 할인",
+          6: "재방문 시 50% 할인 (대박!)",
+        };
+
+        let isRolling = false;
+
+        function rollDice() {
+          if (isRolling) return;
+
+          isRolling = true;
+          rollButton.disabled = true;
+          resultBox.textContent = "주사위가 굴러가고 있습니다...";
+
+          // 굴러가는 느낌을 위해 중간에 몇 번 숫자를 바꿔주기
+          let tempCount = 0;
+          const tempInterval = setInterval(() => {
+            const tempValue = Math.floor(Math.random() * 6) + 1;
+            updateFace(tempValue, false);
+            tempCount++;
+            if (tempCount > 5) {
+              clearInterval(tempInterval);
+            }
+          }, 80);
+
+          dice.classList.add("rolling");
+
+          setTimeout(() => {
+            const value = Math.floor(Math.random() * 6) + 1;
+            updateFace(value, true);
+            dice.classList.remove("rolling");
+            rollButton.disabled = false;
+            isRolling = false;
+          }, 650);
+        }
+
+        function updateFace(value, showResult) {
+          // face-1 ~ face-6 클래스를 관리
+          dice.className = "dice face-" + value;
+
+          diceLabel.innerHTML = `현재 눈: <strong>${value}</strong>`;
+
+          if (showResult) {
+            const prizeText = prizes[value] || "보상이 설정되어 있지 않습니다.";
+            resultBox.innerHTML =
+              `🎲 <strong>${value}</strong>이(가) 나왔습니다.<br>` +
+              `→ 보상: <strong>${prizeText}</strong>`;
+          }
+        }
+
+        rollButton.addEventListener("click", rollDice);
+      })();
+    </script>
+  </body>
+</html>

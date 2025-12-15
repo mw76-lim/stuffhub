@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>컵 셔플 야바위 게임 (공 위치 공개 버전)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f7f2ea;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        color: #3a2415;
+      }
+
+      .game-shell {
+        width: 100%;
+        max-width: 720px;
+        padding: 32px 28px 30px;
+        background: #fffaf5;
+        border-radius: 24px;
+        border: 1px solid rgba(193, 160, 120, 0.5);
+        box-shadow: 0 16px 40px rgba(120, 72, 37, 0.18);
+      }
+
+      .game-header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .game-title {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 4px;
+      }
+
+      .game-sub {
+        font-size: 13px;
+        color: #6b4a30;
+      }
+
+      .table-area {
+        margin-top: 12px;
+        padding: 20px 16px 18px;
+        border-radius: 18px;
+        background: radial-gradient(circle at top, #f4e5d4, #e2c7a8);
+        box-shadow: inset 0 3px 8px rgba(255, 255, 255, 0.7);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cup-stage {
+        position: relative;
+        height: 220px;
+      }
+
+      .cup {
+        position: absolute;
+        bottom: 30px;
+        width: 90px;
+        height: 110px;
+        border-radius: 60px 60px 16px 16px;
+        background: linear-gradient(
+          180deg,
+          #f9f5ef 0,
+          #f1e0cd 40%,
+          #e2c4a0 100%
+        );
+        box-shadow:
+          0 10px 18px rgba(124, 78, 38, 0.4),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+        transform: translateX(-50%);
+        transition: left 0.32s ease, transform 0.18s ease;
+        cursor: pointer;
+      }
+
+      .cup::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 12px;
+        border-radius: 999px;
+        background: radial-gradient(circle at top, #ffffff, #e8d6c0);
+        box-shadow: 0 2px 4px rgba(124, 78, 38, 0.25);
+      }
+
+      .cup::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 74px;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(111, 70, 33, 0.45);
+        filter: blur(3px);
+        opacity: 0.9;
+      }
+
+      .cup.is-disabled {
+        cursor: default;
+        opacity: 0.7;
+      }
+
+      .cup.is-highlight {
+        box-shadow:
+          0 12px 24px rgba(201, 93, 39, 0.6),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+      }
+
+      .cup.reveal {
+        transform: translate(-50%, -20px);
+      }
+
+      .ball {
+        position: absolute;
+        bottom: 30px;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 20%, #ffffff, #e11d48);
+        box-shadow:
+          0 0 0 3px rgba(120, 46, 60, 0.6),
+          0 6px 10px rgba(120, 46, 60, 0.7);
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: left 0.32s ease, opacity 0.2s ease;
+        pointer-events: none;
+      }
+
+      .ball.visible {
+        opacity: 1;
+      }
+
+      .status-row {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+      }
+
+      .status-text {
+        color: #6b4a30;
+      }
+
+      .status-text strong {
+        color: #b45309;
+      }
+
+      .btn {
+        border-radius: 999px;
+        padding: 9px 18px;
+        font-size: 13px;
+        border: 1px solid rgba(148, 104, 63, 0.7);
+        background: #fff;
+        color: #3a2415;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: 0.15s ease;
+      }
+
+      .btn.primary {
+        background: linear-gradient(120deg, #f97316, #fbbf24);
+        border-color: transparent;
+        color: #3b1f0a;
+        box-shadow: 0 10px 24px rgba(201, 93, 39, 0.5);
+      }
+
+      .btn:hover:not([disabled]) {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 26px rgba(201, 93, 39, 0.55);
+      }
+
+      .btn:active:not([disabled]) {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+
+      .btn[disabled] {
+        opacity: 0.6;
+        cursor: default;
+        box-shadow: none;
+      }
+
+      .hint {
+        margin-top: 8px;
+        font-size: 11px;
+        color: #8b6544;
+      }
+
+      @media (max-width: 640px) {
+        .game-shell {
+          padding: 20px 16px 22px;
+        }
+
+        .cup-stage {
+          height: 200px;
+        }
+
+        .cup {
+          width: 80px;
+          height: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-shell">
+      <header class="game-header">
+        <h1 class="game-title">컵 셔플 야바위 게임</h1>
+        <p class="game-sub">
+          섞기 전에 공 위치를 잠깐 보여드립니다. 잘 기억해두셨다가, 섞기 후 공이 들어있는 컵을 맞춰보세요!
+        </p>
+      </header>
+
+      <section class="table-area">
+        <div class="cup-stage">
+          <!-- 컵 3개 -->
+          <div class="cup" data-id="0"></div>
+          <div class="cup" data-id="1"></div>
+          <div class="cup" data-id="2"></div>
+          <!-- 정답 공 -->
+          <div class="ball" id="ball"></div>
+        </div>
+
+        <div class="status-row">
+          <div class="status-text" id="statusText">
+            <strong>섞기 시작하기</strong> 버튼을 누르면, 먼저 공의 위치를 잠깐 공개합니다.
+          </div>
+          <button type="button" class="btn primary" id="startButton">
+            섞기 시작하기 🎩
+          </button>
+        </div>
+
+        <p class="hint">
+          * 실제 이벤트에서는 정답 시 쿠폰/서비스 제공 정책을 연동하시면 됩니다.
+        </p>
+      </section>
+    </div>
+
+    <script>
+      (function () {
+        const cups = document.querySelectorAll(".cup");
+        const ball = document.getElementById("ball");
+        const startButton = document.getElementById("startButton");
+        const statusText = document.getElementById("statusText");
+
+        // 슬롯 위치: 왼, 가운데, 오른쪽
+        const slotPositions = ["20%", "50%", "80%"];
+
+        let winningCupId = null; // 공이 들어있는 컵 ID(0,1,2)
+        let isShuffling = false;
+        let canPick = false;
+
+        // 슬롯 인덱스 -> 컵 ID 매핑 (초기: 0,1,2)
+        let slotToCup = [0, 1, 2];
+
+        function initPositions() {
+          cups.forEach((cup, idx) => {
+            cup.style.left = slotPositions[idx];
+            cup.classList.remove(
+              "reveal",
+              "is-disabled",
+              "is-highlight"
+            );
+          });
+          ball.classList.remove("visible");
+        }
+
+        function resetGameState() {
+          isShuffling = false;
+          canPick = false;
+          slotToCup = [0, 1, 2];
+          initPositions();
+          statusText.innerHTML =
+            "<strong>섞기 시작하기</strong> 버튼을 누르면, 먼저 공의 위치를 잠깐 공개합니다.";
+          startButton.textContent = "섞기 시작하기 🎩";
+        }
+
+        // 공 위치 잠깐 보여주기
+        function revealBallThenShuffle() {
+          // 1) 랜덤으로 공이 들어있는 컵 선택
+          winningCupId = Math.floor(Math.random() * 3);
+          const winningCupEl = document.querySelector(
+            `.cup[data-id="${winningCupId}"]`
+          );
+
+          // 현재 컵 위치(초기 상태: slotToCup와 1:1 매칭)
+          const leftPos = winningCupEl.style.left || slotPositions[winningCupId];
+          ball.style.left = leftPos;
+
+          // 컵 들고 공 보여주기
+          winningCupEl.classList.add("reveal", "is-highlight");
+          ball.classList.add("visible");
+
+          statusText.innerHTML =
+            "👀 공 위치를 기억하세요! 잠시 후 컵을 섞습니다...";
+
+          // 1.2초 후 공 숨기고 컵 다시 내린 뒤 셔플 시작
+          setTimeout(() => {
+            ball.classList.remove("visible");
+
+            setTimeout(() => {
+              winningCupEl.classList.remove("reveal");
+              setTimeout(() => {
+                winningCupEl.classList.remove("is-highlight");
+              }, 120);
+
+              // 이제 진짜 섞기 시작
+              startShuffling();
+            }, 200);
+          }, 1200);
+        }
+
+        // 실제 컵 셔플 로직
+        function startShuffling() {
+          isShuffling = true;
+          canPick = false;
+          startButton.disabled = true;
+          statusText.innerHTML = "섞는 중입니다... 눈을 떼지 마세요 👀";
+
+          const totalSwaps = 8;
+          let step = 0;
+
+          function doSwap() {
+            if (step >= totalSwaps) {
+              // 섞기 종료
+              isShuffling = false;
+              canPick = true;
+              startButton.disabled = false;
+              startButton.textContent = "다시 섞기 🔁";
+              statusText.innerHTML =
+                "어디에 숨었을까요? 공이 들어있다고 생각되는 컵 하나를 선택해보세요.";
+              cups.forEach((cup) => cup.classList.remove("is-disabled"));
+              return;
+            }
+
+            // 서로 다른 두 슬롯 선택
+            let s1 = Math.floor(Math.random() * 3);
+            let s2;
+            do {
+              s2 = Math.floor(Math.random() * 3);
+            } while (s2 === s1);
+
+            const cupId1 = slotToCup[s1];
+            const cupId2 = slotToCup[s2];
+
+            const cupEl1 = document.querySelector(`.cup[data-id="${cupId1}"]`);
+            const cupEl2 = document.querySelector(`.cup[data-id="${cupId2}"]`);
+
+            // 살짝 들어올렸다가 교환
+            cupEl1.style.transform = "translate(-50%, -12px)";
+            cupEl2.style.transform = "translate(-50%, -12px)";
+
+            setTimeout(() => {
+              cupEl1.style.left = slotPositions[s2];
+              cupEl2.style.left = slotPositions[s1];
+            }, 80);
+
+            setTimeout(() => {
+              cupEl1.style.transform = "translate(-50%, 0)";
+              cupEl2.style.transform = "translate(-50%, 0)";
+            }, 220);
+
+            // 매핑 갱신: 슬롯에 들어있는 컵 ID 교환
+            const temp = slotToCup[s1];
+            slotToCup[s1] = slotToCup[s2];
+            slotToCup[s2] = temp;
+
+            step++;
+            setTimeout(doSwap, 320);
+          }
+
+          cups.forEach((cup) => {
+            cup.classList.add("is-disabled");
+          });
+
+          setTimeout(doSwap, 300);
+        }
+
+        // 결과 공개
+        function revealResult(chosenId) {
+          canPick = false;
+          startButton.disabled = false;
+
+          const winningCupEl = document.querySelector(
+            `.cup[data-id="${winningCupId}"]`
+          );
+
+          const winningLeft =
+            winningCupEl.style.left ||
+            slotPositions[
+              slotToCup.indexOf(winningCupId) >= 0
+                ? slotToCup.indexOf(winningCupId)
+                : 1
+            ];
+
+          ball.style.left = winningLeft;
+          winningCupEl.classList.add("reveal", "is-highlight");
+          ball.classList.add("visible");
+
+          cups.forEach((cup) => {
+            if (parseInt(cup.dataset.id, 10) !== winningCupId) {
+              cup.classList.add("is-disabled");
+            }
+          });
+
+          if (chosenId === winningCupId) {
+            statusText.innerHTML =
+              "🎉 <strong>정답!</strong> 공이 들어있던 컵을 정확히 맞추셨습니다.";
+          } else {
+            statusText.innerHTML =
+              "😢 아쉽습니다! 선택하신 컵에는 공이 없었어요. 정답 컵을 확인해보세요.";
+          }
+        }
+
+        // 컵 클릭
+        cups.forEach((cup) => {
+          cup.addEventListener("click", () => {
+            if (!canPick || isShuffling) return;
+            const id = parseInt(cup.dataset.id, 10);
+            revealResult(id);
+          });
+        });
+
+        // 시작 버튼
+        startButton.addEventListener("click", () => {
+          if (isShuffling) return;
+          resetGameState();          // 기본 상태 세팅
+          startButton.disabled = true;
+          revealBallThenShuffle();   // 공 먼저 보여주고 셔플 시작
+        });
+
+        // 최초 레이아웃 세팅
+        initPositions();
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verity F&B Intro Loader</title>
+    <style>
+      :root {
+        --vfb-orange: #f97316;
+        --vfb-gold: #fbbf24;
+        --vfb-brown: #a3542a;
+        --vfb-beige: #f4e9d8;
+        --vfb-dark: #382317;
+
+        --text-light: #fffdf8;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Pretendard", system-ui, sans-serif;
+        background: #fffaf5;
+        color: var(--vfb-dark);
+        min-height: 100vh;
+      }
+
+      /* ===== Intro Loader ===== */
+      #intro {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+
+        /* 기존보다 더 밝고 따뜻한 VFB 톤 */
+        background: radial-gradient(
+          circle at center,
+          #ffe8d0 0%,
+          #f9d5ae 40%,
+          #f6b780 80%,
+          #ed9457 100%
+        );
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      #intro.hidden {
+        opacity: 0;
+        transform: scale(1.05);
+        pointer-events: none;
+      }
+
+      .intro-logo {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: var(--vfb-dark);
+      }
+
+      /* 메인 로고 타이포 */
+      .intro-mark {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        padding: 14px 34px;
+        border-radius: 14px;
+
+        background: rgba(255, 255, 255, 0.35);
+        border: 1px solid rgba(120, 72, 37, 0.25);
+        backdrop-filter: blur(12px);
+
+        box-shadow: 0 6px 18px rgba(120, 72, 37, 0.25);
+      }
+
+      .intro-mark span {
+        background: linear-gradient(120deg, #c95d27, #f0892f, #f7c65f);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* 서브 텍스트 */
+      .intro-sub {
+        display: block;
+        margin-top: 10px;
+        font-size: 12px;
+        color: rgba(80, 48, 28, 0.9);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .intro-dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        background: #22c55e;
+        border-radius: 50%;
+        margin-left: 6px;
+        box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+        animation: blink 1s infinite alternate;
+      }
+
+      @keyframes blink {
+        from {
+          opacity: 0.4;
+          transform: scale(0.85);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Main Page transitions */
+      .page {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      body.is-ready .page {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Intro Loader -->
+    <div id="intro">
+      <div class="intro-logo">
+        <div class="intro-mark">
+          <span>Verity F&B</span>
+        </div>
+        <span class="intro-sub">
+          EXPERIENCE THE ORIGINAL
+          <span class="intro-dot"></span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Content Example -->
+    <main class="page">
+      <div style="padding: 40px; max-width: 900px; margin: 0 auto;">
+        <h1>메인 페이지 콘텐츠</h1>
+        <p>
+          여기는 실제 VFB 웹사이트의 메인 페이지 콘텐츠가 들어갈 자리입니다.
+          인트로는 약 1.4초 동안만 노출되고 자연스럽게 사라집니다.
+        </p>
+      </div>
+    </main>
+
+    <script>
+      // Intro Loader 동작 (1.4초 후 페이드아웃)
+      setTimeout(() => {
+        document.getElementById("intro").classList.add("hidden");
+        document.body.classList.add("is-ready");
+      }, 1400);
+    </script>
+  </body>
+</html>

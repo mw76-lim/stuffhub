@@ -1,200 +1,316 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <title>링크 리스트 예시</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root{
-      --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#64748b;
-      --border:#e2e8f0; --accent:#2563eb; --accent-weak:#dbeafe;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
-      background:var(--bg); color:var(--text);
-    }
-    .wrap{max-width:800px; margin:40px auto; padding:0 16px;}
-    h1{margin:0 0 16px; font-size:1.5rem}
-    p.desc{margin:0 0 24px; color:var(--muted)}
-    
-    /* 리스트 기본 */
-    .link-list{list-style:none; padding:0; margin:0; display:grid; gap:12px;}
-    
-    /* 항목(카드형 링크) */
-    .link-item a{
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
-      padding:16px 18px; background:var(--card); border:1px solid var(--border);
-      border-radius:12px; text-decoration:none; color:inherit;
-      transition: border-color .2s ease, box-shadow .2s ease, transform .05s ease;
-    }
-    .link-item a:hover{ border-color:var(--accent); box-shadow:0 6px 18px rgba(0,0,0,.05); }
-    .link-item a:active{ transform:translateY(1px); }
-    .link-item a:focus{ outline:3px solid var(--accent-weak); outline-offset:2px; }
-    
-    /* 좌측 타이틀, 우측 아이콘 */
-    .title{
-      font-weight:700; letter-spacing:-.2px; line-height:1.3;
-    }
-    .meta{ font-size:.9rem; color:var(--muted); }
-    .chev{
-      flex:0 0 auto; width:10px; height:10px;
-      border-right:2px solid var(--muted); border-bottom:2px solid var(--muted);
-      transform:rotate(-45deg); transition: transform .2s ease, border-color .2s ease;
-    }
-    .link-item a:hover .chev{ transform:translateX(2px) rotate(-45deg); border-color:var(--accent); }
-    
-    /* active(현재 페이지) 표시 예시 */
-    .link-item.is-active a{
-      border-color:var(--accent); background:var(--accent-weak);
-    }
-    
-    @media (max-width:560px){
-      .meta{ display:none; } /* 모바일에서 부가텍스트 생략 */
-    }
-    
-  .link-item.divider {
-  border-top: 1px solid #e2e8f0;
-  margin-top: 16px;
-  padding-top: 16px;
-}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <h1>콘텐츠 목록 : 베리티 F&B</h1>
-    <p class="desc">아래 항목을 클릭하면 해당 페이지로 이동합니다.</p>
+  <head>
+    <meta charset="utf-8" />
+    <title>링크 리스트 예시</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --border: #e2e8f0;
+        --accent: #2563eb;
+        --accent-weak: #dbeafe;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 16px;
+      }
+      h1 {
+        margin: 0 0 16px;
+        font-size: 1.5rem;
+      }
+      p.desc {
+        margin: 0 0 24px;
+        color: var(--muted);
+      }
 
-    <ul class="link-list" role="list">
-      
-      <li class="link-item divider">
-        <div>
-          <strong style="color: #CE5D29;">마케팅/이벤트 기획</strong>
-        </div>
-      </li>
-      <li class="link-item">
-        <a href="game-dart.html" target="_blank">
+      /* 리스트 기본 */
+      .link-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      /* 항목(카드형 링크) */
+      .link-item a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 18px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.05s ease;
+      }
+      .link-item a:hover {
+        border-color: var(--accent);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+      }
+      .link-item a:active {
+        transform: translateY(1px);
+      }
+      .link-item a:focus {
+        outline: 3px solid var(--accent-weak);
+        outline-offset: 2px;
+      }
+
+      /* 좌측 타이틀, 우측 아이콘 */
+      .title {
+        font-weight: 700;
+        letter-spacing: -0.2px;
+        line-height: 1.3;
+      }
+      .meta {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .chev {
+        flex: 0 0 auto;
+        width: 10px;
+        height: 10px;
+        border-right: 2px solid var(--muted);
+        border-bottom: 2px solid var(--muted);
+        transform: rotate(-45deg);
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+      .link-item a:hover .chev {
+        transform: translateX(2px) rotate(-45deg);
+        border-color: var(--accent);
+      }
+
+      /* active(현재 페이지) 표시 예시 */
+      .link-item.is-active a {
+        border-color: var(--accent);
+        background: var(--accent-weak);
+      }
+
+      @media (max-width: 560px) {
+        .meta {
+          display: none;
+        } /* 모바일에서 부가텍스트 생략 */
+      }
+
+      .link-item.divider {
+        border-top: 1px solid #e2e8f0;
+        margin-top: 16px;
+        padding-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>콘텐츠 목록 : 베리티 F&B</h1>
+      <p class="desc">아래 항목을 클릭하면 해당 페이지로 이동합니다.</p>
+
+      <ul class="link-list" role="list">
+        <li class="link-item divider">
           <div>
-            <div class="title">이벤트 - 다트게임</div>
+            <strong style="color: #ce5d29">마케팅/이벤트 기획</strong>
           </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      <li class="link-item">
-        <a href="마케팅전략-오프라인매장.html" target="_blank">
+        </li>
+        <li class="link-item">
+          <a href="planning-dart-game.html" target="_blank">
+            <div>
+              <div class="title">이벤트 - 다트게임</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="마케팅전략-오프라인매장.html" target="_blank">
+            <div>
+              <div class="title">마케팅전략 - 오프라인매장</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+
+        <li class="link-item divider">
           <div>
-            <div class="title">마케팅전략 - 오프라인매장</div>
+            <strong style="color: #ce5d29">게임 - 어플리케이션</strong>
           </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      
-      <li class="link-item divider">
-        <div>
-          <strong style="color: #CE5D29;">웹페이지 기획/디자인</strong>
-        </div>
-      </li>
-      <li class="link-item">
-        <a href="ourbrands.html" target="_blank">
+        </li>
+        <li class="link-item">
+          <a href="game-cup-shuffle.html" target="_blank">
+            <div>
+              <div class="title">야바위 게임</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="game-dice.html" target="_blank">
+            <div>
+              <div class="title">주사위 게임</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="game-ladder.html" target="_blank">
+            <div>
+              <div class="title">사다리 게임</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="game-roulette.html" target="_blank">
+            <div>
+              <div class="title">룰렛 게임</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+
+        <li class="link-item divider">
           <div>
-            <div class="title">Web 디자인 제안 : Our Brands - 페이지</div>
+            <strong style="color: #ce5d29">웹페이지 기획/디자인</strong>
           </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      <li class="link-item">
-        <a href="ourbrands-story.html" target="_blank">
+        </li>
+        <li class="link-item">
+          <a href="ourbrands.html" target="_blank">
+            <div>
+              <div class="title">Web 디자인 제안 : Our Brands - 페이지</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="ourbrands-story.html" target="_blank">
+            <div>
+              <div class="title">Web 디자인 제안 : Our Brands - 브랜드 스토리</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="ourbrands-store-menu.html" target="_blank">
+            <div>
+              <div class="title">Web 디자인 제안 : Our Brands - 메뉴 소개</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="ourbrands-store-information.html" target="_blank">
+            <div>
+              <div class="title">Web 디자인 제안 : Our Brands - 매장 안내</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="blog-temlate.html" target="_blank">
+            <div>
+              <div class="title">Web - 블로그 페이지 템플릿</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="blogpage.html" target="_blank">
+            <div>
+              <div class="title">Web - 블로그 예제 글</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+
+        <li class="link-item divider">
           <div>
-            <div class="title">Web 디자인 제안 : Our Brands - 브랜드 스토리</div>
+            <strong style="color: #ce5d29">웹페이지 구성요소 디자인</strong>
           </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      <li class="link-item">
-        <a href="ourbrands-store-menu.html" target="_blank">
+        </li>
+        <li class="link-item">
+          <a href="home-loading-intro01.html" target="_blank">
+            <div>
+              <div class="title">HOME 페이지 로딩 인트로 #1</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="home-loading-intro02.html" target="_blank">
+            <div>
+              <div class="title">HOME 페이지 로딩 인트로 #2</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="home-loading-intro03.html" target="_blank">
+            <div>
+              <div class="title">HOME 페이지 로딩 인트로 #3</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="image-sweep-reveal.html" target="_blank">
+            <div>
+              <div class="title">이미지 회전하며 드러내기</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="anchor-tab/lcq.html" target="_blank">
+            <div>
+              <div class="title">오른쪽 앵커링 탭 메뉴 - 2 depth</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="anchor-tab/sample1.html" target="_blank">
+            <div>
+              <div class="title">오른쪽 앵커링 탭 메뉴 - sample</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+
+        <li class="link-item divider">
           <div>
-            <div class="title">Web 디자인 제안 : Our Brands - 메뉴 소개</div>
+            <strong style="color: #ce5d29">디자인 이미지 구상</strong>
           </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      <li class="link-item">
-        <a href="ourbrands-store-information.html" target="_blank">
-          <div>
-            <div class="title">Web 디자인 제안 : Our Brands - 매장 안내</div>
-          </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      <li class="link-item">
-        <a href="blog10/blog-temlate.html" target="_blank">
-          <div>
-            <div class="title">블로그 페이지 스타일</div>
-          </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      <li class="link-item">
-        <a href="blogpage.html" target="_blank">
-          <div>
-            <div class="title">Web - 블로그 페이지 - 예제</div>
-          </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      
-      <li class="link-item divider">
-        <div>
-          <strong style="color: #CE5D29;">웹페이지 구성요소 디자인</strong>
-        </div>
-      </li>
-      <li class="link-item">
-        <a href="logo-symbol-intro-motion.html" target="_blank">
-          <div>
-            <div class="title">로고/심볼 인트로 모션</div>
-          </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      <li class="link-item">
-        <a href="anchor-tab/lcq.html" target="_blank">
-          <div>
-            <div class="title">오른쪽 앵커링 탭 메뉴 - 2 depth</div>
-          </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      <li class="link-item">
-        <a href="anchor-tab/sample1.html" target="_blank">
-          <div>
-            <div class="title">오른쪽 앵커링 탭 메뉴 - sample</div>
-          </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      
-      <li class="link-item divider">
-        <div>
-          <strong style="color: #CE5D29;">디자인 이미지 구상</strong>
-        </div>
-      </li>      
-      <li class="link-item">
-        <a href="웹디자인-레이어A.html" target="_blank">
-          <div>
-            <div class="title">웹디자인 - 레이어 A</div>
-          </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-      <li class="link-item">
-        <a href="웹디자인-레이어B.html" target="_blank">
-          <div>
-            <div class="title">웹디자인 - 레이어 B</div>
-          </div>
-          <span class="chev" aria-hidden="true"></span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</body>
+        </li>
+        <li class="link-item">
+          <a href="웹디자인-레이어A.html" target="_blank">
+            <div>
+              <div class="title">웹디자인 - 레이어 A</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="웹디자인-레이어B.html" target="_blank">
+            <div>
+              <div class="title">웹디자인 - 레이어 B</div>
+            </div>
+            <span class="chev" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </body>
 </html>

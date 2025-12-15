@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>사다리 타기 (하드 모드 + 5초 카운트다운)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body{
+        min-height:100vh;
+        display:flex;
+        align-items:flex-start;
+        justify-content:center;
+        padding: 22px;
+        background:#f7f2ea;
+        font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+        color:#3a2415;
+      }
+
+      .game-shell{
+        width:100%;
+        max-width:1100px;
+        padding: 28px 24px 22px;
+        background:#fffaf5;
+        border-radius:24px;
+        border:1px solid rgba(193,160,120,.6);
+        box-shadow:0 16px 40px rgba(120,72,37,.18);
+      }
+
+      .game-header{ text-align:center; margin-bottom:14px; }
+      .game-title{ font-size:22px; font-weight:900; letter-spacing:-.03em; margin-bottom:6px; }
+      .game-sub{ font-size:13px; color:#6b4a30; line-height:1.5; }
+
+      .top-row{
+        margin-top:14px;
+        display:grid;
+        grid-template-columns: 1fr 320px;
+        gap:16px;
+        align-items:stretch;
+      }
+      @media (max-width: 980px){
+        .top-row{ grid-template-columns: 1fr; }
+      }
+
+      .board{
+        border-radius:18px;
+        background: radial-gradient(circle at top, #f4e4cf, #e2c6a7);
+        box-shadow: inset 0 3px 6px rgba(255,255,255,.6);
+        padding:14px;
+        position:relative;
+      }
+
+      /* ===== 카운트다운 + 선택 버튼 ===== */
+      .hud{
+        display:flex;
+        flex-wrap:wrap;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+        margin-bottom: 10px;
+      }
+
+      .timer-pill{
+        display:inline-flex;
+        align-items:center;
+        gap:10px;
+        padding:10px 12px;
+        border-radius:999px;
+        background:#fff;
+        border:1px solid rgba(193,160,120,.55);
+        font-size:13px;
+        color:#6b4a30;
+      }
+      .timer-pill strong{ color:#b45309; }
+      .timer-dot{
+        width:10px; height:10px; border-radius:999px;
+        background:#22c55e;
+        box-shadow: 0 0 0 4px rgba(34,197,94,.15);
+      }
+      .timer-pill.danger .timer-dot{
+        background:#ef4444;
+        box-shadow: 0 0 0 4px rgba(239,68,68,.15);
+      }
+
+      .pick-row{
+        display:flex;
+        justify-content:center;
+        gap:10px;
+        flex-wrap:wrap;
+        margin: 10px 0 12px;
+      }
+      .pick-btn{
+        border-radius:999px;
+        padding:10px 14px;
+        font-size:13px;
+        border:1px solid rgba(148,104,63,.7);
+        background:#fff;
+        color:#3a2415;
+        font-weight:900;
+        cursor:pointer;
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+        transition:.15s ease;
+      }
+      .pick-btn:hover{ transform: translateY(-1px); }
+      .pick-btn[disabled]{ opacity:.55; cursor:default; transform:none; }
+
+      /* ===== 캔버스 스크롤 영역(세로 길게) ===== */
+      .canvas-scroll{
+        max-height: 760px; /* 길어져도 스크롤로 보기 */
+        overflow:auto;
+        border-radius:16px;
+        background: rgba(255,255,255,.55);
+        border: 1px solid rgba(193,160,120,.55);
+        padding: 12px;
+      }
+      canvas{
+        width:100%;
+        height:auto;
+        display:block;
+        border-radius:12px;
+        background:#151515;
+      }
+
+      .side{
+        border-radius:18px;
+        border:1px solid rgba(193,160,120,.6);
+        background:#fff7ec;
+        padding:14px;
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+      }
+      .side h3{ font-size:14px; font-weight:900; letter-spacing:-.02em; }
+
+      .prize-list{ display:grid; gap:8px; font-size:13px; color:#6b4a30; }
+      .prize-item{
+        display:flex; align-items:center; justify-content:space-between;
+        background:#fff;
+        border:1px solid rgba(193,160,120,.45);
+        border-radius:12px;
+        padding:10px 10px;
+        gap:10px;
+      }
+      .prize-item strong{ color:#3a2415; }
+      .badge{
+        font-size:11px; padding:6px 10px; border-radius:999px;
+        border:1px solid rgba(193,160,120,.6);
+        background:#faf6f0;
+        color:#6b4a30;
+        white-space:nowrap;
+      }
+
+      .actions{
+        display:flex; gap:10px; flex-wrap:wrap;
+      }
+      .btn{
+        border-radius:999px;
+        padding:10px 14px;
+        font-size:13px;
+        border:1px solid rgba(148,104,63,.7);
+        background:#fff;
+        color:#3a2415;
+        font-weight:900;
+        cursor:pointer;
+        display:inline-flex; align-items:center; gap:8px;
+        transition:.15s ease;
+      }
+      .btn.primary{
+        background: linear-gradient(120deg, #f97316, #fbbf24);
+        border-color: transparent;
+        color:#3b1f0a;
+        box-shadow: 0 10px 24px rgba(201,93,39,.5);
+      }
+      .btn:hover:not([disabled]){ transform: translateY(-1px); }
+      .btn[disabled]{ opacity:.55; cursor:default; transform:none; box-shadow:none; }
+
+      .result{
+        padding:12px 14px;
+        border-radius:16px;
+        background:#fff;
+        border:1px solid rgba(193,160,120,.55);
+        font-size:13px;
+        color:#6b4a30;
+        line-height:1.6;
+        min-height:54px;
+      }
+      .result strong{ color:#b45309; }
+
+      .hint{
+        margin-top:10px;
+        font-size:11px;
+        color:#8b6544;
+        text-align:center;
+        line-height:1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-shell">
+      <header class="game-header">
+        <h1 class="game-title">사다리 타기 (하드 모드)</h1>
+        <p class="game-sub">
+          사다리가 길고 복잡해서 눈으로 따라가기 어렵게 만들었습니다.<br />
+          <strong>라운드 시작</strong>을 누르면 <strong>5초 안에</strong> START를 선택해야 합니다.
+        </p>
+      </header>
+
+      <div class="top-row">
+        <section class="board">
+          <div class="hud">
+            <div class="timer-pill" id="timerPill" aria-live="polite">
+              <span class="timer-dot" aria-hidden="true"></span>
+              남은 선택 시간: <strong id="timerText">-</strong>
+            </div>
+            <div class="actions">
+              <button class="btn primary" id="roundBtn">라운드 시작 ⏱️</button>
+              <button class="btn" id="regenBtn">사다리 새로 만들기 🔁</button>
+              <button class="btn" id="resetBtn">초기화</button>
+            </div>
+          </div>
+
+          <div class="pick-row" id="pickRow">
+            <button class="pick-btn" data-start="0" disabled>START 1</button>
+            <button class="pick-btn" data-start="1" disabled>START 2</button>
+            <button class="pick-btn" data-start="2" disabled>START 3</button>
+            <button class="pick-btn" data-start="3" disabled>START 4</button>
+            <button class="pick-btn" data-start="4" disabled>START 5</button>
+            <button class="pick-btn" data-start="5" disabled>START 6</button>
+          </div>
+
+          <div class="canvas-scroll">
+            <canvas id="ladderCanvas" width="1100" height="1600" aria-label="사다리 보드"></canvas>
+          </div>
+
+          <div class="hint">
+            팁: 이 버전은 일부러 복잡하게 만들어 <strong>눈으로 추적이 어려운</strong> “운+심리”형 게임에 가깝습니다.
+          </div>
+        </section>
+
+        <aside class="side">
+          <div>
+            <h3>도착 결과(END 1~6)</h3>
+            <div class="prize-list" id="prizeList"></div>
+          </div>
+
+          <div class="result" id="resultBox">
+            <strong>라운드 시작</strong>을 눌러 5초 카운트다운을 시작하세요.
+          </div>
+
+          <div style="font-size:11px;color:#8b6544;line-height:1.5;">
+            * 운영 시에는 “쿠폰 발급/QR” 등과 연결하면 됩니다.<br />
+            * 이 버전은 <strong>프론트 단독(HTML/CSS/JS)</strong> 데모입니다.
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <script>
+      (() => {
+        // ===== 난이도(복잡도) 설정 =====
+        const COLS = 6;                 // 세로줄 개수(START/END 개수)
+        const ROWS = 32;                // 층 수 (높이/복잡도)
+        const RUNG_DENSITY = 0.68;       // 층마다 가로줄 생성 시도 비율 (높을수록 복잡)
+        const ANIM_MS = 2300;           // 경로 애니메이션 시간
+        const COUNTDOWN_SEC = 5;        // 선택 제한 시간
+
+        // 캔버스 레이아웃
+        const MARGIN_X = 90;
+        const TOP_Y = 55;
+        const BOTTOM_Y = 1520;
+
+        // ===== 보상(END 1~6) =====
+        // 여기 문구만 바꾸면 됨.
+        const prizesByEndCol = [
+          { title: "캔 음료 1개", badge: "소소" },
+          { title: "면류 1접시", badge: "인기" },
+          { title: "포켓 핫팩", badge: "굿즈" },
+          { title: "당일 5,000원 할인", badge: "할인" },
+          { title: "다음 방문 30% 할인", badge: "재방문" },
+          { title: "다음 방문 50% 할인", badge: "대박" },
+        ];
+
+        // ===== DOM =====
+        const canvas = document.getElementById("ladderCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const pickRow = document.getElementById("pickRow");
+        const pickButtons = pickRow.querySelectorAll(".pick-btn");
+
+        const prizeList = document.getElementById("prizeList");
+        const resultBox = document.getElementById("resultBox");
+
+        const regenBtn = document.getElementById("regenBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const roundBtn = document.getElementById("roundBtn");
+
+        const timerPill = document.getElementById("timerPill");
+        const timerText = document.getElementById("timerText");
+
+        // ===== 상태 =====
+        // rungs[r] = Set of links at that row. link i means connect col i and i+1.
+        // 인접 link(i)와 link(i+1)는 동시에 허용하지 않음(교차/겹침 방지)
+        let rungs = [];
+        let animating = false;
+
+        let countdownTimer = null;
+        let roundActive = false; // 카운트다운 진행 중 선택 가능 상태
+        let deadline = 0;
+
+        function drawPrizeList(){
+          prizeList.innerHTML = "";
+          prizesByEndCol.forEach((p, i) => {
+            const el = document.createElement("div");
+            el.className = "prize-item";
+            el.innerHTML = `
+              <div><strong>END ${i+1}</strong> · ${p.title}</div>
+              <div class="badge">${p.badge}</div>
+            `;
+            prizeList.appendChild(el);
+          });
+        }
+
+        function lerp(a,b,t){ return a + (b-a)*t; }
+
+        function getColX(col){
+          const usable = canvas.width - MARGIN_X * 2;
+          const step = usable / (COLS - 1);
+          return MARGIN_X + step * col;
+        }
+
+        function getRowY(rowIndex){
+          const usable = BOTTOM_Y - TOP_Y;
+          const step = usable / ROWS;
+          return TOP_Y + step * rowIndex;
+        }
+
+        function generateLadder(){
+          rungs = Array.from({length: ROWS + 1}, () => new Set());
+
+          for(let r=1; r<=ROWS; r++){
+            // 한 층에서 여러 개 가로줄을 만들되, 인접 가로줄 금지 규칙
+            // (예: 0-1과 1-2가 같은 층에 동시에 있으면 너무 엉키므로 방지)
+            const used = new Set();
+            for(let i=0; i<COLS-1; i++){
+              if (used.has(i) || used.has(i-1) || used.has(i+1)) continue;
+              if (Math.random() < RUNG_DENSITY) {
+                rungs[r].add(i);
+                used.add(i);
+              }
+            }
+          }
+        }
+
+        function drawStatic(){
+          ctx.clearRect(0,0,canvas.width,canvas.height);
+
+          // 배경
+          ctx.fillStyle = "#151515";
+          ctx.fillRect(0,0,canvas.width,canvas.height);
+
+          // START / END 텍스트
+          ctx.font = "800 14px system-ui, -apple-system, Segoe UI, sans-serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+
+          for(let c=0; c<COLS; c++){
+            const x = getColX(c);
+            ctx.fillStyle = "rgba(255,255,255,0.90)";
+            ctx.fillText(`START ${c+1}`, x, TOP_Y - 22);
+
+            ctx.fillStyle = "rgba(255,255,255,0.78)";
+            ctx.fillText(`END ${c+1}`, x, BOTTOM_Y + 22);
+          }
+
+          // 세로줄
+          ctx.lineWidth = 6;
+          ctx.lineCap = "round";
+          ctx.strokeStyle = "rgba(255,255,255,0.82)";
+          for(let c=0; c<COLS; c++){
+            const x = getColX(c);
+            ctx.beginPath();
+            ctx.moveTo(x, TOP_Y);
+            ctx.lineTo(x, BOTTOM_Y);
+            ctx.stroke();
+          }
+
+          // 가로줄(발판) 많이
+          ctx.lineWidth = 6;
+          ctx.strokeStyle = "rgba(249, 115, 22, 0.95)"; // 오렌지
+          for(let r=1; r<=ROWS; r++){
+            const y = getRowY(r);
+            for(const link of rungs[r]){
+              const x1 = getColX(link);
+              const x2 = getColX(link+1);
+              ctx.beginPath();
+              ctx.moveTo(x1, y);
+              ctx.lineTo(x2, y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        function buildPathPoints(startCol){
+          const pts = [];
+          let col = startCol;
+
+          pts.push({x:getColX(col), y: TOP_Y});
+
+          for(let r=1; r<=ROWS; r++){
+            const y = getRowY(r);
+
+            // 내려가기
+            pts.push({x:getColX(col), y});
+
+            // 해당 층에서 "내가 있는 col" 기준으로 좌우 이동 가능성 체크
+            // link i는 col i <-> i+1 연결
+            // 내가 col=i면 오른쪽 이동, col=i+1이면 왼쪽 이동
+            // 한 층에서 여러 link가 있을 수 있으므로, 현재 col에 해당되는 link만 반영하면 됨.
+            if (rungs[r].has(col)) {
+              // col과 col+1 연결이 있으면 오른쪽
+              col = col + 1;
+              pts.push({x:getColX(col), y});
+            } else if (rungs[r].has(col-1)) {
+              // col-1과 col 연결이 있으면 왼쪽
+              col = col - 1;
+              pts.push({x:getColX(col), y});
+            }
+          }
+
+          // 최하단 끝점
+          pts.push({x:getColX(col), y: BOTTOM_Y});
+
+          return { points: pts, endCol: col };
+        }
+
+        function polylineLength(points){
+          let total = 0;
+          for(let i=0;i<points.length-1;i++){
+            total += Math.hypot(points[i+1].x - points[i].x, points[i+1].y - points[i].y);
+          }
+          return total;
+        }
+
+        function drawPathProgress(points, t){
+          const total = polylineLength(points);
+          const target = total * t;
+
+          ctx.lineWidth = 9;
+          ctx.lineCap = "round";
+          ctx.strokeStyle = "rgba(250, 204, 21, 0.95)"; // 노랑
+          ctx.beginPath();
+
+          let acc = 0;
+          ctx.moveTo(points[0].x, points[0].y);
+
+          for(let i=0;i<points.length-1;i++){
+            const a = points[i], b = points[i+1];
+            const seg = Math.hypot(b.x - a.x, b.y - a.y);
+
+            if (acc + seg <= target){
+              ctx.lineTo(b.x, b.y);
+              acc += seg;
+            } else {
+              const remain = target - acc;
+              const ratio = seg === 0 ? 1 : Math.max(0, Math.min(1, remain / seg));
+              ctx.lineTo(lerp(a.x,b.x,ratio), lerp(a.y,b.y,ratio));
+              break;
+            }
+          }
+          ctx.stroke();
+
+          // 마커
+          const marker = getMarker(points, t);
+          if (marker){
+            ctx.fillStyle = "rgba(255,255,255,0.92)";
+            ctx.beginPath();
+            ctx.arc(marker.x, marker.y, 7, 0, Math.PI*2);
+            ctx.fill();
+          }
+        }
+
+        function getMarker(points, t){
+          const total = polylineLength(points);
+          const target = total * t;
+          let acc = 0;
+
+          for(let i=0;i<points.length-1;i++){
+            const a = points[i], b = points[i+1];
+            const seg = Math.hypot(b.x - a.x, b.y - a.y);
+            if (acc + seg >= target){
+              const ratio = seg === 0 ? 1 : (target - acc) / seg;
+              return { x: lerp(a.x,b.x,ratio), y: lerp(a.y,b.y,ratio) };
+            }
+            acc += seg;
+          }
+          return points[points.length-1];
+        }
+
+        function setButtonsEnabled(enabled){
+          pickButtons.forEach(b => b.disabled = !enabled);
+          regenBtn.disabled = !enabled;
+          resetBtn.disabled = !enabled;
+          roundBtn.disabled = !enabled && !roundActive; // 라운드 중에는 roundBtn 비활성 유지
+        }
+
+        function setPickEnabled(enabled){
+          pickButtons.forEach(b => b.disabled = !enabled);
+        }
+
+        function showResult(endCol, startCol){
+          const prize = prizesByEndCol[endCol];
+          resultBox.innerHTML =
+            `START <strong>${startCol+1}</strong> → END <strong>${endCol+1}</strong><br>` +
+            `결과: <strong>${prize.title}</strong> <span style="color:#8b6544;">(${prize.badge})</span>`;
+        }
+
+        function animatePath(startCol){
+          if (animating) return;
+          animating = true;
+          setButtonsEnabled(false);
+
+          const { points, endCol } = buildPathPoints(startCol);
+
+          const start = performance.now();
+          const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+
+          const tick = (now) => {
+            const p = Math.min(1, (now - start) / ANIM_MS);
+            const t = easeOut(p);
+
+            drawStatic();
+            drawPathProgress(points, t);
+
+            if (p < 1){
+              requestAnimationFrame(tick);
+            } else {
+              animating = false;
+              setButtonsEnabled(true);
+              showResult(endCol, startCol);
+            }
+          };
+
+          requestAnimationFrame(tick);
+        }
+
+        // ===== 카운트다운 =====
+        function updateTimerUI(secLeft){
+          if (secLeft <= 2){
+            timerPill.classList.add("danger");
+          } else {
+            timerPill.classList.remove("danger");
+          }
+          timerText.textContent = `${secLeft.toFixed(0)}s`;
+        }
+
+        function stopCountdown(){
+          if (countdownTimer) clearInterval(countdownTimer);
+          countdownTimer = null;
+          roundActive = false;
+          timerPill.classList.remove("danger");
+          timerText.textContent = "-";
+          setPickEnabled(false);
+          roundBtn.disabled = false;
+        }
+
+        function startRound(){
+          if (animating) return;
+
+          // 라운드 시작: 5초 동안만 선택 가능
+          roundActive = true;
+          deadline = Date.now() + COUNTDOWN_SEC * 1000;
+
+          setPickEnabled(true);
+          roundBtn.disabled = true;
+
+          resultBox.innerHTML = `⏱️ <strong>${COUNTDOWN_SEC}초</strong> 안에 START를 선택하세요!`;
+          updateTimerUI(COUNTDOWN_SEC);
+
+          if (countdownTimer) clearInterval(countdownTimer);
+          countdownTimer = setInterval(() => {
+            const msLeft = deadline - Date.now();
+            const secLeft = Math.max(0, Math.ceil(msLeft / 1000));
+            updateTimerUI(secLeft);
+
+            if (msLeft <= 0){
+              clearInterval(countdownTimer);
+              countdownTimer = null;
+              roundActive = false;
+              setPickEnabled(false);
+              roundBtn.disabled = false;
+              timerText.textContent = "0s";
+              timerPill.classList.add("danger");
+              resultBox.innerHTML = `⛔ 시간 초과! <strong>라운드 시작</strong>을 다시 눌러주세요.`;
+            }
+          }, 100);
+        }
+
+        // ===== 이벤트 =====
+        pickRow.addEventListener("click", (e) => {
+          const btn = e.target.closest("button[data-start]");
+          if (!btn) return;
+          if (!roundActive) return;              // 카운트다운 중에만 선택 가능
+          if (animating) return;
+
+          // 선택 확정되면 카운트다운 종료 + 선택 잠금
+          const startCol = parseInt(btn.dataset.start, 10);
+          stopCountdown();
+          setPickEnabled(false);
+
+          resultBox.textContent = "경로를 따라 내려가는 중입니다...";
+          // 보드가 길어서 시작 지점 보이게 맨 위로 스크롤(선택 직후)
+          document.querySelector(".canvas-scroll").scrollTo({ top: 0, behavior: "smooth" });
+
+          animatePath(startCol);
+        });
+
+        regenBtn.addEventListener("click", () => {
+          if (animating) return;
+          stopCountdown();
+          generateLadder();
+          drawStatic();
+          resultBox.innerHTML = `<strong>라운드 시작</strong>을 눌러 5초 카운트다운을 시작하세요.`;
+        });
+
+        resetBtn.addEventListener("click", () => {
+          if (animating) return;
+          stopCountdown();
+          drawStatic();
+          resultBox.innerHTML = `<strong>라운드 시작</strong>을 눌러 5초 카운트다운을 시작하세요.`;
+        });
+
+        roundBtn.addEventListener("click", () => {
+          if (animating) return;
+          startRound();
+        });
+
+        // ===== 초기화 =====
+        drawPrizeList();
+        generateLadder();
+        drawStatic();
+        setPickEnabled(false);
+        timerText.textContent = "-";
+      })();
+    </script>
+  </body>
+</html>

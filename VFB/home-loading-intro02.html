@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VFB Intro Loader Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        /* --bg-main: #050608; */
+        /* --ink: #f9fafb; */
+        --accent-1: #f97316; /* 마라/오렌지 */
+        --accent-2: #fbbf24; /* 골드 */
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: var(--bg-main);
+        color: var(--ink);
+        min-height: 100vh;
+      }
+
+      /* ===== Intro Overlay ===== */
+      #intro {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: radial-gradient(circle at top, #1c0f0a, #050608 60%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      #intro.hidden {
+        opacity: 0;
+        transform: scale(1.03);
+        pointer-events: none;
+      }
+
+      #intro-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .intro-logo {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+      }
+
+      .intro-mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 30px;
+        border-radius: 999px;
+        border: 1px solid rgba(249, 250, 251, 0.18);
+        background: radial-gradient(
+          circle at top left,
+          rgba(248, 181, 56, 0.4),
+          rgba(15, 23, 42, 0.75)
+        );
+        backdrop-filter: blur(14px);
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+
+      .intro-mark span {
+        background: linear-gradient(120deg, #f97316, #fbbf24);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .intro-sub {
+        display: block;
+        margin-top: 10px;
+        font-size: 14px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(249, 250, 251, 0.7);
+      }
+
+      .intro-dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: #22c55e;
+        margin: 0 6px;
+        box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+        animation: blink 1s ease-in-out infinite alternate;
+      }
+
+      @keyframes blink {
+        from {
+          opacity: 0.4;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1.06);
+        }
+      }
+
+      /* ===== Main Page Content (예시) ===== */
+      .page {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      body.is-ready .page {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .page-inner {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 32px 20px 80px;
+      }
+
+      h1 {
+        font-size: 28px;
+        margin-bottom: 12px;
+      }
+
+      p {
+        line-height: 1.7;
+        /* color: #e5e7eb; */
+        font-size: 15px;
+      }
+
+      .placeholder-section {
+        margin-top: 28px;
+        padding: 18px;
+        border-radius: 16px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: radial-gradient(circle at top, #111827, #020617 70%);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Intro Loader -->
+    <div id="intro">
+      <canvas id="intro-canvas"></canvas>
+      <div class="intro-logo">
+        <div class="intro-mark">
+          <span>Verity F&B</span>
+        </div>
+        <span class="intro-sub">
+          <span class="intro-dot"></span>
+          EXPERIENCE THE ORIGINAL
+          <span class="intro-dot"></span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Page (예시) -->
+    <main class="page">
+      <div class="page-inner">
+        <h1>메인 콘텐츠 영역 (VFB 웹사이트)</h1>
+        <p>
+          이 영역에 실제 VFB / 라오충칭훠궈 / 론다코리아 메인 페이지 콘텐츠가 들어갑니다.
+          인트로는 약 1.6초 동안만 자연스럽게 재생된 후 페이드아웃되며,
+          그 뒤로는 항상 이 메인 콘텐츠가 바로 보이게 됩니다.
+        </p>
+
+        <p>
+          라오충칭훠궈 메인 히어로, 메뉴 하이라이트, 캠페인 배너 등 실제 컴포넌트를 <br>
+          이 영역에 배치하면 됩니다.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cupiditate ipsum non temporibus porro exercitationem, voluptas quae similique. Officia corrupti error, expedita saepe nam necessitatibus adipisci soluta incidunt libero consequatur.
+        </p>
+
+        <p style="height: 500px;">
+          djfkldjfkld
+        </p>
+
+        <p style="height: 500px;">
+          djfkldjfkld
+        </p>
+
+      </div>
+    </main>
+
+    <script>
+      (() => {
+        const intro = document.getElementById("intro");
+        const canvas = document.getElementById("intro-canvas");
+        const ctx = canvas.getContext("2d");
+
+        let width = 0;
+        let height = 0;
+        let animationId = null;
+        let startTime = null;
+
+        function resize() {
+          const dpr = window.devicePixelRatio || 1;
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        window.addEventListener("resize", resize);
+
+        function draw(timestamp) {
+          if (!startTime) startTime = timestamp;
+          const elapsed = timestamp - startTime;
+
+          ctx.clearRect(0, 0, width, height);
+
+          // 배경 약한 오버레이
+          ctx.fillStyle = "rgba(5, 6, 8, 1)";
+          ctx.fillRect(0, 0, width, height);
+
+          const cx = width / 2;
+          const cy = height / 2;
+
+          const maxR = Math.sqrt(width * width + height * height) * 0.6;
+
+          // 0~1 사이 진행률 (약 1.6초 기준)
+          const t = Math.min(elapsed / 1600, 1);
+
+          // 부드러운 이징
+          const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+
+          const base = easeOut(t);
+
+          // 여러 레이어의 라디얼 그라디언트 링
+          const layers = 3;
+          for (let i = 0; i < layers; i++) {
+            const phase = t * 2 + i * 0.9;
+            const radius =
+              maxR * (0.15 + i * 0.18 + 0.05 * Math.sin(phase * Math.PI));
+
+            const grad = ctx.createRadialGradient(
+              cx,
+              cy,
+              0,
+              cx,
+              cy,
+              radius
+            );
+            if (i === 0) {
+              grad.addColorStop(
+                0,
+                `rgba(249, 115, 22, ${0.28 + base * 0.3})`
+              );
+              grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+            } else if (i === 1) {
+              grad.addColorStop(
+                0,
+                `rgba(251, 191, 36, ${0.22 + base * 0.25})`
+              );
+              grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+            } else {
+              grad.addColorStop(
+                0,
+                `rgba(248, 250, 252, ${0.12 + base * 0.18})`
+              );
+              grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+            }
+
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          // 약간의 grain 느낌
+          const grainCount = 40;
+          ctx.fillStyle = "rgba(0,0,0,0.4)";
+          for (let i = 0; i < grainCount; i++) {
+            const gx = Math.random() * width;
+            const gy = Math.random() * height;
+            const s = Math.random() * 2;
+            ctx.fillRect(gx, gy, s, s);
+          }
+
+          // 1초 이후부터는 라이트 링 하나씩 줄이듯 효과
+          if (elapsed < 2200) {
+            animationId = requestAnimationFrame(draw);
+          }
+        }
+
+        function startIntro() {
+          resize();
+          animationId = requestAnimationFrame(draw);
+
+          // 1.6초 후 인트로 페이드아웃 + 메인 표시
+          setTimeout(() => {
+            intro.classList.add("hidden");
+            document.body.classList.add("is-ready");
+            if (animationId) cancelAnimationFrame(animationId);
+          }, 1600);
+        }
+
+        startIntro();
+      })();
+    </script>
+  </body>
+</html>

@@ -5,25 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      :root {
-        --bg: #f8f7f4;
-        --paper: #ffffff;
-        --text: #161616;
-        --muted: #6b7280;
-        --line: #e7e5e4;
-        --accent: #ff6a00;
-        --radius: 16px;
-        --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
-        --maxw: 1200px;
-      }
       div#bo_v_con {
-        max-width: var(--maxw);
+        max-width: 1200px;
         margin: 0 auto;
         padding: 22px;
       }
       .post-container {
         padding: 40px 90px;
-        background-color: #FFFCFB;
+        background-color: #fffcfb;
         border-radius: 12px;
       }
       .post-container a {
@@ -31,12 +20,60 @@
         text-decoration: none;
       }
 
+      /* table */
+      .post-container table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+      }
+      .post-container th,
+      .post-container td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      .post-container th {
+        background: #f4f4f4;
+      }
+
+      /* Image */
       .cover-img {
         aspect-ratio: 16 / 9;
         background: center / cover;
         border-radius: 14px;
         margin-bottom: 16px;
       }
+      .img-align-items {
+        display: flex;
+        align-items: center; /* 세로 중앙 정렬 */
+        justify-content: center; /* 가로 중앙 정렬 (선택사항) */
+      }
+      .img-align-items img {
+        max-width: 100%;
+        height: auto;
+      }
+      /* 16:9 비율을 유지하는 컨테이너 */
+      .ratio-189 {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 18 / 9;   /* 핵심 */
+        overflow: hidden;       /* 넘치는 이미지 잘림 */
+        border-radius: 12px;    /* 선택 */
+      }
+      /* 이미지 커버 방식 */
+      .ratio-189 img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;       /* 비율 유지 + 꽉 채우기 */
+        object-position: center; /* 중앙 정렬 */
+        transform: translate(-50%, -50%);
+      }
+
+      /* style */
       .prose h2 {
         margin: 2em 0 0.5em;
         font-size: 20px;
@@ -45,7 +82,7 @@
         margin: 0.9em 0;
       }
       .note {
-        border-left: 4px solid var(--accent);
+        border-left: 4px solid #ff6a00;
         background: #fff7ef;
         padding: 12px 14px;
         border-radius: 12px;
@@ -59,7 +96,7 @@
         margin: 16px 0;
       }
       .qna-q {
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         border-radius: 12px;
         background: #fff;
         padding: 14px;
@@ -71,7 +108,7 @@
 
       /* Timeline */
       .timeline {
-        border-left: 3px solid var(--line);
+        border-left: 3px solid #e7e5e4;
         margin: 16px 0 8px 4px;
         padding-left: 14px;
       }
@@ -80,7 +117,7 @@
       }
       .tl-date {
         font-size: 12px;
-        color: var(--muted);
+        color: #6b7280;
       }
       .tl-title {
         font-weight: 800;
@@ -99,7 +136,7 @@
       }
       .tl-col {
         background: #ffffff;
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         border-radius: 12px;
         padding: 14px;
       }
@@ -109,7 +146,7 @@
         justify-content: space-between;
         gap: 10px;
         padding: 6px 0 10px;
-        border-bottom: 1px solid var(--line);
+        border-bottom: 1px solid #e7e5e4;
       }
       .tl-head h3 {
         margin: 0;
@@ -120,12 +157,12 @@
         padding: 6px 10px;
         border-radius: 999px;
         background: #fafafa;
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         white-space: nowrap;
       }
       .tl-list {
         position: relative;
-        border-left: 3px solid var(--line);
+        border-left: 3px solid #e7e5e4;
         margin: 12px 0 0 4px;
         padding-left: 14px;
       }
@@ -135,7 +172,7 @@
       }
       .tl-date {
         font-size: 12px;
-        color: var(--muted);
+        color: #6b7280;
       }
       .tl-title {
         font-weight: 800;
@@ -171,7 +208,7 @@
         }
       }
       .people-panel {
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         border-radius: 12px;
         background: #fff;
         padding: 14px;
@@ -202,7 +239,7 @@
       }
       .tag {
         font-size: 12px;
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         border-radius: 999px;
         padding: 6px 10px;
         background: #fafafa;
@@ -216,14 +253,14 @@
       }
       .btn {
         padding: 10px 14px;
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         border-radius: 12px;
         background: #fff;
         cursor: pointer;
         font-weight: 700;
       }
       .btn.accent {
-        background: var(--accent);
+        background: #ff6a00;
         color: #fff;
         border-color: transparent;
       }
@@ -236,7 +273,7 @@
         padding: 16px;
         text-align: center;
       }
-      
+
       /* stepas */
       .steps {
         display: grid;
@@ -294,9 +331,10 @@
         text-align: center;
       }
       .callout {
-        border: 1px solid rgba(46, 125, 50, 0.45);
-        background: rgba(46, 125, 50, 0.05);
+        border: 1px solid #2E7D3273;
+        background: #2E7D320D;
         padding: 16px;
+        margin: 0 2rem;
         border-radius: 14px;
         color: #2e7d32;
       }
@@ -322,10 +360,12 @@
           <!-- 커버 이미지 -->
           <h2>이미지 예제</h2>
           <div class="steps">
-            <div class="grid-12">
-              <img src="https://placehold.co/600x300/000000/FFFFFF/png?text=Cover+Image" />
+            <div class="grid-12 ratio-189">
+              <img src="https://placehold.co/600x400/000000/FFFFFF/png?text=Cover+Image" />
             </div>
+          </div>
 
+          <div class="steps">
             <div class="grid-6">
               <img src="https://placehold.co/600x350/B4753A/FFFFFF/png?text=Grid+6+Image" />
             </div>
@@ -451,7 +491,7 @@
               <img src="blog10/캐리커쳐-매니저-1.png" class="border-radius" style="width: 100%" alt="" />
             </div>
           </div>
-          
+
           <div class="steps text-center">
             <div class="step grid-4">
               <h3>58%</h3>
@@ -465,7 +505,7 @@
               <h3>58%</h3>
               <p>마라탕 선택</p>
             </div>
-            
+
             <div class="grid-3 kpi-box">
               <h3>46%</h3>
               <p>마라홍탕 선택</p>
@@ -580,79 +620,93 @@
               </div>
             </div>
           </div>
-          <div>
-            <div class="tl-col weekday">
-              <div class="tl-head">
-                <h3>평일 타임라인</h3>
-                <span class="tl-badge">Weekday · Open 17:00</span>
-              </div>
-              <div class="tl-list">
-                <div class="tl-item">
-                  <div class="tl-date">AM 6:00</div>
-                  <div class="tl-title">식재료 입고 &amp; 선도 확인</div>
-                  <div class="tl-desc">농가 채소, 육류, 해산물—온도·신선도 체크 후 바로 손질.</div>
+          <div class="steps">
+            <div class="grid-8">
+              <div class="tl-col weekday">
+                <div class="tl-head">
+                  <h3>평일 타임라인</h3>
+                  <span class="tl-badge">Weekday · Open 17:00</span>
                 </div>
-                <div class="tl-item">
-                  <div class="tl-date">AM 8:30</div>
-                  <div class="tl-title">육수/라오유(辣油) 컨디션 점검</div>
-                  <div class="tl-desc">장시간 우린 베이스와 마라향 오일의 황금 비율 유지.</div>
-                </div>
-                <div class="tl-item">
-                  <div class="tl-date">PM 3:00</div>
-                  <div class="tl-title">디너 프렙</div>
-                  <div class="tl-desc">저녁 서비스 대비 신선 재료 보충, 테이블·기기 셋업.</div>
-                </div>
-                <div class="tl-item">
-                  <div class="tl-date">PM 5:00</div>
-                  <div class="tl-title">디너 오픈</div>
-                  <div class="tl-desc">테이블 회전/온도/재료 타이밍 컨트롤—서비스 퀄리티 표준화.</div>
-                </div>
-                <div class="tl-item">
-                  <div class="tl-date">PM 9:00</div>
-                  <div class="tl-title">서비스 피크</div>
-                  <div class="tl-desc">주방·홀 긴밀 협업으로 품질 유지 &amp; 고객 경험 최적화.</div>
+                <div class="tl-list">
+                  <div class="tl-item">
+                    <div class="tl-date">AM 6:00</div>
+                    <div class="tl-title">식재료 입고 &amp; 선도 확인</div>
+                    <div class="tl-desc">농가 채소, 육류, 해산물—온도·신선도 체크 후 바로 손질.</div>
+                  </div>
+                  <div class="tl-item">
+                    <div class="tl-date">AM 8:30</div>
+                    <div class="tl-title">육수/라오유(辣油) 컨디션 점검</div>
+                    <div class="tl-desc">장시간 우린 베이스와 마라향 오일의 황금 비율 유지.</div>
+                  </div>
+                  <div class="tl-item">
+                    <div class="tl-date">PM 3:00</div>
+                    <div class="tl-title">디너 프렙</div>
+                    <div class="tl-desc">저녁 서비스 대비 신선 재료 보충, 테이블·기기 셋업.</div>
+                  </div>
+                  <div class="tl-item">
+                    <div class="tl-date">PM 5:00</div>
+                    <div class="tl-title">디너 오픈</div>
+                    <div class="tl-desc">테이블 회전/온도/재료 타이밍 컨트롤—서비스 퀄리티 표준화.</div>
+                  </div>
+                  <div class="tl-item">
+                    <div class="tl-date">PM 9:00</div>
+                    <div class="tl-title">서비스 피크</div>
+                    <div class="tl-desc">주방·홀 긴밀 협업으로 품질 유지 &amp; 고객 경험 최적화.</div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="tl-col weekend">
-              <div class="tl-head">
-                <h3>주말 타임라인</h3>
-                <span class="tl-badge">Weekend · Open 12:00</span>
-              </div>
-              <div class="tl-list">
-                <div class="tl-item">
-                  <div class="tl-date">AM 6:00</div>
-                  <div class="tl-title">식재료 입고 &amp; 선도 확인</div>
-                  <div class="tl-desc">평일과 동일 기준으로 검수·손질, 주말 수요 대비 물량 체크.</div>
+            <div class="grid-4 img-align-items">
+              <img src="blog10/캐리커쳐-매니저-1.png" class="border-radius" style="width: 100%" alt="" />
+            </div>
+
+            <div class="grid-4 img-align-items">
+              <img src="blog10/캐리커쳐-매니저-1.png" class="border-radius" style="width: 100%" alt="" />
+            </div>
+
+            <div class="grid-8">
+              <div class="tl-col weekend">
+                <div class="tl-head">
+                  <h3>주말 타임라인</h3>
+                  <span class="tl-badge">Weekend · Open 12:00</span>
                 </div>
-                <div class="tl-item">
-                  <div class="tl-date">AM 8:30</div>
-                  <div class="tl-title">육수/라오유(辣油) 컨디션 점검</div>
-                  <div class="tl-desc">점심 오픈을 위해 템포 업—황금 비율 &amp; 화력 안정화.</div>
-                </div>
-                <div class="tl-item">
-                  <div class="tl-date">AM 11:00</div>
-                  <div class="tl-title">런치 프렙</div>
-                  <div class="tl-desc">테이블 세팅, 반조리 상태 점검, 신선 재료 보충.</div>
-                </div>
-                <div class="tl-item">
-                  <div class="tl-date">PM 12:00</div>
-                  <div class="tl-title">런치 오픈</div>
-                  <div class="tl-desc">활기찬 점심 서비스—테이블 회전/온도/타이밍 표준화.</div>
-                </div>
-                <div class="tl-item">
-                  <div class="tl-date">PM 5:00</div>
-                  <div class="tl-title">디너 프렙</div>
-                  <div class="tl-desc">점심 직후 재정비—재료 보충, 소스·라오유 컨디션 재점검.</div>
-                </div>
-                <div class="tl-item">
-                  <div class="tl-date">PM 6:00</div>
-                  <div class="tl-title">디너 피크 돌입</div>
-                  <div class="tl-desc">가족·지인 모임으로 테이블 풀가동—주방/홀 풀스피드 운영.</div>
+                <div class="tl-list">
+                  <div class="tl-item">
+                    <div class="tl-date">AM 6:00</div>
+                    <div class="tl-title">식재료 입고 &amp; 선도 확인</div>
+                    <div class="tl-desc">평일과 동일 기준으로 검수·손질, 주말 수요 대비 물량 체크.</div>
+                  </div>
+                  <div class="tl-item">
+                    <div class="tl-date">AM 8:30</div>
+                    <div class="tl-title">육수/라오유(辣油) 컨디션 점검</div>
+                    <div class="tl-desc">점심 오픈을 위해 템포 업—황금 비율 &amp; 화력 안정화.</div>
+                  </div>
+                  <div class="tl-item">
+                    <div class="tl-date">AM 11:00</div>
+                    <div class="tl-title">런치 프렙</div>
+                    <div class="tl-desc">테이블 세팅, 반조리 상태 점검, 신선 재료 보충.</div>
+                  </div>
+                  <div class="tl-item">
+                    <div class="tl-date">PM 12:00</div>
+                    <div class="tl-title">런치 오픈</div>
+                    <div class="tl-desc">활기찬 점심 서비스—테이블 회전/온도/타이밍 표준화.</div>
+                  </div>
+                  <div class="tl-item">
+                    <div class="tl-date">PM 5:00</div>
+                    <div class="tl-title">디너 프렙</div>
+                    <div class="tl-desc">점심 직후 재정비—재료 보충, 소스·라오유 컨디션 재점검.</div>
+                  </div>
+                  <div class="tl-item">
+                    <div class="tl-date">PM 6:00</div>
+                    <div class="tl-title">디너 피크 돌입</div>
+                    <div class="tl-desc">가족·지인 모임으로 테이블 풀가동—주방/홀 풀스피드 운영.</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <div class="callout">“좋은 재료 없이는 좋은 훠궈도 없다.” – 라오충칭훠궈의 변함없는 원칙</div>
 
           <div class="tags">
             <span class="tag">#라오충칭훠궈</span>
@@ -661,11 +715,53 @@
           </div>
 
           <div class="actions">
-            <a class="btn accent" href="../blogpage.html">목록으로</a>
-            <a class="btn" href="#">공유하기</a>
+            <a class="btn accent" href="blogpage.html">목록으로</a>
+            <a id="shareBtn" class="btn">공유하기</a>
           </div>
         </div>
       </div>
     </div>
+
+    <script>
+      // 공유 & 링크 복사
+      (function () {
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        document.getElementById("shareBtn").addEventListener("click", async () => {
+          const shareData = {
+            title: document.getElementById("content-title")?.textContent,
+            text: "라오충칭훠궈 소식 확인해보세요!",
+            url: location.href,
+          };
+
+          const canWebShare =
+            typeof navigator !== "undefined" &&
+            typeof navigator.share === "function" &&
+            (typeof navigator.canShare !== "function" || navigator.canShare(shareData)) &&
+            (location.protocol === "https:" || location.hostname === "localhost") &&
+            isMobile; // 데스크톱 크롬의 반쪽 지원 회피
+
+          if (canWebShare) {
+            try {
+              // 일부 환경에서 무반응으로 바로 resolve/close 되는 것을 대비해 타임아웃 적용
+              const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error("share-timeout")), 2500));
+              await Promise.race([navigator.share(shareData), timeout]);
+              return; // 정상 공유
+            } catch (err) {
+              // 사용자 취소/미지원/무반응 타임아웃 등 모두 fallback
+            }
+          } else {
+            // Fallback: 링크 복사
+            try {
+              await navigator.clipboard.writeText(location.href);
+              alert("공유 기능이 제한되어 링크를 복사했습니다. 원하는 앱에 붙여넣어 공유해주세요.");
+            } catch {
+              // 클립보드 API 미지원 시 마지막 수단
+              const ok = prompt("공유 기능이 제한됩니다. 아래 링크를 복사해주세요:", location.href);
+              // 사용자가 취소해도 추가 처리 불필요
+            }
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

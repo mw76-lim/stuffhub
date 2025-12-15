@@ -5,25 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      :root {
-        --bg: #f8f7f4;
-        --paper: #ffffff;
-        --text: #161616;
-        --muted: #6b7280;
-        --line: #e7e5e4;
-        --accent: #ff6a00;
-        --radius: 16px;
-        --shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
-        --maxw: 1200px;
-      }
       div#bo_v_con {
-        max-width: var(--maxw);
+        max-width: 1200px;
         margin: 0 auto;
         padding: 22px;
       }
       .post-container {
         padding: 40px 90px;
-        background-color: #FFFCFB;
+        background-color: #fffcfb;
         border-radius: 12px;
       }
       .post-container a {
@@ -31,12 +20,60 @@
         text-decoration: none;
       }
 
+      /* table */
+      .post-container table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+      }
+      .post-container th,
+      .post-container td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+      .post-container th {
+        background: #f4f4f4;
+      }
+
+      /* Image */
       .cover-img {
         aspect-ratio: 16 / 9;
         background: center / cover;
         border-radius: 14px;
         margin-bottom: 16px;
       }
+      .img-align-items {
+        display: flex;
+        align-items: center; /* 세로 중앙 정렬 */
+        justify-content: center; /* 가로 중앙 정렬 (선택사항) */
+      }
+      .img-align-items img {
+        max-width: 100%;
+        height: auto;
+      }
+      /* 16:9 비율을 유지하는 컨테이너 */
+      .ratio-189 {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 18 / 9;   /* 핵심 */
+        overflow: hidden;       /* 넘치는 이미지 잘림 */
+        border-radius: 12px;    /* 선택 */
+      }
+      /* 이미지 커버 방식 */
+      .ratio-189 img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;       /* 비율 유지 + 꽉 채우기 */
+        object-position: center; /* 중앙 정렬 */
+        transform: translate(-50%, -50%);
+      }
+
+      /* style */
       .prose h2 {
         margin: 2em 0 0.5em;
         font-size: 20px;
@@ -45,7 +82,7 @@
         margin: 0.9em 0;
       }
       .note {
-        border-left: 4px solid var(--accent);
+        border-left: 4px solid #ff6a00;
         background: #fff7ef;
         padding: 12px 14px;
         border-radius: 12px;
@@ -59,7 +96,7 @@
         margin: 16px 0;
       }
       .qna-q {
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         border-radius: 12px;
         background: #fff;
         padding: 14px;
@@ -71,7 +108,7 @@
 
       /* Timeline */
       .timeline {
-        border-left: 3px solid var(--line);
+        border-left: 3px solid #e7e5e4;
         margin: 16px 0 8px 4px;
         padding-left: 14px;
       }
@@ -80,7 +117,7 @@
       }
       .tl-date {
         font-size: 12px;
-        color: var(--muted);
+        color: #6b7280;
       }
       .tl-title {
         font-weight: 800;
@@ -99,7 +136,7 @@
       }
       .tl-col {
         background: #ffffff;
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         border-radius: 12px;
         padding: 14px;
       }
@@ -109,7 +146,7 @@
         justify-content: space-between;
         gap: 10px;
         padding: 6px 0 10px;
-        border-bottom: 1px solid var(--line);
+        border-bottom: 1px solid #e7e5e4;
       }
       .tl-head h3 {
         margin: 0;
@@ -120,12 +157,12 @@
         padding: 6px 10px;
         border-radius: 999px;
         background: #fafafa;
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         white-space: nowrap;
       }
       .tl-list {
         position: relative;
-        border-left: 3px solid var(--line);
+        border-left: 3px solid #e7e5e4;
         margin: 12px 0 0 4px;
         padding-left: 14px;
       }
@@ -135,7 +172,7 @@
       }
       .tl-date {
         font-size: 12px;
-        color: var(--muted);
+        color: #6b7280;
       }
       .tl-title {
         font-weight: 800;
@@ -171,7 +208,7 @@
         }
       }
       .people-panel {
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         border-radius: 12px;
         background: #fff;
         padding: 14px;
@@ -202,7 +239,7 @@
       }
       .tag {
         font-size: 12px;
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         border-radius: 999px;
         padding: 6px 10px;
         background: #fafafa;
@@ -216,16 +253,25 @@
       }
       .btn {
         padding: 10px 14px;
-        border: 1px solid var(--line);
+        border: 1px solid #e7e5e4;
         border-radius: 12px;
         background: #fff;
         cursor: pointer;
         font-weight: 700;
       }
       .btn.accent {
-        background: var(--accent);
+        background: #ff6a00;
         color: #fff;
         border-color: transparent;
+      }
+
+      /* kpi */
+      .kpi-box {
+        background: #c2ae77;
+        border: 1px solid #161616;
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
       }
 
       /* stepas */
@@ -285,9 +331,10 @@
         text-align: center;
       }
       .callout {
-        border: 1px solid rgba(46, 125, 50, 0.45);
-        background: rgba(46, 125, 50, 0.05);
+        border: 1px solid #2E7D3273;
+        background: #2E7D320D;
         padding: 16px;
+        margin: 0 2rem;
         border-radius: 14px;
         color: #2e7d32;
       }
@@ -312,10 +359,9 @@
 
           <!-- 커버 이미지 -->
           <div class="steps">
-            <div class="grid-6">
+            <div class="grid-8 ratio-189">
               <img src="blog01/병마용01.jpg" alt="">
             </div>
-            <div class="grid-2"></div>
             <div class="grid-4">
               <img src="https://cdn.midjourney.com/2dfa1736-7cf0-4971-b303-d773f1811637/0_3.png" alt="">
             </div>
@@ -360,6 +406,7 @@
           <h2>다음 방문 때 해보세요</h2>
           <p>입구에서 병마용 복장의 판다와 함께 사진을 찍어보세요. 그 순간, 전통과 즐거움의 공존이 그대로 한 컷에 담깁니다.</p>
 
+          <br>
           <div class="tags" aria-label="태그">
             <span class="tag">#라오충칭훠궈</span>
             <span class="tag">#판다</span>
@@ -367,8 +414,8 @@
           </div>
 
           <div class="actions">
-            <a class="btn accent" href="../blogpage.html">목록으로</a>
-            <a class="btn" href="#">공유하기</a>
+            <a class="btn accent" href="blogpage.html">목록으로</a>
+            <div id="shareBtn" class="btn">공유하기</div>
           </div>
         </div>
       </div>
