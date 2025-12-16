@@ -7,70 +7,124 @@
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
 
-      body {
+      body{
         min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: grid;
+        place-items: center;
+        gap: 12px;
         background: #f7f2ea;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         color: #3a2415;
+        padding: 16px;
       }
 
-      /* ------------------------
-         메인 박스 크기 확대
-      ------------------------- */
-      .game-shell {
-        width: 100%;
-        max-width: 900px; /* 기존 대비 약 2배 */
-        padding: 40px;
+      /* ✅ Fixed canvas: 600x450 */
+      .game-shell{
+        width: 600px;
+        height: 450px;
+        padding: 14px 14px 12px;
         background: #fffaf5;
         border-radius: 24px;
         box-shadow: 0 16px 40px rgba(120, 72, 37, 0.18);
         border: 1px solid rgba(193, 160, 120, 0.4);
-      }
+        overflow: hidden;
 
-      .game-header { text-align: center; margin-bottom: 24px; }
-      .game-title { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
-      .game-sub { font-size: 14px; color: #6b4a30; }
-
-      /* ------------------------
-         2컬럼 구조: 룰렛 + 범례
-      ------------------------- */
-      .content-row {
         display: grid;
-        grid-template-columns: 1fr 260px; /* 좌측 룰렛 넓게, 우측 범례 */
-        gap: 30px;
-        align-items: center;
+        grid-template-rows: auto 1fr auto;
+        gap: 10px;
       }
 
-      /* ------------------------
-         룰렛 크기 2배 확대
-      ------------------------- */
-      .wheel-wrap {
+      /* ✅ 상단 바(타이틀 + 리셋) */
+      .topbar{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap: 10px;
+      }
+
+      .game-header{
+        text-align:left;
+        min-width:0;
+      }
+      .game-title{
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+
+      .btn{
+        padding: 10px 14px;
+        font-size: 12px;
+        font-weight: 900;
+        border-radius: 999px;
+        border: 1px solid rgba(148,104,63,.55);
+        background: rgba(255,255,255,.85);
+        color: #3a2415;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+        box-shadow: 0 10px 20px rgba(120,72,37,.12);
+        white-space:nowrap;
+      }
+      .btn.primary{
+        border: none;
+        color: #fff;
+        background: linear-gradient(120deg, #f97316, #fbbf24);
+        box-shadow: 0 12px 26px rgba(201, 93, 39, 0.35);
+      }
+      .btn:hover:not([disabled]){ transform: translateY(-1px); }
+      .btn[disabled]{ opacity: .55; cursor: default; transform: none; box-shadow: none; }
+
+      .content-row{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        min-height: 0;
+      }
+
+      .wheel-wrap{
         position: relative;
-        width: 380px;  /* 기존 240px → 380px */
+        width: 260px;
         aspect-ratio: 1 / 1;
         margin: 0 auto;
       }
 
-      .wheel {
+      .pointer{
+        z-index: 2;
+        position: absolute;
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%) rotate(180deg);
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-bottom: 18px solid #c95327;
+        filter: drop-shadow(0 6px 10px rgba(0,0,0,.15));
+      }
+
+      .wheel{
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        border: 8px solid #f0e0ce;
-
+        border: 7px solid #f0e0ce;
         background: conic-gradient(
-          #f97316 0deg 72deg,      /* 20% */
-          #facc15 72deg 144deg,    /* 20% */
-          #f9a8d4 144deg 216deg,   /* 20% */
-          #a5b4fc 216deg 252deg,   /* 10% */
-          #6ee7b7 252deg 288deg,   /* 10% */
-          #e5e7eb 288deg 360deg    /* 20% */
+          #f97316 0deg 72deg,
+          #facc15 72deg 144deg,
+          #f9a8d4 144deg 216deg,
+          #a5b4fc 216deg 252deg,
+          #6ee7b7 252deg 288deg,
+          #e5e7eb 288deg 360deg
         );
       }
 
-      .wheel-inner {
+      .wheel-inner{
         position: absolute;
         inset: 40%;
         border-radius: 50%;
@@ -79,43 +133,114 @@
         align-items: center;
         justify-content: center;
         pointer-events: none;
+        font-weight: 900;
+        color: rgba(58, 36, 21, 0.65);
       }
 
-      .pointer {
-        z-index: 1;
-        position: absolute;
-        top: -18px;
-        left: 50%;
-        transform: translateX(-50%) rotate(180deg);
-        width: 0;
-        height: 0;
-        border-left: 14px solid transparent;
-        border-right: 14px solid transparent;
-        border-bottom: 22px solid #c95327;
-      }
-
-      /* ------------------------
-         범례 (우측 정렬)
-      ------------------------- */
-      .game-legend {
+      .controls{
         display: grid;
-        gap: 10px;
-        font-size: 13px;
+        gap: 8px;
       }
 
-      .legend-item {
+      /* ✅ seed-buttons + spinButton 가로 배치 */
+      .control-row{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap: 10px;
+      }
+
+      .seed-buttons{
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items:center;
+        min-width:0;
+      }
+
+      .seed-buttons label{
+        display:inline-flex;
+        align-items:center;
+        gap: 6px;
+        font-size: 12px;
+        color:#6b4a30;
+      }
+
+      .seed-btn{
+        appearance: none;
+        padding: 7px 10px;
+        background: #fff;
+        border-radius: 999px;
+        border: 2px solid #c9a67a;
+        cursor: pointer;
+        font-size: 12px;
+        transition: 0.2s ease;
+      }
+
+      .seed-btn:checked{
+        background: #c9a67a;
+        color: #fff;
+        border-color: #c9a67a;
+      }
+
+      .game-result{
+        text-align: center;
+        font-size: 12px;
+        color: #5a3a22;
+        min-height: 18px;
+      }
+      .game-result strong{ color:#b45309; }
+
+      /* ✅ 범례 박스 (game-shell 아래) */
+      .legend-shell{
+        width: 600px;
+        background: rgba(255,250,245,.85);
+        border-radius: 18px;
+        border: 1px solid rgba(193, 160, 120, 0.35);
+        box-shadow: 0 10px 26px rgba(120, 72, 37, 0.10);
+        padding: 12px;
+      }
+
+      .legend-title{
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        color: #5a3a22;
+        margin-bottom: 8px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap: 8px;
+      }
+      .legend-title span{
+        font-size: 11px;
+        font-weight: 700;
+        color: #7a5538;
+        opacity: .9;
+      }
+
+      .game-legend{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        font-size: 11.5px;
+      }
+
+      .legend-item{
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 6px 10px;
-        border-radius: 10px;
+        padding: 7px 8px;
+        border-radius: 12px;
         background: #f4e5d1;
+        line-height: 1.2;
       }
 
-      .legend-color {
-        width: 14px;
-        height: 14px;
+      .legend-color{
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
+        flex: 0 0 auto;
       }
 
       .c1 { background: #f97316; }
@@ -125,132 +250,141 @@
       .c5 { background: #6ee7b7; }
       .c6 { background: #e5e7eb; }
 
-      /* ------------------------
-         시드번호 라디오 버튼 UI
-      ------------------------- */
-      .seed-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin: 20px 0;
-      }
+      @media (max-width: 640px){
+        body{ gap: 10px; }
+        .game-shell{
+          width: 100%;
+          height: auto;
+          min-height: 450px;
+        }
+        .legend-shell{ width: 100%; }
+        .wheel-wrap{ width: 280px; }
+        .game-legend{ grid-template-columns: 1fr; }
 
-      .seed-btn {
-        appearance: none;
-        padding: 10px 16px;
-        background: #fff;
-        border-radius: 999px;
-        border: 2px solid #c9a67a;
-        cursor: pointer;
-        font-size: 14px;
-        transition: 0.2s ease;
-      }
+        .topbar{ flex-wrap:wrap; justify-content:center; }
+        .game-header{ text-align:center; width:100%; }
 
-      .seed-btn:checked {
-        background: #c9a67a;
-        color: #fff;
-        border-color: #c9a67a;
-      }
-
-      .btn-spin {
-        padding: 14px 28px;
-        font-size: 16px;
-        font-weight: 700;
-        border-radius: 999px;
-        border: none;
-        color: #fff;
-        background: linear-gradient(120deg, #f97316, #fbbf24);
-        cursor: pointer;
-        display: block;
-        margin: 0 auto;
-      }
-
-      .game-result {
-        margin-top: 20px;
-        text-align: center;
-        font-size: 15px;
+        .control-row{ flex-direction:column; align-items:stretch; }
+        #spinButton{ width:100%; }
+        .seed-buttons{ justify-content:center; }
       }
     </style>
   </head>
+
   <body>
-
     <div class="game-shell">
-      <header class="game-header">
-        <h1 class="game-title">무료 음식/쿠폰 룰렛게임</h1>
-        <p class="game-sub">라오충칭훠궈에서 오늘의 행운을 뽑아보세요!</p>
-      </header>
+      <!-- ✅ 상단: 타이틀 + 리셋버튼 -->
+      <div class="topbar">
+        <header class="game-header">
+          <h1 class="game-title">무료 음식/쿠폰 룰렛게임</h1>
+        </header>
+        <button class="btn" id="resetButton" disabled>게임초기화 🔁</button>
+      </div>
 
-      <!-- ============================
-           2컬럼 레이아웃 시작
-      ============================= -->
       <div class="content-row">
-
-        <!-- 룰렛 -->
         <div class="wheel-wrap">
           <div class="pointer"></div>
           <div class="wheel" id="wheel">
             <div class="wheel-inner">↑</div>
           </div>
         </div>
+      </div>
 
-        <!-- 범례 -->
-        <div class="game-legend">
-          <div class="legend-item"><span class="legend-color c1"></span> 캔 음료 1개 (20%)</div>
-          <div class="legend-item"><span class="legend-color c2"></span> 면류 1접시 (20%)</div>
-          <div class="legend-item"><span class="legend-color c3"></span> 포켓 핫팩 (20%)</div>
-          <div class="legend-item"><span class="legend-color c4"></span> 당일 만원 할인 (10%)</div>
-          <div class="legend-item"><span class="legend-color c5"></span> 재방문 50% 할인 (10%)</div>
-          <div class="legend-item"><span class="legend-color c6"></span> 꽝 (20%)</div>
+      <div class="controls">
+        <!-- ✅ seed-buttons + spinButton 가로로 한 줄 -->
+        <div class="control-row" aria-label="시드 및 스핀">
+          <div class="seed-buttons" aria-label="시드 선택">
+            <label><input type="radio" name="seed" class="seed-btn" value="1" checked>1</label>
+            <label><input type="radio" name="seed" class="seed-btn" value="2">2</label>
+            <label><input type="radio" name="seed" class="seed-btn" value="3">3</label>
+            <label><input type="radio" name="seed" class="seed-btn" value="4">4</label>
+            <label><input type="radio" name="seed" class="seed-btn" value="5">5</label>
+            <label><input type="radio" name="seed" class="seed-btn" value="6">6</label>
+          </div>
+
+          <button class="btn primary" id="spinButton">룰렛 돌리기 🎲</button>
         </div>
 
+        <div class="game-result" id="resultText">시드 번호를 선택하고 룰렛을 돌려보세요.</div>
       </div>
-      <!-- 2컬럼 끝 -->
+    </div>
 
-      <!-- 시드 번호 라디오 버튼 -->
-      <div class="seed-buttons">
-        <label><input type="radio" name="seed" class="seed-btn" value="1" checked>1</label>
-        <label><input type="radio" name="seed" class="seed-btn" value="2">2</label>
-        <label><input type="radio" name="seed" class="seed-btn" value="3">3</label>
-        <label><input type="radio" name="seed" class="seed-btn" value="4">4</label>
-        <label><input type="radio" name="seed" class="seed-btn" value="5">5</label>
-        <label><input type="radio" name="seed" class="seed-btn" value="6">6</label>
+    <div class="legend-shell" aria-label="상품 범례">
+      <div class="legend-title">
+        <div>상품 범례</div>
+        <span>* 확률은 내부 설정 기준</span>
       </div>
-
-      <button class="btn-spin" id="spinButton">룰렛 돌리기 🎲</button>
-
-      <div class="game-result" id="resultText">시드 번호를 선택하고 룰렛을 돌려보세요.</div>
+      <div class="game-legend">
+        <div class="legend-item"><span class="legend-color c1"></span> 캔 음료 1개 (20%)</div>
+        <div class="legend-item"><span class="legend-color c2"></span> 면류 1접시 (20%)</div>
+        <div class="legend-item"><span class="legend-color c3"></span> 포켓 핫팩 (20%)</div>
+        <div class="legend-item"><span class="legend-color c4"></span> 당일 만원 할인 (10%)</div>
+        <div class="legend-item"><span class="legend-color c5"></span> 재방문 50% 할인 (10%)</div>
+        <div class="legend-item"><span class="legend-color c6"></span> 꽝 (20%)</div>
+      </div>
     </div>
 
     <script>
-      let app_wheel = {};
-      app_wheel.rotation = 0;
-
       (function () {
         const wheel = document.getElementById("wheel");
-        const spinButton = document.getElementById("spinButton");
-        const resultText = document.getElementById("resultText");
 
-        const seedButtons = document.querySelectorAll("input[name='seed']");
+        const spinButton = document.getElementById("spinButton");
+        const resetButton = document.getElementById("resetButton");
+        const resultText = document.getElementById("resultText");
+        const seedInputs = document.querySelectorAll("input[name='seed']");
 
         const prizes = [
-          { label: "꽝", prob: 0.2, ds:0, de:72},
-          { label: "재방문시 50% 할인", prob: 0.1, ds:72, de:108},
-          { label: "당일 결제금액 만원 할인", prob: 0.1, ds:108, de:144},
-          { label: "포켓 핫팩", prob: 0.2, ds:144, de:216},
-          { label: "면류 1접시", prob: 0.2, ds:216, de:288},
-          { label: "캔 음료 1개", prob: 0.2, ds:288, de:360},
+          { label: "꽝", prob: 0.2, ds: 0,   de: 72 },
+          { label: "재방문시 50% 할인", prob: 0.1, ds: 72,  de: 108 },
+          { label: "당일 결제금액 만원 할인", prob: 0.1, ds: 108, de: 144 },
+          { label: "포켓 핫팩", prob: 0.2, ds: 144, de: 216 },
+          { label: "면류 1접시", prob: 0.2, ds: 216, de: 288 },
+          { label: "캔 음료 1개", prob: 0.2, ds: 288, de: 360 },
         ];
-
-
 
         const sectorAngles = [0, 72, 144, 216, 252, 288, 360];
         const pointerAngle = 90;
 
         let currentRotation = 0;
         let isSpinning = false;
+        let hasResult = false;
 
         function getSeed() {
           return parseInt(document.querySelector("input[name='seed']:checked").value, 10);
+        }
+
+        function setSeedsDisabled(disabled){
+          seedInputs.forEach(i => (i.disabled = disabled));
+          seedInputs.forEach(i => {
+            const label = i.closest("label");
+            if (!label) return;
+            label.style.opacity = disabled ? "0.65" : "1";
+            label.style.cursor = disabled ? "default" : "pointer";
+          });
+        }
+
+        function setUIState(state){
+          // state: "ready" | "spinning" | "done"
+          if (state === "ready"){
+            spinButton.disabled = false;
+            resetButton.disabled = true;
+            setSeedsDisabled(false);
+            hasResult = false;
+            return;
+          }
+          if (state === "spinning"){
+            spinButton.disabled = true;
+            resetButton.disabled = true;
+            setSeedsDisabled(true);
+            return;
+          }
+          if (state === "done"){
+            spinButton.disabled = true;
+            resetButton.disabled = false;
+            setSeedsDisabled(true);
+            hasResult = true;
+            return;
+          }
         }
 
         function getSeededRandom(seed) {
@@ -269,27 +403,37 @@
           return prizes.length - 1;
         }
 
-        function whichPrize(){
-          let wheelDegree = Math.floor(currentRotation) % 360;
-          let selectedPrize = null;
+        function whichPrizeByRotation(rot){
+          const wheelDegree = ((Math.floor(rot) % 360) + 360) % 360;
           for (let i = 0; i < prizes.length; i++) {
-            if (prizes[i].ds <= wheelDegree && wheelDegree < prizes[i].de) {
-              selectedPrize = prizes[i];
-            }
+            if (prizes[i].ds <= wheelDegree && wheelDegree < prizes[i].de) return prizes[i];
           }
-          return selectedPrize;
+          return prizes[0];
+        }
+
+        function resetGame(){
+          isSpinning = false;
+          currentRotation = 0;
+
+          wheel.style.transition = "none";
+          wheel.style.transform = "rotate(0deg)";
+          wheel.offsetHeight;
+          wheel.style.transition = "";
+
+          resultText.textContent = "시드 번호를 선택하고 룰렛을 돌려보세요.";
+          setUIState("ready");
         }
 
         function spinWheel() {
-          if (isSpinning) return;
+          if (isSpinning || hasResult) return;
 
           const seed = getSeed();
           isSpinning = true;
-          spinButton.disabled = true;
+
+          setUIState("spinning");
           resultText.textContent = "룰렛이 돌고 있어요...";
 
           const index = pickPrizeIndex(seed);
-          // const chosen = prizes[index];
 
           const start = sectorAngles[index];
           const end = sectorAngles[index + 1];
@@ -310,26 +454,29 @@
 
           currentRotation = newRotation;
 
-          const chosen = whichPrize();
-
-          wheel.style.transition = "transform 2.6s cubic-bezier(0.22, 0.61, 0.35, 1)";
+          wheel.style.transition = "transform 2.4s cubic-bezier(0.22, 0.61, 0.35, 1)";
           wheel.style.transform = `rotate(${newRotation}deg)`;
 
           setTimeout(() => {
             isSpinning = false;
-            spinButton.disabled = false;
+
+            const chosen = whichPrizeByRotation(currentRotation);
 
             if (chosen.label === "꽝") {
               resultText.innerHTML = `아쉽지만 이번에는 <strong>꽝</strong>입니다.`;
             } else {
               resultText.innerHTML = `축하합니다! <strong>${chosen.label}</strong> 당첨!`;
             }
-          }, 2700);
+
+            setUIState("done");
+          }, 2500);
         }
 
         spinButton.addEventListener("click", spinWheel);
+        resetButton.addEventListener("click", resetGame);
+
+        resetGame();
       })();
     </script>
-
   </body>
 </html>

@@ -2,96 +2,124 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>컵 셔플 야바위 게임 (공 위치 공개 버전)</title>
+    <title>컵 셔플 야바위 게임 (3회 누적 · 난이도 상승)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root{
+        --bg:#f7f2ea;
+        --paper:#fffaf5;
+        --ink:#3a2415;
+        --muted:#6b4a30;
+        --line:rgba(193, 160, 120, 0.5);
+        --shadow:0 16px 40px rgba(120, 72, 37, 0.18);
+        --radius:24px;
       }
 
       body {
         min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #f7f2ea;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
-        color: #3a2415;
+        display: grid;
+        place-items: center;
+        background: var(--bg);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        padding: 16px;
       }
 
       .game-shell {
-        width: 100%;
-        max-width: 720px;
-        padding: 32px 28px 30px;
-        background: #fffaf5;
-        border-radius: 24px;
-        border: 1px solid rgba(193, 160, 120, 0.5);
-        box-shadow: 0 16px 40px rgba(120, 72, 37, 0.18);
+        width: 600px;
+        height: 450px;
+        padding: 16px 16px 14px;
+        background: var(--paper);
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 10px;
       }
 
       .game-header {
         text-align: center;
-        margin-bottom: 20px;
+        display: grid;
+        gap: 6px;
       }
 
       .game-title {
-        font-size: 22px;
-        font-weight: 800;
+        font-size: 18px;
+        font-weight: 900;
         letter-spacing: -0.02em;
-        margin-bottom: 4px;
       }
 
       .game-sub {
-        font-size: 13px;
-        color: #6b4a30;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.4;
+        margin: 0 auto;
+        max-width: 56ch;
       }
 
+      .meta-row{
+        display:flex;
+        justify-content:center;
+        gap:8px;
+        flex-wrap:wrap;
+      }
+      .chip{
+        font-size:11px;
+        padding:6px 10px;
+        border-radius:999px;
+        border:1px solid rgba(148, 104, 63, 0.45);
+        background: rgba(255,255,255,.7);
+        color:#5a3a22;
+      }
+      .chip strong{ color:#b45309; }
+
       .table-area {
-        margin-top: 12px;
-        padding: 20px 16px 18px;
+        padding: 14px 12px 12px;
         border-radius: 18px;
         background: radial-gradient(circle at top, #f4e5d4, #e2c7a8);
         box-shadow: inset 0 3px 8px rgba(255, 255, 255, 0.7);
         position: relative;
         overflow: hidden;
+
+        display:grid;
+        grid-template-rows: 1fr auto;
+        gap: 10px;
+        min-height: 0;
       }
 
       .cup-stage {
         position: relative;
-        height: 220px;
+        height: 190px;
       }
 
       .cup {
         position: absolute;
-        bottom: 30px;
-        width: 90px;
-        height: 110px;
-        border-radius: 60px 60px 16px 16px;
-        background: linear-gradient(
-          180deg,
-          #f9f5ef 0,
-          #f1e0cd 40%,
-          #e2c4a0 100%
-        );
+        bottom: 20px;
+        width: 78px;
+        height: 96px;
+        border-radius: 56px 56px 16px 16px;
+        background: linear-gradient(180deg, #f9f5ef 0, #f1e0cd 40%, #e2c4a0 100%);
         box-shadow:
-          0 10px 18px rgba(124, 78, 38, 0.4),
+          0 10px 18px rgba(124, 78, 38, 0.35),
           inset 0 0 0 1px rgba(255, 255, 255, 0.6);
         transform: translateX(-50%);
-        transition: left 0.32s ease, transform 0.18s ease;
+        transition: left 0.32s ease, transform 0.18s ease, opacity .12s ease;
         cursor: pointer;
       }
 
       .cup::before {
         content: "";
         position: absolute;
-        top: -10px;
+        top: -9px;
         left: 50%;
         transform: translateX(-50%);
-        width: 70px;
-        height: 12px;
+        width: 62px;
+        height: 11px;
         border-radius: 999px;
         background: radial-gradient(circle at top, #ffffff, #e8d6c0);
         box-shadow: 0 2px 4px rgba(124, 78, 38, 0.25);
@@ -103,159 +131,283 @@
         bottom: -6px;
         left: 50%;
         transform: translateX(-50%);
-        width: 74px;
+        width: 66px;
         height: 10px;
         border-radius: 999px;
         background: rgba(111, 70, 33, 0.45);
         filter: blur(3px);
-        opacity: 0.9;
+        opacity: 0.85;
       }
 
-      .cup.is-disabled {
-        cursor: default;
-        opacity: 0.7;
-      }
-
+      .cup.is-disabled { cursor: default; opacity: 0.7; }
       .cup.is-highlight {
         box-shadow:
-          0 12px 24px rgba(201, 93, 39, 0.6),
+          0 12px 24px rgba(201, 93, 39, 0.55),
           inset 0 0 0 1px rgba(255, 255, 255, 0.7);
       }
-
-      .cup.reveal {
-        transform: translate(-50%, -20px);
-      }
+      .cup.reveal { transform: translate(-50%, -16px); }
 
       .ball {
         position: absolute;
-        bottom: 30px;
-        width: 26px;
-        height: 26px;
+        bottom: 20px;
+        width: 22px;
+        height: 22px;
         border-radius: 50%;
         background: radial-gradient(circle at 30% 20%, #ffffff, #e11d48);
         box-shadow:
-          0 0 0 3px rgba(120, 46, 60, 0.6),
-          0 6px 10px rgba(120, 46, 60, 0.7);
+          0 0 0 3px rgba(120, 46, 60, 0.55),
+          0 6px 10px rgba(120, 46, 60, 0.6);
         transform: translateX(-50%);
         opacity: 0;
         transition: left 0.32s ease, opacity 0.2s ease;
         pointer-events: none;
       }
-
-      .ball.visible {
-        opacity: 1;
-      }
+      .ball.visible { opacity: 1; }
 
       .status-row {
-        margin-top: 16px;
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr auto;
         gap: 10px;
         align-items: center;
-        justify-content: space-between;
-        font-size: 13px;
+        font-size: 12px;
       }
 
       .status-text {
-        color: #6b4a30;
+        color: var(--muted);
+        line-height: 1.35;
       }
-
-      .status-text strong {
-        color: #b45309;
-      }
+      .status-text strong { color: #b45309; }
 
       .btn {
         border-radius: 999px;
-        padding: 9px 18px;
-        font-size: 13px;
-        border: 1px solid rgba(148, 104, 63, 0.7);
+        padding: 9px 14px;
+        font-size: 12px;
+        border: 1px solid rgba(148, 104, 63, 0.65);
         background: #fff;
         color: #3a2415;
-        font-weight: 600;
+        font-weight: 700;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
         gap: 6px;
         transition: 0.15s ease;
+        white-space: nowrap;
       }
-
       .btn.primary {
         background: linear-gradient(120deg, #f97316, #fbbf24);
         border-color: transparent;
         color: #3b1f0a;
-        box-shadow: 0 10px 24px rgba(201, 93, 39, 0.5);
+        box-shadow: 0 10px 22px rgba(201, 93, 39, 0.45);
       }
-
+      .btn.ghost { background: rgba(255,255,255,.75); }
       .btn:hover:not([disabled]) {
         transform: translateY(-1px);
-        box-shadow: 0 12px 26px rgba(201, 93, 39, 0.55);
+        box-shadow: 0 12px 24px rgba(201, 93, 39, 0.5);
+      }
+      .btn:active:not([disabled]) { transform: translateY(0); box-shadow: none; }
+      .btn[disabled] { opacity: 0.6; cursor: default; box-shadow: none; }
+
+      .footer-row{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:10px;
+        font-size:11px;
+        color:#8b6544;
+        padding: 0 4px;
       }
 
-      .btn:active:not([disabled]) {
-        transform: translateY(0);
-        box-shadow: none;
+      /* =======================
+         ✅ Modal
+      ======================= */
+      .modal-backdrop{
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.45);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        z-index: 9999;
+      }
+      .modal-backdrop.is-open{ display: flex; }
+
+      .modal{
+        width: min(520px, 100%);
+        background: rgba(255,250,245,.96);
+        border: 1px solid rgba(193,160,120,.55);
+        border-radius: 18px;
+        box-shadow: 0 22px 60px rgba(0,0,0,.22);
+        overflow: hidden;
+        transform: translateY(8px);
+        opacity: 0;
+        animation: pop .16s ease forwards;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+      @keyframes pop{
+        to { transform: translateY(0); opacity: 1; }
       }
 
-      .btn[disabled] {
-        opacity: 0.6;
-        cursor: default;
-        box-shadow: none;
+      .modal-head{
+        padding: 14px 14px 10px;
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap: 10px;
+        border-bottom: 1px solid rgba(148,104,63,.20);
+        background:
+          radial-gradient(circle at 12% 0%, rgba(249,115,22,.18), rgba(255,255,255,0) 62%),
+          radial-gradient(circle at 92% 10%, rgba(251,191,36,.18), rgba(255,255,255,0) 64%);
       }
 
-      .hint {
-        margin-top: 8px;
+      .modal-title{
+        display:grid;
+        gap:4px;
+      }
+      .modal-title h2{
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+      }
+      .modal-title p{
+        font-size: 11.5px;
+        color: #6b4a30;
+        line-height: 1.35;
+      }
+
+      .modal-close{
+        border: 1px solid rgba(148,104,63,.35);
+        background: rgba(255,255,255,.7);
+        border-radius: 12px;
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .modal-body{
+        padding: 12px 14px;
+        display:grid;
+        gap: 10px;
+      }
+
+      .result-box{
+        border: 1px solid rgba(148,104,63,.25);
+        background: rgba(255,255,255,.72);
+        border-radius: 14px;
+        padding: 12px;
+        display:grid;
+        gap: 8px;
+      }
+      .result-top{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+        flex-wrap:wrap;
+      }
+      .badge{
         font-size: 11px;
-        color: #8b6544;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(148,104,63,.30);
+        background: rgba(255,255,255,.8);
+        color:#5a3a22;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+      .result-text{
+        font-size: 12px;
+        color: #5b3a22;
+        line-height: 1.45;
+      }
+      .result-text strong{ color:#b45309; }
+
+      .modal-actions{
+        display:flex;
+        gap: 10px;
+        justify-content:flex-end;
+        padding: 0 14px 14px;
       }
 
       @media (max-width: 640px) {
-        .game-shell {
-          padding: 20px 16px 22px;
-        }
-
-        .cup-stage {
-          height: 200px;
-        }
-
-        .cup {
-          width: 80px;
-          height: 100px;
-        }
+        .game-shell{ width: 100%; height: auto; min-height: 450px; }
+        .cup-stage{ height: 200px; }
+        .status-row{ grid-template-columns: 1fr; }
+        .modal-actions{ justify-content: stretch; }
+        .modal-actions .btn{ width: 100%; justify-content:center; }
       }
     </style>
   </head>
+
   <body>
-    <div class="game-shell">
+    <div class="game-shell" role="application" aria-label="컵 셔플 야바위 게임">
       <header class="game-header">
-        <h1 class="game-title">컵 셔플 야바위 게임</h1>
+        <h1 class="game-title">컵 셔플 야바위</h1>
         <p class="game-sub">
-          섞기 전에 공 위치를 잠깐 보여드립니다. 잘 기억해두셨다가, 섞기 후 공이 들어있는 컵을 맞춰보세요!
+          총 3회 도전! 1→2→3회차로 갈수록 더 빠르고 더 많이 섞습니다. (3회차는 미끼 동작도 있어요)
         </p>
+        <div class="meta-row" aria-label="진행 현황">
+          <div class="chip">회차: <strong id="roundChip">0</strong>/3</div>
+          <div class="chip">정답: <strong id="correctChip">0</strong></div>
+          <div class="chip">남은 횟수: <strong id="leftChip">3</strong></div>
+          <div class="chip">난이도: <strong id="levelChip">-</strong></div>
+        </div>
       </header>
 
-      <section class="table-area">
+      <section class="table-area" aria-label="게임 영역">
         <div class="cup-stage">
-          <!-- 컵 3개 -->
-          <div class="cup" data-id="0"></div>
-          <div class="cup" data-id="1"></div>
-          <div class="cup" data-id="2"></div>
-          <!-- 정답 공 -->
-          <div class="ball" id="ball"></div>
+          <div class="cup" data-id="0" aria-label="왼쪽 컵"></div>
+          <div class="cup" data-id="1" aria-label="가운데 컵"></div>
+          <div class="cup" data-id="2" aria-label="오른쪽 컵"></div>
+          <div class="ball" id="ball" aria-hidden="true"></div>
         </div>
 
         <div class="status-row">
           <div class="status-text" id="statusText">
-            <strong>섞기 시작하기</strong> 버튼을 누르면, 먼저 공의 위치를 잠깐 공개합니다.
+            <strong>라운드 시작</strong>을 누르면 공 위치를 잠깐 공개한 뒤 섞습니다.
           </div>
           <button type="button" class="btn primary" id="startButton">
-            섞기 시작하기 🎩
+            라운드 시작 🎩
           </button>
         </div>
-
-        <p class="hint">
-          * 실제 이벤트에서는 정답 시 쿠폰/서비스 제공 정책을 연동하시면 됩니다.
-        </p>
       </section>
+
+      <div class="footer-row">
+        <div>* 3회 종료 후, 정답 횟수(0~3)에 따라 최종 상품이 결정됩니다.</div>
+        <button type="button" class="btn ghost" id="resetAllButton">전체 초기화</button>
+      </div>
+    </div>
+
+    <!-- ✅ Modal -->
+    <div class="modal-backdrop" id="resultModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal">
+        <div class="modal-head">
+          <div class="modal-title">
+            <h2 id="modalTitle">최종 결과</h2>
+            <p>결과 화면을 직원에게 보여주면 혜택이 적용됩니다.</p>
+          </div>
+          <button class="modal-close" type="button" id="modalClose" aria-label="닫기">닫기 ✕</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="result-box">
+            <div class="result-top">
+              <span class="badge" id="modalBadge">정답 0/3</span>
+              <span class="badge" id="modalLevel">난이도 기록: Lv.1→Lv.3</span>
+            </div>
+            <div class="result-text" id="modalText">
+              -
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn ghost" id="modalReset">다시 하기 🔁</button>
+          <button type="button" class="btn primary" id="modalConfirm">확인했어요 ✅</button>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -263,104 +415,224 @@
         const cups = document.querySelectorAll(".cup");
         const ball = document.getElementById("ball");
         const startButton = document.getElementById("startButton");
+        const resetAllButton = document.getElementById("resetAllButton");
         const statusText = document.getElementById("statusText");
 
-        // 슬롯 위치: 왼, 가운데, 오른쪽
+        const roundChip = document.getElementById("roundChip");
+        const correctChip = document.getElementById("correctChip");
+        const leftChip = document.getElementById("leftChip");
+        const levelChip = document.getElementById("levelChip");
+
+        // ✅ Modal refs
+        const resultModal = document.getElementById("resultModal");
+        const modalClose = document.getElementById("modalClose");
+        const modalReset = document.getElementById("modalReset");
+        const modalConfirm = document.getElementById("modalConfirm");
+        const modalBadge = document.getElementById("modalBadge");
+        const modalLevel = document.getElementById("modalLevel");
+        const modalText = document.getElementById("modalText");
+
         const slotPositions = ["20%", "50%", "80%"];
 
-        let winningCupId = null; // 공이 들어있는 컵 ID(0,1,2)
+        const MAX_ROUNDS = 3;
+        let roundsPlayed = 0;
+        let correctCount = 0;
+
+        let winningCupId = null;
         let isShuffling = false;
         let canPick = false;
-
-        // 슬롯 인덱스 -> 컵 ID 매핑 (초기: 0,1,2)
         let slotToCup = [0, 1, 2];
+
+        const DIFFICULTY = [
+          null,
+          { name: "Lv.1", swaps: 6,  tick: 320, lift: 10, fakeChance: 0.00 },
+          { name: "Lv.2", swaps: 9,  tick: 260, lift: 12, fakeChance: 0.12 },
+          { name: "Lv.3", swaps: 12, tick: 220, lift: 14, fakeChance: 0.22 },
+        ];
+
+        function currentLevel(){
+          const r = Math.min(MAX_ROUNDS, roundsPlayed + 1);
+          return DIFFICULTY[r];
+        }
+
+        function updateChips(){
+          roundChip.textContent = String(roundsPlayed);
+          correctChip.textContent = String(correctCount);
+          leftChip.textContent = String(Math.max(0, MAX_ROUNDS - roundsPlayed));
+          levelChip.textContent = (roundsPlayed >= MAX_ROUNDS) ? "-" : currentLevel().name;
+        }
+
+        function lockCups(lock){
+          cups.forEach(c => c.classList.toggle("is-disabled", lock));
+        }
+
+        function clearCupFX(){
+          cups.forEach(cup => cup.classList.remove("reveal","is-highlight"));
+          ball.classList.remove("visible");
+        }
 
         function initPositions() {
           cups.forEach((cup, idx) => {
             cup.style.left = slotPositions[idx];
-            cup.classList.remove(
-              "reveal",
-              "is-disabled",
-              "is-highlight"
-            );
+            cup.style.transform = "translateX(-50%)";
           });
-          ball.classList.remove("visible");
+          clearCupFX();
         }
 
-        function resetGameState() {
+        function resetRoundState() {
           isShuffling = false;
           canPick = false;
           slotToCup = [0, 1, 2];
+          winningCupId = null;
           initPositions();
-          statusText.innerHTML =
-            "<strong>섞기 시작하기</strong> 버튼을 누르면, 먼저 공의 위치를 잠깐 공개합니다.";
-          startButton.textContent = "섞기 시작하기 🎩";
+          lockCups(false);
         }
 
-        // 공 위치 잠깐 보여주기
-        function revealBallThenShuffle() {
-          // 1) 랜덤으로 공이 들어있는 컵 선택
-          winningCupId = Math.floor(Math.random() * 3);
-          const winningCupEl = document.querySelector(
-            `.cup[data-id="${winningCupId}"]`
-          );
+        function resetAll() {
+          roundsPlayed = 0;
+          correctCount = 0;
+          resetRoundState();
+          updateChips();
+          startButton.disabled = false;
+          startButton.textContent = "라운드 시작 🎩";
+          statusText.innerHTML =
+            "<strong>라운드 시작</strong>을 누르면 공 위치를 잠깐 공개한 뒤 섞습니다.";
+        }
 
-          // 현재 컵 위치(초기 상태: slotToCup와 1:1 매칭)
+        function getPrizeText(score){
+          if (score === 3) return "🏆 퍼펙트: 최고급 혜택 (예: 프리미엄 서비스/쿠폰)";
+          if (score === 2) return "🥇 2회 정답: 강력 혜택 (예: 인기 메뉴/사이드)";
+          if (score === 1) return "🥈 1회 정답: 기본 혜택 (예: 소소 쿠폰)";
+          return "😅 0회 정답: 참여 감사 (예: 스탬프/다음 기회)";
+        }
+
+        /* =======================
+           ✅ Modal controls
+        ======================= */
+        let lastFocusEl = null;
+
+        function openModal(){
+          lastFocusEl = document.activeElement;
+          resultModal.classList.add("is-open");
+          // 포커스 이동
+          setTimeout(() => modalConfirm.focus(), 0);
+        }
+
+        function closeModal(){
+          resultModal.classList.remove("is-open");
+          if (lastFocusEl && typeof lastFocusEl.focus === "function") lastFocusEl.focus();
+        }
+
+        // backdrop 클릭 닫기
+        resultModal.addEventListener("click", (e) => {
+          if (e.target === resultModal) closeModal();
+        });
+
+        // ESC 닫기
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && resultModal.classList.contains("is-open")) {
+            closeModal();
+          }
+        });
+
+        modalClose.addEventListener("click", closeModal);
+        modalConfirm.addEventListener("click", closeModal);
+        modalReset.addEventListener("click", () => {
+          closeModal();
+          resetAll();
+        });
+
+        function showFinalModal(){
+          const prize = getPrizeText(correctCount);
+          modalBadge.textContent = `정답 ${correctCount}/3`;
+          modalLevel.textContent = `난이도 기록: Lv.1 → Lv.2 → Lv.3`;
+          modalText.innerHTML =
+            `✅ <strong>3회 종료!</strong> 총 <strong>${correctCount}</strong>회 정답입니다.<br/>` +
+            `<strong>최종 상품:</strong> ${prize}<br/>` +
+            `📌 이 화면을 직원에게 보여주세요.`;
+          openModal();
+        }
+
+        /* =======================
+           Game flow
+        ======================= */
+        function revealBallThenShuffle() {
+          winningCupId = Math.floor(Math.random() * 3);
+          const winningCupEl = document.querySelector(`.cup[data-id="${winningCupId}"]`);
+
           const leftPos = winningCupEl.style.left || slotPositions[winningCupId];
           ball.style.left = leftPos;
 
-          // 컵 들고 공 보여주기
           winningCupEl.classList.add("reveal", "is-highlight");
           ball.classList.add("visible");
 
-          statusText.innerHTML =
-            "👀 공 위치를 기억하세요! 잠시 후 컵을 섞습니다...";
+          statusText.innerHTML = "👀 공 위치를 기억하세요! 잠시 후 컵을 섞습니다...";
 
-          // 1.2초 후 공 숨기고 컵 다시 내린 뒤 셔플 시작
           setTimeout(() => {
             ball.classList.remove("visible");
-
             setTimeout(() => {
               winningCupEl.classList.remove("reveal");
-              setTimeout(() => {
-                winningCupEl.classList.remove("is-highlight");
-              }, 120);
-
-              // 이제 진짜 섞기 시작
+              setTimeout(() => winningCupEl.classList.remove("is-highlight"), 120);
               startShuffling();
-            }, 200);
-          }, 1200);
+            }, 180);
+          }, 850);
         }
 
-        // 실제 컵 셔플 로직
         function startShuffling() {
+          const lvl = currentLevel();
+
           isShuffling = true;
           canPick = false;
           startButton.disabled = true;
-          statusText.innerHTML = "섞는 중입니다... 눈을 떼지 마세요 👀";
+          lockCups(true);
 
-          const totalSwaps = 8;
+          statusText.innerHTML =
+            `섞는 중입니다... (${lvl.name}) 눈을 떼지 마세요 👀`;
+
+          const totalSteps = lvl.swaps;
           let step = 0;
 
+          function doFake(){
+            const a = Math.floor(Math.random() * 3);
+            const b = (Math.random() < 0.45) ? null : ((a + 1 + Math.floor(Math.random()*2)) % 3);
+
+            const cupIdA = slotToCup[a];
+            const cupElA = document.querySelector(`.cup[data-id="${cupIdA}"]`);
+            cupElA.style.transform = `translate(-50%, -${lvl.lift}px)`;
+
+            let cupElB = null;
+            if (b !== null){
+              const cupIdB = slotToCup[b];
+              cupElB = document.querySelector(`.cup[data-id="${cupIdB}"]`);
+              cupElB.style.transform = `translate(-50%, -${lvl.lift}px)`;
+            }
+
+            setTimeout(() => {
+              cupElA.style.transform = "translate(-50%, 0)";
+              if (cupElB) cupElB.style.transform = "translate(-50%, 0)";
+            }, Math.max(140, lvl.tick - 60));
+          }
+
           function doSwap() {
-            if (step >= totalSwaps) {
-              // 섞기 종료
+            if (step >= totalSteps) {
               isShuffling = false;
               canPick = true;
-              startButton.disabled = false;
-              startButton.textContent = "다시 섞기 🔁";
-              statusText.innerHTML =
-                "어디에 숨었을까요? 공이 들어있다고 생각되는 컵 하나를 선택해보세요.";
-              cups.forEach((cup) => cup.classList.remove("is-disabled"));
+              lockCups(false);
+              startButton.disabled = true;
+              statusText.innerHTML = "어디에 숨었을까요? 컵 하나를 선택해보세요.";
               return;
             }
 
-            // 서로 다른 두 슬롯 선택
+            if (Math.random() < lvl.fakeChance){
+              doFake();
+              step++;
+              setTimeout(doSwap, lvl.tick);
+              return;
+            }
+
             let s1 = Math.floor(Math.random() * 3);
             let s2;
-            do {
-              s2 = Math.floor(Math.random() * 3);
-            } while (s2 === s1);
+            do { s2 = Math.floor(Math.random() * 3); } while (s2 === s1);
 
             const cupId1 = slotToCup[s1];
             const cupId2 = slotToCup[s2];
@@ -368,73 +640,64 @@
             const cupEl1 = document.querySelector(`.cup[data-id="${cupId1}"]`);
             const cupEl2 = document.querySelector(`.cup[data-id="${cupId2}"]`);
 
-            // 살짝 들어올렸다가 교환
-            cupEl1.style.transform = "translate(-50%, -12px)";
-            cupEl2.style.transform = "translate(-50%, -12px)";
+            cupEl1.style.transform = `translate(-50%, -${lvl.lift}px)`;
+            cupEl2.style.transform = `translate(-50%, -${lvl.lift}px)`;
 
             setTimeout(() => {
               cupEl1.style.left = slotPositions[s2];
               cupEl2.style.left = slotPositions[s1];
-            }, 80);
+            }, 70);
 
             setTimeout(() => {
               cupEl1.style.transform = "translate(-50%, 0)";
               cupEl2.style.transform = "translate(-50%, 0)";
-            }, 220);
+            }, Math.max(170, lvl.tick - 70));
 
-            // 매핑 갱신: 슬롯에 들어있는 컵 ID 교환
             const temp = slotToCup[s1];
             slotToCup[s1] = slotToCup[s2];
             slotToCup[s2] = temp;
 
             step++;
-            setTimeout(doSwap, 320);
+            setTimeout(doSwap, lvl.tick);
           }
 
-          cups.forEach((cup) => {
-            cup.classList.add("is-disabled");
-          });
-
-          setTimeout(doSwap, 300);
+          setTimeout(doSwap, 220);
         }
 
-        // 결과 공개
         function revealResult(chosenId) {
           canPick = false;
-          startButton.disabled = false;
 
-          const winningCupEl = document.querySelector(
-            `.cup[data-id="${winningCupId}"]`
-          );
-
-          const winningLeft =
-            winningCupEl.style.left ||
-            slotPositions[
-              slotToCup.indexOf(winningCupId) >= 0
-                ? slotToCup.indexOf(winningCupId)
-                : 1
-            ];
+          const winningCupEl = document.querySelector(`.cup[data-id="${winningCupId}"]`);
+          const winningLeft = winningCupEl.style.left || slotPositions[1];
 
           ball.style.left = winningLeft;
           winningCupEl.classList.add("reveal", "is-highlight");
           ball.classList.add("visible");
 
-          cups.forEach((cup) => {
-            if (parseInt(cup.dataset.id, 10) !== winningCupId) {
-              cup.classList.add("is-disabled");
-            }
-          });
+          lockCups(true);
 
-          if (chosenId === winningCupId) {
+          const isCorrect = (chosenId === winningCupId);
+          if (isCorrect) correctCount++;
+
+          roundsPlayed++;
+          updateChips();
+
+          if (isCorrect) {
             statusText.innerHTML =
-              "🎉 <strong>정답!</strong> 공이 들어있던 컵을 정확히 맞추셨습니다.";
+              `🎉 <strong>정답!</strong> (${roundsPlayed}/3) 지금까지 <strong>${correctCount}</strong>회 성공!`;
           } else {
             statusText.innerHTML =
-              "😢 아쉽습니다! 선택하신 컵에는 공이 없었어요. 정답 컵을 확인해보세요.";
+              `😢 아쉽! (${roundsPlayed}/3) 지금까지 <strong>${correctCount}</strong>회 성공!`;
+          }
+
+          startButton.disabled = false;
+          if (roundsPlayed >= MAX_ROUNDS) {
+            startButton.textContent = "최종 결과 보기 🎁";
+          } else {
+            startButton.textContent = `다음 라운드 (${roundsPlayed+1}/3) ▶`;
           }
         }
 
-        // 컵 클릭
         cups.forEach((cup) => {
           cup.addEventListener("click", () => {
             if (!canPick || isShuffling) return;
@@ -443,16 +706,28 @@
           });
         });
 
-        // 시작 버튼
         startButton.addEventListener("click", () => {
-          if (isShuffling) return;
-          resetGameState();          // 기본 상태 세팅
+          if (roundsPlayed >= MAX_ROUNDS) {
+            // ✅ 최종 결과: status-row 문구 변경 대신 모달 오픈
+            showFinalModal();
+            return;
+          }
+
+          resetRoundState();
           startButton.disabled = true;
-          revealBallThenShuffle();   // 공 먼저 보여주고 셔플 시작
+          startButton.textContent = "섞는 중... 🎩";
+
+          const lvl = currentLevel();
+          statusText.innerHTML =
+            `<strong>${roundsPlayed+1}회차</strong> 시작! 난이도 <strong>${lvl.name}</strong> — 공 위치를 잠깐 공개합니다.`;
+
+          revealBallThenShuffle();
+          updateChips();
         });
 
-        // 최초 레이아웃 세팅
-        initPositions();
+        resetAllButton.addEventListener("click", resetAll);
+
+        resetAll();
       })();
     </script>
   </body>
