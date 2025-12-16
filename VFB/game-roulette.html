@@ -191,6 +191,17 @@
       }
       .game-result strong{ color:#b45309; }
 
+      /* ✅ game-shell 하단 관리자 버튼 */
+      .admin-row{
+        display:flex;
+        justify-content:center;
+        padding-top: 2px;
+      }
+      .btn.admin{
+        width: 100%;
+        max-width: 320px;
+      }
+
       /* ✅ 범례 박스 (game-shell 아래) */
       .legend-shell{
         width: 600px;
@@ -250,6 +261,68 @@
       .c5 { background: #6ee7b7; }
       .c6 { background: #e5e7eb; }
 
+      /* ✅ NEW: 결과/보상 안내 박스 */
+      .reward-shell{
+        width: 600px;
+        background: rgba(255,250,245,.88);
+        border-radius: 18px;
+        border: 1px solid rgba(193, 160, 120, 0.35);
+        box-shadow: 0 10px 26px rgba(120, 72, 37, 0.10);
+        padding: 12px;
+        display:grid;
+        gap: 10px;
+      }
+
+      .reward-head{
+        display:flex;
+        align-items:flex-end;
+        justify-content:space-between;
+        gap: 10px;
+        flex-wrap:wrap;
+      }
+
+      .reward-head h3{
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        color:#5a3a22;
+      }
+
+      .reward-note{
+        font-size: 11px;
+        color:#8b6544;
+        line-height: 1.35;
+      }
+
+      .reward-summary{
+        border-radius: 14px;
+        border: 1px solid rgba(148,104,63,.22);
+        background: rgba(255,255,255,.78);
+        padding: 10px;
+        display:grid;
+        gap: 6px;
+        font-size: 12px;
+        color:#6b4a30;
+      }
+      .reward-summary strong{ color:#b45309; }
+
+      .reward-grid{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        font-size: 12px;
+      }
+
+      .reward-card{
+        background: rgba(255,255,255,.78);
+        border: 1px solid rgba(148,104,63,.22);
+        border-radius: 14px;
+        padding: 10px;
+        display:grid;
+        gap: 6px;
+      }
+      .reward-card strong{ color:#3a2415; }
+
       @media (max-width: 640px){
         body{ gap: 10px; }
         .game-shell{
@@ -257,7 +330,7 @@
           height: auto;
           min-height: 450px;
         }
-        .legend-shell{ width: 100%; }
+        .legend-shell, .reward-shell{ width: 100%; }
         .wheel-wrap{ width: 280px; }
         .game-legend{ grid-template-columns: 1fr; }
 
@@ -267,6 +340,8 @@
         .control-row{ flex-direction:column; align-items:stretch; }
         #spinButton{ width:100%; }
         .seed-buttons{ justify-content:center; }
+
+        .reward-grid{ grid-template-columns: 1fr; }
       }
     </style>
   </head>
@@ -306,9 +381,37 @@
         </div>
 
         <div class="game-result" id="resultText">시드 번호를 선택하고 룰렛을 돌려보세요.</div>
+
+        <!-- ✅ 요청: game-shell 안 하단 관리자 버튼 -->
+        <div class="admin-row" aria-label="관리자 제출">
+          <button class="btn primary admin" id="adminSubmitBtn" disabled>관리자 확인/제출하기 ✅</button>
+        </div>
       </div>
     </div>
 
+    <!-- ✅ NEW: 결과 및 보상 안내 박스 -->
+    <div class="reward-shell" aria-label="결과 및 보상 안내">
+      <div class="reward-head">
+        <h3>결과 및 보상 안내</h3>
+        <div class="reward-note">* 결과 화면을 직원에게 보여주면 혜택이 적용됩니다.</div>
+      </div>
+
+      <div class="reward-summary">
+        <div>현재 결과: <strong id="rewardResultLabel">-</strong></div>
+        <div>보상 안내: <span id="rewardHint">룰렛을 돌리면 결과가 여기에 표시됩니다.</span></div>
+      </div>
+
+      <div class="reward-grid">
+        <div class="reward-card"><strong>캔 음료 1개</strong><div style="font-size:11px;color:#6b4a30;">즉시 제공 가능</div></div>
+        <div class="reward-card"><strong>면류 1접시</strong><div style="font-size:11px;color:#6b4a30;">식사 중 제공</div></div>
+        <div class="reward-card"><strong>포켓 핫팩</strong><div style="font-size:11px;color:#6b4a30;">굿즈 제공</div></div>
+        <div class="reward-card"><strong>당일 만원 할인</strong><div style="font-size:11px;color:#6b4a30;">결제 시 적용</div></div>
+        <div class="reward-card"><strong>재방문 50% 할인</strong><div style="font-size:11px;color:#6b4a30;">다음 방문 적용</div></div>
+        <div class="reward-card"><strong>꽝</strong><div style="font-size:11px;color:#6b4a30;">다음 기회에!</div></div>
+      </div>
+    </div>
+
+    <!-- (기존) 범례 박스 -->
     <div class="legend-shell" aria-label="상품 범례">
       <div class="legend-title">
         <div>상품 범례</div>
@@ -330,16 +433,22 @@
 
         const spinButton = document.getElementById("spinButton");
         const resetButton = document.getElementById("resetButton");
+        const adminSubmitBtn = document.getElementById("adminSubmitBtn");
+
         const resultText = document.getElementById("resultText");
         const seedInputs = document.querySelectorAll("input[name='seed']");
 
+        // ✅ NEW: 결과/보상 안내 박스 연결
+        const rewardResultLabel = document.getElementById("rewardResultLabel");
+        const rewardHint = document.getElementById("rewardHint");
+
         const prizes = [
-          { label: "꽝", prob: 0.2, ds: 0,   de: 72 },
-          { label: "재방문시 50% 할인", prob: 0.1, ds: 72,  de: 108 },
-          { label: "당일 결제금액 만원 할인", prob: 0.1, ds: 108, de: 144 },
-          { label: "포켓 핫팩", prob: 0.2, ds: 144, de: 216 },
-          { label: "면류 1접시", prob: 0.2, ds: 216, de: 288 },
-          { label: "캔 음료 1개", prob: 0.2, ds: 288, de: 360 },
+          { label: "꽝", prob: 0.2, ds: 0,   de: 72,  hint: "😅 아쉽지만 다음 기회에!" },
+          { label: "재방문시 50% 할인", prob: 0.1, ds: 72,  de: 108, hint: "🎫 다음 방문 결제 시 적용(직원 확인)" },
+          { label: "당일 결제금액 만원 할인", prob: 0.1, ds: 108, de: 144, hint: "💳 오늘 결제 시 즉시 할인 적용" },
+          { label: "포켓 핫팩", prob: 0.2, ds: 144, de: 216, hint: "🔥 굿즈 제공(재고 상황에 따라 대체 가능)" },
+          { label: "면류 1접시", prob: 0.2, ds: 216, de: 288, hint: "🍜 식사 중 1회 제공" },
+          { label: "캔 음료 1개", prob: 0.2, ds: 288, de: 360, hint: "🥤 즉시 제공 가능" },
         ];
 
         const sectorAngles = [0, 72, 144, 216, 252, 288, 360];
@@ -348,6 +457,7 @@
         let currentRotation = 0;
         let isSpinning = false;
         let hasResult = false;
+        let lastChosen = null;
 
         function getSeed() {
           return parseInt(document.querySelector("input[name='seed']:checked").value, 10);
@@ -368,19 +478,26 @@
           if (state === "ready"){
             spinButton.disabled = false;
             resetButton.disabled = true;
+            adminSubmitBtn.disabled = true;
             setSeedsDisabled(false);
             hasResult = false;
+            lastChosen = null;
+
+            rewardResultLabel.textContent = "-";
+            rewardHint.textContent = "룰렛을 돌리면 결과가 여기에 표시됩니다.";
             return;
           }
           if (state === "spinning"){
             spinButton.disabled = true;
             resetButton.disabled = true;
+            adminSubmitBtn.disabled = true;
             setSeedsDisabled(true);
             return;
           }
           if (state === "done"){
             spinButton.disabled = true;
             resetButton.disabled = false;
+            adminSubmitBtn.disabled = false; // ✅ 결과 후 활성화
             setSeedsDisabled(true);
             hasResult = true;
             return;
@@ -461,6 +578,7 @@
             isSpinning = false;
 
             const chosen = whichPrizeByRotation(currentRotation);
+            lastChosen = chosen;
 
             if (chosen.label === "꽝") {
               resultText.innerHTML = `아쉽지만 이번에는 <strong>꽝</strong>입니다.`;
@@ -468,9 +586,23 @@
               resultText.innerHTML = `축하합니다! <strong>${chosen.label}</strong> 당첨!`;
             }
 
+            // ✅ NEW: 아래 결과/보상 박스 업데이트
+            rewardResultLabel.textContent = chosen.label;
+            rewardHint.textContent = chosen.hint;
+
             setUIState("done");
           }, 2500);
         }
+
+        adminSubmitBtn.addEventListener("click", () => {
+          if (!lastChosen) return;
+          alert(
+            `관리자 확인/제출 ✅\n\n` +
+            `결과: ${lastChosen.label}\n` +
+            `안내: ${lastChosen.hint}\n\n` +
+            `직원에게 본 화면을 보여주세요.`
+          );
+        });
 
         spinButton.addEventListener("click", spinWheel);
         resetButton.addEventListener("click", resetGame);

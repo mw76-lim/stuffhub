@@ -42,7 +42,13 @@
         display:flex;
         gap:10px;
         flex-wrap:wrap;
-        justify-content:center;
+        justify-content:space-between; /* ✅ 오른쪽 끝 배치 */
+        align-items:center;
+      }
+      .actions-left{
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
         align-items:center;
       }
 
@@ -136,14 +142,6 @@
         background:#151515;
       }
 
-      .hint{
-        font-size:11px;
-        color:#8b6544;
-        text-align:center;
-        line-height:1.45;
-        padding: 0 6px;
-      }
-
       /* ✅ info box (game-shell 아래) */
       .info-shell{
         width:600px;
@@ -210,6 +208,7 @@
         .game-shell{ height:auto; min-height:450px; }
         .prize-list{ grid-template-columns: 1fr; }
         .pick-row{ grid-template-columns: 1fr 1fr; }
+        .actions{ justify-content: center; } /* 모바일은 가운데 정렬 */
       }
     </style>
   </head>
@@ -224,12 +223,18 @@
       </header>
 
       <div class="actions">
-        <button class="btn primary" id="regenBtn">사다리 새로 만들기 🔁</button>
+        <!-- ✅ 왼쪽 그룹 -->
+        <div class="actions-left">
+          <button class="btn primary" id="regenBtn">사다리 새로 만들기 🔁</button>
 
-        <div class="counters" aria-label="카운터">
-          <span class="pill">새로 만들기 <strong id="regenCount">0</strong>회</span>
-          <span class="pill">사다리 타기 <strong id="playCount">0</strong>회</span>
+          <div class="counters" aria-label="카운터">
+            <span class="pill">새로 만들기 <strong id="regenCount">0</strong>회</span>
+            <span class="pill">사다리 타기 <strong id="playCount">0</strong>회</span>
+          </div>
         </div>
+
+        <!-- ✅ 오른쪽 끝: 관리자 버튼 -->
+        <button class="btn" id="adminSubmitBtn" disabled>관리자 확인/제출하기 ✅</button>
       </div>
 
       <div class="pick-row" id="pickRow" aria-label="START 선택">
@@ -246,19 +251,20 @@
           <canvas id="ladderCanvas" width="1100" height="1600"></canvas>
         </div>
       </section>
-
     </div>
 
     <div class="info-shell" aria-label="결과 및 보상">
       <div class="info-head">
-        <h3>도착 결과(END 1~6)</h3>
+        <h3>진행상황</h3>
       </div>
-
-      <div class="prize-list" id="prizeList"></div>
-
       <div class="result" id="resultBox">
         START를 선택해 게임을 진행하세요.
       </div>
+
+      <div class="info-head">
+        <h3>결과 및 보상 안내</h3>
+      </div>
+      <div class="prize-list" id="prizeList"></div>
     </div>
 
     <script>
@@ -296,6 +302,9 @@
         const regenBtn = document.getElementById("regenBtn");
         const canvasScroll = document.getElementById("canvasScroll");
 
+        // ✅ 관리자 버튼
+        const adminSubmitBtn = document.getElementById("adminSubmitBtn");
+
         // ✅ 카운터
         const regenCountEl = document.getElementById("regenCount");
         const playCountEl = document.getElementById("playCount");
@@ -305,9 +314,17 @@
         let rungs = [];
         let animating = false;
 
+        // ✅ 제출 데이터(데모)
+        let lastResult = null; // { startCol, endCol, prizeTitle, badge }
+
         function updatePickAvailability(){
           const canPlay = playCount < MAX_PLAY_PER_LADDER && !animating;
           pickButtons.forEach(btn => btn.disabled = !canPlay);
+        }
+
+        function updateAdminAvailability(){
+          // 플레이 결과가 있고, 애니메이션 중이 아닐 때만 활성
+          adminSubmitBtn.disabled = !(lastResult && !animating);
         }
 
         function drawPrizeList(){
@@ -482,35 +499,36 @@
           return marker;
         }
 
-        function setPickDisabled(disabled){
-          pickButtons.forEach(b => b.disabled = disabled);
-        }
-
         function showResult(endCol, startCol){
           const prize = prizesByEndCol[endCol];
           resultBox.innerHTML =
             `START <strong>${startCol+1}</strong> → END <strong>${endCol+1}</strong><br>` +
             `결과: <strong>${prize.title}</strong> <span style="color:#8b6544;">(${prize.badge})</span>`;
+
+          lastResult = {
+            startCol,
+            endCol,
+            prizeTitle: prize.title,
+            badge: prize.badge
+          };
+          updateAdminAvailability();
         }
 
         // ✅ 진행 상황에 맞춰 스크롤 따라가기
         function followScroll(markerYCanvas){
           if (!markerYCanvas) return;
 
-          // canvas는 CSS로 축소될 수 있으니 scale 계산
           const renderedCanvasH = canvas.getBoundingClientRect().height;
           const scale = renderedCanvasH / canvas.height;
 
           const markerYRendered = markerYCanvas * scale;
 
-          // 마커가 컨테이너 중간쯤 오게(약 35% 위치)
           const offset = canvasScroll.clientHeight * 0.35;
           const desired = markerYRendered - offset;
 
           const maxScroll = canvasScroll.scrollHeight - canvasScroll.clientHeight;
           const next = Math.max(0, Math.min(maxScroll, desired));
 
-          // 너무 딱딱하지 않게 약간 보간
           canvasScroll.scrollTop = canvasScroll.scrollTop + (next - canvasScroll.scrollTop) * 0.18;
         }
 
@@ -520,6 +538,7 @@
 
           updatePickAvailability();
           regenBtn.disabled = true;
+          updateAdminAvailability();
 
           const { points, endCol } = buildPathPoints(startCol);
           const start = performance.now();
@@ -537,6 +556,7 @@
               regenBtn.disabled = false;
               updatePickAvailability();
               showResult(endCol, startCol);
+              updateAdminAvailability();
             }
           };
 
@@ -552,12 +572,11 @@
 
           const startCol = parseInt(btn.dataset.start, 10);
 
-          // ✅ 사다리 타기 횟수 증가
           playCount += 1;
           playCountEl.textContent = String(playCount);
 
-          // ✅ 횟수 초과 시 START 버튼 비활성화
           updatePickAvailability();
+          updateAdminAvailability();
 
           resultBox.textContent = "경로를 따라 내려가는 중입니다...";
           canvasScroll.scrollTo({ top: 0, behavior: "smooth" });
@@ -568,32 +587,66 @@
         regenBtn.addEventListener("click", () => {
           if (animating) return;
 
-          // ✅ 사다리 새로 만들기 횟수 증가
           regenCount += 1;
           regenCountEl.textContent = String(regenCount);
 
-          // ✅ 사다리 타기 횟수 초기화
           playCount = 0;
           playCountEl.textContent = "0";
+
+          // ✅ 새 사다리 만들면 제출도 다시 비활성(결과 무효)
+          lastResult = null;
+          updateAdminAvailability();
 
           generateLadder();
           drawStatic();
 
           resultBox.textContent = "새 사다리가 생성되었습니다. START를 선택하세요.";
 
-          // ✅ 다시 START 가능
           updatePickAvailability();
-
           canvasScroll.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // ✅ 관리자 제출(데모)
+        adminSubmitBtn.addEventListener("click", () => {
+          if (!lastResult) return;
+          alert(
+            `관리자 확인/제출 ✅\n\n` +
+            `START: ${lastResult.startCol + 1}\n` +
+            `END: ${lastResult.endCol + 1}\n` +
+            `결과: ${lastResult.prizeTitle} (${lastResult.badge})\n\n` +
+            `※ 운영 연동 시 서버/QR/쿠폰 발급으로 연결`
+          );
+
+          fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              title: "API 테스트 제목",
+              body: "프론트엔드에서 POST 호출 테스트 중입니다.",
+              userId: 1
+            })
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log("응답:", data);
+            if (data.userId == 1) alert("성공");
+            else alert("실패");
+          })
+          .catch(err => console.error(err));
+
+
         });
 
         // ===== 초기화 =====
         drawPrizeList();
         generateLadder();
         drawStatic();
-        setPickDisabled(false);
         regenCountEl.textContent = "0";
         playCountEl.textContent = "0";
+        updatePickAvailability();
+        updateAdminAvailability();
       })();
     </script>
   </body>
