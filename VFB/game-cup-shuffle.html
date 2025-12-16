@@ -14,6 +14,7 @@
         --muted:#6b4a30;
         --line:rgba(193, 160, 120, 0.5);
         --shadow:0 16px 40px rgba(120, 72, 37, 0.18);
+        --shadow-soft:0 10px 26px rgba(120,72,37,.10);
         --radius:24px;
       }
 
@@ -21,6 +22,7 @@
         min-height: 100vh;
         display: grid;
         place-items: center;
+        gap: 12px;
         background: var(--bg);
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: var(--ink);
@@ -42,10 +44,20 @@
         gap: 10px;
       }
 
+      /* ✅ 상단바: 타이틀/리셋 */
+      .topbar{
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap: 10px;
+      }
+
       .game-header {
         text-align: center;
         display: grid;
         gap: 6px;
+        min-width: 0;
+        flex: 1 1 auto;
       }
 
       .game-title {
@@ -61,6 +73,34 @@
         margin: 0 auto;
         max-width: 56ch;
       }
+
+      .btn {
+        border-radius: 999px;
+        padding: 9px 12px;
+        font-size: 12px;
+        border: 1px solid rgba(148, 104, 63, 0.55);
+        background: rgba(255,255,255,.85);
+        color: #3a2415;
+        font-weight: 900;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+        white-space: nowrap;
+        box-shadow: 0 10px 18px rgba(120,72,37,.10);
+        flex: 0 0 auto;
+      }
+      .btn.primary {
+        background: linear-gradient(120deg, #f97316, #fbbf24);
+        border-color: transparent;
+        color: #3b1f0a;
+        box-shadow: 0 10px 22px rgba(201, 93, 39, 0.45);
+      }
+      .btn.ghost { background: rgba(255,255,255,.75); }
+      .btn:hover:not([disabled]) { transform: translateY(-1px); box-shadow: 0 14px 26px rgba(120,72,37,.16); }
+      .btn:active:not([disabled]) { transform: translateY(0); box-shadow: 0 10px 18px rgba(120,72,37,.10); }
+      .btn[disabled] { opacity: 0.6; cursor: default; box-shadow: none; transform:none; }
 
       .meta-row{
         display:flex;
@@ -92,10 +132,7 @@
         min-height: 0;
       }
 
-      .cup-stage {
-        position: relative;
-        height: 190px;
-      }
+      .cup-stage { position: relative; height: 190px; }
 
       .cup {
         position: absolute;
@@ -111,7 +148,6 @@
         transition: left 0.32s ease, transform 0.18s ease, opacity .12s ease;
         cursor: pointer;
       }
-
       .cup::before {
         content: "";
         position: absolute;
@@ -124,7 +160,6 @@
         background: radial-gradient(circle at top, #ffffff, #e8d6c0);
         box-shadow: 0 2px 4px rgba(124, 78, 38, 0.25);
       }
-
       .cup::after {
         content: "";
         position: absolute;
@@ -171,41 +206,8 @@
         align-items: center;
         font-size: 12px;
       }
-
-      .status-text {
-        color: var(--muted);
-        line-height: 1.35;
-      }
+      .status-text { color: var(--muted); line-height: 1.35; }
       .status-text strong { color: #b45309; }
-
-      .btn {
-        border-radius: 999px;
-        padding: 9px 14px;
-        font-size: 12px;
-        border: 1px solid rgba(148, 104, 63, 0.65);
-        background: #fff;
-        color: #3a2415;
-        font-weight: 700;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        transition: 0.15s ease;
-        white-space: nowrap;
-      }
-      .btn.primary {
-        background: linear-gradient(120deg, #f97316, #fbbf24);
-        border-color: transparent;
-        color: #3b1f0a;
-        box-shadow: 0 10px 22px rgba(201, 93, 39, 0.45);
-      }
-      .btn.ghost { background: rgba(255,255,255,.75); }
-      .btn:hover:not([disabled]) {
-        transform: translateY(-1px);
-        box-shadow: 0 12px 24px rgba(201, 93, 39, 0.5);
-      }
-      .btn:active:not([disabled]) { transform: translateY(0); box-shadow: none; }
-      .btn[disabled] { opacity: 0.6; cursor: default; box-shadow: none; }
 
       .footer-row{
         display:flex;
@@ -217,8 +219,104 @@
         padding: 0 4px;
       }
 
+      /* ✅ 결과/보상 박스 (game-shell 아래) */
+      .reward-shell{
+        width: 600px;
+        background: rgba(255,250,245,.88);
+        border-radius: 18px;
+        border: 1px solid rgba(193, 160, 120, 0.35);
+        box-shadow: var(--shadow-soft);
+        padding: 12px;
+        display:grid;
+        gap: 10px;
+      }
+
+      .reward-head{
+        display:flex;
+        align-items:flex-end;
+        justify-content:space-between;
+        gap: 10px;
+        flex-wrap:wrap;
+      }
+      .reward-head h3{
+        font-size: 13px;
+        font-weight: 950;
+        letter-spacing: -0.02em;
+        color:#5a3a22;
+      }
+      .reward-head .note{
+        font-size: 11px;
+        color:#8b6544;
+        line-height: 1.35;
+      }
+
+      .reward-grid{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .reward-card{
+        background: rgba(255,255,255,.78);
+        border: 1px solid rgba(148,104,63,.22);
+        border-radius: 14px;
+        padding: 10px;
+        display:grid;
+        gap: 6px;
+      }
+      .reward-top{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap: 8px;
+        flex-wrap:wrap;
+      }
+      .reward-top strong{
+        font-size: 12px;
+        color:#3a2415;
+        letter-spacing: -0.01em;
+      }
+      .reward-badge{
+        font-size: 11px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(148,104,63,.25);
+        background: rgba(255,255,255,.9);
+        color:#5a3a22;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+      .reward-desc{
+        font-size: 11.5px;
+        color:#6b4a30;
+        line-height: 1.35;
+      }
+
+      /* ✅ 현재 결과 요약(실시간) */
+      .summary{
+        border-radius: 16px;
+        border: 1px solid rgba(148,104,63,.22);
+        background: rgba(255,255,255,.78);
+        padding: 12px;
+        display:grid;
+        gap: 8px;
+      }
+      .summary .row{
+        display:flex;
+        justify-content:space-between;
+        gap: 10px;
+        font-size: 12px;
+        color:#6b4a30;
+      }
+      .summary .row strong{ color:#b45309; }
+      .summary .final{
+        font-size: 12px;
+        color:#5a3a22;
+        line-height: 1.45;
+      }
+
       /* =======================
-         ✅ Modal
+         ✅ Modal (원본 유지)
       ======================= */
       .modal-backdrop{
         position: fixed;
@@ -245,9 +343,7 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
       }
-      @keyframes pop{
-        to { transform: translateY(0); opacity: 1; }
-      }
+      @keyframes pop{ to { transform: translateY(0); opacity: 1; } }
 
       .modal-head{
         padding: 14px 14px 10px;
@@ -261,20 +357,9 @@
           radial-gradient(circle at 92% 10%, rgba(251,191,36,.18), rgba(255,255,255,0) 64%);
       }
 
-      .modal-title{
-        display:grid;
-        gap:4px;
-      }
-      .modal-title h2{
-        font-size: 14px;
-        font-weight: 900;
-        letter-spacing: -0.02em;
-      }
-      .modal-title p{
-        font-size: 11.5px;
-        color: #6b4a30;
-        line-height: 1.35;
-      }
+      .modal-title{ display:grid; gap:4px; }
+      .modal-title h2{ font-size: 14px; font-weight: 900; letter-spacing: -0.02em; }
+      .modal-title p{ font-size: 11.5px; color: #6b4a30; line-height: 1.35; }
 
       .modal-close{
         border: 1px solid rgba(148,104,63,.35);
@@ -286,11 +371,7 @@
         cursor: pointer;
       }
 
-      .modal-body{
-        padding: 12px 14px;
-        display:grid;
-        gap: 10px;
-      }
+      .modal-body{ padding: 12px 14px; display:grid; gap: 10px; }
 
       .result-box{
         border: 1px solid rgba(148,104,63,.25);
@@ -333,8 +414,14 @@
 
       @media (max-width: 640px) {
         .game-shell{ width: 100%; height: auto; min-height: 450px; }
+        .reward-shell{ width: 100%; }
+        .reward-grid{ grid-template-columns: 1fr; }
         .cup-stage{ height: 200px; }
         .status-row{ grid-template-columns: 1fr; }
+
+        .topbar{ align-items:center; }
+        #resetAllButton{ width:auto; }
+
         .modal-actions{ justify-content: stretch; }
         .modal-actions .btn{ width: 100%; justify-content:center; }
       }
@@ -343,18 +430,23 @@
 
   <body>
     <div class="game-shell" role="application" aria-label="컵 셔플 야바위 게임">
-      <header class="game-header">
-        <h1 class="game-title">컵 셔플 야바위</h1>
-        <p class="game-sub">
-          총 3회 도전! 1→2→3회차로 갈수록 더 빠르고 더 많이 섞습니다. (3회차는 미끼 동작도 있어요)
-        </p>
-        <div class="meta-row" aria-label="진행 현황">
-          <div class="chip">회차: <strong id="roundChip">0</strong>/3</div>
-          <div class="chip">정답: <strong id="correctChip">0</strong></div>
-          <div class="chip">남은 횟수: <strong id="leftChip">3</strong></div>
-          <div class="chip">난이도: <strong id="levelChip">-</strong></div>
-        </div>
-      </header>
+      <!-- ✅ 상단에 resetAllButton 배치 -->
+      <div class="topbar">
+        <header class="game-header">
+          <h1 class="game-title">컵 셔플 야바위</h1>
+          <p class="game-sub">
+            총 3회 도전! 1→2→3회차로 갈수록 더 빠르고 더 많이 섞습니다. (3회차는 미끼 동작도 있어요)
+          </p>
+          <div class="meta-row" aria-label="진행 현황">
+            <div class="chip">회차: <strong id="roundChip">0</strong>/3</div>
+            <div class="chip">정답: <strong id="correctChip">0</strong></div>
+            <div class="chip">남은 횟수: <strong id="leftChip">3</strong></div>
+            <div class="chip">난이도: <strong id="levelChip">-</strong></div>
+          </div>
+        </header>
+
+        <button type="button" class="btn ghost" id="resetAllButton">전체 초기화 🔁</button>
+      </div>
 
       <section class="table-area" aria-label="게임 영역">
         <div class="cup-stage">
@@ -376,7 +468,70 @@
 
       <div class="footer-row">
         <div>* 3회 종료 후, 정답 횟수(0~3)에 따라 최종 상품이 결정됩니다.</div>
-        <button type="button" class="btn ghost" id="resetAllButton">전체 초기화</button>
+        <div></div>
+      </div>
+    </div>
+
+    <!-- ✅ game-shell 아래: 결과/보상 박스 -->
+    <div class="reward-shell" aria-label="결과 및 보상 안내">
+      <div class="reward-head">
+        <h3>결과 및 보상 안내</h3>
+        <div class="note">
+          * 최종 결과는 <strong>3회 종료 후</strong> 확정됩니다.<br/>
+          * 직원에게 화면을 보여주면 혜택이 적용됩니다.
+        </div>
+      </div>
+
+      <div class="reward-grid" aria-label="보상 기준">
+        <div class="reward-card">
+          <div class="reward-top">
+            <strong>정답 3회</strong>
+            <span class="reward-badge">퍼펙트</span>
+          </div>
+          <div class="reward-desc">🏆 최고급 혜택 (예: 프리미엄 서비스/쿠폰)</div>
+        </div>
+
+        <div class="reward-card">
+          <div class="reward-top">
+            <strong>정답 2회</strong>
+            <span class="reward-badge">강력</span>
+          </div>
+          <div class="reward-desc">🥇 강력 혜택 (예: 인기 메뉴/사이드)</div>
+        </div>
+
+        <div class="reward-card">
+          <div class="reward-top">
+            <strong>정답 1회</strong>
+            <span class="reward-badge">기본</span>
+          </div>
+          <div class="reward-desc">🥈 기본 혜택 (예: 소소 쿠폰)</div>
+        </div>
+
+        <div class="reward-card">
+          <div class="reward-top">
+            <strong>정답 0회</strong>
+            <span class="reward-badge">참여</span>
+          </div>
+          <div class="reward-desc">😅 참여 감사 (예: 스탬프/다음 기회)</div>
+        </div>
+      </div>
+
+      <div class="summary" aria-label="현재 진행 요약">
+        <div class="row">
+          <div>현재 회차</div>
+          <div><strong><span id="sumRound">0</span></strong>/3</div>
+        </div>
+        <div class="row">
+          <div>누적 정답</div>
+          <div><strong><span id="sumCorrect">0</span></strong>회</div>
+        </div>
+        <div class="row">
+          <div>남은 기회</div>
+          <div><strong><span id="sumLeft">3</span></strong>회</div>
+        </div>
+        <div class="final" id="sumHint">
+          지금은 진행 중입니다. 3회 종료 후 최종 결과가 확정됩니다.
+        </div>
       </div>
     </div>
 
@@ -397,9 +552,7 @@
               <span class="badge" id="modalBadge">정답 0/3</span>
               <span class="badge" id="modalLevel">난이도 기록: Lv.1→Lv.3</span>
             </div>
-            <div class="result-text" id="modalText">
-              -
-            </div>
+            <div class="result-text" id="modalText">-</div>
           </div>
         </div>
 
@@ -422,6 +575,12 @@
         const correctChip = document.getElementById("correctChip");
         const leftChip = document.getElementById("leftChip");
         const levelChip = document.getElementById("levelChip");
+
+        // ✅ Summary refs (below box)
+        const sumRound = document.getElementById("sumRound");
+        const sumCorrect = document.getElementById("sumCorrect");
+        const sumLeft = document.getElementById("sumLeft");
+        const sumHint = document.getElementById("sumHint");
 
         // ✅ Modal refs
         const resultModal = document.getElementById("resultModal");
@@ -455,11 +614,34 @@
           return DIFFICULTY[r];
         }
 
+        function getPrizeText(score){
+          if (score === 3) return "🏆 퍼펙트: 최고급 혜택 (예: 프리미엄 서비스/쿠폰)";
+          if (score === 2) return "🥇 2회 정답: 강력 혜택 (예: 인기 메뉴/사이드)";
+          if (score === 1) return "🥈 1회 정답: 기본 혜택 (예: 소소 쿠폰)";
+          return "😅 0회 정답: 참여 감사 (예: 스탬프/다음 기회)";
+        }
+
+        function updateSummary(){
+          sumRound.textContent = String(roundsPlayed);
+          sumCorrect.textContent = String(correctCount);
+          sumLeft.textContent = String(Math.max(0, MAX_ROUNDS - roundsPlayed));
+
+          if (roundsPlayed >= MAX_ROUNDS){
+            sumHint.innerHTML =
+              `✅ <strong>3회 종료</strong> · 최종 상품: <strong>${getPrizeText(correctCount)}</strong>`;
+          } else {
+            const lvl = currentLevel()?.name || "-";
+            sumHint.innerHTML =
+              `진행 중입니다. 다음 회차 난이도는 <strong>${lvl}</strong> 입니다.`;
+          }
+        }
+
         function updateChips(){
           roundChip.textContent = String(roundsPlayed);
           correctChip.textContent = String(correctCount);
           leftChip.textContent = String(Math.max(0, MAX_ROUNDS - roundsPlayed));
           levelChip.textContent = (roundsPlayed >= MAX_ROUNDS) ? "-" : currentLevel().name;
+          updateSummary();
         }
 
         function lockCups(lock){
@@ -499,13 +681,6 @@
             "<strong>라운드 시작</strong>을 누르면 공 위치를 잠깐 공개한 뒤 섞습니다.";
         }
 
-        function getPrizeText(score){
-          if (score === 3) return "🏆 퍼펙트: 최고급 혜택 (예: 프리미엄 서비스/쿠폰)";
-          if (score === 2) return "🥇 2회 정답: 강력 혜택 (예: 인기 메뉴/사이드)";
-          if (score === 1) return "🥈 1회 정답: 기본 혜택 (예: 소소 쿠폰)";
-          return "😅 0회 정답: 참여 감사 (예: 스탬프/다음 기회)";
-        }
-
         /* =======================
            ✅ Modal controls
         ======================= */
@@ -514,7 +689,6 @@
         function openModal(){
           lastFocusEl = document.activeElement;
           resultModal.classList.add("is-open");
-          // 포커스 이동
           setTimeout(() => modalConfirm.focus(), 0);
         }
 
@@ -523,12 +697,10 @@
           if (lastFocusEl && typeof lastFocusEl.focus === "function") lastFocusEl.focus();
         }
 
-        // backdrop 클릭 닫기
         resultModal.addEventListener("click", (e) => {
           if (e.target === resultModal) closeModal();
         });
 
-        // ESC 닫기
         document.addEventListener("keydown", (e) => {
           if (e.key === "Escape" && resultModal.classList.contains("is-open")) {
             closeModal();
@@ -586,8 +758,7 @@
           startButton.disabled = true;
           lockCups(true);
 
-          statusText.innerHTML =
-            `섞는 중입니다... (${lvl.name}) 눈을 떼지 마세요 👀`;
+          statusText.innerHTML = `섞는 중입니다... (${lvl.name}) 눈을 떼지 마세요 👀`;
 
           const totalSteps = lvl.swaps;
           let step = 0;
@@ -708,7 +879,6 @@
 
         startButton.addEventListener("click", () => {
           if (roundsPlayed >= MAX_ROUNDS) {
-            // ✅ 최종 결과: status-row 문구 변경 대신 모달 오픈
             showFinalModal();
             return;
           }
