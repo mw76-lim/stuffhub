@@ -259,7 +259,8 @@
           <div>
             <h1 class="title">게임 이벤트 등록/리스트</h1>
             <p class="sub">
-              게시판 리소스를 활용해 “테이블 1회 참여권”을 발급하고 상태(Ready/Done)를 관리합니다.<br />
+              게시판 리소스를 활용해 “테이블 1회 참여권”을 발급하고 <br>
+              (게임종류,완료시각,당첨결과) 등록에 따라 상태(Ready/Done)를 관리합니다.<br />
               리스트는 <b>등록시간 역순</b>이며 <b>페이지당 20개</b>로 노출됩니다.
             </p>
           </div>
@@ -389,6 +390,16 @@
             <button class="page-btn" type="button">27</button>
             <button class="page-btn" type="button" aria-label="다음 페이지">›</button>
           </nav>
+
+          <div class="meta">
+            DB 테이블 데이타 구조 <br>
+            - 직원명 [varchar(20)] <br>
+            - 테이블명 [varchar(20)] <br>
+            - 등록시각 <br>
+            - 게임종류 [varchar(20)] <br>
+            - 당첨결과 [TEXT] <br>
+            - 완료시각 <br>
+          </div>
         </div>
       </div>
     </div>
