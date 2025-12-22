@@ -644,9 +644,17 @@
 
         const DIFFICULTY = [
           null,
-          { name: "Lv.1", swaps: 6,  tick: 320, lift: 10, fakeChance: 0.00 },
-          { name: "Lv.2", swaps: 9,  tick: 260, lift: 12, fakeChance: 0.12 },
-          { name: "Lv.3", swaps: 12, tick: 220, lift: 14, fakeChance: 0.22 },
+          // { name: "Lv.1", swaps: 6,  tick: 320, lift: 10, fakeChance: 0.00 },
+          // { name: "Lv.2", swaps: 9,  tick: 260, lift: 12, fakeChance: 0.12 },
+          // { name: "Lv.3", swaps: 12, tick: 220, lift: 14, fakeChance: 0.22 },
+
+          // { name: "Lv.1", swaps: 24,  tick: 130, lift: 10, fakeChance: 0.00 }, // h 10
+          // { name: "Lv.1", swaps: 12,  tick: 130, lift: 10, fakeChance: 0.00 }, // h 9
+          // { name: "Lv.1", swaps: 30,  tick: 320, lift: 10, fakeChance: 0.00 }, // 약간 어려움
+          // { name: "Lv.1", swaps: 20,  tick: 320, lift: 10, fakeChance: 0.00 }, // 쉬움
+          { name: "Lv.2", swaps: 20,  tick: 320, lift: 10, fakeChance: 0.00 },
+          { name: "Lv.2", swaps: 20,  tick: 320, lift: 10, fakeChance: 0.00 },
+          { name: "Lv.3", swaps: 20,  tick: 320, lift: 10, fakeChance: 0.00 },
         ];
 
         function currentLevel(){
