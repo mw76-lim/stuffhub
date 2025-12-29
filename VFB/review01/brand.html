@@ -1,0 +1,1017 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+  <meta name="format-detection" content="telephone=no" />
+  
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VERITY">
+  
+  <meta name="description" content="설명">
+  <meta property="og:url" content="도메인">
+  <link rel="canonical" href="도메인">
+  <meta property="og:image" content="/images/ogimage.png">
+  <link href="/images/verity.ico" rel="shortcut icon" type="image/x-icon">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>VERITY</title>
+  <link rel="stylesheet" href="http://verity.gloriasnd.kr/css/default.css?ver=2303229">
+  <link rel="stylesheet" href="http://verity.gloriasnd.kr/js/font-awesome/css/font-awesome.min.css?ver=2303229">
+  <link rel="stylesheet" href="http://verity.gloriasnd.kr/css/font.css?ver=2303229">
+  <link rel="stylesheet" href="http://verity.gloriasnd.kr/css/all.min.css?ver=2303229">
+  <link rel="stylesheet" href="http://verity.gloriasnd.kr/css/verity_common.css?ver=2303229">
+  <link rel="stylesheet" href="http://verity.gloriasnd.kr/css/verity_css.css?ver=2303229">
+  <link rel="stylesheet" href="http://verity.gloriasnd.kr/css/verity_animate.css?ver=2303229">
+  <link rel="stylesheet" href="http://verity.gloriasnd.kr/skin/latest/brand_sns1/style.css?ver=2303229">
+  <link rel="stylesheet" href="http://verity.gloriasnd.kr/skin/latest/brand_sns2/style.css?ver=2303229">
+  
+  <script src="http://verity.gloriasnd.kr/js/html5.js"></script>
+  <script>
+    // 자바스크립트에서 사용하는 전역변수 선언
+    var g5_url       = "http://verity.gloriasnd.kr";
+    var g5_bbs_url   = "http://verity.gloriasnd.kr/bbs";
+    var g5_is_member = "";
+    var g5_is_admin  = "";
+    var g5_is_mobile = "";
+    var g5_bo_table  = "";
+    var g5_sca       = "";
+    var g5_editor    = "";
+    var g5_cookie_domain = "";
+    var g5_shop_url = "http://verity.gloriasnd.kr/shop";
+  </script>
+  
+  <script src="http://verity.gloriasnd.kr/js/jquery-1.12.4.min.js?ver=2304171"></script>
+  <script src="http://verity.gloriasnd.kr/js/jquery-migrate-1.4.1.min.js?ver=2304171"></script>
+  <script src="http://verity.gloriasnd.kr/js/jquery.menu.js?ver=2304171"></script>
+  <script src="http://verity.gloriasnd.kr/js/common.js?ver=2304171"></script>
+  <script src="http://verity.gloriasnd.kr/js/wrest.js?ver=2304171"></script>
+  <script src="http://verity.gloriasnd.kr/js/placeholders.min.js?ver=2304171"></script>
+  <script src="http://verity.gloriasnd.kr/js/verity_common.js?ver=2304171"></script>
+  <script src="http://verity.gloriasnd.kr/js/swiper.min.js?ver=2304171"></script>
+  <script src="http://verity.gloriasnd.kr/js/wow.min.js?ver=2304171"></script>
+  <script>new WOW().init();</script>
+<style>
+
+      /* ==============================
+         1. 브랜드 스토리 섹션
+         ============================== */
+      .vfb-brand-story-split {
+        position: relative;
+        overflow: hidden;
+        padding: 80px 16px;
+        color: #0f172a;
+        background: radial-gradient(circle at 0% 100%, rgba(179, 38, 30, 0.12) 0, transparent 20%);
+        /* opacity: 0.7; */
+      }
+
+      .vfb-brand-story-split__inner {
+        position: relative;
+        max-width: 1120px;
+        margin: 0 auto;
+      }
+
+      .vfb-brand-story-split {
+        --vfb-green: #4eb997;
+        --vfb-yellow: #f6c75e;
+        --vfb-teal: #2fadbe;
+        --ink: #0f172a;
+        --muted: #6b7280;
+      }
+
+      .vfb-brand-story-split__bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+
+      .vfb-brand-story-split__glow {
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        border-radius: 999px;
+        filter: blur(45px);
+        opacity: 0.7;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .vfb-brand-story-split__glow--tl {
+        top: -60px;
+        left: -40px;
+        background: radial-gradient(circle, rgba(79, 195, 150, 0.55), transparent 60%);
+      }
+
+      .vfb-brand-story-split__glow--br {
+        bottom: -60px;
+        right: -40px;
+        background: radial-gradient(circle, rgba(250, 204, 21, 0.55), transparent 60%);
+      }
+
+      .vfb-brand-story-split__header {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 36px;
+      }
+
+      .vfb-brand-story-split__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--muted);
+      }
+
+      .vfb-brand-story-split__pill {
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(78, 185, 151, 0.08);
+        border: 1px solid rgba(78, 185, 151, 0.25);
+        color: #047857;
+      }
+
+      .vfb-brand-story-split__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--vfb-green), var(--vfb-teal));
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.06);
+      }
+
+      .vfb-brand-story-split__label {
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .vfb-brand-story-split__title {
+        font-size: clamp(26px, 3vw, 32px);
+        margin: 0 0 10px;
+        line-height: 1.25;
+        letter-spacing: -0.03em;
+      }
+
+      .vfb-brand-story-split__title span {
+        background: linear-gradient(135deg, var(--vfb-green), var(--vfb-teal));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .vfb-brand-story-split__lead {
+        max-width: 640px;
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+
+      .vfb-brand-story-split__layout {
+        position: relative;
+        z-index: 1;
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr);
+        gap: 32px;
+        align-items: flex-start;
+      }
+
+      .vfb-brand-story-split__story {
+        font-size: 14px;
+        line-height: 1.9;
+        color: var(--muted);
+      }
+
+      .vfb-brand-story-split__story p {
+        margin: 0 0 14px;
+      }
+
+      .vfb-brand-story-split__story p:last-child {
+        margin-bottom: 0;
+      }
+
+      .vfb-brand-story-split__story strong {
+        color: #111827;
+        font-weight: 600;
+      }
+
+      .vfb-brand-story-split__aside {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .vfb-brand-story-split__image-frame {
+        position: relative;
+        width: 100%;
+        max-width: 320px;
+        border-radius: 22px;
+        padding: 10px;
+        background: linear-gradient(135deg, rgba(78, 185, 151, 0.18), rgba(246, 199, 94, 0.22));
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14), 0 3px 10px rgba(15, 23, 42, 0.1);
+        overflow: hidden;
+      }
+
+      .vfb-brand-story-split__image {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 18px;
+        object-fit: cover;
+        background: #0f172a;
+      }
+
+      @media (max-width: 900px) {
+        .vfb-brand-story-split__layout {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 20px;
+        }
+
+        .vfb-brand-story-split__aside {
+          justify-content: flex-start;
+        }
+
+        .vfb-brand-story-split__image-frame {
+          max-width: 260px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .vfb-brand-story-split {
+          padding: 56px 16px;
+        }
+
+        .vfb-brand-story-split__title {
+          font-size: 24px;
+        }
+
+        .vfb-brand-story-split__lead {
+          font-size: 14px;
+        }
+
+        .vfb-brand-story-split__image-frame {
+          max-width: 100%;
+        }
+      }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <header id="verity_header">
+      <div class="inner">
+        <h1 id="verity_logo">
+          <a href="/" title="메인으로 이동">
+            <span class="text_hidden">Verity</span>
+          </a>
+        </h1>
+        
+        <div>
+          <nav id="verity_gnb">
+            <ul>
+              <li>
+                <a href="/doc/company.php" title="Verity F&B 소개">Verity F&B 소개</a>
+                <ul>
+                  <li>
+                    <a href="/doc/company.php#greeting" title="CEO 인사말">CEO 인사말</a>
+                  </li>
+                  <li>
+                    <a href="/doc/company.php#principles" title="우리의 원칙">우리의 원칙</a>
+                  </li>
+                  <li>
+                    <a href="/doc/company.php#brand" title="브랜드 이미지와 정체성">브랜드 이미지와 정체성</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/doc/brand.php/laochongqing" title="브랜드">브랜드</a>
+                <ul>
+                  <li>
+                    <a href="/doc/brand.php/laochongqing" title="라오충칭훠궈">라오충칭훠궈</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/bbs/board.php?bo_table=franchise_introduce" title="프랜차이즈">프랜차이즈</a>
+                <ul>
+                  <li>
+                    <a href="/bbs/board.php?bo_table=franchise_introduce" title="브랜드 소개">브랜드 소개</a>
+                  </li>
+                  <li>
+                    <a href="/doc/franchise.php/process" title="창업절차">창업절차</a>
+                  </li>
+                  <li>
+                    <a href="/doc/franchise.php/inquiry" title="창업문의">창업문의</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/bbs/board.php?bo_table=verity_news" title="베리티 소식">베리티 소식</a>
+                <ul>
+                  <li>
+                    <a href="#" title="베리티 소식">베리티 소식</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/doc/customer.php" title="고객의 소리">고객의 소리</a>
+                <ul>
+                  <li>
+                    <a href="/doc/customer.php" title="고객의 소리">고객의 소리</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          
+          <button type="button" id="menuToggle" title="사이트맵">
+            <span>
+              
+            </span>
+            <span>
+              
+            </span>
+            <span>
+              
+            </span>
+          </button>
+          
+          <div id="all_gnb">
+            <ul>
+              <li>
+                <a href="/doc/company.php" title="Verity F&B 소개">Verity F&B 소개</a>
+                <ul>
+                  <li>
+                    <a href="/doc/company.php#greeting" title="CEO 인사말">CEO 인사말</a>
+                  </li>
+                  <li>
+                    <a href="/doc/company.php#principles" title="우리의 원칙">우리의 원칙</a>
+                  </li>
+                  <li>
+                    <a href="/doc/company.php#brand" title="브랜드 이미지와 정체성">브랜드 이미지와 정체성</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/doc/brand.php/laochongqing" title="브랜드">브랜드</a>
+                <ul>
+                  <li>
+                    <a href="/doc/brand.php/laochongqing" title="라오충칭훠궈">라오충칭훠궈</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/bbs/board.php?bo_table=franchise_introduce" title="프랜차이즈">프랜차이즈</a>
+                <ul>
+                  <li>
+                    <a href="/bbs/board.php?bo_table=franchise_introduce" title="브랜드 소개">브랜드 소개</a>
+                  </li>
+                  <li>
+                    <a href="/doc/franchise.php/process" title="창업절차">창업절차</a>
+                  </li>
+                  <li>
+                    <a href="/doc/franchise.php/inquiry" title="창업문의">창업문의</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/bbs/board.php?bo_table=verity_news" title="베리티 소식">베리티 소식</a>
+                <ul>
+                  <li>
+                    <a href="#" title="베리티 소식">베리티 소식</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/doc/customer.php" title="고객의 소리">고객의 소리</a>
+                <ul>
+                  <li>
+                    <a href="/doc/customer.php" title="고객의 소리">고객의 소리</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <div id="sVisu" class="sVisu2">
+      <div class="s-inner">
+        <h2 class="wow fadeInUp">Our Brands</h2>
+      </div>
+    </div>
+    
+    <div class="sub_menu_wrap">
+      <div class="s-inner">
+        <a href="/" class="home">
+          <span class="text_hidden">Home</span>
+        </a>
+        <div class="depth1">
+          <button type="button">
+            
+          </button>
+          <ul>
+            <li>
+              <a href="/doc/company.php" title="Verity F&B 소개">Verity F&B 소개</a>
+            </li>
+            <li>
+              <a href="/doc/brand.php/laochongqing" title="브랜드">브랜드</a>
+            </li>
+            <li>
+              <a href="/bbs/board.php?bo_table=franchise_introduce" title="프랜차이즈">프랜차이즈</a>
+            </li>
+            <li>
+              <a href="/bbs/board.php?bo_table=verity_news" title="베리티 소식">베리티 소식</a>
+            </li>
+            <li>
+              <a href="/doc/customer.php" title="고객의 소리">고객의 소리</a>
+            </li>
+          </ul>
+        </div>
+        <div class="depth2">
+          <button type="button">
+            
+          </button>
+          <ul>
+            <li>
+              <a href="/doc/brand.php/laochongqing" title="라오충칭훠궈">라오충칭훠궈</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      subFun(2, 1);
+    </script>
+    
+    <div id="sub_content">
+      <div class="side_menu_wrap">
+        <p class="tit">Section</p>
+        <ul>
+          <li class="on">
+            <a href="#story">
+              <i class="icon icon1"></i>
+              <p>브랜드 스토리</p>
+            </a>
+          </li>
+          <li>
+            <a href="#menu">
+              <i class="icon icon2"></i>
+              <p>메뉴 소개</p>
+            </a>
+          </li>
+          <li>
+            <a href="#store">
+              <i class="icon icon3"></i>
+              <p>매장 안내</p>
+            </a>
+          </li>
+          <li>
+            <a href="#sns">
+              <i class="icon icon4"></i>
+              <p>SNS</p>
+            </a>
+          </li>
+          <li>
+            <a href="#faq">
+              <i class="icon icon5"></i>
+              <p>FAQ</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      <div id="story" class="sBrand_case1 s-inner pt150">
+        <p class="logo_img mb70">
+          <img src="http://verity.gloriasnd.kr/images/sLaochongqing_logo.png" alt="라오충칭훠궈">
+        </p>
+        <div class="sub_title">
+          <span>브랜드 스토리</span>
+        </div>
+        
+        <div class="box mt50">
+          <div class="txt_box">
+            <p class="t1">100년 전통 충칭 훠궈에서 시작된, 라오충칭훠궈</p>
+            <p class="t2">충칭 훠궈의 100년 스토리를 오늘의 테이블에 맞게 다시 풀어낸 프리미엄 훠궈 브랜드</p>
+            <p class="s_txt1">100년 전통 충칭 훠궈를 기반으로 탄생한 라오충칭훠궈는 깊고 진한 육수와 정통 향신료를 현대적인 감성으로 풀어낸 프리미엄 훠궈 브랜드입니다.</p>
+            <p class="s_txt1">중국 사천성 충칭 지역에서 시작된 마라 훠궈의 매력은 그 깊은 국물 맛과 함께 사람들이 한 자리에 모여 나누는 따뜻한 식문화에 있습니다. 우리는 이 문화를 한국에서도 자연스럽게 경험할 수 있도록 정통 조리법은 지키되 고객의 입맛에 맞춘 구성과 서비스를 더했습니다.</p>
+            <p class="s_txt1">라오충칭훠궈는 현재 중국 전역 23개 매장에서 운영되고 있으며, 이 노하우를 바탕으로 글로벌 15호점으로 한국에 상륙했습니다. 오랜 시간 다듬어 온 비법 육수와 다채로운 향신료, 그리고 50여 가지 재료를 취향대로 조합해, 방문할 때마다 다른 조합과 무드를 즐길 수 있는 자유로운 식경험을 지향합니다.</p>
+            <p class="s_txt1">정통은 지키되, 경험은 새롭게.<br>라오충칭훠궈에서 진짜 마라의 세계와, 그 안에 담긴 식문화의 즐거움을 만나보세요.</p>
+          </div>
+          <div class="img_box" style="background-image:url(http://verity.gloriasnd.kr/images/sLaochongqing_img1.png)">
+            
+          </div>
+        </div>
+      </div>
+      
+      <div id="menu" class="sBrand_case2 bg1 mt150">
+        <div class="s-inner">
+          <div class="sub_title">
+            <span>메뉴 소개</span>
+          </div>
+          <p class="s_txt1 fc_w mt50">깊이 있는 홍탕과 균형 잡힌 백탕, 직접 손질한 재료들로 충칭 현지 감성을 그대로 담아 훠궈 테이블을 완성하고, 정통 훠궈 육수와 50여 가지 식재료를 취향에 맞게 조합해 즐길 수 있습니다. 여기에 중국 대표 백주와 와인 등 다양한 주류를 곁들이면 한 끼 식사가 아니라, 완성도 높은 식경험을 누리실 수 있습니다.</p>
+          
+          <div class="img mt50">
+            <img src="http://verity.gloriasnd.kr/images/sLaochongqing_img2.png">
+          </div>
+          
+          <ul class="tag_list mt30">
+            <li>#홍당 맵기 조절</li>
+            <li>#중국 정통 요리</li>
+            <li>#주말 점심 세트</li>
+          </ul>
+          
+          <p class="tit1 mt100">
+            <span>Best Menu</span>
+          </p>
+          <div class="best_box mt50">
+            <div>
+              <div class="txt_box">
+                <dl>
+                  <dt>충칭 홍탕/백탕 베이스</dt>
+                  <dd>화자오와 각종 향신료를 직접 블렌딩한 마라 육수와, 뼈와 야채를 오래 끓인 부드러운 백탕이 기본 베이스입니다. 홍탕의 매운맛을 덜고 싶으시다면, 탕에 들어있는 고추를 살짝 건져내시면 보다 순한 맛으로 즐기실 수 있습니다.</dd>
+                </dl>
+                <ul>
+                  <li>맵기 단계 선택 (총3단계)</li>
+                  <li>사골탕</li>
+                  <li>버섯탕</li>
+                </ul>
+              </div>
+              <div class="img_box" style="background-image:url(http://verity.gloriasnd.kr/images/sLaochongqing_img3_1.jpg)">
+                
+              </div>
+            </div>
+            <div>
+              <div class="txt_box">
+                <dl>
+                  <dt>완자 플레이트</dt>
+                  <dd>신선한 재료를 사용하여 완자를 입에 넣는 순간 탱글한 식감과 자연스러운 감칠맛이 살아납니다. 육수에 천천히 익히면 재료 본연의 풍미가 더 깊어지며, 홍탕과 백탕 어디에 넣어도 훠궈 국물의 조화로운 맛을 한층 끌어올려 줍니다.</dd>
+                </dl>
+                <ul>
+                  <li>인기토핑</li>
+                  <li>수제완자</li>
+                </ul>
+              </div>
+              <div class="img_box" style="background-image:url(http://verity.gloriasnd.kr/images/sLaochongqing_img3_2.jpg)">
+                
+              </div>
+            </div>
+            <div>
+              <div class="txt_box">
+                <dl>
+                  <dt>각종 채소 플래터</dt>
+                  <dd>훠궈의 깊은 풍미를 돋보이게 하는 엄선된 채소와 신선한 버섯, 두부류를 조화롭게 구성하여 한층 섬세한 맛의 균형을 더합니다. 깔끔한 향과 자연스러운 단맛이 육수와 어우러져 더욱 품격 있는 식경험을 완성합니다.</dd>
+                </dl>
+                <ul>
+                  <li>신선한 채소</li>
+                  <li>채소 플래터</li>
+                  <li>다양한 버섯</li>
+                </ul>
+              </div>
+              <div class="img_box" style="background-image:url(http://verity.gloriasnd.kr/images/sLaochongqing_img3_3.jpg)">
+                
+              </div>
+            </div>
+            <div>
+              <div class="txt_box">
+                <dl>
+                  <dt>육류 셀렉션</dt>
+                  <dd>훠궈에 최적화된 마블링의 소고기 슬라이스부터 풍미 깊은 양고기까지 부위별 특성을 살린 셀렉션입니다. 지방/식감/향 선택에 따라 세분화된 구성도 가능합니다. 각 부위의 맛을 가장 잘 살린 최적의 컷을 제공합니다.</dd>
+                </dl>
+                <ul>
+                  <li>훠궈 고기류</li>
+                  <li>소고기</li>
+                  <li>양고기</li>
+                </ul>
+              </div>
+              <div class="img_box" style="background-image:url(http://verity.gloriasnd.kr/images/sLaochongqing_img3_4.jpg)">
+                
+              </div>
+            </div>
+            <div>
+              <div class="txt_box">
+                <dl>
+                  <dt>중국 전통주 셀렉션</dt>
+                  <dd>마오타이, 우량예, 교량춘 등 충칭 스타일 훠궈와 가장 잘 어울리는 고량주 중심으로 구성된 셀렉션입니다. 도수, 향, 숙성 기간에 따라 취향별 추천이 가능합니다. 각 술이 지닌 깊은 풍미로 더욱 풍성한 식경험을 선사합니다.</dd>
+                </dl>
+                <ul>
+                  <li>중국 전통주</li>
+                  <li>고량주 페어링</li>
+                  <li>와인 페어링</li>
+                </ul>
+              </div>
+              <div class="img_box" style="background-image:url(http://verity.gloriasnd.kr/images/sLaochongqing_img3_5.jpg)">
+                
+              </div>
+            </div>
+            <div>
+              <div class="txt_box">
+                <dl>
+                  <dt>스페셜 요리</dt>
+                  <dd>중국 본토의 풍미를 그대로 담은 다양한 일품요리도 함께 즐기실 수 있습니다. 깊고 진한 향신료의 조화와 재료 본연의 맛을 섬세하게 살려낸 것이 특징입니다. 중국 현지식으로 식사를 더욱 다채롭고 만족스럽게 완성해드립니다.</dd>
+                </dl>
+                <ul>
+                  <li>중국 본토맛</li>
+                  <li>다채로운 요리</li>
+                  <li>일품요리</li>
+                </ul>
+              </div>
+              <div class="img_box" style="background-image:url(http://verity.gloriasnd.kr/images/sLaochongqing_img3_6.jpg)">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="store" class="s-inner pt150">
+        <div class="sub_title">
+          <span>매장 안내</span>
+        </div>
+        <p class="s_tit1 mt50">라오충칭훠궈의 첫 글로벌 매장이 동탄 상륙!<br>이제 국내에서도 정통 프리미엄 훠궈의 진한 풍미와 깊은 매력을 온전히 느껴보세요.</p>
+        <div class="sBrand_case3 mt50">
+          <ul class="tab_box">
+            <li class="on">
+              <button type="button"><span>1호점</span>동탄본점</button>
+            </li>
+            <li>
+              <button type="button"><span>2호점</span>Coming Soon</button>
+            </li>
+          </ul>
+          <div class="cont_box">
+            <div class="on">
+              <div class="interior_slide">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img src="http://verity.gloriasnd.kr/images/sLaochongqing_interior1_1.png">
+                    <p>홀 내부 전경</p>
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="http://verity.gloriasnd.kr/images/sLaochongqing_interior1_1.png">
+                    <p>홀 내부 전경</p>
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="http://verity.gloriasnd.kr/images/sLaochongqing_interior1_1.png">
+                    <p>홀 내부 전경</p>
+                  </div>
+                </div>
+                <div class="swiper-button-next">
+                  
+                </div>
+                <div class="swiper-button-prev">
+                  
+                </div>
+                <div class="swiper-pagination">
+                  
+                </div>
+              </div>
+              <div class="info">
+                <dl>
+                  <dt>매장주소</dt>
+                  <dd>경기도 화성시 동탄반석로 172 149, 150호</dd>
+                </dl>
+                <dl>
+                  <dt>영업시간</dt>
+                  <dd>평일 17:00 ~ 22:00<br>주말 12:00 ~ 22:00 (15:00 ~ 17:00 브레이크 타임)</dd>
+                </dl>
+                <dl>
+                  <dt>대표번호</dt>
+                  <dd>(031) 614-1104<br>단체 예약문의는 대표번호로 연락해주세요</dd>
+                </dl>
+                <dl>
+                  <dt>주차안내</dt>
+                  <dd>4시간 무료주차 제공 <br>자차 이용 시 동탄파라곤 지하주차장에 주차 후 103동 엘리베이터를 이용하여 1층으로 올라오시면 매장입구가 보입니다.</dd>
+                </dl>
+              </div>
+              <div class="map">
+                <a href="https://naver.me/5PV6UBtm" target="_blank" class="naver">네이버 지도</a>
+                <a href="https://kko.to/JFT94NOfNU" target="_blank" class="kakao">카카오맵</a>
+              </div>
+            </div>
+            <div>
+              <div class="interior_slide">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img src="http://verity.gloriasnd.kr/images/sLaochongqing_interior_ready.png">
+                    <p>사진에 대한 텍스트 입력</p>
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="http://verity.gloriasnd.kr/images/sLaochongqing_interior_ready.png">
+                    <p>사진에 대한 텍스트 입력</p>
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="http://verity.gloriasnd.kr/images/sLaochongqing_interior_ready.png">
+                    <p>사진에 대한 텍스트 입력</p>
+                  </div>
+                </div>
+                <div class="swiper-button-next">
+                  
+                </div>
+                <div class="swiper-button-prev">
+                  
+                </div>
+                <div class="swiper-pagination">
+                  
+                </div>
+              </div>
+              <div class="info">
+                <dl>
+                  <dt>매장주소</dt>
+                  <dd>내용을 입력하세요.</dd>
+                </dl>
+                <dl>
+                  <dt>영업시간</dt>
+                  <dd>내용을 입력하세요.</dd>
+                </dl>
+                <dl>
+                  <dt>대표번호</dt>
+                  <dd>내용을 입력하세요.</dd>
+                </dl>
+                <dl>
+                  <dt>주차안내</dt>
+                  <dd>내용을 입력하세요.</dd>
+                </dl>
+              </div>
+              <div class="map">
+                <a href="#" target="_blank" class="naver">네이버 지도</a>
+                <a href="#" target="_blank" class="kakao">카카오맵</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="sns" class="sBrand_case4 s-inner pt150 pb150">
+        <div class="sub_title">
+          <span>SNS</span>
+        </div>
+        <p class="s_tit1 mt50">라오충칭훠궈 인스타그램에서 매장의 생생한 분위기를 확인하고 <br class="mo_br">시즌 메뉴와 주요 공지사항도 가장 빠르게 만나보세요!</p>
+        
+        <div class="box mt50">
+          <div>
+            <a href="https://www.instagram.com/laochongqing/" target="_blank">
+              <img src="http://verity.gloriasnd.kr/data/file/laochongqing/thumb-4a50c801dddfd4cc90094e342a091668_47eYxiEv_1e0a5abcf17cf0b9fc83e1506ee98fd56a3e454d_624x533.png">
+            </a>
+          </div>
+          <div class="case2">
+            <a href="https://www.instagram.com/laochongqing/" target="_blank">
+              <img src="http://verity.gloriasnd.kr/data/file/laochongqing/thumb-4a50c801dddfd4cc90094e342a091668_bsiD3GFd_64f3c1f65bde6fb09e60ed8c967664adb1f24a51_206x259.png">
+            </a>
+            <a href="https://www.instagram.com/laochongqing/" target="_blank">
+              <img src="http://verity.gloriasnd.kr/data/file/laochongqing/thumb-4a50c801dddfd4cc90094e342a091668_aeqNOTic_51c80b5d6cb57f2ca30a1bb682456ade6ae817f6_206x259.png">
+            </a>
+            <a href="https://www.instagram.com/laochongqing/" target="_blank">
+              <img src="http://verity.gloriasnd.kr/data/file/laochongqing/thumb-4a50c801dddfd4cc90094e342a091668_v45bGVtp_4ecd7d5a68cb510bb6f8ecfb144cb58d48bf0590_206x259.png">
+            </a>
+            <a href="https://www.instagram.com/laochongqing/" target="_blank">
+              <img src="http://verity.gloriasnd.kr/data/file/laochongqing/thumb-4a50c801dddfd4cc90094e342a091668_poH2WuJU_ac841093674a83033213863aec125ffaaa228be3_206x259.png">
+            </a>
+          </div>
+        </div>
+        
+        <a href="https://www.instagram.com/laochongqing/" target="_blank" class="instagram_btn">@laochongqing 바로가기</a>
+      </div>
+      
+      <div id="faq" class="sBrand_case5">
+        <div class="s-inner">
+          <div class="sub_title">
+            <span>자주 묻는 질문</span>
+          </div>
+          <div class="tab_box mt50">
+            <ul>
+              <li class="on">
+                <a href="#" data-cate="all">전체보기</a>
+              </li>
+              <li>
+                <a href="#" data-cate="메뉴관련">메뉴관련</a>
+              </li>
+              <li>
+                <a href="#" data-cate="매장이용">매장이용</a>
+              </li>
+              <li>
+                <a href="#" data-cate="예약/운영">예약/운영</a>
+              </li>
+              <li>
+                <a href="#" data-cate="기타">기타</a>
+              </li>
+            </ul>
+          </div>
+          <div class="cont_box mt30">
+            <div data-cate="메뉴관련">
+              <button type="button"><span>메뉴관련</span> 어떤 음식을 파나요?</button>
+              <div class="cont">
+                <p>중국 충칭식 정통 훠궈를 중심으로 고기, 채소, 해산물, 면류 등 다양한 재료를 제공합니다.</p>
+              </div>
+            </div>
+            <div data-cate="메뉴관련">
+              <button type="button"><span>메뉴관련</span> 매운 음식이 많은가요?</button>
+              <div class="cont">
+                <p>마라탕은 매운 편이지만, 버섯탕·토마토탕·사골탕처럼 맵지 않은 육수도 선택할 수 있습니다.</p>
+              </div>
+            </div>
+            <div data-cate="메뉴관련">
+              <button type="button"><span>메뉴관련</span> 대표 메뉴는 무엇인가요?</button>
+              <div class="cont">
+                <p>마라홍탕, 토마토탕, 소갈비살, 깐양볶음, 꿔바로우 등이 인기 있습니다.</p>
+              </div>
+            </div>
+            <div data-cate="메뉴관련">
+              <button type="button"><span>메뉴관련</span> 기본 주문은 몇 인 기준인가요?</button>
+              <div class="cont">
+                <p>대부분 메뉴는 2인 이상 기준으로 제공되며, 1인 방문 시에는 양이 많을 수 있습니다.</p>
+              </div>
+            </div>
+            <div data-cate="메뉴관련">
+              <button type="button"><span>메뉴관련</span> 채식 가능한가요?</button>
+              <div class="cont">
+                <p>버섯탕이나 토마토탕과 채소, 두부, 면류 위주로 구성하시면 채식 식사도 가능합니다.</p>
+              </div>
+            </div>
+            <div data-cate="메뉴관련">
+              <button type="button"><span>메뉴관련</span> 알레르기 재료는 표시되어 있나요?</button>
+              <div class="cont">
+                <p>일부 메뉴에는 알레르기 유발 성분이 표시되어 있지 않을 수 있습니다.알레르기 관련 정보가 필요하신 경우, 직원에게 문의해 주세요. 성실히 안내해 드리겠습니다.</p>
+              </div>
+            </div>
+            <div data-cate="매장이용">
+              <button type="button"><span>매장이용</span> 혼자 가도 먹을 수 있나요?</button>
+              <div class="cont">
+                <p>가능합니다. 다만 기본 구성이 2인 이상이므로 남는 재료가 많을 수 있습니다.</p>
+              </div>
+            </div>
+            <div data-cate="매장이용">
+              <button type="button"><span>매장이용</span> 아이와 함께 가도 괜찮나요?</button>
+              <div class="cont">
+                <p>매운 메뉴 외에도 순한 탕이 있어 어린이도 함께 즐기실 수 있습니다.</p>
+              </div>
+            </div>
+            <div data-cate="매장이용">
+              <button type="button"><span>매장이용</span> 반반탕 가능한가요?</button>
+              <div class="cont">
+                <p>네, 두 가지 탕을 나눠 먹는 반반탕 구성이 가능합니다.</p>
+              </div>
+            </div>
+            <div data-cate="매장이용">
+              <button type="button"><span>매장이용</span> 주차할 수 있나요?</button>
+              <div class="cont">
+                <p>매장 건물 내 또는 인근 제휴 주차장이 마련되어 있습니다.</p>
+              </div>
+            </div>
+            <div data-cate="예약/운영">
+              <button type="button"><span>예약/운영</span> 예약은 어떻게 하나요?</button>
+              <div class="cont">
+                <p>전화 또는 네이버 예약을 통해 사전 예약이 가능합니다.</p>
+              </div>
+            </div>
+            <div data-cate="예약/운영">
+              <button type="button"><span>예약/운영</span> 운영 시간은 어떻게 되나요?</button>
+              <div class="cont">
+                <p>점심과 저녁 시간 모두 운영되며, 요일별로 상이할 수 있으니 ‘찾아오시는 길’ 페이지를 참고해 주세요.</p>
+              </div>
+            </div>
+            <div data-cate="예약/운영">
+              <button type="button"><span>예약/운영</span> 포장이나 배달도 되나요?</button>
+              <div class="cont">
+                <p>현재는 매장 식사만 제공하고 있으며, 포장/배달 서비스는 검토 중입니다.</p>
+              </div>
+            </div>
+            <div data-cate="예약/운영">
+              <button type="button"><span>예약/운영</span> 명절에도 영업하나요?</button>
+              <div class="cont">
+                <p>설날, 추석 당일을 제외하고 대부분 정상 운영합니다. 공지사항을 참고해 주세요.</p>
+              </div>
+            </div>
+            <div data-cate="기타">
+              <button type="button"><span>기타</span> 반려동물 출입 가능한가요?</button>
+              <div class="cont">
+                <p>위생 관계상 실내 반려동물 동반은 제한됩니다.</p>
+              </div>
+            </div>
+            <div data-cate="기타">
+              <button type="button"><span>기타</span> 외국인도 이용할 수 있나요?</button>
+              <div class="cont">
+                <p>현재 영어/중국어 메뉴판은 제공되지 않지만, 직원들이 간단한 설명을 도와드리며 외국인도 불편 없이 식사하실 수 있습니다.</p>
+              </div>
+            </div>
+            <div data-cate="기타">
+              <button type="button"><span>기타</span> 결제는 어떻게 하나요?</button>
+              <div class="cont">
+                <p>카드 결제, 삼성페이, 카카오페이 등 다양한 방식이 가능합니다.</p>
+              </div>
+            </div>
+            <div data-cate="기타">
+              <button type="button"><span>기타</span> 현금영수증 발급되나요?</button>
+              <div class="cont">
+                <p>네. 요청 시 즉시 발급해드립니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="fap" class="s-inner mt70">
+        <div class="sub_contact_wrap">
+          <div>
+            <dl>
+              <dt>가맹 상담이 필요하신가요?</dt>
+              <dd>가맹상담 신청 및 궁금한 점이 있으면 문의주시기 바랍니다.</dd>
+            </dl>
+            <a href="/doc/customer.php" class="view_btn">문의하기</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <script>
+      var swiper = new Swiper(".interior_slide", {
+        loop: true,
+        effect: 'fade',
+        observer: true,
+        observeParents: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    <footer id="verity_footer">
+      <div class="inner">
+        <p class="f_logo">
+          <img src="http://verity.gloriasnd.kr/images/logo.svg" alt="Verity">
+        </p>
+        <ul class="f_info">
+          <li><strong>대표</strong>김은선</li>
+          <li><strong>사업자등록번호</strong>882-86-01292</li>
+          <li><strong>개인정보처리관리자</strong>sales@rondakorea.com</li>
+          <br>
+          <li><strong>주소</strong>경기도 화성시 동탄첨단산업1로 27 금강펜테리움IX타워 A동 1501~1505호</li>
+          <li>
+            <strong>대표번호</strong>
+            <a href="tel:031-613-2360">031-613-2360</a>
+          </li>
+        </ul>
+        <p class="copy">© Verity. All Rights Reserved.</p>
+        <button type="button" class="go_top">
+          Go to top <p class="arrow">
+            <span>
+              
+            </span>
+            <span>
+              
+            </span>
+            <span>
+              
+            </span>
+          </p>
+        </button>
+        <div class="f_member">
+          <a href="http://verity.gloriasnd.kr/bbs/login.php">Admin</a>
+        </div>
+      </div>
+    </footer>
+    
+    
+    <script src="http://verity.gloriasnd.kr/js/jquery.smoothwheel.js">
+      
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.22/bundled/lenis.min.js">
+      
+    </script>
+    <script>
+      var isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+      if (!isMobile) {
+        const lenis = new Lenis()
+        
+        lenis.on('scroll', (e) => {
+        })
+        
+        function raf(time) {
+          lenis.raf(time)
+          requestAnimationFrame(raf)
+        }
+        
+        requestAnimationFrame(raf)
+      }
+    </script>
+    
+  </body>
+  </html>
+  

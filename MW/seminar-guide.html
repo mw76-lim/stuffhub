@@ -8,365 +8,608 @@
 
   <body style="margin:0; padding:0; background:#f3f4f6; font-family: ui-sans-serif, system-ui, -apple-system, 'Noto Sans KR', Arial, sans-serif; color:#0f172a;">
     <!--
-      워드문서스타일(메일 붙여넣기용) 안내
-      - 인라인 스타일 + 테이블 기반으로 구성 (Outlook/웹메일에서 비교적 안정적)
-      - 메일 본문으로 사용 시, 아래 카드 내부(제목/본문)를 그대로 복사하여 붙여넣기 권장
-      - 날짜/장소/시간 등은 필요 시 운영팀 확정 후 업데이트
+      ✅ 메일/워드 붙여넣기용
+      - 표 기반 + 인라인 스타일 중심(Outlook 호환성)
+      - 회차 width:50px / 일자 width:100px
+      - 발표자/소속: 2줄(발표자 bold + 소속 muted)
+      - 강연제목 + 강연내용: 1컬럼으로 병합(구조화)
     -->
 
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f3f4f6;">
       <tr>
         <td align="center" style="padding:18px 12px 40px;">
-          <!-- PAGE CONTAINER -->
-          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="960" style="width:100%; max-width:960px;">
-            <!-- CARD -->
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="960" style="max-width:960px; width:100%;">
             <tr>
-              <td style="padding:0;">
-                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#ffffff; border:1px solid #e5e7eb; border-radius:14px; overflow:hidden; box-shadow:0 10px 26px rgba(15,23,42,0.06);">
+              <td>
+                <!-- CARD -->
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                  style="background:#ffffff; border:1px solid #e5e7eb; border-radius:14px; overflow:hidden; box-shadow:0 10px 26px rgba(15,23,42,0.06);">
+
                   <!-- HEADER -->
                   <tr>
                     <td style="padding:18px 20px; border-bottom:1px solid #e5e7eb;">
-                      <div style="font-size:18px; line-height:1.35; font-weight:800; letter-spacing:-0.01em;">
+                      <div style="font-size:18px; font-weight:800; letter-spacing:-0.01em; line-height:1.35;">
                         2026년 사내 교육(세미나) 연간 운영 계획 안내 및 가이드
                       </div>
-                      <div style="margin-top:8px; font-size:13px; line-height:1.55; color:#6b7280;">
-                        2026년 정기 사내 교육(세미나) 운영 방향과 연간 일정(안)을 공유드립니다. (세부 주제/일부 일정은 확정 후 순차 안내)
+                      <div style="margin-top:6px; font-size:13px; color:#6b7280; line-height:1.55;">
+                        운영 주기: 매월 2회(2째주/4째주 <b>수요일</b>) · 권장 시간: <b>11:30~13:30</b> (Brown Bag) · 모든 회차 <b>영상 녹화</b> 진행<br />
+                        ※ 일정/강사/주제는 내부 협의 및 외부 섭외 상황에 따라 조정될 수 있습니다.
+                      </div>
+
+                      <!-- submission rule -->
+                      <div style="margin-top:10px; border:1px solid #dbeafe; background:#eff6ff; border-radius:12px; padding:10px 12px;">
+                        <div style="font-size:12px; font-weight:800; color:#1d4ed8; margin-bottom:6px;">자료 제출 기준 (운영 안정화 목적)</div>
+                        <div style="font-size:13px; line-height:1.6; color:#0f172a;">
+                          • <b>기획서(제목 + 2~3줄 설명)</b>: 진행일 기준 <b>D-7(최소 7일 전)</b>까지<br />
+                          • <b>발표자료(PPT/PDF)</b>: 진행일 기준 <b>D-3(최소 3일 전)</b>까지<br />
+                          • 문의: 사내 교육(세미나) 운영 관련 제반 사항은 <b>Peter 상무 / Miles 이사</b>에게 문의 부탁드립니다.
+                        </div>
                       </div>
                     </td>
                   </tr>
 
-                  <!-- CONTENT -->
+                  <!-- BODY -->
                   <tr>
-                    <td style="padding:18px 20px 22px;">
-                      <div style="font-size:14px; line-height:1.75; color:#0f172a;">
-                        안녕하세요.<br />
-                        론다코리아 임직원 여러분께 2026년 사내 교육(세미나) 운영 계획과 진행 가이드를 안내드립니다.
-                      </div>
-
-                      <div style="height:1px; background:#e5e7eb; margin:18px 0;"></div>
-
+                    <td style="padding:16px 20px 22px;">
                       <!-- SECTION: OVERVIEW -->
-                      <div style="font-size:14px; font-weight:800; letter-spacing:-0.01em; margin:0 0 10px;">
-                        ■ 사내 교육(세미나) 개요
-                      </div>
-
-                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden;">
+                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">■ 사내 교육(세미나) 개요</div>
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fafafa;">
                         <tr>
-                          <td style="padding:12px 14px; background:#fafafa;">
-                            <div style="font-size:13px; line-height:1.65; color:#0f172a;">
-                              <div style="font-weight:800; margin-bottom:6px;">운영 목적</div>
-                              <ul style="margin:0 0 10px 18px; padding:0; line-height:1.7;">
-                                <li><b>사내 교육 강화</b>를 통해 조직 전반의 지식 공유 및 학습 문화를 정착합니다.</li>
-                                <li>세미나 주제는 <b>직무와 직/간접적으로 관련성</b>이 있는 내용 중심으로 구성합니다.</li>
-                                <li>우수/반복 활용이 가능한 세션은 <b>영상 녹화</b>를 통해 교육 자산으로 축적합니다.</li>
-                              </ul>
+                          <td style="padding:12px 14px; font-size:13px; line-height:1.7; color:#0f172a;">
+                            <b>운영 목적</b><br />
+                            • <b>사내 교육 강화</b>를 통해 지식 공유 및 학습 문화를 정착합니다.<br />
+                            • 세미나 주제는 <b>직무와 직/간접적으로 관련성</b>이 있는 내용으로 구성하여 실무 적용 가능성을 높입니다.<br /><br />
 
-                              <div style="font-weight:800; margin:12px 0 6px;">운영 방식</div>
-                              <ul style="margin:0 0 10px 18px; padding:0; line-height:1.7;">
-                                <li><b>내부 임원진 강의 + 외부 초빙 강사</b> 병행</li>
-                                <li>연간 총 <b>24회</b> (월 2회 운영)</li>
-                                <li>기본 운영: <b>2째주 / 4째주</b> 정기 진행 (요일/시간은 내부 공지 기준)</li>
-                              </ul>
-
-                              <div style="font-weight:800; margin:12px 0 6px;">자료 준비 및 운영 프로세스(요약)</div>
-                              <ol style="margin:0 0 0 18px; padding:0; line-height:1.7;">
-                                <li>진행자(발표자) 및 일정 확정</li>
-                                <li>
-                                  <b>기획서(제목 + 2~3줄 설명)</b>를 <b>세미나 진행일 기준 최소 7일 전(D-7)</b> 운영 담당자에게 전달
-                                </li>
-                                <li>
-                                  <b>발표 자료(PPT/PDF 등)</b>를 <b>세미나 진행일 기준 최소 3일 전(D-3)</b> 운영 담당자에게 전달
-                                </li>
-                                <li>운영팀: 자료 취합 → 발표 환경 세팅 → 촬영/음향 사전 점검</li>
-                                <li>세미나 진행 및 (필요 시) 영상 아카이빙/공유</li>
-                              </ol>
-
-                              <div style="margin-top:12px; padding:10px 12px; border:1px solid #dbeafe; background:#eff6ff; border-radius:12px;">
-                                <div style="font-size:13px; line-height:1.6;">
-                                  <b style="color:#1d4ed8;">문의</b> :
-                                  사내 교육(세미나) 운영과 관련한 제반 사항은 <b>Peter 상무 또는 Miles 이사</b>에게 문의 부탁드립니다.
-                                </div>
-                              </div>
-                            </div>
+                            <b>운영 방식</b><br />
+                            • 내부 강사(임원진/계열사/관계사) + 외부 초빙 강사 병행<br />
+                            • 강의 1~1.5시간 + Q&A 약 30분(권장)<br />
+                            • 참석 확인 및 설문(오프라인/온라인) 운영 권장
                           </td>
                         </tr>
                       </table>
 
-                      <div style="height:1px; background:#e5e7eb; margin:18px 0;"></div>
-
-                      <!-- SECTION: INSTRUCTORS -->
-                      <div style="font-size:14px; font-weight:800; letter-spacing:-0.01em; margin:0 0 10px;">
-                        ■ 강사진(임원진) 명단
-                      </div>
-
-                      <!-- Two-column list (table-based) -->
-                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden;">
+                      <div style="height:16px;"></div>
+                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">■ 세미나 자료 준비</div>
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fafafa;">
                         <tr>
-                          <td style="padding:12px 14px; background:#ffffff;">
-                            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
-                              <tr>
-                                <!-- LEFT COL -->
-                                <td width="50%" valign="top" style="padding:0 10px 0 0;">
-                                  <div style="font-size:12px; font-weight:800; color:#6b7280; margin:0 0 8px;">내부 강사진</div>
+                          <td style="padding:12px 14px; font-size:13px; line-height:1.7; color:#0f172a;">
+                            <b>1. 강연 주제 미리 수집하기</b><br />
+                            
+                            <b>2. 강연 자료 d-3 전 수집</b><br />
+                            <b>운영 목적</b><br />
+                            • <b>사내 교육 강화</b>를 통해 지식 공유 및 학습 문화를 정착합니다.<br />
+                            • 세미나 주제는 <b>직무와 직/간접적으로 관련성</b>이 있는 내용으로 구성하여 실무 적용 가능성을 높입니다.<br /><br />
 
-                                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:separate; border-spacing:0 8px;">
-                                    <tr>
-                                      <td style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fafafa;">
-                                        <div style="font-weight:800;">문병술 대표님</div>
-                                        <div style="font-size:12px; color:#6b7280; margin-top:4px;">(예: RK Establishment History / Milestones 등)</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fafafa;">
-                                        <div style="font-weight:800;">황원태 사장님</div>
-                                        <div style="font-size:12px; color:#6b7280; margin-top:4px;">Leadership / Business Ethics 등</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fafafa;">
-                                        <div style="font-weight:800;">김문관 고문님</div>
-                                        <div style="font-size:12px; color:#6b7280; margin-top:4px;">Leadership / Business Ethics 등</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fafafa;">
-                                        <div style="font-weight:800;">박진범 전무님</div>
-                                        <div style="font-size:12px; color:#6b7280; margin-top:4px;">SCM 영역</div>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </td>
-
-                                <!-- RIGHT COL -->
-                                <td width="50%" valign="top" style="padding:0 0 0 10px;">
-                                  <div style="font-size:12px; font-weight:800; color:#6b7280; margin:0 0 8px;">내부 강사진</div>
-
-                                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:separate; border-spacing:0 8px;">
-                                    <tr>
-                                      <td style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fafafa;">
-                                        <div style="font-weight:800;">권현성 전무님</div>
-                                        <div style="font-size:12px; color:#6b7280; margin-top:4px;">FIN 영역</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fafafa;">
-                                        <div style="font-weight:800;">이영민 상무님</div>
-                                        <div style="font-size:12px; color:#6b7280; margin-top:4px;">SCM 영역</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fafafa;">
-                                        <div style="font-weight:800;">서우종 상무님</div>
-                                        <div style="font-size:12px; color:#6b7280; margin-top:4px;">SCM 영역</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; background:#fafafa;">
-                                        <div style="font-weight:800;">오동섭 상무님</div>
-                                        <div style="font-size:12px; color:#6b7280; margin-top:4px;">OPS 영역</div>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </td>
-                              </tr>
-                            </table>
-
-                            <div style="margin-top:10px; font-size:12px; color:#6b7280; line-height:1.6;">
-                              ※ 내부 강사진은 연 2회 수준으로 운영되며, 잔여 회차는 외부 초빙 강사로 편성될 예정입니다.
-                            </div>
+                            <b>운영 방식</b><br />
+                            • 내부 강사(임원진/계열사/관계사) + 외부 초빙 강사 병행<br />
+                            • 강의 1~1.5시간 + Q&A 약 30분(권장)<br />
+                            • 참석 확인 및 설문(오프라인/온라인) 운영 권장
                           </td>
                         </tr>
                       </table>
 
-                      <div style="height:1px; background:#e5e7eb; margin:18px 0;"></div>
+
+                      <div style="height:16px;"></div>
+
+                      <!-- SECTION: INSTRUCTORS (2-col compact list) -->
+                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">■ 강사진(임원진) 명단</div>
+
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden;">
+
+
+                        <tr>
+                          <td style="width:50%; padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 문병술 대표님 / RK
+                          </td>
+                          <td style="width:50%; padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 권현성 전무님 / RK-FIN
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 황원태 사장님 / RK
+                          </td>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 박진범 전무님 / RK-SCM
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 김문관 고문님 / RK
+                          </td>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 이영민 상무님 / RK-SCM
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 장철원 대표님 / RK
+                          </td>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 서우종 상무님 / RK-SCM
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 송현일 이사님 / RK-SCM
+                          </td>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 오동섭 상무님 / RK-OPS
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 유근재 대표님 / U-System
+                          </td>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • 이유진 부사장님 / U-System
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • Aiden 고문님 / RMX
+                          </td>
+                          <td style="padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:13px; line-height:1.6;">
+                            • Jay 이사님 / RMX
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:10px 14px; font-size:13px; line-height:1.6;">
+                            • 임영택 상무님 / TRP
+                          </td>
+                          <td style="padding:10px 14px; font-size:13px; line-height:1.6;">
+                            • 김성규 대표님 / AM
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style="margin-top:8px; font-size:12px; color:#6b7280; line-height:1.55;">
+                        ※ 상기 명단 외에도 계열사/협력사/고객사 및 외부 초빙 강사 참여가 추가될 수 있습니다.
+                      </div>
+
+                      <div style="height:18px;"></div>
 
                       <!-- SECTION: SCHEDULE -->
-                      <div style="font-size:14px; font-weight:800; letter-spacing:-0.01em; margin:0 0 10px;">
-                        ■ 2026년 사내 교육(세미나) 연간 일정(안)
-                      </div>
+                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">■ 2026년 사내 교육(세미나) 연간 일정 (안)</div>
 
-                      <div style="font-size:13px; color:#6b7280; line-height:1.6; margin-bottom:10px;">
-                        아래 일정은 “기본 운영 프레임” 기반의 연간 편성(안)입니다. 확정된 회차는 추후 공지하며, 미정 구간은 <b>추후 확정(예정)</b>으로 표기합니다.
+                      <div style="font-size:13px; color:#334155; line-height:1.6; margin:0 0 10px;">
+                        아래 표는 2026년 총 24회차 운영을 위한 기본 스케줄(안)입니다. <b>강연 제목/내용은 1회차 확정</b>이며, 그 외 회차는 <b>추후 확정 예정</b>입니다.
                       </div>
 
                       <!-- Schedule Table -->
-                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden;">
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden;">
                         <tr>
-                          <td style="padding:0;">
-                            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; font-size:13px;">
-                              <tr>
-                                <td colspan="3" style="padding:10px 12px; background:#f9fafb; border-bottom:1px solid #e5e7eb; text-align:center; font-weight:800;">
-                                  상반기 (1~6월)
-                                </td>
-                              </tr>
+                          <td style="width:50px; background:#f9fafb; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px; font-weight:800;">회차</td>
+                          <td style="width:100px; background:#f9fafb; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px; font-weight:800;">일자</td>
+                          <td style="background:#f9fafb; padding:10px 10px; border-bottom:1px solid #e5e7eb; font-size:13px; font-weight:800;">발표자 / 소속</td>
+                          <td style="background:#f9fafb; padding:10px 10px; border-bottom:1px solid #e5e7eb; font-size:13px; font-weight:800;">강연(제목 + 내용)</td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; width:14%; background:#ffffff;"><b>1월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; width:43%; background:#ffffff;">
-                                  1회차: <b>확정/예정</b> (내부 강사) <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; width:43%; background:#ffffff;">
-                                  2회차: <b>확정/예정</b> (내부 강사) <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- Half-year row -->
+                        <tr>
+                          <td colspan="4" style="background:#eef2ff; padding:10px; border-bottom:1px solid #e5e7eb; text-align:center; font-size:13px; font-weight:800; color:#1d4ed8;">
+                            상반기 (1~6월)
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;"><b>2월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  1회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  2회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- 1 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">1</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;"><b>2026-01-14</b></td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>문병술 대표님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; line-height:1.4; margin:0 0 6px;">
+                              RK Establishment History &amp; Milestones
+                            </div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              설립 배경과 핵심 전환점(마일스톤)을 정리합니다.<br />
+                              제품/사업 모델의 큰 흐름과 향후 확장 방향을 공유합니다.
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;"><b>3월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  1회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  2회차: <span style="display:inline-block; padding:3px 9px 4px; border-radius:999px; border:1px solid #93c5fd; background:#eff6ff; color:#1d4ed8; font-weight:800; font-size:12px; line-height:1;">외부 초빙(예정)</span>
-                                  <div style="font-size:12px; color:#6b7280; margin-top:6px;">강사/주제: 섭외 진행 후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- helper for "TBD" -->
+                        <!-- 2 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-01-28</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>황원태 사장님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              강연 내용 및 대상/난이도는 운영 담당자와 협의 후 확정됩니다.<br />
+                              (기획서 D-7 / 발표자료 D-3 제출 기준)
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;"><b>4월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  1회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  2회차: <span style="display:inline-block; padding:3px 9px 4px; border-radius:999px; border:1px solid #93c5fd; background:#eff6ff; color:#1d4ed8; font-weight:800; font-size:12px; line-height:1;">외부 초빙(예정)</span>
-                                  <div style="font-size:12px; color:#6b7280; margin-top:6px;">강사/주제: 섭외 진행 후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- 3 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">3</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-02-11</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>김문관 고문님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              강연 구성(강의+Q&amp;A) 및 세부 주제는 추후 안내드립니다.
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;"><b>5월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  1회차: <span style="display:inline-block; padding:3px 9px 4px; border-radius:999px; border:1px solid #93c5fd; background:#eff6ff; color:#1d4ed8; font-weight:800; font-size:12px; line-height:1;">외부 초빙(예정)</span>
-                                  <div style="font-size:12px; color:#6b7280; margin-top:6px;">강사/주제: 섭외 진행 후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  2회차: <span style="display:inline-block; padding:3px 9px 4px; border-radius:999px; border:1px solid #93c5fd; background:#eff6ff; color:#1d4ed8; font-weight:800; font-size:12px; line-height:1;">외부 초빙(예정)</span>
-                                  <div style="font-size:12px; color:#6b7280; margin-top:6px;">강사/주제: 섭외 진행 후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- 4 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">4</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-02-25</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>권현성 전무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-FIN</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              (재무 FIN 영역) 직무 관련 주제 범위 내에서 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;"><b>6월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  1회차: <span style="display:inline-block; padding:3px 9px 4px; border-radius:999px; border:1px solid #93c5fd; background:#eff6ff; color:#1d4ed8; font-weight:800; font-size:12px; line-height:1;">외부 초빙(예정)</span>
-                                  <div style="font-size:12px; color:#6b7280; margin-top:6px;">강사/주제: 섭외 진행 후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  2회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- 5 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">5</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-03-11</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>유근재 대표님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">U-System</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              외부/관계사 강사 섭외 확정 후 세부 내용 업데이트 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td colspan="3" style="padding:10px 12px; background:#f9fafb; border-bottom:1px solid #e5e7eb; text-align:center; font-weight:800;">
-                                  하반기 (7~12월)
-                                </td>
-                              </tr>
+                        <!-- 6 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">6</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-03-25</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>박진범 전무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-SCM</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              (SCM) 공급망/발주/납기/품질/리스크 등 범위 내에서 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;"><b>7월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  1회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  2회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- 7 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">7</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-04-08</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>장철원 대표님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              세부 주제/대상은 추후 확정 후 안내드립니다.
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;"><b>8월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  1회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  2회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- 8 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">8</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-04-22</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>오동섭 상무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-OPS</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              (OPS) 운영/규정/프로세스/데이터베이스화/학점제 관련 범위에서 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;"><b>9월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  1회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  2회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- 9 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">9</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-05-13</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>임영택 상무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">TRP</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              관계사 강의 내용은 섭외 확정 후 업데이트됩니다.
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;"><b>10월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  1회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  2회차: <span style="display:inline-block; padding:3px 9px 4px; border-radius:999px; border:1px solid #93c5fd; background:#eff6ff; color:#1d4ed8; font-weight:800; font-size:12px; line-height:1;">외부 초빙(예정)</span>
-                                  <div style="font-size:12px; color:#6b7280; margin-top:6px;">강사/주제: 섭외 진행 후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- 10 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">10</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-05-27</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>서우종 상무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-SCM</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              (SCM) 재고/물류/협상/협력사 관리 등 범위 내에서 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;"><b>11월</b></td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  1회차: <span style="display:inline-block; padding:3px 9px 4px; border-radius:999px; border:1px solid #93c5fd; background:#eff6ff; color:#1d4ed8; font-weight:800; font-size:12px; line-height:1;">외부 초빙(예정)</span>
-                                  <div style="font-size:12px; color:#6b7280; margin-top:6px;">강사/주제: 섭외 진행 후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                  2회차: <span style="display:inline-block; padding:3px 9px 4px; border-radius:999px; border:1px solid #93c5fd; background:#eff6ff; color:#1d4ed8; font-weight:800; font-size:12px; line-height:1;">외부 초빙(예정)</span>
-                                  <div style="font-size:12px; color:#6b7280; margin-top:6px;">강사/주제: 섭외 진행 후 확정</div>
-                                </td>
-                              </tr>
+                        <!-- 11 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">11</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-06-10</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>Aiden 고문님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RMX</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              외부/관계사 강사 확정 후 강연 개요 업데이트 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
 
-                              <tr>
-                                <td style="padding:10px 10px; background:#ffffff;"><b>12월</b></td>
-                                <td style="padding:10px 10px; background:#ffffff;">
-                                  1회차: <span style="display:inline-block; padding:3px 9px 4px; border-radius:999px; border:1px solid #93c5fd; background:#eff6ff; color:#1d4ed8; font-weight:800; font-size:12px; line-height:1;">외부 초빙(예정)</span>
-                                  <div style="font-size:12px; color:#6b7280; margin-top:6px;">강사/주제: 섭외 진행 후 확정</div>
-                                </td>
-                                <td style="padding:10px 10px; background:#ffffff;">
-                                  2회차: <b>내부 강사</b> <div style="font-size:12px; color:#6b7280; margin-top:4px;">강연 제목/주제: 추후 확정</div>
-                                </td>
-                              </tr>
-                            </table>
+                        <!-- 12 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">12</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-06-24</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>이영민 상무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-SCM</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              (SCM) 대외 커뮤니케이션/이슈관리/변경관리 등 범위 내에서 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- Half-year row -->
+                        <tr>
+                          <td colspan="4" style="background:#ecfeff; padding:10px; border-bottom:1px solid #e5e7eb; text-align:center; font-size:13px; font-weight:800; color:#0f766e;">
+                            하반기 (7~12월)
+                          </td>
+                        </tr>
+
+                        <!-- 13 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">13</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-07-08</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>김성규 대표님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">AM</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              외부/협력사 강사 확정 후 세부 내용 업데이트 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 14 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">14</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-07-22</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>황원태 사장님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              2회차와 연계 또는 다른 주제로 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 15 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">15</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-08-12</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>송현일 이사님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-SCM</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              (SCM) 직무 관련 주제 범위 내에서 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 16 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">16</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-08-26</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>김문관 고문님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              3회차와 연계 또는 다른 주제로 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 17 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">17</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-09-09</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>문병술 대표님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              1회차와 연계 또는 심화 주제로 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 18 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">18</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-09-23</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>박진범 전무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-SCM</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              6회차와 연계 또는 다른 주제로 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 19 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">19</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-10-14</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>이유진 부사장님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">U-System</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              관계사 강사 확정 후 강연 개요 업데이트 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 20 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">20</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-10-28</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>이영민 상무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-SCM</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              12회차와 연계 또는 다른 주제로 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 21 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">21</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-11-11</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>Jay 이사님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RMX</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              외부/관계사 강사 확정 후 세부 내용 업데이트 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 22 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">22</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-11-25</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>서우종 상무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-SCM</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              10회차와 연계 또는 다른 주제로 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 23 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">23</td>
+                          <td style="width:100px; padding:10px 8px; border-bottom:1px solid #e5e7eb; font-size:13px;">2026-12-09</td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <b>권현성 전무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-FIN</span>
+                          </td>
+                          <td style="padding:10px 10px; border-bottom:1px solid #e5e7eb;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              4회차와 연계 또는 다른 주제로 확정 예정입니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- 24 -->
+                        <tr>
+                          <td style="width:50px; padding:10px 8px; font-size:13px;">24</td>
+                          <td style="width:100px; padding:10px 8px; font-size:13px;">2026-12-23</td>
+                          <td style="padding:10px 10px;">
+                            <b>오동섭 상무님</b><br />
+                            <span style="font-size:12px; color:#6b7280;">RK-OPS</span>
+                          </td>
+                          <td style="padding:10px 10px;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 6px;">(미정) 강연 제목 확정 예정</div>
+                            <div style="font-size:13px; line-height:1.55; color:#334155;">
+                              8회차와 연계 또는 다른 주제로 확정 예정입니다.
+                            </div>
                           </td>
                         </tr>
                       </table>
 
                       <div style="margin-top:10px; font-size:12px; color:#6b7280; line-height:1.6;">
-                        ※ 일정(안) 기준: 월 2회 정기 운영을 원칙으로 하며, 공휴일/내부 일정에 따라 일부 회차는 조정될 수 있습니다.<br />
-                        ※ 확정된 회차(날짜/강연 제목/강연 개요)는 운영팀에서 취합 후 전사 공지로 업데이트 예정입니다.
-                      </div>
-
-                      <div style="height:1px; background:#e5e7eb; margin:18px 0;"></div>
-
-                      <div style="font-size:14px; line-height:1.75; color:#0f172a;">
-                        본 프로그램은 단기 이벤트가 아닌, 론다코리아의 중·장기적인 학습 문화와 지식 자산 축적을 위한 연간 프로그램입니다.<br />
-                        임직원 여러분의 많은 관심과 참여를 부탁드립니다. 감사합니다.
-                      </div>
-
-                      <div style="margin-top:14px; font-size:14px; line-height:1.7; color:#0f172a;">
-                        <b>[보내는 사람 이름]</b> 드림
-                      </div>
-
-                      <div style="margin-top:10px; font-size:12px; color:#6b7280; line-height:1.6;">
-                        ※ Outlook에서 붙여넣기 시 “서식 유지(Keep Source Formatting)”를 선택하면 스타일 유지가 더 안정적입니다.
+                        ※ 일정(일자)은 기본 운영 주기 기준의 (안)이며 내부 사정에 따라 조정될 수 있습니다.<br />
+                        ※ (미정) 표시는 주제/구성 확정 후 업데이트 예정입니다.
                       </div>
                     </td>
                   </tr>
-                  <!-- /CONTENT -->
+                  <!-- /BODY -->
+
                 </table>
+                <!-- /CARD -->
+
+                <div style="margin-top:10px; font-size:12px; color:#6b7280; line-height:1.6;">
+                  팁: Outlook에서는 붙여넣기 시 “서식 유지(Keep Source Formatting)”를 선택하면 스타일 유지가 더 안정적입니다.
+                </div>
               </td>
             </tr>
-            <!-- /CARD -->
           </table>
-          <!-- /PAGE CONTAINER -->
         </td>
       </tr>
     </table>
