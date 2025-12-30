@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>정보보호 및 영업비밀 보호 서약서 | ㈜론다코리아</title>
+    <style>
+      :root{
+        --bg:#f3f4f6;
+        --paper:#ffffff;
+        --ink:#0f172a;
+        --muted:#6b7280;
+        --line:#e5e7eb;
+        --accent:#1d4ed8;
+        --soft:#f9fafb;
+        --radius:14px;
+        --shadow:0 10px 26px rgba(15,23,42,.06);
+      }
+      *{ box-sizing:border-box; }
+      body{
+        margin:0;
+        padding:0;
+        background:var(--bg);
+        color:var(--ink);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans KR", Arial, sans-serif;
+      }
+
+      /* ===== Screen layout (card) ===== */
+      .wrap{
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 20px 12px 40px;
+      }
+      .card{
+        background:var(--paper);
+        border:1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow:hidden;
+      }
+      .header{
+        padding: 18px 20px;
+        border-bottom:1px solid var(--line);
+      }
+      .title{
+        margin:0;
+        font-size: 20px;
+        line-height:1.35;
+        font-weight: 900;
+        letter-spacing:-0.01em;
+      }
+      .sub{
+        margin: 6px 0 0;
+        font-size: 13px;
+        color: var(--muted);
+        line-height:1.55;
+      }
+
+      /* ===== Content ===== */
+      .content{
+        padding: 18px 20px 22px;
+      }
+      p{
+        margin: 0 0 10px;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+      .muted{ color: var(--muted); }
+      .divider{
+        height:1px;
+        background:var(--line);
+        margin: 12px 0;
+      }
+      h2{
+        margin: 16px 0 8px;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing:-0.01em;
+      }
+      ul, ol{
+        margin: 6px 0 10px 18px;
+        padding: 0;
+        font-size: 14px;
+        line-height: 1.75;
+      }
+      li{ margin: 3px 0; }
+
+      .checkline{
+        display:flex;
+        gap:10px;
+        align-items:flex-start;
+        margin: 8px 0 10px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--soft);
+      }
+      .checkline input{
+        width: 18px;
+        height: 18px;
+        margin-top: 2px;
+      }
+      .checkline .txt{
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--ink);
+      }
+      .note{
+        border:1px solid #bfdbfe;
+        background:#eff6ff;
+        border-radius:12px;
+        padding: 10px 12px;
+        margin: 8px 0 10px;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .note b{ color: var(--accent); }
+
+      .field-grid{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 8px 0 10px;
+      }
+      .field{
+        border:1px solid var(--line);
+        border-radius:12px;
+        padding: 10px 12px;
+        background:#fff;
+      }
+      .field .k{
+        font-size: 12px;
+        font-weight: 900;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .field .v{
+        min-height: 24px;
+        border-bottom: 1px dashed #cbd5e1;
+        padding-bottom: 3px;
+        font-size: 14px;
+      }
+      .field.full{ grid-column: 1 / -1; }
+
+      .sign{
+        margin-top: 14px;
+        padding: 14px 14px;
+        border:1px solid var(--line);
+        border-radius: 12px;
+        background: var(--soft);
+      }
+      .sign-row{
+        display:flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items:center;
+        margin-top: 10px;
+      }
+      .sign-box{
+        flex: 1 1 220px;
+        border:1px solid var(--line);
+        border-radius: 12px;
+        background:#fff;
+        padding: 10px 12px;
+      }
+      .sign-box .k{
+        font-size: 12px;
+        font-weight: 900;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .sign-box .v{
+        min-height: 26px;
+        border-bottom: 1px dashed #cbd5e1;
+        padding-bottom: 3px;
+        font-size: 14px;
+      }
+      .foot{
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      /* ===== Page splitting helpers ===== */
+      .page{ }
+      .page-break{
+        display:none; /* screen: 숨김 */
+      }
+
+      /* ===== Print (A4 Word-style, narrow margins, multi-page) ===== */
+      @page{
+        size: A4;
+        /* ✅ "좁게" 보다 더 타이트한 여백 (필요 시 수치만 조절) */
+        margin: 10mm 10mm 12mm 10mm;
+      }
+      @media print{
+        body{ background:#fff; }
+        .wrap{ max-width: none; padding:0; margin:0; }
+        .card{
+          box-shadow:none;
+          border:none;
+          border-radius:0;
+          overflow:visible;
+        }
+        .header{
+          padding: 0 0 8px;
+          border-bottom: 1px solid #bbb;
+          margin-bottom: 10px;
+        }
+        .content{ padding:0; }
+
+        /* A4 폭 고정 (워드 느낌) */
+        .wrap, .card{
+          width: 190mm; /* A4(210) - 좌우여백(10+10) = 190 */
+        }
+
+        /* 인쇄 시 배경을 최대한 단순화 */
+        .checkline{ background:#fff; }
+        .note{ background:#fff; }
+
+        /* ✅ 페이지 분리 */
+        .page-break{
+          display:block;
+          break-before: page;
+          page-break-before: always;
+          height: 0;
+        }
+
+        /* ✅ 조항/서명 블록이 중간에서 찢기지 않도록 */
+        .checkline, .note, .field-grid, .sign{ break-inside: avoid; page-break-inside: avoid; }
+        h2{ break-after: avoid; page-break-after: avoid; }
+
+        /* 인쇄에서는 카드식 구분선 간격을 더 타이트 */
+        .divider{ margin: 10px 0; }
+        p{ margin-bottom: 8px; }
+        ul, ol{ margin-bottom: 8px; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="card">
+
+        <!-- ===================== PAGE 1 ===================== -->
+        <div class="page">
+          <div class="header">
+            <h1 class="title">정보보호 및 영업비밀 보호 서약서</h1>
+            <p class="sub">㈜론다코리아(이하 “회사”) 임직원용</p>
+          </div>
+
+          <div class="content">
+            <!-- 기본 인적사항 -->
+            <div class="field-grid">
+              <div class="field">
+                <div class="k">서약인(성명)</div>
+                <div class="v">&nbsp;</div>
+              </div>
+              <div class="field">
+                <div class="k">사번</div>
+                <div class="v">&nbsp;</div>
+              </div>
+              <div class="field">
+                <div class="k">부서</div>
+                <div class="v">&nbsp;</div>
+              </div>
+              <div class="field">
+                <div class="k">직위/직책</div>
+                <div class="v">&nbsp;</div>
+              </div>
+              <div class="field full">
+                <div class="k">작성일</div>
+                <div class="v">&nbsp;</div>
+              </div>
+            </div>
+
+            <p>
+              본인 ____________________ 은(는) ㈜론다코리아(이하 “회사”)로부터 회사의 <b>정보보호 정책, 지침 및 관련 규정</b>에 대하여 충분한 설명을 받았으며,
+              회사 임직원으로서 본 서약서의 모든 내용을 <b>재직 중은 물론 재직기간 만료, 계약 해지 또는 퇴직 이후에도 성실히 준수</b>할 것을 서약합니다.
+            </p>
+
+            <div class="divider"></div>
+
+            <!-- 제1조 -->
+            <h2>제1조 (일반 준수 사항)</h2>
+            <div class="checkline">
+              <input type="checkbox" />
+              <div class="txt"><b>체크:</b> 본인은 아래 일반 준수 사항을 충분히 숙지하였으며, 이에 동의하고 성실히 준수하겠습니다.</div>
+            </div>
+            <ol>
+              <li>회사의 정보보호 정책, 보안 지침, 내부 규정 및 본 서약서의 내용을 성실히 준수하겠습니다.</li>
+              <li>본 서약 내용을 위반하여 회사에 손해를 초래하거나 회사의 명예 및 신뢰를 훼손하는 행위를 하지 않겠습니다.</li>
+              <li>회사의 사전 승인 없이 회사의 자산(업무용 장비, 영업비밀, 지식재산권, 정보 등)을 개인적 목적 또는 사적 용도로 사용하지 않겠습니다.</li>
+              <li>
+                재직 중 개인 또는 공동으로 수행한 모든 업무 결과물(아이디어, 보고서, 기획서, 설계, 디자인, 저작물, 발명, 특허 등 일체의 산출물)은
+                <b>회사 업무와 관련된 경우 회사에 귀속됨</b>에 동의합니다.
+              </li>
+            </ol>
+
+            <div class="divider"></div>
+
+            <!-- 제2조 -->
+            <h2>제2조 (정보보호 및 정보자산 관리 준수 사항)</h2>
+            <div class="checkline">
+              <input type="checkbox" />
+              <div class="txt"><b>체크:</b> 본인은 정보보호 준수 사항을 숙지하였으며, 이에 동의하고 준수하겠습니다.</div>
+            </div>
+            <ol>
+              <li>
+                업무상 취득한 회사의 정보자산, 기술자료, 인사·재무 정보, 영업비밀, 고객 및 임직원의 개인정보, 투자정보 등 모든 기밀·대외비 정보를
+                업무 목적 외로 사용하거나 회사의 사전 승인 없이 복사, 기록, 저장, 변경, 삭제, 외부 공개 또는 유출하지 않겠습니다.
+              </li>
+              <li>
+                회사의 사전 승인을 받은 시스템 및 시설만 이용하며, 출입카드, 계정(ID) 및 비밀번호는 본인만 사용하고 타인에게 공유하지 않으며 안전하게 관리하겠습니다.
+              </li>
+              <li>
+                업무용 단말기(PC, 노트북 등)의 보안 유지를 위해 회사가 지정한 패치관리시스템, 보안시스템 계정 역시 본인만 사용하겠습니다.
+              </li>
+              <li>
+                회사가 제공하거나 승인한 <b>“Gear &amp; Asset”</b>만을 이용하여 업무를 수행하며, 정보보호 및 IP에 민감한 자료를 회사 외부로 반출하지 않겠습니다.
+                <div class="note">
+                  <b>정의:</b> “Gear &amp; Asset”이란 ERP, FTP, 공유폴더, 웹하드, 물리적 저장장치, 업무용 PC/노트북/모바일 기기, 이메일, 메신저, 인쇄물, 카탈로그, Hand-out,
+                  각종 시스템 접근 권한 및 회사가 관리·운영하는 모든 기기, 자산, 정보 일체를 의미합니다.
+                </div>
+              </li>
+              <li>회사에서 제공한 Gear &amp; Asset을 개인적인 목적으로 사용하지 않겠습니다.</li>
+              <li>
+                회사의 중요 정보 보호를 위하여, 회사는 관련 법령이 허용하는 범위 내에서 업무용 Gear &amp; Asset을 통해 생성·전송되는 업무 데이터(이메일, 메신저 등) 및
+                업무용 단말기에 대하여 <b>보안 목적의 모니터링, 점검, 열람</b>을 할 수 있음에 동의합니다.
+              </li>
+              <li>
+                정식 절차를 통해 취득한 정품 소프트웨어만을 지정된 업무 기기에서 사용하며, 비인가 소프트웨어 및 승인되지 않은 저장매체를 사용하지 않겠습니다.
+              </li>
+              <li>본 조항에 따른 의무는 재직 중뿐 아니라 퇴직 후에도 유효함에 동의합니다.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- ✅ PAGE BREAK (인쇄 시에만 적용) -->
+        <div class="page-break"></div>
+
+        <!-- ===================== PAGE 2 ===================== -->
+        <div class="page">
+          <div class="content">
+            <div class="divider"></div>
+
+            <!-- 제3조 -->
+            <h2>제3조 (지식재산권 보호)</h2>
+            <div class="checkline">
+              <input type="checkbox" />
+              <div class="txt"><b>체크:</b> 본인은 지식재산권 보호 사항을 숙지하였으며, 이에 동의합니다.</div>
+            </div>
+            <ol>
+              <li>
+                회사 업무와 관련하여 창작·개발·발명·설계한 모든 지식재산에 대한 소유권, 사용권, 처분권 등 일체의 권리는 회사에 귀속됨을 인지하고 이에 동의합니다.
+              </li>
+              <li>회사 또는 제3자의 지식재산을 권리자의 사전 승인 없이 공개, 유출 또는 사용하지 않겠습니다.</li>
+              <li>본 조항의 효력은 재직 기간 종료 이후에도 계속됩니다.</li>
+            </ol>
+
+            <div class="divider"></div>
+
+            <!-- 제4조 -->
+            <h2>제4조 (영업비밀 보호)</h2>
+            <div class="checkline">
+              <input type="checkbox" />
+              <div class="txt"><b>체크:</b> 본인은 영업비밀 보호 사항을 숙지하였으며, 이에 동의합니다.</div>
+            </div>
+            <ol>
+              <li>
+                “영업비밀”이란 공지되지 아니하고 독립된 경제적 가치를 가지며 회사가 비밀로 관리하는 기술상·경영상 정보를 의미함을 인지합니다.
+              </li>
+              <li>본인은 「부정경쟁방지 및 영업비밀보호에 관한 법률」에 따라 영업비밀을 무단으로 공개, 유출, 사용하지 않겠습니다.</li>
+              <li>재직 중은 물론 퇴직 후에도 회사의 영업비밀을 회사의 사전 동의 없이 공개, 누설, 사용하지 않겠습니다.</li>
+              <li>영업비밀 여부가 불분명한 경우, 반드시 보안 담당자에게 사전 확인을 받은 후 처리하겠습니다.</li>
+              <li>본 조항의 권리와 의무는 재직기간 종료 이후에도 유효합니다.</li>
+            </ol>
+
+            <div class="divider"></div>
+
+            <!-- 제5조 -->
+            <h2>제5조 (정보 공유 및 커뮤니케이션 준수)</h2>
+            <div class="checkline">
+              <input type="checkbox" />
+              <div class="txt"><b>체크:</b> 본인은 정보 공유 관련 준수 사항을 숙지하였으며, 이에 동의합니다.</div>
+            </div>
+            <ol>
+              <li>회사의 정보 공유 및 커뮤니케이션 지침을 준수하겠습니다.</li>
+              <li>정보 공유는 필요성에 따라 <b>대면 → 온라인 회의 → 전화 → 이메일 → 메신저</b> 순으로 활용하겠습니다.</li>
+              <li>개인 이메일을 업무에 사용하지 않으며, 회사가 제공한 이메일 및 공식 커뮤니케이션 도구만 사용하겠습니다.</li>
+              <li>회사가 허용한 메신저(예: WeChat, MS Teams 등)만 사용하며, 외부 메신저 사용을 지양하겠습니다.</li>
+              <li>출력물은 최소화하고 회수가 필요한 경우 즉시 회수하겠습니다.</li>
+              <li>외부 제공 자료는 PDF 형식으로 제공하며 회사 지정 양식을 사용하겠습니다.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- ✅ PAGE BREAK (인쇄 시에만 적용) -->
+        <div class="page-break"></div>
+
+        <!-- ===================== PAGE 3 ===================== -->
+        <div class="page">
+          <div class="content">
+            <div class="divider"></div>
+
+            <!-- 제6조 -->
+            <h2>제6조 (정보 및 자료 반환)</h2>
+            <div class="checkline">
+              <input type="checkbox" />
+              <div class="txt"><b>체크:</b> 본인은 정보 및 자료 반환 의무를 숙지하였으며, 이에 동의합니다.</div>
+            </div>
+            <ol>
+              <li>회사가 제공하거나 업무와 관련하여 생성된 모든 자료, 장비, 데이터는 회사의 소유임을 인지합니다.</li>
+              <li>
+                재직 종료 또는 회사 요청 시 모든 회사 소유 자산과 정보를 즉시 반환하며,
+                개인 계정이나 클라우드에 저장된 자료도 삭제 및 반환에 협조하겠습니다.
+              </li>
+            </ol>
+
+            <div class="divider"></div>
+
+            <!-- 제7조 -->
+            <h2>제7조 (개인정보 수집·이용 동의)</h2>
+            <div class="checkline">
+              <input type="checkbox" />
+              <div class="txt"><b>체크:</b> 본인은 개인정보 수집·이용에 대해 이해하였으며 이에 동의합니다.</div>
+            </div>
+            <ol>
+              <li>회사는 법령 준수, 근로관계 운영 및 복리후생 제공을 목적으로 개인정보를 처리합니다.</li>
+              <li>개인정보는 관련 법령에 따라 보관되며, 법적 근거가 없는 경우 요청 시 삭제될 수 있습니다.</li>
+              <li>본 동의는 고용 유지에 필수적인 개인정보 처리에 해당함을 인지합니다.</li>
+            </ol>
+
+            <div class="divider"></div>
+
+            <!-- 서약 -->
+            <h2>서약</h2>
+            <p>
+              본인은 본 서약서의 내용을 충분히 이해하였으며, 자유로운 의사에 따라 서명합니다.
+              본 서약을 위반할 경우 회사의 규정 및 관련 법령에 따라 책임을 부담할 것에 동의합니다.
+            </p>
+
+            <div class="sign">
+              <div class="sign-row">
+                <div class="sign-box">
+                  <div class="k">서명일</div>
+                  <div class="v">년 &nbsp;&nbsp;&nbsp; 월 &nbsp;&nbsp;&nbsp; 일</div>
+                </div>
+                <div class="sign-box">
+                  <div class="k">서약인(성명)</div>
+                  <div class="v">&nbsp;</div>
+                </div>
+                <div class="sign-box">
+                  <div class="k">서명(인)</div>
+                  <div class="v">&nbsp;</div>
+                </div>
+              </div>
+              <div class="foot">㈜론다코리아 귀중</div>
+            </div>
+
+            <p class="foot">
+              ※ 본 문서는 사내 규정/법무 검토에 따라 일부 문구가 조정될 수 있습니다. (전자서명/출력 모두 사용 가능)
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
