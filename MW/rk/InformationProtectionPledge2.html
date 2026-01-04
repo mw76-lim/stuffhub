@@ -15,6 +15,9 @@
         --soft:#f9fafb;
         --radius:14px;
         --shadow:0 10px 26px rgba(15,23,42,.06);
+        --warn:#b42318;
+        --warn-soft:#fff1f2;
+        --warn-line:#fecdd3;
       }
       *{ box-sizing:border-box; }
       body{
@@ -72,7 +75,7 @@
         margin: 12px 0;
       }
 
-      /* 조항 블록: 체크를 하단에 두기 위해 섹션 단위로 묶음 */
+      /* 조항 블록 */
       .clause{
         padding: 0;
         margin: 0 0 12px;
@@ -91,7 +94,7 @@
       }
       li{ margin: 3px 0; }
 
-      /* 조항 끝 체크 라인 (하단 배치) */
+      /* 조항 끝 체크 라인 */
       .checkline{
         display:flex;
         gap:10px;
@@ -130,6 +133,18 @@
         line-height: 1.6;
       }
       .note b{ color: var(--accent); }
+
+      /* ✅ 보강(추가) 노트: 위반/보안사고/DRM 등 강조 */
+      .note-warn{
+        border:1px solid var(--warn-line);
+        background:var(--warn-soft);
+        border-radius:12px;
+        padding: 10px 12px;
+        margin: 8px 0 10px;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .note-warn b{ color: var(--warn); }
 
       .field-grid{
         display:grid;
@@ -197,7 +212,7 @@
         line-height: 1.6;
       }
 
-      /* ===== Print (A4 Word-style, narrow margins, multi-page) ===== */
+      /* ===== Print ===== */
       @page{
         size: A4;
         margin: 10mm 10mm 12mm 10mm;
@@ -217,11 +232,10 @@
           margin-bottom: 10px;
         }
         .content{ padding:0; }
-
         .wrap, .card{ width: 190mm; }
 
         .checkline{ background:#fff; }
-        .note{ background:#fff; }
+        .note, .note-warn{ background:#fff; }
 
         .page-break{
           display:block;
@@ -230,7 +244,7 @@
           height: 0;
         }
 
-        .checkline, .note, .field-grid, .sign,
+        .checkline, .note, .note-warn, .field-grid, .sign,
         .clause{ break-inside: avoid; page-break-inside: avoid; }
         h2{ break-after: avoid; page-break-after: avoid; }
 
@@ -297,6 +311,13 @@
                   <b>회사 업무와 관련된 경우 회사에 귀속됨</b>에 동의합니다.
                 </li>
               </ol>
+
+              <!-- ✅ 보강: 위반 시 조치(원칙 명확화) -->
+              <div class="note-warn">
+                <b>추가 고지:</b> 본 서약의 내용을 위반한 경우, 회사는 관련 법령 및 사내 규정에 따라
+                <b>징계, 손해배상 청구, 민·형사상 책임 추궁, 접근 권한 회수, 시스템 사용 제한</b> 등 필요한 조치를 취할 수 있습니다.
+              </div>
+
               <div class="checkline">
                 <input type="checkbox" />
                 <div class="txt"><b>체크:</b> 본인은 위 일반 준수 사항을 충분히 숙지하였으며, 이에 동의하고 성실히 준수하겠습니다.</div>
@@ -324,6 +345,13 @@
                     <b>정의:</b> “Gear &amp; Asset”이란 ERP, FTP, 공유폴더, 웹하드, 물리적 저장장치, 업무용 PC/노트북/모바일 기기, 이메일, 메신저, 인쇄물, 카탈로그, Hand-out,
                     각종 시스템 접근 권한 및 회사가 관리·운영하는 모든 기기, 자산, 정보 일체를 의미합니다.
                   </div>
+
+                  <!-- ✅ 보강: DRM/워터마크/로그 등 기술적 보호조치 명시 -->
+                  <div class="note-warn">
+                    <b>기술적 보호조치:</b> 회사는 정보보호 및 영업비밀 보호를 위하여 관련 법령이 허용하는 범위 내에서
+                    <b>DRM, 워터마크, 접근제어, 로그 기록, 다운로드/전송 제한</b> 등 기술적 보호조치를 적용할 수 있으며,
+                    서약인은 이에 따른 사용 제한을 준수합니다.
+                  </div>
                 </li>
                 <li>회사에서 제공한 Gear &amp; Asset을 개인적인 목적으로 사용하지 않겠습니다.</li>
                 <li>
@@ -333,6 +361,19 @@
                 <li>
                   정식 절차를 통해 취득한 정품 소프트웨어만을 지정된 업무 기기에서 사용하며, 비인가 소프트웨어 및 승인되지 않은 저장매체를 사용하지 않겠습니다.
                 </li>
+
+                <!-- ✅ 보강: BYOD(개인 기기) 경계 명확화 -->
+                <li>
+                  개인 소유의 기기(개인 PC, 노트북, 모바일 기기 등)를 업무에 사용하는 경우에도,
+                  회사의 정보보호 정책 및 본 서약서와 동일한 수준의 보안 기준을 준수하겠습니다.
+                </li>
+
+                <!-- ✅ 보강: 보안사고/의심 상황 즉시 보고 의무 -->
+                <li>
+                  정보 유출, 보안 사고, 계정 도용, 의심되는 접근 또는 정책 위반 가능성을 인지한 경우,
+                  지체 없이 회사의 보안 담당자 또는 지정된 보고 채널에 즉시 보고하겠습니다.
+                </li>
+
                 <li>본 조항에 따른 의무는 재직 중뿐 아니라 퇴직 후에도 유효함에 동의합니다.</li>
               </ol>
               <div class="checkline">
@@ -376,6 +417,13 @@
                 </li>
                 <li>본인은 「부정경쟁방지 및 영업비밀보호에 관한 법률」에 따라 영업비밀을 무단으로 공개, 유출, 사용하지 않겠습니다.</li>
                 <li>재직 중은 물론 퇴직 후에도 회사의 영업비밀을 회사의 사전 동의 없이 공개, 누설, 사용하지 않겠습니다.</li>
+
+                <!-- ✅ 보강: 퇴직/전직 준비 시 반출 금지 명확화 -->
+                <li>
+                  퇴직 예정, 전직 준비, 경쟁사 이직 여부와 관계없이 재직 중 회사의 정보 및 영업비밀을 외부로 반출하거나
+                  사전에 개인 저장매체 또는 개인 계정(클라우드/이메일 등)에 보관하는 행위를 하지 않겠습니다.
+                </li>
+
                 <li>영업비밀 여부가 불분명한 경우, 반드시 보안 담당자에게 사전 확인을 받은 후 처리하겠습니다.</li>
                 <li>본 조항의 권리와 의무는 재직기간 종료 이후에도 유효합니다.</li>
               </ol>
@@ -441,6 +489,26 @@
               <div class="checkline">
                 <input type="checkbox" />
                 <div class="txt"><b>체크:</b> 본인은 위 개인정보 수집·이용에 대해 충분히 이해하였으며, 이에 동의합니다.</div>
+              </div>
+              <div class="clause-end"></div>
+            </section>
+
+            <!-- ✅ 보강: 위반 시 조치 조항을 문서 말미에 “정식 조항”으로 한 번 더 명확화 -->
+            <section class="clause">
+              <h2>제8조 (위반 시 조치)</h2>
+              <ol>
+                <li>
+                  서약인이 본 서약서 또는 회사의 정보보호 정책/지침/내부 규정을 위반한 경우,
+                  회사는 관련 법령 및 사내 규정에 따라 <b>징계, 손해배상 청구, 민·형사상 책임 추궁</b> 등을 포함한 필요한 조치를 취할 수 있습니다.
+                </li>
+                <li>
+                  회사는 위반 사실의 확인 및 피해 확산 방지를 위하여 <b>접근 권한 회수, 시스템 사용 제한, 자료 회수 및 보존 조치</b>를 할 수 있으며,
+                  서약인은 이에 협조합니다.
+                </li>
+              </ol>
+              <div class="checkline">
+                <input type="checkbox" />
+                <div class="txt"><b>체크:</b> 본인은 위 “위반 시 조치” 내용을 충분히 이해하였으며, 이에 동의합니다.</div>
               </div>
               <div class="clause-end"></div>
             </section>
