@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>세미나 참석 여부 확인 폼 (샘플)</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --paper:#ffffff;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --accent:#2563eb;
+      --soft:#f8fafc;
+      --radius:14px;
+      --shadow:0 10px 24px rgba(15,23,42,.06);
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+      line-height:1.55;
+    }
+    .wrap{
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 22px 12px 44px;
+    }
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .header{
+      padding: 18px 18px 14px;
+      border-bottom:1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, var(--soft));
+    }
+    .badge{
+      display:inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing:-0.01em;
+    }
+    h1{
+      margin: 10px 0 6px;
+      font-size: 20px;
+      line-height:1.25;
+      letter-spacing:-0.02em;
+    }
+    .sub{
+      margin:0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .content{
+      padding: 18px;
+    }
+
+    .info{
+      border:1px solid #bfdbfe;
+      background:#eff6ff;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin: 0 0 14px;
+      font-size: 13px;
+      color:#0f172a;
+    }
+    .info b{ color:#1d4ed8; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .field{
+      border:1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background:#fff;
+    }
+    .field.full{ grid-column: 1 / -1; }
+    label{
+      display:block;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0 0 6px;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 10px;
+      font-size: 14px;
+      outline: none;
+      background:#fff;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+    }
+    textarea{ min-height: 88px; resize: vertical; }
+
+    .radio-wrap{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .radio{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      background: var(--soft);
+      user-select:none;
+    }
+    .radio input{ width:16px; height:16px; }
+
+    .hint{
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .divider{
+      height:1px;
+      background: var(--line);
+      margin: 16px 0;
+    }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      justify-content:flex-end;
+      padding: 14px 18px 18px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-weight: 900;
+      font-size: 14px;
+      cursor:pointer;
+      background:#fff;
+      color: var(--ink);
+    }
+    .btn.primary{
+      background: var(--accent);
+      border-color: var(--accent);
+      color:#fff;
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    /* Print: Word-like */
+    @page{ size: A4; margin: 12mm 12mm 14mm 12mm; }
+    @media print{
+      body{ background:#fff; }
+      .wrap{ padding:0; max-width:none; }
+      .card{ box-shadow:none; border:none; border-radius:0; }
+      .header{ padding:0 0 10px; border-bottom:1px solid #bbb; background:none; }
+      .actions{ display:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="header">
+        <span class="badge">RSVP</span>
+        <h1>세미나 참석 여부 확인</h1>
+        <p class="sub">
+          아래 항목을 입력해 주세요. (응답 마감: <b>YYYY-MM-DD(요일) 18:00</b>)
+        </p>
+      </div>
+
+      <form class="content" action="#" method="post">
+        <div class="info">
+          <b>안내</b> · 본 응답은 좌석/자료/다과 및 운영 준비를 위한 용도입니다.<br/>
+          <b>미정</b> 선택 시, 운영자가 행사 1~2일 전 재확인 연락을 드릴 수 있습니다.
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="name">성명 <span aria-hidden="true" style="color:#ef4444">*</span></label>
+            <input id="name" name="name" type="text" placeholder="예: 홍길동" required />
+          </div>
+
+          <div class="field">
+            <label for="dept">부서 <span aria-hidden="true" style="color:#ef4444">*</span></label>
+            <input id="dept" name="dept" type="text" placeholder="예: OPS / 영업 / R&D" required />
+          </div>
+
+          <div class="field">
+            <label for="position">직위/직책</label>
+            <input id="position" name="position" type="text" placeholder="예: 매니저 / 책임 / 팀장" />
+          </div>
+
+          <div class="field">
+            <label for="contact">연락처(선택)</label>
+            <input id="contact" name="contact" type="tel" placeholder="예: 010-0000-0000" />
+            <div class="hint">※ 미정/변경 발생 시 확인 연락을 드릴 수 있습니다.</div>
+          </div>
+
+          <div class="field full">
+            <label>참석 여부 <span aria-hidden="true" style="color:#ef4444">*</span></label>
+            <div class="radio-wrap" role="radiogroup" aria-label="참석 여부">
+              <label class="radio">
+                <input type="radio" name="rsvp" value="attend" required />
+                참석
+              </label>
+              <label class="radio">
+                <input type="radio" name="rsvp" value="decline" />
+                불참
+              </label>
+              <label class="radio">
+                <input type="radio" name="rsvp" value="maybe" />
+                미정
+              </label>
+            </div>
+            <div class="hint">※ 불참/미정 선택 시, 사유 또는 참고사항을 아래에 남겨 주세요.</div>
+          </div>
+
+          <div class="field full">
+            <label for="reason">불참/미정 사유(또는 참고사항)</label>
+            <textarea id="reason" name="reason" placeholder="예: 출장/미팅/개인 일정, 참석 가능 시간(부분참석) 등"></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="request">기타 요청사항(선택)</label>
+            <textarea id="request" name="request" placeholder="예: 좌석 배치, 질의 사전 제출, 접근성/편의 요청 등"></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="confirm">개인정보 처리 안내(필수 확인)</label>
+            <div class="hint" style="margin-top:0;">
+              입력하신 정보는 세미나 운영(참석 명단, 좌석/자료 준비, 필요 시 연락)을 위해 사용되며,
+              행사 종료 후 내부 기준에 따라 보관/폐기됩니다.
+            </div>
+            <div class="radio-wrap" style="margin-top:10px;">
+              <label class="radio" style="border-radius:12px;">
+                <input type="checkbox" name="privacy" required />
+                위 내용을 확인하였으며, 개인정보 처리에 동의합니다.
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="muted" style="font-size:12px;margin:0;">
+          ※ 본 HTML은 Google Form / MS Forms 구성의 “내용(문항)”을 문서/메일 공유용으로 재현한 샘플입니다.
+          실제 제출/취합 기능은 각 폼 서비스에서 설정해 주세요.
+        </p>
+      </form>
+
+      <div class="actions">
+        <button class="btn" type="button" onclick="window.print()">인쇄</button>
+        <button class="btn" type="reset">초기화</button>
+        <button class="btn primary" type="submit" form="rsvpForm" disabled title="샘플 HTML에서는 제출 기능을 사용하지 않습니다.">
+          제출(샘플)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 샘플 페이지: 제출 버튼 비활성 (실제 Form 도구 사용 권장)
+  </script>
+</body>
+</html>
