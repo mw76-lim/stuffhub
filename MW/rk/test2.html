@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>03_Survey 예제 (무기명) — Raw_Response.xlsx & Summary.pdf</title>
+  </head>
+
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background: #f3f4f6;
+      font-family: ui-sans-serif, system-ui, -apple-system, 'Noto Sans KR', Arial, sans-serif;
+      color: #0f172a;
+    "
+  >
+    <!--
+      ✅ 메일/워드 붙여넣기용: 표 기반 + 인라인 스타일
+      ✅ 무기명 설문 반영:
+        - 이름/사번/이메일/개인식별자 수집 항목 없음
+        - Timestamp는 선택(또는 익명 토큰/제출일자 단위로 축약 가능)
+    -->
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;">
+      <tr>
+        <td align="center" style="padding:18px 12px 40px;">
+          <table role="presentation" width="960" cellpadding="0" cellspacing="0" border="0" style="max-width:960px; width:100%;">
+            <tr>
+              <td>
+                <!-- CARD -->
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  border="0"
+                  style="
+                    background:#ffffff;
+                    border:1px solid #e5e7eb;
+                    border-radius:14px;
+                    overflow:hidden;
+                    box-shadow:0 10px 26px rgba(15,23,42,0.06);
+                  "
+                >
+                  <!-- HEADER -->
+                  <tr>
+                    <td style="padding:18px 20px; border-bottom:1px solid #e5e7eb;">
+                      <div style="font-size:18px; font-weight:800; letter-spacing:-0.01em; line-height:1.35;">
+                        03_Survey 예제 (무기명 설문) — Raw_Response.xlsx &amp; Summary.pdf
+                      </div>
+                      <div style="margin-top:6px; font-size:13px; color:#6b7280; line-height:1.65;">
+                        아래는 세미나 아카이빙 폴더의 <b>03_Survey</b> 구성 예시입니다.<br />
+                        본 예시는 <b>무기명 설문</b> 운영을 전제로 하며, 개인 식별 정보(이름/사번/이메일 등)를 수집하지 않습니다.
+                      </div>
+
+                      <div style="margin-top:12px; border:1px solid #dbeafe; background:#eff6ff; border-radius:12px; padding:10px 12px;">
+                        <div style="font-size:12px; font-weight:800; color:#1d4ed8; margin-bottom:6px;">무기명 설문 반영 포인트</div>
+                        <div style="font-size:13px; line-height:1.7; color:#0f172a;">
+                          • 개인 식별 항목 미포함 (이름/사번/연락처/이메일/좌석번호 등)<br />
+                          • <b>부서/직급</b>은 “가까운 범주”로만 선택(식별 리스크 낮춤)<br />
+                          • Timestamp는 필요 시 <b>날짜 단위</b>로 축약하거나, 내부 분석용으로만 보관(외부 공유 금지)<br />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- BODY -->
+                  <tr>
+                    <td style="padding:16px 20px 22px;">
+
+                      <!-- SECTION: TREE -->
+                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">1) 03_Survey 폴더 구조</div>
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fafafa;">
+                        <tr>
+                          <td style="padding:12px 14px; font-size:13px; line-height:1.7; color:#0f172a;">
+                            <div style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;">
+                              03_Survey/<br />
+                              &nbsp;&nbsp;├─ Raw_Response.xlsx<br />
+                              &nbsp;&nbsp;└─ Summary.pdf
+                            </div>
+                            <div style="margin-top:10px; font-size:12px; color:#6b7280;">
+                              * Raw_Response.xlsx = 원본(가공 전) 데이터 / Summary.pdf = 공유용 요약(1~2p)
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style="height:16px;"></div>
+
+                      <!-- SECTION: RAW -->
+                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">2) Raw_Response.xlsx 예제 (무기명)</div>
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#ffffff;">
+                        <tr>
+                          <td style="padding:12px 14px; border-bottom:1px solid #e5e7eb; background:#f9fafb;">
+                            <div style="font-size:13px; font-weight:800;">시트 구성</div>
+                            <div style="margin-top:4px; font-size:12px; color:#6b7280; line-height:1.6;">
+                              • <b>Responses</b>: 설문 응답 원본 (무기명)<br />
+                              • <b>Meta</b>: 회차/일자/응답률 등 메타데이터
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- Responses table -->
+                        <tr>
+                          <td style="padding:12px 14px;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 8px;">Sheet: Responses</div>
+
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                              style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; border-collapse:separate;">
+                              <tr>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">Submit Date</td>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">회차</td>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">강연자</td>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">부서(범주)</td>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">직급(범주)</td>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:center;">Q2-1</td>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:center;">Q2-2</td>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:center;">Q2-3</td>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:center;">Q2-4</td>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:center;">Q2-5</td>
+                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">주관식 의견</td>
+                              </tr>
+
+                              <tr>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">2026-03-25</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">6</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">박진범</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">SCM</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">책임/선임</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">5</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">5</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">5</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">실제 사례 중심이라 이해가 쉬웠습니다.</td>
+                              </tr>
+
+                              <tr>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">2026-03-25</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">6</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">박진범</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">영업</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">사원</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">3</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
+                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">SCM 흐름을 처음 구조적으로 이해했습니다.</td>
+                              </tr>
+
+                              <tr>
+                                <td style="padding:8px 8px; font-size:12px;">2026-03-25</td>
+                                <td style="padding:8px 8px; font-size:12px;">6</td>
+                                <td style="padding:8px 8px; font-size:12px;">박진범</td>
+                                <td style="padding:8px 8px; font-size:12px;">기술</td>
+                                <td style="padding:8px 8px; font-size:12px;">책임/선임</td>
+                                <td style="padding:8px 8px; font-size:12px; text-align:center;">3</td>
+                                <td style="padding:8px 8px; font-size:12px; text-align:center;">3</td>
+                                <td style="padding:8px 8px; font-size:12px; text-align:center;">3</td>
+                                <td style="padding:8px 8px; font-size:12px; text-align:center;">3</td>
+                                <td style="padding:8px 8px; font-size:12px; text-align:center;">3</td>
+                                <td style="padding:8px 8px; font-size:12px;">초반 용어 설명이 조금 더 있었으면 좋겠습니다.</td>
+                              </tr>
+                            </table>
+
+                            <div style="margin-top:10px; font-size:12px; color:#6b7280; line-height:1.6;">
+                              * 무기명 설문이므로 응답자 식별 컬럼(이름/사번/이메일 등)은 포함하지 않습니다.<br />
+                              * Timestamp 대신 <b>Submit Date(YYYY-MM-DD)</b>로 축약하여 익명성을 강화할 수 있습니다.
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- Meta table -->
+                        <tr>
+                          <td style="padding:0 12px 14px;">
+                            <div style="font-size:13px; font-weight:800; margin:0 0 8px;">Sheet: Meta</div>
+
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                              style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; background:#fafafa;">
+                              <tr>
+                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">항목</td>
+                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">내용</td>
+                              </tr>
+                              <tr>
+                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">세미나명</td>
+                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">RK 인사이트 세미나</td>
+                              </tr>
+                              <tr>
+                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">회차</td>
+                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">6</td>
+                              </tr>
+                              <tr>
+                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">일자</td>
+                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">2026-03-25</td>
+                              </tr>
+                              <tr>
+                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">강연자</td>
+                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">박진범</td>
+                              </tr>
+                              <tr>
+                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">설문 방식</td>
+                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">Google Form (무기명)</td>
+                              </tr>
+                              <tr>
+                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">응답 수</td>
+                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">18</td>
+                              </tr>
+                              <tr>
+                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; background:#f9fafb;">비고</td>
+                                <td style="padding:10px; font-size:12px; background:#ffffff;">개인 식별 항목 미수집(익명성 확보)</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style="height:16px;"></div>
+
+                      <!-- SECTION: SUMMARY -->
+                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">3) Summary.pdf 예제 (공유용 1~2p)</div>
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#ffffff;">
+                        <tr>
+                          <td style="padding:12px 14px; border-bottom:1px solid #e5e7eb; background:#f9fafb;">
+                            <div style="font-size:13px; font-weight:800;">요약본 특징</div>
+                            <div style="margin-top:4px; font-size:12px; color:#6b7280; line-height:1.6;">
+                              • 전사 공유용(개인 식별 정보 없음) &nbsp;• 핵심 지표 + 인사이트 + 개선점 중심 &nbsp;• 1~2페이지 권장
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td style="padding:14px;">
+                            <!-- "PDF page" mock -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                              style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#ffffff;">
+                              <tr>
+                                <td style="padding:14px 16px; border-bottom:1px solid #e5e7eb;">
+                                  <div style="font-size:16px; font-weight:900; letter-spacing:-0.01em;">
+                                    RK 인사이트 세미나 설문 요약 (무기명)
+                                  </div>
+                                  <div style="margin-top:6px; font-size:12px; color:#6b7280; line-height:1.6;">
+                                    회차: 6회차 &nbsp;|&nbsp; 일자: 2026-03-25 &nbsp;|&nbsp; 강연자: 박진범 &nbsp;|&nbsp; 주제: 공급망 리스크 관리 실전 &nbsp;|&nbsp; 응답: 18건
+                                  </div>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td style="padding:12px 16px;">
+                                  <div style="font-size:13px; font-weight:900; margin:0 0 6px;">1. 응답 개요</div>
+                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                                    style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; background:#fafafa;">
+                                    <tr>
+                                      <td style="padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb; width:180px;">총 참석자</td>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">25명</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">설문 응답자</td>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">18명</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="padding:10px; font-size:12px; font-weight:800; background:#f9fafb;">응답률</td>
+                                      <td style="padding:10px; font-size:12px; background:#ffffff;">72%</td>
+                                    </tr>
+                                  </table>
+
+                                  <div style="height:12px;"></div>
+
+                                  <div style="font-size:13px; font-weight:900; margin:0 0 6px;">2. 정량 평가 요약 (5점 만점)</div>
+                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                                    style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden;">
+                                    <tr>
+                                      <td style="background:#f9fafb; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">문항</td>
+                                      <td style="width:120px; background:#f9fafb; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:right;">평균</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb;">(예) 주제/내용의 유용성</td>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:right;">4.3</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb;">(예) 이해하기 쉬운 전달</td>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:right;">3.9</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb;">(예) 구성/시간 배분 적절</td>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:right;">4.1</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb;">(예) 업무 적용 가능성</td>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:right;">4.3</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="padding:10px; font-size:12px;">(예) 전반 만족도</td>
+                                      <td style="padding:10px; font-size:12px; text-align:right;">4.2</td>
+                                    </tr>
+                                  </table>
+
+                                  <div style="margin-top:10px; border:1px solid #e5e7eb; background:#fafafa; border-radius:10px; padding:10px 12px;">
+                                    <div style="font-size:12px; font-weight:900; margin-bottom:6px;">한 줄 요약</div>
+                                    <div style="font-size:12px; color:#334155; line-height:1.6;">
+                                      “실무 사례 기반 구성에 대한 만족도가 높았으며, 비전공 부서 대상 용어 설명 보강 니즈가 확인됨.”
+                                    </div>
+                                  </div>
+
+                                  <div style="height:12px;"></div>
+
+                                  <div style="font-size:13px; font-weight:900; margin:0 0 6px;">3. 주관식 피드백 요약</div>
+                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                                    style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; background:#fafafa;">
+                                    <tr>
+                                      <td style="padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">긍정 피드백 Top</td>
+                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
+                                        • 사례 중심이라 이해가 쉬움<br />
+                                        • SCM 흐름을 구조적으로 정리 가능<br />
+                                        • 타 부서에도 참고가 됨
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td style="padding:10px; font-size:12px; font-weight:800; background:#f9fafb;">개선 요청</td>
+                                      <td style="padding:10px; font-size:12px; background:#ffffff;">
+                                        • 초반 용어 설명 강화<br />
+                                        • 사례 수 확대 요청<br />
+                                        • 자료 사전 공유 요청
+                                      </td>
+                                    </tr>
+                                  </table>
+
+                                  <div style="margin-top:10px; font-size:11px; color:#6b7280; line-height:1.6;">
+                                    * 본 요약은 <b>무기명 설문</b> 결과를 기반으로 작성되었으며, 개인 식별 정보는 포함하지 않습니다.
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+                            <!-- /PDF mock -->
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div style="height:16px;"></div>
+
+                      <!-- SECTION: NOTE -->
+                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">4) 운영 메모 (권장)</div>
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fafafa;">
+                        <tr>
+                          <td style="padding:12px 14px; font-size:13px; line-height:1.7; color:#0f172a;">
+                            • <b>Raw_Response.xlsx</b>는 원본 보관(읽기 전용 권장) — 전사 공유 금지<br />
+                            • <b>Summary.pdf</b>는 전사 공유 가능(개인 식별 정보/특정인 추정 가능 내용 제거)<br />
+                            • 응답 수가 매우 적은 회차(예: 3~5명)는 부서/직급 분포 공개 시 식별 가능성이 커질 수 있으므로
+                              <b>분포 차트는 생략</b>하거나 “기타”로 합산 권장
+                          </td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                  <!-- /BODY -->
+                </table>
+                <!-- /CARD -->
+
+                <div style="margin-top:10px; font-size:12px; color:#6b7280; line-height:1.6;">
+                  팁: Outlook에서는 붙여넣기 시 “서식 유지(Keep Source Formatting)”를 선택하면 스타일 유지가 더 안정적입니다.
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
