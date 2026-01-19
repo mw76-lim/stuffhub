@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RK 노트북 자산 · 매각 · 교체구입 (Slide · Light)</title>
+  <style>
+    :root{
+      --bg:#eef2ff;
+      --paper:#ffffff;
+      --card:#ffffff;
+      --card2:#f8fafc;
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --accent:#2563eb;
+      --accent2:#0ea5e9;
+      --good:#059669;
+      --warn:#b45309;
+      --bad:#be123c;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+      background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 55%, #ffffff 100%);
+      color:var(--ink);
+    }
+
+    /* --- PPT Slide Canvas (16:9) --- */
+    .deck{
+      display:flex;
+      flex-direction:column;
+      gap:28px;
+      padding:28px;
+    }
+    .slide{
+      width: 1365px;          /* 16:9 preview size (scaled) */
+      height: 768px;          /* 16:9 preview size (scaled) */
+      margin: 0 auto;
+      background:
+        radial-gradient(1000px 600px at 10% 0%, rgba(37,99,235,0.16), transparent 55%),
+        radial-gradient(900px 520px at 85% 35%, rgba(14,165,233,0.12), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow:hidden;
+      position:relative;
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.10);
+    }
+    .pad{
+      padding: 28px 30px;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+    }
+    .title{
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      line-height:1.15;
+      margin:0;
+    }
+    .subtitle{
+      margin:6px 0 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.4;
+      max-width:980px;
+    }
+    .meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.35;
+      white-space:nowrap;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius:999px;
+      background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.25);
+      color: var(--ink);
+      font-size:12px;
+      font-weight:800;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap:14px;
+      flex:1;
+      min-height:0;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:14px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(248,250,252,0.90), rgba(255,255,255,0.96));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 14px;
+      min-height:0;
+      overflow:hidden;
+    }
+    .card h3{
+      margin:0 0 10px 0;
+      font-size:15px;
+      letter-spacing:-0.2px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .kpi{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      padding: 14px 14px;
+      background: rgba(15,23,42,0.02);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    .kpi .label{ color:var(--muted); font-size:12px; }
+    .kpi .value{ font-size:28px; font-weight:900; letter-spacing:-0.4px; }
+    .kpi .note{ color:var(--muted); font-size:12px; line-height:1.4; }
+
+    .callout{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(37,99,235,0.04);
+      border: 1px solid rgba(37,99,235,0.14);
+      color: var(--ink);
+      font-size:12.5px;
+      line-height:1.5;
+    }
+    .callout .muted{ color:var(--muted); }
+    .dot{
+      width:10px; height:10px; border-radius:999px; margin-top:4px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.12);
+      flex:0 0 auto;
+    }
+
+    /* Tables */
+    .table-wrap{
+      height:100%;
+      overflow:auto;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,0.02);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:12px;
+    }
+    thead th{
+      position:sticky;
+      top:0;
+      z-index:2;
+      text-align:left;
+      color: var(--muted);
+      font-weight:900;
+      padding: 10px 10px;
+      background: rgba(248,250,252,0.96);
+      border-bottom:1px solid var(--line);
+      white-space:nowrap;
+    }
+    tbody td{
+      padding: 9px 10px;
+      border-top: 1px solid rgba(15,23,42,0.06);
+      color: rgba(15,23,42,0.92);
+      vertical-align:top;
+      white-space:nowrap;
+      background: rgba(255,255,255,0.85);
+    }
+    tbody tr:hover td{ background: rgba(37,99,235,0.05); }
+    .right{text-align:right}
+    .center{text-align:center}
+    .muted{color:var(--muted)}
+    .pill{
+      display:inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(15,23,42,0.02);
+      color: var(--muted);
+      font-size:11px;
+      font-weight:900;
+    }
+    .pill.warn{ border-color: rgba(180,83,9,0.25); color: #92400e; background: rgba(251,191,36,0.14); }
+    .pill.ok{ border-color: rgba(5,150,105,0.22); color: #065f46; background: rgba(16,185,129,0.12); }
+
+    .footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      color: rgba(71,85,105,0.9);
+      font-size:12px;
+      margin-top:auto;
+    }
+
+    /* Print to PDF as slides */
+    @media print{
+      body{ background:#fff; }
+      .deck{ padding:0; gap:0; }
+      .slide{
+        width: 297mm;
+        height: 167mm;
+        border-radius:0;
+        border:none;
+        box-shadow:none;
+        page-break-after: always;
+        margin:0;
+      }
+      .table-wrap{ overflow: visible; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="deck">
+
+    <!-- =========================
+         Slide 1: Summary
+    ========================== -->
+    <section class="slide">
+      <div class="pad">
+        <div class="topbar">
+          <div>
+            <h1 class="title">RK 노트북 자산 · 매각 · 교체구입 요약</h1>
+            <!-- <p class="subtitle">
+              제공 데이터 기준(자산대장 / 매각 예상 / 교체 구입 견적)으로 핵심 수량·금액을 요약했습니다.
+              상세 증빙은 뒤 페이지 표를 확인하세요.
+            </p> -->
+          </div>
+          <div class="meta">
+            <div class="badge">자산관리 요약</div>
+            <div style="height:8px"></div>
+            <!-- <div>문서 형식: PPT(슬라이드) HTML</div> -->
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="kpi">
+            <div class="label">현재 자산대장(노트북+PC)</div>
+            <div class="value">36대</div>
+            <div class="note">NB 33대 + PC 3대</div>
+          </div>
+          <div class="kpi">
+            <div class="label">매각 예상(교체/매각 대상)</div>
+            <div class="value">24대</div>
+            <div class="note">중고 예상 총액 <b>792만원</b></div>
+          </div>
+          <div class="kpi">
+            <div class="label">교체 구매 견적</div>
+            <div class="value">22대</div>
+            <div class="note">단가 145만원 · 합계 <b>3,190만원</b></div>
+          </div>
+        </div>
+
+        <div class="grid1">
+          <div class="card">
+            <h3>
+              <span>핵심 포인트</span>
+              <span class="pill ok">결론/의사결정</span>
+            </h3>
+            <div class="callout"><span class="dot"></span>
+              <div><b>순지출 추정</b>: 3,190만원(구매) − 792만원(매각) = <b>2,398만원</b></div>
+            </div>
+            <div class="callout"><span class="dot"></span>
+              <div><b>교체 구매 모델</b>: ThinkPad T14 Gen 6 ARL (21QDCTO1) / Win11 Pro / 3Y On-site</div>
+            </div>
+            <div class="callout"><span class="dot"></span>
+              <div><b>자산대장 운영 권장</b>: 사내 자산번호 + 모델코드 + S/N(시리얼) 3요소 동시 유지</div>
+            </div>
+            <div class="callout"><span class="dot"></span>
+              <div class="muted">
+                참고: 매각가는 “예상가”이며 실제 회수액은 외관/배터리/구성품(충전기) 및 시장 상황에 따라 변동 가능.
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="display: none;">
+            <h3>
+              <span>페이지 구성</span>
+              <span class="pill">증빙 데이터</span>
+            </h3>
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:44px" class="center">#</th>
+                  <th>페이지</th>
+                  <th style="width:140px">내용</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="center">1</td>
+                  <td>서머리</td>
+                  <td class="muted">의사결정 요약</td>
+                </tr>
+                <tr>
+                  <td class="center">2</td>
+                  <td>현 노트북 자산</td>
+                  <td class="muted">자산대장 원자료</td>
+                </tr>
+                <tr>
+                  <td class="center">3</td>
+                  <td>노트북 매각 예상</td>
+                  <td class="muted">중고 예상가 집계</td>
+                </tr>
+                <tr>
+                  <td class="center">4</td>
+                  <td>노트북 교체 구입 견적</td>
+                  <td class="muted">구매 견적 원자료</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="footer">
+              <div class="muted">※ 표는 스크롤 가능(화면) / 인쇄 시 슬라이드 단위로 출력</div>
+              <div class="muted">Slide 1 / 4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Slide 2: Current Assets
+    ========================== -->
+    <section class="slide" style="height: auto;">
+      <div class="pad">
+        <div class="topbar">
+          <div>
+            <h1 class="title">1. 현 노트북 자산 (원자료)</h1>
+            <p class="subtitle">자산대장: 라벨링 / 자산유형 / 품목 / 모델명 / S/N / 상태 / 구매연도 / 사용자·부서 / 지급일 / 비고</p>
+          </div>
+          <div class="meta">
+            <div class="badge">증빙 데이터</div>
+            <div style="height:8px"></div>
+            <div class="muted">Slide 2 / 4</div>
+          </div>
+        </div>
+
+        <div class="card" style="flex:1; min-height:0;">
+          <h3>
+            <span>자산대장 (NB/PC)</span>
+            <span class="pill">총 36대</span>
+          </h3>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>라벨링</th>
+                  <th class="center">유형</th>
+                  <th>품목</th>
+                  <th>모델명</th>
+                  <th>S/N</th>
+                  <th class="center">상태</th>
+                  <th class="center">구매연도</th>
+                  <th>사용자 / 부서</th>
+                  <th class="center">지급일</th>
+                  <th class="center">비고</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- (원본 데이터 그대로 유지) -->
+                <tr><td>RK-NB-2026-001</td><td class="center">NB</td><td>I pad pro 12.9인치 6세대</td><td>MP203KH/Z</td><td>FW5QCX3NK0</td><td class="center">사용중</td><td class="center"></td><td>문병술 / 대표님</td><td class="center">2024-05-02</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-002</td><td class="center">NB</td><td>LG 그램</td><td>17Z95N-G.AP5GL</td><td></td><td class="center">사용중</td><td class="center">2025-10-14</td><td>문병술 / 대표님</td><td class="center">2025-10-14</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-003</td><td class="center">NB</td><td>레노버</td><td>HThinkPad Black</td><td>R234946560004</td><td class="center">사용중</td><td class="center">2025-11-19</td><td>문병술 / 대표님</td><td class="center">2025-11-19</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-004</td><td class="center">NB</td><td>Galaxy Book 2 pro</td><td>950XEE</td><td>5SB39FDTB00179M</td><td class="center">사용중</td><td class="center"></td><td>송현일 / SCM</td><td class="center">2023-05-19</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-005</td><td class="center">NB</td><td>Galaxy Book 2</td><td>950XEE</td><td>5SB39FBTC00076V</td><td class="center">사용중</td><td class="center"></td><td>송현일 / SCM</td><td class="center">2023-05-19</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-006</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT930XED</td><td>4WJ59FFR401953L</td><td class="center">사용중</td><td class="center"></td><td>김은선 / 베리티</td><td class="center">2022-02-07</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-007</td><td class="center">NB</td><td>LG 그램</td><td>17Z95N-G.AP5GL</td><td>202NZNN086055</td><td class="center">사용중</td><td class="center">2025-10-14</td><td>김은선 / 베리티</td><td class="center">2022-02-07</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-008</td><td class="center">NB</td><td>Apple Macbook Air M2</td><td>Z15S00035KH/A</td><td>QPWKQWK7TD</td><td class="center">사용중</td><td class="center"></td><td>황원태 / 사장님</td><td class="center">2022-05-01</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-009</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT930XED</td><td>5CD69FGRC00278M</td><td class="center">사용중</td><td class="center"></td><td>김세웅 / SCM</td><td class="center">2022-05-02</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-010</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT930XED</td><td>52FC9FNR500589</td><td class="center">사용중</td><td class="center"></td><td>박진범 / SCM</td><td class="center">2023-05-01</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-011</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT930XED</td><td>5RVO9FCTC00049H</td><td class="center">사용중</td><td class="center"></td><td>이영민 / SCM</td><td class="center">2023-05-17</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-012</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT930XED</td><td>5RV09FDTC01299P</td><td class="center">사용중</td><td class="center"></td><td>윤유현 / SCM</td><td class="center">2023-06-12</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-013</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT950XDC</td><td>4YXB9FFR500196B</td><td class="center">사용중</td><td class="center"></td><td>오세준 / SCM</td><td class="center">2023-07-17</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-014</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT930XED</td><td>5Q6Q9FCT900429B</td><td class="center">사용중</td><td class="center"></td><td>EMMA / RMX</td><td class="center">2023-09-11</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-015</td><td class="center">NB</td><td>Galaxy Book 3 Pro</td><td>NT940FXT</td><td>655A9FEW400768</td><td class="center">사용중</td><td class="center"></td><td>김후람 / OPS</td><td class="center">2023-12-18</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-016</td><td class="center">NB</td><td>Galaxy Book 3 Pro</td><td>NT940FXT</td><td>665A9FEW400735R</td><td class="center">사용중</td><td class="center"></td><td>김수민 / OPS</td><td class="center">2023-12-18</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-017</td><td class="center">NB</td><td>Galaxy Book 4 Pro</td><td>NT940XGQ</td><td>6KYR9FDX100158J</td><td class="center">사용중</td><td class="center"></td><td>장진헌 / SCM</td><td class="center">2024-06-21</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-018</td><td class="center">NB</td><td>Galaxy Book 3 Pro</td><td>NT940XFG</td><td>658M9FAW300197J</td><td class="center">사용중</td><td class="center"></td><td>남상진 / OPS</td><td class="center">2023-12-18</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-019</td><td class="center">NB</td><td>Galaxy Book 4 Pro</td><td>NT940XGQ</td><td>6YKRFDX100033R</td><td class="center">사용중</td><td class="center"></td><td>서우종 / SCM</td><td class="center">2025-02-03</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-020</td><td class="center">NB</td><td>Galaxy Book 4 Pro</td><td>NT940XGQ</td><td>6KYR9FDX100194Z</td><td class="center">사용중</td><td class="center"></td><td>김문관 / 고문님</td><td class="center">2025-01-20</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-021</td><td class="center">NB</td><td>Galaxy Book 3 Pro</td><td>NT940XFT</td><td>665A9FEW400435H</td><td class="center">사용중</td><td class="center"></td><td>안미래 / FIN</td><td class="center">2023-12-18</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-PC-2026-001</td><td class="center">PC</td><td>오션</td><td>데스크톱</td><td>RK-D-001</td><td class="center">사용중</td><td class="center">2025-03-24</td><td>김지현 / OPS</td><td class="center">2025-03-24</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-022</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT950XFG</td><td>65L19FEW100539P</td><td class="center">사용중</td><td class="center"></td><td>박지안 / FIN</td><td class="center">2024-12-02</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-PC-2026-002</td><td class="center">PC</td><td>그린</td><td>데스크톱</td><td>RK-D-003</td><td class="center">사용중</td><td class="center">2025-04-02</td><td>임면우 / OPS</td><td class="center">2025-04-02</td><td class="center"></td></tr>
+                <tr><td>RK-PC-2026-003</td><td class="center">PC</td><td>마젠타</td><td>데스크톱</td><td>RK-D-002</td><td class="center">사용중</td><td class="center">2025-03-26</td><td>이주희 / OPS</td><td class="center">2025-03-26</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-023</td><td class="center">NB</td><td>Galaxy Book 4 Pro</td><td>NT940XGQ</td><td>6KYR9FDX100203</td><td class="center">사용중</td><td class="center"></td><td>신지수 / OPS</td><td class="center">2025-04-21</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-024</td><td class="center">NB</td><td>Galaxy Book 4 Pro</td><td>NT940XGQ</td><td>6KYR9FDX100266L</td><td class="center">사용중</td><td class="center"></td><td>김나희 / OPS</td><td class="center">2025-04-28</td><td class="center"></td></tr>
+                <tr><td>RK-NB-2026-025</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT950XFG</td><td>65L19FEW100573M</td><td class="center">사용중</td><td class="center"></td><td>권현성 / OPS</td><td class="center">2025-12-01</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-026</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>940XFG</td><td>665A9FEW401204E</td><td class="center">사용중</td><td class="center"></td><td>원호재 / SCM</td><td class="center">2025-12-15</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-027</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT950XFG</td><td>65L19FEW100561A</td><td class="center">사용중</td><td class="center"></td><td>오동섭 / OPS</td><td class="center">2024-04-15</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-028</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT930XEW</td><td>5Q6Q9FETC00126L</td><td class="center">사용중</td><td class="center"></td><td>이장원 / 베리티</td><td class="center">2023-02-14</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-029</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT930XED</td><td>1CLW91JN500037K</td><td class="center">사용중</td><td class="center"></td><td>카페테리아</td><td class="center"></td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-030</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>950XEE</td><td>5RUZ9FCW100074A</td><td class="center">사용중</td><td class="center"></td><td>공PC(디자인팀)</td><td class="center"></td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-031</td><td class="center">NB</td><td>Galaxy Book 3 Pro</td><td>NT940XFG</td><td>658M9FAW400754W</td><td class="center">사용중</td><td class="center"></td><td>임지홍 / Planning</td><td class="center">2024-01-02</td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-032</td><td class="center">NB</td><td>Galaxy Book 2 Pro</td><td>NT930XDB</td><td>4WJ59FGR500463W</td><td class="center">사용중</td><td class="center"></td><td>LCQ(주방) 권혁두</td><td class="center"></td><td class="center"><span class="pill warn">교체대상</span></td></tr>
+                <tr><td>RK-NB-2026-033</td><td class="center">NB</td><td>Galaxy Book 4 Pro</td><td>NT940XGQ</td><td>6KYR9FBX200021D</td><td class="center">사용중</td><td class="center"></td><td>LCQ(카운터) 박수빈</td><td class="center">2024-05-29</td><td class="center"></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="footer">
+            <div class="muted">Tip: 화면에서 표 스크롤 가능 · 인쇄 시 슬라이드 단위 출력</div>
+            <div class="muted">Slide 2 / 4</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Slide 3: Resale Estimate
+    ========================== -->
+    <section class="slide">
+      <div class="pad">
+        <div class="topbar">
+          <div>
+            <h1 class="title">2. 노트북 매각 예상 (원자료)</h1>
+            <p class="subtitle">사양·모델 기준 수량 및 중고 예상가(만원) 집계</p>
+          </div>
+          <div class="meta">
+            <div class="badge">증빙 데이터</div>
+            <div style="height:8px"></div>
+            <div class="muted">Slide 3 / 4</div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card" style="min-height:0;">
+            <h3>
+              <span>매각 예상 리스트</span>
+              <span class="pill">총 24대 · 792만원</span>
+            </h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>사양</th>
+                    <th>품목(모델)</th>
+                    <th class="right">수량</th>
+                    <th class="right">중고 예상가(만원)</th>
+                    <th class="right">소계(만원)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>갤럭시북2 프로 i5-12 16 256</td><td>950XEE</td><td class="right">3</td><td class="right">35</td><td class="right">105</td></tr>
+                  <tr><td>갤럭시북2 프로 i5-12 16 256</td><td>NT930XED</td><td class="right">7</td><td class="right">35</td><td class="right">245</td></tr>
+                  <tr><td>LG 2021 그램17 i5-11 16 256</td><td>17Z95N-G.AP5GL</td><td class="right">1</td><td class="right">22</td><td class="right">22</td></tr>
+                  <tr><td>Apple Macbook Air M2</td><td>Z15S00035KH/A</td><td class="right">1</td><td class="right">40</td><td class="right">40</td></tr>
+                  <tr><td>Galaxy Book 2 Pro</td><td>NT950XDC</td><td class="right">1</td><td class="right">30</td><td class="right">30</td></tr>
+                  <tr><td>갤럭시북3 프로 i5-13 16 256</td><td>NT940FXT</td><td class="right">2</td><td class="right">35</td><td class="right">70</td></tr>
+                  <tr><td>Galaxy Book 3 Pro</td><td>NT940XFG</td><td class="right">3</td><td class="right">35</td><td class="right">105</td></tr>
+                  <tr><td>Galaxy Book 3 Pro</td><td>NT940XFT</td><td class="right">1</td><td class="right">35</td><td class="right">35</td></tr>
+                  <tr><td>Galaxy Book 2 Pro</td><td>NT950XFG</td><td class="right">3</td><td class="right">30</td><td class="right">90</td></tr>
+                  <tr><td>Galaxy Book 2 Pro</td><td>NT930XEW</td><td class="right">1</td><td class="right">30</td><td class="right">30</td></tr>
+                  <tr><td>갤럭시북 프로 i5-11 8 256</td><td>NT930XDB</td><td class="right">1</td><td class="right">20</td><td class="right">20</td></tr>
+                  <tr>
+                    <td colspan="2" class="right" style="font-weight:900;">총합계</td>
+                    <td class="right" style="font-weight:900;">24</td>
+                    <td class="right" style="font-weight:900;">총합계(만원)</td>
+                    <td class="right" style="font-weight:900;">792</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="footer">
+              <div class="muted">매각가 변동 요인: 외관/배터리/구성품/SSD 상태/키보드 마모/시장 수요</div>
+              <div class="muted">Slide 3 / 4</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3><span>요약 계산</span><span class="pill ok">핵심</span></h3>
+            <div class="kpi" style="margin-bottom:12px;">
+              <div class="label">중고 예상 회수액</div>
+              <div class="value">792만원</div>
+              <div class="note">24대 기준 / 모델·사양별 추정</div>
+            </div>
+            <div class="kpi" style="margin-bottom:12px;">
+              <div class="label">가장 큰 비중</div>
+              <div class="value" style="font-size:18px;">갤럭시북2 프로 (NT930XED)</div>
+              <div class="note">7대 × 35만원 = 245만원</div>
+            </div>
+            <div class="callout">
+              <span class="dot"></span>
+              <div>
+                <b>실무 팁</b><br/>
+                매각 실행 전, 자산별로 “충전기 포함 여부”와 “외관/배터리 상태”를 3등급으로 분류하면
+                실제 회수액 예측이 더 안정적입니다.
+              </div>
+            </div>
+            <div class="footer">
+              <div class="muted">—</div>
+              <div class="muted">Slide 3 / 4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Slide 4: Purchase Quote
+    ========================== -->
+    <section class="slide">
+      <div class="pad">
+        <div class="topbar">
+          <div>
+            <h1 class="title">3. 노트북 교체 구입 견적 (원자료)</h1>
+            <p class="subtitle">ThinkPad T14 Gen 6 ARL 21QDCTO1 22대 / 납품단가 1,450,000원 / 3년 On-Site</p>
+          </div>
+          <div class="meta">
+            <div class="badge">증빙 데이터</div>
+            <div style="height:8px"></div>
+            <div class="muted">Slide 4 / 4</div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card" style="min-height:0;">
+            <h3>
+              <span>견적 라인</span>
+              <!-- <span class="pill">1 Line</span> -->
+            </h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="center" style="width:60px;">No</th>
+                    <th style="width:110px;">품명</th>
+                    <th>모델 및 사양</th>
+                    <th class="right" style="width:90px;">수량</th>
+                    <th class="right" style="width:130px;">납품단가</th>
+                    <th class="right" style="width:130px;">계</th>
+                    <th style="width:90px;">비고</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="center">1</td>
+                    <td>노트북</td>
+                    <td>ThinkPad T14 Gen 6 ARL 21QDCTO1</td>
+                    <td class="right">22</td>
+                    <td class="right">1,450,000</td>
+                    <td class="right"><b>31,900,000</b></td>
+                    <td class="muted"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="footer">
+              <div class="muted">금액 단위: 원</div>
+              <div class="muted">Slide 4 / 4</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3><span>상세 사양</span><span class="pill ok">Spec</span></h3>
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:120px;">항목</th>
+                  <th>내용</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="muted">CPU</td><td>Intel® Core™ Ultra 5 225U (E-cores up to 3.80 GHz / P-cores up to 4.80 GHz)</td></tr>
+                <tr><td class="muted">Memory</td><td>16 GB DDR5-5600MT/s (SODIMM)</td></tr>
+                <tr><td class="muted">SSD</td><td>256 GB SSD M.2 2280 PCIe Gen4 TLC Opal</td></tr>
+                <tr><td class="muted">Display</td><td>14&quot; WUXGA (1920×1200), IPS, Anti-Glare, Non-Touch, 100%sRGB, 500 nits, 60Hz, Low Power</td></tr>
+                <tr><td class="muted">Camera</td><td>5MP RGB+IR + Mic + Privacy Shutter (Black)</td></tr>
+                <tr><td class="muted">Battery</td><td>4 Cell Li-ion 52.5Wh</td></tr>
+                <tr><td class="muted">Wireless</td><td>Intel® Wi-Fi 6E AX211 2x2 AX &amp; Bluetooth® 5.3</td></tr>
+                <tr><td class="muted">OS</td><td>Windows 11 Pro 64</td></tr>
+                <tr><td class="muted">Warranty</td><td><b>3Year On-Site</b></td></tr>
+              </tbody>
+            </table>
+
+            <div style="height:10px"></div>
+            <!-- <div class="callout">
+              <span class="dot"></span>
+              <div>
+                <b>구매 운영 팁</b><br/>
+                납품 시점에 “자산번호 라벨(사내)”을 선부착하고, 인수확인서에 S/N을 함께 기재하면
+                지급/회수/매각까지 추적성이 크게 좋아집니다.
+              </div>
+            </div> -->
+
+            <!-- <div class="footer">
+              <div class="muted">—</div>
+              <div class="muted">Slide 4 / 4</div>
+            </div> -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

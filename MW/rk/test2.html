@@ -1,375 +1,456 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>03_Survey 예제 (무기명) — Raw_Response.xlsx & Summary.pdf</title>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RK 수출바우처(KOTRA) 제시안 패키지</title>
+  <style>
+    :root{
+      --bg:#f8f7f4;
+      --card:#ffffff;
+      --text:#1c1c1c;
+      --muted:#6b6f76;
+      --line:#e7e3dc;
+      --accent:#ff6a00;
+      --accent2:#1f7a8c;
+      --radius:16px;
+      --shadow:0 10px 25px rgba(0,0,0,.06);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    .wrap{
+      max-width:1040px;
+      margin:0 auto;
+      padding:28px 18px 60px;
+    }
+    header{
+      background:linear-gradient(135deg, rgba(255,106,0,.10), rgba(31,122,140,.10));
+      border:1px solid var(--line);
+      border-radius:calc(var(--radius) + 6px);
+      padding:22px 18px;
+      box-shadow:var(--shadow);
+    }
+    .topline{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:10px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid rgba(255,106,0,.25);
+      background:rgba(255,106,0,.08);
+      color:#8a3a00;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .meta{
+      font-size:13px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    h1{
+      font-size:22px;
+      margin:8px 0 6px;
+      letter-spacing:-.2px;
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
 
-  <body
-    style="
-      margin: 0;
-      padding: 0;
-      background: #f3f4f6;
-      font-family: ui-sans-serif, system-ui, -apple-system, 'Noto Sans KR', Arial, sans-serif;
-      color: #0f172a;
-    "
-  >
-    <!--
-      ✅ 메일/워드 붙여넣기용: 표 기반 + 인라인 스타일
-      ✅ 무기명 설문 반영:
-        - 이름/사번/이메일/개인식별자 수집 항목 없음
-        - Timestamp는 선택(또는 익명 토큰/제출일자 단위로 축약 가능)
-    -->
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      margin-top:16px;
+    }
+    @media (min-width: 920px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
 
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;">
-      <tr>
-        <td align="center" style="padding:18px 12px 40px;">
-          <table role="presentation" width="960" cellpadding="0" cellspacing="0" border="0" style="max-width:960px; width:100%;">
-            <tr>
-              <td>
-                <!-- CARD -->
-                <table
-                  role="presentation"
-                  width="100%"
-                  cellpadding="0"
-                  cellspacing="0"
-                  border="0"
-                  style="
-                    background:#ffffff;
-                    border:1px solid #e5e7eb;
-                    border-radius:14px;
-                    overflow:hidden;
-                    box-shadow:0 10px 26px rgba(15,23,42,0.06);
-                  "
-                >
-                  <!-- HEADER -->
-                  <tr>
-                    <td style="padding:18px 20px; border-bottom:1px solid #e5e7eb;">
-                      <div style="font-size:18px; font-weight:800; letter-spacing:-0.01em; line-height:1.35;">
-                        03_Survey 예제 (무기명 설문) — Raw_Response.xlsx &amp; Summary.pdf
-                      </div>
-                      <div style="margin-top:6px; font-size:13px; color:#6b7280; line-height:1.65;">
-                        아래는 세미나 아카이빙 폴더의 <b>03_Survey</b> 구성 예시입니다.<br />
-                        본 예시는 <b>무기명 설문</b> 운영을 전제로 하며, 개인 식별 정보(이름/사번/이메일 등)를 수집하지 않습니다.
-                      </div>
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px 16px 14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      top:0; left:0;
+      width:100%;
+      height:4px;
+      background:linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity:.9;
+    }
+    .card h2{
+      margin:10px 0 6px;
+      font-size:16px;
+      letter-spacing:-.2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .pill{
+      font-size:12px;
+      font-weight:700;
+      color:#fff;
+      background:var(--accent2);
+      padding:4px 10px;
+      border-radius:999px;
+    }
+    .desc{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .sec{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px dashed var(--line);
+    }
+    .sec h3{
+      margin:0 0 6px;
+      font-size:13px;
+      color:#2a2d31;
+      letter-spacing:-.1px;
+    }
+    ul{
+      margin:0;
+      padding-left:18px;
+      color:#2a2d31;
+    }
+    li{ margin:4px 0; }
+    blockquote{
+      margin:10px 0 0;
+      padding:10px 12px;
+      border-left:4px solid rgba(255,106,0,.55);
+      background:rgba(255,106,0,.06);
+      border-radius:10px;
+      color:#2a2d31;
+      font-size:13px;
+    }
+    .note{
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .danger{
+      color:#8a1f11;
+      background:rgba(255,0,0,.06);
+      border:1px solid rgba(255,0,0,.12);
+      padding:10px 12px;
+      border-radius:12px;
+      font-size:12.5px;
+      margin-top:10px;
+    }
 
-                      <div style="margin-top:12px; border:1px solid #dbeafe; background:#eff6ff; border-radius:12px; padding:10px 12px;">
-                        <div style="font-size:12px; font-weight:800; color:#1d4ed8; margin-bottom:6px;">무기명 설문 반영 포인트</div>
-                        <div style="font-size:13px; line-height:1.7; color:#0f172a;">
-                          • 개인 식별 항목 미포함 (이름/사번/연락처/이메일/좌석번호 등)<br />
-                          • <b>부서/직급</b>은 “가까운 범주”로만 선택(식별 리스크 낮춤)<br />
-                          • Timestamp는 필요 시 <b>날짜 단위</b>로 축약하거나, 내부 분석용으로만 보관(외부 공유 금지)<br />
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+    .footer{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    @media (min-width: 920px){
+      .footer{ grid-template-columns: 1.25fr .75fr; }
+    }
+    .panel{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .panel h2{
+      margin:0 0 8px;
+      font-size:15px;
+      letter-spacing:-.2px;
+    }
+    .combo{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 12px 10px;
+      margin-top:10px;
+      background:rgba(31,122,140,.05);
+    }
+    .combo strong{
+      display:block;
+      margin-bottom:6px;
+      font-size:13px;
+    }
+    .combo ol{
+      margin:0;
+      padding-left:18px;
+      color:#2a2d31;
+    }
+    .copy{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:10px 12px;
+      border:1px dashed var(--line);
+      border-radius:12px;
+      background:#fcfbf9;
+      color:#2a2d31;
+      white-space:pre-wrap;
+      word-break:break-word;
+      margin-top:10px;
+    }
+    .small{
+      font-size:12px;
+      color:var(--muted);
+      margin:6px 0 0;
+    }
+  </style>
+</head>
 
-                  <!-- BODY -->
-                  <tr>
-                    <td style="padding:16px 20px 22px;">
+<body>
+  <div class="wrap">
+    <header>
+      <div class="topline">
+        <span class="badge">RK · 수출바우처(KOTRA) 제출용 제시안</span>
+        <span class="meta">버전: v1.0 · 문서: HTML 템플릿</span>
+      </div>
+      <h1>수출바우처 사용 계획 제시안(Use Case) 패키지</h1>
+      <p class="subtitle">
+        목적: “해외 바이어 신뢰 확보 → 리드 창출 → 상담/검증 → 계약 전환”으로 이어지는
+        <b>기술 중심 B2B 수출 인프라</b> 구축
+      </p>
+      <div class="copy" aria-label="KOTRA 제출용 총괄 문장(복사하여 사용)">
+KOTRA 수출바우처를 활용하여 해외 바이어 수출 상담에 필요한 영문·중문 기술 콘텐츠 제작,
+해외 온라인 마케팅을 통한 수출 리드 확보, 바이어 발굴 및 상담 연계 서비스를 수행함으로써
+지속 가능한 수출 세일즈 인프라를 구축하고자 함.
+      </div>
+      <p class="small">※ 특정 수행기관/업체명 확정 없이, “바우처로 집행 가능한 서비스 유형” 중심으로 제시하는 형태</p>
+    </header>
 
-                      <!-- SECTION: TREE -->
-                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">1) 03_Survey 폴더 구조</div>
-                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fafafa;">
-                        <tr>
-                          <td style="padding:12px 14px; font-size:13px; line-height:1.7; color:#0f172a;">
-                            <div style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;">
-                              03_Survey/<br />
-                              &nbsp;&nbsp;├─ Raw_Response.xlsx<br />
-                              &nbsp;&nbsp;└─ Summary.pdf
-                            </div>
-                            <div style="margin-top:10px; font-size:12px; color:#6b7280;">
-                              * Raw_Response.xlsx = 원본(가공 전) 데이터 / Summary.pdf = 공유용 요약(1~2p)
-                            </div>
-                          </td>
-                        </tr>
-                      </table>
+    <main class="grid">
+      <!-- 안 1 -->
+      <section class="card" id="usecase-1">
+        <h2><span class="pill">안 1</span> 해외 바이어 대응용 기술 콘텐츠 구축</h2>
+        <p class="desc">가장 안정적이며 결과물이 명확한 “B2B 제조기업 표준” 제시안</p>
 
-                      <div style="height:16px;"></div>
+        <div class="sec">
+          <h3>사용 내용(집행 항목)</h3>
+          <ul>
+            <li>영문/중문 기술 제안서(Proposal) 제작</li>
+            <li>제품별 데이터시트(Data Sheet) 및 사양(Spec) 문서</li>
+            <li>공정/적용 사례(Application) 설명 자료</li>
+            <li>해외 수출 상담용 PPT 템플릿(표준 슬라이드)</li>
+          </ul>
+        </div>
 
-                      <!-- SECTION: RAW -->
-                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">2) Raw_Response.xlsx 예제 (무기명)</div>
-                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#ffffff;">
-                        <tr>
-                          <td style="padding:12px 14px; border-bottom:1px solid #e5e7eb; background:#f9fafb;">
-                            <div style="font-size:13px; font-weight:800;">시트 구성</div>
-                            <div style="margin-top:4px; font-size:12px; color:#6b7280; line-height:1.6;">
-                              • <b>Responses</b>: 설문 응답 원본 (무기명)<br />
-                              • <b>Meta</b>: 회차/일자/응답률 등 메타데이터
-                            </div>
-                          </td>
-                        </tr>
+        <div class="sec">
+          <h3>KOTRA 제출용 문장</h3>
+          <blockquote>
+            해외 바이어 수출 상담에 활용 가능한 영문·중문 기술 콘텐츠를 제작하여
+            기술 검증 및 계약 전환을 지원하고자 함.
+          </blockquote>
+        </div>
 
-                        <!-- Responses table -->
-                        <tr>
-                          <td style="padding:12px 14px;">
-                            <div style="font-size:13px; font-weight:800; margin:0 0 8px;">Sheet: Responses</div>
+        <p class="note">성과 예시: 제작물(파일) 납품 + 상담 활용 로그/리드 전환율</p>
+      </section>
 
-                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                              style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; border-collapse:separate;">
-                              <tr>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">Submit Date</td>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">회차</td>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">강연자</td>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">부서(범주)</td>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">직급(범주)</td>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:center;">Q2-1</td>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:center;">Q2-2</td>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:center;">Q2-3</td>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:center;">Q2-4</td>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:center;">Q2-5</td>
-                                <td style="background:#f9fafb; padding:8px 8px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">주관식 의견</td>
-                              </tr>
+      <!-- 안 2 -->
+      <section class="card" id="usecase-2">
+        <h2><span class="pill">안 2</span> 해외 타깃 시장 조사 + 바이어 발굴</h2>
+        <p class="desc">KOTRA 선호도가 높고 “수출 가능성” 스토리라인이 쉬운 제시안</p>
 
-                              <tr>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">2026-03-25</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">6</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">박진범</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">SCM</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">책임/선임</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">5</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">5</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">5</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">실제 사례 중심이라 이해가 쉬웠습니다.</td>
-                              </tr>
+        <div class="sec">
+          <h3>사용 내용(집행 항목)</h3>
+          <ul>
+            <li>타깃 국가/권역 시장조사(산업·수요·경쟁·진입장벽)</li>
+            <li>반도체 장비·부품 분야 잠재 바이어 리스트업</li>
+            <li>잠재 바이어 접촉 및 상담 주선(온라인 미팅 포함)</li>
+            <li>바이어 요구사항 수집 및 후속 제안 연계</li>
+          </ul>
+        </div>
 
-                              <tr>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">2026-03-25</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">6</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">박진범</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">영업</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">사원</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">3</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:center;">4</td>
-                                <td style="padding:8px 8px; font-size:12px; border-bottom:1px solid #e5e7eb;">SCM 흐름을 처음 구조적으로 이해했습니다.</td>
-                              </tr>
+        <div class="sec">
+          <h3>KOTRA 제출용 문장</h3>
+          <blockquote>
+            반도체 장비·부품 분야 해외 타깃 시장 조사를 통해
+            잠재 바이어를 발굴하고 수출 상담을 연계하고자 함.
+          </blockquote>
+        </div>
 
-                              <tr>
-                                <td style="padding:8px 8px; font-size:12px;">2026-03-25</td>
-                                <td style="padding:8px 8px; font-size:12px;">6</td>
-                                <td style="padding:8px 8px; font-size:12px;">박진범</td>
-                                <td style="padding:8px 8px; font-size:12px;">기술</td>
-                                <td style="padding:8px 8px; font-size:12px;">책임/선임</td>
-                                <td style="padding:8px 8px; font-size:12px; text-align:center;">3</td>
-                                <td style="padding:8px 8px; font-size:12px; text-align:center;">3</td>
-                                <td style="padding:8px 8px; font-size:12px; text-align:center;">3</td>
-                                <td style="padding:8px 8px; font-size:12px; text-align:center;">3</td>
-                                <td style="padding:8px 8px; font-size:12px; text-align:center;">3</td>
-                                <td style="padding:8px 8px; font-size:12px;">초반 용어 설명이 조금 더 있었으면 좋겠습니다.</td>
-                              </tr>
-                            </table>
+        <p class="note">성과 예시: 조사보고서 + 바이어 리스트 + 상담 실적</p>
+      </section>
 
-                            <div style="margin-top:10px; font-size:12px; color:#6b7280; line-height:1.6;">
-                              * 무기명 설문이므로 응답자 식별 컬럼(이름/사번/이메일 등)은 포함하지 않습니다.<br />
-                              * Timestamp 대신 <b>Submit Date(YYYY-MM-DD)</b>로 축약하여 익명성을 강화할 수 있습니다.
-                            </div>
-                          </td>
-                        </tr>
+      <!-- 안 3 -->
+      <section class="card" id="usecase-3">
+        <h2><span class="pill">안 3</span> 해외 온라인 마케팅 (B2B 리드 확보형)</h2>
+        <p class="desc">불특정 홍보가 아닌 “구매 가능 바이어”를 타깃으로 리드를 만드는 구조</p>
 
-                        <!-- Meta table -->
-                        <tr>
-                          <td style="padding:0 12px 14px;">
-                            <div style="font-size:13px; font-weight:800; margin:0 0 8px;">Sheet: Meta</div>
+        <div class="sec">
+          <h3>사용 내용(집행 항목)</h3>
+          <ul>
+            <li>Google 검색 광고(제품/공정 키워드 중심) 운영</li>
+            <li>LinkedIn B2B 타깃 광고(직무/산업/국가 필터링) 운영</li>
+            <li>해외 바이어 유입용 랜딩 페이지(문의/상담 CTA 포함)</li>
+            <li>리드 추적/리포팅(유입-문의-상담 전환 지표)</li>
+          </ul>
+        </div>
 
-                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                              style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; background:#fafafa;">
-                              <tr>
-                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">항목</td>
-                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">내용</td>
-                              </tr>
-                              <tr>
-                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">세미나명</td>
-                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">RK 인사이트 세미나</td>
-                              </tr>
-                              <tr>
-                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">회차</td>
-                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">6</td>
-                              </tr>
-                              <tr>
-                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">일자</td>
-                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">2026-03-25</td>
-                              </tr>
-                              <tr>
-                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">강연자</td>
-                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">박진범</td>
-                              </tr>
-                              <tr>
-                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">설문 방식</td>
-                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">Google Form (무기명)</td>
-                              </tr>
-                              <tr>
-                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">응답 수</td>
-                                <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">18</td>
-                              </tr>
-                              <tr>
-                                <td style="width:160px; padding:10px; font-size:12px; font-weight:800; background:#f9fafb;">비고</td>
-                                <td style="padding:10px; font-size:12px; background:#ffffff;">개인 식별 항목 미수집(익명성 확보)</td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
+        <div class="sec">
+          <h3>KOTRA 제출용 문장</h3>
+          <blockquote>
+            해외 잠재 바이어 대상 온라인 마케팅을 통해 수출 리드를 확보하고
+            상담으로 연계하고자 함.
+          </blockquote>
+        </div>
 
-                      <div style="height:16px;"></div>
+        <div class="danger">
+          <b>주의(표현/집행 리스크 방지)</b><br/>
+          “SNS 운영”, “브랜딩/인지도 강화” 단독 표기는 지양.<br/>
+          반드시 “바이어, 리드, 수출 상담”과 연결해 기재.
+        </div>
+      </section>
 
-                      <!-- SECTION: SUMMARY -->
-                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">3) Summary.pdf 예제 (공유용 1~2p)</div>
-                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#ffffff;">
-                        <tr>
-                          <td style="padding:12px 14px; border-bottom:1px solid #e5e7eb; background:#f9fafb;">
-                            <div style="font-size:13px; font-weight:800;">요약본 특징</div>
-                            <div style="margin-top:4px; font-size:12px; color:#6b7280; line-height:1.6;">
-                              • 전사 공유용(개인 식별 정보 없음) &nbsp;• 핵심 지표 + 인사이트 + 개선점 중심 &nbsp;• 1~2페이지 권장
-                            </div>
-                          </td>
-                        </tr>
+      <!-- 안 4 -->
+      <section class="card" id="usecase-4">
+        <h2><span class="pill">안 4</span> 해외 전시회·상담회 연계 패키지</h2>
+        <p class="desc">오프라인 접점 + 사전/사후 대응을 결합해 성과 설명이 쉬운 제시안</p>
 
-                        <tr>
-                          <td style="padding:14px;">
-                            <!-- "PDF page" mock -->
-                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                              style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#ffffff;">
-                              <tr>
-                                <td style="padding:14px 16px; border-bottom:1px solid #e5e7eb;">
-                                  <div style="font-size:16px; font-weight:900; letter-spacing:-0.01em;">
-                                    RK 인사이트 세미나 설문 요약 (무기명)
-                                  </div>
-                                  <div style="margin-top:6px; font-size:12px; color:#6b7280; line-height:1.6;">
-                                    회차: 6회차 &nbsp;|&nbsp; 일자: 2026-03-25 &nbsp;|&nbsp; 강연자: 박진범 &nbsp;|&nbsp; 주제: 공급망 리스크 관리 실전 &nbsp;|&nbsp; 응답: 18건
-                                  </div>
-                                </td>
-                              </tr>
+        <div class="sec">
+          <h3>사용 내용(집행 항목)</h3>
+          <ul>
+            <li>해외 전시회/상담회 참가 연계(홍보물·부스 운영 지원 포함)</li>
+            <li>전시회용 기술 홍보물(카탈로그/리플렛/포스터) 제작</li>
+            <li>사전 바이어 매칭 및 미팅 어레인지</li>
+            <li>사후 후속 미팅/제안서/샘플 대응 자료 준비</li>
+          </ul>
+        </div>
 
-                              <tr>
-                                <td style="padding:12px 16px;">
-                                  <div style="font-size:13px; font-weight:900; margin:0 0 6px;">1. 응답 개요</div>
-                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                                    style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; background:#fafafa;">
-                                    <tr>
-                                      <td style="padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb; width:180px;">총 참석자</td>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">25명</td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">설문 응답자</td>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">18명</td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px; font-size:12px; font-weight:800; background:#f9fafb;">응답률</td>
-                                      <td style="padding:10px; font-size:12px; background:#ffffff;">72%</td>
-                                    </tr>
-                                  </table>
+        <div class="sec">
+          <h3>KOTRA 제출용 문장</h3>
+          <blockquote>
+            해외 전시회 및 상담회 참가를 통해 신규 바이어 발굴 및
+            수출 상담을 추진하고자 함.
+          </blockquote>
+        </div>
 
-                                  <div style="height:12px;"></div>
+        <p class="note">성과 예시: 상담 건수 + 후속 제안서 제출 + 파이프라인 금액</p>
+      </section>
 
-                                  <div style="font-size:13px; font-weight:900; margin:0 0 6px;">2. 정량 평가 요약 (5점 만점)</div>
-                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                                    style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden;">
-                                    <tr>
-                                      <td style="background:#f9fafb; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb;">문항</td>
-                                      <td style="width:120px; background:#f9fafb; padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; text-align:right;">평균</td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb;">(예) 주제/내용의 유용성</td>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:right;">4.3</td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb;">(예) 이해하기 쉬운 전달</td>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:right;">3.9</td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb;">(예) 구성/시간 배분 적절</td>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:right;">4.1</td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb;">(예) 업무 적용 가능성</td>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; text-align:right;">4.3</td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px; font-size:12px;">(예) 전반 만족도</td>
-                                      <td style="padding:10px; font-size:12px; text-align:right;">4.2</td>
-                                    </tr>
-                                  </table>
+      <!-- 안 5 -->
+      <section class="card" id="usecase-5">
+        <h2><span class="pill">안 5</span> 해외 바이어 대응용 온라인 기술 페이지 구축</h2>
+        <p class="desc">‘홈페이지 리뉴얼’이 아니라 ‘수출 상담 대응용 기술 페이지’로 프레이밍</p>
 
-                                  <div style="margin-top:10px; border:1px solid #e5e7eb; background:#fafafa; border-radius:10px; padding:10px 12px;">
-                                    <div style="font-size:12px; font-weight:900; margin-bottom:6px;">한 줄 요약</div>
-                                    <div style="font-size:12px; color:#334155; line-height:1.6;">
-                                      “실무 사례 기반 구성에 대한 만족도가 높았으며, 비전공 부서 대상 용어 설명 보강 니즈가 확인됨.”
-                                    </div>
-                                  </div>
+        <div class="sec">
+          <h3>사용 내용(집행 항목)</h3>
+          <ul>
+            <li>영문/중문 제품·기술 페이지(사양/적용/문의 구조) 구축</li>
+            <li>바이어 문의/상담 연계(폼/메일/캘린더 연동 등)</li>
+            <li>국가·산업별 랜딩 페이지(캠페인 연계)</li>
+            <li>기술 PDF 다운로드(필요 시 접근통제/워터마킹 적용)</li>
+          </ul>
+        </div>
 
-                                  <div style="height:12px;"></div>
+        <div class="sec">
+          <h3>KOTRA 제출용 문장</h3>
+          <blockquote>
+            해외 바이어 수출 상담 대응을 위한 기술 중심 온라인 페이지를
+            구축하고자 함.
+          </blockquote>
+        </div>
 
-                                  <div style="font-size:13px; font-weight:900; margin:0 0 6px;">3. 주관식 피드백 요약</div>
-                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                                    style="border:1px solid #e5e7eb; border-radius:10px; overflow:hidden; background:#fafafa;">
-                                    <tr>
-                                      <td style="padding:10px; font-size:12px; font-weight:800; border-bottom:1px solid #e5e7eb; background:#f9fafb;">긍정 피드백 Top</td>
-                                      <td style="padding:10px; font-size:12px; border-bottom:1px solid #e5e7eb; background:#ffffff;">
-                                        • 사례 중심이라 이해가 쉬움<br />
-                                        • SCM 흐름을 구조적으로 정리 가능<br />
-                                        • 타 부서에도 참고가 됨
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td style="padding:10px; font-size:12px; font-weight:800; background:#f9fafb;">개선 요청</td>
-                                      <td style="padding:10px; font-size:12px; background:#ffffff;">
-                                        • 초반 용어 설명 강화<br />
-                                        • 사례 수 확대 요청<br />
-                                        • 자료 사전 공유 요청
-                                      </td>
-                                    </tr>
-                                  </table>
+        <div class="danger">
+          <b>위험 표현(지양)</b><br/>
+          “홈페이지 리뉴얼”, “회사 소개 강화” 단독 표기<br/>
+          → 반드시 “수출 상담/바이어 대응/기술 검증” 목적을 전면에 배치
+        </div>
+      </section>
 
-                                  <div style="margin-top:10px; font-size:11px; color:#6b7280; line-height:1.6;">
-                                    * 본 요약은 <b>무기명 설문</b> 결과를 기반으로 작성되었으며, 개인 식별 정보는 포함하지 않습니다.
-                                  </div>
-                                </td>
-                              </tr>
-                            </table>
-                            <!-- /PDF mock -->
-                          </td>
-                        </tr>
-                      </table>
+      <!-- 안 6 -->
+      <section class="card" id="usecase-6">
+        <h2><span class="pill">안 6</span> 해외 수출 상담 프로세스 체계화 (가점용)</h2>
+        <p class="desc">바우처 종료 후에도 “지속 가능한 수출 운영 체계”를 남기는 제시안</p>
 
-                      <div style="height:16px;"></div>
+        <div class="sec">
+          <h3>사용 내용(집행 항목)</h3>
+          <ul>
+            <li>해외 문의/상담 대응 프로세스(표준 SOP) 정리</li>
+            <li>상담 자료 표준화(템플릿, Q&amp;A, 체크리스트)</li>
+            <li>상담 이력 관리 체계(리드→미팅→제안→샘플→계약)</li>
+            <li>성과 리포트 구조(지표 정의 및 대시보드/리포트 템플릿)</li>
+          </ul>
+        </div>
 
-                      <!-- SECTION: NOTE -->
-                      <div style="font-size:14px; font-weight:800; margin:0 0 8px;">4) 운영 메모 (권장)</div>
-                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
-                        style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fafafa;">
-                        <tr>
-                          <td style="padding:12px 14px; font-size:13px; line-height:1.7; color:#0f172a;">
-                            • <b>Raw_Response.xlsx</b>는 원본 보관(읽기 전용 권장) — 전사 공유 금지<br />
-                            • <b>Summary.pdf</b>는 전사 공유 가능(개인 식별 정보/특정인 추정 가능 내용 제거)<br />
-                            • 응답 수가 매우 적은 회차(예: 3~5명)는 부서/직급 분포 공개 시 식별 가능성이 커질 수 있으므로
-                              <b>분포 차트는 생략</b>하거나 “기타”로 합산 권장
-                          </td>
-                        </tr>
-                      </table>
+        <div class="sec">
+          <h3>KOTRA 제출용 문장</h3>
+          <blockquote>
+            수출 상담 대응 프로세스를 체계화하여 바우처 종료 이후에도
+            지속 가능한 수출 구조를 구축하고자 함.
+          </blockquote>
+        </div>
 
-                    </td>
-                  </tr>
-                  <!-- /BODY -->
-                </table>
-                <!-- /CARD -->
+        <p class="note">성과 예시: SOP 문서 + 템플릿 패키지 + 운영 지표</p>
+      </section>
+    </main>
 
-                <div style="margin-top:10px; font-size:12px; color:#6b7280; line-height:1.6;">
-                  팁: Outlook에서는 붙여넣기 시 “서식 유지(Keep Source Formatting)”를 선택하면 스타일 유지가 더 안정적입니다.
-                </div>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </body>
+    <section class="footer">
+      <div class="panel">
+        <h2>추천 “복합 제시안” (실제 제출에 유리한 조합)</h2>
+
+        <div class="combo">
+          <strong>세트 A (안정형)</strong>
+          <ol>
+            <li>안 1: 해외 기술 콘텐츠 제작</li>
+            <li>안 2: 바이어 발굴·상담 연계</li>
+            <li>안 3: 해외 온라인 마케팅(리드 확보)</li>
+          </ol>
+          <p class="small">특징: 집행 리스크 낮고, 제조/B2B 심사에서 설득력 높음</p>
+        </div>
+
+        <div class="combo">
+          <strong>세트 B (확장형)</strong>
+          <ol>
+            <li>안 1: 해외 기술 콘텐츠 제작</li>
+            <li>안 4: 전시회·상담회 연계</li>
+            <li>안 5: 바이어 대응 온라인 기술 페이지 구축</li>
+          </ol>
+          <p class="small">특징: 오프라인 접점과 디지털 전환을 함께 설계</p>
+        </div>
+
+        <div class="copy" aria-label="내부 공유용 요약 문장(복사하여 사용)">
+RK는 수출바우처를 단발성 홍보가 아닌, 해외 바이어가 기술을 검증하고
+상담·계약으로 이어질 수 있는 “수출 세일즈 인프라 구축” 용도로 사용한다.
+        </div>
+      </div>
+
+      <aside class="panel">
+        <h2>제출 품질 체크(간단)</h2>
+        <ul>
+          <li>모든 항목에 “해외/바이어/수출 상담”이 명시되어 있는가?</li>
+          <li>결과물이 남는가? (보고서, 리드, 콘텐츠, 페이지, SOP)</li>
+          <li>불특정 홍보 표현을 피했는가? (“인지도”, “브랜딩” 단독 지양)</li>
+          <li>바우처 종료 후 활용(지속성)을 언급했는가?</li>
+        </ul>
+        <p class="small">원하시면 이 HTML을 RK 스타일 토큰(컬러/로고/푸터)로 더 맞춰드릴 수도 있어요.</p>
+      </aside>
+    </section>
+  </div>
+</body>
 </html>

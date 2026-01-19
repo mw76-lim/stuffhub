@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>판교-대장동 1층 하이브리드(사무/거주) 공간 배치 가이드 (가독성 버전)</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --paper:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --accent:#2563eb;
+      --chip:#eef2ff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg), #ffffff);
+      color:var(--ink);
+      line-height:1.55;
+    }
+    .wrap{
+      max-width: 920px;
+      margin: 22px auto;
+      padding: 0 16px 40px;
+    }
+    header{
+      background:
+        radial-gradient(900px 450px at 10% 0%, rgba(37,99,235,0.12), transparent 55%),
+        linear-gradient(180deg, #fff 0%, #fbfdff 100%);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px 18px 14px;
+    }
+    h1{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-0.2px;
+    }
+    .sub{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(37,99,235,0.18);
+      background: var(--chip);
+      color: var(--ink);
+      font-size:12px;
+      font-weight:700;
+    }
+    .chip b{ color:var(--accent); }
+
+    .card{
+      margin-top:12px;
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px 16px;
+    }
+    .card h2{
+      margin:0;
+      font-size:16px;
+      letter-spacing:-0.15px;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:10px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      padding:3px 9px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#f8fafc;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .desc{
+      margin:8px 0 12px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .section{
+      border-top: 1px dashed var(--line);
+      padding-top:12px;
+      margin-top:12px;
+    }
+    .section:first-of-type{
+      border-top:none;
+      padding-top:0;
+      margin-top:0;
+    }
+    .section h3{
+      margin:0 0 8px 0;
+      font-size:13px;
+      letter-spacing:-0.1px;
+    }
+
+    ul{
+      margin:0;
+      padding-left:18px;
+      font-size:13px;
+    }
+    li{ margin: 6px 0; }
+
+    .note{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(37,99,235,0.18);
+      background: rgba(37,99,235,0.06);
+      color: var(--ink);
+      font-size:12.8px;
+    }
+    .note b{ color:#1e3a8a; }
+    .footer{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+    }
+
+    @media print{
+      body{ background:#fff; }
+      .wrap{ max-width:none; margin:0; padding:0; }
+      header, .card{ border-radius:0; }
+      .footer{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <h1>판교-대장동 1층 하이브리드(사무/거주) 공간 배치 가이드</h1>
+      <div class="sub">
+        전제: <b>사무/거주 50:50</b> · <b>거실=회의실</b> · <b>마스터존(방1)=거주+집중 사무</b><br/>
+        목적: 가구 · 전자기기 · 비품 · 소모품 배치 “기본 패키지”를 공간별로 정의 ( <a href="https://land.naver.com/info/groundPlanGallery.naver?rletNo=175877&ptpId=2&newComplex=Y&expand=false">도식도</a> )
+      </div>
+      <div class="chips">
+        <span class="chip"><b>거실</b> = 회의/응대</span>
+        <span class="chip"><b>주방/식당</b> = 라운지+탕비</span>
+        <span class="chip"><b>마스터존</b> = 생활+집중업무</span>
+        <span class="chip"><b>좌측 침실</b> = 서브오피스/게스트</span>
+        <span class="chip"><b>테라스</b> = 휴식/야외미팅</span>
+      </div>
+    </header>
+
+    <!-- 1) Living -->
+    <section class="card">
+      <h2>1) 거실 → 회의실 겸 공용 업무 공간 <span class="tag">공용 · 회사 얼굴</span></h2>
+      <p class="desc">가장 넓은 중앙 공간을 “회의/응대/공용업무”로 고정. 대형 디스플레이와 화상회의 장비가 핵심.</p>
+
+      <div class="section">
+        <h3>가구</h3>
+        <ul>
+          <li>10~12인 회의 테이블 (2400~3000mm)</li>
+          <li>회의용 의자 10~12EA (메쉬 등받이 권장)</li>
+          <li>벽면 수납 캐비닛 / 슬림 선반</li>
+          <li>이동형 화이트보드</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>전자기기 (MON/AV)</h3>
+        <ul>
+          <li>75~86&quot; 대형 모니터 (MON)</li>
+          <li>전자칠판/인터랙티브 디스플레이(선택)</li>
+          <li>사운드바 또는 PA/스피커(AV)</li>
+          <li>무선 프레젠터 + HDMI/USB-C 허브</li>
+          <li>화상회의 카메라 + 회의용 마이크 스피커</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <b>비품/소모품:</b> A4용지, 포스트잇, 보드마커, 회의 노트/펜, 멀티탭/케이블정리, 티슈/물티슈
+      </div>
+    </section>
+
+    <!-- 2) Kitchen -->
+    <section class="card">
+      <h2>2) 주방·식당 → 라운지 &amp; 탕비 공간 <span class="tag">업무 완충</span></h2>
+      <p class="desc">간단 미팅/휴식/식사를 동시에 커버. 소모품(커피·컵·키친류) 표준화가 만족도를 좌우.</p>
+
+      <div class="section">
+        <h3>가구</h3>
+        <ul>
+          <li>4~6인 테이블</li>
+          <li>바체어 2~3EA (아일랜드)</li>
+          <li>컵/식기 수납장</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>전자기기 (AP)</h3>
+        <ul>
+          <li>커피머신/커피메이커</li>
+          <li>전자렌지</li>
+          <li>정수기(렌탈 포함)</li>
+          <li>일반 냉장고 + 음료 냉장고</li>
+          <li>공기청정기</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <b>소모품:</b> 원두/캡슐, 종이컵/머그컵, 설탕/시럽, 키친타월/행주, 물티슈, 분리수거 봉투
+      </div>
+    </section>
+
+    <!-- 3) Master -->
+    <section class="card">
+      <h2>3) 마스터존(방1) → 거주 + 집중 사무 <span class="tag">개인 · 집중</span></h2>
+      <p class="desc">침실 기능을 유지하면서도 장시간 집중업무가 가능한 셋업. 수납/동선/조명이 중요.</p>
+
+      <div class="section">
+        <h3>가구</h3>
+        <ul>
+          <li>퀸 또는 슈퍼싱글 침대 + 협탁</li>
+          <li>옷장/시스템장(드레스룸 연계)</li>
+          <li>업무용 데스크 1600mm 내외</li>
+          <li>인체공학 의자</li>
+          <li>책장/서랍장</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>전자기기 (NB/MON/선택 AP·OF)</h3>
+        <ul>
+          <li>노트북 1대 (NB)</li>
+          <li>27&quot; 모니터 1~2대 (MON)</li>
+          <li>스탠드 조명(작업등)</li>
+          <li>공기청정기(선택, AP)</li>
+          <li>개인 프린터(선택, OF)</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <b>비품:</b> 충전 스테이션, 케이블 정리, 서류 트레이/파일함, 개인 소형 금고(선택)
+      </div>
+    </section>
+
+    <!-- 4) Sub Office -->
+    <section class="card">
+      <h2>4) 좌측 침실 A → 서브 오피스(팀원용) <span class="tag">작업실</span></h2>
+      <p class="desc">2인 작업실 기준. 공유 프린터/공유 수납을 이 방에 모으면 동선이 정리됨.</p>
+
+      <div class="section">
+        <h3>가구</h3>
+        <ul>
+          <li>데스크 1400~1600mm × 2EA</li>
+          <li>사무용 의자 × 2EA</li>
+          <li>공용 서랍장/수납장</li>
+          <li>화이트보드(선택)</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>전자기기 (PC/NB/MON/OF)</h3>
+        <ul>
+          <li>PC 또는 노트북 2대</li>
+          <li>24~27&quot; 모니터 2~4대</li>
+          <li>공유 프린터(추천, OF)</li>
+          <li>공기청정기(선택, AP)</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <b>소모품:</b> 토너/잉크, 복사용지, 클리어파일, 스테이플러/심, 라벨지(자산/보관)
+      </div>
+    </section>
+
+    <!-- 5) Guest / Flexible -->
+    <section class="card">
+      <h2>5) 좌측 침실 B → 게스트룸 / 임시 업무실 <span class="tag">유연 공간</span></h2>
+      <p class="desc">출장/외부 협업자 숙소 겸 임시 프로젝트 룸. 필요 시 촬영/편집실로 전환 가능.</p>
+
+      <div class="section">
+        <h3>가구</h3>
+        <ul>
+          <li>소파베드 또는 싱글 침대</li>
+          <li>이동형 데스크/접이식 테이블</li>
+          <li>옷걸이 스탠드</li>
+          <li>2인 테이블(선택)</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>전자기기 (선택)</h3>
+        <ul>
+          <li>보조 모니터 1대(선택, MON)</li>
+          <li>공기청정기(선택, AP)</li>
+          <li>촬영/편집 장비 보관함(선택)</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <b>비품:</b> 예비 침구/수건, 멀티탭, 기본 어메니티(간단), 쓰레기봉투
+      </div>
+    </section>
+
+    <!-- 6) Terrace -->
+    <section class="card">
+      <h2>6) 테라스 → 휴식/야외 미팅 포인트 <span class="tag">외부</span></h2>
+      <p class="desc">분리된 휴식/흡연/짧은 미팅 공간. 방수·내후성 가구 중심으로 구성.</p>
+
+      <div class="section">
+        <h3>가구</h3>
+        <ul>
+          <li>야외 테이블 + 의자(2~4인)</li>
+          <li>스탠딩 테이블(선택)</li>
+          <li>수납형 벤치(선택)</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>비품</h3>
+        <ul>
+          <li>재떨이(필요 시)</li>
+          <li>외부용 조명(센서등/스탠드)</li>
+          <li>간이 청소도구(빗자루 등)</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <b>운영 팁:</b> “테라스 전용 보관함” 1개 두면 청소/비품이 실내로 유입되지 않아 깔끔합니다.
+      </div>
+    </section>
+
+    <div class="footer">
+      © RK 하이브리드 공간 배치 가이드 (가독성 버전)
+    </div>
+  </div>
+</body>
+</html>
