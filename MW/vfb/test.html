@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>베리티F&B | 지자체/경기도/KOTRA 연계 지원 공고 확인 & 신청 가이드</title>
+    <style>
+      :root{
+        --bg:#f8f7f4;
+        --paper:#FFFCFB;
+        --text:#161616;
+        --muted:#6b7280;
+        --line:#e7e5e4;
+        --accent:#ff6a00;
+        --accent2:#f1bf86;
+        --good:#16a34a;
+
+        --radius-xl:22px;
+        --radius-lg:18px;
+        --radius-md:14px;
+
+        --shadow:0 16px 44px rgba(17,17,17,.12);
+        --shadow-soft:0 10px 26px rgba(0,0,0,.07);
+        --maxw: 1100px;
+      }
+      *{ box-sizing:border-box; margin:0; padding:0; }
+      body{
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+        background:
+          radial-gradient(circle at 12% 12%, rgba(255,106,0,.12), rgba(255,255,255,0) 42%),
+          radial-gradient(circle at 92% 18%, rgba(241,191,134,.26), rgba(255,255,255,0) 48%),
+          var(--bg);
+        color:var(--text);
+        line-height:1.65;
+      }
+      .wrap{ max-width: var(--maxw); margin:0 auto; padding:22px; }
+      .paper{
+        background: var(--paper);
+        border:1px solid var(--line);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow);
+        overflow:hidden;
+      }
+
+      /* Header */
+      .hero{
+        padding: 18px 18px 14px;
+        border-bottom: 1px solid var(--line);
+        background:
+          radial-gradient(circle at 10% 0%, rgba(255,106,0,.10), rgba(255,255,255,0) 48%),
+          linear-gradient(180deg, rgba(255,255,255,.0), rgba(0,0,0,.02));
+      }
+      .kicker{
+        font-size: 11px;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .title{
+        font-size: 22px;
+        font-weight: 950;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin-bottom: 8px;
+      }
+      .desc{
+        font-size: 13.5px;
+        color: var(--muted);
+        max-width: 92ch;
+      }
+      .chips{
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+        margin-top:10px;
+      }
+      .chip{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:7px 10px;
+        border-radius:999px;
+        border:1px solid var(--line);
+        background:#fafafa;
+        font-size:12px;
+        font-weight:900;
+        color:#374151;
+        white-space:nowrap;
+      }
+      .dot{
+        width:8px; height:8px;
+        border-radius:999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgba(255,106,0,.12);
+      }
+
+      /* Body */
+      .content{
+        padding: 18px;
+        display:grid;
+        gap: 14px;
+      }
+      h2{
+        font-size:16px;
+        letter-spacing:-0.02em;
+      }
+      h3{
+        font-size:14px;
+        letter-spacing:-0.01em;
+      }
+      p{ margin:2px 0; }
+      ul{ margin:6px 0 0; padding-left:18px; color:#374151; }
+      li{ margin:6px 0; }
+
+      .card{
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+        padding: 14px;
+        display:grid;
+        gap:10px;
+      }
+
+      .note{
+        border-left:4px solid var(--accent);
+        background:#fff7ef;
+        padding:12px 14px;
+        border-radius:14px;
+        color:#2d2d2d;
+      }
+      .ok{
+        border-left:4px solid var(--good);
+        background: rgba(22,163,74,.06);
+        padding:12px 14px;
+        border-radius:14px;
+        color:#14532d;
+      }
+
+      .grid2{
+        display:grid;
+        gap: 12px;
+      }
+      @media (min-width: 920px){
+        .grid2{
+          grid-template-columns: 1fr 1fr;
+          align-items:start;
+        }
+      }
+
+      .table{
+        width:100%;
+        border-collapse: collapse;
+        border:1px solid var(--line);
+        border-radius: 14px;
+        overflow:hidden;
+        background:#fff;
+      }
+      .table th, .table td{
+        padding:10px 12px;
+        border-bottom:1px solid var(--line);
+        text-align:left;
+        vertical-align:top;
+        font-size:13px;
+      }
+      .table th{
+        background:#fafafa;
+        font-weight:950;
+        color:#374151;
+        white-space:nowrap;
+      }
+      .table tr:last-child th, .table tr:last-child td{ border-bottom:0; }
+
+      .pill{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:7px 10px;
+        border-radius:999px;
+        border:1px solid var(--line);
+        background:#fafafa;
+        font-size:12px;
+        font-weight:900;
+        color:#374151;
+        white-space:nowrap;
+      }
+      .pill.good{
+        border-color: rgba(22,163,74,.28);
+        background: rgba(22,163,74,.08);
+        color:#166534;
+      }
+      .pill.warn{
+        border-color: rgba(220,38,38,.26);
+        background: rgba(220,38,38,.06);
+        color:#991b1b;
+      }
+
+      .timeline{
+        display:grid;
+        gap:10px;
+        margin-top: 6px;
+      }
+      .tl{
+        border:1px solid var(--line);
+        background:#fff;
+        border-radius:14px;
+        padding:12px 14px;
+        display:grid;
+        gap:6px;
+      }
+      .tl .m{
+        font-weight:950;
+        display:flex;
+        align-items:center;
+        gap:10px;
+      }
+      .m .badge{
+        width:22px; height:22px;
+        border-radius:999px;
+        display:grid;
+        place-items:center;
+        background: rgba(255,106,0,.12);
+        border:1px solid rgba(255,106,0,.35);
+        color: var(--accent);
+        font-size:12px;
+        font-weight:950;
+      }
+      .muted{ color: var(--muted); font-size:12.5px; }
+
+      .foot{
+        padding: 14px 18px 18px;
+        border-top:1px solid var(--line);
+        color: var(--muted);
+        font-size:12px;
+        line-height:1.6;
+      }
+
+      @media (max-width: 560px){
+        .wrap{ padding:12px; }
+        .hero{ padding:16px 14px 12px; }
+        .content{ padding:14px; }
+        .title{ font-size:19px; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="paper">
+        <header class="hero">
+          <div class="kicker">Verity F&amp;B · 화성시 동탄 소재 · 지원사업 루트 가이드</div>
+          <h1 class="title">지자체/경기도/KOTRA 연계 공고 확인 &amp; 신청 가이드</h1>
+          <p class="desc">
+            베리티F&amp;B(화성시 동탄) 기준으로 <b>① 화성시 → ② 경기도 → ③ 경기도×KOTRA</b> 순으로 확장해가는
+            지원사업 루트에 대해, <b>공고를 어디서 확인하고 언제쯤 뜨며 어떻게 지원하는지</b>를 실무 관점으로 정리했습니다.
+          </p>
+          <div class="chips" aria-label="요약">
+            <span class="chip"><span class="dot"></span>1순위: 화성시(문턱 낮음)</span>
+            <span class="chip">2순위: 경기도(지원규모↑)</span>
+            <span class="chip">3순위: 경기도×KOTRA(준비도 필요)</span>
+            <span class="chip">공고는 보통 2~3주만 열림</span>
+          </div>
+        </header>
+
+        <main class="content">
+          <section class="ok">
+            <b>베리티F&amp;B 추천 흐름</b><br/>
+            ① 화성시 사업으로 <b>해외용 브랜드/콘텐츠 자산</b>을 먼저 만들고 → ② 경기도 사업으로 확장 → ③ 경기도×KOTRA로 실제 매칭/검증 단계로 가는 것이 가장 안전합니다.
+          </section>
+
+          <!-- 1 -->
+          <section class="card" aria-label="1. 화성시 기업지원 사업">
+            <h2>① 화성시 기업지원 사업 (1순위)</h2>
+            <div class="grid2">
+              <div class="card" style="box-shadow:none;">
+                <h3>공고는 어디서 확인하나</h3>
+                <ul>
+                  <li><b>화성시청</b> 홈페이지: 경제/기업지원/공고·고시</li>
+                  <li><b>화성산업진흥원</b> 홈페이지: 기업지원사업/중소기업 지원</li>
+                  <li>(보조) 기업지원 포털/뉴스레터/유관기관 공지</li>
+                </ul>
+                <p class="muted">* “바우처” 단어가 없어도 마케팅/판로/해외진출 키워드로 공고가 올라오는 경우가 많습니다.</p>
+              </div>
+
+              <div class="card" style="box-shadow:none;">
+                <h3>공고 시기(패턴) &amp; 기간</h3>
+                <ul>
+                  <li><b>상반기:</b> 2~4월 (가장 많음)</li>
+                  <li><b>하반기:</b> 7~9월 (추가/잔여 예산)</li>
+                  <li><b>수시:</b> 예산 잔여 시 비정기 공고</li>
+                </ul>
+                <div class="pill good">대체로 연 1~2회</div>
+                <div class="pill warn">공고 오픈 후 접수기간은 보통 2~3주</div>
+              </div>
+            </div>
+
+            <div class="grid2">
+              <div class="card" style="box-shadow:none;">
+                <h3>지원 방식</h3>
+                <ul>
+                  <li>온라인 신청 또는 <b>이메일 접수</b> (공고별 상이)</li>
+                  <li>서류: 사업자등록증, 간단 사업계획(2~4p), 재무자료(간단) 등</li>
+                  <li>해외 실적 요구: <b>대부분 없음</b></li>
+                </ul>
+              </div>
+
+              <div class="note">
+                <b>베리티F&amp;B 포지션(추천 문구)</b><br/>
+                “화성시 동탄 소재 프리미엄 F&amp;B 브랜드 운영 법인으로, 해외 진출 준비 단계에서 브랜드/콘텐츠 자산을 구축하고자 함.”
+              </div>
+            </div>
+          </section>
+
+          <!-- 2 -->
+          <section class="card" aria-label="2. 경기도 수출·해외진출 지원사업">
+            <h2>② 경기도 수출·해외진출 지원사업 (2순위)</h2>
+
+            <div class="grid2">
+              <div class="card" style="box-shadow:none;">
+                <h3>공고는 어디서 확인하나</h3>
+                <ul>
+                  <li><b>경기도청</b> 공고/기업지원</li>
+                  <li><b>경기경제과학진흥원(GBSA)</b> : 수출·해외진출/글로벌 마케팅</li>
+                  <li><b>경기도 기업지원 포털(egbiz)</b></li>
+                </ul>
+                <p class="muted">* “소비재/식품 해외진출”, “글로벌 마케팅 지원” 등으로 분류되는 공고를 집중 확인합니다.</p>
+              </div>
+
+              <div class="card" style="box-shadow:none;">
+                <h3>공고 시기(패턴) &amp; 기간</h3>
+                <ul>
+                  <li><b>연초 메인:</b> 1~3월 (가장 중요)</li>
+                  <li><b>추가 모집:</b> 6~7월</li>
+                  <li><b>보충 공고:</b> 9~10월 (예산 잔여 시)</li>
+                </ul>
+                <div class="pill good">연 1회 메인 + α</div>
+                <div class="pill warn">접수기간은 보통 2~3주</div>
+              </div>
+            </div>
+
+            <div class="grid2">
+              <div class="card" style="box-shadow:none;">
+                <h3>지원 방식</h3>
+                <ul>
+                  <li>온라인 포털(GBSA/egbiz) 중심</li>
+                  <li>서류: 사업계획서(조금 더 구조적), 기업현황/재무, (있으면) 브랜드 자료</li>
+                  <li>해외 실적: 공고별로 다르나 <b>초기/예정 기업</b> 트랙 존재 가능</li>
+                </ul>
+              </div>
+
+              <div class="note">
+                <b>실무 팁</b><br/>
+                화성시 사업으로 만든 결과물(영문 소개, 브로슈어, 랜딩)을 <b>그대로 첨부</b>하면 경기도 사업에서 “준비도” 점수가 크게 올라갑니다.
+              </div>
+            </div>
+          </section>
+
+          <!-- 3 -->
+          <section class="card" aria-label="3. 경기도 × KOTRA 연계">
+            <h2>③ 경기도 × KOTRA 연계 (3순위 · 전략적 접근)</h2>
+
+            <div class="grid2">
+              <div class="card" style="box-shadow:none;">
+                <h3>공고는 어디서 확인하나</h3>
+                <ul>
+                  <li><b>KOTRA</b> 지역사업/지자체 연계 공지</li>
+                  <li>경기도/GBSA 공고에서 “KOTRA 연계”로 동시 게시</li>
+                  <li>KOTRA 경기지원단 공지(해당 시)</li>
+                </ul>
+                <p class="muted">* 단독 KOTRA 사업보다 지자체 연계가 문턱이 낮은 편이지만, “준비된 기업” 기준이 적용됩니다.</p>
+              </div>
+
+              <div class="card" style="box-shadow:none;">
+                <h3>공고 시기(패턴) &amp; 기간</h3>
+                <ul>
+                  <li><b>상반기:</b> 3~5월</li>
+                  <li><b>하반기:</b> 8~10월</li>
+                  <li>보통 <b>연 1회</b>, 많아야 2회</li>
+                </ul>
+                <div class="pill warn">타이밍 놓치면 다음 해까지 대기 가능</div>
+              </div>
+            </div>
+
+            <div class="grid2">
+              <div class="card" style="box-shadow:none;">
+                <h3>지원 방식 &amp; 준비물</h3>
+                <ul>
+                  <li>온라인 신청 + 서류 심사</li>
+                  <li>요구 수준: 영문 브랜드 소개, 해외 대상 설명 논리, 활용 계획(바이어 매칭/마케팅)</li>
+                  <li>해외 실적이 없어도 가능하나 <b>‘바로 실행 가능한 준비도’</b>가 핵심</li>
+                </ul>
+              </div>
+
+              <div class="note">
+                <b>추천 접근</b><br/>
+                ①·②에서 확보한 “해외용 자산(영문/중문 웹/브로슈어/스토리)”을 기반으로 ③에 들어가면 안정적입니다.
+              </div>
+            </div>
+          </section>
+
+          <!-- Comparison table -->
+          <section class="card" aria-label="4. 세 루트 비교표">
+            <h2>4) 세 루트 비교표</h2>
+            <table class="table" aria-label="루트 비교">
+              <tr>
+                <th>구분</th>
+                <th>화성시</th>
+                <th>경기도</th>
+                <th>경기도×KOTRA</th>
+              </tr>
+              <tr>
+                <th>난이도</th>
+                <td>★★☆☆☆</td>
+                <td>★★★☆☆</td>
+                <td>★★★★☆</td>
+              </tr>
+              <tr>
+                <th>해외 실적</th>
+                <td>불필요</td>
+                <td>대부분 불필요(공고별 상이)</td>
+                <td>없어도 가능하나 준비도 필수</td>
+              </tr>
+              <tr>
+                <th>공고 빈도</th>
+                <td>연 1~2회</td>
+                <td>연 1회 + α</td>
+                <td>연 1회(가끔 2회)</td>
+              </tr>
+              <tr>
+                <th>지원 규모</th>
+                <td>소~중</td>
+                <td>중</td>
+                <td>중~대</td>
+              </tr>
+              <tr>
+                <th>베리티 적합도</th>
+                <td>⭐⭐⭐⭐⭐</td>
+                <td>⭐⭐⭐⭐☆</td>
+                <td>⭐⭐⭐☆☆</td>
+              </tr>
+            </table>
+          </section>
+
+          <!-- Calendar -->
+          <section class="card" aria-label="5. 추천 연간 캘린더">
+            <h2>5) 베리티F&amp;B 추천 연간 캘린더(안전 루트)</h2>
+            <div class="timeline">
+              <div class="tl">
+                <div class="m"><span class="badge">1</span>1~3월: 경기도 공고 집중 체크</div>
+                <div class="muted">경기도(GBSA/egbiz) 메인 공고가 가장 많이 뜨는 기간</div>
+              </div>
+              <div class="tl">
+                <div class="m"><span class="badge">2</span>2~4월: 화성시 기업지원 사업 대응</div>
+                <div class="muted">문턱 낮고 준비자산 확보에 최적(웹/브로슈어/콘텐츠 제작)</div>
+              </div>
+              <div class="tl">
+                <div class="m"><span class="badge">3</span>6~7월: 경기도 추가 모집/보완 공고</div>
+                <div class="muted">연초에 놓쳤다면 이 시기가 두 번째 기회</div>
+              </div>
+              <div class="tl">
+                <div class="m"><span class="badge">4</span>8~10월: 경기도×KOTRA 연계(준비된 경우)</div>
+                <div class="muted">바이어 매칭/검증 단계. 타이밍 놓치면 다음 해까지 대기 가능</div>
+              </div>
+            </div>
+
+            <section class="note" style="margin-top:12px;">
+              <b>실무 팁</b><br/>
+              공고는 접수기간이 짧습니다(보통 2~3주). 따라서 “공고 뜬 다음 준비”가 아니라,
+              <b>상시로 사업계획 핵심 문장/브랜드 소개자료/예산안</b>을 미리 준비해두는 편이 안전합니다.
+            </section>
+          </section>
+        </main>
+
+        <footer class="foot">
+          * 본 문서는 내부 기획용 가이드입니다. 실제 공고 일정/요건/접수 방법은 매년 변경될 수 있으므로 공고 원문을 기준으로 최종 확인이 필요합니다.<br/>
+          * “준비도”는 대부분 사업에서 핵심 평가 요소입니다. 화성시→경기도→경기도×KOTRA로 갈수록 영문 자료/시장 논리/집행 계획의 완성도를 높이세요.
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

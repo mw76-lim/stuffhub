@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RK 자산관리 대장 예제 (3시트 통합 HTML)</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --paper:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --accent:#2563eb;
+      --accent2:#0ea5e9;
+      --chip:#eef2ff;
+      --good:#16a34a;
+      --warn:#b45309;
+      --bad:#dc2626;
+      --shadow: 0 10px 28px rgba(15,23,42,0.06);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg), #ffffff);
+      color:var(--ink);
+      line-height:1.55;
+    }
+    .wrap{
+      max-width: 1120px;
+      margin: 22px auto;
+      padding: 0 16px 40px;
+    }
+    header{
+      background:
+        radial-gradient(900px 450px at 10% 0%, rgba(37,99,235,0.12), transparent 55%),
+        radial-gradient(900px 450px at 90% 30%, rgba(14,165,233,0.10), transparent 55%),
+        linear-gradient(180deg, #fff 0%, #fbfdff 100%);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px 18px 14px;
+      box-shadow: var(--shadow);
+    }
+    h1{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-0.2px;
+    }
+    .sub{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(37,99,235,0.18);
+      background: var(--chip);
+      color: var(--ink);
+      font-size:12px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .chip b{ color:var(--accent); }
+    .bar{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .tab{
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--ink);
+      border-radius:12px;
+      padding:10px 12px;
+      font-weight:900;
+      font-size:13px;
+      cursor:pointer;
+      box-shadow: 0 6px 16px rgba(15,23,42,0.04);
+    }
+    .tab[aria-selected="true"]{
+      border-color: rgba(37,99,235,0.35);
+      background: rgba(37,99,235,0.08);
+      color:#1e3a8a;
+    }
+    .tools{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .input{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+      padding:8px 10px;
+      min-width: 260px;
+    }
+    .input span{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .input input{
+      border:none;
+      outline:none;
+      width:100%;
+      font-size:13px;
+      background:transparent;
+      color:var(--ink);
+    }
+    .btn{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:12px;
+      padding:10px 12px;
+      font-weight:900;
+      font-size:13px;
+      cursor:pointer;
+    }
+
+    .sheet{
+      margin-top:12px;
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow: var(--shadow);
+      display:none;
+    }
+    .sheet.active{ display:block; }
+
+    .sheet h2{
+      margin:0;
+      font-size:16px;
+      letter-spacing:-0.15px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .hint{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .legend{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      border:1px solid var(--line);
+      background:#f8fafc;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .tag.good{ border-color: rgba(22,163,74,0.25); background: rgba(22,163,74,0.08); color:#065f46; }
+    .tag.warn{ border-color: rgba(180,83,9,0.25); background: rgba(251,191,36,0.14); color:#92400e; }
+    .tag.bad{ border-color: rgba(220,38,38,0.25); background: rgba(220,38,38,0.08); color:#7f1d1d; }
+
+    .table-wrap{
+      margin-top:12px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:auto;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      min-width: 920px;
+      font-size:13px;
+    }
+    th, td{
+      padding:10px 10px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+      background:#fff;
+    }
+    th{
+      position:sticky;
+      top:0;
+      z-index:2;
+      background:#fbfdff;
+      color:#0f172a;
+      font-weight:900;
+      border-bottom:1px solid var(--line);
+      white-space:nowrap;
+    }
+    tr:last-child td{ border-bottom:none; }
+    td.muted{ color:var(--muted); }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:3px 8px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      border:1px solid var(--line);
+      background:#f8fafc;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .pill.good{ border-color: rgba(22,163,74,0.25); background: rgba(22,163,74,0.08); color:#065f46; }
+    .pill.warn{ border-color: rgba(180,83,9,0.25); background: rgba(251,191,36,0.14); color:#92400e; }
+    .pill.bad{ border-color: rgba(220,38,38,0.25); background: rgba(220,38,38,0.08); color:#7f1d1d; }
+
+    .note{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(37,99,235,0.18);
+      background: rgba(37,99,235,0.06);
+      color: var(--ink);
+      font-size:13px;
+    }
+    .note b{ color:#1e3a8a; }
+
+    .footer{
+      margin-top:14px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    @media print{
+      header, .bar, .footer, .input, .btn { display:none !important; }
+      body{ background:#fff; }
+      .wrap{ max-width:none; margin:0; padding:0; }
+      .sheet{ border-radius:0; box-shadow:none; page-break-after: always; }
+      .sheet:last-of-type{ page-break-after: auto; }
+      th{ position:static; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>RK 자산관리 대장 예제 (3시트 통합)</h1>
+      <div class="sub">
+        운영 원칙: <b>A(필수 추적)</b>는 사람 귀속 · <b>B(간이)</b>는 위치 귀속 · <b>C(재고)</b>는 수량만 관리<br/>
+        자산번호 규칙 예시: <b>RK-[유형코드]-[연도]-[일련번호]</b>
+      </div>
+      <div class="chips">
+        <span class="chip"><b>IT 개인자산</b> (NB/PC/MB) = 분실·보안 리스크</span>
+        <span class="chip"><b>공용설비</b> (MON/AV/AP/OF) = 공간 귀속</span>
+        <span class="chip"><b>비품·재고</b> = 수량/구매·폐기만</span>
+      </div>
+    </header>
+
+    <div class="bar">
+      <div class="tabs" role="tablist" aria-label="자산대장 시트">
+        <button class="tab" role="tab" aria-selected="true" data-target="sheet1">1) IT_개인자산 (NB/PC/MB)</button>
+        <button class="tab" role="tab" aria-selected="false" data-target="sheet2">2) 공용설비_자산 (MON/AV/AP/OF)</button>
+        <button class="tab" role="tab" aria-selected="false" data-target="sheet3">3) 비품_재고 (가구/소모품)</button>
+      </div>
+
+      <div class="tools">
+        <div class="input" title="현재 보고 있는 시트에서만 필터링됩니다.">
+          <span>검색</span>
+          <input id="q" type="text" placeholder="자산번호, 사용자, 위치, 품목, 모델, S/N…" />
+        </div>
+        <button class="btn" id="btnPrint" type="button">인쇄</button>
+        <button class="btn" id="btnClear" type="button">검색 초기화</button>
+      </div>
+    </div>
+
+    <!-- SHEET 1 -->
+    <section class="sheet active" id="sheet1" data-sheet="sheet1">
+      <h2>
+        1) IT_개인자산 (필수 추적)
+        <span class="tag good">A 등급: 100% 추적</span>
+      </h2>
+      <div class="hint">
+        핵심 필드: <b>자산번호 + S/N(또는 IMEI)</b>, 사용자/부서, 지급일/회수일, 상태.
+      </div>
+      <div class="legend">
+        <span class="tag good">사용중</span>
+        <span class="tag warn">교체대상</span>
+        <span class="tag">보관</span>
+        <span class="tag bad">분실/미회수</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>자산번호</th>
+              <th>유형코드</th>
+              <th>품목</th>
+              <th>모델명</th>
+              <th>S/N 또는 IMEI</th>
+              <th>자산상태</th>
+              <th>구매연도</th>
+              <th>사용자 / 부서</th>
+              <th>지급일</th>
+              <th>회수일</th>
+              <th>비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RK-NB-2026-001</td>
+              <td>NB</td>
+              <td>노트북</td>
+              <td>ThinkPad T14 Gen 6</td>
+              <td class="muted">PF-XXXX-XXXX</td>
+              <td><span class="pill good">사용중</span></td>
+              <td>2026</td>
+              <td>홍길동 / OPS</td>
+              <td>2026-01-10</td>
+              <td class="muted">-</td>
+              <td class="muted">3Y On-site</td>
+            </tr>
+            <tr>
+              <td>RK-PC-2026-003</td>
+              <td>PC</td>
+              <td>데스크톱</td>
+              <td>Office Desktop</td>
+              <td class="muted">RK-D-002</td>
+              <td><span class="pill good">사용중</span></td>
+              <td>2025</td>
+              <td>이주희 / OPS</td>
+              <td>2025-03-26</td>
+              <td class="muted">-</td>
+              <td class="muted">고정 설치</td>
+            </tr>
+            <tr>
+              <td>RK-MB-2026-004</td>
+              <td>MB</td>
+              <td>모바일</td>
+              <td>iPhone 15 Pro</td>
+              <td class="muted">IMEI: 35XXXXXXXXXXXXX</td>
+              <td><span class="pill good">사용중</span></td>
+              <td>2026</td>
+              <td>김철수 / FIN</td>
+              <td>2026-01-15</td>
+              <td class="muted">-</td>
+              <td class="muted">업무용 회선</td>
+            </tr>
+            <tr>
+              <td>RK-NB-2026-014</td>
+              <td>NB</td>
+              <td>노트북</td>
+              <td>Galaxy Book 2 Pro</td>
+              <td class="muted">5Q6Q9FCT900429B</td>
+              <td><span class="pill warn">교체대상</span></td>
+              <td>2023</td>
+              <td>EMMA / RMX</td>
+              <td>2023-09-11</td>
+              <td class="muted">-</td>
+              <td class="muted">만 3년 도래 예정</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <b>운영 팁:</b> IT 개인자산은 “인수확인(서명/전자서명) + 회수 체크(회수일/반납상태)”만 붙여도 관리 난이도가 크게 내려갑니다.
+      </div>
+    </section>
+
+    <!-- SHEET 2 -->
+    <section class="sheet" id="sheet2" data-sheet="sheet2">
+      <h2>
+        2) 공용설비_자산 (간이 관리)
+        <span class="tag">B 등급: 위치 중심</span>
+      </h2>
+      <div class="hint">
+        핵심 필드: <b>자산번호</b>, 설치 위치, 상태, 기본 모델/시리얼(있으면).
+      </div>
+      <div class="legend">
+        <span class="tag good">정상</span>
+        <span class="tag warn">점검필요</span>
+        <span class="tag">보관</span>
+        <span class="tag bad">고장</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>자산번호</th>
+              <th>유형코드</th>
+              <th>품목</th>
+              <th>브랜드/모델</th>
+              <th>S/N</th>
+              <th>설치 위치</th>
+              <th>상태</th>
+              <th>구매/도입</th>
+              <th>관리담당</th>
+              <th>비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RK-MON-2026-001</td>
+              <td>MON</td>
+              <td>전자칠판 86"</td>
+              <td class="muted">LG / 86TR3DK</td>
+              <td class="muted">-</td>
+              <td>동탄 오피스 · 대회의실</td>
+              <td><span class="pill good">정상</span></td>
+              <td>2024</td>
+              <td class="muted">운영팀</td>
+              <td class="muted">리모컨/펜 포함</td>
+            </tr>
+            <tr>
+              <td>RK-AV-2026-002</td>
+              <td>AV</td>
+              <td>PA 시스템(스피커+컨트롤러)</td>
+              <td class="muted">JBL / (모델기입)</td>
+              <td class="muted">-</td>
+              <td>동탄 오피스 · 대회의실</td>
+              <td><span class="pill warn">점검필요</span></td>
+              <td>2023</td>
+              <td class="muted">운영팀</td>
+              <td class="muted">케이블 접촉 불안</td>
+            </tr>
+            <tr>
+              <td>RK-AV-2026-003</td>
+              <td>AV</td>
+              <td>빔프로젝터</td>
+              <td class="muted">Epson / EB-XXXX</td>
+              <td class="muted">SN-XXXX</td>
+              <td>동탄 오피스 · 교육존</td>
+              <td><span class="pill good">정상</span></td>
+              <td>2025</td>
+              <td class="muted">운영팀</td>
+              <td class="muted">램프 교체주기 기록</td>
+            </tr>
+            <tr>
+              <td>RK-AP-2026-004</td>
+              <td>AP</td>
+              <td>정수기(렌탈)</td>
+              <td class="muted">Coway / (모델)</td>
+              <td class="muted">-</td>
+              <td>동탄 오피스 · 탕비</td>
+              <td><span class="pill good">정상</span></td>
+              <td>2025</td>
+              <td class="muted">총무</td>
+              <td class="muted">렌탈 계약 정보 별도</td>
+            </tr>
+            <tr>
+              <td>RK-OF-2026-001</td>
+              <td>OF</td>
+              <td>복합기(FAX/프린터)</td>
+              <td class="muted">Canon / iR-XXXX</td>
+              <td class="muted">SN-YYYY</td>
+              <td>동탄 오피스 · OA 코너</td>
+              <td><span class="pill good">정상</span></td>
+              <td>2024</td>
+              <td class="muted">총무</td>
+              <td class="muted">토너 재고는 비품시트</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <b>운영 팁:</b> 공용설비는 “사용자” 대신 <b>설치 위치</b>를 표준화(예: 동탄-대회의실/탕비/OA코너)하면 분실·이전 이슈가 크게 줄어듭니다.
+      </div>
+    </section>
+
+    <!-- SHEET 3 -->
+    <section class="sheet" id="sheet3" data-sheet="sheet3">
+      <h2>
+        3) 비품_재고 (재고 개념)
+        <span class="tag">C 등급: 수량만</span>
+      </h2>
+      <div class="hint">
+        핵심 필드: 품목명, 규격/단위, <b>보관 위치</b>, 현재 수량, 최소 수량(안전재고), 구매/폐기 기록.
+      </div>
+      <div class="legend">
+        <span class="tag good">정상 재고</span>
+        <span class="tag warn">보충 필요</span>
+        <span class="tag bad">품절</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>카테고리</th>
+              <th>품목</th>
+              <th>규격/단위</th>
+              <th>보관 위치</th>
+              <th>현재 수량</th>
+              <th>안전재고</th>
+              <th>상태</th>
+              <th>최근 구매일</th>
+              <th>최근 구매처</th>
+              <th>비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>사무소모품</td>
+              <td>A4 복사용지</td>
+              <td class="muted">500매/권</td>
+              <td>프린팅/소모품 보관실</td>
+              <td>12</td>
+              <td>6</td>
+              <td><span class="pill good">정상</span></td>
+              <td class="muted">2026-01-05</td>
+              <td class="muted">쿠팡</td>
+              <td class="muted">-</td>
+            </tr>
+            <tr>
+              <td>사무소모품</td>
+              <td>토너(복합기)</td>
+              <td class="muted">블랙 1EA</td>
+              <td>OA 코너 캐비닛</td>
+              <td>1</td>
+              <td>2</td>
+              <td><span class="pill warn">보충필요</span></td>
+              <td class="muted">2025-12-20</td>
+              <td class="muted">대리점</td>
+              <td class="muted">모델명 매칭 필요</td>
+            </tr>
+            <tr>
+              <td>가구/집기</td>
+              <td>회의용 의자</td>
+              <td class="muted">EA</td>
+              <td>대회의실</td>
+              <td>12</td>
+              <td class="muted">-</td>
+              <td><span class="pill good">정상</span></td>
+              <td class="muted">2024-08-10</td>
+              <td class="muted">오피스몰</td>
+              <td class="muted">자산번호 부여하지 않음</td>
+            </tr>
+            <tr>
+              <td>IT 소모품</td>
+              <td>HDMI 케이블</td>
+              <td class="muted">2m / EA</td>
+              <td>대회의실 서랍</td>
+              <td>0</td>
+              <td>2</td>
+              <td><span class="pill bad">품절</span></td>
+              <td class="muted">2025-11-03</td>
+              <td class="muted">네이버</td>
+              <td class="muted">즉시 구매</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <b>운영 팁:</b> 비품·재고는 “자산번호”를 붙이지 않고, <b>안전재고</b>만 관리하면 운영 스트레스가 확 줄어듭니다.
+      </div>
+    </section>
+
+    <div class="footer">
+      이 파일은 예제 템플릿입니다. 필요하면 “유형코드/필드명/상태값”을 RK 운영 방식에 맞게 그대로 고정해 쓰세요.
+    </div>
+  </div>
+
+  <script>
+    // Tabs
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const sheets = Array.from(document.querySelectorAll('.sheet'));
+    const q = document.getElementById('q');
+
+    function setActive(targetId){
+      tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.target === targetId ? 'true' : 'false'));
+      sheets.forEach(s => s.classList.toggle('active', s.id === targetId));
+      q.value = '';
+      filterActive('');
+    }
+
+    tabs.forEach(t => {
+      t.addEventListener('click', () => setActive(t.dataset.target));
+    });
+
+    // Filter only active sheet
+    function filterActive(keyword){
+      const active = sheets.find(s => s.classList.contains('active'));
+      if(!active) return;
+
+      const rows = Array.from(active.querySelectorAll('tbody tr'));
+      const k = (keyword || '').trim().toLowerCase();
+
+      rows.forEach(r => {
+        const text = r.innerText.toLowerCase();
+        r.style.display = (!k || text.includes(k)) ? '' : 'none';
+      });
+    }
+
+    q.addEventListener('input', (e) => filterActive(e.target.value));
+
+    document.getElementById('btnClear').addEventListener('click', () => {
+      q.value = '';
+      filterActive('');
+      q.focus();
+    });
+
+    document.getElementById('btnPrint').addEventListener('click', () => window.print());
+  </script>
+</body>
+</html>
