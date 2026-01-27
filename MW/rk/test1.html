@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>노트북 교체·구매 의사결정</title>
+    <title>휴대폰 구매/매각 의사결정 요약</title>
     <style>
       :root {
         --bg: #ffffff;
@@ -12,7 +12,8 @@
         --line: #e2e8f0;
         --soft: #f8fafc;
         --accent: #2563eb;
-        --accent2: #0ea5e9;
+        --ok: #16a34a;
+        --warn: #f59e0b;
       }
       * {
         box-sizing: border-box;
@@ -34,20 +35,21 @@
         color: var(--ink);
       }
 
-      /* 16:9 PPT canvas */
+      /* 16:9 slide canvas (1280x720) */
       .slide {
         width: 1280px;
-        height: 920px;
+        height: 720px;
         margin: 24px auto;
         background: var(--bg);
         border: 1px solid var(--line);
         border-radius: 18px;
         overflow: hidden;
         box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        position: relative;
       }
 
       .header {
-        padding: 26px 34px 18px 34px;
+        padding: 28px 34px 18px 34px;
         border-bottom: 1px solid var(--line);
         background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
       }
@@ -55,136 +57,70 @@
         margin: 0;
         font-size: 34px;
         letter-spacing: -0.4px;
-        font-weight: 900;
+        font-weight: 800;
         line-height: 1.15;
       }
       .subtitle {
         margin: 10px 0 0 0;
-        font-size: 13px;
+        font-size: 14px;
         color: var(--muted);
-        line-height: 1.35;
       }
 
       .content {
         display: grid;
-        grid-template-columns: 1.08fr 1fr;
-        gap: 16px;
-        padding: 16px 18px 18px 18px;
-        height: calc(920px - 92px);
-        min-height: 0; /* 중요: 자식 overflow 스크롤 허용 */
-      }
-
-      /* LEFT/RIGHT columns scroll instead of clipping */
-      .col {
-        min-height: 0;
-        overflow: auto;
-        padding-right: 6px; /* scrollbar gutter */
+        grid-template-columns: 1.05fr 1fr;
+        gap: 18px;
+        padding: 18px 22px 22px 22px;
+        height: calc(720px - 92px);
       }
 
       .card {
         background: #fff;
         border: 1px solid var(--line);
         border-radius: 16px;
-        padding: 16px;
+        padding: 18px 18px 16px 18px;
       }
       .card h2 {
         margin: 0 0 12px 0;
         font-size: 18px;
-        font-weight: 900;
+        font-weight: 800;
         letter-spacing: -0.2px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         gap: 10px;
       }
-      .meta {
+      .badge {
         font-size: 12px;
-        font-weight: 800;
-        padding: 4px 10px;
+        padding: 5px 10px;
         border-radius: 999px;
         background: var(--soft);
         border: 1px solid var(--line);
         color: var(--muted);
-        white-space: nowrap;
+        font-weight: 700;
       }
 
-      /* LEFT blocks */
-      .stack {
-        display: grid;
-        gap: 12px;
-      }
-      .mini {
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 12px;
-        background: #fff;
-      }
-      .mini h3 {
-        margin: 0 0 8px 0;
-        font-size: 15px;
-        font-weight: 900;
-        letter-spacing: -0.2px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-      }
-      .chip {
-        font-size: 12px;
-        font-weight: 800;
-        padding: 4px 10px;
-        border-radius: 999px;
-        background: rgba(37, 99, 235, 0.06);
-        border: 1px solid rgba(37, 99, 235, 0.2);
-        color: var(--accent);
-        white-space: nowrap;
-      }
-      .mini ul {
-        margin: 0;
-        padding-left: 18px;
-        font-size: 13.5px;
-        line-height: 1.55;
-      }
-      .mini li {
-        margin: 6px 0;
-      }
-      .summary {
-        margin-top: 10px;
-        padding: 10px 12px;
-        border-radius: 12px;
-        background: var(--soft);
-        border: 1px dashed var(--line);
-        font-size: 13px;
-        color: var(--muted);
-        line-height: 1.5;
-      }
-      .summary strong {
-        color: var(--accent);
-      }
-
-      /* Scenario cards */
-      .sc-grid {
+      .scenario {
         display: grid;
         gap: 10px;
       }
-      .sc {
+      .scenario-item {
+        padding: 12px 12px;
         border: 1px solid var(--line);
         border-radius: 14px;
-        padding: 6px;
         background: #fff;
       }
-      .sc-top {
+      .scenario-item .top {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
         gap: 10px;
         margin-bottom: 6px;
       }
-      .sc-name {
+      .scenario-item .name {
         font-weight: 900;
         letter-spacing: -0.2px;
       }
-      .tag {
+      .scenario-item .tag {
         font-size: 12px;
         font-weight: 800;
         padding: 4px 8px;
@@ -194,130 +130,78 @@
         color: var(--muted);
         white-space: nowrap;
       }
-
-      /* RIGHT blocks */
-      .right-stack {
-        display: grid;
-        gap: 12px;
-      }
-
-      .pref {
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 16px;
-      }
-      .pref h2 {
-        margin: 0 0 10px 0;
-        font-size: 18px;
-        font-weight: 900;
-        letter-spacing: -0.2px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-      }
-
-      .bar-wrap {
-        margin-top: 8px;
-        background: var(--soft);
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        overflow: hidden;
-        height: 14px;
-      }
-      .bar {
-        height: 100%;
-        width: 84%;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-      }
-      .pref-grid {
-        margin-top: 12px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-      .pref-card {
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 10px 12px;
-        background: #fff;
-      }
-      .k {
-        font-size: 12px;
-        color: var(--muted);
-        font-weight: 800;
-        letter-spacing: -0.1px;
-      }
-      .v {
-        margin-top: 4px;
-        font-size: 28px;
-        font-weight: 900;
-        letter-spacing: -0.4px;
-        line-height: 1.05;
-      }
-      .v small {
-        font-size: 14px;
-        font-weight: 800;
-        color: var(--muted);
-      }
-      .pref-note {
-        margin-top: 10px;
-        font-size: 12.5px;
-        color: var(--muted);
+      .scenario-item ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--ink);
         line-height: 1.45;
       }
-
-      .decision {
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 14px;
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
       }
+      .footnote {
+        margin-top: 12px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: var(--soft);
+        border: 1px dashed var(--line);
+        font-size: 13px;
+        color: var(--muted);
+      }
+
       .decision h3 {
         margin: 0;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 900;
         letter-spacing: -0.2px;
       }
-      .divider {
-        height: 1px;
-        background: var(--line);
-        margin: 12px 0;
+      .decision .box {
+        margin-top: 10px;
+        padding: 12px 12px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
       }
-      .decision p {
+      .decision .box p {
         margin: 0;
-        font-size: 15px;
-        line-height: 1.65;
+        font-size: 13.5px;
+        line-height: 1.55;
+        color: var(--ink);
       }
-      .decision p + p {
+      .decision .box p + p {
         margin-top: 10px;
       }
 
       .callout {
-        margin-top: 12px;
-        padding: 12px;
+        margin-top: 10px;
+        padding: 12px 12px;
         border-radius: 14px;
         border: 1px solid rgba(37, 99, 235, 0.25);
         background: rgba(37, 99, 235, 0.06);
-        font-size: 16px;
-        line-height: 1.5;
       }
       .callout strong {
         color: var(--accent);
       }
 
-      /* nicer scrollbars */
-      .col::-webkit-scrollbar {
-        width: 10px;
+      .divider {
+        height: 1px;
+        background: var(--line);
+        margin: 14px 0;
       }
-      .col::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 999px;
-        border: 2px solid #f8fafc;
+      /* 결정사항 1 전용 강조 스타일 */
+      .decision-primary h3 {
+        font-size: 18px; /* 기존 16px → 18px */
       }
-      .col::-webkit-scrollbar-track {
-        background: transparent;
+
+      .decision-primary p {
+        font-size: 15px; /* 기존 13.5px → 15px */
+        line-height: 1.65;
+      }
+
+      .decision-primary .callout {
+        font-size: 18px;
       }
 
       /* responsive preview */
@@ -334,147 +218,41 @@
   </head>
 
   <body>
-    <div class="slide" role="img" aria-label="노트북 교체·구매 의사결정 슬라이드">
+    <div class="slide" role="img" aria-label="휴대폰 구매/매각 의사결정 요약 슬라이드">
       <div class="header">
-        <h1 class="title">노트북 교체·구매 의사결정</h1>
-        <div class="subtitle">1) 교체 사유(보안) · 2) 구매 시나리오 · 3) 선호도 · 4) 기존 장비 매각 · 5) 최종 권고</div>
+        <h1 class="title">휴대폰 구매/매각 의사결정 요약</h1>
       </div>
 
       <div class="content">
-        <!-- LEFT COLUMN (scrollable) -->
-        <div class="col" aria-label="좌측 요약 영역">
-          <section class="card">
-            <!-- <h2>요약 근거 <span class="meta">보고용 정리</span></h2> -->
+        <!-- Left: Scenario summary -->
+        <section class="card">
+          <h2>휴대폰 구매 시나리오 요약</h2>
 
-            <div class="stack">
-              <!-- 1. 교체 사유 -->
-              <div class="mini">
-                <h3>1. 노트북 전체 교체 사유 <span class="chip">보안·운영 기준 강화</span></h3>
-                <ul>
-                  <li><strong>최신 보안 기준 충족 한계</strong>: 최신 OS/보안 정책 적용 제약</li>
-                  <li><strong>사외 사용 상시화</strong>: 외부 협업·교육·출장 증가로 분실·도난 리스크 확대</li>
-                  <li><strong>사고 대응 수단 부족</strong>: 원격 통제·데이터 보호(암호화 등) 구조적 한계</li>
-                  <li><strong>DRM/MDM 선행 조건</strong>: 최신 OS·TPM·암호화 지원 등 기본 단말 요건 필요</li>
-                </ul>
-                <div class="summary"><strong>요약:</strong> 최소 보안 기준 확보 및 향후 보안 체계 고도화를 위한 기반 정비</div>
+          <div class="scenario">
+            <div class="scenario-item">
+              <div class="top">
+                <div class="name">A. iPhone 17 pro 256GB</div>
+                <div class="tag">단독 옵션</div>
               </div>
-
-              <!-- 2. 시나리오 (one-line per scenario) -->
-              <div class="mini">
-                <h3>2. 노트북 구매 시나리오 요약 <span class="chip">21대 기준</span></h3>
-
-                <div class="sc-grid">
-                  <div class="sc">
-                    <div class="sc-top">
-                      <div class="sc-name">A. 레노버</div>
-                      <div class="tag">가격 효율성</div>
-                    </div>
-                    <p style="margin: 0; font-size: 13.5px; line-height: 1.5">단가 <strong>145만원</strong> × 21대 → <strong>총 3,045만원</strong></p>
-                  </div>
-
-                  <div class="sc">
-                    <div class="sc-top">
-                      <div class="sc-name">B. LG 그램 14</div>
-                      <div class="tag">선호도 / 만족도</div>
-                    </div>
-                    <p style="margin: 0; font-size: 13.5px; line-height: 1.5">단가 <strong>169만원</strong> × 21대 → <strong>총 3,549만원</strong></p>
-                  </div>
-
-                  <div class="sc">
-                    <div class="sc-top">
-                      <div class="sc-name">C. MS 서피스</div>
-                      <div class="tag">최상선호 / 비용 부담</div>
-                    </div>
-                    <p style="margin: 0; font-size: 13.5px; line-height: 1.5">단가 <strong>223만원</strong> × 21대 → <strong>총 4,683만원</strong></p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 3. 선호도 (moved to LEFT) -->
-              <div class="mini" aria-label="노트북 선호도">
-                <h3>3. 노트북 선호도 <span class="chip">사내 조사</span></h3>
-
-                <div class="bar-wrap" aria-hidden="true" style="margin-top: 8px">
-                  <div class="bar"></div>
-                </div>
-
-                <div class="pref-grid">
-                  <div class="pref-card">
-                    <div class="k">LG 그램</div>
-                    <div class="v">84<small>%</small></div>
-                  </div>
-                  <div class="pref-card">
-                    <div class="k">레노버</div>
-                    <div class="v">16<small>%</small></div>
-                  </div>
-                </div>
-
-                <!-- <div class="pref-note" style="margin-top:8px;">
-                * 선호도 결과는 표준 모델 선정 시 사용자 수용성·운영 표준화(정책 적용/관리 효율)에 직접적인 영향을 줍니다.
-              </div> -->
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <!-- RIGHT COLUMN (scrollable) -->
-        <div class="col" aria-label="우측 요약 영역">
-          <div class="right-stack">
-            <!-- 4. 매각 (moved to RIGHT top) -->
-            <div class="pref" aria-label="기존 노트북 매각">
-              <h2>
-                4. 기존 노트북 매각
-                <span class="meta">매각 대상 22대</span>
-              </h2>
-
-              <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6">
-                <li>대표님, 황 사장님, 엘린 부장님 등 <strong>총 6명 제외</strong></li>
-                <li>나머지 <strong>22대</strong> 기기 매각 대상</li>
-                <li>기존 노트북 매각 예상: <strong>총 770만원</strong> (22대)</li>
+              <ul>
+                <li>단가 <strong>162만원</strong> × <strong>26대</strong></li>
+                <li>총 구입비: <strong>4,212만원</strong></li>
               </ul>
             </div>
+          </div>
 
-            <br />
+          <div class="footnote">※ 기존 휴대폰 매각 예상: <strong>총 423만원</strong> (20대)</div>
+        </section>
 
-            <!-- 5. 결정사항 -->
-            <div class="decision" aria-label="결정사항: 노트북 구매">
-              <h3>5. 결정사항 : 노트북 구매</h3>
-              <div class="divider"></div>
+        <!-- Right: Decisions -->
+        <div class="box decision-primary">
+          <h3>결정사항 2. 휴대폰 구매</h3>
+          <div class="divider"></div>
 
-              <p>
-                <strong>시나리오 A(레노버)</strong>는 가격 측면에서 가장 효율적인 선택입니다. 다만 이번 교체의 목적은 단순 비용 절감이 아니라,
-                <strong>사외 사용 상시화 환경에서의 최소 보안 기준 확보</strong> 및
-                <strong>향후 DRM·MDM 등 보안 체계 고도화를 위한 기반 마련</strong>입니다.
-              </p>
-
-              <p>
-                이 관점에서 <strong>시나리오 B(LG 그램)</strong>은 임직원 선호도가 높고(84%), 휴대성과 사용 만족도가 검증되어 표준 장비로서의 수용성과
-                운영 안정성이 가장 큽니다. 반면 <strong>시나리오 C(MS 서피스)</strong>는 비용 부담이 과도하여 표준 모델로의 현실성이 낮습니다.
-              </p>
-
-              <div class="callout">
-                <strong>→ 결론:</strong> 교체 목적(보안 기준 강화·향후 보안 고도화)과 선호도·운영 효율을 종합할 때, 레노버 대비 가격 차이가 과도하지
-                않은 범위에서 <strong>‘LG 그램’을 기준 모델로 구매</strong>하는 방안을 제안합니다.
-              </div>
-
-              <!-- 비용 요약 -->
-              <div
-                style="
-                  margin-top: 12px;
-                  padding: 12px;
-                  border-radius: 12px;
-                  background: #f8fafc;
-                  border: 1px solid #e2e8f0;
-                  font-size: 14px;
-                  line-height: 1.6;
-                "
-              >
-                <strong>비용 요약</strong><br />
-                - LG 그램 14 구매 총액: <strong>3,549만원</strong><br />
-                - 기존 노트북 매각: <strong>– 770만원</strong> (22대)<br />
-                <div style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed #e2e8f0">→ <strong>실질 소요 금액: 2,779만원</strong></div>
-              </div>
-            </div>
+          <div class="callout">
+            휴대폰 구매는 대안 시나리오가 없는 구조로,  <br>
+            제출된 <strong>휴대폰 구매 시나리오 A</strong>에 따라 <br>
+            <strong>그대로 진행</strong>하는 것에 대한 승인만 필요합니다.
           </div>
         </div>
       </div>
