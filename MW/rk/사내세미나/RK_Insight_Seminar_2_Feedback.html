@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RK 인사이트 세미나 2회차 | 강연자 피드백 요약(1p)</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --paper:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --soft:#f1f5f9;
+      --accent:#2563eb;
+      --accent2:#06b6d4;
+      --good:#16a34a;
+      --warn:#f59e0b;
+      --shadow: 0 18px 55px rgba(2,6,23,.14);
+      --radius:18px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+    }
+
+    /* Print (A4 1 page) */
+    @page { size: A4; margin: 12mm; }
+    @media print{
+      body{ background:#fff !important; }
+      .wrap{ padding:0 !important; }
+      .sheet{ box-shadow:none !important; border:1px solid var(--line); }
+      .hint{ display:none !important; }
+    }
+
+    body{
+  margin:0;
+  font-family:var(--font);
+  background:#ffffff;   /* 전체 배경을 흰색으로 */
+  color:var(--ink);
+}
+
+.wrap{
+  padding:12px 8px 24px;
+  display:flex;
+  justify-content:center;
+}
+
+.sheet{
+  width: 96vw;           /* 화면 너비에 가깝게 확장 */
+  max-width: 1200px;     /* 데스크탑에서도 너무 커지지 않게 제한 */
+  min-height: 297mm;
+  background:var(--paper);
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  position:relative;
+}
+
+
+    .topbar{
+      padding:18px 24px 14px;
+      background:
+        linear-gradient(90deg, rgba(37,99,235,.10), rgba(6,182,212,.08)),
+        linear-gradient(180deg, #ffffff, #fbfdff);
+      border-bottom:1px solid var(--line);
+      position:relative;
+    }
+    .brandline{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .titlegrp{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:0;
+    }
+    .kicker{
+      font-size:12px;
+      letter-spacing:.02em;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(37,99,235,.12), rgba(6,182,212,.10));
+      border:1px solid rgba(37,99,235,.18);
+      color:#0b2a6f;
+      font-weight:700;
+    }
+    h1{
+      margin:0;
+      font-size:22px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+      color:#0b1633;
+    }
+    .meta{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      text-align:right;
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .meta .pill{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+
+
+.content{
+  padding:18px 24px 18px;
+  display:grid;
+  grid-template-columns: 1fr 1.1fr;  /* 오른쪽 컬럼을 더 넓게 */
+  gap:18px;
+}
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:#fff;
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, #fbfcfe);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .card .hd .h{
+      font-weight:800;
+      letter-spacing:-.01em;
+      font-size:14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .num{
+      width:26px;
+      height:26px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      color:#0b2a6f;
+      background: linear-gradient(90deg, rgba(37,99,235,.18), rgba(6,182,212,.14));
+      border:1px solid rgba(37,99,235,.22);
+      flex:0 0 auto;
+    }
+    .card .bd{
+      padding:12px 14px 14px;
+      color:var(--ink);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:8px;
+    }
+    .stat{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px 10px;
+      background: var(--soft);
+    }
+    .stat .label{
+      font-size:11px;
+      color:var(--muted);
+      margin-bottom:6px;
+      font-weight:700;
+    }
+    .stat .value{
+      font-size:16px;
+      font-weight:900;
+      color:#0b1633;
+      letter-spacing:-.02em;
+    }
+
+    .meter{
+      margin-top:10px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px;
+      background:#fff;
+    }
+    .meter .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .meter .row b{
+      font-size:12px;
+      color:#0b1633;
+      letter-spacing:-.01em;
+    }
+    .meter .row span{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .bar{
+      height:10px;
+      border-radius:999px;
+      background: #eaf0ff;
+      border:1px solid rgba(37,99,235,.18);
+      overflow:hidden;
+    }
+    .bar > i{
+      display:block;
+      height:100%;
+      width:94%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius:999px;
+    }
+    .tone{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .chip{
+      font-size:12px;
+      font-weight:800;
+      color:#0b2a6f;
+      border:1px solid rgba(37,99,235,.22);
+      background: rgba(37,99,235,.08);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    ul{
+      margin:8px 0 0 18px;
+      padding:0;
+    }
+    li{ margin:6px 0; }
+    .muted{ color:var(--muted); }
+
+    .quote{
+      margin-top:10px;
+      border-left:3px solid rgba(37,99,235,.45);
+      padding:10px 12px;
+      background: linear-gradient(90deg, rgba(37,99,235,.06), transparent);
+      border-radius:12px;
+      color:#0b1633;
+      font-size:12.8px;
+      line-height:1.6;
+    }
+
+    .rightcol{
+      display:grid;
+      grid-template-rows: auto auto 1fr;
+      gap:14px;
+    }
+
+    .footer{
+      padding:12px 24px 16px;
+      border-top:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font-size:11px;
+      background: linear-gradient(180deg, #ffffff, #fbfcfe);
+    }
+    .sig{
+      font-weight:800;
+      color:#0b1633;
+    }
+    .hint{
+      margin-top:12px;
+      text-align:center;
+      color:rgba(255,255,255,.75);
+      font-size:12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="sheet" role="document" aria-label="RK 인사이트 세미나 2회차 강연자 피드백 요약 1페이지">
+      <header class="topbar">
+        <div class="brandline">
+          <div class="titlegrp">
+            <div class="kicker">
+              <span class="badge">RK Insight Seminar</span>
+              <span>설문 기반 피드백 요약</span>
+            </div>
+            <h1>RK 인사이트 세미나 2회차 · 강연자 피드백 요약</h1>
+          </div>
+          <div class="meta">
+            <span class="pill">응답자: <b>14명</b></span>
+            <!-- <span class="pill">요약 목적: <b>한눈에 강점·보완점 파악</b></span> -->
+          </div>
+        </div>
+      </header>
+
+      <section class="content">
+        <!-- LEFT -->
+        <div class="leftcol">
+          <article class="card">
+            <div class="hd">
+              <div class="h"><span class="num">1</span>전체 만족도 요약</div>
+            </div>
+            <div class="bd">
+              <div class="stats">
+                <div class="stat">
+                  <div class="label">응답자 수</div>
+                  <div class="value">14명</div>
+                </div>
+                <div class="stat">
+                  <div class="label">전반 만족도(체감)</div>
+                  <div class="value">약 4.7 / 5.0</div>
+                </div>
+              </div>
+
+              <div class="meter" aria-label="만족도 막대">
+                <div class="row">
+                  <b>전반 만족도</b>
+                  <span>매우 긍정적</span>
+                </div>
+                <div class="bar" aria-hidden="true"><i></i></div>
+                <div class="tone">
+                  전반적 분위기는 매우 긍정적이며, “회사에 대해 다시 생각하게 되었다”, “큰 흐름을 이해했다”는 반응이 다수였습니다.
+                  비판보다는 <b>발전적 제안 중심</b>의 톤이었습니다.
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card" style="margin-top:14px;">
+            <div class="hd">
+              <div class="h"><span class="num">2</span>가장 긍정적으로 평가된 포인트</div>
+            </div>
+            <div class="bd">
+              <div class="muted" style="font-weight:800; font-size:12px;">반복 키워드</div>
+              <div class="chips" aria-label="반복 키워드">
+                <span class="chip">회사</span>
+                <span class="chip">역사</span>
+                <span class="chip">방향</span>
+                <span class="chip">앞으로</span>
+                <span class="chip">다시</span>
+                <span class="chip">생각</span>
+                <span class="chip">론다</span>
+              </div>
+
+              <div class="muted" style="margin-top:12px; font-weight:800; font-size:12px;">대표 긍정 의견(요약)</div>
+              <ul>
+                <li>회사 흐름과 방향을 <b>한 번에 이해</b>할 수 있었다.</li>
+                <li>우리 회사의 연혁을 <b>다시 정리</b>해 볼 수 있는 시간이었다.</li>
+                <li>조직과 개인이 <b>어떻게 변화</b>해야 하는지 생각하게 되었다.</li>
+                <li><b>큰 그림</b>을 볼 수 있는 의미 있는 강연이었다.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="rightcol">
+          <article class="card">
+            <div class="hd">
+              <div class="h"><span class="num">3</span>개선이 필요하다고 느낀 부분</div>
+            </div>
+            <div class="bd">
+              <div class="muted" style="font-weight:800; font-size:12px;">반복적으로 등장한 아쉬운 점 → 발전적 제안</div>
+              <ul>
+                <li><b>실무 연결 사례</b>가 더 있으면 이해와 적용에 도움이 됩니다.</li>
+                <li><b>부서/직무별 적용 포인트</b>를 구체화하면 공감과 실행력이 높아질 수 있습니다.</li>
+                <li><b>기술·산업 트렌드와의 연결</b>이 더해지면 현장 체감도가 강화될 것으로 보입니다.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="hd">
+              <div class="h"><span class="num">4</span>다음 회차에 대한 기대/요청</div>
+            </div>
+            <div class="bd">
+              <ul>
+                <li>기술 트렌드 및 <b>실무 사례 중심</b>의 이야기</li>
+                <li>특정 부서 관점에서의 <b>적용 방향</b> 제시</li>
+                <li>RK 중장기 방향과 각 조직의 역할에 대한 <b>구체화</b></li>
+              </ul>
+              <div class="quote">
+                “큰 방향은 이해되었고, 이제는 그것이 <b>나의 일과 어떻게 연결되는지</b> 알고 싶다”는 흐름입니다.
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="hd">
+              <div class="h"><span class="num">5</span>강연자에게 전달할 ‘한 장 요약 메시지’</div>
+            </div>
+            <div class="bd" style="font-size:12.8px; line-height:1.65;">
+              이번 RK 인사이트 세미나는 구성, 전달, 난이도, 흐름 모든 면에서 <b>매우 높은 평가</b>를 받았습니다.
+              특히 “회사의 역사와 방향을 다시 생각하게 되었다”는 의견이 많았으며, 참석자들은 RK가 어디에서 왔고 어디로 가고 있는지를
+              한 번에 조망할 수 있었다고 느꼈습니다.<br/><br/>
+
+              다음 회차에 대해서는 실무와 더 직접 연결되는 사례, 부서역할별로 ‘나에게 무엇을 의미하는지’를 짚어주는 구조,
+              기술 및 산업 트렌드와의 연결을 기대하는 의견이 많았습니다. 큰 메시지는 이미 충분히 공감되고 있는 만큼,
+              여기에 ‘각자의 자리에서 무엇을 하면 좋을지’가 더해진다면 방향과 실행의 힌트를 함께 얻는 시간이 될 것입니다.<br/><br/>
+
+              이번 강연에 대해 진심으로 감사드리며, 다음 인사이트 세미나 역시 많은 구성원들이 기대하고 있습니다.
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div>문서 목적: <span class="sig">강연 수용도·강점·보완점</span>을 강연자가 한눈에 파악하도록 요약</div>
+        <div>RK Insight Seminar · Feedback Summary (1 page)</div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="hint">Tip: 인쇄 시 “배경 그래픽” 옵션을 켜면 상단 그라데이션이 더 예쁘게 출력됩니다.</div>
+</body>
+</html>
