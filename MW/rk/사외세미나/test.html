@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RK 사외 교육 조사·기획 보고 (2p)</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --paper:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --soft:#f8fafc;
+      --accent:#2563eb;
+      --ok:#16a34a;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+                   "Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic", Arial, sans-serif;
+      line-height:1.4;
+    }
+
+    /* print-friendly pages */
+    .wrap{ max-width:1200px; margin:22px auto; padding:0 14px 40px; }
+    .page{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:0 14px 34px rgba(15,23,42,.10);
+      overflow:hidden;
+      margin-bottom:18px;
+    }
+    .page + .page{ page-break-before:always; }
+
+    .header{
+      padding:18px 22px 14px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%);
+    }
+    .title{
+      margin:0;
+      font-size:22px;
+      font-weight:900;
+      letter-spacing:-0.3px;
+      line-height:1.15;
+    }
+    .sub{
+      margin-top:8px;
+      font-size:12.5px;
+      color:var(--muted);
+      line-height:1.4;
+    }
+    .content{ padding:16px 18px 20px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:start;
+    }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+      overflow:hidden;
+    }
+    .card .card-h{
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      background:var(--soft);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .card .card-h b{
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:-0.2px;
+    }
+    .badge{
+      font-size:11px;
+      font-weight:800;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .card .card-b{ padding:12px; }
+
+    /* excel-like table */
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:13px;
+      table-layout:fixed;
+    }
+    th, td{
+      border:1px solid var(--line);
+      padding:9px 8px;
+      vertical-align:top;
+      word-break:break-word;
+    }
+    th{
+      background:var(--soft);
+      font-weight:900;
+      text-align:center;
+      color:#0b1220;
+    }
+    td{ background:#fff; }
+    .left{ text-align:left; }
+    .center{ text-align:center; }
+
+    .tag{
+      display:inline-block;
+      margin:2px 4px 0 0;
+      padding:3px 8px;
+      font-size:11px;
+      font-weight:800;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--soft);
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .pill-ok{ background:rgba(22,163,74,.08); border-color:rgba(22,163,74,.25); color:var(--ok); }
+    .pill-warn{ background:rgba(245,158,11,.10); border-color:rgba(245,158,11,.30); color:var(--warn); }
+    .pill-bad{ background:rgba(239,68,68,.08); border-color:rgba(239,68,68,.25); color:var(--bad); }
+
+    .callout{
+      margin-top:12px;
+      border:1px solid rgba(37,99,235,.22);
+      background:rgba(37,99,235,.06);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:13px;
+      line-height:1.45;
+    }
+    .callout strong{ color:var(--accent); }
+
+    .mini-note{
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    .list{
+      margin:0;
+      padding-left:16px;
+      font-size:13px;
+      line-height:1.55;
+    }
+    .list li{ margin:4px 0; }
+
+    @media (max-width: 980px){
+      .grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- ===================== PAGE 1: 조사 요약 보고 ===================== -->
+    <section class="page" aria-label="사외 교육 조사 요약 보고 1페이지">
+      <div class="header">
+        <h1 class="title">RK 사외 교육 조사 보고 (요약)</h1>
+        <div class="sub">
+          대상 기관: KPC / KMA / 휴넷 · 비교 항목: 강의 형태, 교육비 할인, 환급/지원금, 연회비 · 결론: <b>KPC 우선 검토</b>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="grid">
+          <!-- 기관 비교 -->
+          <div class="card">
+            <div class="card-h">
+              <b>기관 비교(핵심)</b>
+              <span class="badge">요약표</span>
+            </div>
+            <div class="card-b">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:18%;">구분</th>
+                    <th style="width:27%;">KPC</th>
+                    <th style="width:27%;">KMA</th>
+                    <th style="width:28%;">휴넷</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>강의 형태</th>
+                    <td class="center"><span class="tag pill-ok">집체교육</span></td>
+                    <td class="center"><span class="tag pill-ok">집체교육</span></td>
+                    <td class="center"><span class="tag pill-warn">온라인</span></td>
+                  </tr>
+                  <tr>
+                    <th>교육비 할인</th>
+                    <td class="left">법인회원(연회비 150만) 시<br>약 10% 할인(일부 제외)</td>
+                    <td class="left">법인회원(연회비 450만) 시<br>약 10% 할인(일부 제외)</td>
+                    <td class="left">별도 할인 없음<br>(온라인 단가가 상대적으로 저렴)</td>
+                  </tr>
+                  <tr>
+                    <th>환급/지원금</th>
+                    <td class="left"><span class="tag pill-ok">범위 넓음</span><br>NCS 단가 기준 환급(90/60/40%)<br>RK는 90% 환급 예상</td>
+                    <td class="left"><span class="tag pill-bad">제한적</span><br>환급 가능 과정 리스트 내에서만 가능</td>
+                    <td class="left"><span class="tag pill-warn">제한적</span><br>기업 분류별 환급액 기준(우선지원기업 등)</td>
+                  </tr>
+                  <tr>
+                    <th>연회비</th>
+                    <td class="center">일반 150만 / 특별 250만</td>
+                    <td class="center">법인 정회원 450만</td>
+                    <td class="center">없음</td>
+                  </tr>
+                  <tr>
+                    <th>장소</th>
+                    <td class="left">서울(종로/경복궁역)<br>대구·대전·부산(추후 공지)</td>
+                    <td class="left">서울(여의도)</td>
+                    <td class="left">온라인</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="callout">
+                <strong>결론(우선 선정): KPC</strong><br>
+                ① 집체교육 기반 운영이 가능하고, ② 환급/지원금 적용 범위가 넓으며,
+                ③ 연회비(150만) 대비 할인·환급 효율이 가장 합리적인 것으로 판단.
+              </div>
+            </div>
+          </div>
+
+          <!-- 분류별 샘플 과정(KPC) -->
+          <div class="card">
+            <div class="card-h">
+              <b>교육 분류별 샘플 과정 (KPC)</b>
+              <span class="badge">리서치 리스트업</span>
+            </div>
+            <div class="card-b">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:28%;">분류</th>
+                    <th class="left">샘플 과정(각 3개 예시)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>1) AX 혁신/효율화</th>
+                    <td class="left">
+                      • 업무 생산성을 높이는 ChatGPT 활용 Skill-up (1일 / 일반 37만, 법인 37만 / 환급 O)<br>
+                      • 일잘러의 ChatGPT와 생성형 AI 업무 활용 (1일 / 일반 37만, 법인 33만 / 환급 O)<br>
+                      • ChatGPT를 활용한 엑셀·VBA·PPT 자동화 (1일 / 일반 36만 / 환급 O)
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>2) SCM/구매/물류</th>
+                    <td class="left">
+                      • 구매관리기본 (3일 / 일반 67만, 법인 60만)<br>
+                      • SCM(공급망관리) 입문과 핵심 실무 (2일 / 일반 57만, 법인 51만 / 환급 O)<br>
+                      • 공급망관리(SCM) 실무 (2일 / 일반 57만, 법인 51만)
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>3) 리더십/조직</th>
+                    <td class="left">
+                      • 성과내는 팀을 만드는 팀장리더십 (3일 / 일반 67만, 법인 60만 / 환급 O)<br>
+                      • 고급관리자 역량강화 (3일 / 일반 69만, 법인 63만)<br>
+                      • 조직을 이끄는 리더의 소통스킬(소통리더십) (2일 / 일반 57만, 법인 52만 / 환급 O)
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>4) 경영지원/공통</th>
+                    <td class="left">
+                      • 비전공자를 위한 회계입문 (3일 / 일반 62만, 법인 56만 / 환급 O)<br>
+                      • 재무제표 보는 법과 재무보고서 활용 실무 (1일 / 일반 30만, 법인 27만 / 환급 O)<br>
+                      • 총무 업무 기본 (3일 / 일반 67만, 법인 60만 / 환급 O)
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="mini-note">
+                * 위 샘플은 업로드 파일 내 “분류별 리스트업” 기준 발췌 예시이며, 최종 운영 시 RK 직무/직급별 우선순위에 맞춰 큐레이션 예정.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PAGE 2: 사외교육 기획 보고 ===================== -->
+    <section class="page" aria-label="사외 교육 기획 보고 2페이지">
+      <div class="header">
+        <h1 class="title">RK 사외교육 기획 보고 (KPC 중심 운영안)</h1>
+        <div class="sub">
+          목적: 조직 역량 강화 + 정부 환급/지원금 활용을 통한 비용 효율화 · 운영 형태: “사외 교육(집체) + 사내 공유(확산)” 구조
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="grid">
+
+          <!-- 운영 구조 -->
+          <div class="card">
+            <div class="card-h">
+              <b>1) 운영 구조(안)</b>
+              <span class="badge">To-Be</span>
+            </div>
+            <div class="card-b">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:26%;">구분</th>
+                    <th class="left">기획 내용</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>주관 기관</th>
+                    <td class="left">
+                      <span class="tag pill-ok">KPC 우선</span>
+                      <span class="tag">집체교육</span>
+                      <span class="tag">환급 범위 넓음</span>
+                      <br>※ 필요 시 보조 채널로 KMA/휴넷 일부 활용(특정 과정/온라인 보완)
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>대상</th>
+                    <td class="left">직무/직급별 우선순위 운영(AX, SCM/구매, 리더십, 경영지원)</td>
+                  </tr>
+                  <tr>
+                    <th>선정 방식</th>
+                    <td class="left">
+                      분기별 수요조사 → 과정 후보 큐레이션(5~10개) → 부서장 승인 → 단체 신청/수강
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>확산(사내 연계)</th>
+                    <td class="left">
+                      수강자 1인당 “사내 공유 15분(요약)” 또는 “1페이지 노트” 제출 → 사내 교육/세미나 자료로 재활용
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="callout">
+                <strong>핵심 설계:</strong> 사외 교육은 “환급 기반 비용 효율화”, 사내 확산은 “조직 전체 학습 효과 극대화” 목적.
+              </div>
+            </div>
+          </div>
+
+          <!-- 추진 로드맵 & 프로세스 -->
+          <div class="card">
+            <div class="card-h">
+              <b>2) 추진 로드맵 & 환급 운영 프로세스(안)</b>
+              <span class="badge">실행 관점</span>
+            </div>
+            <div class="card-b">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width:22%;">단계</th>
+                    <th class="left">주요 작업</th>
+                    <th style="width:18%;">산출물</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Step 1. 제도 세팅</th>
+                    <td class="left">
+                      KPC 법인회원(연회비) 가입 여부 확정 · 교육 담당자 계정/권한 정리 · 내부 신청/승인 양식 준비
+                    </td>
+                    <td class="center">운영 가이드 1p<br>신청서 양식</td>
+                  </tr>
+                  <tr>
+                    <th>Step 2. 과정 선정</th>
+                    <td class="left">
+                      4개 분류 기준 과정 Pool 구성(분기별 업데이트) · 환급 가능 과정 우선 편성 · 일정/지역 고려
+                    </td>
+                    <td class="center">분기 운영 리스트</td>
+                  </tr>
+                  <tr>
+                    <th>Step 3. 신청/수강</th>
+                    <td class="left">
+                      단체 신청(가능 시) · 참석자 확정 · 출석/수료 증빙 확보(환급/지원금 요건 충족)
+                    </td>
+                    <td class="center">참석자 명단<br>수료 증빙</td>
+                  </tr>
+                  <tr>
+                    <th>Step 4. 환급/정산</th>
+                    <td class="left">
+                      훈련비 환급 신청(요건 확인) · 회사 내부 정산(실비/교통 등) · 결과 보고
+                    </td>
+                    <td class="center">환급 신청서류<br>정산서</td>
+                  </tr>
+                  <tr>
+                    <th>Step 5. 사내 확산</th>
+                    <td class="left">
+                      수강자 요약 공유(15분) 또는 1p 노트 제출 · 사내 세미나/브라운백 자료화
+                    </td>
+                    <td class="center">요약 노트<br>공유 세션</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="mini-note">
+                * 환급/지원금은 과정별 적용 여부 및 기업 분류/요건에 따라 달라질 수 있으므로, “과정 선정 단계”에서 적용 가능 여부를 체크리스트로 선확인.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI / 관리표 (가볍게) -->
+        <div class="card" style="margin-top:14px;">
+          <div class="card-h">
+            <b>3) 운영 KPI(안) · 보고 포맷</b>
+            <span class="badge">분기 보고</span>
+          </div>
+          <div class="card-b">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:20%;">지표</th>
+                  <th style="width:20%;">목표(예시)</th>
+                  <th class="left">측정/보고 방식</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>참여 인원</th>
+                  <td class="center">분기 N명</td>
+                  <td class="left">과정별 참석/수료 인원 집계</td>
+                </tr>
+                <tr>
+                  <th>환급 적용률</th>
+                  <td class="center">가능 과정 우선</td>
+                  <td class="left">환급 가능 과정 비중 + 실제 환급 완료 금액</td>
+                </tr>
+                <tr>
+                  <th>교육 만족도</th>
+                  <td class="center">4.3/5 이상</td>
+                  <td class="left">간단 설문(3문항) + 자유의견</td>
+                </tr>
+                <tr>
+                  <th>사내 확산</th>
+                  <td class="center">수강자 100%</td>
+                  <td class="left">요약 노트 제출률 / 15분 공유 세션 진행률</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
