@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>전 직원 대상 노트북 교체 및 휴대폰 지급 시행 보고</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --paper:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --chip:#f1f5f9;
+      --accent:#2563eb;
+      --accent2:#0ea5e9;
+      --ok:#16a34a;
+      --warn:#f59e0b;
+      --shadow:0 10px 25px rgba(15,23,42,.08);
+      --radius:16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, "Helvetica Neue", sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:var(--sans);
+      line-height:1.55;
+    }
+    .page{
+      max-width:980px;
+      margin:32px auto;
+      padding:0 18px 42px;
+    }
+    .card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    header{
+      padding:22px 22px 16px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(135deg, rgba(37,99,235,.08), rgba(14,165,233,.05));
+    }
+    .title{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 12px;
+      align-items:flex-end;
+      justify-content:space-between;
+    }
+    h1{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-.3px;
+    }
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      justify-content:flex-end;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.65);
+      backdrop-filter:saturate(140%) blur(6px);
+      white-space:nowrap;
+    }
+    .pill b{color:var(--ink); font-weight:700}
+    .content{
+      padding:18px 22px 22px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    @media (min-width: 860px){
+      .grid{
+        grid-template-columns: 1.25fr .75fr;
+        align-items:start;
+      }
+    }
+    section{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px 14px 12px;
+      background:#fff;
+    }
+    section h2{
+      margin:0 0 10px;
+      font-size:15px;
+      letter-spacing:-.2px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .secno{
+      width:26px; height:26px;
+      border-radius:9px;
+      display:inline-grid;
+      place-items:center;
+      background:var(--chip);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-weight:700;
+      font-size:12px;
+      flex:0 0 auto;
+    }
+    p{margin:0 0 10px; color:var(--ink)}
+    .muted{color:var(--muted)}
+    ul{margin:0; padding-left:18px}
+    li{margin:6px 0; color:var(--ink)}
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--chip);
+      color:var(--ink);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background:var(--accent);
+      flex:0 0 auto;
+    }
+    .dot.ok{background:var(--ok)}
+    .dot.warn{background:var(--warn)}
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+      font-size:13px;
+    }
+    thead th{
+      text-align:left;
+      padding:10px 12px;
+      background:var(--chip);
+      border-bottom:1px solid var(--line);
+      color:var(--muted);
+      font-weight:700;
+    }
+    tbody td{
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+    }
+    tbody tr:last-child td{border-bottom:none}
+    td.num{font-family:var(--mono); text-align:right; white-space:nowrap}
+    .note{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px dashed rgba(37,99,235,.45);
+      background:rgba(37,99,235,.06);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .names{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+    @media (min-width: 860px){
+      .names{
+        grid-template-columns:1fr;
+      }
+    }
+    .namebox{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:12px;
+      background:#fff;
+    }
+    .namebox h3{
+      margin:0 0 8px;
+      font-size:13px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .count{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--line);
+      background:var(--chip);
+      padding:4px 8px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .list li{
+      margin:0;
+      padding:6px 9px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      font-size:12px;
+      color:var(--ink);
+    }
+    .footer{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:space-between;
+      color:var(--muted);
+      font-size:12px;
+      padding:0 6px;
+    }
+    .sig{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .line{
+      width:140px;
+      height:1px;
+      background:var(--line);
+    }
+
+    /* Print */
+    @media print{
+      body{background:#fff}
+      .page{max-width:none; margin:0; padding:0}
+      .card{box-shadow:none; border:none; border-radius:0}
+      header{background:#fff}
+      section{break-inside:avoid}
+      .footer{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="card">
+      <header>
+        <div class="title">
+          <h1>전 직원 대상 노트북 교체 및 휴대폰 지급 시행 보고</h1>
+          <div class="meta">
+            <span class="pill"><b>문서 유형</b> 보고서(기안 참고)</span>
+            <span class="pill"><b>대상</b> RK 전 직원</span>
+            <span class="pill"><b>구분</b> 노트북(보안) · 휴대폰(복지)</span>
+          </div>
+        </div>
+        <div class="chips" aria-label="요약">
+          <span class="chip"><span class="dot ok"></span>노트북: 보안·자산관리 목적</span>
+          <span class="chip"><span class="dot"></span>휴대폰: 복지 지원 목적</span>
+          <span class="chip"><span class="dot warn"></span>예상 총액: 74,700,000원(변동 가능)</span>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="grid">
+          <!-- Left column -->
+          <div>
+            <section>
+              <h2><span class="secno">1</span>추진 개요</h2>
+              <p>
+                RK는 임직원의 업무 환경 개선과 운영 안정성 강화를 목적으로 전 직원을 대상으로
+                <b>노트북 교체</b> 및 <b>휴대폰 지급</b>을 시행하고자 한다.
+              </p>
+              <p class="muted">
+                본 건은 노트북의 경우 <b>업무 보안 및 자산 관리 목적</b>, 휴대폰의 경우 <b>복지 지원 목적</b>으로 구분하여 추진하며,
+                각 기기는 구매 목적 및 운영 방식에 따라 <b>독립적으로 관리</b>한다.
+              </p>
+            </section>
+
+            <section>
+              <h2><span class="secno">2</span>추진 배경</h2>
+
+              <p><b>2.1 노트북 교체 (보안 및 운영 목적)</b></p>
+              <ul>
+                <li>기존 노트북 사용에 따른 성능 저하 및 관리 편차 발생</li>
+                <li>업무용 IT 자산의 표준화 필요</li>
+                <li>신규 입사자 발생에 따른 추가 장비 확보 필요</li>
+                <li>회사 자산 기준에 맞는 일괄 교체를 통해 관리 효율성 제고</li>
+              </ul>
+
+              <div style="height:10px"></div>
+
+              <p><b>2.2 휴대폰 지급 (복지 목적)</b></p>
+              <ul>
+                <li>업무상 모바일 기기 활용 빈도 증가</li>
+                <li>개인 비용 부담 완화 및 근무 만족도 제고</li>
+                <li>전 직원 대상 복지 기준의 형평성 확보 필요</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2><span class="secno">3</span>시행 내용</h2>
+
+              <p><b>3.1 노트북 교체</b></p>
+              <ul>
+                <li><b>대상</b>: RK 전 직원 중 노트북 지급 대상자</li>
+                <li><b>목적</b>: 업무 보안 및 자산 관리 효율성 제고</li>
+                <li><b>운영 원칙</b>
+                  <ul>
+                    <li>회사 자산으로 등록 및 관리</li>
+                    <li>자산관리대장에 사용자 및 지급 현황 반영</li>
+                    <li>기존 노트북은 회수 후 내부 기준에 따라 재배치 또는 폐기</li>
+                  </ul>
+                </li>
+              </ul>
+
+              <div style="height:10px"></div>
+
+              <p><b>3.2 휴대폰 지급</b></p>
+              <ul>
+                <li><b>대상</b>: RK 전 직원 중 휴대폰 지급 대상자</li>
+                <li><b>목적</b>: 복지 지원 및 업무 활용 편의성 제고</li>
+                <li><b>운영 원칙</b>
+                  <ul>
+                    <li>복지 성격의 지급으로 운영</li>
+                    <li>세부 지급 기준 및 사용 가이드는 추후 별도 안내</li>
+                  </ul>
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h2><span class="secno">4</span>구매 예상 금액</h2>
+              <table aria-label="구매 예상 금액 표">
+                <thead>
+                  <tr>
+                    <th style="width:28%">구분</th>
+                    <th style="width:18%">수량</th>
+                    <th style="width:18%">단가</th>
+                    <th style="width:36%">예상 금액</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>노트북</b></td>
+                    <td class="num">21 EA</td>
+                    <td class="num">1,450,000원</td>
+                    <td class="num">30,450,000원</td>
+                  </tr>
+                  <tr>
+                    <td><b>휴대폰</b></td>
+                    <td class="num">25 EA</td>
+                    <td class="num">1,770,000원</td>
+                    <td class="num">44,250,000원</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"><b>합계</b></td>
+                    <td class="num"><b>74,700,000원</b></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="note">
+                ※ 상기 금액은 <b>예상 금액</b>이며, 실제 구매 금액은 업체 견적 및 구매 조건에 따라 변동될 수 있음.
+              </div>
+            </section>
+
+            <section>
+              <h2><span class="secno">5</span>추진 일정 및 향후 계획</h2>
+              <ol style="margin:0; padding-left:18px">
+                <li>시안 결재 승인</li>
+                <li>노트북 및 휴대폰 구매 대상자 확정</li>
+                <li>업체별 견적 수취</li>
+                <li>노트북 구매 / 휴대폰 구매 건 <b>각각 별도 구매 결재</b> 진행</li>
+                <li>구매 완료 후
+                  <ul>
+                    <li>노트북 자산 등록 및 지급 관리</li>
+                    <li>휴대폰 지급 및 복지 운영 가이드 안내</li>
+                  </ul>
+                </li>
+              </ol>
+            </section>
+
+            <section>
+              <h2><span class="secno">6</span>기대 효과</h2>
+              <ul>
+                <li>업무용 IT 자산의 표준화 및 관리 효율성 제고</li>
+                <li>임직원 업무 환경 개선 및 업무 몰입도 향상</li>
+                <li>복지 제도 운영에 대한 구성원 체감도 강화</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2><span class="secno">7</span>결론</h2>
+              <p>
+                본 노트북 교체 및 휴대폰 지급은 업무 운영 안정성과 임직원 복지 강화를 동시에 고려한 전사 단위 개선 과제로,
+                단계별 결재 및 구매 절차를 통해 합리적으로 추진하고자 한다.
+              </p>
+            </section>
+          </div>
+
+          <!-- Right column -->
+          <div class="names">
+            <section class="namebox">
+              <h3>
+                노트북 구매 대상자
+                <span class="count">총 21명</span>
+              </h3>
+              <ul class="list" aria-label="노트북 구매 대상자 목록">
+                <li>송현일</li><li>김세웅</li><li>박진범</li>
+                <li>이영민</li><li>윤유현</li><li>오세준</li>
+                <li>간숙화</li><li>김후람</li><li>김수민</li>
+                <li>장진헌</li><li>서우종</li><li>김문관</li>
+                <li>안미래</li><li>박지안</li><li>신지수</li>
+                <li>김나희</li><li>권현성</li><li>원호재</li>
+                <li>오동섭</li><li>임지홍</li><li>(HR) 신규입사자</li>
+              </ul>
+            </section>
+
+            <section class="namebox">
+              <h3>
+                휴대폰 구매 대상자
+                <span class="count">총 25명</span>
+              </h3>
+              <ul class="list" aria-label="휴대폰 구매 대상자 목록">
+                <li>송현일</li><li>황원태</li><li>김세웅</li>
+                <li>박진범</li><li>이영민</li><li>윤유현</li>
+                <li>오세준</li><li>간숙화</li><li>김후람</li>
+                <li>김수민</li><li>장진헌</li><li>서우종</li>
+                <li>김문관</li><li>안미래</li><li>김지현</li>
+                <li>박지안</li><li>이주희</li><li>임면우</li>
+                <li>신지수</li><li>김나희</li><li>권현성</li>
+                <li>원호재</li><li>오동섭</li><li>임지홍</li>
+                <li>(HR) 신규입사자</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2><span class="secno">+</span>관리 포인트</h2>
+              <ul>
+                <li><b>노트북</b>: 자산 등록(모델/시리얼/사용자/지급일) 및 회수 처리 기준 명확화</li>
+                <li><b>휴대폰</b>: 지급 기준(복지) 및 대상자 변동(입·퇴사) 시 처리 룰 사전 안내</li>
+                <li><b>결재 분리</b>: 노트북/휴대폰은 목적·업체·증빙이 달라 구매 결재를 별도 진행 권장</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="sig">
+            <span class="muted">작성:</span><span class="line" aria-hidden="true"></span>
+            <span class="muted">검토:</span><span class="line" aria-hidden="true"></span>
+            <span class="muted">승인:</span><span class="line" aria-hidden="true"></span>
+          </div>
+          <div class="muted">
+            본 문서는 전자결재 본문/첨부용으로 사용 가능하며, 인쇄 시 레이아웃이 최적화됩니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
