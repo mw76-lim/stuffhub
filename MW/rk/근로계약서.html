@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Employment Agreement (US-style)</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --paper:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --accent:#2563eb;
+
+      --radius:14px;
+      --shadow:0 10px 30px rgba(15,23,42,.08);
+      --max:900px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:var(--font);
+      line-height:1.6;
+    }
+    .wrap{max-width:var(--max); margin:24px auto; padding:0 16px 40px;}
+    .paper{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    header{
+      padding:22px 26px 18px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+    }
+    h1{margin:0; font-size:22px; letter-spacing:-0.02em;}
+    .meta{margin-top:8px; color:var(--muted); font-size:12px; display:flex; gap:10px; flex-wrap:wrap;}
+    .chip{
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid #dbeafe;
+      background:#eef2ff;
+      color:#1d4ed8;
+      font-weight:700;
+    }
+    main{padding:22px 26px 26px;}
+    .notice{
+      margin:0 0 14px;
+      padding:12px 14px;
+      border:1px dashed #cbd5e1;
+      border-radius:12px;
+      background:#fbfdff;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .section{margin-top:18px; padding-top:14px; border-top:1px solid var(--line);}
+    .section h2{margin:0 0 10px; font-size:15px; letter-spacing:-0.01em;}
+    .clause{
+      margin:0 0 10px;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+    }
+    .clause .title{font-weight:800;}
+    .clause p{margin:8px 0 0; color:var(--ink); font-size:13.5px;}
+    .clause ul{margin:8px 0 0; padding-left:18px;}
+    .clause li{margin:6px 0;}
+    table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0 0;}
+    th,td{border:1px solid var(--line); padding:10px; vertical-align:top;}
+    th{width:26%; background:#f8fafc; text-align:left;}
+    footer{
+      padding:14px 26px 18px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      background:#fbfcff;
+    }
+    .sign{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    @media (max-width: 760px){ .sign{grid-template-columns:1fr;} }
+    .signbox{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:14px;
+      background:#fff;
+      min-height:170px;
+      position:relative;
+    }
+    .signbox h3{margin:0 0 10px; font-size:14px;}
+    .field{margin:8px 0; font-size:13.5px;}
+    .line{display:inline-block; min-width:220px; border-bottom:1px solid #94a3b8; transform:translateY(-2px); margin-left:6px;}
+    .stamp{
+      position:absolute; right:14px; bottom:14px;
+      width:96px; height:72px;
+      border:2px dashed #cbd5e1; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      color:#94a3b8; font-size:12px; text-align:center; padding:6px;
+    }
+    @media print{
+      body{background:#fff;}
+      .wrap{max-width:none; margin:0; padding:0;}
+      .paper{border:none; border-radius:0; box-shadow:none;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="paper">
+      <header>
+        <h1>EMPLOYMENT AGREEMENT</h1>
+        <div class="meta">
+          <span class="chip">US-Style Template</span>
+          <span>Agreement No.: <strong>{{AGREEMENT_NO}}</strong></span>
+          <span>Date: <strong>{{AGREEMENT_DATE}}</strong></span>
+        </div>
+      </header>
+
+      <main>
+        <p class="notice">
+          This template is provided for general informational purposes only and does not constitute legal advice.
+          State laws vary. Please have counsel review before use.
+        </p>
+
+        <div class="section">
+          <h2>1. Parties</h2>
+          <div class="clause">
+            <div class="title">Employer</div>
+            <table>
+              <tr><th>Company Name</th><td>{{COMPANY_NAME}}</td></tr>
+              <tr><th>Entity Type</th><td>{{COMPANY_ENTITY_TYPE}}</td></tr>
+              <tr><th>Address</th><td>{{COMPANY_ADDRESS}}</td></tr>
+              <tr><th>Representative</th><td>{{COMPANY_REP_NAME}}, {{COMPANY_REP_TITLE}}</td></tr>
+            </table>
+          </div>
+          <div class="clause">
+            <div class="title">Employee</div>
+            <table>
+              <tr><th>Full Name</th><td>{{EMPLOYEE_NAME}}</td></tr>
+              <tr><th>Home Address</th><td>{{EMPLOYEE_ADDRESS}}</td></tr>
+              <tr><th>Email</th><td>{{EMPLOYEE_EMAIL}}</td></tr>
+              <tr><th>Phone</th><td>{{EMPLOYEE_PHONE}}</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>2. Position and Duties</h2>
+          <div class="clause">
+            <div class="title">Title / Department / Reporting</div>
+            <p>
+              Employee is hired as <strong>{{JOB_TITLE}}</strong> in the <strong>{{DEPARTMENT}}</strong> department,
+              reporting to <strong>{{REPORTS_TO}}</strong>. Employee will perform duties customary to this position and
+              any other duties reasonably assigned by the Company.
+            </p>
+          </div>
+          <div class="clause">
+            <div class="title">Work Location</div>
+            <p>
+              Primary work location: <strong>{{WORK_LOCATION}}</strong>.
+              Employee may be required to travel or work at other locations as needed.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>3. Start Date and Employment Relationship (At-Will)</h2>
+          <div class="clause">
+            <div class="title">Start Date</div>
+            <p>Employee’s start date is <strong>{{START_DATE}}</strong>.</p>
+          </div>
+          <div class="clause">
+            <div class="title">At-Will Employment</div>
+            <p>
+              Employee’s employment is <strong>at-will</strong>. This means either the Company or Employee may terminate
+              the employment relationship at any time, with or without cause, and with or without notice, subject to
+              applicable law. No representative of the Company has authority to enter into any agreement contrary to this
+              at-will relationship except in a written agreement signed by an authorized officer of the Company.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>4. Compensation</h2>
+          <div class="clause">
+            <div class="title">Base Salary / Wages</div>
+            <p>
+              Employee will be paid <strong>{{COMP_PAY_RATE}}</strong> (e.g., $___ per year / $___ per hour),
+              payable in accordance with the Company’s regular payroll schedule.
+            </p>
+          </div>
+          <div class="clause">
+            <div class="title">Bonus / Incentives (If Any)</div>
+            <p>
+              Employee may be eligible for bonus or incentive compensation under the Company’s plans, if any, as in effect
+              from time to time. Eligibility does not guarantee payment.
+            </p>
+          </div>
+          <div class="clause">
+            <div class="title">Withholdings</div>
+            <p>
+              All compensation is subject to applicable tax withholdings and authorized deductions.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>5. Benefits and Policies</h2>
+          <div class="clause">
+            <div class="title">Benefits</div>
+            <p>
+              Employee may participate in employee benefit plans offered by the Company, subject to plan terms and
+              eligibility requirements. The Company reserves the right to modify or terminate benefits at any time,
+              consistent with applicable law.
+            </p>
+          </div>
+          <div class="clause">
+            <div class="title">Policies and Handbook</div>
+            <p>
+              Employee agrees to comply with Company policies, including (without limitation) information security,
+              confidentiality, and acceptable use policies. Policies may be updated from time to time.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>6. Timekeeping, Overtime, and Paid Time Off (PTO)</h2>
+          <div class="clause">
+            <div class="title">Work Schedule</div>
+            <p>
+              Expected schedule: <strong>{{WORK_SCHEDULE}}</strong>. The Company may adjust schedule based on business needs.
+            </p>
+          </div>
+          <div class="clause">
+            <div class="title">Overtime / Exempt Status</div>
+            <p>
+              Employee is classified as: <strong>{{EXEMPT_STATUS}}</strong> (Exempt / Non-Exempt).
+              Non-exempt employees must accurately record all time worked and obtain advance approval for overtime
+              in accordance with Company policy.
+            </p>
+          </div>
+          <div class="clause">
+            <div class="title">PTO and Holidays</div>
+            <p>
+              PTO accrual and holiday schedules are governed by Company policy and applicable law.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>7. Confidentiality and Company Property</h2>
+          <div class="clause">
+            <div class="title">Confidential Information</div>
+            <p>
+              Employee will not use or disclose the Company’s confidential or proprietary information except as required
+              to perform duties for the Company. This obligation continues during and after employment, to the extent
+              permitted by law.
+            </p>
+          </div>
+          <div class="clause">
+            <div class="title">Return of Property</div>
+            <p>
+              Upon termination (or upon request), Employee will promptly return all Company property, including devices,
+              documents, credentials, and any copies thereof.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>8. Intellectual Property (Work Made for Hire)</h2>
+          <div class="clause">
+            <div class="title">Inventions and Work Product</div>
+            <p>
+              To the maximum extent permitted by law, all work product, inventions, discoveries, developments, and other
+              materials created by Employee within the scope of employment or using Company resources are the exclusive
+              property of the Company. Employee agrees to execute documents necessary to confirm such rights.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>9. Restrictive Covenants (If Applicable)</h2>
+          <div class="clause">
+            <div class="title">Non-Solicitation / Non-Competition</div>
+            <p>
+              Any non-solicitation or non-competition restrictions (if applicable) will be set forth in a separate
+              agreement or addendum and will be interpreted consistent with applicable state law.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>10. Governing Law; Severability; Entire Agreement</h2>
+          <div class="clause">
+            <div class="title">Governing Law</div>
+            <p>
+              This Agreement is governed by the laws of the State of <strong>{{GOVERNING_STATE}}</strong>, without regard
+              to conflict of laws principles.
+            </p>
+          </div>
+          <div class="clause">
+            <div class="title">Severability</div>
+            <p>
+              If any provision is held unenforceable, the remaining provisions will remain in full force and effect.
+            </p>
+          </div>
+          <div class="clause">
+            <div class="title">Entire Agreement</div>
+            <p>
+              This Agreement, together with any referenced policies or addenda, constitutes the entire agreement between
+              the parties regarding employment, and supersedes all prior discussions or agreements.
+            </p>
+          </div>
+          <div class="clause">
+            <div class="title">Amendments</div>
+            <p>
+              Any amendment must be in writing and signed by both parties.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>11. Signatures</h2>
+          <div class="clause">
+            <p>
+              IN WITNESS WHEREOF, the parties have executed this Agreement as of the date first written above.
+            </p>
+
+            <div class="sign">
+              <div class="signbox">
+                <h3>Company</h3>
+                <div class="field">Name: <strong>{{COMPANY_NAME}}</strong></div>
+                <div class="field">By: <strong>{{COMPANY_REP_NAME}}</strong> <span class="line"></span></div>
+                <div class="field">Title: <strong>{{COMPANY_REP_TITLE}}</strong></div>
+                <div class="field">Date: <strong>{{SIGN_DATE}}</strong></div>
+                <div class="stamp">Signature</div>
+              </div>
+
+              <div class="signbox">
+                <h3>Employee</h3>
+                <div class="field">Name: <strong>{{EMPLOYEE_NAME}}</strong> <span class="line"></span></div>
+                <div class="field">Date: <strong>{{SIGN_DATE}}</strong></div>
+                <div class="stamp">Signature</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <div>Document: Employment Agreement (US-style) · Version: {{DOC_VERSION}} · Owner: {{OWNER_DEPT}}</div>
+        <div>Company: {{COMPANY_NAME}}</div>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
