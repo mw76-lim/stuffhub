@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>RK 인사이트 세미나 3회차 설문 결과 분석 리포트</title>
+
+<style>
+@page { size: A4; margin: 0; }
+
+html, body{
+  margin:0;
+  padding:0;
+  background:#ffffff;
+  font-family: "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+  color:#111;
+}
+
+/* A4 고정 */
+.page{
+  width:210mm;
+  height:297mm;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+}
+
+/* 공통 섹션 */
+.section{
+  border-bottom:1px solid #000;
+  padding:6mm 8mm;
+}
+
+.header{
+  border-bottom:2px solid #000;
+}
+
+.title{
+  font-size:20px;
+  font-weight:700;
+}
+
+.subtitle{
+  font-size:12px;
+  margin-top:4px;
+}
+
+.bold{
+  font-weight:700;
+}
+
+.small{
+  font-size:14px;
+}
+
+/* KPI 그리드 */
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:6mm;
+  margin-top:4mm;
+}
+
+.kpi{
+  border:1px solid #000;
+  padding:4mm;
+  font-size:14px;
+}
+
+/* 바 차트 */
+.bar-wrap{
+  margin-top:3mm;
+}
+
+.bar-label{
+  font-size:12px;
+  margin-top:3mm;
+}
+
+.bar{
+  height:6px;
+  background:#000;
+  margin-top:2mm;
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="section header">
+    <div class="title">RK 인사이트 세미나 3회차 설문 결과 분석 리포트</div>
+    <div class="subtitle">
+      강연자 공유용 · 총 응답 12명
+    </div>
+  </div>
+
+  <!-- 1. 만족도 -->
+  <div class="section">
+    <div class="bold">1. 전반적 만족도</div>
+
+    <div class="grid">
+      <div class="kpi">
+        전반적 만족도 4점 이상 91%<br>
+        (5점 9명 / 4점 2명 / 3점 1명)
+      </div>
+      <div class="kpi">
+        진행 방식 적절성 4점 이상 100%<br>
+        (5점 10명 / 4점 2명)
+      </div>
+    </div>
+
+    <div class="small" style="margin-top:4mm;">
+      전반적으로 매우 높은 만족도가 확인되었으며, 강연 구성과 진행 안정성에 대한 긍정 평가가 두드러졌습니다.
+    </div>
+  </div>
+
+  <!-- 2. 항목별 평가 -->
+  <div class="section">
+    <div class="bold">2. 항목별 긍정 평가 (5점 응답 기준)</div>
+
+    <div class="bar-wrap">
+      <div class="bar-label">이해 용이성 (5점 8명)</div>
+      <div class="bar" style="width:65%;"></div>
+
+      <div class="bar-label">구성·흐름 적절성 (5점 9명)</div>
+      <div class="bar" style="width:75%;"></div>
+
+      <div class="bar-label">업무 시사점 제공 (5점 7명)</div>
+      <div class="bar" style="width:58%;"></div>
+
+      <div class="bar-label">실제 도움 체감 (5점 7명)</div>
+      <div class="bar" style="width:58%;"></div>
+
+      <div class="bar-label">난이도 적절성 (5점 8명)</div>
+      <div class="bar" style="width:65%;"></div>
+    </div>
+  </div>
+
+  <!-- 3. 긍정 의견 -->
+  <div class="section">
+    <div class="bold">3. 긍정 반응 핵심 포인트</div>
+    • 사례 기반 설명이 몰입도와 이해도 향상에 기여<br>
+    • 관점 확장 및 사고 전환에 대한 언급 다수<br>
+    • 조직·협업 관점 정립에 도움<br>
+    • 개인적 동기 부여 및 인식 정리에 효과적
+  </div>
+
+  <!-- 4. 도움 유형 -->
+  <div class="section">
+    <div class="bold">4. 실질적 도움 유형</div>
+    • 시야/관점 확장<br>
+    • 향후 업무 판단 기준 형성<br>
+    • 조직·리더십 이해 증진<br>
+    • 개인적 동기 부여
+  </div>
+
+  <!-- 5. 개선 -->
+  <div class="section">
+    <div class="bold">5. 개선 제안</div>
+    • 실무 적용 사례를 조금 더 보강하면 현장감이 강화될 수 있음<br>
+    • 조직 내 경험 공유 확대 시 만족도 상승 가능<br>
+    • 일부 주제는 심화 설명을 통해 확장 가능
+  </div>
+
+  <!-- 종합 -->
+  <div class="section" style="border-bottom:none;">
+    <div class="bold">종합 코멘트</div>
+    이번 3회차 세미나는 구성 완성도와 전달력이 높게 평가되었으며,
+    특히 관점 확장 및 조직 인식 강화 측면에서 긍정적 효과가 확인되었습니다.
+  </div>
+
+</div>
+</body>
+</html>
