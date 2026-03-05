@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RK 인사이트 세미나 4회차 설문 결과 요약(강연자 공유용)</title>
+
+  <style>
+    @page { size: A4; margin: 4mm; }
+    html, body { margin:0; padding:0; background:#fff; color:#111; }
+    body{
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      font-family: "Noto Sans KR","Malgun Gothic",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      line-height: 1.45;
+    }
+
+    .page{
+      width: 210mm;
+      height: 297mm;
+      box-sizing: border-box;
+      margin: 0 auto;
+      padding: 0;
+      display:flex;
+      flex-direction:column;
+      gap: 0;
+    }
+
+    .h1{ font-size:20px; font-weight:800; letter-spacing:-0.2px; }
+    .sub{ font-size:12px; color:#333; }
+    .h2{ font-size:15px; font-weight:800; margin:0 0 2mm 0; }
+    .small{ font-size:11.5px; color:#333; }
+    .mono{ font-variant-numeric: tabular-nums; }
+
+    .block{
+      border: 1px solid #000;
+      padding: 4mm;
+      box-sizing: border-box;
+    }
+    .block + .block{ border-top: 0; }
+
+    .top{
+      border: 2px solid #000;
+      padding: 4mm;
+    }
+
+    .kpis{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      border: 1px solid #000;
+    }
+    .kpi{
+      padding: 3.5mm;
+      border-right: 1px solid #000;
+      box-sizing:border-box;
+    }
+    .kpi:last-child{ border-right:0; }
+    .kpi .label{ font-size:12.5px; font-weight:700; }
+    .kpi .value{ font-size:22px; font-weight:900; margin-top:1mm; }
+    .kpi .desc{ font-size:11.5px; color:#333; margin-top:1mm; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 0;
+      border: 1px solid #000;
+      border-top: 0;
+    }
+    .col{
+      padding: 4mm;
+      border-right: 1px solid #000;
+      box-sizing:border-box;
+    }
+    .col:last-child{ border-right:0; }
+
+ /* ===== Rating list 개선 ===== */
+
+.rating{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 2.5mm;   /* 행 간격 증가 */
+  margin-top: 2mm;
+}
+
+.row{
+  display:grid;
+  grid-template-columns: 1fr 46mm;
+  gap: 3mm;
+  align-items:center;
+
+  border:1px solid #000;        /* 행 구분 */
+  border-left:4px solid #000;   /* 강조 라인 */
+  padding:2.5mm 3mm;
+  box-sizing:border-box;
+}
+
+/* 제목 */
+.row .name{
+  font-size:12.5px;
+  font-weight:600;
+}
+
+/* bar 영역 */
+.row .barwrap{
+  border:1px solid #000;
+  height:6.5mm;
+  background:#fff;
+}
+    .row .fill{ height:100%; background:#111; }
+/* 메타 정보 */
+.row .meta{
+  grid-column: 1 / -1;
+  font-size:11.5px;
+  color:#333;
+  margin-top:1mm;
+}
+
+    ul{ margin: 1mm 0 0 0; padding-left: 4mm; }
+    li{ margin: 1mm 0; font-size:12.5px; }
+
+    .mini{
+      width:100%;
+      border-collapse: collapse;
+      margin-top: 2mm;
+      font-size:12.5px;
+    }
+    .mini th, .mini td{
+      border:1px solid #000;
+      padding: 2mm;
+      vertical-align:top;
+    }
+    .mini th{ text-align:left; font-weight:800; }
+
+    /* ===== Footer (총평) 강화 ===== */
+    .footer{
+      border: 2px solid #000;
+      border-top: 0;
+      padding: 4mm;
+      font-size:13.5px;     /* 총평 폰트 업 */
+      line-height: 1.55;    /* 총평 가독성 업 */
+      font-weight: 500;
+    }
+    .footer b{ font-weight: 900; }
+    .footer .headline{
+      font-size:14.5px;
+      font-weight:900;
+      margin-bottom: 2mm;
+    }
+    .footer .bul{
+      margin-top: 2mm;
+      padding-left: 4mm;
+      font-size:13.5px;
+    }
+    .footer .bul li{ font-size:13.5px; margin: 1mm 0; }
+
+    .no-break{ break-inside: avoid; page-break-inside: avoid; }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <div class="top no-break">
+      <div class="h1">RK 인사이트 세미나 4회차 설문 결과 요약 (강연자 공유용)</div>
+      <div class="sub mono">응답 11명 · 5점 척도 · 긍정 의견 중심 요약</div>
+    </div>
+
+    <div class="block no-break" style="border-top:0;">
+      <div class="h2">1) 전반 요약</div>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">전반 만족도 평균</div>
+          <div class="value mono">4.73 / 5</div>
+          <div class="desc mono">5점 8명 · 4점 3명</div>
+        </div>
+        <div class="kpi">
+          <div class="label">이해 용이성 평균</div>
+          <div class="value mono">4.73 / 5</div>
+          <div class="desc mono">5점 8명 · 4점 3명</div>
+        </div>
+        <div class="kpi">
+          <div class="label">진행 방식 평균</div>
+          <div class="value mono">4.55 / 5</div>
+          <div class="desc mono">5점 6명 · 4점 5명</div>
+        </div>
+      </div>
+      <div class="small" style="margin-top:2mm;">
+        전반적으로 “어려운 주제를 쉽게 풀어줘서 좋았다”, “금융상품을 구조적으로 이해하게 됐다”는 반응이 중심이었습니다.
+      </div>
+    </div>
+
+    <div class="grid no-break">
+      <div class="col">
+        <div class="h2">2) 항목별 평점(평균) & 분포</div>
+
+        <div class="rating">
+          <div class="row">
+            <div class="name">시사점 제공(2-1) <span class="mono">4.45</span></div>
+            <div class="barwrap"><div class="fill" style="width:89%;"></div></div>
+            <div class="meta mono">5점 6 · 4점 4 · 3점 1</div>
+          </div>
+
+          <div class="row">
+            <div class="name">이해 용이성(2-2) <span class="mono">4.73</span></div>
+            <div class="barwrap"><div class="fill" style="width:95%;"></div></div>
+            <div class="meta mono">5점 8 · 4점 3</div>
+          </div>
+
+          <div class="row">
+            <div class="name">구성/흐름(2-3) <span class="mono">4.64</span></div>
+            <div class="barwrap"><div class="fill" style="width:93%;"></div></div>
+            <div class="meta mono">5점 7 · 4점 4</div>
+          </div>
+
+          <div class="row">
+            <div class="name">도움 체감(2-4) <span class="mono">4.18</span></div>
+            <div class="barwrap"><div class="fill" style="width:84%;"></div></div>
+            <div class="meta mono">5점 4 · 4점 5 · 3점 2</div>
+          </div>
+
+          <div class="row">
+            <div class="name">전반 만족(2-5) <span class="mono">4.73</span></div>
+            <div class="barwrap"><div class="fill" style="width:95%;"></div></div>
+            <div class="meta mono">5점 8 · 4점 3</div>
+          </div>
+
+          <div class="row">
+            <div class="name">난이도 적절(2-7) <span class="mono">4.73</span></div>
+            <div class="barwrap"><div class="fill" style="width:95%;"></div></div>
+            <div class="meta mono">5점 8 · 4점 3</div>
+          </div>
+
+          <div class="row">
+            <div class="name">진행 방식(2-8) <span class="mono">4.55</span></div>
+            <div class="barwrap"><div class="fill" style="width:91%;"></div></div>
+            <div class="meta mono">5점 6 · 4점 5</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="h2">3) 긍정 피드백 핵심</div>
+        <ul>
+          <li>금융상품/금융시장 개념을 “구조적으로 정리할 수 있었다”는 반응</li>
+          <li>생소한 주제를 “쉽게 풀어 설명해 이해가 잘 됐다”는 평가</li>
+          <li>개인 학습/생활 지식 측면에서 “실용적이었다”는 의견</li>
+        </ul>
+
+        <div class="h2" style="margin-top:3mm;">4) 도움이 된 형태(복수)</div>
+        <table class="mini">
+          <tr>
+            <th>도움 유형</th>
+            <th class="mono" style="width:18mm;">응답</th>
+          </tr>
+          <tr>
+            <td>시야/관점 확장</td>
+            <td class="mono">11</td>
+          </tr>
+          <tr>
+            <td>개인적 인식·동기 부여</td>
+            <td class="mono">10</td>
+          </tr>
+          <tr>
+            <td>향후 업무 판단 참고</td>
+            <td class="mono">2</td>
+          </tr>
+          <tr>
+            <td>조직·리더십 이해</td>
+            <td class="mono">1</td>
+          </tr>
+        </table>
+
+        <div class="h2" style="margin-top:3mm;">5) 개선/제안(완곡 정리)</div>
+        <ul>
+          <li>일부 참여자는 “내용 대비 시간이 짧게 느껴졌다”는 의견 <br> (관심도가 높은 편으로 해석)</li>
+          <li>실무/시장 상황과 연결된 사례가 더해지면 이해가 “더 구체적으로 와닿을 것”이라는 제안</li>
+          <li>기초 다음 단계로 “심화 과정”에 대한 기대</li>
+        </ul>
+
+        <div class="h2" style="margin-top:3mm;">6) 다음 회차 희망 방향</div>
+        <ul>
+          <li>실무/생활 연결 사례 중심(시장 변화 → 전략/자산관리)</li>
+          <li>다양한 주제 경험 지속에 대한 긍정 의견</li>
+          <li>특정 부서 업무 이해, 리더십/조직 강화 주제</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer no-break">
+      <div class="headline">총평</div>
+      이번 4회차 세미나는 금융 주제에 대해 <b>높은 만족도(전반 4.73/5)</b>와 <b>이해 용이성(4.73/5)</b>이 함께 확인된 세션이었습니다.
+      특히 “어려운 내용을 구조적으로 정리해 주었다”는 피드백이 반복적으로 나타났으며, 참여자들이 금융상품을 단편적으로가 아닌
+      <b>시장·상품·리스크 관점에서 체계적으로 이해</b>할 수 있도록 도와준 점이 강점으로 평가되었습니다.
+
+      <ul class="bul">
+        <li><b>강점:</b> 기초 개념을 부담 없이 따라갈 수 있는 설명 방식 + 흐름/구성의 안정감</li>
+        <li><b>효과:</b> 구성원들의 금융 리터러시(기초 이해) 향상 및 개인 관점 확장에 기여</li>
+        <li><b>확장 포인트:</b> 관심도가 높은 만큼, 다음 회차에서는 사례/시나리오 기반 심화(예: 시장 변화→의사결정)로 자연스럽게 연결 가능</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>
